@@ -1,0 +1,135 @@
+@import "./foundations/_base.scss";
+
+.quest-step {
+  position: relative;
+  display: flex;
+  align-content: center;
+
+  svg {
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    fill: #999999;
+    transition: ease-in 0.2s;
+    transform-origin: 50% 50%;
+  }
+
+  &-page {
+    max-width: 300px;
+  }
+
+  &-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    color: $brand-white;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-bottom: ($grid-unit);
+
+    a {
+      display: flex;
+      color: $brand-white;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      justify-content: center;
+    }
+  }
+
+  &-number {
+    background-color: #888888;
+    width: ($grid-unit * 6);
+    height: ($grid-unit * 6);
+    border-radius: ($grid-unit * 3);
+    text-align: center;
+    line-height: ($grid-unit * 6);
+    margin-right: $grid-unit;
+    color: $brand-body;
+  }
+
+  &-complete {
+
+    &:hover {
+      svg {
+        transform: scale(1.05);
+      }
+    }
+
+    svg {
+      fill: black;
+    }
+
+    .quest-step-number {
+      background-color: $brand-green;
+    }
+  }
+}
+.step {
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (min-width: 768px) {
+    max-width: 100%;
+    margin-bottom: ($grid-unit * 4);
+  }
+}
+
+.step-reverse {
+  &-1 {
+    order: 1;
+  }
+  &-2 {
+    order: 2;
+  }
+  &-3 {
+    order: 3;
+  }
+  &-4 {
+    order: 4;
+  }
+
+  @media (min-width: 768px) {
+    &-1 {
+      order: 4;
+    }
+    &-2 {
+      order: 3;
+    }
+    &-3 {
+      order: 2;
+    }
+    &-4 {
+      order: 1;
+    }
+  }
+}
+
+
+.ticktrbl, .tickttb {
+  display: block;
+  width: 100px;
+  height: 100px;
+}
+
+.tickttb {
+  margin: 0 auto;
+}
+
+.submit-icon {
+  max-width: 100px;
+  margin: 0 auto;
+  display: block;
+
+  svg {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    fill: $brand-orange;
+  }
+}
