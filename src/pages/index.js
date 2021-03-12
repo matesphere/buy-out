@@ -24,7 +24,7 @@ const IndexPage = () => {
 
   return (
     <main className="homepage">
-      <Header headerText="Community land buyout quest" />
+      <Header headerText="Community land buyout" />
       <section className="container" id="main">
         <div className="row">
           <div className="col-lg-8">
