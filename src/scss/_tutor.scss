@@ -1,0 +1,26 @@
+@import "./foundations/_base.scss";
+
+.tutor {
+  .steps {
+    li {
+      list-style: none;
+      margin-bottom: ($grid-unit * 4);
+
+      svg {
+        width: ($grid-unit * 2);
+        height: ($grid-unit * 2);
+        margin-right: ($grid-unit * 2);
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+      }
+
+      span {
+        margin-right: ($grid-unit * 3);
+      }
+    }
+
+  }
+}
