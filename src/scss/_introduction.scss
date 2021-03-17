@@ -5,3 +5,137 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.image-map {
+  position: relative;
+
+  .outer-grid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 33.3%;
+    top: 0;
+  }
+
+  .outer-square {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 2;
+    padding: 20% 0 25% 33%;
+  }
+
+  .inner-grid {
+    width: 33.3%;
+    height: 33.3%;
+    display: table;
+    position: relative;
+
+    &-1 {
+      .info-icon {
+        position: absolute;
+        right: 20%;
+        bottom: 0%;
+      }
+    }
+
+    &-2 {
+      .info-icon {
+        position: absolute;
+        left: 30%;
+        top: 13%;
+      }
+    }
+
+    &-3 {
+      .info-icon {
+        position: absolute;
+        left: 40%;
+        bottom: 20%;
+      }
+    }
+
+    &-4 {
+      .info-icon {
+        position: absolute;
+        right: 0%;
+        bottom: 5%;
+      }
+    }
+
+    &-5 {
+      .info-icon {
+        position: absolute;
+        right: 40%;
+        top: 0%;
+      }
+    }
+
+    &-6 {
+      .info-icon {
+        position: absolute;
+        left: 5%;
+        top: 30%;
+      }
+    }
+
+    &-8 {
+      .info-icon {
+        position: absolute;
+        left: 5%;
+        bottom: 40%;
+      }
+    }
+
+  }
+
+  .info-icon {
+    position: relative;
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
+
+    &-show {
+      display: none;
+      position: absolute;
+      z-index: 4;
+      width: 200px;
+      background-color: white;
+      padding: ($grid-unit * 2);
+      border-radius: $grid-unit;
+      border: 1px solid $brand-green;
+    }
+
+    &-show-c {
+      left: -80px;
+    }
+
+    &-show-l {
+      left: -40%;
+    }
+
+    &-show-r {
+      right: -40%;
+    }
+
+    &:hover {
+      cursor: pointer;
+
+      .info-icon-show {
+        display: block;
+      }
+    }
+  }
+
+  .hover-pins {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+}

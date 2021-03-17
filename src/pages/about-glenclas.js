@@ -3,6 +3,7 @@ import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
 
+import InfoPick from "../assets/info-pick.svg";
 import ScotlandArea from "../assets/scotland-area.svg";
 
 import {graphql, Link, useStaticQuery} from "gatsby";
@@ -31,6 +32,11 @@ const IntroPage = () => {
           gatsbyImageData(layout: CONSTRAINED)
         }
       }
+      image5: file(relativePath: { eq: "map-zoom.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED)
+        }
+      }
     }
   `)
 
@@ -40,14 +46,102 @@ const IntroPage = () => {
       <section className="container" id="main">
         <div className="row">
           <div className="col-lg-8">
-            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">About Glenclas:</h2>
 
-
-            <p className="sm-type-lead mb-2">Your quest will concentrate around Glenclas (Gleann Clas, ‘valley of the class’) is a scattered community area and <a href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland" target="_blank">civil parish</a> in the <a href="https://en.wikipedia.org/wiki/Loch_Alsh" traget="_blank">Lochalsh</a> area of <a href="https://en.wikipedia.org/wiki/Highland_council_area" taget="_blank">Highland</a> in western Scotland.</p>
-
-            <div className="scotland-area mb-4">
-            <ScotlandArea />
+            <div className="row">
+              <div className="col-lg-8">
+                <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">About Glenclas:</h2>
+                <p className="sm-type-lead mb-2">Your quest will concentrate around Glenclas (Gleann Clas, ‘valley of the class’) is a scattered community area and <a href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland" target="_blank">civil parish</a> in the <a href="https://en.wikipedia.org/wiki/Loch_Alsh" traget="_blank">Lochalsh</a> area of <a href="https://en.wikipedia.org/wiki/Highland_council_area" taget="_blank">Highland</a> in western Scotland.</p>
+              </div>
+              <div className="col-lg-4">
+                <div className="scotland-area mb-4">
+                  <ScotlandArea />
+                </div>
+              </div>
             </div>
+
+
+            <div className="image-map mb-4 mt-4">
+              <div className="image-map-holder">
+                <div>
+                  <GatsbyImage image={data.image5.childImageSharp.gatsbyImageData} />
+                </div>
+                <div className="hover-pins">
+                  <p className="sm-type-amp">Hover over the pins to see more information</p>
+                </div>
+                <div className="outer-grid">
+                  <div className="outer-square">
+                    <div className="inner-grid inner-grid-1">
+                      <span className="info-icon">
+                        <InfoPick />
+                         <div className="info-icon-show info-icon-show-l">
+                           <p className="sm-type-amp">Shop and Post Office.</p>
+                           <p className="sm-type-amp">Heritage Centre.</p>
+                         </div>
+                      </span>
+                    </div>
+                    <div className="inner-grid inner-grid-2">
+                       <span className="info-icon">
+                        <InfoPick />
+                         <div className="info-icon-show info-icon-show-c">
+                           <p className="sm-type-amp">Affordable Housing area.</p>
+                         </div>
+                      </span>
+                    </div>
+                    <div className="inner-grid inner-grid-3">
+                       <span className="info-icon">
+                        <InfoPick />
+                         <div className="info-icon-show info-icon-show-c">
+                           <p className="sm-type-amp">Campsite / Cabins.</p>
+                           <p className="sm-type-amp">Market gardening.</p>
+                         </div>
+                      </span>
+                    </div>
+                    <div className="inner-grid inner-grid-4">
+                      <span className="info-icon">
+                        <InfoPick />
+                         <div className="info-icon-show info-icon-show-c">
+                           <p className="sm-type-amp">Play park / Skate park.</p>
+                           <p className="sm-type-amp">Wind turbine.</p>
+                         </div>
+                      </span>
+                    </div>
+                    <div className="inner-grid inner-grid-5">
+                      <span className="info-icon">
+                        <InfoPick />
+                         <div className="info-icon-show info-icon-show-c">
+                           <p className="sm-type-amp">Business hub.</p>
+
+                         </div>
+                      </span>
+                    </div>
+                    <div className="inner-grid inner-grid-6">
+                       <span className="info-icon">
+                        <InfoPick />
+                         <div className="info-icon-show info-icon-show-r">
+                           <p className="sm-type-amp">Forest area.</p>
+                         </div>
+                      </span>
+                    </div>
+                    <div className="inner-grid inner-grid-7">
+
+                    </div>
+                    <div className="inner-grid inner-grid-8">
+                      <span className="info-icon">
+                        <InfoPick />
+                         <div className="info-icon-show info-icon-show-c">
+                           <p className="sm-type-amp">Micro Hydro.</p>
+                         </div>
+                      </span>
+                    </div>
+                    <div className="inner-grid inner-grid-9">
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
             <p className="sm-type-lead mb-2">Despite the local government reorganisation the area is considered by many still to be in <a href="https://en.wikipedia.org/wiki/Inverness-shire" target="_blank">Inverness-shire</a>.</p>
             <p className="sm-type-lead mb-2"> The main village, also known as Glenclas Village, occupies an attractive situation opposite a neighbouring island, at the head of Glen More. There is a smaller hamlet less than a mile to the south, on the edge of Glenclas Bay and at the head of Glen Beag. There are several other clusters of houses scattered throughout Glenclas including further up Glen Beag and Glen More, on the road leading to the main north-south road. At the 2001 census the whole Glenclas community had a population of 985 and in 2011, Highland Council estimated that the community of Glenelg village had a population of 208</p>
             <div className="mb-4 mt-4">
