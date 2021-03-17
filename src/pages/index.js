@@ -10,6 +10,7 @@ import Slash from "../assets/slash.svg";
 import { eng } from "./_index.data"
 import {graphql, Link, useStaticQuery} from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image"
+import TickSheet from "../assets/tick-sheet.svg";
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -48,6 +49,10 @@ const IndexPage = () => {
             )}
           </div>
           <div className="col-lg-4">
+            <p className="sm-type-guitar mb-2">Helpful information</p>
+            <div className="side-grey">
+              <p className="sm-type-amp">This will be some help text.</p>
+            </div>
             <div className="side-color">
               <span className="side-color-slash">
                 <Slash />

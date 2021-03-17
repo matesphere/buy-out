@@ -1,7 +1,6 @@
 /*MAIN*/
 body {
     line-height: 1.25em;
-    font: 400 1rem/1.5625rem 'Roboto Slab', sans-serif;
     background: white;
     color: $brand-body;
 }
@@ -138,6 +137,9 @@ p {
     }
 }
 
+.sm-type-italic {
+    font-style: italic;
+}
 .sm-type-uppercase {
     text-transform: uppercase;
 }
@@ -161,7 +163,7 @@ p {
     padding-left: 1em;
     margin-right: auto;
     margin-left: auto;
-    max-width: 1100px;
+    max-width: 1200px;
 }
 
 .row {
@@ -330,4 +332,79 @@ p {
     @media (min-width: 768px) {
         display: none;
     }
+}
+
+.ticker {
+    display: flex;
+    align-items: center;
+
+    svg {
+        fill: $brand-red;
+    }
+
+    .ticker-sheet {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        margin-right: 16px;
+    }
+}
+
+.task {
+    color: $brand-red;
+}
+
+.side-grey {
+    background-color: #eeeeee;
+    margin-bottom: $grid-unit * 2;
+    padding: $grid-unit * 2;
+    border-radius: ($grid-unit *2);
+
+    a:link, a:visited {
+        color: $brand-darkgreen;
+    }
+}
+
+
+
+.form-label {
+    font-weight: 400;
+    text-transform: none;
+    font-size: 16px;
+    line-height: 1.25;
+
+    @media (min-width: 641px) {
+        font-size: 19px;
+        line-height: 1.31579;
+    }
+}
+.form-label, .form-label-bold {
+    display: block;
+    color: #0b0c0c;
+    padding-bottom: 2px;
+}
+
+
+.form-control {
+    box-sizing: border-box;
+    text-transform: none;
+    font-size: 16px;
+    line-height: 1.25;
+    width: 100%;
+    padding: 5px 4px 4px;
+    border: 2px solid $brand-body;
+
+    @media (min-width: 641px) {
+        font-size: 19px;
+        line-height: 1.31579;
+    }
+}
+
+input.form-control, textarea.form-control {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
+input:focus, textarea:focus, select:focus, button:focus {
+    outline: 3px solid $brand-green;
+    outline-offset: 0;
 }

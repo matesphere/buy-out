@@ -5,7 +5,6 @@ import '../scss/index.scss'
 import Submit from '../assets/submit.svg'
 import QuestBg from '../assets/quest-bg.svg'
 import Tick from '../assets/tick.svg'
-import {Link} from "gatsby";
 
 const YourNotesPage = () => {
   return (

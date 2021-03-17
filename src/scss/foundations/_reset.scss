@@ -20,7 +20,7 @@ body {
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5;
-  color: #212529;
+  color: $brand-body;
   text-align: left;
   background-color: #fff;
 }
@@ -117,12 +117,11 @@ sup {
 a {
   color: #5b7e20;
   background-color: transparent;
-  text-decoration: none;
 }
 
 a:hover {
-  text-decoration: underline;
-  color: $brand-darkgreen;
+  text-decoration: none;
+  color: $brand-red;
 }
 
 a.dark-link {
@@ -328,7 +327,7 @@ h1, h2, h3, h4, h5, h6,
   font-weight: 600;
   line-height: 1.2;
   color: $brand-redorange;
-  font-family: 'Ruda', Serif;
+  font-family: 'Roboto Slab', Serif;
 }
 
 body,
@@ -340,7 +339,7 @@ html {
 }
 
 body, p {
-  font: 400 1rem/1.5625rem "Roboto Slab", sans-serif;
+  font: 400 1rem/1.5625rem "Ruda", sans-serif;
 }
 
 
