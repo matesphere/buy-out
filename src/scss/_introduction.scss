@@ -8,6 +8,8 @@
 
 .image-map {
   position: relative;
+  max-width: 500px;
+  margin: 0 auto ($grid-unit * 3);
 
   .outer-grid {
     position: absolute;
@@ -137,5 +139,41 @@
     position: absolute;
     bottom: 10px;
     left: 10px;
+  }
+}
+
+.table {
+  display: table;
+  width: 100%;
+  margin-bottom: ($grid-unit * 4);
+}
+.title {
+  display: table-caption;
+  text-align: center;
+  font-weight: bold;
+  font-size: larger;
+}
+.heading {
+  display: table-row;
+  font-weight: bold;
+  text-align: center;
+  font-weight: bold;
+}
+.roww {
+  display: table-row;
+  width: 100%;
+}
+.cell {
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: $grid-unit * 2;
+
+  &:first-of-type {
+    width: 40%;
+  }
+
+  &:last-of-type {
+    width: 60%;
   }
 }
