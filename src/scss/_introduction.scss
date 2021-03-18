@@ -177,3 +177,27 @@
     width: 60%;
   }
 }
+
+.reddot, .greydot, .yellowdot, .tealdot, .purpledot {
+  width: 12px;
+  height: 12px;
+  display: inline-block;
+  margin-right: $grid-unit;
+  border-radius: 10px;
+}
+
+.reddot {
+  background-color: #BD2E2E;
+}
+.greydot {
+  background-color: #4D4C4C;
+}
+.yellowdot {
+  background-color: #E2C913;
+}
+.tealdot {
+  background-color: #4EBDC7;
+}
+.purpledot {
+  background-color: #7C4B98;
+}

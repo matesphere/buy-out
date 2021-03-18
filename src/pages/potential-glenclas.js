@@ -52,8 +52,8 @@ const IntroPage = () => {
                               <span className="info-icon">
                                 <InfoPick />
                                  <div className="info-icon-show info-icon-show-c">
-                                   <p className="sm-type-amp">Shop and Post Office.</p>
-                                   <p className="sm-type-amp">Heritage Centre.</p>
+                                   <p className="sm-type-amp"><span className="reddot"></span> Shop and Post Office.</p>
+                                   <p className="sm-type-amp"><span className="reddot"></span> Heritage Centre.</p>
                                  </div>
                               </span>
                             </div>
@@ -61,7 +61,7 @@ const IntroPage = () => {
                                <span className="info-icon">
                                 <InfoPick />
                                  <div className="info-icon-show info-icon-show-c">
-                                   <p className="sm-type-amp">Affordable Housing area.</p>
+                                   <p className="sm-type-amp"><span className="greydot"></span> Affordable Housing area.</p>
                                  </div>
                               </span>
                             </div>
@@ -69,8 +69,8 @@ const IntroPage = () => {
                                <span className="info-icon">
                                 <InfoPick />
                                  <div className="info-icon-show info-icon-show-r">
-                                   <p className="sm-type-amp">Campsite / Cabins.</p>
-                                   <p className="sm-type-amp">Market gardening.</p>
+                                   <p className="sm-type-amp"><span className="purpledot"></span> Campsite / Cabins.</p>
+                                   <p className="sm-type-amp"><span className="purpledot"></span> Market gardening.</p>
                                  </div>
                               </span>
                             </div>
@@ -78,8 +78,8 @@ const IntroPage = () => {
                               <span className="info-icon">
                                 <InfoPick />
                                  <div className="info-icon-show info-icon-show-c">
-                                   <p className="sm-type-amp">Play park / Skate park.</p>
-                                   <p className="sm-type-amp">Wind turbine.</p>
+                                   <p className="sm-type-amp"><span className="yellowdot"></span> Play park / Skate park.</p>
+                                   <p className="sm-type-amp"><span className="yellowdot"></span> Wind turbine.</p>
                                  </div>
                               </span>
                             </div>
@@ -87,7 +87,7 @@ const IntroPage = () => {
                               <span className="info-icon">
                                 <InfoPick />
                                  <div className="info-icon-show info-icon-show-c">
-                                   <p className="sm-type-amp">Business hub.</p>
+                                   <p className="sm-type-amp"><span className="yellowdot"></span> Business hub.</p>
 
                                  </div>
                               </span>
@@ -96,7 +96,7 @@ const IntroPage = () => {
                                <span className="info-icon">
                                 <InfoPick />
                                  <div className="info-icon-show info-icon-show-r">
-                                   <p className="sm-type-amp">Forest area.</p>
+                                   <p className="sm-type-amp"><span className="tealdot"></span> Forest area.</p>
                                  </div>
                               </span>
                             </div>
@@ -107,7 +107,7 @@ const IntroPage = () => {
                               <span className="info-icon">
                                 <InfoPick />
                                  <div className="info-icon-show info-icon-show-c">
-                                   <p className="sm-type-amp">Micro Hydro.</p>
+                                   <p className="sm-type-amp"><span className="yellowdot"></span> Micro Hydro.</p>
                                  </div>
                               </span>
                             </div>
@@ -131,7 +131,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Affordable housing</p>
+                                  <p><span className="greydot"></span> Affordable housing</p>
                               </div>
                               <div className="cell">
                                   <p>Space for 3 pairs of semi-detached houses behind a row of existing houses.</p>
@@ -140,7 +140,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Play park / skate park</p>
+                                  <p><span className="yellowdot"></span> Play park / skate park</p>
                               </div>
                               <div className="cell">
                                   <p>Could be located behind the school and provide a facility for the primary school children as well as for older children.</p>
@@ -149,7 +149,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Shop and PO</p>
+                                  <p><span className="reddot"></span> Shop and PO</p>
                               </div>
                               <div className="cell">
                                   <p>Could be situated just of the ‘High Street’ a purpose-built mini supermarket and shop, to service the local community and visitors.</p>
@@ -158,7 +158,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Micro-hydro</p>
+                                  <p><span className="yellowdot"></span> Micro-hydro</p>
                               </div>
                               <div className="cell">
                                   <p>Making use of the stream coming off the hill behind the village. Providing both power for the community and an income from electricity sold onto the grid.</p>
@@ -167,7 +167,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Wind turbine</p>
+                                  <p><span className="yellowdot"></span> Wind turbine</p>
                               </div>
                               <div className="cell">
                                   <p>Situated on the hill behind the village. Providing both power for the community and an income from electricity sold onto the grid.</p>
@@ -176,7 +176,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Business hub</p>
+                                  <p><span className="yellowdot"></span> Business hub</p>
                               </div>
                               <div className="cell">
                                   <p>Situated off the main thoroughfare, a new build that could be divided into units for offices and/or workshops.</p>
@@ -185,7 +185,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Forest</p>
+                                  <p><span className="tealdot"></span> Forest</p>
                               </div>
                               <div className="cell">
                                   <p>On the extensive hill behind the village, an area of some 15 acres to be planted as mixed woodland. Potential for income from the softwood, amenity value (woodland walks) and habitat creation as well as climate mitigation</p>
@@ -194,7 +194,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Campsite / cabins / glamping</p>
+                                  <p><span className="purpledot"></span> Campsite / cabins / glamping</p>
                               </div>
                               <div className="cell">
                                   <p>Potential for a community owned campsite and area for cabins or wigwams. The shower toilet block could be made available to public use (for a fee) to allow campervan and other tourists to use the facilities.
@@ -204,7 +204,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Local heritage centre</p>
+                                  <p><span className="reddot"></span> Local heritage centre</p>
                               </div>
                               <div className="cell">
                                   <p>A ‘Learning Centre’ focussed on the lives of people in the area over the past 200 years. This would be a focus for local residents but also for people returning to the area and wanting to research their roots, possibly from abroad.</p>
@@ -213,7 +213,7 @@ const IntroPage = () => {
 
                           <div className="roww">
                               <div className="cell">
-                                  <p>Market garden</p>
+                                  <p><span className="purpledot"></span> Market garden</p>
                               </div>
                               <div className="cell">
                                   <p>A commercial operation to grow year-round fruit and vegetables for the local community and for local businesses such as the Glenclas Hotel and Lodge.</p>
