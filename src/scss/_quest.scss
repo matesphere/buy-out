@@ -4,6 +4,9 @@
   position: relative;
   display: flex;
   align-content: center;
+  background-color: #aaa;
+  width: 100%;
+  min-height: 120px;
 
   svg {
     top: 0px;
@@ -11,7 +14,11 @@
     z-index: 0;
     fill: #999999;
     transition: ease-in 0.2s;
-    transform-origin: 50% 50%;
+  }
+
+  a {
+    text-decoration: none;
+    transition: ease-in 0.2s;
   }
 
   &-page {
@@ -53,8 +60,12 @@
   }
 
   &-complete {
+    background-color: $brand-body;
 
     &:hover {
+      box-shadow: 0 8px 12px -4px rgb(0 0 0 / 40%), 0 0 2px rgb(0 0 0 / 40%);
+      transition: ease-in 0.2s;
+
       svg {
         transform: scale(1.05);
       }

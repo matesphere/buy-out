@@ -4,11 +4,22 @@ import Footer from '../components/_footer'
 import '../scss/index.scss'
 import Tick from '../assets/tick.svg'
 import Cross from '../assets/cross.svg'
-import {Link} from "gatsby";
 import QuestBg from "../assets/quest-bg.svg";
+import {Helmet} from "react-helmet";
 
 const YourNotesPage = () => {
   return (
+    <>
+      <Helmet>
+          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <title>Quest 1</title>
+          <meta name="description" content="The description" />
+          {/*<meta name="image" content={image} />*/}
+          <meta property="og:url" content="url" />
+          <meta property="og:title" content="Quest 1" />
+          <meta property="og:description" content="The description" />
+          {/*<meta property="og:image" content={image} />*/}
+      </Helmet>
     <main className="notes">
       <Header headerText="TUTOR LOGIN" />
       <section className="container" id="main">
@@ -217,6 +228,7 @@ const YourNotesPage = () => {
       </section>
       <Footer />
     </main>
+  </>
   )
 }
 

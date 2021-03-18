@@ -19,79 +19,83 @@ const QuestPage = () => {
     }
   `)
   return (
-    <main className="the-quest">
-        <Helmet>
-            <title>Quest 1</title>
-            <meta name="description" content="The description" />
-            {/*<meta name="image" content={image} />*/}
-            <meta property="og:url" content="url" />
-            <meta property="og:title" content="Quest 1" />
-            <meta property="og:description" content="The description" />
-            {/*<meta property="og:image" content={image} />*/}
-        </Helmet>
-      <Header headerText="the Quest" />
-      <section className="container" id="main">
-        <div className="row">
-          <div className="col-lg-12">
-              <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Quest 1 - Research</h1>
-          </div>
-        </div>
-          <div className="row">
-              <div className="col-lg-8">
-                  <p className="sm-type-guitar sm-type-guitar--medium mt-4 mb-4">The legitimate place of people in the landscape: renewing and repopulating rural Scotland</p>
-                  <p className="sm-type-lead mb-4">Contact Community Land Scotland (CLS)</p>
-                  <p className="sm-type-lead mb-4">Find out about what funding is available</p>
-                  <p className="sm-type-lead mb-4">Get in touch with the agencies that can support you through the journey</p>
-                  <p className="sm-type-lead mb-4">Look into options: Protocol or CRTB</p>
+      <>
+          <Helmet>
+              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+              <title>Quest 1</title>
+              <meta name="description" content="The description" />
+              {/*<meta name="image" content={image} />*/}
+              <meta property="og:url" content="url" />
+              <meta property="og:title" content="Quest 1" />
+              <meta property="og:description" content="The description" />
+              {/*<meta property="og:image" content={image} />*/}
+          </Helmet>
+            <main className="the-quest">
 
-                  <div className="sm-type-amp mb-4">
-                      <ul>
-                          <li className="mb-2">CLS has a ‘Protocol for Negotiated Sales of Land with Scottish Land and Estates’ (SLE), which provide guidance for sales between SLE and CLS members</li>
-                          <li>'Community Right To Buy' (CRTB) is a statutory route that allows communities the right to buy land when it comes up for sale.</li>
-                      </ul>
+              <Header headerText="the Quest" />
+              <section className="container" id="main">
+                <div className="row">
+                  <div className="col-lg-12">
+                      <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Quest 1 - Research</h1>
                   </div>
+                </div>
+                  <div className="row">
+                      <div className="col-lg-8">
+                          <p className="sm-type-guitar sm-type-guitar--medium mt-4 mb-4">The legitimate place of people in the landscape: renewing and repopulating rural Scotland</p>
+                          <p className="sm-type-lead mb-4">Contact Community Land Scotland (CLS)</p>
+                          <p className="sm-type-lead mb-4">Find out about what funding is available</p>
+                          <p className="sm-type-lead mb-4">Get in touch with the agencies that can support you through the journey</p>
+                          <p className="sm-type-lead mb-4">Look into options: Protocol or CRTB</p>
 
-                  <p className="sm-type-lead mb-4">Identify who the landowner is</p>
-                  <div className="mb-4">
-                      <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} />
-                  </div>
-                  <h2 className="sm-type-drum">Useful links</h2>
+                          <div className="sm-type-amp mb-4">
+                              <ul>
+                                  <li className="mb-2">CLS has a ‘Protocol for Negotiated Sales of Land with Scottish Land and Estates’ (SLE), which provide guidance for sales between SLE and CLS members</li>
+                                  <li>'Community Right To Buy' (CRTB) is a statutory route that allows communities the right to buy land when it comes up for sale.</li>
+                              </ul>
+                          </div>
 
-                  <ul>
-                      <li>
-                          <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
-                      </li>
-                      <li>
-                          <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
-                      </li>
-                      <li>
-                          <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
-                      </li>
-                      <li>
-                          <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
-                      </li>
-                  </ul>
-              </div>
+                          <p className="sm-type-lead mb-4">Identify who the landowner is</p>
+                          <div className="mb-4">
+                              <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} />
+                          </div>
+                          <h2 className="sm-type-drum">Useful links</h2>
 
-              <div className="col-lg-4">
-                  <div className="side-color">
-                      <div className="side-color-text">
-                          <p className="sm-type-guitar">Congratulations?</p>
-                          <p className="sm-type-amp mb-4">You have completed Quest 1.</p>
-                          <Tick />
-                          <p><Link className="dark-link" to="/your-notes#guest-1">Your Quest 1 notes</Link></p>
-                          <p><Link className="dark-link" to="/the-quest-2">Move onto Quest 2</Link></p>
+                          <ul>
+                              <li>
+                                  <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
+                              </li>
+                              <li>
+                                  <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
+                              </li>
+                              <li>
+                                  <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
+                              </li>
+                              <li>
+                                  <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
+                              </li>
+                          </ul>
+                      </div>
+
+                      <div className="col-lg-4">
+                          <div className="side-color">
+                              <div className="side-color-text">
+                                  <p className="sm-type-guitar">Congratulations?</p>
+                                  <p className="sm-type-amp mb-4">You have completed Quest 1.</p>
+                                  <Tick />
+                                  <p><Link className="dark-link" to="/your-notes#guest-1">Your Quest 1 notes</Link></p>
+                                  <p><Link className="dark-link" to="/the-quest-2">Move onto Quest 2</Link></p>
+                              </div>
+                          </div>
                       </div>
                   </div>
-              </div>
-          </div>
 
 
 
 
-      </section>
-      <Footer />
-    </main>
+              </section>
+              <Footer />
+            </main>
+          </>
   )
 }
 

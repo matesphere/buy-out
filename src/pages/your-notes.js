@@ -3,7 +3,6 @@ import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
 import Submit from '../assets/submit.svg'
-import QuestBg from '../assets/quest-bg.svg'
 import Tick from '../assets/tick.svg'
 
 const YourNotesPage = () => {
@@ -25,7 +24,6 @@ const YourNotesPage = () => {
           <div className="row quest-notes" id="guest-1">
               <div className="col-lg-8">
                   <div className="quest-step quest-step-page quest-step-complete">
-                      <QuestBg />
                       <div className="quest-step-text">
                           <span className="quest-step-number">1</span>
                           RESEARCH
@@ -57,7 +55,6 @@ const YourNotesPage = () => {
           <div className="row quest-notes" id="guest-2">
               <div className="col-lg-8">
                   <div className="quest-step quest-step-page quest-step-complete">
-                      <QuestBg />
                       <div className="quest-step-text">
                           <span className="quest-step-number">2</span>
                           CONSULT
@@ -92,7 +89,6 @@ const YourNotesPage = () => {
           <div className="row quest-notes" id="guest-3">
               <div className="col-lg-8">
                   <div className="quest-step quest-step-page quest-step-complete">
-                      <QuestBg />
                       <div className="quest-step-text">
                           <span className="quest-step-number">3</span>
                           LAY THE FOUNDATIONS
