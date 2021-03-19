@@ -69,8 +69,8 @@ const QuestPage = () => {
                               <label className="form-label" htmlFor="id1">Hold a community meeting to explore the options.</label>
                           </div>
                           <div className="multiple-choice">
-                              <input className="form-control" id="id1" type="checkbox"/>
-                              <label className="form-label" htmlFor="id1">If there is community support, elect a Steering Group to take forward a possible purchase.</label>
+                              <input className="form-control" id="id2" type="checkbox"/>
+                              <label className="form-label" htmlFor="id2">If there is community support, elect a Steering Group to take forward a possible purchase.</label>
                           </div>
 
                           <p className="sm-type-amp"><Link to="/the-roles">Move onto choosing your Steering Group.</Link></p>

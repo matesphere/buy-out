@@ -15,15 +15,17 @@ const YourNotesPage = () => {
           <div className="row">
               <div className="col-lg-12">
                   <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Your notes</h1>
-                  <ul className="completed-nav">
-                      <li className="sm-type-lead"><Link to="/your-notes-completed" className="completed-nav-completed">1. Research</Link> <Tick /></li>
-                      <li className="sm-type-lead"><Link to="/your-notes-inprogress">2. Consult <span className="notification"></span></Link></li>
-                  </ul>
               </div>
           </div>
 
           <div className="row" id="guest-2">
               <div className="col-lg-8">
+
+                  <ul className="completed-nav">
+                      <li className="sm-type-lead"><Link to="/your-notes-completed" className="completed-nav-completed">1. Research</Link> <Tick /></li>
+                      <li className="sm-type-lead"><Link to="/your-notes-inprogress">2. Consult <span className="notification"></span></Link></li>
+                  </ul>
+
                   <div className="side-grey">
                       <div className="quest-step quest-step-page quest-step-complete">
                           <div className="quest-step-text">
