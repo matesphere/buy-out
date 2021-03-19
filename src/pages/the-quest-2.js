@@ -7,6 +7,8 @@ import Submit from "../assets/submit.svg";
 import { graphql, useStaticQuery } from "gatsby";
 import { Helmet } from 'react-helmet'
 import { Link } from "gatsby"
+import HelpIcon from "../assets/help-icon.svg";
+import TickSheet from "../assets/tick-sheet.svg";
 
 const QuestPage = () => {
   return (
@@ -31,42 +33,60 @@ const QuestPage = () => {
             </div>
               <div className="row">
                   <div className="col-lg-8">
-                      <p className="sm-type-guitar sm-type-guitar--medium mt-4 mb-4"></p>
-                      <p className="sm-type-amp mb-4">Hold a community meeting to explore the options</p>
-                      <p className="sm-type-amp mb-4">If there is community support, elect a Steering Group to take forward a possible purchase</p>
+                      <div className="side-grey">
+                          <h3 className="task ticker mb-2">
+                              <span className="ticker-sheet"><TickSheet /></span>
+                              <span className="sm-type-drum">Task to complete:</span>
+                          </h3>
+                          <ul>
+                              <li><p className="sm-type-lead">Hold a community meeting to explore the options.</p>
+                                  <ul className="mb-4">
+                                      <li className="mb-2">Some information to help you here.</li>
+                                  </ul>
+                              </li>
+                              <li><p className="sm-type-lead">If there is community support, elect a Steering Group to take forward a possible purchase.</p>
+                                  <ul className="mb-4">
+                                      <li className="mb-2">Some information to help you here.</li>
+                                  </ul>
+                              </li>
 
-                      <h2 className="sm-type-drum">Useful links</h2>
 
-                      <ul>
-                          <li>
-                              <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank">Community Land Scotland About Us</a>
-                          </li>
-                          <li>
-                              <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank">Community Land Scotland About Us</a>
-                          </li>
-                          <li>
-                              <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank">Community Land Scotland About Us</a>
-                          </li>
-                          <li>
-                              <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank">Community Land Scotland About Us</a>
-                          </li>
-                      </ul>
+                          </ul>
+                      </div>
                   </div>
 
                   <div className="col-lg-4">
-                      <div className="side-color">
-                          <div className="side-color-text">
-                              <span className="submit-icon">
-                                <Submit />
-                              </span>
-                              <p className="sm-type-guitar">Have you gathered enough information?</p>
-                              <p className="sm-type-amp mb-4">No move on to submitting your findings.</p>
-                              <Link to="/your-notes" className="btn-solid-lg">
-                                  <Submit />
-                                  Submit
-                              </Link>
-                          </div>
+                      <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
+                      <div className="side-grey">
+                          <p className="sm-type-amp ticker">You will need to work together and decided who will do the following.</p>
                       </div>
+
+                      <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-green"><TickSheet /></span>Your checklist</p>
+                      <div className="side-grey">
+                          <p className="sm-type-amp">Check all task here:</p>
+                          <div className="multiple-choice">
+                              <input className="form-control" id="id1" type="checkbox"/>
+                              <label className="form-label" htmlFor="id1">Hold a community meeting to explore the options.</label>
+                          </div>
+                          <div className="multiple-choice">
+                              <input className="form-control" id="id1" type="checkbox"/>
+                              <label className="form-label" htmlFor="id1">If there is community support, elect a Steering Group to take forward a possible purchase.</label>
+                          </div>
+
+                          <p className="sm-type-amp"><Link to="/the-roles">Move onto choosing your Steering Group.</Link></p>
+                      </div>
+
+                      {/*<div className="side-grey">*/}
+                      {/*    <span className="submit-icon">*/}
+                      {/*      <Submit />*/}
+                      {/*    </span>*/}
+                      {/*    <p className="sm-type-guitar">Have you gathered enough information?</p>*/}
+                      {/*    <p className="sm-type-amp mb-4">No move on to submitting your findings.</p>*/}
+                      {/*    <Link to="/your-notes" className="btn-solid-lg">*/}
+                      {/*        <Submit />*/}
+                      {/*        Submit*/}
+                      {/*    </Link>*/}
+                      {/*</div>*/}
                   </div>
               </div>
           </section>

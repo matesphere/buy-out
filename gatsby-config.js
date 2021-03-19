@@ -7,6 +7,7 @@ module.exports = {
     "gatsby-plugin-image",
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-smoothscroll',
     {
       resolve: "gatsby-plugin-google-analytics",
       options: {

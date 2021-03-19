@@ -201,3 +201,23 @@
 .purpledot {
   background-color: #7C4B98;
 }
+
+.filters-container {
+  .form-holder {
+    display: block;
+  }
+
+  .success-holder {
+    display: none;
+  }
+}
+
+.filters-container.show {
+  .form-holder {
+    display: none;
+  }
+
+  .success-holder {
+    display: block;
+  }
+}

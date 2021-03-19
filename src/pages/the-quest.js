@@ -48,7 +48,7 @@ const QuestPage = () => {
                       <div className="col-lg-4">
                           <div className="quest-step quest-step-complete">
                               <div className="quest-step-text">
-                                  <Link to="/the-quest-1">
+                                  <Link to="/the-quest-1-completed">
                                       <span className="quest-step-number">1</span>
                                       RESEARCH
                                   </Link>

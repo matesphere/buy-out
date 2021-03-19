@@ -3,21 +3,13 @@ import * as React from "react"
 import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
-import { graphql, useStaticQuery, Link } from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image"
+import { Link } from "gatsby";
 import { Helmet } from 'react-helmet'
-import Tick from '../assets/tick.svg'
+import HelpIcon from "../assets/help-icon.svg";
+import TickSheet from "../assets/tick-sheet.svg";
 
 const QuestPage = () => {
-    const data = useStaticQuery(graphql`
-    query {
-      file(relativePath: { eq: "fairer-scotland.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED)
-        }
-      }
-    }
-  `)
+
   return (
       <>
           <Helmet>
@@ -42,49 +34,86 @@ const QuestPage = () => {
                   <div className="row">
                       <div className="col-lg-8">
                           <p className="sm-type-guitar sm-type-guitar--medium mt-4 mb-4">The legitimate place of people in the landscape: renewing and repopulating rural Scotland</p>
-                          <p className="sm-type-lead mb-4">Contact Community Land Scotland (CLS)</p>
-                          <p className="sm-type-lead mb-4">Find out about what funding is available</p>
-                          <p className="sm-type-lead mb-4">Get in touch with the agencies that can support you through the journey</p>
-                          <p className="sm-type-lead mb-4">Look into options: Protocol or CRTB</p>
 
-                          <div className="sm-type-amp mb-4">
+                          <div className="side-grey">
+                              <h3 className="task ticker mb-2">
+                                  <span className="ticker-sheet"><TickSheet /></span>
+                                  <span className="sm-type-drum">Task to complete:</span>
+                              </h3>
                               <ul>
-                                  <li className="mb-2">CLS has a ‘Protocol for Negotiated Sales of Land with Scottish Land and Estates’ (SLE), which provide guidance for sales between SLE and CLS members</li>
-                                  <li>'Community Right To Buy' (CRTB) is a statutory route that allows communities the right to buy land when it comes up for sale.</li>
+                                  <li><p className="sm-type-lead">Contact Community Land Scotland (CLS)</p>
+                                      <ul className="mb-4">
+                                          <li className="mb-2">Some information to help you here</li>
+                                      </ul>
+                                  </li>
+                                  <li><p className="sm-type-lead">Find out about what funding is available</p>
+                                      <ul className="mb-4">
+                                          <li className="mb-2">Some information to help you here</li>
+                                      </ul>
+                                  </li>
+                                  <li><p className="sm-type-lead">Get in touch with the agencies that can support you through the journey</p>
+                                      <ul className="mb-4">
+                                          <li className="mb-2">Some information to help you here</li>
+                                      </ul>
+                                  </li>
+                                  <li><p className="sm-type-lead">Look into options: Protocol or CRTB</p>
+                                      <ul className="mb-4">
+                                          <li className="mb-2">CLS has a ‘Protocol for Negotiated Sales of Land with Scottish Land and Estates’ (SLE), which provide guidance for sales between SLE and CLS members</li>
+                                          <li>'Community Right To Buy' (CRTB) is a statutory route that allows communities the right to buy land when it comes up for sale.</li>
+                                      </ul>
+                                  </li>
+                                  <li><p className="sm-type-lead">Identify who the landowner is</p>
+                                      <ul className="mb-4">
+                                          <li className="mb-2">Some information to help you here</li>
+                                      </ul>
+                                  </li>
                               </ul>
                           </div>
-
-                          <p className="sm-type-lead mb-4">Identify who the landowner is</p>
-                          <div className="mb-4">
-                              <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} />
-                          </div>
-                          <h2 className="sm-type-drum">Useful links</h2>
-
-                          <ul>
-                              <li>
-                                  <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
-                              </li>
-                              <li>
-                                  <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
-                              </li>
-                              <li>
-                                  <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
-                              </li>
-                              <li>
-                                  <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland About Us</a>
-                              </li>
-                          </ul>
                       </div>
 
                       <div className="col-lg-4">
-                          <div className="side-color">
-                              <div className="side-color-text">
-                                  <p className="sm-type-guitar">Congratulations?</p>
-                                  <p className="sm-type-amp mb-4">You have completed Quest 1.</p>
-                                  <Tick />
-                                  <p><Link className="dark-link" to="/your-notes#guest-1">Your Quest 1 notes</Link></p>
-                                  <p><Link className="dark-link" to="/the-quest-2">Move onto Quest 2</Link></p>
+                          <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
+                          <div className="side-grey">
+                              <p className="sm-type-amp">Useful links</p>
+                              <ul>
+                                  <li>
+                                      <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land Scotland</a>
+                                  </li>
+                                  <li>
+                                      <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land</a>
+                                  </li>
+                                  <li>
+                                      <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community About Us</a>
+                                  </li>
+                                  <li>
+                                      <a href="https://www.communitylandscotland.org.uk/about-us/what-we-do/" rel="external" target="_blank" rel="noreferrer">Community Land About Us</a>
+                                  </li>
+                              </ul>
+                          </div>
+                          <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-green"><TickSheet /></span>Your checklist</p>
+                          <div className="side-grey">
+                              <p className="sm-type-amp">Check all task here:</p>
+                              <div className="multiple-choice">
+                                  <input className="form-control" id="id1" type="checkbox"/>
+                                  <label className="form-label" htmlFor="id1">Contact Community Land Scotland (CLS)</label>
                               </div>
+                              <div className="multiple-choice">
+                                  <input className="form-control" id="id2" type="checkbox"/>
+                                  <label className="form-label" htmlFor="id2">Find out about what funding is available</label>
+                              </div>
+                              <div className="multiple-choice">
+                                  <input className="form-control" id="id3" type="checkbox"/>
+                                  <label className="form-label" htmlFor="id3">Get in touch with the agencies that can support you through the journey</label>
+                              </div>
+                              <div className="multiple-choice">
+                                  <input className="form-control" id="id4" type="checkbox"/>
+                                  <label className="form-label" htmlFor="id4">Look into options: Protocol or CRTB</label>
+                              </div>
+                              <div className="multiple-choice">
+                                  <input className="form-control" id="id5" type="checkbox"/>
+                                  <label className="form-label" htmlFor="id5">Identify who the landowner is</label>
+                              </div>
+                              <p className="sm-type-amp"><Link to="/your-notes-submit">You can now submit your findings.</Link></p>
                           </div>
                       </div>
                   </div>

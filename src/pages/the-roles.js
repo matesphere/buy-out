@@ -1,14 +1,18 @@
-import React from "react"
+import React, { useState } from 'react'
 import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
+import scrollTo from 'gatsby-plugin-smoothscroll'
 
 import TickSheet from "../assets/tick-sheet.svg";
+import Tick from '../assets/tick.svg'
 
 import { Link } from "gatsby";
 import {Helmet} from "react-helmet";
+import HelpIcon from "../assets/help-icon.svg";
 
 const IntroPage = () => {
+  const [showFilters, setShowFilters] = useState(false)
 
 
   return (
@@ -28,7 +32,8 @@ const IntroPage = () => {
           <section className="container" id="main">
             <div className="row">
               <div className="col-lg-8">
-                <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">You are about to embark on the community buy out quest.</h2>
+                <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Choose your steering group.</h2>
+
                 <p className="sm-type-guitar mb-4">You are going to work as the board of a
                   community group who will lead the purchase of some land that has come up for sale.</p>
 
@@ -54,34 +59,52 @@ const IntroPage = () => {
 
                 </div>
 
-                <h4 className="sm-type-guitar mb-2 mt-4">Enter the names for the roles below:</h4>
-                <form className="mb-4">
-                    <ul>
-                      <li className="mb-2">
-                        <label className="form-label sm-type-amp">Chair</label>
-                        <input class="form-control" />
-                      </li>
-                      <li className="mb-2">
-                        <label className="form-label sm-type-amp">Vice-chair</label>
-                        <input class="form-control" />
-                      </li>
-                      <li className="mb-2">
-                        <label className="form-label sm-type-amp">Secretary</label>
-                        <input class="form-control" />
-                      </li>
-                      <li className="mb-2">
-                        <label className="form-label sm-type-amp">Treasurer</label>
-                        <input class="form-control" />
-                      </li>
-                    </ul>
-                    <button className="btn-solid-lg" to="/introduction">Submit names</button>
-                </form>
+                <div className={`filters-container${
+                    showFilters ? ' show' : ''
+                }`}>
+                  <div className="form-holder">
+                    <h4 className="sm-type-guitar mb-2 mt-4">Enter the names for the roles below:</h4>
+                    <div className="mb-4" id="form-roles">
+                      <ul>
+                        <li className="mb-2">
+                          <label className="form-label sm-type-amp">Chair</label>
+                          <input class="form-control" />
+                        </li>
+                        <li className="mb-2">
+                          <label className="form-label sm-type-amp">Vice-chair</label>
+                          <input class="form-control" />
+                        </li>
+                        <li className="mb-2">
+                          <label className="form-label sm-type-amp">Secretary</label>
+                          <input class="form-control" />
+                        </li>
+                        <li className="mb-2">
+                          <label className="form-label sm-type-amp">Treasurer</label>
+                          <input class="form-control" />
+                        </li>
+                      </ul>
+
+                      <button onClick={() => {
+                        setShowFilters(!showFilters)
+                        scrollTo('#filter-container')
+                      }} className="btn-solid-lg" to="/introduction">Submit names</button>
+                    </div>
+                  </div>
+                  <div className="success-holder mb-4 mt-4" id="filter-container">
+                    <h4 className="sm-type-bigdrum sm-type-bigdrum--medium"><span class="side-icon"><Tick /></span> Success</h4>
+                    <p>Your roles have been submitted.</p>
+                    <p><Link to="/your-notes-inprogress">You will see your feedback here</Link></p>
+                  </div>
+
+
+
+                </div>
 
               </div>
               <div className="col-lg-4">
-                <p className="sm-type-guitar mb-2">Helpful information</p>
+                <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
                 <div className="side-grey">
-                  <p className="sm-type-amp ticker"><span className="ticker-sheet"><TickSheet /></span>You will need to work together and decided who will do the following.</p>
+                  <p className="sm-type-amp ticker">You will need to work together and decided who will do the following.</p>
                   <ul className="sm-type-amp">
                     <li>Chair</li>
                     <li>Vice-chair</li>
@@ -89,12 +112,17 @@ const IntroPage = () => {
                     <li>Treasurer</li>
                   </ul>
                   <p className="sm-type-amp">Some more information <Link to="/about-the-roles">about the roles can be found here</Link>.</p>
-
-
                 </div>
+
+                <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-green"><TickSheet /></span>Your checklist</p>
                 <div className="side-grey">
-                  <p className="sm-type-amp">A lot of the information you will need is available here.</p>
-                  <p className="sm-type-amp"><Link to="/about-glenclas">Read more about Glenclas here</Link></p>
+                  <p className="sm-type-amp">Check all task here:</p>
+                  <div className="multiple-choice">
+                    <input className="form-control" id="id1" type="checkbox"/>
+                    <label className="form-label" htmlFor="id1">You have chosen who will do which role.</label>
+                  </div>
+
+                  <p className="sm-type-amp"><a href="#form-roles">You can submit your roles.</a></p>
                 </div>
               </div>
             </div>

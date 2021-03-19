@@ -8,6 +8,7 @@ import ScotlandArea from "../assets/scotland-area.svg";
 import {graphql, Link, useStaticQuery} from "gatsby";
 import {GatsbyImage} from "gatsby-plugin-image";
 import {Helmet} from "react-helmet";
+import HelpIcon from "../assets/help-icon.svg";
 
 const IntroPage = () => {
   const data = useStaticQuery(graphql`
@@ -52,7 +53,7 @@ const IntroPage = () => {
         <meta property="og:description" content="The description" />
         {/*<meta property="og:image" content={image} />*/}
       </Helmet>
-      <main className="homepage">
+      <main className="the-quest">
         <Header headerText="Introduction" />
         <section className="container" id="main">
           <div className="row">
@@ -100,11 +101,13 @@ const IntroPage = () => {
               <p className="sm-type-amp"><Link to="/potential-glenclas">Potential planning</Link></p>
             </div>
             <div className="col-lg-4">
-              <p className="sm-type-guitar mb-2">Helpful information</p>
+              <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
               <div className="side-grey">
                 <p className="sm-type-amp">Read all about Glenclas and find out what you need to move on to the next quest.</p>
                 <p className="sm-type-amp">Make notes of the amenities and the opportunities.</p>
                 <p className="sm-type-amp"><Link to="/about-glenclas-people">Hear from the people of Glenclas</Link></p>
+                <p className="sm-type-amp"><Link to="/potential-glenclas">Potential planning</Link></p>
+
 
               </div>
             </div>

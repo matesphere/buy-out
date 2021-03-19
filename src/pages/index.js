@@ -3,14 +3,11 @@ import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
 
-import HomeOne from "../assets/home-icon-1.svg";
-import HomeTwo from "../assets/home-icon-2.svg";
-import HomeThree from "../assets/home-icon-3.svg";
-import Slash from "../assets/slash.svg";
-import { eng } from "./_index.data"
+
 import {graphql, Link, useStaticQuery} from "gatsby";
-import { GatsbyImage } from "gatsby-plugin-image"
 import {Helmet} from "react-helmet";
+import TickSheet from "../assets/tick-sheet.svg";
+import HelpIcon from "../assets/help-icon.svg";
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -41,65 +38,49 @@ const IndexPage = () => {
           <section className="container" id="main">
             <div className="row">
               <div className="col-lg-8">
-                <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Make your community a landowner!</h2>
+                <h2 className="sm-type-drum sm-type-drum--medium mt-4">Make your community a landowner!</h2>
                 <p className="sm-type-guitar mb-4">Can you make it through the 8 steps and emerge victorious?</p>
-                <div className="homepage-image">
-                  <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} />
-                </div>
-                <h3 className="sm-type-drum sm-type-drum--medium">Overview</h3>
-                {eng.map(eng => (
-                    <div key={eng.text}>
-                      <p className="sm-type-guitar">
-                        {eng.text}
-                      </p>
-                      <p className="sm-type-amp">
-                        {eng.description}
-                      </p>
-                    </div>
+                <p className="sm-type-lead mb-4">The following will walk you through the process to help on your quest.</p>
 
-                    )
-                )}
+                <ol>
+                  <li className="sm-type-lead mb-4">You will be guided along the way to help you achieve your goal.</li>
+                  <li className="sm-type-lead mb-4">Your help guide will always appear in the "Helpful information" boxes. <br />Look out for this icon <span className="side-icon side-icon-orange"><HelpIcon /></span></li>
+                  <li className="sm-type-lead mb-4">Make sure you read all the information and check "Your checklist" to make sure you have completed the task. <br />Look out for this icon <span className="side-icon side-icon-green"><TickSheet /></span></li>
+                  <li className="sm-type-lead mb-4">You wont be able to move on until you click all the boxes in the "Your checklist" area.</li>
+                </ol>
+
               </div>
               <div className="col-lg-4">
-                <p className="sm-type-guitar mb-2">Helpful information</p>
+                <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
                 <div className="side-grey">
-                  <p className="sm-type-amp">This will be some help text.</p>
+                  <p className="sm-type-amp">Read all of the steps. You will have to follow them carefully.</p>
                 </div>
-                <div className="side-color">
-                  <span className="side-color-slash">
-                    <Slash />
-                  </span>
-                  <div className="side-color-text">
-                    <p>When communities purchase the land on which their people live and work, they are freed to reinvigorate their areas and improve the prospects of future generations.</p>
-                    <div className="home-icon-1">
-                      <HomeOne />
-                    </div>
-                    <div className="home-icon-2">
-                      <HomeTwo />
-                    </div>
-                    <div className="home-icon-3">
-                      <HomeThree />
-                    </div>
+
+                <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-green"><TickSheet /></span>Your checklist</p>
+                <div className="side-grey">
+                  <p className="sm-type-amp">Check all task here:</p>
+                  <div className="multiple-choice">
+                    <input className="form-control" id="id1" type="checkbox"/>
+                    <label className="form-label" htmlFor="id1">Did you find the "Helpful information" location?</label>
                   </div>
+
+                  <div className="multiple-choice">
+                    <input className="form-control" id="id2" type="checkbox"/>
+                    <label className="form-label" htmlFor="id2">Did you find the "Your checklist" location?</label>
+                  </div>
+
+                  <div className="multiple-choice mb-4">
+                    <input className="form-control" id="id3" type="checkbox"/>
+                    <label className="form-label" htmlFor="id3">Have you read all actions?</label>
+                  </div>
+
+                  <p className="sm-type-amp"><Link to="/getting-started">You can now move onto the next stage.</Link></p>
+
                 </div>
+
               </div>
             </div>
           </section>
-          <div className="fullbg-black">
-            <section className="container">
-              <div className="row">
-                <div className="col-lg-8">
-                  <div className="getting-started">
-                    <h4 className="sm-type-drum sm-type-drum--medium">Now it’s your turn</h4>
-                    <p className="sm-type-amp">Work through the community land buyout process to find out if you have what it takes to help your community - for a better, brighter tomorrow!</p>
-                  </div>
-                </div>
-                <div className="col-lg-4 button-center">
-                  <Link className="btn-solid-lg" to="/the-quest">Get started</Link>
-                </div>
-              </div>
-            </section>
-          </div>
           <Footer />
         </main>
       </>
