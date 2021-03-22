@@ -48,9 +48,9 @@ const IndexPage = () => {
                         <div className="col-lg-6 mb-2">
                             <label className="form-label sm-type-amp">Teams</label>
                             <select className="form-control">
-                                <option>Team Edinburgh</option>
-                                <option>Team Dundee</option>
-                                <option>Team Glasgow</option>
+                                <option>Team Blue</option>
+                                <option>Team Green</option>
+                                <option>Team Yellow</option>
                             </select>
                         </div>
                     </div>
@@ -62,9 +62,9 @@ const IndexPage = () => {
                         <div className="col-lg-6 mb-2">
                             <label className="form-label sm-type-amp">Teams</label>
                             <select className="form-control">
-                                <option>Team Edinburgh</option>
-                                <option>Team Dundee</option>
-                                <option>Team Glasgow</option>
+                                <option>Team Blue</option>
+                                <option>Team Green</option>
+                                <option>Team Yellow</option>
                             </select>
                         </div>
                     </div>
@@ -76,9 +76,9 @@ const IndexPage = () => {
                         <div className="col-lg-6 mb-2">
                             <label className="form-label sm-type-amp">Teams</label>
                             <select className="form-control">
-                                <option>Team Edinburgh</option>
-                                <option>Team Dundee</option>
-                                <option>Team Glasgow</option>
+                                <option>Team Blue</option>
+                                <option>Team Green</option>
+                                <option>Team Yellow</option>
                             </select>
                         </div>
                     </div>
@@ -90,9 +90,9 @@ const IndexPage = () => {
                         <div className="col-lg-6 mb-2">
                             <label className="form-label sm-type-amp">Teams</label>
                             <select className="form-control">
-                                <option>Team Edinburgh</option>
-                                <option>Team Dundee</option>
-                                <option>Team Glasgow</option>
+                                <option>Team Blue</option>
+                                <option>Team Green</option>
+                                <option>Team Yellow</option>
                             </select>
                         </div>
                     </div>
