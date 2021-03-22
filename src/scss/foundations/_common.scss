@@ -485,8 +485,8 @@ input:focus, textarea:focus, select:focus, button:focus {
     width: 0;
     height: 0;
     position: absolute;
-    top: 9px;
-    left: 9px;
+    top: 7px;
+    left: 7px;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
@@ -537,12 +537,12 @@ input:focus, textarea:focus, select:focus, button:focus {
     left: 0;
 }
 
-multiple-choice [type=radio]:focus + label::before {
-    box-shadow: 0 0 0 4px $brand-green;
-}
-
 .multiple-choice [type=checkbox]:focus + label::before {
     box-shadow: 0 0 0 3px $brand-green;
+}
+
+.multiple-choice [type=radio]:focus + label::before {
+    box-shadow: 0 0 0 4px $brand-green;
 }
 
 .login-form {
