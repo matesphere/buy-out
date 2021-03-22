@@ -561,3 +561,11 @@ input:focus, textarea:focus, select:focus, button:focus {
     max-width: 600px;
     margin: ($grid-unit * 3) auto;
 }
+
+.team-select {
+    display: flex;
+
+    .multiple-choice {
+        flex: 1 1 0;
+    }
+}
