@@ -115,11 +115,6 @@ const IndexPage = () => {
                         </div>
                     </div>
 
-
-                  <div className="col-lg-12">
-                    <p className="sm-type-lead"><a href="#">Add more names</a></p>
-                  </div>
-
                   <button className="btn-solid-lg" to="/introduction">Save</button>
                 </form>
 
