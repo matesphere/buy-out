@@ -172,6 +172,7 @@ p {
     margin-right: -($grid-unit * 2);
     margin-left: -($grid-unit * 2);
 }
+
 .col-1,
 .col-2,
 .col-3,
@@ -567,8 +568,15 @@ input:focus, textarea:focus, select:focus, button:focus {
     flex-wrap: wrap;
 
     .multiple-choice {
-        flex-wrap: wrap;
-        flex: 1 1 25%;
+        flex: 0 1 50%;
         flex-grow: 0;
+
+        @media (min-width: 7480px) {
+            flex: 0 1 33%;
+        }
+
+        @media (min-width: 768px) {
+            flex: 0 1 25%;
+        }
     }
 }

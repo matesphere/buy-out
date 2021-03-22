@@ -38,7 +38,7 @@ const IndexPage = () => {
               <div className="col-lg-8">
                 <h2 className="sm-type-drum sm-type-drum--medium mt-4">Add student to teams</h2>
 
-                <form className="mb-4" id="form-login">
+                <form className="mb-4 container" id="form-login">
                     <div className="side-grey row mb-4">
                         <div className="col-lg-12 mb-2">
                             <p className="sm-type-guitar sm-type-guitar--medium">John Doe.</p>
