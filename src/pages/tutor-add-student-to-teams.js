@@ -6,9 +6,8 @@ import '../scss/index.scss'
 
 import {graphql, Link, useStaticQuery} from "gatsby";
 import {Helmet} from "react-helmet";
-import TickSheet from "../assets/tick-sheet.svg";
 import HelpIcon from "../assets/help-icon.svg";
-import scrollTo from "gatsby-plugin-smoothscroll";
+import Cross from '../assets/cross.svg'
 
 const IndexPage = () => {
   const data = useStaticQuery(graphql`
@@ -49,65 +48,72 @@ const IndexPage = () => {
                             <p className="form-label sm-type-amp">Teams</p>
                             <div className="multiple-choice">
                                 <input className="form-control" id="id1" type="radio" name="team" />
-                                <label className="form-label" htmlFor="id1">Yellow</label>
+                                <label className="form-label" htmlFor="id1"><span className="yellowdot"></span> Yellow</label>
                             </div>
                             <div className="multiple-choice">
                                 <input className="form-control" id="id2" type="radio" name="team" />
-                                <label className="form-label" htmlFor="id2">Red</label>
+                                <label className="form-label" htmlFor="id2"><span className="reddot"></span> Red</label>
                             </div>
                             <div className="multiple-choice">
                                 <input className="form-control" id="id4" type="radio" name="team" />
-                                <label className="form-label" htmlFor="id4">Green</label>
+                                <label className="form-label" htmlFor="id4"><span className="tealdot"></span> Teal</label>
                             </div>
                             <div className="multiple-choice">
                                 <input className="form-control" id="id5" type="radio" name="team" />
-                                <label className="form-label" htmlFor="id5">Blue</label>
+                                <label className="form-label" htmlFor="id5"><span className="purpledot"></span> Purple</label>
                             </div>
                         </div>
                     </div>
 
                     <div className="side-grey row mb-4">
                         <div className="col-lg-6 mb-2">
-                            <p className="sm-type-guitar sm-type-guitar--medium">Jane Doe.</p>
+                            <p className="sm-type-guitar sm-type-guitar--medium">John Doe.</p>
                         </div>
                         <div className="col-lg-6 mb-2">
-                            <label className="form-label sm-type-amp">Teams</label>
-                            <select className="form-control">
-                                <option>Team Blue</option>
-                                <option>Team Green</option>
-                                <option>Team Yellow</option>
-                            </select>
+                            <p className="form-label sm-type-amp">Teams</p>
+                            <div className="multiple-choice">
+                                <input className="form-control" id="id1" type="radio" name="team" />
+                                <label className="form-label" htmlFor="id1"><span className="yellowdot"></span> Yellow</label>
+                            </div>
+                            <div className="multiple-choice">
+                                <input className="form-control" id="id2" type="radio" name="team" />
+                                <label className="form-label" htmlFor="id2"><span className="reddot"></span> Red</label>
+                            </div>
+                            <div className="multiple-choice">
+                                <input className="form-control" id="id4" type="radio" name="team" />
+                                <label className="form-label" htmlFor="id4"><span className="tealdot"></span> Teal</label>
+                            </div>
+                            <div className="multiple-choice">
+                                <input className="form-control" id="id5" type="radio" name="team" />
+                                <label className="form-label" htmlFor="id5"><span className="purpledot"></span> Purple</label>
+                            </div>
                         </div>
                     </div>
 
                     <div className="side-grey row mb-4">
                         <div className="col-lg-6 mb-2">
-                            <p className="sm-type-guitar sm-type-guitar--medium">John Jones.</p>
+                            <p className="sm-type-guitar sm-type-guitar--medium">John Doe.</p>
                         </div>
                         <div className="col-lg-6 mb-2">
-                            <label className="form-label sm-type-amp">Teams</label>
-                            <select className="form-control">
-                                <option>Team Blue</option>
-                                <option>Team Green</option>
-                                <option>Team Yellow</option>
-                            </select>
+                            <p className="form-label sm-type-amp">Teams</p>
+                            <div className="multiple-choice">
+                                <input className="form-control" id="id1" type="radio" name="team" />
+                                <label className="form-label" htmlFor="id1"><span className="yellowdot"></span> Yellow</label>
+                            </div>
+                            <div className="multiple-choice">
+                                <input className="form-control" id="id2" type="radio" name="team" />
+                                <label className="form-label" htmlFor="id2"><span className="reddot"></span> Red</label>
+                            </div>
+                            <div className="multiple-choice">
+                                <input className="form-control" id="id4" type="radio" name="team" />
+                                <label className="form-label" htmlFor="id4"><span className="tealdot"></span> Teal</label>
+                            </div>
+                            <div className="multiple-choice">
+                                <input className="form-control" id="id5" type="radio" name="team" />
+                                <label className="form-label" htmlFor="id5"><span className="purpledot"></span> Purple</label>
+                            </div>
                         </div>
                     </div>
-
-                    <div className="side-grey row mb-4">
-                        <div className="col-lg-6 mb-2">
-                            <p className="sm-type-guitar sm-type-guitar--medium">Jane Smith.</p>
-                        </div>
-                        <div className="col-lg-6 mb-2">
-                            <label className="form-label sm-type-amp">Teams</label>
-                            <select className="form-control">
-                                <option>Team Blue</option>
-                                <option>Team Green</option>
-                                <option>Team Yellow</option>
-                            </select>
-                        </div>
-                    </div>
-
 
 
                   <div className="col-lg-12">
@@ -119,17 +125,34 @@ const IndexPage = () => {
 
               </div>
               <div className="col-lg-4">
-                <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
-                <div className="side-grey">
-                    <p className="sm-type-lead sm-type-lead--medium">Team Yellow.</p>
-                    <p className="sm-type-amp">John Doe</p>
-                    <p className="sm-type-amp">Jane Doe</p>
-                    <p className="sm-type-lead sm-type-lead--medium">Team Blue.</p>
-                    <p className="sm-type-amp">John Doe</p>
-                    <p className="sm-type-lead sm-type-lead--medium">Team Red.</p>
-                    <p className="sm-type-amp">John Doe</p>
-                    <p className="sm-type-amp">Jane Doe</p>
-                </div>
+                  <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Teams</p>
+                  <div className="side-grey">
+                      <p className="sm-type-guitar sm-type-guitar--medium"><span className="yellowdot"></span> Team Yellow.</p>
+                      <p className="sm-type-lead">John Doe <span className="cross-icon"><Cross /></span></p>
+                      <p className="sm-type-lead">Jane Doe <span className="cross-icon"><Cross /></span></p>
+                      <p className="sm-type-guitar sm-type-guitar--medium mt-4"><span className="tealdot"></span> Team Teal.</p>
+                      <p className="sm-type-lead">John Doe <span className="cross-icon"><Cross /></span></p>
+                      <p className="sm-type-guitar sm-type-guitar--medium mt-4"><span className="reddot"></span> Team Red.</p>
+                      <p className="sm-type-lead">John Doe <span className="cross-icon"><Cross /></span></p>
+                      <p className="sm-type-lead">Jane Doe <span className="cross-icon"><Cross /></span></p>
+                      <p className="sm-type-guitar sm-type-guitar--medium mt-4"><span className="purpledot"></span> Team Purple.</p>
+                      <p className="sm-type-lead"> John Doe <span className="cross-icon"><Cross /></span></p>
+                      <p className="sm-type-lead">Jane Doe <span className="cross-icon"><Cross /></span></p>
+                  </div>
+
+                  <p className="sm-type-guitar mb-2 mt-4"><span className="side-icon side-icon-orange"><HelpIcon /></span>Students unassigned</p>
+                  <div className="side-grey">
+                      <p className="sm-type-amp">John Doe</p>
+                      <p className="sm-type-amp">Jane Doe</p>
+                      <p className="sm-type-amp">John Doe</p>
+                      <p className="sm-type-amp">John Doe</p>
+                      <p className="sm-type-amp">Jane Doe</p>
+                      <p className="sm-type-amp">John Doe</p>
+                      <p className="sm-type-amp">Jane Doe</p>
+                      <p className="sm-type-amp">John Doe</p>
+                      <p className="sm-type-amp">John Doe</p>
+                      <p className="sm-type-amp">Jane Doe</p>
+                  </div>
               </div>
             </div>
           </section>

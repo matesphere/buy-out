@@ -365,6 +365,13 @@ p {
     }
 }
 
+.cross-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin-left: 8px;
+}
+
 .task {
     color: $brand-red;
 }
