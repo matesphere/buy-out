@@ -564,8 +564,11 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 .team-select {
     display: flex;
+    flex-wrap: wrap;
 
     .multiple-choice {
-        flex: 1 1 0;
+        flex-wrap: wrap;
+        flex: 1 1 25%;
+        flex-grow: 0;
     }
 }
