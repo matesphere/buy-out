@@ -544,3 +544,13 @@ multiple-choice [type=radio]:focus + label::before {
 .multiple-choice [type=checkbox]:focus + label::before {
     box-shadow: 0 0 0 3px $brand-green;
 }
+
+.login-form {
+    max-width: 400px;
+    margin: ($grid-unit * 3) auto;
+}
+
+.login-student-form {
+    max-width: 600px;
+    margin: ($grid-unit * 3) auto;
+}

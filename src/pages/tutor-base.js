@@ -4,7 +4,6 @@ import Footer from '../components/_footer'
 import '../scss/index.scss'
 import Tick from '../assets/tick.svg'
 import Cross from '../assets/cross.svg'
-import QuestBg from "../assets/quest-bg.svg";
 import {Helmet} from "react-helmet";
 
 const YourNotesPage = () => {
@@ -12,7 +11,7 @@ const YourNotesPage = () => {
     <>
       <Helmet>
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Quest 1</title>
+          <title>Your teams</title>
           <meta name="description" content="The description" />
           {/*<meta name="image" content={image} />*/}
           <meta property="og:url" content="url" />
@@ -21,7 +20,7 @@ const YourNotesPage = () => {
           {/*<meta property="og:image" content={image} />*/}
       </Helmet>
     <main className="notes">
-      <Header headerText="TUTOR LOGIN" />
+      <Header headerText="Your teams" />
       <section className="container" id="main">
           <div className="row tutor mt-4">
               <div className="col-lg-12">
@@ -32,7 +31,6 @@ const YourNotesPage = () => {
           <div className="row tutor mt-4">
               <div className="col-lg-4">
                   <div className="quest-step quest-step-complete step">
-                      <QuestBg />
                       <div className="quest-step-text">
                           <span className="quest-step-number">1</span>
                           Team one name
@@ -130,7 +128,6 @@ const YourNotesPage = () => {
           <div className="row tutor mt-4">
               <div className="col-lg-4">
                   <div className="quest-step quest-step-complete step">
-                      <QuestBg />
                       <div className="quest-step-text">
                           <span className="quest-step-number">2</span>
                           Team two name
