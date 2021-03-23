@@ -16,12 +16,24 @@ import Ticktb2 from '../assets/tick-tp2.svg'
 import Ticktb3 from '../assets/tick-tp3.svg'
 import Ticktb4 from '../assets/tick-tp4.svg'
 
-import { Link } from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import {Helmet} from "react-helmet";
 import HelpIcon from "../assets/help-icon.svg";
+import {GatsbyImage} from "gatsby-plugin-image";
 
 
 const QuestPage = () => {
+
+    const data = useStaticQuery(graphql`
+    query {
+      image1: file(relativePath: { eq: "team-logo.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED)
+        }
+      }
+    }
+  `)
+
   return (
       <>
           <Helmet>
@@ -39,8 +51,17 @@ const QuestPage = () => {
               <section className="container" id="main">
                   <div className="row step mt-4">
                       <div className="col-lg-8 side-grey">
-                          <h2 className="sm-type-drum sm-type-drum--medium">Team: Purple</h2>
-                          <p className="sm-type-lead">John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe</p>
+                          <div className="container">
+                              <div className="row">
+                                  <div className="col-lg-8">
+                                      <h2 className="sm-type-drum sm-type-drum--medium">Team: Purple</h2>
+                                      <p className="sm-type-lead">John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe</p>
+                                  </div>
+                                  <div className="col-lg-4">
+                                      <GatsbyImage image={data.image1.childImageSharp.gatsbyImageData} />
+                                  </div>
+                              </div>
+                          </div>
                       </div>
                       <div className="col-lg-4">
                           <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
