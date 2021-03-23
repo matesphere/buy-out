@@ -62,7 +62,7 @@ const IntroPage = () => {
               <div className="row">
                 <div className="col-lg-8">
                   <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">About Glenclas:</h2>
-                  <p className="sm-type-lead mb-2">Your quest will concentrate around Glenclas (Gleann Clas, ‘valley of the class’) is a scattered community area and <a href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland" target="_blank">civil parish</a> in the <a href="https://en.wikipedia.org/wiki/Loch_Alsh" traget="_blank">Lochalsh</a> area of <a href="https://en.wikipedia.org/wiki/Highland_council_area" taget="_blank">Highland</a> in western Scotland.</p>
+                  <p className="sm-type-lead mb-2">Your quest will concentrate around Glenclas (Gleann Clas, ‘valley of the class’) is a scattered community area and <a href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland" rel="noreferrer" target="_blank">civil parish</a> in the <a href="https://en.wikipedia.org/wiki/Loch_Alsh" rel="noreferrer" target="_blank">Lochalsh</a> area of <a href="https://en.wikipedia.org/wiki/Highland_council_area" rel="noreferrer" target="_blank">Highland</a> in western Scotland.</p>
                 </div>
                 <div className="col-lg-4">
                   <div className="scotland-area mb-4">
@@ -71,7 +71,7 @@ const IntroPage = () => {
                 </div>
               </div>
 
-              <p className="sm-type-lead mb-2">Despite the local government reorganisation the area is considered by many still to be in <a href="https://en.wikipedia.org/wiki/Inverness-shire" target="_blank">Inverness-shire</a>.</p>
+              <p className="sm-type-lead mb-2">Despite the local government reorganisation the area is considered by many still to be in <a href="https://en.wikipedia.org/wiki/Inverness-shire" rel="noreferrer" target="_blank">Inverness-shire</a>.</p>
               <p className="sm-type-lead mb-2"> The main village, also known as Glenclas Village, occupies an attractive situation opposite a neighbouring island, at the head of Glen More. There is a smaller hamlet less than a mile to the south, on the edge of Glenclas Bay and at the head of Glen Beag. There are several other clusters of houses scattered throughout Glenclas including further up Glen Beag and Glen More, on the road leading to the main north-south road. At the 2001 census the whole Glenclas community had a population of 985 and in 2011, Highland Council estimated that the community of Glenelg village had a population of 208</p>
               <div className="mb-4 mt-4">
                 <GatsbyImage image={data.image1.childImageSharp.gatsbyImageData} />

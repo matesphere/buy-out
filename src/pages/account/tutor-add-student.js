@@ -1,25 +1,13 @@
 import React from "react"
-import Header from '../components/_header'
-import Footer from '../components/_footer'
-import '../scss/index.scss'
+import LoginHeader from '../account/_header'
+import AccountFooter from './_footer'
+import '../../scss/index.scss'
 
 
-import {graphql, Link, useStaticQuery} from "gatsby";
 import {Helmet} from "react-helmet";
-import TickSheet from "../assets/tick-sheet.svg";
-import HelpIcon from "../assets/help-icon.svg";
-import scrollTo from "gatsby-plugin-smoothscroll";
+import HelpIcon from "../../assets/help-icon.svg";
 
-const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      file(relativePath: { eq: "cls-ppt3-no-text-crop-1024x322.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED)
-        }
-      }
-    }
-  `)
+const TutorAddPage = () => {
 
   return (
       <>
@@ -33,13 +21,20 @@ const IndexPage = () => {
         </Helmet>
 
         <main className="the-quest">
-          <Header headerText="Add students" />
+          <LoginHeader headerText="Add students" />
           <section className="container" id="main">
             <div className="row">
               <div className="col-lg-8">
-                <h2 className="sm-type-drum sm-type-drum--medium mt-4">Add student details here</h2>
+                <h2 className="sm-type-drum sm-type-drum--medium mt-4">Add student for Quest</h2>
+                <div className="side-grey row mb-4">
+                  <div className="col-lg-12">
+                    <p className="sm-type-lead sm-type-lead--medium">03.05.2020 - Class 4B 2020</p>
+                  </div>
+                </div>
 
-                <form className="login-student-form mb-4" id="form-login">
+                <h2 className="sm-type-drum sm-type-drum--medium mt-4">Student details</h2>
+
+                <form className="mb-4" id="form-login" action="/account/tutor-add-student-to-teams">
 
                   <div className="side-grey row mb-4">
                     <div className="col-lg-12">
@@ -88,7 +83,7 @@ const IndexPage = () => {
                     <p className="sm-type-lead"><a href="#">Add more names</a></p>
                   </div>
 
-                  <button className="btn-solid-lg" to="/introduction">Submit names</button>
+                  <button className="btn-solid-lg">Submit names</button>
                 </form>
 
               </div>
@@ -100,10 +95,10 @@ const IndexPage = () => {
               </div>
             </div>
           </section>
-          <Footer />
+          <AccountFooter />
         </main>
       </>
   )
 }
 
-export default IndexPage
+export default TutorAddPage

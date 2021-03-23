@@ -3,8 +3,6 @@ import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
 
-import ScotlandArea from "../assets/scotland-area.svg";
-
 import {graphql, Link, useStaticQuery} from "gatsby";
 import {GatsbyImage} from "gatsby-plugin-image";
 import {Helmet} from "react-helmet";

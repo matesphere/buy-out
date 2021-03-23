@@ -2,7 +2,6 @@ import * as React from "react"
 import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
-import Submit from '../assets/submit.svg'
 import Tick from '../assets/tick.svg'
 import {Link} from "gatsby";
 
