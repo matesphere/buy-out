@@ -49,9 +49,11 @@ const QuestPage = () => {
             <main className="the-quest">
               <Header headerText="Team hub" />
               <section className="container" id="main">
-                  <div className="row step mt-4">
-                      <div className="col-lg-8 side-grey">
-                          <div className="container">
+                  <div className="row">
+                      <div className="col-lg-8">
+                          <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Your team</h1>
+
+                          <div className="container side-grey">
                               <div className="row">
                                   <div className="col-lg-8">
                                       <h2 className="sm-type-drum sm-type-drum--medium">Team: Purple</h2>

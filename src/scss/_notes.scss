@@ -50,14 +50,11 @@
 }
 
 .completed-nav {
-  padding: 0;
 
   li {
-    list-style: none;
-    display: flex;
     margin-bottom: $grid-unit;
-    align-items: center;
   }
+
   svg {
     width: 16px;
     height: 16px;

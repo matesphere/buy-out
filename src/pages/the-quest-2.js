@@ -26,13 +26,9 @@ const QuestPage = () => {
         <main className="the-quest">
           <Header headerText="the Quest" />
           <section className="container" id="main">
-            <div className="row">
-              <div className="col-lg-12">
-                  <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Quest 2 - Consult</h1>
-              </div>
-            </div>
               <div className="row">
                   <div className="col-lg-8">
+                      <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Quest 2 - Consult</h1>
                       <div className="side-grey">
                           <h3 className="task ticker mb-2">
                               <span className="ticker-sheet"><TickSheet /></span>

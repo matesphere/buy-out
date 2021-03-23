@@ -35,13 +35,9 @@ const QuestPage = () => {
 
               <Header headerText="the Quest" />
               <section className="container" id="main">
-                <div className="row">
-                  <div className="col-lg-12">
-                      <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Quest 1 - Research</h1>
-                  </div>
-                </div>
                   <div className="row">
                       <div className="col-lg-8">
+                          <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Quest 1 - Research</h1>
                           <p className="sm-type-guitar sm-type-guitar--medium mt-4 mb-4">The legitimate place of people in the landscape: renewing and repopulating rural Scotland</p>
                           <ul>
                               <li><p className="sm-type-lead">Contact Community Land Scotland (CLS)</p>
