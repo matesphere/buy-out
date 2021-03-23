@@ -113,7 +113,7 @@ const QuestPage = () => {
                                   <input className="form-control" id="id5" type="checkbox"/>
                                   <label className="form-label" htmlFor="id5">Identify who the landowner is</label>
                               </div>
-                              <p className="sm-type-amp"><Link to="/your-notes-submit">You can now submit your findings.</Link></p>
+                              <p className="sm-type-amp"><Link to="/student/your-notes-submit">You can now submit your findings.</Link></p>
                           </div>
                       </div>
                   </div>

@@ -42,7 +42,7 @@ const TutorPage = () => {
                           <p className="steps-step sm-type-lead sm-type-lead--medium">Step 1</p>
                           <div>
                               <Tick /><span>Completed</span>
-                              <span><a href="#">student notes</a></span>
+                              <span><a href="#">team work</a></span>
                               <span><a href="#">tutor notes</a></span>
                           </div>
                       </li>
@@ -52,7 +52,7 @@ const TutorPage = () => {
                           <div>
                               <Tick />
                               <span>Completed</span>
-                              <span><a href="#">student notes</a></span>
+                              <span><a href="#">team work</a></span>
                               <span><a href="#">tutor notes</a></span>
                           </div>
                       </li>
@@ -62,7 +62,7 @@ const TutorPage = () => {
                           <div>
                               <Cross />
                               <span>Submitted</span>
-                              <span><a href="#">student notes</a></span>
+                              <span><a href="#">team work</a></span>
                               <span><a href="#">add tutor notes</a></span>
                           </div>
                       </li>

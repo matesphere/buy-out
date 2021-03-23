@@ -93,7 +93,7 @@ const IntroPage = () => {
                   <div className="success-holder mb-4 mt-4" id="filter-container">
                     <h4 className="sm-type-bigdrum sm-type-bigdrum--medium"><span class="side-icon"><Tick /></span> Success</h4>
                     <p>Your roles have been submitted.</p>
-                    <p><Link to="/your-notes-inprogress">You will see your feedback here</Link></p>
+                    <p><Link to="/student/your-notes-inprogress">You will see your feedback here</Link></p>
                   </div>
 
 

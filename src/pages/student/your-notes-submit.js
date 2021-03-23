@@ -1,10 +1,10 @@
 import * as React from "react"
-import Header from '../components/_header'
-import Footer from '../components/_footer'
-import '../scss/index.scss'
-import Submit from '../assets/submit.svg'
-import Tick from '../assets/tick.svg'
-import HelpIcon from "../assets/help-icon.svg";
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
+import '../../scss/index.scss'
+import Submit from '../../assets/submit.svg'
+import Tick from '../../assets/tick.svg'
+import HelpIcon from "../../assets/help-icon.svg";
 import {useState} from "react";
 import scrollTo from "gatsby-plugin-smoothscroll";
 import {Link} from "gatsby";
@@ -49,7 +49,7 @@ const YourNotesPage = () => {
                               <h4 className="sm-type-bigdrum sm-type-bigdrum--medium"><span
                                   className="side-icon"><Tick/></span> Success</h4>
                               <p>Your notes have been submitted.</p>
-                              <p><Link to="/your-notes-inprogress">You will see your feedback here</Link></p>
+                              <p><Link to="/student/your-notes-inprogress">You will see your feedback here</Link></p>
                           </div>
                       </div>
                   </div>

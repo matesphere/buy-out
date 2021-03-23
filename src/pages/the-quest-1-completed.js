@@ -81,7 +81,7 @@ const QuestPage = () => {
                                   <span className="side-icon"><Tick /></span>
                                   Congratulations?</p>
                               <p className="sm-type-amp mb-4">You have completed Quest 1.</p>
-                              <p><Link className="dark-link" to="/your-notes-completed">Your Quest 1 notes</Link></p>
+                              <p><Link className="dark-link" to="/student/your-notes-completed">Your Quest 1 notes</Link></p>
                               <p><Link className="dark-link" to="/the-quest-2">Move onto Quest 2</Link></p>
                           </div>
                       </div>
