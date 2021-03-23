@@ -14,7 +14,6 @@ const YourNotesPage = () => {
           <div className="row">
               <div className="col-lg-8">
                   <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Team notes</h1>
-                  <p className="sm-type-lead">Your notes are listed below. Check your notes for feedback.</p>
                   <ol className="completed-nav">
                       <li className="sm-type-lead"><Link to="/student/your-notes-completed" className="completed-nav-completed">Research</Link> <Tick /></li>
                       <li className="sm-type-lead"><Link to="/student/your-notes-inprogress">Consult <span className="notification"></span></Link></li>
