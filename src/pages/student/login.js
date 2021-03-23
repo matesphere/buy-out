@@ -26,7 +26,7 @@ const IndexPage = () => {
               <div className="col-lg-8">
                 <h2 className="sm-type-drum sm-type-drum--medium mt-4">Enter your email and password</h2>
 
-                <form className="login-form mb-4" id="form-login" action="/student/your-notes/">
+                <form className="login-form mb-4" id="form-login" action="/the-quest/">
                   <div className="mb-2">
                     <label className="form-label sm-type-amp">Email</label>
                     <input type="email" className="form-control"/>

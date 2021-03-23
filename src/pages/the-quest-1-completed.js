@@ -7,6 +7,7 @@ import { graphql, useStaticQuery, Link } from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image"
 import { Helmet } from 'react-helmet'
 import Tick from '../assets/tick.svg'
+import HelpIcon from "../assets/help-icon.svg";
 
 const QuestPage = () => {
     const data = useStaticQuery(graphql`
@@ -76,6 +77,8 @@ const QuestPage = () => {
                       </div>
 
                       <div className="col-lg-4">
+                          <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
+
                           <div className="side-grey">
                               <p className="sm-type-guitar">
                                   <span className="side-icon"><Tick /></span>

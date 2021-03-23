@@ -34,15 +34,24 @@ const QuestPage = () => {
               {/*<meta property="og:image" content={image} />*/}
           </Helmet>
             <main className="the-quest">
-              <Header headerText="the Quest" />
+              <Header headerText="Team hub" />
               <section className="container" id="main">
-                <div className="row">
-                  <div className="col-lg-12">
-                    <p className="sm-type-guitar mb-4 mt-4">Your progress towards a community land buyout. Remember to work as a team - after all,
-                      'the only thing that will redeem mankind is cooperation'!</p>
+                  <div className="row step side-grey mt-4">
+                      <div className="col-lg-6">
+                          <h2 className="sm-type-drum sm-type-drum--medium">Team: Purple</h2>
+                      </div>
+                      <div className="col-lg-6">
+                          <p className="sm-type-lead">John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe, John Doe</p>
+                      </div>
                   </div>
-                </div>
-
+                  <div className="row">
+                      <div className="col-lg-1"></div>
+                      <div className="col-lg-10">
+                          <p className="sm-type-guitar mb-4">Your progress towards a community land buyout. Remember to work as a team - after all,
+                              'the only thing that will redeem mankind is cooperation'!</p>
+                      </div>
+                      <div className="col-lg-1"></div>
+                  </div>
                   <div className="row step">
                       <div className="col-lg-2">&nbsp;</div>
                       <div className="col-lg-4">

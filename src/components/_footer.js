@@ -9,9 +9,7 @@ const Footer = () => {
                     <div className="col-lg-12">
                         <ul>
                             <li>Home</li>
-                            <li>Help</li>
-                            <li>Your Notes</li>
-                            <li>Tutor Feedback</li>
+                            <li>Team hub</li>
                         </ul>
 
                         <p>Copyright 2021. All rights reserved.</p>
