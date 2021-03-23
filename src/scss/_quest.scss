@@ -80,6 +80,10 @@
       background-color: $brand-green;
     }
   }
+
+  &-highlight {
+    box-shadow: 0px 0px 15px 2px $brand-green;
+  }
 }
 .step {
   max-width: 400px;

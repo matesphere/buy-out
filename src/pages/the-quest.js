@@ -15,6 +15,7 @@ import Ticktb1 from '../assets/tick-tp1.svg'
 import Ticktb2 from '../assets/tick-tp2.svg'
 import Ticktb3 from '../assets/tick-tp3.svg'
 import Ticktb4 from '../assets/tick-tp4.svg'
+import Tick from '../assets/tick.svg'
 
 import {graphql, Link, useStaticQuery} from 'gatsby'
 import {Helmet} from "react-helmet";
@@ -40,11 +41,9 @@ const QuestPage = () => {
               <meta name="viewport" content="width=device-width, initial-scale=1.0" />
               <title>Quest 1</title>
               <meta name="description" content="The description" />
-              {/*<meta name="image" content={image} />*/}
               <meta property="og:url" content="url" />
               <meta property="og:title" content="Quest 1" />
               <meta property="og:description" content="The description" />
-              {/*<meta property="og:image" content={image} />*/}
           </Helmet>
             <main className="the-quest">
               <Header headerText="Team hub" />
@@ -87,7 +86,7 @@ const QuestPage = () => {
                               <div className="quest-step-text">
                                   <Link to="/the-quest-1-completed">
                                       <span className="quest-step-number">1</span>
-                                      RESEARCH
+                                      RESEARCH <span className="medium-icon"><Tick /></span>
                                   </Link>
                               </div>
                           </div>
@@ -101,7 +100,7 @@ const QuestPage = () => {
                           </span>
                       </div>
                       <div className="col-lg-4">
-                          <div className="quest-step quest-step-complete">
+                          <div className="quest-step quest-step-complete quest-step-highlight">
                               <div className="quest-step-text">
                                   <Link to="/the-quest-2">
                                       <span className="quest-step-number">2</span>

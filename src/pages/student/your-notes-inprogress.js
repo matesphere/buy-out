@@ -28,7 +28,7 @@ const YourNotesPage = () => {
                           </div>
                       </div>
                       <div className="mt-4 mb-4">
-                          <h3 className="sm-type-guitar mb-2">Your notes</h3>
+                          <h3 className="sm-type-guitar mb-2">Team notes</h3>
                           <p className="sm-type-lead">Chair: John Doe</p>
                           <p className="sm-type-lead">Vice-chair: Jane Doe</p>
                           <p className="sm-type-lead">Secretary: John Doe, Jane Doe</p>
