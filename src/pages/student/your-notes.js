@@ -9,7 +9,7 @@ import HelpIcon from "../../assets/help-icon.svg";
 const YourNotesPage = () => {
   return (
     <main className="notes">
-      <Header headerText="NOTES" />
+      <Header headerText="The quest" />
       <section className="container" id="main">
           <div className="row">
               <div className="col-lg-8">

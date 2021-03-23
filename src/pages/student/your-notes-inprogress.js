@@ -10,7 +10,7 @@ import { Link } from "gatsby";
 const YourNotesPage = () => {
   return (
     <main className="notes">
-      <Header headerText="Notes" />
+      <Header headerText="The quest" />
       <section className="container" id="main">
           <div className="row" id="guest-2">
               <div className="col-lg-8">

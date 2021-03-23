@@ -27,8 +27,8 @@ const IntroPage = () => {
           <meta property="og:description" content="The description" />
           {/*<meta property="og:image" content={image} />*/}
         </Helmet>
-        <main className="homepage">
-          <Header headerText="Introduction" />
+        <main className="the-quest">
+          <Header headerText="The quest" />
           <section className="container" id="main">
             <div className="row">
               <div className="col-lg-8">

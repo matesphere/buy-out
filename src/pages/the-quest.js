@@ -46,11 +46,11 @@ const QuestPage = () => {
               <meta property="og:description" content="The description" />
           </Helmet>
             <main className="the-quest">
-              <Header headerText="Team hub" />
+              <Header headerText="The quest" />
               <section className="container" id="main">
                   <div className="row">
                       <div className="col-lg-8">
-                          <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Your team</h1>
+                          <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Team hub</h1>
 
                           <div className="container side-grey">
                               <div className="row">
