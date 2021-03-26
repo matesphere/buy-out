@@ -5,7 +5,9 @@ import { useQuery, useMutation } from '@apollo/client'
 import { GET_STUDENTS } from '../../gql/queries'
 import {
     CREATE_TEAMS_WITH_STUDENTS,
+    START_QUEST,
     createTeamWithStudentsMapper,
+    startQuestMapper,
 } from '../../gql/mutations'
 
 import LoginHeader from './_header'
@@ -105,7 +107,10 @@ const Student = ({ student, teams, setTeams }) => (
 const TutorAddStudentPage = () => {
     const [teams, setTeams] = useState([])
     const { loading, error, data } = useQuery(GET_STUDENTS)
-    const [createTeams, response] = useMutation(CREATE_TEAMS_WITH_STUDENTS)
+    const [createTeams, createTeamsResponse] = useMutation(
+        CREATE_TEAMS_WITH_STUDENTS
+    )
+    const [startQuest, startQuestResponse] = useMutation(START_QUEST)
 
     if (loading) return 'Loading...'
     if (error) return `Error! ${error.message}`
@@ -181,17 +186,33 @@ const TutorAddStudentPage = () => {
                     >
                         Save teams
                     </button>
-                    // TODO: adding start quest mutation here
-                    {response.data && (
+
+                    {createTeamsResponse.data && (
                         <>
                             <div className="col-lg-12">
-                                {`Created ${response.data.insert_team.returning.length} teams!`}{' '}
-                                <a
-                                    onClick={() => {}}
-                                    href="/tutor/current-quest"
+                                {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
+                                <button
+                                    className="btn-solid-lg mt-4"
+                                    onClick={() => {
+                                        startQuest({
+                                            variables: startQuestMapper(
+                                                createTeamsResponse.data.insert_team.returning.map(
+                                                    (obj) => obj.id
+                                                )
+                                            ),
+                                        })
+                                    }}
                                 >
-                                    Start Quest! ->
-                                </a>
+                                    START QUEST!
+                                </button>
+                                {startQuestResponse.data && (
+                                    <>
+                                        {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
+                                        <a href="/tutor/current-quest">
+                                            To tutor hub ->
+                                        </a>
+                                    </>
+                                )}
                             </div>
                             <br />
                             <br />

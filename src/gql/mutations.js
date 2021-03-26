@@ -76,12 +76,9 @@ export const createTeamWithStudentsMapper = (teams, tutorId) => {
     return { objects: mappedTeams }
 }
 
-// TODO: allow for passing of multiple team IDs!!
 export const START_QUEST = gql`
-    mutation StartQuest($objects: [stage_progress_insert_input]) {
-        insert_stage_progress(
-            objects: { team_id: $team_id, status: unlocked, stage_id: 1 }
-        ) {
+    mutation StartQuest($objects: [stage_progress_insert_input!]!) {
+        insert_stage_progress(objects: $objects) {
             returning {
                 stage {
                     id
@@ -93,4 +90,23 @@ export const START_QUEST = gql`
     }
 `
 
-export const startQuestMapper = (teamIds) => ({})
+export const startQuestMapper = (teamIds) => ({
+    objects: teamIds.map((teamId) => ({
+        team_id: teamId,
+        status: 'unlocked',
+        stage_id: 1,
+    })),
+})
+
+export const UNLOCK_STAGE = gql`
+    mutation UnlockStage($teamId: uuid, $stageId: Int) {
+        insert_stage_progress_one(
+            object: { team_id: $teamId, stage_id: $stageId, status: unlocked }
+        ) {
+            id
+            team_id
+            stage_id
+            status
+        }
+    }
+`

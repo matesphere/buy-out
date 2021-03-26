@@ -1,12 +1,131 @@
-import * as React from 'react'
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import { gql, useQuery } from '@apollo/client'
+
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
+import {
+    LockedStageStatus,
+    UnlockedStageStatus,
+    SubmittedStageStatus,
+    FailedStageStatus,
+    CompletedStageStatus,
+} from '../../components/tutor/CurrentQuest'
+
 import '../../scss/index.scss'
-import Tick from '../../assets/tick.svg'
-import Cross from '../../assets/cross.svg'
-import { Helmet } from 'react-helmet'
+
+const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
+
+const TUTOR_CURRENT_QUEST_QUERY = gql`
+    query TutorCurrentQuestQuery($tutor_id: uuid!) {
+        tutor_by_pk(id: $tutor_id) {
+            school {
+                name
+            }
+            user {
+                name
+                username
+                email
+            }
+            teams {
+                id
+                name
+                students {
+                    id
+                    user {
+                        name
+                    }
+                }
+                stage_progresses {
+                    id
+                    team_id
+                    stage_id
+                    status
+                    documents {
+                        id
+                        status
+                        link
+                        feedback
+                    }
+                }
+            }
+        }
+        stage {
+            id
+            title
+        }
+    }
+`
+
+const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
+    const stageProgress = stageProgresses.find(
+        (stageProgress) => stageProgress.stage_id === stageId
+    )
+
+    if (stageProgress) {
+        switch (stageProgress.status) {
+            case 'submitted':
+                return (
+                    <SubmittedStageStatus documents={stageProgress.documents} />
+                )
+            case 'failed':
+                return <FailedStageStatus documents={stageProgress.documents} />
+            case 'completed':
+                return (
+                    <CompletedStageStatus documents={stageProgress.documents} />
+                )
+            default:
+                return <UnlockedStageStatus />
+        }
+    } else {
+        return <LockedStageStatus teamId={teamId} stageId={stageId} />
+    }
+}
+
+const TeamInfoPanel = ({ listNum, teamName, students }) => (
+    <>
+        <div className="quest-step quest-step-complete step">
+            <div className="quest-step-text">
+                <span className="quest-step-number">{listNum + 1}</span>
+                {teamName}
+            </div>
+        </div>
+        <div className="mt-3">
+            {students.map(({ user: { name } }, i) => (
+                <p key={i} className="sm-type-amp">
+                    {name}
+                </p>
+            ))}
+        </div>
+    </>
+)
+
+const StageInfoPanel = ({ stages, stageProgresses, teamId }) => (
+    <ul className="steps">
+        {stages.map(({ id, title }, i) => (
+            <li key={i}>
+                <p className="steps-step sm-type-lead sm-type-lead--medium">
+                    {`Stage ${id}: ${title}`}
+                </p>
+                {getStageStatusDisplay(id, stageProgresses, teamId)}
+            </li>
+        ))}
+    </ul>
+)
 
 const TutorPage = () => {
+    const { loading, error, data } = useQuery(TUTOR_CURRENT_QUEST_QUERY, {
+        variables: { tutor_id: TUTOR_ID },
+    })
+
+    if (loading) return 'Loading...'
+    if (error) return `Error! ${error.message}`
+
+    const {
+        tutor_by_pk: { teams },
+        stage,
+    } = data
+
     return (
         <>
             <Helmet>
@@ -14,147 +133,32 @@ const TutorPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Your teams</title>
+                <title>Current Quest</title>
                 <meta name="description" content="The description" />
-                <meta property="og:url" content="url" />
-                <meta property="og:title" content="Quest 1" />
-                <meta property="og:description" content="The description" />
             </Helmet>
             <main className="notes">
-                <LoginHeader headerText="Your teams" />
+                <LoginHeader headerText="Current Quest" />
                 <section className="container" id="main">
-                    <div className="row tutor mt-4">
-                        <div className="col-lg-4">
-                            <div className="quest-step quest-step-complete step">
-                                <div className="quest-step-text">
-                                    <span className="quest-step-number">1</span>
-                                    Team one name
+                    {teams.map(
+                        ({ id, name, students, stage_progresses }, i) => (
+                            <div key={i} className="row tutor mt-4">
+                                <div className="col-lg-4">
+                                    <TeamInfoPanel
+                                        listNum={i}
+                                        teamName={name}
+                                        students={students}
+                                    />
+                                </div>
+                                <div className="col-lg-8">
+                                    <StageInfoPanel
+                                        stages={stage}
+                                        stageProgresses={stage_progresses}
+                                        teamId={id}
+                                    />
                                 </div>
                             </div>
-                            <div className="mt-3">
-                                <p className="sm-type-amp">Johnny D</p>
-                                <p className="sm-type-amp">Jane D</p>
-                                <p className="sm-type-amp">Johnny D</p>
-                                <p className="sm-type-amp">Jane D</p>
-                            </div>
-                        </div>
-                        <div className="col-lg-8">
-                            <ul className="steps">
-                                <li>
-                                    <p className="steps-step sm-type-lead sm-type-lead--medium">
-                                        Step 1
-                                    </p>
-                                    <div>
-                                        <Tick />
-                                        <span>Completed</span>
-                                        <span>
-                                            <a href="#">team work</a>
-                                        </span>
-                                        <span>
-                                            <a href="#">tutor notes</a>
-                                        </span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <p className="steps-step sm-type-lead sm-type-lead--medium">
-                                        Step 2
-                                    </p>
-                                    <div>
-                                        <Tick />
-                                        <span>Completed</span>
-                                        <span>
-                                            <a href="#">team work</a>
-                                        </span>
-                                        <span>
-                                            <a href="#">tutor notes</a>
-                                        </span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <p className="steps-step sm-type-lead sm-type-lead--medium">
-                                        Step 3
-                                    </p>
-                                    <div>
-                                        <Cross />
-                                        <span>Submitted</span>
-                                        <span>
-                                            <a href="#">team work</a>
-                                        </span>
-                                        <span>
-                                            <a href="#">add tutor notes</a>
-                                        </span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <p className="steps-step sm-type-lead sm-type-lead--medium">
-                                        Step 4
-                                    </p>
-                                    <div>
-                                        <Cross />
-                                        <span>LOCKED</span>
-                                        <span>
-                                            <a href="#">unlock step</a>
-                                        </span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <p className="steps-step sm-type-lead sm-type-lead--medium">
-                                        Step 5
-                                    </p>
-                                    <div>
-                                        <Cross />
-                                        <span>LOCKED</span>
-                                        <span>
-                                            <a href="#">unlock step</a>
-                                        </span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <p className="steps-step sm-type-lead sm-type-lead--medium">
-                                        Step 6
-                                    </p>
-                                    <div>
-                                        <Cross />
-                                        <span>LOCKED</span>
-                                        <span>
-                                            <a href="#">unlock step</a>
-                                        </span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <p className="steps-step sm-type-lead sm-type-lead--medium">
-                                        Step 7
-                                    </p>
-                                    <div>
-                                        <Cross />
-                                        <span>LOCKED</span>
-                                        <span>
-                                            <a href="#">unlock step</a>
-                                        </span>
-                                    </div>
-                                </li>
-
-                                <li>
-                                    <p className="steps-step sm-type-lead sm-type-lead--medium">
-                                        Step 8
-                                    </p>
-                                    <div>
-                                        <Cross />
-                                        <span>LOCKED</span>
-                                        <span>
-                                            <a href="#">unlock step</a>
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                        )
+                    )}
                 </section>
                 <AccountFooter />
             </main>
