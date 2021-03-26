@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -41,19 +41,16 @@ const QuestPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Quest 1</title>
+                <title>Team Hub</title>
                 <meta name="description" content="The description" />
-                <meta property="og:url" content="url" />
-                <meta property="og:title" content="Quest 1" />
-                <meta property="og:description" content="The description" />
             </Helmet>
             <main className="the-quest">
-                <Header headerText="The quest" />
+                <Header headerText="Team Hub" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Team hub
+                                Your Team
                             </h1>
 
                             <div className="container side-grey">
@@ -70,6 +67,7 @@ const QuestPage = () => {
                                     </div>
                                     <div className="col-lg-4">
                                         <GatsbyImage
+                                            alt=""
                                             image={
                                                 data.image1.childImageSharp
                                                     .gatsbyImageData

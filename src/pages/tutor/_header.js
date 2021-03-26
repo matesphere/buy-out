@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React from 'react'
 import '../../scss/index.scss'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'

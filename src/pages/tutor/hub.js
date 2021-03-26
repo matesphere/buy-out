@@ -74,7 +74,7 @@ const IndexPage = () => {
                                 </p>
                                 <p className="sm-type-amp">
                                     Start a new{' '}
-                                    <Link to="/tutor/new-quest">
+                                    <Link to="/tutor/add-students">
                                         Quest here
                                     </Link>
                                     .
