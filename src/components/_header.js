@@ -36,6 +36,7 @@ const Header = ({ headerText }) => {
                     <div className="col-lg-4">
                         <div className="cls-logo">
                             <GatsbyImage
+                                alt=""
                                 image={
                                     data.file.childImageSharp.gatsbyImageData
                                 }

@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { gql, useQuery } from '@apollo/client'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
@@ -23,6 +24,62 @@ import Ticktb4 from '../../assets/tick-tp4.svg'
 import Tick from '../../assets/tick.svg'
 import HelpIcon from '../../assets/help-icon.svg'
 
+// TODO use this for the real thing!
+// user_by_pk(id: $id) {
+//     name
+//     student {
+//         team {
+//             name
+//             stage_progresses {
+//                 stage_id
+//                 status
+//             }
+//             students {
+//                 user {
+//                     name
+//                 }
+//             }
+//         }
+//     }
+// }
+
+const TEAM_HUB_QUERY = gql`
+    query TeamHubQuery($name: String) {
+        user(where: { name: { _eq: $name } }) {
+            name
+            student {
+                team {
+                    name
+                    stage_progresses {
+                        stage_id
+                        status
+                    }
+                    students {
+                        user {
+                            name
+                        }
+                    }
+                }
+            }
+        }
+        stage {
+            id
+            title
+        }
+    }
+`
+
+const getStageClasses = (status) => {
+    switch (status) {
+        case 'unlocked':
+            return 'quest-step-complete quest-step-highlight'
+        case 'completed':
+            return 'quest-step-complete'
+        default:
+            return ''
+    }
+}
+
 const QuestPage = () => {
     const data = useStaticQuery(graphql`
         query {
@@ -34,6 +91,50 @@ const QuestPage = () => {
         }
     `)
 
+    const { loading, error, data: pageData } = useQuery(TEAM_HUB_QUERY, {
+        variables: {
+            name: 'Steve Carter',
+        },
+    })
+
+    if (loading) return 'Loading...'
+    if (error) return `Error! ${error.message}`
+
+    // const {
+    //     user: {
+    //         name,
+    //         student: {
+    //             team: {
+    //                 name: teamName,
+    //                 stage_progresses: stageProgresses,
+    //                 students,
+    //             },
+    //         },
+    //     },
+    // } = pageData
+
+    const user = pageData.user[0]
+
+    const {
+        name,
+        student: {
+            team: {
+                name: teamName,
+                stage_progresses: stageProgresses,
+                students,
+            },
+        },
+    } = user
+
+    const stages = pageData.stage.map((stage) => {
+        const stageProgressForStage =
+            stageProgresses.find((sp) => sp.stage_id === stage.id) || {} // TODO optional chaining here once TS is in
+
+        const status = stageProgressForStage.status || 'locked'
+
+        return { ...stage, status }
+    })
+
     return (
         <>
             <Helmet>
@@ -44,9 +145,13 @@ const QuestPage = () => {
                 <title>Team Hub</title>
                 <meta name="description" content="The description" />
             </Helmet>
+
             <main className="the-quest">
                 <Header headerText="Team Hub" />
                 <section className="container" id="main">
+                    <div className="side-grey">
+                        <p className="sm-type-amp">{`Logged in as ${name}`}</p>
+                    </div>
                     <div className="row">
                         <div className="col-lg-8">
                             <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
@@ -57,12 +162,15 @@ const QuestPage = () => {
                                 <div className="row">
                                     <div className="col-lg-8">
                                         <h2 className="sm-type-drum sm-type-drum--medium">
-                                            Team: Purple
+                                            {teamName}
                                         </h2>
                                         <p className="sm-type-lead">
-                                            John Doe, John Doe, John Doe, John
-                                            Doe, John Doe, John Doe, John Doe,
-                                            John Doe, John Doe
+                                            {students
+                                                .map(
+                                                    (student) =>
+                                                        student.user.name
+                                                )
+                                                .join(', ')}
                                         </p>
                                     </div>
                                     <div className="col-lg-4">
@@ -98,9 +206,8 @@ const QuestPage = () => {
                         <div className="col-lg-10">
                             <p className="sm-type-guitar mb-4">
                                 Your progress towards a community land buyout.
-                                Remember to work as a team - after all, 'the
-                                only thing that will redeem mankind is
-                                cooperation'!
+                                Remember to work as a team - after all, the only
+                                thing that will redeem mankind is cooperation!
                             </p>
                         </div>
                         <div className="col-lg-1"></div>
@@ -108,16 +215,32 @@ const QuestPage = () => {
                     <div className="row step">
                         <div className="col-lg-2">&nbsp;</div>
                         <div className="col-lg-4">
-                            <div className="quest-step quest-step-complete">
+                            <div
+                                className={`quest-step ${getStageClasses(
+                                    stages[0].status
+                                )}`}
+                            >
                                 <div className="quest-step-text">
-                                    <Link to="/the-quest-1-completed">
+                                    <Link
+                                        to={
+                                            stages[0].status === 'completed'
+                                                ? '/student/stage-1-complete'
+                                                : '/student/stage-1'
+                                        }
+                                    >
                                         <span className="quest-step-number">
-                                            1
+                                            {stages[0].status === 'locked' ? (
+                                                <Lock />
+                                            ) : (
+                                                1
+                                            )}
                                         </span>
-                                        RESEARCH{' '}
-                                        <span className="medium-icon">
-                                            <Tick />
-                                        </span>
+                                        {stages[0].title.toUpperCase()}
+                                        {stages[0].status === 'complete' && (
+                                            <span className="medium-icon">
+                                                <Tick />
+                                            </span>
+                                        )}
                                     </Link>
                                 </div>
                             </div>
@@ -135,13 +258,26 @@ const QuestPage = () => {
                             </span>
                         </div>
                         <div className="col-lg-4">
-                            <div className="quest-step quest-step-complete quest-step-highlight">
+                            <div
+                                className={`quest-step ${getStageClasses(
+                                    stages[1].status
+                                )}`}
+                            >
                                 <div className="quest-step-text">
                                     <Link to="/the-quest-2">
                                         <span className="quest-step-number">
-                                            2
+                                            {stages[1].status === 'locked' ? (
+                                                <Lock />
+                                            ) : (
+                                                2
+                                            )}
                                         </span>
-                                        CONSULT
+                                        {stages[1].title.toUpperCase()}
+                                        {stages[1].status === 'complete' && (
+                                            <span className="medium-icon">
+                                                <Tick />
+                                            </span>
+                                        )}
                                     </Link>
                                 </div>
                             </div>
@@ -161,16 +297,24 @@ const QuestPage = () => {
                             </span>
                         </div>
                         <div className="col-lg-4 step-reverse-2">
-                            <div className="quest-step">
+                            <div
+                                className={`quest-step ${getStageClasses(
+                                    stages[2].status
+                                )}`}
+                            >
                                 <div className="quest-step-text">
                                     <span className="quest-step-number">
-                                        <Lock />
+                                        {stages[2].status === 'locked' ? (
+                                            <Lock />
+                                        ) : (
+                                            3
+                                        )}
                                     </span>
-                                    PROGRESS <br />
-                                    YOUR PLANS
+                                    {stages[2].title.toUpperCase()}
                                 </div>
                             </div>
                         </div>
+                        //TODO still need logic building into steps from here
                         <div className="col-lg-2 step-reverse-3">
                             <span className="hide-on-narrow">
                                 <span className="ticktrbl">
@@ -189,8 +333,7 @@ const QuestPage = () => {
                                     <span className="quest-step-number">
                                         <Lock />
                                     </span>
-                                    LAY THE <br />
-                                    FOUNDATIONS
+                                    {stages[3].title.toUpperCase()}
                                 </div>
                             </div>
                         </div>
@@ -214,7 +357,7 @@ const QuestPage = () => {
                                     <span className="quest-step-number">
                                         <Lock />
                                     </span>
-                                    PRESENT FINDINGS
+                                    {stages[4].title.toUpperCase()}
                                 </div>
                             </div>
                         </div>
@@ -236,8 +379,7 @@ const QuestPage = () => {
                                     <span className="quest-step-number">
                                         <Lock />
                                     </span>
-                                    GET COMMUNITY <br />
-                                    AGREEMENT
+                                    {stages[5].title.toUpperCase()}
                                 </div>
                             </div>
                         </div>
@@ -261,7 +403,7 @@ const QuestPage = () => {
                                     <span className="quest-step-number">
                                         <Lock />
                                     </span>
-                                    COMMENCE BUYOUT
+                                    {stages[6].title.toUpperCase()}
                                 </div>
                             </div>
                         </div>
@@ -283,7 +425,7 @@ const QuestPage = () => {
                                     <span className="quest-step-number">
                                         <Lock />
                                     </span>
-                                    CELEBRATE
+                                    {stages[7].title.toUpperCase()}
                                 </div>
                             </div>
                         </div>
