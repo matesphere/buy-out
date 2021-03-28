@@ -110,3 +110,58 @@ export const UNLOCK_STAGE = gql`
         }
     }
 `
+
+export const SUBMIT_WORK = gql`
+    mutation SubmitWork($stageProgressId: uuid, $docLink: String) {
+        insert_document_one(
+            object: {
+                stage_progress_id: $stageProgressId
+                link: $docLink
+                status: submitted
+            }
+        ) {
+            id
+            link
+            status
+        }
+        update_stage_progress(
+            where: { id: { _eq: $stageProgressId } }
+            _set: { status: submitted }
+        ) {
+            returning {
+                id
+                status
+            }
+        }
+    }
+`
+
+export const MARK_PASSED = gql`
+    mutation MarkPassed($documentId: uuid, $stageProgressId: uuid) {
+        update_document(
+            _set: { status: marked_passed, feedback: "nice job" }
+            where: { id: { _eq: $documentId } }
+        ) {
+            returning {
+                id
+                link
+                feedback
+                status
+            }
+        }
+        update_stage_progress(
+            _set: { status: completed }
+            where: { id: { _eq: $stageProgressId } }
+        ) {
+            returning {
+                id
+                stage {
+                    id
+                    title
+                }
+                status
+                team_id
+            }
+        }
+    }
+`

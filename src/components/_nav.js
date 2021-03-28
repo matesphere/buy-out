@@ -13,10 +13,10 @@ const Nav = () => {
                     <Link to="/about-glenclas">About Glenclas</Link>
                 </li>
                 <li className="nav-links">
-                    <Link to="/the-quest/">Student hub</Link>
+                    <Link to="/student/team-hub/">Team hub</Link>
                 </li>
                 <li className="nav-links">
-                    <Link to="/student/your-notes">
+                    <Link to="/tutor/hub">
                         Tutor hub
                         <span className="nav-links-notification"></span>
                     </Link>

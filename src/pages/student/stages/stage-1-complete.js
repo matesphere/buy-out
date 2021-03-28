@@ -2,6 +2,7 @@ import React from 'react'
 import { graphql, useStaticQuery, Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
+import { gql, useQuery } from '@apollo/client'
 
 import Header from '../../../components/_header'
 import Footer from '../../../components/_footer'
@@ -10,6 +11,22 @@ import Tick from '../../../assets/tick.svg'
 import HelpIcon from '../../../assets/help-icon.svg'
 
 import '../../../scss/index.scss'
+
+const STAGE_1_COMPLETE_QUERY = gql`
+    query StageQuery($name: String, $stageId: Int) {
+        user(where: { name: { _eq: $name } }) {
+            student {
+                team {
+                    stage_progresses(where: { stage_id: { _eq: $stageId } }) {
+                        documents {
+                            feedback
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
 
 const QuestPage = () => {
     const data = useStaticQuery(graphql`
@@ -21,6 +38,25 @@ const QuestPage = () => {
             }
         }
     `)
+
+    const { loading, error, data: pageData } = useQuery(
+        STAGE_1_COMPLETE_QUERY,
+        { variables: { name: 'Steve Carter', stageId: 1 } }
+    )
+
+    if (loading) return 'Loading...'
+    if (error) return `Error! ${error.message}`
+
+    const user = pageData.user[0]
+
+    const {
+        student: {
+            team: { stage_progresses: stageProgresses },
+        },
+    } = user
+
+    const docFeedback = stageProgresses[0].documents[0].feedback
+
     return (
         <>
             <Helmet>
@@ -28,13 +64,8 @@ const QuestPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Quest 1</title>
+                <title>STage 1 - Complete</title>
                 <meta name="description" content="The description" />
-                {/*<meta name="image" content={image} />*/}
-                <meta property="og:url" content="url" />
-                <meta property="og:title" content="Quest 1" />
-                <meta property="og:description" content="The description" />
-                {/*<meta property="og:image" content={image} />*/}
             </Helmet>
             <main className="the-quest">
                 <Header headerText="the Quest" />
@@ -113,6 +144,7 @@ const QuestPage = () => {
                             </ul>
                             <div className="mb-4">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.file.childImageSharp
                                             .gatsbyImageData
@@ -134,25 +166,29 @@ const QuestPage = () => {
                                     <span className="side-icon">
                                         <Tick />
                                     </span>
-                                    Congratulations?
+                                    Congratulations!
                                 </p>
                                 <p className="sm-type-amp mb-4">
-                                    You have completed Quest 1.
+                                    You have completed Stage 1.
+                                </p>
+                                <p className="sm-type-amp mb-4">
+                                    Your tutor feedback was: <br />"
+                                    {docFeedback}"
                                 </p>
                                 <p>
                                     <Link
                                         className="dark-link"
                                         to="/student/your-notes-completed"
                                     >
-                                        Your Quest 1 notes
+                                        Your Stage 1 notes
                                     </Link>
                                 </p>
                                 <p>
                                     <Link
                                         className="dark-link"
-                                        to="/the-quest-2"
+                                        to="/student/stage-2"
                                     >
-                                        Move onto Quest 2
+                                        Move onto Stage 2
                                     </Link>
                                 </p>
                             </div>

@@ -24,7 +24,7 @@ import Ticktb4 from '../../assets/tick-tp4.svg'
 import Tick from '../../assets/tick.svg'
 import HelpIcon from '../../assets/help-icon.svg'
 
-// TODO use this for the real thing!
+// TODO use this for the real thing! can store team ID once we have it initially, to make team queries a bit easier
 // user_by_pk(id: $id) {
 //     name
 //     student {
@@ -73,12 +73,38 @@ const getStageClasses = (status) => {
     switch (status) {
         case 'unlocked':
             return 'quest-step-complete quest-step-highlight'
+        case 'submitted':
+            return 'quest-step-complete'
         case 'completed':
             return 'quest-step-complete'
         default:
             return ''
     }
 }
+
+const StageButton = ({ id, title, status }) => (
+    <div className={`quest-step ${getStageClasses(status)}`}>
+        <div className="quest-step-text">
+            <Link
+                to={
+                    status === 'completed'
+                        ? `/student/stage-${id}/complete`
+                        : `/student/stage-${id}`
+                }
+            >
+                <span className="quest-step-number">
+                    {status === 'locked' ? <Lock /> : id}
+                </span>
+                {title.toUpperCase()}
+                {status === 'completed' && (
+                    <span className="medium-icon">
+                        <Tick />
+                    </span>
+                )}
+            </Link>
+        </div>
+    </div>
+)
 
 const QuestPage = () => {
     const data = useStaticQuery(graphql`
@@ -100,19 +126,6 @@ const QuestPage = () => {
     if (loading) return 'Loading...'
     if (error) return `Error! ${error.message}`
 
-    // const {
-    //     user: {
-    //         name,
-    //         student: {
-    //             team: {
-    //                 name: teamName,
-    //                 stage_progresses: stageProgresses,
-    //                 students,
-    //             },
-    //         },
-    //     },
-    // } = pageData
-
     const user = pageData.user[0]
 
     const {
@@ -132,7 +145,7 @@ const QuestPage = () => {
 
         const status = stageProgressForStage.status || 'locked'
 
-        return { ...stage, status }
+        return <StageButton {...{ ...stage, status }} />
     })
 
     return (
@@ -214,37 +227,7 @@ const QuestPage = () => {
                     </div>
                     <div className="row step">
                         <div className="col-lg-2">&nbsp;</div>
-                        <div className="col-lg-4">
-                            <div
-                                className={`quest-step ${getStageClasses(
-                                    stages[0].status
-                                )}`}
-                            >
-                                <div className="quest-step-text">
-                                    <Link
-                                        to={
-                                            stages[0].status === 'completed'
-                                                ? '/student/stage-1-complete'
-                                                : '/student/stage-1'
-                                        }
-                                    >
-                                        <span className="quest-step-number">
-                                            {stages[0].status === 'locked' ? (
-                                                <Lock />
-                                            ) : (
-                                                1
-                                            )}
-                                        </span>
-                                        {stages[0].title.toUpperCase()}
-                                        {stages[0].status === 'complete' && (
-                                            <span className="medium-icon">
-                                                <Tick />
-                                            </span>
-                                        )}
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
+                        <div className="col-lg-4">{stages[0]}</div>
                         <div className="col-lg-2">
                             <span className="hide-on-narrow">
                                 <span className="ticktrbl">
@@ -257,31 +240,7 @@ const QuestPage = () => {
                                 </span>
                             </span>
                         </div>
-                        <div className="col-lg-4">
-                            <div
-                                className={`quest-step ${getStageClasses(
-                                    stages[1].status
-                                )}`}
-                            >
-                                <div className="quest-step-text">
-                                    <Link to="/the-quest-2">
-                                        <span className="quest-step-number">
-                                            {stages[1].status === 'locked' ? (
-                                                <Lock />
-                                            ) : (
-                                                2
-                                            )}
-                                        </span>
-                                        {stages[1].title.toUpperCase()}
-                                        {stages[1].status === 'complete' && (
-                                            <span className="medium-icon">
-                                                <Tick />
-                                            </span>
-                                        )}
-                                    </Link>
-                                </div>
-                            </div>
-                        </div>
+                        <div className="col-lg-4">{stages[1]}</div>
                     </div>
                     <div className="row step step-reverse">
                         <div className="col-lg-2 step-reverse-1">
@@ -297,24 +256,8 @@ const QuestPage = () => {
                             </span>
                         </div>
                         <div className="col-lg-4 step-reverse-2">
-                            <div
-                                className={`quest-step ${getStageClasses(
-                                    stages[2].status
-                                )}`}
-                            >
-                                <div className="quest-step-text">
-                                    <span className="quest-step-number">
-                                        {stages[2].status === 'locked' ? (
-                                            <Lock />
-                                        ) : (
-                                            3
-                                        )}
-                                    </span>
-                                    {stages[2].title.toUpperCase()}
-                                </div>
-                            </div>
+                            {stages[2]}
                         </div>
-                        //TODO still need logic building into steps from here
                         <div className="col-lg-2 step-reverse-3">
                             <span className="hide-on-narrow">
                                 <span className="ticktrbl">
@@ -328,14 +271,7 @@ const QuestPage = () => {
                             </span>
                         </div>
                         <div className="col-lg-4 step-reverse-4">
-                            <div className="quest-step">
-                                <div className="quest-step-text">
-                                    <span className="quest-step-number">
-                                        <Lock />
-                                    </span>
-                                    {stages[3].title.toUpperCase()}
-                                </div>
-                            </div>
+                            {stages[3]}
                         </div>
                     </div>
                     <div className="row step">
@@ -351,16 +287,7 @@ const QuestPage = () => {
                                 </span>
                             </span>
                         </div>
-                        <div className="col-lg-4">
-                            <div className="quest-step">
-                                <div className="quest-step-text">
-                                    <span className="quest-step-number">
-                                        <Lock />
-                                    </span>
-                                    {stages[4].title.toUpperCase()}
-                                </div>
-                            </div>
-                        </div>
+                        <div className="col-lg-4">{stages[4]}</div>
                         <div className="col-lg-2">
                             <span className="hide-on-narrow">
                                 <span className="ticktrbl">
@@ -373,16 +300,7 @@ const QuestPage = () => {
                                 </span>
                             </span>
                         </div>
-                        <div className="col-lg-4">
-                            <div className="quest-step">
-                                <div className="quest-step-text">
-                                    <span className="quest-step-number">
-                                        <Lock />
-                                    </span>
-                                    {stages[5].title.toUpperCase()}
-                                </div>
-                            </div>
-                        </div>
+                        <div className="col-lg-4">{stages[5]}</div>
                     </div>
                     <div className="row step step-reverse">
                         <div className="col-lg-2 step-reverse-1">
@@ -398,14 +316,7 @@ const QuestPage = () => {
                             </span>
                         </div>
                         <div className="col-lg-4 step-reverse-2">
-                            <div className="quest-step">
-                                <div className="quest-step-text">
-                                    <span className="quest-step-number">
-                                        <Lock />
-                                    </span>
-                                    {stages[6].title.toUpperCase()}
-                                </div>
-                            </div>
+                            {stages[6]}
                         </div>
                         <div className="col-lg-2 step-reverse-3">
                             <span className="hide-on-narrow">
@@ -420,14 +331,7 @@ const QuestPage = () => {
                             </span>
                         </div>
                         <div className="col-lg-4 step-reverse-4">
-                            <div className="quest-step">
-                                <div className="quest-step-text">
-                                    <span className="quest-step-number">
-                                        <Lock />
-                                    </span>
-                                    {stages[7].title.toUpperCase()}
-                                </div>
-                            </div>
+                            {stages[7]}
                         </div>
                     </div>
                 </section>

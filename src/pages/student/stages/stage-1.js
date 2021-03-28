@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import { gql, useQuery, useMutation } from '@apollo/client'
+import { SUBMIT_WORK } from '../../../gql/mutations'
 
 import Header from '../../../components/_header'
 import Footer from '../../../components/_footer'
@@ -10,7 +12,42 @@ import TickSheet from '../../../assets/tick-sheet.svg'
 
 import '../../../scss/index.scss'
 
+// TODO this will also probably use user ID (or team ID actually)
+const STAGE_1_QUERY = gql`
+    query StageQuery($name: String, $stageId: Int) {
+        user(where: { name: { _eq: $name } }) {
+            student {
+                team {
+                    stage_progresses(where: { stage_id: { _eq: $stageId } }) {
+                        id
+                        stage_id
+                        status
+                    }
+                }
+            }
+        }
+    }
+`
+
 const QuestPage = () => {
+    const { loading, error, data: pageData } = useQuery(STAGE_1_QUERY, {
+        variables: { name: 'Steve Carter', stageId: 1 },
+    })
+    const [submitWork, submitWorkResponse] = useMutation(SUBMIT_WORK)
+
+    if (loading) return 'Loading...'
+    if (error) return `Error! ${error.message}`
+
+    const user = pageData.user[0]
+
+    const {
+        student: {
+            team: { stage_progresses: stageProgresses },
+        },
+    } = user
+
+    const stageProgressId = stageProgresses[0].id
+
     return (
         <>
             <Helmet>
@@ -18,13 +55,8 @@ const QuestPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Quest 1</title>
+                <title>Stage 1: Research</title>
                 <meta name="description" content="The description" />
-                {/*<meta name="image" content={image} />*/}
-                <meta property="og:url" content="url" />
-                <meta property="og:title" content="Quest 1" />
-                <meta property="og:description" content="The description" />
-                {/*<meta property="og:image" content={image} />*/}
             </Helmet>
             <main className="the-quest">
                 <Header headerText="the Quest" />
@@ -244,6 +276,26 @@ const QuestPage = () => {
                                     </Link>
                                 </p>
                             </div>
+
+                            <button
+                                className="btn-solid-lg mt-4"
+                                onClick={() => {
+                                    submitWork({
+                                        variables: {
+                                            stageProgressId,
+                                            docLink: 'doc.link',
+                                        },
+                                    })
+                                }}
+                            >
+                                Submit Work
+                            </button>
+                            {submitWorkResponse.data && (
+                                <span>
+                                    {`Doc submitted and available at `}
+                                    <a href="doc.link">doc.link</a>
+                                </span>
+                            )}
                         </div>
                     </div>
                 </section>

@@ -66,7 +66,10 @@ const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
         switch (stageProgress.status) {
             case 'submitted':
                 return (
-                    <SubmittedStageStatus documents={stageProgress.documents} />
+                    <SubmittedStageStatus
+                        documents={stageProgress.documents}
+                        stageProgressId={stageProgress.id}
+                    />
                 )
             case 'failed':
                 return <FailedStageStatus documents={stageProgress.documents} />

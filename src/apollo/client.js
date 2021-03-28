@@ -21,7 +21,7 @@ export const client = new ApolloClient({
     link: from([
         authMiddleware,
         new HttpLink({
-            uri: 'http://3.9.132.238/v1/graphql',
+            uri: 'https://clq.beanmate.coffee/v1/graphql',
             fetch,
         }),
     ]),
