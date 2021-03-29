@@ -599,9 +599,17 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 .green-link {
     color: $brand-midgreen;
+    &:hover {
+        color: $brand-red !important;
+        cursor: pointer;
+    }
 }
 .orange-link {
     color: $brand-redorange;
+    &:hover {
+        color: $brand-redorange;
+        cursor: pointer;
+    }
 }
 .text-underline {
     text-decoration: underline;
