@@ -7,6 +7,7 @@ import Lock from '../../assets/lock.svg'
 import Tick from '../../assets/tick.svg'
 import Cross from '../../assets/cross.svg'
 import Progress from '../../assets/progress.svg'
+import Submitted from '../../assets/submitted.svg'
 
 export const LockedStageStatus = ({ teamId, stageId }) => {
     //? this madness updates the Apollo cache after a mutation, to update the UI immediately
@@ -81,7 +82,7 @@ export const LockedStageStatus = ({ teamId, stageId }) => {
 export const UnlockedStageStatus = () => (
     <div className="progress">
         <Progress />
-        <span>Unlocked - <span className="orange-link">In progress</span></span>
+        <span>Unlocked - <span className="green-link">In progress</span></span>
     </div>
 )
 
@@ -135,20 +136,20 @@ export const SubmittedStageStatus = ({ documents, stageProgressId }) => {
 
     return (
         <div>
-            <Lock />
-            <span>Work submitted</span>
+            <Submitted />
+            <span className="orange-link">Work submitted</span>
             <span>
                 <a href={documents[0].link}>Team Work</a>
             </span>
             <span>
-                <a href="#">Write Feedback</a>
+                <a className="green-link text-underline">Write Feedback</a>
             </span>
             <span>
-                <a>Mark Failed</a>
+                <a className="green-link text-underline">Mark Failed</a>
             </span>
             <span>
                 <a
-                    href
+                    className="green-link text-underline"
                     onClick={(e) => {
                         e.preventDefault()
                         markPassed({

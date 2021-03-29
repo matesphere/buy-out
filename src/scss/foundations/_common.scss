@@ -598,10 +598,13 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 .green-link {
-    color: $brand-green;
+    color: $brand-midgreen;
 }
 .orange-link {
     color: $brand-redorange;
+}
+.text-underline {
+    text-decoration: underline;
 }
 
 .progress {
