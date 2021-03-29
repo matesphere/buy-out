@@ -2,6 +2,7 @@ module.exports = {
     siteMetadata: {
         title: 'buy-out',
     },
+    flags: { PRESERVE_WEBPACK_CACHE: true },
     plugins: [
         'gatsby-plugin-sass',
         'gatsby-plugin-image',
@@ -68,7 +69,7 @@ module.exports = {
             options: {
                 typeName: 'clq',
                 fieldName: 'data',
-                url: 'http://3.9.132.238/v1/graphql',
+                url: 'https://clq.beanmate.coffee/v1/graphql',
                 headers: {
                     'x-hasura-access-key': 'thisisalongrandomstring',
                 },
