@@ -56,6 +56,42 @@ const TUTOR_CURRENT_QUEST_QUERY = gql`
         }
     }
 `
+const TUTOR_CURRENT_QUEST_SUB = gql`
+    subscription TutorCurrentQuestSub($tutor_id: uuid!) {
+        tutor_by_pk(id: $tutor_id) {
+            school {
+                name
+            }
+            user {
+                name
+                username
+                email
+            }
+            teams {
+                id
+                name
+                students {
+                    id
+                    user {
+                        name
+                    }
+                }
+                stage_progresses {
+                    id
+                    team_id
+                    stage_id
+                    status
+                    documents {
+                        id
+                        status
+                        link
+                        feedback
+                    }
+                }
+            }
+        }
+    }
+`
 
 const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
     const stageProgress = stageProgresses.find(
@@ -117,12 +153,37 @@ const StageInfoPanel = ({ stages, stageProgresses, teamId }) => (
 )
 
 const TutorPage = () => {
-    const { loading, error, data } = useQuery(TUTOR_CURRENT_QUEST_QUERY, {
-        variables: { tutor_id: TUTOR_ID },
-    })
+    const { loading, error, data, subscribeToMore } = useQuery(
+        TUTOR_CURRENT_QUEST_QUERY,
+        {
+            variables: { tutor_id: TUTOR_ID },
+        }
+    )
 
     if (loading) return 'Loading...'
     if (error) return `Error! ${error.message}`
+
+    subscribeToMore({
+        document: TUTOR_CURRENT_QUEST_SUB,
+        variables: { tutor_id: TUTOR_ID },
+
+        updateQuery: (prev, { subscriptionData }) => {
+            if (!subscriptionData.data) return prev
+
+            // TODO big check whether status of any stages has actually changed
+            // const stageProgressesWithStatus =
+            //     subscriptionData.data.user[0].student.team.stage_progresses
+
+            // if (subscriptionData.)
+
+            return {
+                tutor_by_pk: {
+                    ...prev.tutor_by_pk,
+                    teams: subscriptionData.data.tutor_by_pk.teams,
+                },
+            }
+        },
+    })
 
     const {
         tutor_by_pk: { teams },

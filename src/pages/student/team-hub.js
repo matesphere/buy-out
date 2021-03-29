@@ -155,11 +155,7 @@ const QuestPage = () => {
         },
 
         updateQuery: (prev, { subscriptionData }) => {
-            console.log(prev)
-
             if (!subscriptionData.data) return prev
-
-            console.log(subscriptionData.data)
 
             // TODO big check whether status of any stages has actually changed
             // const stageProgressesWithStatus =
