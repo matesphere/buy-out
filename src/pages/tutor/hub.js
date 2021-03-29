@@ -1,6 +1,7 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
+import { gql, useQuery } from '@apollo/client'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
@@ -8,7 +9,38 @@ import AccountFooter from './_footer'
 import HelpIcon from '../../assets/help-icon.svg'
 import '../../scss/index.scss'
 
+const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
+
+const TUTOR_HUB_QUERY = gql`
+    query TutorCurrentQuestQuery($tutor_id: uuid!) {
+        tutor_by_pk(id: $tutor_id) {
+            school {
+                name
+            }
+            user {
+                name
+                username
+                email
+            }
+        }
+    }
+`
+
 const IndexPage = () => {
+    const { loading, error, data } = useQuery(TUTOR_HUB_QUERY, {
+        variables: { tutor_id: TUTOR_ID },
+    })
+
+    if (loading) return 'Loading...'
+    if (error) return `Error! ${error.message}`
+
+    const {
+        tutor_by_pk: {
+            school: { name: schoolName },
+            user: { name },
+        },
+    } = data
+
     return (
         <>
             <Helmet>
@@ -26,8 +58,9 @@ const IndexPage = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                Welcome back Tutor Name
+                                Welcome back {name}
                             </h2>
+                            <p className="sm-type-amp">{schoolName}</p>
                             <p className="sm-type-guitar sm-type-guitar--medium mt-4">
                                 Your Quests
                             </p>
