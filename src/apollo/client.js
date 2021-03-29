@@ -5,7 +5,11 @@ import {
     InMemoryCache,
     HttpLink,
     from,
+    split,
 } from '@apollo/client'
+import { WebSocketLink } from '@apollo/client/link/ws'
+import { getMainDefinition } from '@apollo/client/utilities'
+import ws from 'ws'
 
 const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext({
@@ -17,13 +21,37 @@ const authMiddleware = new ApolloLink((operation, forward) => {
     return forward(operation)
 })
 
+const wsForNode = typeof window === 'undefined' ? ws : null
+
+const wsLink = new WebSocketLink({
+    uri: `wss://clq.beanmate.coffee/v1/graphql`,
+    options: {
+        reconnect: true,
+        connectionParams: {
+            headers: {
+                'x-hasura-access-key': 'thisisalongrandomstring',
+            },
+        },
+    },
+    webSocketImpl: wsForNode,
+})
+
 export const client = new ApolloClient({
-    link: from([
-        authMiddleware,
-        new HttpLink({
-            uri: 'https://clq.beanmate.coffee/v1/graphql',
-            fetch,
-        }),
-    ]),
+    link: split(
+        ({ query }) => {
+            const { kind, operation } = getMainDefinition(query)
+            return (
+                kind === 'OperationDefinition' && operation === 'subscription'
+            )
+        },
+        wsLink,
+        from([
+            authMiddleware,
+            new HttpLink({
+                uri: 'https://clq.beanmate.coffee/v1/graphql',
+                fetch,
+            }),
+        ])
+    ),
     cache: new InMemoryCache(),
 })

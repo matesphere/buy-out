@@ -172,7 +172,7 @@ export const FailedStageStatus = ({ documents }) => (
         <Cross />
         <span>Failed</span>
         <span>
-            <a href={documents.link}>Team Work</a>
+            <a href={documents[0].link}>Team Work</a>
         </span>
         <span>
             <a href="#">Your Feedback</a>

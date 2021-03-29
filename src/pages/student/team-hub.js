@@ -24,7 +24,7 @@ import Ticktb4 from '../../assets/tick-tp4.svg'
 import Tick from '../../assets/tick.svg'
 import HelpIcon from '../../assets/help-icon.svg'
 
-// TODO use this for the real thing! can store team ID once we have it initially, to make team queries a bit easier
+// TODO use this for the real thing! could store team ID once we have it initially & use that, to make team queries a bit easier
 // user_by_pk(id: $id) {
 //     name
 //     student {
@@ -65,6 +65,28 @@ const TEAM_HUB_QUERY = gql`
         stage {
             id
             title
+        }
+    }
+`
+
+const TEAM_HUB_SUB = gql`
+    subscription TeamHubSub($name: String) {
+        user(where: { name: { _eq: $name } }) {
+            name
+            student {
+                team {
+                    name
+                    stage_progresses {
+                        stage_id
+                        status
+                    }
+                    students {
+                        user {
+                            name
+                        }
+                    }
+                }
+            }
         }
     }
 `
@@ -117,9 +139,32 @@ const QuestPage = () => {
         }
     `)
 
-    const { loading, error, data: pageData } = useQuery(TEAM_HUB_QUERY, {
+    const { loading, error, data: pageData, subscribeToMore } = useQuery(
+        TEAM_HUB_QUERY,
+        {
+            variables: {
+                name: 'Steve Carter',
+            },
+        }
+    )
+
+    subscribeToMore({
+        document: TEAM_HUB_SUB,
         variables: {
             name: 'Steve Carter',
+        },
+        // TODO need to update query in cache with results of sub - but how the balls do we do that
+        updateQuery: (prev, { subscriptionData }) => {
+            if (!subscriptionData.data) return prev
+
+            const stageProgressesWithStatus =
+                subscriptionData.data.user[0].student.team.stage_progresses
+
+            // if (subscriptionData.)
+
+            return {
+                ...prev,
+            }
         },
     })
 

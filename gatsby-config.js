@@ -2,6 +2,7 @@ module.exports = {
     siteMetadata: {
         title: 'buy-out',
     },
+    flags: { PRESERVE_WEBPACK_CACHE: true },
     plugins: [
         'gatsby-plugin-sass',
         'gatsby-plugin-image',
