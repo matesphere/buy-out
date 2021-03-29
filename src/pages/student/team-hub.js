@@ -153,17 +153,27 @@ const QuestPage = () => {
         variables: {
             name: 'Steve Carter',
         },
-        // TODO need to update query in cache with results of sub - but how the balls do we do that
+
         updateQuery: (prev, { subscriptionData }) => {
+            console.log(prev)
+
             if (!subscriptionData.data) return prev
 
-            const stageProgressesWithStatus =
-                subscriptionData.data.user[0].student.team.stage_progresses
+            console.log(subscriptionData.data)
+
+            // TODO big check whether status of any stages has actually changed
+            // const stageProgressesWithStatus =
+            //     subscriptionData.data.user[0].student.team.stage_progresses
 
             // if (subscriptionData.)
 
             return {
                 ...prev,
+                user: [
+                    {
+                        ...subscriptionData.data.user[0],
+                    },
+                ],
             }
         },
     })
