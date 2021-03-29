@@ -10,7 +10,7 @@ const AccountFooter = () => {
                     <div className="col-lg-12">
                         <ul>
                             <li>
-                                <Link to="/account/tutor-hub/">Tutor Hub</Link>
+                                <Link to="/tutor/hub/">Tutor Hub</Link>
                             </li>
                         </ul>
 

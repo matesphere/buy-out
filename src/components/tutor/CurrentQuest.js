@@ -6,6 +6,7 @@ import { UNLOCK_STAGE, MARK_PASSED } from '../../gql/mutations'
 import Lock from '../../assets/lock.svg'
 import Tick from '../../assets/tick.svg'
 import Cross from '../../assets/cross.svg'
+import Progress from '../../assets/progress.svg'
 
 export const LockedStageStatus = ({ teamId, stageId }) => {
     //? this madness updates the Apollo cache after a mutation, to update the UI immediately
@@ -59,7 +60,7 @@ export const LockedStageStatus = ({ teamId, stageId }) => {
             <span>Locked</span>
             <span>
                 <a
-                    href
+                    href="#"
                     onClick={(e) => {
                         e.preventDefault()
                         unlockStage({
@@ -78,9 +79,9 @@ export const LockedStageStatus = ({ teamId, stageId }) => {
 }
 
 export const UnlockedStageStatus = () => (
-    <div>
-        <Lock />
-        <span>Unlocked</span>
+    <div className="progress">
+        <Progress />
+        <span>Unlocked - <span className="orange-link">In progress</span></span>
     </div>
 )
 

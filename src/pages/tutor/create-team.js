@@ -17,7 +17,6 @@ import HelpIcon from '../../assets/help-icon.svg'
 import Cross from '../../assets/cross.svg'
 import '../../scss/index.scss'
 
-const DOTS = ['yellowdot', 'tealdot', 'reddot', 'purpledot']
 const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
 
 const TeamInput = ({ setTeams }) => (
@@ -36,17 +35,17 @@ const TeamInput = ({ setTeams }) => (
                 <label className="form-label sm-type-amp">Name</label>
                 <span>
                     <input id="name" type="name" className="form-control" />
-                    <button type="submit">Add team</button>
+                    <button type="submit" className="btn-outline-lg">Add team</button>
                 </span>
             </div>
         </div>
     </form>
 )
 
-const Team = ({ pos, team: { name, students } }) => (
+const Team = ({ team: { name, students } }) => (
     <>
         <p className="sm-type-leadguitar sm-type-lead--medium">
-            <span className={DOTS[pos]}></span> {name}
+            <span className="blackdot"></span> {name}
         </p>
         {students.map(({ name }, i) => (
             <p key={i} className="sm-type-amp">
@@ -155,69 +154,76 @@ const TutorAddStudentPage = () => {
                                 ))}
                             </form>
                         </div>
-                    </div>
-                    {teams.length > 0 && (
-                        <>
-                            <div className="col-lg-4">
-                                <p className="sm-type-guitar mb-2">
+
+                        <div className="col-lg-4">
+                            {teams.length > 0 && (
+                                <>
+                                    <p className="sm-type-guitar mb-2">
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
-                                    Teams
-                                </p>
-                                <div className="side-grey">
-                                    {teams.map((team, i) => (
-                                        <Team key={i} pos={i} team={team} />
-                                    ))}
-                                </div>
-                            </div>
-                        </>
-                    )}
-                    <button
-                        className="btn-solid-lg mt-4"
-                        onClick={() => {
-                            createTeams({
-                                variables: createTeamWithStudentsMapper(
-                                    teams,
-                                    TUTOR_ID
-                                ),
-                            })
-                        }}
-                    >
-                        Save teams
-                    </button>
+                                        Teams
+                                    </p>
+                                    <div className="side-grey">
+                                        {teams.map((team, i) => (
+                                            <Team key={i} pos={i} team={team} />
+                                        ))}
+                                    </div>
+                                </>
+                            )}
 
-                    {createTeamsResponse.data && (
-                        <>
-                            <div className="col-lg-12">
-                                {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
-                                <button
-                                    className="btn-solid-lg mt-4"
-                                    onClick={() => {
-                                        startQuest({
-                                            variables: startQuestMapper(
-                                                createTeamsResponse.data.insert_team.returning.map(
-                                                    (obj) => obj.id
-                                                )
-                                            ),
-                                        })
-                                    }}
-                                >
-                                    START QUEST!
-                                </button>
-                                {startQuestResponse.data && (
-                                    <>
-                                        {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
-                                        <a href="/tutor/current-quest">
-                                            To tutor hub ->
-                                        </a>
-                                    </>
-                                )}
-                            </div>
-                            <br />
-                            <br />
-                        </>
-                    )}
+                            <button
+                                className="btn-outline-lg mt-4"
+                                onClick={() => {
+                                    createTeams({
+                                        variables: createTeamWithStudentsMapper(
+                                            teams,
+                                            TUTOR_ID
+                                        ),
+                                    })
+                                }}
+                            >
+                                Save teams
+                            </button>
+
+
+                            {createTeamsResponse.data && (
+                                <>
+                                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                        {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
+                                    </p>
+                                    <button
+                                        className="btn-solid-lg mt-4"
+                                        onClick={() => {
+                                            startQuest({
+                                                variables: startQuestMapper(
+                                                    createTeamsResponse.data.insert_team.returning.map(
+                                                        (obj) => obj.id
+                                                    )
+                                                ),
+                                            })
+                                        }}
+                                    >
+                                        START QUEST!
+                                    </button>
+                                    {startQuestResponse.data && (
+                                        <div className="modal-window">
+                                            <div>
+                                                <a href="#" title="Close" className="modal-close">Close</a>
+                                            <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                                {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
+                                                <a href="/tutor/current-quest">
+                                                    go to tutor hub
+                                                </a>
+                                            </p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    </div>
+
                 </section>
                 <AccountFooter />
             </main>

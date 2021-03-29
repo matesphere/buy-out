@@ -178,7 +178,7 @@
   }
 }
 
-.reddot, .greydot, .yellowdot, .tealdot, .purpledot {
+.reddot, .greydot, .yellowdot, .tealdot, .purpledot, .blackdot {
   width: 12px;
   height: 12px;
   display: inline-block;
@@ -200,6 +200,9 @@
 }
 .purpledot {
   background-color: #7C4B98;
+}
+.blackdot {
+  background-color: #000;
 }
 
 .filters-container {

@@ -596,3 +596,28 @@ input:focus, textarea:focus, select:focus, button:focus {
         margin: 0 $grid-unit;
     }
 }
+
+.green-link {
+    color: $brand-green;
+}
+.orange-link {
+    color: $brand-redorange;
+}
+
+.progress {
+    margin-left: $grid-unit * 2;
+}
+
+.button-nostyle {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    line-height: normal;
+    color: $brand-green;
+    text-decoration: underline;
+}

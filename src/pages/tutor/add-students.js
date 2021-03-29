@@ -113,54 +113,41 @@ const TutorAddPage = () => {
                                     />
                                 ))}
 
-                                <div className="col-lg-12">
-                                    <p className="sm-type-lead">
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                setStudents([
-                                                    ...students,
-                                                    EMPTY_STUDENT,
-                                                ])
-                                            }
-                                        >
-                                            Add more names
-                                        </button>
-                                    </p>
-                                </div>
+                                <button
+                                    className="sm-type-guitar button-nostyle"
+                                    type="button"
+                                    onClick={() =>
+                                        setStudents([
+                                            ...students,
+                                            EMPTY_STUDENT,
+                                        ])
+                                    }
+                                >
+                                    + Add more names
+                                </button>
 
                                 <button type="submit" className="btn-solid-lg">
                                     Submit names
                                 </button>
                             </form>
                         </div>
-
+                    </div>
+                    <div className="row">
                         {data && (
                             <>
                                 <div className="col-lg-12">
-                                    {`Added ${data.insert_student.returning.length} students!`}{' '}
-                                    <a href="/tutor/create-team">
-                                        Next step ->
-                                    </a>
+                                    <p className="sm-type-drum sm-type-guitar--medium">
+                                        {`Added ${data.insert_student.returning.length} students!`}{' '}
+                                        <a href="/tutor/create-team">
+                                            Next step >
+                                        </a>
+                                    </p>
                                 </div>
                                 <br />
                                 <br />
                             </>
                         )}
 
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Make sure to double check emails!
-                                </p>
-                            </div>
-                        </div>
                     </div>
                 </section>
                 <AccountFooter />
