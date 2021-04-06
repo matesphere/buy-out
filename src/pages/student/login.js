@@ -8,7 +8,7 @@ import HelpIcon from '../../assets/help-icon.svg'
 
 import '../../scss/index.scss'
 
-const IndexPage = () => {
+const StudentLogin = () => {
     return (
         <>
             <Helmet>
@@ -82,4 +82,4 @@ const IndexPage = () => {
     )
 }
 
-export default IndexPage
+export default StudentLogin
