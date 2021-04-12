@@ -14,7 +14,7 @@ import ws from 'ws'
 const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext({
         headers: {
-            'x-hasura-access-key': 'thisisalongrandomstring',
+            'x-hasura-access-key': 'community-land',
         },
     })
 
@@ -29,7 +29,7 @@ const wsLink = new WebSocketLink({
         reconnect: true,
         connectionParams: {
             headers: {
-                'x-hasura-access-key': 'thisisalongrandomstring',
+                'x-hasura-access-key': 'community-land',
             },
         },
     },
