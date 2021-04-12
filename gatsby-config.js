@@ -64,17 +64,17 @@ module.exports = {
             },
             __key: 'pages',
         },
-        {
-            resolve: 'gatsby-source-graphql',
-            options: {
-                typeName: 'clq',
-                fieldName: 'data',
-                url: 'https://clq.beanmate.coffee/v1/graphql',
-                headers: {
-                    'x-hasura-access-key': 'thisisalongrandomstring',
-                },
-            },
-        },
+        // {
+        //     resolve: 'gatsby-source-graphql',
+        //     options: {
+        //         typeName: 'clq',
+        //         fieldName: 'data',
+        //         url: 'https://clq.beanmate.coffee/v1/graphql',
+        //         headers: {
+        //             'x-hasura-access-key': 'thisisalongrandomstring',
+        //         },
+        //     },
+        // },
         {
             resolve: 'gatsby-plugin-create-client-paths',
             options: {
