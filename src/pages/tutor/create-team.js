@@ -21,6 +21,7 @@ const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to s
 
 const TeamInput = ({ setTeams }) => (
     <form
+        className="container"
         onSubmit={(e) => {
             e.preventDefault()
             console.log(e.target.name.value)
@@ -35,8 +36,10 @@ const TeamInput = ({ setTeams }) => (
                 <label className="form-label sm-type-amp">Name</label>
                 <span>
                     <input id="name" type="name" className="form-control" />
-                    <button type="submit" className="btn-outline-lg">Add team</button>
                 </span>
+            </div>
+            <div className="col-lg-6 mb-2">
+                <button type="submit" className="btn-outline-lg">Add team</button>
             </div>
         </div>
     </form>
@@ -139,6 +142,9 @@ const TutorAddStudentPage = () => {
 
                             <TeamInput setTeams={setTeams} />
 
+                            <h3 className="sm-type-drum sm-type-drum--medium mt-4">
+                                Student list
+                            </h3>
                             <form
                                 className="mb-4 container"
                                 id="form-login"
@@ -173,7 +179,7 @@ const TutorAddStudentPage = () => {
                             )}
 
                             <button
-                                className="btn-outline-lg mt-4"
+                                className="btn-solid-lg mt-4"
                                 onClick={() => {
                                     createTeams({
                                         variables: createTeamWithStudentsMapper(

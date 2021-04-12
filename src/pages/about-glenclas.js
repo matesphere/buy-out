@@ -38,6 +38,11 @@ const IntroPage = () => {
           gatsbyImageData(layout: CONSTRAINED)
         }
       }
+      image6: file(relativePath: { eq: "Glenclas782ed1.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED)
+        }
+      }
     }
   `)
 
@@ -55,13 +60,16 @@ const IntroPage = () => {
       </Helmet>
       <main className="the-quest">
         <Header headerText="Introduction" />
-        <section className="container" id="main">
+        <section className="container hero-top-image" id="main">
           <div className="row">
             <div className="col-lg-8">
+              <div className="mt-2 mb-2">
+                <GatsbyImage image={data.image6.childImageSharp.gatsbyImageData} />
+              </div>
 
               <div className="row">
                 <div className="col-lg-8">
-                  <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">About Glenclas:</h2>
+                  <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium">About Glenclas:</h2>
                   <p className="sm-type-lead mb-2">Your quest will concentrate around Glenclas (Gleann Clas, ‘valley of the class’) is a scattered community area and <a href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland" rel="noreferrer" target="_blank">civil parish</a> in the <a href="https://en.wikipedia.org/wiki/Loch_Alsh" rel="noreferrer" target="_blank">Lochalsh</a> area of <a href="https://en.wikipedia.org/wiki/Highland_council_area" rel="noreferrer" target="_blank">Highland</a> in western Scotland.</p>
                 </div>
                 <div className="col-lg-4">

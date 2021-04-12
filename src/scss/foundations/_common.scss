@@ -597,38 +597,8 @@ input:focus, textarea:focus, select:focus, button:focus {
     }
 }
 
-.green-link {
-    color: $brand-midgreen;
-    &:hover {
-        color: $brand-red !important;
-        cursor: pointer;
-    }
-}
-.orange-link {
-    color: $brand-redorange;
-    &:hover {
-        color: $brand-redorange;
-        cursor: pointer;
-    }
-}
-.text-underline {
-    text-decoration: underline;
-}
-
-.progress {
-    margin-left: $grid-unit * 2;
-}
-
-.button-nostyle {
-    border: none;
-    margin: 0;
-    padding: 0;
-    width: auto;
-    overflow: visible;
-    background: transparent;
-    color: inherit;
-    font: inherit;
-    line-height: normal;
-    color: $brand-green;
-    text-decoration: underline;
+.top-section {
+    position: absolute;
+    top: 0px;
+    z-index: 10;
 }

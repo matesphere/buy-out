@@ -19,12 +19,12 @@ const EMPTY_STUDENT = {
 const StudentInput = ({ num, name, email, setStudents }) => (
     <div className="side-grey row mb-4">
         <div className="col-lg-12">
-            <p className="sm-type-lead sm-type-lead--medium">
+            <p className="sm-type-amp sm-type-amp--medium">
                 Student {num + 1}
             </p>
         </div>
-        <div className="col-lg-6 mb-2">
-            <label className="form-label sm-type-amp">Name</label>
+        <div className="col-lg-4 mb-2">
+            <label className="form-label">First Name</label>
             <input
                 type="name"
                 className="form-control"
@@ -34,8 +34,15 @@ const StudentInput = ({ num, name, email, setStudents }) => (
                 }
             />
         </div>
-        <div className="col-lg-6 mb-2">
-            <label className="form-label sm-type-amp">Email</label>
+        <div className="col-lg-4 mb-2">
+            <label className="form-label">Last Name</label>
+            <input
+                type="name"
+                className="form-control"
+            />
+        </div>
+        <div className="col-lg-4 mb-2">
+            <label className="form-label">Email</label>
             <input
                 type="email"
                 className="form-control"
@@ -74,7 +81,7 @@ const TutorAddPage = () => {
                 <LoginHeader headerText="New Quest" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
                                 Add students
                             </h2>
@@ -91,7 +98,7 @@ const TutorAddPage = () => {
                             </h2> */}
 
                             <form
-                                className="mb-4"
+                                className="mb-4 container"
                                 // id="form-login"
                                 onSubmit={(e) => {
                                     e.preventDefault()
@@ -114,7 +121,7 @@ const TutorAddPage = () => {
                                 ))}
 
                                 <button
-                                    className="sm-type-guitar button-nostyle"
+                                    className="btn-outline-reg mb-4"
                                     type="button"
                                     onClick={() =>
                                         setStudents([
