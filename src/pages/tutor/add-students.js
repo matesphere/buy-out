@@ -19,9 +19,7 @@ const EMPTY_STUDENT = {
 const StudentInput = ({ num, name, email, setStudents }) => (
     <div className="side-grey row mb-4">
         <div className="col-lg-12">
-            <p className="sm-type-amp sm-type-amp--medium">
-                Student {num + 1}
-            </p>
+            <p className="sm-type-amp sm-type-amp--medium">Student {num + 1}</p>
         </div>
         <div className="col-lg-4 mb-2">
             <label className="form-label">First Name</label>
@@ -30,7 +28,7 @@ const StudentInput = ({ num, name, email, setStudents }) => (
                 className="form-control"
                 value={name}
                 onChange={({ target: { value } }) =>
-                    setStudents(updateField(num, 'name', value))
+                    setStudents(updateField(num, 'firstName', value))
                 }
             />
         </div>
@@ -39,6 +37,10 @@ const StudentInput = ({ num, name, email, setStudents }) => (
             <input
                 type="name"
                 className="form-control"
+                value={name}
+                onChange={({ target: { value } }) =>
+                    setStudents(updateField(num, 'lastName', value))
+                }
             />
         </div>
         <div className="col-lg-4 mb-2">
@@ -154,7 +156,6 @@ const TutorAddPage = () => {
                                 <br />
                             </>
                         )}
-
                     </div>
                 </section>
                 <AccountFooter />

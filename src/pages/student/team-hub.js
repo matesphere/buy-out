@@ -36,7 +36,7 @@ import HelpIcon from '../../assets/help-icon.svg'
 //             }
 //             students {
 //                 user {
-//                     name
+//                     full_name
 //                 }
 //             }
 //         }
@@ -45,8 +45,8 @@ import HelpIcon from '../../assets/help-icon.svg'
 
 const TEAM_HUB_QUERY = gql`
     query TeamHubQuery($name: String) {
-        user(where: { name: { _eq: $name } }) {
-            name
+        user(where: { first_name: { _eq: $name } }) {
+            full_name
             student {
                 team {
                     name
@@ -56,7 +56,7 @@ const TEAM_HUB_QUERY = gql`
                     }
                     students {
                         user {
-                            name
+                            full_name
                         }
                     }
                 }
@@ -71,8 +71,8 @@ const TEAM_HUB_QUERY = gql`
 
 const TEAM_HUB_SUB = gql`
     subscription TeamHubSub($name: String) {
-        user(where: { name: { _eq: $name } }) {
-            name
+        user(where: { first_name: { _eq: $name } }) {
+            full_name
             student {
                 team {
                     name
@@ -82,7 +82,7 @@ const TEAM_HUB_SUB = gql`
                     }
                     students {
                         user {
-                            name
+                            full_name
                         }
                     }
                 }
@@ -143,7 +143,7 @@ const QuestPage = () => {
         TEAM_HUB_QUERY,
         {
             variables: {
-                name: 'Steve Carter',
+                name: 'Steve',
             },
         }
     )
@@ -151,7 +151,7 @@ const QuestPage = () => {
     subscribeToMore({
         document: TEAM_HUB_SUB,
         variables: {
-            name: 'Steve Carter',
+            name: 'Steve',
         },
 
         updateQuery: (prev, { subscriptionData }) => {
@@ -180,7 +180,7 @@ const QuestPage = () => {
     const user = pageData.user[0]
 
     const {
-        name,
+        full_name: fullName,
         student: {
             team: {
                 name: teamName,
@@ -214,7 +214,7 @@ const QuestPage = () => {
                 <Header headerText="Team Hub" />
                 <section className="container" id="main">
                     <div className="side-grey">
-                        <p className="sm-type-amp">{`Logged in as ${name}`}</p>
+                        <p className="sm-type-amp">{`Logged in as ${fullName}`}</p>
                     </div>
                     <div className="row">
                         <div className="col-lg-8">
@@ -232,7 +232,7 @@ const QuestPage = () => {
                                             {students
                                                 .map(
                                                     (student) =>
-                                                        student.user.name
+                                                        student.user.full_name
                                                 )
                                                 .join(', ')}
                                         </p>

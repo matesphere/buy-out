@@ -14,7 +14,7 @@ import '../../../scss/index.scss'
 
 const STAGE_1_COMPLETE_QUERY = gql`
     query StageQuery($name: String, $stageId: Int) {
-        user(where: { name: { _eq: $name } }) {
+        user(where: { first_name: { _eq: $name } }) {
             student {
                 team {
                     stage_progresses(where: { stage_id: { _eq: $stageId } }) {
@@ -41,7 +41,7 @@ const QuestPage = () => {
 
     const { loading, error, data: pageData } = useQuery(
         STAGE_1_COMPLETE_QUERY,
-        { variables: { name: 'Steve Carter', stageId: 1 } }
+        { variables: { name: 'Steve', stageId: 1 } }
     )
 
     if (loading) return 'Loading...'
@@ -64,7 +64,7 @@ const QuestPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>STage 1 - Complete</title>
+                <title>Stage 1 - Complete</title>
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">

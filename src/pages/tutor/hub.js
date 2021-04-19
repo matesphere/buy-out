@@ -18,7 +18,7 @@ const TUTOR_HUB_QUERY = gql`
                 name
             }
             user {
-                name
+                full_name
                 username
                 email
             }
@@ -37,7 +37,7 @@ const IndexPage = () => {
     const {
         tutor_by_pk: {
             school: { name: schoolName },
-            user: { name },
+            user: { full_name: fullName },
         },
     } = data
 
@@ -58,7 +58,7 @@ const IndexPage = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                Welcome back {name}
+                                {fullName}'s Hub
                             </h2>
                             <p className="sm-type-amp">{schoolName}</p>
                             <p className="sm-type-guitar sm-type-guitar--medium mt-4">
