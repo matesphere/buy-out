@@ -39,7 +39,9 @@ const TeamInput = ({ setTeams }) => (
                 </span>
             </div>
             <div className="col-lg-6 mb-2">
-                <button type="submit" className="btn-outline-lg">Add team</button>
+                <button type="submit" className="btn-outline-lg">
+                    Add team
+                </button>
             </div>
         </div>
     </form>
@@ -61,13 +63,14 @@ const Team = ({ team: { name, students } }) => (
     </>
 )
 
-const addStudentToTeam = (teamNum, { user_id, school_id, user: { name } }) => (
-    teams
-) => {
+const addStudentToTeam = (
+    teamNum,
+    { user_id, school_id, user: { full_name } }
+) => (teams) => {
     const teamsToUpdate = [...teams]
     const updatedStudents = [
         ...teams[teamNum].students,
-        { name, userId: user_id, schoolId: school_id },
+        { name: full_name, userId: user_id, schoolId: school_id },
     ]
     const updatedTeam = { ...teams[teamNum], students: updatedStudents }
     teamsToUpdate[teamNum] = updatedTeam
@@ -79,7 +82,7 @@ const Student = ({ student, teams, setTeams }) => (
     <div className="side-grey row mb-4">
         <div className="col-lg-6">
             <p className="sm-type-guitar sm-type-guitar--medium">
-                {student.user.name}
+                {student.user.full_name}
             </p>
         </div>
         <div className="col-lg-6">
@@ -165,9 +168,9 @@ const TutorAddStudentPage = () => {
                             {teams.length > 0 && (
                                 <>
                                     <p className="sm-type-guitar mb-2">
-                                    <span className="side-icon side-icon-orange">
-                                        <HelpIcon />
-                                    </span>
+                                        <span className="side-icon side-icon-orange">
+                                            <HelpIcon />
+                                        </span>
                                         Teams
                                     </p>
                                     <div className="side-grey">
@@ -192,7 +195,6 @@ const TutorAddStudentPage = () => {
                                 Save teams
                             </button>
 
-
                             {createTeamsResponse.data && (
                                 <>
                                     <p className="sm-type-guitar sm-type-guitar--medium mt-4">
@@ -215,13 +217,19 @@ const TutorAddStudentPage = () => {
                                     {startQuestResponse.data && (
                                         <div className="modal-window">
                                             <div>
-                                                <a href="#" title="Close" className="modal-close">Close</a>
-                                            <p className="sm-type-guitar sm-type-guitar--medium mt-4">
-                                                {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
-                                                <a href="/tutor/current-quest">
-                                                    go to tutor hub
+                                                <a
+                                                    href="#"
+                                                    title="Close"
+                                                    className="modal-close"
+                                                >
+                                                    Close
                                                 </a>
-                                            </p>
+                                                <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                                    {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
+                                                    <a href="/tutor/current-quest">
+                                                        Go to current quest
+                                                    </a>
+                                                </p>
                                             </div>
                                         </div>
                                     )}
@@ -229,7 +237,6 @@ const TutorAddStudentPage = () => {
                             )}
                         </div>
                     </div>
-
                 </section>
                 <AccountFooter />
             </main>

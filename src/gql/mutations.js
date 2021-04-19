@@ -9,7 +9,7 @@ export const INSERT_STUDENTS = gql`
                 school_id
                 user {
                     id
-                    name
+                    full_name
                     email
                     username
                     password
@@ -21,13 +21,14 @@ export const INSERT_STUDENTS = gql`
 
 // TODO: this should really only take fields & map them to the right shape for Hasura, not generate anything
 export const insertStudentsMapper = (students, schoolId) => {
-    const mappedStudents = students.map(({ name, email }) => ({
+    const mappedStudents = students.map(({ firstName, lastName, email }) => ({
         school_id: schoolId,
         user: {
             data: {
-                name: name,
+                first_name: firstName,
+                last_name: lastName,
                 email: email,
-                username: genUsername(name),
+                username: genUsername(firstName, lastName),
                 password: genPassword(),
             },
         },
@@ -44,12 +45,12 @@ export const CREATE_TEAMS_WITH_STUDENTS = gql`
                 name
                 students {
                     user {
-                        name
+                        full_name
                     }
                 }
                 tutor {
                     user {
-                        name
+                        full_name
                     }
                 }
             }
@@ -57,6 +58,7 @@ export const CREATE_TEAMS_WITH_STUDENTS = gql`
     }
 `
 
+// we have to pass school ID here in order to fake a full insert, so the update to student works. this will hopefully be replaced when nested updates arrive
 export const createTeamWithStudentsMapper = (teams, tutorId) => {
     const mappedTeams = teams.map(({ name, students }) => ({
         name,

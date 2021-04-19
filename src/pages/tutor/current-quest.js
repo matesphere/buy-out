@@ -23,7 +23,7 @@ const TUTOR_CURRENT_QUEST_QUERY = gql`
                 name
             }
             user {
-                name
+                full_name
                 username
                 email
             }
@@ -33,7 +33,7 @@ const TUTOR_CURRENT_QUEST_QUERY = gql`
                 students {
                     id
                     user {
-                        name
+                        full_name
                     }
                 }
                 stage_progresses {
@@ -63,7 +63,7 @@ const TUTOR_CURRENT_QUEST_SUB = gql`
                 name
             }
             user {
-                name
+                full_name
                 username
                 email
             }
@@ -73,7 +73,7 @@ const TUTOR_CURRENT_QUEST_SUB = gql`
                 students {
                     id
                     user {
-                        name
+                        full_name
                     }
                 }
                 stage_progresses {
@@ -130,9 +130,9 @@ const TeamInfoPanel = ({ listNum, teamName, students }) => (
             </div>
         </div>
         <div className="mt-3">
-            {students.map(({ user: { name } }, i) => (
+            {students.map(({ user: { full_name } }, i) => (
                 <p key={i} className="sm-type-amp">
-                    {name}
+                    {full_name}
                 </p>
             ))}
         </div>

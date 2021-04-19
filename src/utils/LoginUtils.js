@@ -1,14 +1,5 @@
-export const genUsername = (name) =>
-    name
-        .toLowerCase()
-        .split(' ')
-        .map((name, i) => {
-            if (i === 0) {
-                return name[0]
-            } else {
-                return name
-            }
-        })
+export const genUsername = (firstName, lastName) =>
+    [firstName.toLowerCase()[0], lastName.toLowerCase()]
         .join('')
         .concat(Math.floor(Math.random() * 99))
 

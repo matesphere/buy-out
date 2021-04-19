@@ -7,7 +7,7 @@ export const GET_STUDENTS = gql`
             user_id
             school_id
             user {
-                name
+                full_name
             }
         }
     }

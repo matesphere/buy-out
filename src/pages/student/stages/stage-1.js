@@ -15,7 +15,7 @@ import '../../../scss/index.scss'
 // TODO this will also probably use user ID (or team ID actually)
 const STAGE_1_QUERY = gql`
     query StageQuery($name: String, $stageId: Int) {
-        user(where: { name: { _eq: $name } }) {
+        user(where: { first_name: { _eq: $name } }) {
             student {
                 team {
                     stage_progresses(where: { stage_id: { _eq: $stageId } }) {
@@ -31,7 +31,7 @@ const STAGE_1_QUERY = gql`
 
 const QuestPage = () => {
     const { loading, error, data: pageData } = useQuery(STAGE_1_QUERY, {
-        variables: { name: 'Steve Carter', stageId: 1 },
+        variables: { name: 'Steve', stageId: 1 },
     })
     const [submitWork, submitWorkResponse] = useMutation(SUBMIT_WORK)
 
