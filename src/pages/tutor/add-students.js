@@ -15,8 +15,10 @@ import '../../scss/index.scss'
 
 const SCHOOL_ID = 'e89e1d0c-4be6-4716-a597-a7c1f6d0ee6f' // TODO: retrieve & store school ID somewhere
 
+// TODO: validation to check for any missing fields on students - show error in modal?
 const EMPTY_STUDENT = {
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
 }
 
@@ -70,7 +72,7 @@ const updateField = (studentNum, field, value) => (students) => {
 }
 
 const TutorAddPage = () => {
-    const [students, setStudents] = useState([EMPTY_STUDENT])
+    const [students, setStudents] = useState([EMPTY_STUDENT, EMPTY_STUDENT])
     const [showModal, setShowModal] = useState(false)
     const [insertStudents, { data }] = useMutation(INSERT_STUDENTS)
 
@@ -90,12 +92,11 @@ const TutorAddPage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                STEP 1: Add students
+                                Add students
                             </h2>
 
                             <p className="sm-type-lead">
-                                Add all students who will be taking The Quest,
-                                before hitting 'submit names'.
+                                Add all students who will be taking The Quest.
                             </p>
                             {/* <div className="side-grey row mb-4">
                                 <div className="col-lg-12">
@@ -126,11 +127,6 @@ const TutorAddPage = () => {
                                     />
                                 ))}
 
-                                <p className="sm-type-lead mt-4 mb-4 text-align-center ">
-                                    Add ALL students details before submitting
-                                    names.
-                                </p>
-
                                 <button
                                     className="btn-outline-reg mb-4"
                                     type="button"
@@ -145,11 +141,11 @@ const TutorAddPage = () => {
                                 </button>
 
                                 <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                    STEP 2: Submit details
+                                    All done?
                                 </h2>
                                 <p className="sm-type-lead mb-4">
-                                    Once you have added all your students
-                                    details, you can "Submit names" below.
+                                    Once you have added all your students'
+                                    details, hit 'submit names' below.
                                 </p>
 
                                 <button type="submit" className="btn-solid-lg">

@@ -19,38 +19,59 @@ import '../../scss/index.scss'
 
 const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
 
-const TeamInput = ({ setTeams }) => (
-    <form
-        className="container"
-        onSubmit={(e) => {
-            e.preventDefault()
-            console.log(e.target.name.value)
-            setTeams((teams) => [
-                ...teams,
-                { name: e.target.name.value, students: [] },
-            ])
-        }}
-    >
-        <div className="side-grey row mb-4">
-            <div className="col-lg-6 mb-2">
-                <label className="form-label sm-type-amp">Name</label>
-                <span>
-                    <input id="name" type="name" className="form-control" />
-                </span>
-            </div>
-            <div className="col-lg-6 mb-2">
-                <button type="submit" className="btn-outline-lg">
-                    Add team
-                </button>
-            </div>
-        </div>
-    </form>
-)
+// TODO: sort out 'team/teams' pluralisation in modals
 
-const Team = ({ team: { name, students } }) => (
+const TeamInput = ({ setTeams }) => {
+    const [teamName, setTeamName] = useState('')
+    return (
+        <form
+            className="container"
+            onSubmit={(e) => {
+                e.preventDefault()
+                setTeams((teams) => [
+                    ...teams,
+                    { name: teamName, students: [] },
+                ])
+                setTeamName('')
+            }}
+        >
+            <div className="side-grey row mb-4">
+                <div className="col-lg-6 mb-2">
+                    <label className="form-label sm-type-amp">Name</label>
+                    <span>
+                        <input
+                            id="name"
+                            type="name"
+                            className="form-control"
+                            value={teamName}
+                            onChange={(e) => setTeamName(e.target.value)}
+                        />
+                    </span>
+                </div>
+                <div className="col-lg-6 mb-2">
+                    <button type="submit" className="btn-outline-lg">
+                        Add team
+                    </button>
+                </div>
+            </div>
+        </form>
+    )
+}
+
+const Team = ({ team: { name, students }, setTeams }) => (
     <>
         <p className="sm-type-leadguitar sm-type-lead--medium">
             <span className="blackdot"></span> {name}
+            <span
+                className="cross-icon"
+                onClick={() =>
+                    setTeams((teams) =>
+                        teams.filter((team) => team.name !== name)
+                    )
+                }
+            >
+                <Cross />
+            </span>
         </p>
         {students.map(({ name }, i) => (
             <p key={i} className="sm-type-amp">
@@ -111,6 +132,7 @@ const Student = ({ student, teams, setTeams }) => (
 
 const TutorAddStudentPage = () => {
     const [teams, setTeams] = useState([])
+    const [showModal, setShowModal] = useState(false)
     const { loading, error, data } = useQuery(GET_STUDENTS)
     const [createTeams, createTeamsResponse] = useMutation(
         CREATE_TEAMS_WITH_STUDENTS
@@ -140,13 +162,13 @@ const TutorAddStudentPage = () => {
                                 STEP 1: Create Teams
                             </h2>
                             <p className="sm-type-lead sm-type-lead--medium mb-4">
-                                Add teams here...
+                                Add all required teams here...
                             </p>
 
                             <TeamInput setTeams={setTeams} />
 
                             <h3 className="sm-type-drum sm-type-drum--medium mt-4">
-                                STEP 2: Student list
+                                STEP 2: Assign students
                             </h3>
                             <p className="sm-type-lead sm-type-lead--medium mb-4">
                                 ...then assign students to teams here
@@ -168,16 +190,9 @@ const TutorAddStudentPage = () => {
 
                             <button
                                 className="btn-solid-lg mt-4"
-                                onClick={() => {
-                                    createTeams({
-                                        variables: createTeamWithStudentsMapper(
-                                            teams,
-                                            TUTOR_ID
-                                        ),
-                                    })
-                                }}
+                                onClick={() => setShowModal(true)}
                             >
-                                Save teams
+                                Create teams
                             </button>
                         </div>
 
@@ -196,60 +211,93 @@ const TutorAddStudentPage = () => {
                                 {teams.length > 0 && (
                                     <>
                                         {teams.map((team, i) => (
-                                            <Team key={i} pos={i} team={team} />
+                                            <Team
+                                                key={i}
+                                                pos={i}
+                                                team={team}
+                                                setTeams={setTeams}
+                                            />
                                         ))}
                                     </>
                                 )}
                             </div>
+                        </div>
+                    </div>
+                </section>
 
+                {showModal && (
+                    <div className="modal-window">
+                        <div>
+                            <button
+                                onClick={() => setShowModal(false)}
+                                title="Close"
+                                className="modal-close"
+                            >
+                                Cancel
+                            </button>
+                            {!createTeamsResponse.data && (
+                                <>
+                                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                        {`You are about to create ${teams.length} teams! Is this correct?`}{' '}
+                                    </p>
+
+                                    <button
+                                        className="btn-solid-lg mt-4"
+                                        onClick={() => {
+                                            createTeams({
+                                                variables: createTeamWithStudentsMapper(
+                                                    teams,
+                                                    TUTOR_ID
+                                                ),
+                                            })
+                                        }}
+                                    >
+                                        Yes, create teams
+                                    </button>
+                                </>
+                            )}
                             {createTeamsResponse.data && (
-                                <div className="modal-window">
-                                    <div>
-                                        <p className="sm-type-guitar sm-type-guitar--medium">
-                                            {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
-                                        </p>
-                                        <button
-                                            className="btn-solid-lg mt-4 mb-4"
-                                            onClick={() => {
-                                                startQuest({
-                                                    variables: startQuestMapper(
-                                                        createTeamsResponse.data.insert_team.returning.map(
-                                                            (obj) => obj.id
-                                                        )
-                                                    ),
-                                                })
-                                            }}
-                                        >
-                                            START QUEST!
-                                        </button>
-
-                                        <a
-                                            href="/tutor/create-team"
-                                            className="sm-type-amp mt-4"
-                                        >
-                                            Assign more students to team
-                                        </a>
-                                        {startQuestResponse.data && (
-                                            <div className="modal-window">
-                                                <div>
-                                                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
-                                                        {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
-                                                    </p>
-                                                    <a
-                                                        href="/tutor/current-quest"
-                                                        className="btn-solid-lg mt-4 mb-4"
-                                                    >
-                                                        Go to current quest
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
+                                <div>
+                                    <p className="sm-type-guitar sm-type-guitar--medium">
+                                        {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
+                                    </p>
+                                    <button
+                                        className="btn-solid-lg mt-4 mb-4"
+                                        onClick={() => {
+                                            startQuest({
+                                                variables: startQuestMapper(
+                                                    createTeamsResponse.data.insert_team.returning.map(
+                                                        (obj) => obj.id
+                                                    )
+                                                ),
+                                            })
+                                            setShowModal(false)
+                                        }}
+                                    >
+                                        START QUEST!
+                                    </button>
                                 </div>
                             )}
                         </div>
                     </div>
-                </section>
+                )}
+
+                {startQuestResponse.data && (
+                    <div className="modal-window">
+                        <div>
+                            <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
+                            </p>
+                            <a
+                                href="/tutor/current-quest"
+                                className="btn-solid-lg mt-4 mb-4"
+                            >
+                                Go to current quest
+                            </a>
+                        </div>
+                    </div>
+                )}
+
                 <AccountFooter />
             </main>
         </>
