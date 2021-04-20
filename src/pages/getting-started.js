@@ -3,22 +3,14 @@ import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
 import { eng } from "./_index.data"
-import {graphql, Link, useStaticQuery} from "gatsby";
+import {graphql, useStaticQuery} from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image"
 import {Helmet} from "react-helmet";
 import HelpIcon from "../assets/help-icon.svg";
 import TickSheet from "../assets/tick-sheet.svg";
+import DogVideo from "../assets/the-quest.mp4"
 
 const IndexPage = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      file(relativePath: { eq: "cls-ppt3-no-text-crop-1024x322.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED)
-        }
-      }
-    }
-  `)
 
   return (
       <>
@@ -40,8 +32,10 @@ const IndexPage = () => {
               <div className="col-lg-8">
                 <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Quest Research.</h2>
                 <p className="sm-type-guitar mb-4">Before embarking on the Quest, it is important to gain some background knowledge about community land ownership in Scotland and also to think about some of the important concepts and issues.</p>
-                <div className="homepage-image">
-                  <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} />
+                <div className="homepage-image mb-4">
+                  <video controls>
+                    <source src={DogVideo} type="video/mp4" />
+                  </video>
                 </div>
                 <p className="sm-type-guitar mb-4">Here are a series of questions to help you to do some preliminary exploration. This is your first opportunity to work together as a team, so the answers that you provide should be the product of discussions between each of the team members.</p>
 
