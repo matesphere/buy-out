@@ -14,7 +14,7 @@ import ws from 'ws'
 const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext({
         headers: {
-            'x-hasura-access-key': 'thisisalongrandomstring',
+            'x-hasura-access-key': 'community-land',
         },
     })
 
@@ -26,10 +26,10 @@ const wsForNode = typeof window === 'undefined' ? ws : null
 const wsLink = new WebSocketLink({
     uri: `wss://clq.beanmate.coffee/v1/graphql`,
     options: {
-        reconnect: true,
+        reconnect: false,
         connectionParams: {
             headers: {
-                'x-hasura-access-key': 'thisisalongrandomstring',
+                'x-hasura-access-key': 'community-land',
             },
         },
     },

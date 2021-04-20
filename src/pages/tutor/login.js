@@ -1,13 +1,42 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import { withAuthenticator } from '@aws-amplify/ui-react'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
-import { withAuth } from '../../utils/auth/withAuth'
 
 import HelpIcon from '../../assets/help-icon.svg'
 
 import '../../scss/index.scss'
+
+// const signUp = async (username, password, email) => {
+//     try {
+//         const { user } = await Auth.signUp({
+//             username,
+//             password,
+//             attributes: {
+//                 email,
+//             },
+//         })
+//         console.log(user)
+//     } catch (error) {
+//         console.log('error signing up:', error)
+//     }
+// }
+
+const signIn = async (username, password) => {
+    try {
+        const user = await Auth.signIn(username, password)
+    } catch (error) {
+        console.log('error signing in', error)
+    }
+}
+
+const handleSubmit = async (e) => {
+    e.preventDefault()
+    const { username, password } = e.target.elements
+    await signIn(username.value, password.value)
+}
 
 const TutorLogin = ({ login }) => {
     return (
@@ -34,7 +63,7 @@ const TutorLogin = ({ login }) => {
                                 className="login-form mb-4"
                                 id="form-login"
                                 // action="/tutor/hub"
-                                onSubmit={login}
+                                onSubmit={handleSubmit}
                             >
                                 <div className="mb-2">
                                     <label className="form-label sm-type-amp">
@@ -86,4 +115,4 @@ const TutorLogin = ({ login }) => {
     )
 }
 
-export default withAuth(TutorLogin)
+export default withAuthenticator(TutorLogin)

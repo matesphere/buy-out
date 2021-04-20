@@ -12,7 +12,7 @@ const config = {
     UserPoolId: process.env.AWS_USER_POOL_ID,
     ClientId: process.env.AWS_APP_CLIENT_ID,
     AppWebDomain: process.env.AWS_APP_DOMAIN,
-    TokenScopesArray: [],
+    TokenScopesArray: ['openid', 'email'],
     RedirectUriSignIn: process.env.AWS_SIGN_IN_REDIRECT_URI,
     RedirectUriSignOut: process.env.AWS_SIGN_OUT_REDIRECT_URI,
 }
@@ -38,7 +38,7 @@ const handleSuccess = ({ auth, ...props }) => {
             console.log('hooray')
         },
         onFailure: (result) => {
-            props.history.push('/', { error: 'Unable to Auth' })
+            props.navigate('/', { error: 'Unable to Auth' })
         },
     }
 }
@@ -48,7 +48,7 @@ Each SDK function is wrapped in the handleError method above. */
 const cognitoAuthSDK = ({ onError, data, props }) => {
     const auth = new CognitoAuth(data)
 
-    const ex = (f) => onError(f, props.history.push)
+    const ex = (f) => onError(f, props.navigate)
 
     handleSuccess({ auth, ...props })
 
