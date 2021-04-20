@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useMutation } from '@apollo/client'
-import { INSERT_STUDENTS, insertStudentsMapper } from '../../gql/mutations'
+import {INSERT_STUDENTS, insertStudentsMapper, startQuestMapper} from '../../gql/mutations'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
@@ -143,18 +143,20 @@ const TutorAddPage = () => {
                     </div>
                     <div className="row">
                         {data && (
-                            <>
-                                <div className="col-lg-12">
-                                    <p className="sm-type-drum sm-type-guitar--medium">
+                            <div className="modal-window">
+                                <div>
+                                    <p className="sm-type-guitar">
                                         {`Added ${data.insert_student.returning.length} students!`}{' '}
-                                        <a href="/tutor/create-team">
-                                            Next step >
-                                        </a>
                                     </p>
+                                    <a href="/tutor/create-team" className="btn-solid-lg mt-4 mb-4">
+                                        Next step >
+                                    </a>
+
+                                    <a href="/tutor/create-team" className="sm-type-amp mt-4">
+                                        Add more names before continuing
+                                    </a>
                                 </div>
-                                <br />
-                                <br />
-                            </>
+                            </div>
                         )}
                     </div>
                 </section>

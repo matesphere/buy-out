@@ -137,17 +137,20 @@ const TutorAddStudentPage = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                Create Teams
+                                STEP 1: Create Teams
                             </h2>
-                            {/* <p className="sm-type-lead sm-type-lead--medium mb-4">
-                                03.05.2020 - Class 4B 2020
-                            </p> */}
+                            <p className="sm-type-lead sm-type-lead--medium mb-4">
+                                Add ALL of your Team names before assigning students.
+                            </p>
 
                             <TeamInput setTeams={setTeams} />
 
                             <h3 className="sm-type-drum sm-type-drum--medium mt-4">
-                                Student list
+                                STEP 2: Student list
                             </h3>
+                            <p className="sm-type-lead sm-type-lead--medium mb-4">
+                                Add ALL of your students to teams before you "Save teams".
+                            </p>
                             <form
                                 className="mb-4 container"
                                 id="form-login"
@@ -162,24 +165,6 @@ const TutorAddStudentPage = () => {
                                     />
                                 ))}
                             </form>
-                        </div>
-
-                        <div className="col-lg-4">
-                            {teams.length > 0 && (
-                                <>
-                                    <p className="sm-type-guitar mb-2">
-                                        <span className="side-icon side-icon-orange">
-                                            <HelpIcon />
-                                        </span>
-                                        Teams
-                                    </p>
-                                    <div className="side-grey">
-                                        {teams.map((team, i) => (
-                                            <Team key={i} pos={i} team={team} />
-                                        ))}
-                                    </div>
-                                </>
-                            )}
 
                             <button
                                 className="btn-solid-lg mt-4"
@@ -194,14 +179,37 @@ const TutorAddStudentPage = () => {
                             >
                                 Save teams
                             </button>
+                        </div>
+
+                        <div className="col-lg-4">
+                            {teams.length > 0 && (
+                                <>
+                                    <p className="sm-type-guitar mb-2">
+                                        <span className="side-icon side-icon-orange">
+                                            <HelpIcon />
+                                        </span>
+                                        Teams
+                                    </p>
+
+                                    <div className="side-grey">
+                                        <p className="sm-type-amp">
+                                            Your teams will appear below.
+                                        </p>
+                                        {teams.map((team, i) => (
+                                            <Team key={i} pos={i} team={team} />
+                                        ))}
+                                    </div>
+                                </>
+                            )}
 
                             {createTeamsResponse.data && (
-                                <>
-                                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                <div className="modal-window">
+                                    <div>
+                                    <p className="sm-type-guitar sm-type-guitar--medium">
                                         {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
                                     </p>
                                     <button
-                                        className="btn-solid-lg mt-4"
+                                        className="btn-solid-lg mt-4 mb-4"
                                         onClick={() => {
                                             startQuest({
                                                 variables: startQuestMapper(
@@ -214,26 +222,24 @@ const TutorAddStudentPage = () => {
                                     >
                                         START QUEST!
                                     </button>
+
+                                        <a href="/tutor/create-team" className="sm-type-amp mt-4">
+                                            Assign more students to team
+                                        </a>
                                     {startQuestResponse.data && (
                                         <div className="modal-window">
                                             <div>
-                                                <a
-                                                    href="#"
-                                                    title="Close"
-                                                    className="modal-close"
-                                                >
-                                                    Close
-                                                </a>
                                                 <p className="sm-type-guitar sm-type-guitar--medium mt-4">
                                                     {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
-                                                    <a href="/tutor/current-quest">
-                                                        Go to current quest
-                                                    </a>
                                                 </p>
+                                                <a href="/tutor/current-quest" className="btn-solid-lg mt-4 mb-4">
+                                                    Go to current quest
+                                                </a>
                                             </div>
                                         </div>
                                     )}
-                                </>
+                                    </div>
+                                </div>
                             )}
                         </div>
                     </div>

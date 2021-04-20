@@ -2,11 +2,6 @@ import React from "react"
 import Header from '../components/_header'
 import Footer from '../components/_footer'
 import '../scss/index.scss'
-
-import HomeOne from "../assets/home-icon-1.svg";
-import HomeTwo from "../assets/home-icon-2.svg";
-import HomeThree from "../assets/home-icon-3.svg";
-import Slash from "../assets/slash.svg";
 import { eng } from "./_index.data"
 import {graphql, Link, useStaticQuery} from "gatsby";
 import { GatsbyImage } from "gatsby-plugin-image"
@@ -38,29 +33,32 @@ const IndexPage = () => {
           {/*<meta property="og:image" content={image} />*/}
         </Helmet>
 
-        <main className="homepage">
+        <main className="the-quest">
           <Header headerText="Getting started" />
           <section className="container" id="main">
             <div className="row">
               <div className="col-lg-8">
-                <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">You are about to embark on the community buy out quest.</h2>
-                <p className="sm-type-guitar mb-4">Can you make it through the 8 steps and emerge victorious?</p>
+                <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">Quest Research.</h2>
+                <p className="sm-type-guitar mb-4">Before embarking on the Quest, it is important to gain some background knowledge about community land ownership in Scotland and also to think about some of the important concepts and issues.</p>
                 <div className="homepage-image">
                   <GatsbyImage image={data.file.childImageSharp.gatsbyImageData} />
                 </div>
-                <h3 className="sm-type-drum sm-type-drum--medium">Overview</h3>
+                <p className="sm-type-guitar mb-4">Here are a series of questions to help you to do some preliminary exploration. This is your first opportunity to work together as a team, so the answers that you provide should be the product of discussions between each of the team members.</p>
+
+                <h3 className="sm-type-drum sm-type-drum--medium">Questions</h3>
+                <ol>
                 {eng.map(eng => (
-                    <div key={eng.text}>
+                    <li key={eng.text}>
                       <p className="sm-type-guitar">
                         {eng.text}
                       </p>
-                      <p className="sm-type-amp">
+                      <p className="sm-type-amp mb-4">
                         {eng.description}
                       </p>
-                    </div>
-
+                    </li>
                     )
                 )}
+                </ol>
               </div>
               <div className="col-lg-4">
                 <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
@@ -73,30 +71,18 @@ const IndexPage = () => {
                   <p className="sm-type-amp">Check all task here:</p>
                   <div className="multiple-choice">
                     <input className="form-control" id="id1" type="checkbox"/>
-                    <label className="form-label" htmlFor="id1">Did you read the overview section?</label>
+                    <label className="form-label" htmlFor="id1">Did you answer all the 12 questions?</label>
                   </div>
-
-                  <p className="sm-type-amp"><Link to="/the-quest-1">You can now move onto the next stage.</Link></p>
-
                 </div>
+
+                <button
+                    className="btn-solid-lg mt-4" disabled="disabled"
+                >
+                  Submit Work
+                </button>
               </div>
             </div>
           </section>
-          {/*<div className="fullbg-black">*/}
-          {/*  <section className="container">*/}
-          {/*    <div className="row">*/}
-          {/*      <div className="col-lg-8">*/}
-          {/*        <div className="getting-started">*/}
-          {/*          <h4 className="sm-type-drum sm-type-drum--medium">Now it’s your turn</h4>*/}
-          {/*          <p className="sm-type-amp">Work through the community land buyout process to find out if you have what it takes to help your community - for a better, brighter tomorrow!</p>*/}
-          {/*        </div>*/}
-          {/*      </div>*/}
-          {/*      <div className="col-lg-4 button-center">*/}
-          {/*        <Link className="btn-solid-lg" to="/the-quest-1">Get started</Link>*/}
-          {/*      </div>*/}
-          {/*    </div>*/}
-          {/*  </section>*/}
-          {/*</div>*/}
           <Footer />
         </main>
       </>
