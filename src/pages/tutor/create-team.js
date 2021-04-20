@@ -140,7 +140,7 @@ const TutorAddStudentPage = () => {
                                 STEP 1: Create Teams
                             </h2>
                             <p className="sm-type-lead sm-type-lead--medium mb-4">
-                                Add ALL of your Team names before assigning students.
+                                Add teams here...
                             </p>
 
                             <TeamInput setTeams={setTeams} />
@@ -149,7 +149,7 @@ const TutorAddStudentPage = () => {
                                 STEP 2: Student list
                             </h3>
                             <p className="sm-type-lead sm-type-lead--medium mb-4">
-                                Add ALL of your students to teams before you "Save teams".
+                                ...then assign students to teams here
                             </p>
                             <form
                                 className="mb-4 container"
@@ -183,9 +183,9 @@ const TutorAddStudentPage = () => {
 
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2">
-                                        <span className="side-icon side-icon-orange">
-                                            <HelpIcon />
-                                        </span>
+                                <span className="side-icon side-icon-orange">
+                                    <HelpIcon />
+                                </span>
                                 Teams
                             </p>
                             <div className="side-grey">
@@ -205,39 +205,45 @@ const TutorAddStudentPage = () => {
                             {createTeamsResponse.data && (
                                 <div className="modal-window">
                                     <div>
-                                    <p className="sm-type-guitar sm-type-guitar--medium">
-                                        {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
-                                    </p>
-                                    <button
-                                        className="btn-solid-lg mt-4 mb-4"
-                                        onClick={() => {
-                                            startQuest({
-                                                variables: startQuestMapper(
-                                                    createTeamsResponse.data.insert_team.returning.map(
-                                                        (obj) => obj.id
-                                                    )
-                                                ),
-                                            })
-                                        }}
-                                    >
-                                        START QUEST!
-                                    </button>
+                                        <p className="sm-type-guitar sm-type-guitar--medium">
+                                            {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
+                                        </p>
+                                        <button
+                                            className="btn-solid-lg mt-4 mb-4"
+                                            onClick={() => {
+                                                startQuest({
+                                                    variables: startQuestMapper(
+                                                        createTeamsResponse.data.insert_team.returning.map(
+                                                            (obj) => obj.id
+                                                        )
+                                                    ),
+                                                })
+                                            }}
+                                        >
+                                            START QUEST!
+                                        </button>
 
-                                        <a href="/tutor/create-team" className="sm-type-amp mt-4">
+                                        <a
+                                            href="/tutor/create-team"
+                                            className="sm-type-amp mt-4"
+                                        >
                                             Assign more students to team
                                         </a>
-                                    {startQuestResponse.data && (
-                                        <div className="modal-window">
-                                            <div>
-                                                <p className="sm-type-guitar sm-type-guitar--medium mt-4">
-                                                    {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
-                                                </p>
-                                                <a href="/tutor/current-quest" className="btn-solid-lg mt-4 mb-4">
-                                                    Go to current quest
-                                                </a>
+                                        {startQuestResponse.data && (
+                                            <div className="modal-window">
+                                                <div>
+                                                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                                        {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
+                                                    </p>
+                                                    <a
+                                                        href="/tutor/current-quest"
+                                                        className="btn-solid-lg mt-4 mb-4"
+                                                    >
+                                                        Go to current quest
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
+                                        )}
                                     </div>
                                 </div>
                             )}

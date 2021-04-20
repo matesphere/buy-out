@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { useMutation } from '@apollo/client'
-import {INSERT_STUDENTS, insertStudentsMapper, startQuestMapper} from '../../gql/mutations'
+import {
+    INSERT_STUDENTS,
+    insertStudentsMapper,
+    startQuestMapper,
+} from '../../gql/mutations'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
@@ -67,6 +71,7 @@ const updateField = (studentNum, field, value) => (students) => {
 
 const TutorAddPage = () => {
     const [students, setStudents] = useState([EMPTY_STUDENT])
+    const [showModal, setShowModal] = useState(false)
     const [insertStudents, { data }] = useMutation(INSERT_STUDENTS)
 
     return (
@@ -89,7 +94,8 @@ const TutorAddPage = () => {
                             </h2>
 
                             <p className="sm-type-lead">
-                                Add ALL students details before submitting names.
+                                Add all students who will be taking The Quest,
+                                before hitting 'submit names'.
                             </p>
                             {/* <div className="side-grey row mb-4">
                                 <div className="col-lg-12">
@@ -108,13 +114,7 @@ const TutorAddPage = () => {
                                 // id="form-login"
                                 onSubmit={(e) => {
                                     e.preventDefault()
-                                    console.log('submit')
-                                    insertStudents({
-                                        variables: insertStudentsMapper(
-                                            students,
-                                            SCHOOL_ID
-                                        ),
-                                    })
+                                    setShowModal(true)
                                 }}
                             >
                                 {students.map((student, i) => (
@@ -127,7 +127,8 @@ const TutorAddPage = () => {
                                 ))}
 
                                 <p className="sm-type-lead mt-4 mb-4 text-align-center ">
-                                    Add ALL students details before submitting names.
+                                    Add ALL students details before submitting
+                                    names.
                                 </p>
 
                                 <button
@@ -147,7 +148,8 @@ const TutorAddPage = () => {
                                     STEP 2: Submit details
                                 </h2>
                                 <p className="sm-type-lead mb-4">
-                                    Once you have added all your students details, you can "Submit names" below.
+                                    Once you have added all your students
+                                    details, you can "Submit names" below.
                                 </p>
 
                                 <button type="submit" className="btn-solid-lg">
@@ -156,25 +158,39 @@ const TutorAddPage = () => {
                             </form>
                         </div>
                     </div>
-                    <div className="row">
-                        {data && (
-                            <div className="modal-window">
-                                <div>
-                                    <p className="sm-type-guitar">
-                                        {`Added ${data.insert_student.returning.length} students!`}{' '}
-                                    </p>
-                                    <a href="/tutor/create-team" className="btn-solid-lg mt-4 mb-4">
-                                        Next step >
-                                    </a>
-
-                                    <a href="/tutor/create-team" className="sm-type-amp mt-4">
-                                        Add more names before continuing
-                                    </a>
-                                </div>
-                            </div>
-                        )}
-                    </div>
                 </section>
+
+                {showModal && (
+                    <div className="modal-window">
+                        <div>
+                            <button
+                                onClick={() => setShowModal(false)}
+                                title="Close"
+                                className="modal-close"
+                            >
+                                Cancel
+                            </button>
+                            <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                {`You are about to add ${students.length} students! Is this correct?`}{' '}
+                            </p>
+                            <p>
+                                <a
+                                    href="/tutor/create-team"
+                                    onClick={() => {
+                                        insertStudents({
+                                            variables: insertStudentsMapper(
+                                                students,
+                                                SCHOOL_ID
+                                            ),
+                                        })
+                                    }}
+                                >
+                                    Yes, go to create teams >
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                )}
                 <AccountFooter />
             </main>
         </>
