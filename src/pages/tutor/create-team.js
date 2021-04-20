@@ -182,25 +182,25 @@ const TutorAddStudentPage = () => {
                         </div>
 
                         <div className="col-lg-4">
-                            {teams.length > 0 && (
-                                <>
-                                    <p className="sm-type-guitar mb-2">
+                            <p className="sm-type-guitar mb-2">
                                         <span className="side-icon side-icon-orange">
                                             <HelpIcon />
                                         </span>
-                                        Teams
-                                    </p>
+                                Teams
+                            </p>
+                            <div className="side-grey">
+                                <p className="sm-type-amp">
+                                    Your teams will appear below.
+                                </p>
 
-                                    <div className="side-grey">
-                                        <p className="sm-type-amp">
-                                            Your teams will appear below.
-                                        </p>
+                                {teams.length > 0 && (
+                                    <>
                                         {teams.map((team, i) => (
                                             <Team key={i} pos={i} team={team} />
                                         ))}
-                                    </div>
-                                </>
-                            )}
+                                    </>
+                                )}
+                            </div>
 
                             {createTeamsResponse.data && (
                                 <div className="modal-window">
