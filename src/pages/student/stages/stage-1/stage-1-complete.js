@@ -4,13 +4,13 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
 import { gql, useQuery } from '@apollo/client'
 
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
+import Header from '../../../../components/_header'
+import Footer from '../../../../components/_footer'
 
-import Tick from '../../../assets/tick.svg'
-import HelpIcon from '../../../assets/help-icon.svg'
+import Tick from '../../../../assets/tick.svg'
+import HelpIcon from '../../../../assets/help-icon.svg'
 
-import '../../../scss/index.scss'
+import '../../../../scss/index.scss'
 
 const STAGE_1_COMPLETE_QUERY = gql`
     query StageQuery($name: String, $stageId: Int) {

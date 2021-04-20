@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { gql, useQuery, useMutation } from '@apollo/client'
-import { SUBMIT_WORK } from '../../../gql/mutations'
+import { SUBMIT_WORK } from '../../../../gql/mutations'
 
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
+import Header from '../../../../components/_header'
+import Footer from '../../../../components/_footer'
 
-import HelpIcon from '../../../assets/help-icon.svg'
-import TickSheet from '../../../assets/tick-sheet.svg'
+import HelpIcon from '../../../../assets/help-icon.svg'
+import TickSheet from '../../../../assets/tick-sheet.svg'
 
-import '../../../scss/index.scss'
+import '../../../../scss/index.scss'
 
 // TODO this will also probably use user ID (or team ID actually)
 const STAGE_1_QUERY = gql`
@@ -29,10 +29,75 @@ const STAGE_1_QUERY = gql`
     }
 `
 
+const useCheckboxListState = (listOfLabels) => {
+    const [checkboxState, setCheckboxState] = useState(
+        listOfLabels.map((label, i) => ({ id: i, label, value: false }))
+    )
+
+    const toggleCheckbox = (id) => {
+        setCheckboxState((state) =>
+            state.map((checkbox) =>
+                checkbox.id === id
+                    ? { id, label: checkbox.label, value: !checkbox.value }
+                    : checkbox
+            )
+        )
+    }
+
+    const allCheckboxesChecked = checkboxState
+        .map((checkbox) => checkbox.value)
+        .every(Boolean)
+
+    return [checkboxState, toggleCheckbox, allCheckboxesChecked]
+}
+
+const CHECKBOX_LIST = [
+    'Contact Community Land Scotland (CLS)',
+    'Find out about what funding is available',
+    'Get in touch with the agencies that can support you through the journey',
+    'Look into options: Protocol or CRTB',
+    'Identify who the landowner is',
+]
+
+// TODO: freeze this in place once work submitted (i.e. based on active doc submission in DB)
+const CheckboxList = ({
+    checkboxState,
+    toggleCheckbox,
+    allCheckboxesChecked,
+}) => (
+    <div className="side-grey">
+        <p className="sm-type-amp">Check all task here:</p>
+        {checkboxState.map(({ id, label, value }) => (
+            <div className="multiple-choice">
+                <input
+                    className="form-control"
+                    id={id}
+                    type="checkbox"
+                    value={value ? 'checked' : 'unchecked'}
+                    onChange={() => toggleCheckbox(id)}
+                />
+                <label className="form-label" htmlFor={id}>
+                    {label}
+                </label>
+            </div>
+        ))}
+        {allCheckboxesChecked && (
+            <p className="sm-type-amp">You can now submit your findings.</p>
+        )}
+    </div>
+)
+
 const QuestPage = () => {
+    const [
+        checkboxState,
+        toggleCheckbox,
+        allCheckboxesChecked,
+    ] = useCheckboxListState(CHECKBOX_LIST)
+
     const { loading, error, data: pageData } = useQuery(STAGE_1_QUERY, {
         variables: { name: 'Steve', stageId: 1 },
     })
+
     const [submitWork, submitWorkResponse] = useMutation(SUBMIT_WORK)
 
     if (loading) return 'Loading...'
@@ -215,70 +280,17 @@ const QuestPage = () => {
                                 </span>
                                 Your checklist
                             </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Check all task here:
-                                </p>
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        Contact Community Land Scotland (CLS)
-                                    </label>
-                                </div>
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id2"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id2">
-                                        Find out about what funding is available
-                                    </label>
-                                </div>
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id3"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id3">
-                                        Get in touch with the agencies that can
-                                        support you through the journey
-                                    </label>
-                                </div>
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id4"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id4">
-                                        Look into options: Protocol or CRTB
-                                    </label>
-                                </div>
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id5"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id5">
-                                        Identify who the landowner is
-                                    </label>
-                                </div>
-                                <p className="sm-type-amp">
-                                    <Link to="/student/your-notes-submit">
-                                        You can now submit your findings.
-                                    </Link>
-                                </p>
-                            </div>
+                            <CheckboxList
+                                {...{
+                                    checkboxState,
+                                    toggleCheckbox,
+                                    allCheckboxesChecked,
+                                }}
+                            />
 
                             <button
                                 className="btn-solid-lg mt-4"
+                                disabled={!allCheckboxesChecked}
                                 onClick={() => {
                                     submitWork({
                                         variables: {
