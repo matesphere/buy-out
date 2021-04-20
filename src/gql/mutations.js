@@ -167,3 +167,21 @@ export const MARK_PASSED = gql`
         }
     }
 `
+
+// TODO remove this from prod!!!!!
+export const RESET_DB = gql`
+    mutation ResetDB {
+        delete_team(where: {}) {
+            returning {
+                id
+            }
+        }
+        delete_user(
+            where: { id: { _neq: "8163dda8-eac2-4997-86e7-bb8addc37c3b" } }
+        ) {
+            returning {
+                id
+            }
+        }
+    }
+`
