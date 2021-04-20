@@ -85,8 +85,12 @@ const TutorAddPage = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                Add students
+                                STEP 1: Add students
                             </h2>
+
+                            <p className="sm-type-lead">
+                                Add ALL students details before submitting names.
+                            </p>
                             {/* <div className="side-grey row mb-4">
                                 <div className="col-lg-12">
                                     <p className="sm-type-lead sm-type-lead--medium">
@@ -122,6 +126,10 @@ const TutorAddPage = () => {
                                     />
                                 ))}
 
+                                <p className="sm-type-lead mt-4 mb-4 text-align-center ">
+                                    Add ALL students details before submitting names.
+                                </p>
+
                                 <button
                                     className="btn-outline-reg mb-4"
                                     type="button"
@@ -134,6 +142,13 @@ const TutorAddPage = () => {
                                 >
                                     + Add more names
                                 </button>
+
+                                <h2 className="sm-type-drum sm-type-drum--medium mt-4">
+                                    STEP 2: Submit details
+                                </h2>
+                                <p className="sm-type-lead mb-4">
+                                    Once you have added all your students details, you can "Submit names" below.
+                                </p>
 
                                 <button type="submit" className="btn-solid-lg">
                                     Submit names
