@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useMutation } from '@apollo/client'
 import {
@@ -71,10 +71,78 @@ const updateField = (studentNum, field, value) => (students) => {
     return studentsToUpdate
 }
 
+const useDelayedRender = (delay) => {
+    const [delayed, setDelayed] = useState(true)
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setDelayed(false), delay)
+        return () => clearTimeout(timeout)
+    }, [])
+
+    console.log(delayed)
+    return (fn) => !delayed && fn()
+}
+
+const LoadingSpinner = ({ delay }) => {
+    const delayedRender = useDelayedRender(delay)
+
+    return delayedRender(() => <div className="loader"></div>)
+}
+
+const ConfirmModal = ({ students, setShowModal }) => {
+    const [insertStudents, { loading, error, data }] = useMutation(
+        INSERT_STUDENTS
+    )
+
+    return (
+        <div className="modal-window">
+            <div>
+                <button
+                    onClick={() => setShowModal(false)}
+                    title="Close"
+                    className="modal-close"
+                >
+                    Cancel
+                </button>
+
+                {!data && (
+                    <>
+                        <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                            {`You are about to add ${students.length} students! Is this correct?`}{' '}
+                        </p>
+
+                        <button
+                            className="btn-solid-lg mt-4"
+                            onClick={() => {
+                                insertStudents({
+                                    variables: insertStudentsMapper(
+                                        students,
+                                        SCHOOL_ID
+                                    ),
+                                })
+                            }}
+                        >
+                            Yes, add students
+                        </button>
+                    </>
+                )}
+
+                {loading && <LoadingSpinner delay={200} />}
+
+                {data && (
+                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                        Done!{' '}
+                        <a href="/tutor/create-team">Go to create teams ></a>
+                    </p>
+                )}
+            </div>
+        </div>
+    )
+}
+
 const TutorAddPage = () => {
     const [students, setStudents] = useState([EMPTY_STUDENT, EMPTY_STUDENT])
     const [showModal, setShowModal] = useState(false)
-    const [insertStudents, { data }] = useMutation(INSERT_STUDENTS)
 
     return (
         <>
@@ -156,37 +224,8 @@ const TutorAddPage = () => {
                     </div>
                 </section>
 
-                {showModal && (
-                    <div className="modal-window">
-                        <div>
-                            <button
-                                onClick={() => setShowModal(false)}
-                                title="Close"
-                                className="modal-close"
-                            >
-                                Cancel
-                            </button>
-                            <p className="sm-type-guitar sm-type-guitar--medium mt-4">
-                                {`You are about to add ${students.length} students! Is this correct?`}{' '}
-                            </p>
-                            <p>
-                                <a
-                                    href="/tutor/create-team"
-                                    onClick={() => {
-                                        insertStudents({
-                                            variables: insertStudentsMapper(
-                                                students,
-                                                SCHOOL_ID
-                                            ),
-                                        })
-                                    }}
-                                >
-                                    Yes, go to create teams >
-                                </a>
-                            </p>
-                        </div>
-                    </div>
-                )}
+                {showModal && <ConfirmModal {...{ students, setShowModal }} />}
+
                 <AccountFooter />
             </main>
         </>

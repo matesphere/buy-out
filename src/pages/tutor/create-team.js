@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { useQuery, useMutation } from '@apollo/client'
 
@@ -130,14 +130,118 @@ const Student = ({ student, teams, setTeams }) => (
     </div>
 )
 
-const TutorAddStudentPage = () => {
-    const [teams, setTeams] = useState([])
-    const [showModal, setShowModal] = useState(false)
-    const { loading, error, data } = useQuery(GET_STUDENTS)
+const useDelayedRender = (delay) => {
+    const [delayed, setDelayed] = useState(true)
+
+    useEffect(() => {
+        const timeout = setTimeout(() => setDelayed(false), delay)
+        return () => clearTimeout(timeout)
+    }, [])
+
+    console.log(delayed)
+    return (fn) => !delayed && fn()
+}
+
+const LoadingSpinner = ({ delay }) => {
+    const delayedRender = useDelayedRender(delay)
+
+    return delayedRender(() => <div className="loader"></div>)
+}
+
+const ConfirmModal = ({ teams, showModal, setShowModal }) => {
     const [createTeams, createTeamsResponse] = useMutation(
         CREATE_TEAMS_WITH_STUDENTS
     )
     const [startQuest, startQuestResponse] = useMutation(START_QUEST)
+
+    return (
+        <>
+            {showModal && (
+                <div className="modal-window">
+                    <div>
+                        <button
+                            onClick={() => setShowModal(false)}
+                            title="Close"
+                            className="modal-close"
+                        >
+                            Cancel
+                        </button>
+
+                        {!createTeamsResponse.data && (
+                            <>
+                                <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                    {`You are about to create ${teams.length} teams! Is this correct?`}{' '}
+                                </p>
+
+                                <button
+                                    className="btn-solid-lg mt-4"
+                                    onClick={() => {
+                                        createTeams({
+                                            variables: createTeamWithStudentsMapper(
+                                                teams,
+                                                TUTOR_ID
+                                            ),
+                                        })
+                                    }}
+                                >
+                                    Yes, create teams
+                                </button>
+                            </>
+                        )}
+
+                        {createTeamsResponse.loading && (
+                            <LoadingSpinner delay={200} />
+                        )}
+
+                        {createTeamsResponse.data && (
+                            <div>
+                                <p className="sm-type-guitar sm-type-guitar--medium">
+                                    {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
+                                </p>
+                                <button
+                                    className="btn-solid-lg mt-4 mb-4"
+                                    onClick={() => {
+                                        startQuest({
+                                            variables: startQuestMapper(
+                                                createTeamsResponse.data.insert_team.returning.map(
+                                                    (obj) => obj.id
+                                                )
+                                            ),
+                                        })
+                                        setShowModal(false)
+                                    }}
+                                >
+                                    START QUEST!
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                </div>
+            )}
+
+            {startQuestResponse.data && (
+                <div className="modal-window">
+                    <div>
+                        <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                            {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
+                        </p>
+                        <a
+                            href="/tutor/current-quest"
+                            className="btn-solid-lg mt-4 mb-4"
+                        >
+                            Go to current quest
+                        </a>
+                    </div>
+                </div>
+            )}
+        </>
+    )
+}
+
+const TutorAddStudentPage = () => {
+    const [teams, setTeams] = useState([])
+    const [showModal, setShowModal] = useState(false)
+    const { loading, error, data } = useQuery(GET_STUDENTS)
 
     if (loading) return 'Loading...'
     if (error) return `Error! ${error.message}`
@@ -225,78 +329,7 @@ const TutorAddStudentPage = () => {
                     </div>
                 </section>
 
-                {showModal && (
-                    <div className="modal-window">
-                        <div>
-                            <button
-                                onClick={() => setShowModal(false)}
-                                title="Close"
-                                className="modal-close"
-                            >
-                                Cancel
-                            </button>
-                            {!createTeamsResponse.data && (
-                                <>
-                                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
-                                        {`You are about to create ${teams.length} teams! Is this correct?`}{' '}
-                                    </p>
-
-                                    <button
-                                        className="btn-solid-lg mt-4"
-                                        onClick={() => {
-                                            createTeams({
-                                                variables: createTeamWithStudentsMapper(
-                                                    teams,
-                                                    TUTOR_ID
-                                                ),
-                                            })
-                                        }}
-                                    >
-                                        Yes, create teams
-                                    </button>
-                                </>
-                            )}
-                            {createTeamsResponse.data && (
-                                <div>
-                                    <p className="sm-type-guitar sm-type-guitar--medium">
-                                        {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
-                                    </p>
-                                    <button
-                                        className="btn-solid-lg mt-4 mb-4"
-                                        onClick={() => {
-                                            startQuest({
-                                                variables: startQuestMapper(
-                                                    createTeamsResponse.data.insert_team.returning.map(
-                                                        (obj) => obj.id
-                                                    )
-                                                ),
-                                            })
-                                            setShowModal(false)
-                                        }}
-                                    >
-                                        START QUEST!
-                                    </button>
-                                </div>
-                            )}
-                        </div>
-                    </div>
-                )}
-
-                {startQuestResponse.data && (
-                    <div className="modal-window">
-                        <div>
-                            <p className="sm-type-guitar sm-type-guitar--medium mt-4">
-                                {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
-                            </p>
-                            <a
-                                href="/tutor/current-quest"
-                                className="btn-solid-lg mt-4 mb-4"
-                            >
-                                Go to current quest
-                            </a>
-                        </div>
-                    </div>
-                )}
+                <ConfirmModal {...{ teams, showModal, setShowModal }} />
 
                 <AccountFooter />
             </main>
