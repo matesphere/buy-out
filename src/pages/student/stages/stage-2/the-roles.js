@@ -31,7 +31,7 @@ const RolesPage = () => {
                 {/*<meta property="og:image" content={image} />*/}
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 1" />
+                <Header headerText="Stage 2 - Consult" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
