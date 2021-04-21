@@ -183,6 +183,15 @@ const QuestPage = () => {
 
 
                             <div className="side-grey">
+
+                                <h3 className="sm-type-lead sm-type-lead--medium">The Quest</h3>
+
+                                <p className="sm-type-bigamp mb-3">The local Estate Landowner has put up the piece of land for sale and the Community has come together and decided that this is too good an opportunity to miss. At a Community meeting in the Village Hall, it was decided that a Community Group should be formally constituted and a Board of Directors appointed to take the project through. The community also carried out a ‘brain-storming’ exercise and came up with 9 possible uses (Development Options) for the land. (One of these is the purchase of the shop and Post Office in the village before it becomes leased as a residential property).</p>
+                                <p className="sm-type-bigamp mb-3">Your Team is the Board of Directors and your task is to follow the 8-Stage process laid out by Community Land Scotland (<a href="http://www.communitylandscotland.org.uk/" rel="external" tregt="_blank">www.communitylandscotland.org.uk</a>). You will carry out SWOT Analysis on each of the Options which will help you to narrow down the Development Options to the 3 which your team consider to be best use for the land. You will conduct a Feasibility Study to clarify the benefits to the Community, to highlight the reasons for likely success and to identify risks that could cause the Development Schemes to fail. You will then produce a Business plan, which will summarize the Capital and Running Costs, show where the funding will be found and act as a balance sheet to display the financial situation over the first 4 years of the venture.</p>
+                                <p className="sm-type-bigamp mb-3">During this process you must work together to agree which 3 projects would provide the greatest benefit to your community and you will have the opportunity to present your ideas to your Community (the rest of your class).</p>
+
+                            </div>
+                            <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet">
                                         <TickSheet />
@@ -191,12 +200,8 @@ const QuestPage = () => {
                                         Task to complete:
                                     </span>
                                 </h3>
-
-                                <p className="sm-type-bigamp mb-3">The local Estate Landowner has put up the piece of land for sale and the Community has come together and decided that this is too good an opportunity to miss. At a Community meeting in the Village Hall, it was decided that a Community Group should be formally constituted and a Board of Directors appointed to take the project through. The community also carried out a ‘brain-storming’ exercise and came up with 9 possible uses (Development Options) for the land. (One of these is the purchase of the shop and Post Office in the village before it becomes leased as a residential property).</p>
-                                <p className="sm-type-bigamp mb-3">Your Team is the Board of Directors and your task is to follow the 8-Stage process laid out by Community Land Scotland (<a href="http://www.communitylandscotland.org.uk/" rel="external" tregt="_blank">www.communitylandscotland.org.uk</a>). You will carry out SWOT Analysis on each of the Options which will help you to narrow down the Development Options to the 3 which your team consider to be best use for the land. You will conduct a Feasibility Study to clarify the benefits to the Community, to highlight the reasons for likely success and to identify risks that could cause the Development Schemes to fail. You will then produce a Business plan, which will summarize the Capital and Running Costs, show where the funding will be found and act as a balance sheet to display the financial situation over the first 4 years of the venture.</p>
-                                <p className="sm-type-bigamp mb-3">During this process you must work together to agree which 3 projects would provide the greatest benefit to your community and you will have the opportunity to present your ideas to your Community (the rest of your class).</p>
                                 <p className="sm-type-bigamp mb-3">It is now time to allocate the members of your team to the roles within the Board. Each role will have specific tasks to perform, but every decision that you make must be taken by the complete Board of Directors. If your team has more than 4 members then you can double up on the Secretary and/or Treasurer roles.</p>
-                                <p className="sm-type-bigamp mb-3">Find more information <a href="/student/stage-1/the-roles">about the roles here</a>.</p>
+                                <p className="sm-type-bigamp mb-3">Find more <a href="/student/stage-1/the-roles">information about the roles and choose your Board here</a>.</p>
 
                             </div>
                         </div>
