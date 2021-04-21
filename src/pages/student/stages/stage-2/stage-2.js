@@ -112,6 +112,14 @@ const Stage2Page = () => {
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2"><span className="side-icon side-icon-orange"><HelpIcon /></span>Helpful information</p>
                             <div className="side-grey">
+                                <p className="sm-type-amp">Useful links</p>
+                                <ul>
+                                    <li><a href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland" target="_blank" rel="external">Civil parish</a></li>
+                                    <li><a href="https://en.wikipedia.org/wiki/Loch_Alsh" target="_blank" rel="external">Lochalsh</a></li>
+                                    <li><a href="https://en.wikipedia.org/wiki/Highland_council_area" target="_blank" rel="external">Highland</a></li>
+                                    <li><a href="https://en.wikipedia.org/wiki/Inverness-shire" target="_blank" rel="external">Inverness-shire</a></li>
+                                </ul>
+
                                 <p className="sm-type-amp">Read all about Glenclas and find out what you need to move on to the next quest.</p>
                                 <p className="sm-type-amp">Make notes of the amenities and the opportunities.</p>
                                 <p className="sm-type-amp">Find more <a href="/student/stage-2/the-roles">information about the roles and choose your Board here</a>.</p>
