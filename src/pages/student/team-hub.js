@@ -213,9 +213,7 @@ const QuestPage = () => {
             <main className="the-quest">
                 <Header headerText="Team Hub" />
                 <section className="container" id="main">
-                    <div className="side-grey">
-                        <p className="sm-type-amp">{`Logged in as ${fullName}`}</p>
-                    </div>
+                    <p className="sm-type-lead mt-4"> Logged in as <span className="sm-type-lead--medium">{`${fullName}`}</span></p>
                     <div className="row">
                         <div className="col-lg-8">
                             <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
