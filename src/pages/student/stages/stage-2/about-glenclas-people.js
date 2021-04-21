@@ -1,14 +1,14 @@
 import React from "react"
-import Header from '../components/_header'
-import Footer from '../components/_footer'
-import '../scss/index.scss'
+import Header from '../../../../components/_header'
+import Footer from '../../../../components/_footer'
+import '../../../../scss/index.scss'
 
-import {graphql, Link, useStaticQuery} from "gatsby";
-import {GatsbyImage} from "gatsby-plugin-image";
-import {Helmet} from "react-helmet";
-import HelpIcon from "../assets/help-icon.svg";
+import {graphql, Link, useStaticQuery} from "gatsby"
+import {GatsbyImage} from "gatsby-plugin-image"
+import {Helmet} from "react-helmet"
+import HelpIcon from "../../../../assets/help-icon.svg"
 
-const IntroPage = () => {
+const AboutGlenclasPeoplePage = () => {
   const data = useStaticQuery(graphql`
     query {
       image1: file(relativePath: { eq: "glenclas-people-1.jpg" }) {
@@ -45,7 +45,7 @@ const IntroPage = () => {
           <meta property="og:description" content="The description" />
         </Helmet>
         <main className="the-quest">
-          <Header headerText="Introduction" />
+          <Header headerText="Stage 2" />
           <section className="container" id="main">
             <div className="row">
               <div className="col-lg-8">
@@ -109,7 +109,7 @@ const IntroPage = () => {
                     </div>
                   </div>
                 </div>
-                <p className="sm-type-amp"><Link to="/about-glenclas">Back to Glenclas information</Link></p>
+                <p className="sm-type-amp"><Link to="/student/stage-2/about-glenclas">Back to Glenclas information</Link></p>
 
               </div>
               <div className="col-lg-4">
@@ -117,7 +117,7 @@ const IntroPage = () => {
                 <div className="side-grey">
                   <p className="sm-type-amp">Read all about the people of Glenclas and find out what you need to move on to the next quest.</p>
                   <p className="sm-type-amp">They all have a story to tell about Glenclas.</p>
-                  <p className="sm-type-amp"><Link to="/about-glenclas">Back to Glenclas information</Link></p>
+                  <p className="sm-type-amp"><Link to="/student/stage-2/about-glenclas">Back to Glenclas information</Link></p>
 
                 </div>
               </div>
@@ -130,4 +130,4 @@ const IntroPage = () => {
   )
 }
 
-export default IntroPage
+export default AboutGlenclasPeoplePage

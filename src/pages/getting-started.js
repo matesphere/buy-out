@@ -7,7 +7,7 @@ import { eng } from './_index.data'
 
 import HelpIcon from '../assets/help-icon.svg'
 import TickSheet from '../assets/tick-sheet.svg'
-// import DogVideo from '../assets/the-quest.mp4'
+import DogVideo from '../assets/the-quest.mp4'
 
 import '../scss/index.scss'
 
@@ -43,11 +43,11 @@ const IndexPage = () => {
                                 think about some of the important concepts and
                                 issues.
                             </p>
-                            {/* <div className="homepage-image mb-4">
+                            <div className="homepage-image mb-4">
                                 <video controls>
                                     <source src={DogVideo} type="video/mp4" />
                                 </video>
-                            </div> */}
+                            </div>
                             <p className="sm-type-guitar mb-4">
                                 Here are a series of questions to help you to do
                                 some preliminary exploration. This is your first

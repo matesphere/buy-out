@@ -3,16 +3,16 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
+import Header from '../../../../components/_header'
+import Footer from '../../../../components/_footer'
 
-import TickSheet from '../../../assets/tick-sheet.svg'
-import Tick from '../../../assets/tick.svg'
-import HelpIcon from '../../../assets/help-icon.svg'
+import TickSheet from '../../../../assets/tick-sheet.svg'
+import Tick from '../../../../assets/tick.svg'
+import HelpIcon from '../../../../assets/help-icon.svg'
 
-import '../../../scss/index.scss'
+import '../../../../scss/index.scss'
 
-const IntroPage = () => {
+const RolesPage = () => {
     const [showFilters, setShowFilters] = useState(false)
 
     return (
@@ -31,7 +31,7 @@ const IntroPage = () => {
                 {/*<meta property="og:image" content={image} />*/}
             </Helmet>
             <main className="the-quest">
-                <Header headerText="The quest" />
+                <Header headerText="Stage 1" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -71,18 +71,37 @@ const IntroPage = () => {
                                     who will do the following.
                                 </p>
                                 <ol className="sm-type-guitar">
-                                    <li>Chair</li>
-                                    <li>Vice-chair</li>
-                                    <li>Secretary</li>
-                                    <li>Treasurer.</li>
+                                    <li className="mb-2">Chair</li>
+                                    <li className="mb-2">Vice-chair</li>
+                                    <li className="mb-2">Secretary</li>
+                                    <li className="mb-2">Treasurer.</li>
                                 </ol>
-                                <p className="sm-type-amp">
-                                    Some more information{' '}
-                                    <a href="/about-the-roles">
-                                        about the roles can be found here
-                                    </a>
-                                    .
-                                </p>
+                            </div>
+
+                            <div className="side-grey">
+                                <h2 className="sm-type-guitar mb-2">Chair</h2>
+                                <p className="sm-type-lead mb-2">To chair the Board meetings, keep the members ‘on track’, ensuring that all members are involved in the tasks and in the decision making.</p>
+                                <p className="sm-type-lead mb-2">To have the ’casting vote’ over any decisions.</p>
+                                <p className="sm-type-lead mb-2">To lead the long- and short-listing of the Development Options.</p>
+                                <p className="sm-type-lead mb-2">To lead the feedback presentation to the Community.</p>
+                            </div>
+                            <div className="side-grey">
+                                <h2 className="sm-type-guitar mb-2">Vice-chair</h2>
+                                <p className="sm-type-lead mb-2">To deputise for the Chair, as necessary.</p>
+                                <p className="sm-type-lead mb-2">To oversee the choice of the Group name and the design of the logo.</p>
+                                <p className="sm-type-lead mb-2">To lead the SWOT analysis.</p>
+                                <p className="sm-type-lead mb-24">To assist the Chair in the presentation to the Community.</p>
+                            </div>
+                            <div className="side-grey">
+                                <h2 className="sm-type-guitar mb-2">Secretary</h2>
+                                <p className="sm-type-lead mb-2">To enter the text and data into the Quest forms.</p>
+                                <p className="sm-type-lead mb-2">To record decisions made at ‘meetings’.</p>
+                                <p className="sm-type-lead mb-2">To lead the writing of the Feasibility Study which will be presented to the Community, together with the Business Plan.</p>
+                            </div>
+                            <div className="side-grey">
+                                <h2 className="sm-type-guitar mb-2">Treasurer</h2>
+                                <p className="sm-type-lead mb-2">To oversee any calculations that need to be competed.</p>
+                                <p className="sm-type-lead mb-2">To build the Business Plan which will detail costs, income and funding streams for the purchase of the land and for setting up and running the Development Schemes.</p>
                             </div>
 
                             <div
@@ -171,13 +190,6 @@ const IntroPage = () => {
                                     <li>Secretary</li>
                                     <li>Treasurer</li>
                                 </ul>
-                                <p className="sm-type-amp">
-                                    Some more information{' '}
-                                    <Link to="/about-the-roles">
-                                        about the roles can be found here
-                                    </Link>
-                                    .
-                                </p>
                             </div>
 
                             <p className="sm-type-guitar mb-2">
@@ -190,6 +202,17 @@ const IntroPage = () => {
                                 <p className="sm-type-amp">
                                     Check all task here:
                                 </p>
+                                <div className="multiple-choice">
+                                    <input
+                                        className="form-control"
+                                        id="id1"
+                                        type="checkbox"
+                                    />
+                                    <label className="form-label" htmlFor="id1">
+                                        You have read the information about the roles.
+                                    </label>
+                                </div>
+
                                 <div className="multiple-choice">
                                     <input
                                         className="form-control"
@@ -217,4 +240,4 @@ const IntroPage = () => {
     )
 }
 
-export default IntroPage
+export default RolesPage
