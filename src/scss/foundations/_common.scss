@@ -625,3 +625,60 @@ input:focus, textarea:focus, select:focus, button:focus {
     overflow: hidden;
     display: flex;
 }
+
+.react-tabs {
+    -webkit-tap-highlight-color: transparent;
+    width: 100%;
+}
+
+.react-tabs__tab-list {
+    margin: 0;
+    padding: 0;
+}
+
+.react-tabs__tab {
+    display: inline-block;
+    border-bottom: none;
+    bottom: -1px;
+    padding: $grid-unit $grid-unit*2;
+    position: relative;
+    list-style: none;
+    cursor: pointer;
+    color: $brand-red;
+
+    h6 {
+        margin: 0;
+    }
+}
+
+.react-tabs__tab--selected {
+    background: #eeeeee;
+    color: black;
+    border-radius: 5px 5px 0 0;
+    margin: 0;
+    color: $brand-body;
+}
+
+.react-tabs__tab--disabled {
+    color: GrayText;
+    cursor: default;
+}
+
+
+.react-tabs__tab-panel {
+    display: none;
+}
+
+.react-tabs__tab-panel--selected {
+    display: block;
+}
+
+.react-tabs--information {
+  &--inner {
+    background-color: #eeeeee;
+    margin-bottom: 16px;
+    padding: 16px;
+    border-bottom-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+  }
+}
