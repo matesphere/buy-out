@@ -12,7 +12,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 import DogVideo from '../../../../assets/the-quest.mp4'
-import {eng} from '../../../_index.data'
+import { eng } from '../../../_index.data'
 
 // TODO this will also probably use user ID (or team ID actually)
 const STAGE_1_QUERY = gql`
@@ -53,9 +53,7 @@ const useCheckboxListState = (listOfLabels) => {
     return [checkboxState, toggleCheckbox, allCheckboxesChecked]
 }
 
-const CHECKBOX_LIST = [
-    'You have researched and answered all 12 questions'
-]
+const CHECKBOX_LIST = ['You have researched and answered all 12 questions']
 
 // TODO: freeze this in place once work submitted (i.e. based on active doc submission in DB)
 const CheckboxList = ({
@@ -118,23 +116,23 @@ const QuestPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 1: Research</title>
+                <title>Stage 1 - Research</title>
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 1 - Research" />
+                <Header headerText="Stage 1" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                               Research.
+                                Research
                             </h2>
                             <p className="sm-type-guitar mb-4">
-                                Before embarking on the Quest, it is important
-                                to gain some background knowledge about
-                                community land ownership in Scotland and also to
-                                think about some of the important concepts and
-                                issues.
+                                As the first stage of your Quest, it is
+                                important to gain some background knowledge
+                                about community land ownership in Scotland and
+                                also to think about some of the important
+                                concepts and issues.
                             </p>
                             <div className="homepage-image mb-4">
                                 <video controls>
@@ -176,10 +174,42 @@ const QuestPage = () => {
                             <div className="side-grey">
                                 <p className="sm-type-amp">Useful links</p>
                                 <ul>
-                                    <li><a href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland" target="_blank" rel="external">Civil parish</a></li>
-                                    <li><a href="https://en.wikipedia.org/wiki/Loch_Alsh" target="_blank" rel="external">Lochalsh</a></li>
-                                    <li><a href="https://en.wikipedia.org/wiki/Highland_council_area" target="_blank" rel="external">Highland</a></li>
-                                    <li><a href="https://en.wikipedia.org/wiki/Inverness-shire" target="_blank" rel="external">Inverness-shire</a></li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Civil parish
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Loch_Alsh"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Lochalsh
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Highland_council_area"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Highland
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Inverness-shire"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Inverness-shire
+                                        </a>
+                                    </li>
                                 </ul>
                             </div>
                             <p className="sm-type-guitar mb-2">

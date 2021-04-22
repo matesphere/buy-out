@@ -94,7 +94,7 @@ const HelpPage = () => {
                                 <span className="side-icon side-icon-green">
                                     <TickSheet />
                                 </span>
-                                Your checklist
+                                Example checklist
                             </p>
                             <div className="side-grey">
                                 <p className="sm-type-amp">
@@ -134,12 +134,6 @@ const HelpPage = () => {
                                         Have you read all actions?
                                     </label>
                                 </div>
-
-                                <p className="sm-type-amp">
-                                    <Link to="/getting-started">
-                                        You can now move onto the next stage.
-                                    </Link>
-                                </p>
                             </div>
                         </div>
                     </div>

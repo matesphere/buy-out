@@ -28,7 +28,7 @@ const STAGE_1_COMPLETE_QUERY = gql`
     }
 `
 
-const QuestPage = () => {
+const Stage1Complete = () => {
     const data = useStaticQuery(graphql`
         query {
             file(relativePath: { eq: "fairer-scotland.jpg" }) {
@@ -64,16 +64,16 @@ const QuestPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 1 - Complete</title>
+                <title>Stage 1 - Research - Complete</title>
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 1 - Research" />
+                <Header headerText="Stage 1" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Quest 1 - Research
+                                Research: Complete
                             </h1>
                             <p className="sm-type-guitar sm-type-guitar--medium mt-4 mb-4">
                                 The legitimate place of people in the landscape:
@@ -201,4 +201,4 @@ const QuestPage = () => {
     )
 }
 
-export default QuestPage
+export default Stage1Complete

@@ -22,21 +22,15 @@ const RolesPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Quest 1</title>
-                <meta name="description" content="The description" />
-                {/*<meta name="image" content={image} />*/}
-                <meta property="og:url" content="url" />
-                <meta property="og:title" content="Quest 1" />
-                <meta property="og:description" content="The description" />
-                {/*<meta property="og:image" content={image} />*/}
+                <title>Stage 2 - Consult - Team Roles</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 2 - Consult" />
+                <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Choose your steering group.
+                                Elect your steering group
                             </h2>
 
                             <p className="sm-type-guitar mb-4">
@@ -80,28 +74,75 @@ const RolesPage = () => {
 
                             <div className="side-grey">
                                 <h2 className="sm-type-guitar mb-2">Chair</h2>
-                                <p className="sm-type-lead mb-2">To chair the Board meetings, keep the members ‘on track’, ensuring that all members are involved in the tasks and in the decision making.</p>
-                                <p className="sm-type-lead mb-2">To have the ’casting vote’ over any decisions.</p>
-                                <p className="sm-type-lead mb-2">To lead the long- and short-listing of the Development Options.</p>
-                                <p className="sm-type-lead mb-2">To lead the feedback presentation to the Community.</p>
+                                <p className="sm-type-lead mb-2">
+                                    To chair the Board meetings, keep the
+                                    members ‘on track’, ensuring that all
+                                    members are involved in the tasks and in the
+                                    decision making.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    To have the ’casting vote’ over any
+                                    decisions.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    To lead the long- and short-listing of the
+                                    Development Options.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    To lead the feedback presentation to the
+                                    Community.
+                                </p>
                             </div>
                             <div className="side-grey">
-                                <h2 className="sm-type-guitar mb-2">Vice-chair</h2>
-                                <p className="sm-type-lead mb-2">To deputise for the Chair, as necessary.</p>
-                                <p className="sm-type-lead mb-2">To oversee the choice of the Group name and the design of the logo.</p>
-                                <p className="sm-type-lead mb-2">To lead the SWOT analysis.</p>
-                                <p className="sm-type-lead mb-24">To assist the Chair in the presentation to the Community.</p>
+                                <h2 className="sm-type-guitar mb-2">
+                                    Vice-chair
+                                </h2>
+                                <p className="sm-type-lead mb-2">
+                                    To deputise for the Chair, as necessary.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    To oversee the choice of the Group name and
+                                    the design of the logo.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    To lead the SWOT analysis.
+                                </p>
+                                <p className="sm-type-lead mb-24">
+                                    To assist the Chair in the presentation to
+                                    the Community.
+                                </p>
                             </div>
                             <div className="side-grey">
-                                <h2 className="sm-type-guitar mb-2">Secretary</h2>
-                                <p className="sm-type-lead mb-2">To enter the text and data into the Quest forms.</p>
-                                <p className="sm-type-lead mb-2">To record decisions made at ‘meetings’.</p>
-                                <p className="sm-type-lead mb-2">To lead the writing of the Feasibility Study which will be presented to the Community, together with the Business Plan.</p>
+                                <h2 className="sm-type-guitar mb-2">
+                                    Secretary
+                                </h2>
+                                <p className="sm-type-lead mb-2">
+                                    To enter the text and data into the Quest
+                                    forms.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    To record decisions made at ‘meetings’.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    To lead the writing of the Feasibility Study
+                                    which will be presented to the Community,
+                                    together with the Business Plan.
+                                </p>
                             </div>
                             <div className="side-grey">
-                                <h2 className="sm-type-guitar mb-2">Treasurer</h2>
-                                <p className="sm-type-lead mb-2">To oversee any calculations that need to be competed.</p>
-                                <p className="sm-type-lead mb-2">To build the Business Plan which will detail costs, income and funding streams for the purchase of the land and for setting up and running the Development Schemes.</p>
+                                <h2 className="sm-type-guitar mb-2">
+                                    Treasurer
+                                </h2>
+                                <p className="sm-type-lead mb-2">
+                                    To oversee any calculations that need to be
+                                    competed.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    To build the Business Plan which will detail
+                                    costs, income and funding streams for the
+                                    purchase of the land and for setting up and
+                                    running the Development Schemes.
+                                </p>
                             </div>
 
                             <div
@@ -209,7 +250,8 @@ const RolesPage = () => {
                                         type="checkbox"
                                     />
                                     <label className="form-label" htmlFor="id1">
-                                        You have read the information about the roles.
+                                        You have read the information about the
+                                        roles.
                                     </label>
                                 </div>
 
@@ -225,9 +267,12 @@ const RolesPage = () => {
                                 </div>
 
                                 <p className="sm-type-amp">
-                                    <a href="#form-roles">
-                                        You can submit your roles.
-                                    </a>
+                                    You can submit your roles.
+                                </p>
+                                <p className="sm-type-amp">
+                                    <Link href="/student/stage-2">
+                                        Back to Stage 2
+                                    </Link>
                                 </p>
                             </div>
                         </div>

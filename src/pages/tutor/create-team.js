@@ -88,11 +88,20 @@ const addStudentToTeam = (
     teamNum,
     { user_id, school_id, user: { full_name } }
 ) => (teams) => {
-    const teamsToUpdate = [...teams]
+    const teamsToUpdate = [
+        ...teams.map((team) => ({
+            ...team,
+            students: team.students.filter(
+                (student) => student.userId !== user_id
+            ),
+        })),
+    ]
+
     const updatedStudents = [
         ...teams[teamNum].students,
         { name: full_name, userId: user_id, schoolId: school_id },
     ]
+
     const updatedTeam = { ...teams[teamNum], students: updatedStudents }
     teamsToUpdate[teamNum] = updatedTeam
 
@@ -213,6 +222,10 @@ const ConfirmModal = ({ teams, showModal, setShowModal }) => {
                                 >
                                     START QUEST!
                                 </button>
+                                <span>
+                                    This will unlock Stage 1 for all created
+                                    teams
+                                </span>
                             </div>
                         )}
                     </div>
