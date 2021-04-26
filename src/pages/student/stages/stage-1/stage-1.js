@@ -96,7 +96,7 @@ const QuestPage = () => {
 
     const [submitWork, submitWorkResponse] = useMutation(SUBMIT_WORK)
 
-    if (loading) return 'Loading...'
+    if (loading) return (<section className="container" id="main"><div className="row"><div className="col-lg-12 text-align-center"><div className="loader"></div><p className="sm-type-drum sm-type-drum--medium">Loading...</p></div></div></section>)
     if (error) return `Error! ${error.message}`
 
     const user = pageData.user[0]
