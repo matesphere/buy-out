@@ -158,7 +158,7 @@ const Stage3Page = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="table">
+                            <div className="table table-proposal">
                                 <div className="heading">
                                     <div className="cell">
                                         <p>Options</p>
@@ -205,6 +205,11 @@ const Stage3Page = () => {
                                             primary school children as well as
                                             for older children.
                                         </p>
+                                        <p>
+                                            <Link to="/student/stage-3/playpark-skatepark">
+                                                Read more about{' '}
+                                            </Link>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -221,6 +226,11 @@ const Stage3Page = () => {
                                             Street’ a purpose-built mini
                                             supermarket and shop, to service the
                                             local community and visitors.
+                                        </p>
+                                        <p>
+                                            <Link to="/student/stage-3/shop-and-post-office">
+                                                Read more about{' '}
+                                            </Link>
                                         </p>
                                     </div>
                                 </div>
@@ -239,6 +249,11 @@ const Stage3Page = () => {
                                             Providing both power for the
                                             community and an income from
                                             electricity sold onto the grid.
+                                        </p>
+                                        <p>
+                                            <Link to="/student/stage-3/micro-hydro">
+                                                Read more about{' '}
+                                            </Link>
                                         </p>
                                     </div>
                                 </div>

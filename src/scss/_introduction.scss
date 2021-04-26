@@ -150,20 +150,35 @@
 .title {
   display: table-caption;
   text-align: center;
-  font-weight: bold;
-  font-size: larger;
+  font-weight: 600;
+
+  p {
+   font-weight: 600;
+    font-size: 1.1em;
+  }
 }
 .heading {
   display: table-row;
-  font-weight: bold;
-  text-align: center;
-  font-weight: bold;
+  font-weight: 600;
+  font-size: 1.1em;
+
+  p {
+    font-weight: 600;
+    font-size: 1.1em;
+  }
 }
 .roww {
   display: table-row;
   width: 100%;
 }
 .cell {
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: $grid-unit * 2;
+}
+
+.table-proposal .cell {
   display: table-cell;
   border: solid;
   border-width: thin;
@@ -175,6 +190,22 @@
 
   &:last-of-type {
     width: 60%;
+  }
+}
+
+.table-pricing {
+  .roww {
+    &:first-child {
+      width: 50%;
+    }
+
+    &:nth-child(2) {
+      width: 25%;
+    }
+
+    &:nth-child(3) {
+      width: 25%;
+    }
   }
 }
 

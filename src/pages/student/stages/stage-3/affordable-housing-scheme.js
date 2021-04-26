@@ -125,18 +125,41 @@ const Stage3HousingPage = () => {
                             <p className="sm-type-lead sm-type-lead--medium mb-2">
                                 Grants would be available from:
                             </p>
-                            <p className="sm-type-bigamp">
-                                Highland Council : £ 50,000
-                            </p>
-                            <p className="sm-type-bigamp">
-                                Trusthouse Foundation : £200,000
-                            </p>
-                            <p className="sm-type-bigamp">
-                                Quaker Housing Trust : £150,000
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                Rural Housing Fund : £600,000
-                            </p>
+
+                            <div className="table table-pricing">
+                                <div className="roww">
+                                    <div className="cell">
+                                        <p>Highland Council:</p>
+                                    </div>
+                                    <div className="cell">
+                                        <p>£50,000</p>
+                                    </div>
+                                </div>
+                                <div className="roww">
+                                    <div className="cell">
+                                        <p>Trusthouse Foundation:</p>
+                                    </div>
+                                    <div className="cell">
+                                        <p>£200,000</p>
+                                    </div>
+                                </div>
+                                <div className="roww">
+                                    <div className="cell">
+                                        <p>Quaker Housing Trust:</p>
+                                    </div>
+                                    <div className="cell">
+                                        <p>£150,000</p>
+                                    </div>
+                                </div>
+                                <div className="roww">
+                                    <div className="cell">
+                                        <p>Rural Housing Fund:</p>
+                                    </div>
+                                    <div className="cell">
+                                        <p>£600,000</p>
+                                    </div>
+                                </div>
+                            </div>
 
                             <p className="sm-type-bigamp mb-4">
                                 Leaving a remaining £80,000 to be obtained via a
