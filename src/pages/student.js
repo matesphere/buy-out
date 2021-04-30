@@ -13,6 +13,11 @@ import Stage3HousingPage from './student/stages/stage-3/affordable-housing-schem
 import Stage3PlaySkate from './student/stages/stage-3/playpark-skatepark'
 import Stage3ShopPostOffice from './student/stages/stage-3/shop-and-post-office'
 import Stage3MicroHydro from './student/stages/stage-3/micro-hydro'
+import Stage3WindTurbine from './student/stages/stage-3/wind-turbine'
+import Stage3BusinessHub from './student/stages/stage-3/business-hub'
+import Stage3ForestryScheme from './student/stages/stage-3/forestry-scheme'
+import Stage3CampsiteCabin from './student/stages/stage-3/campsite-cabin'
+import Stage3MarketScheme from './student/stages/stage-3/market-scheme'
 // import YourNotesSubmit from './student/your-notes-submit'
 // import YourNotesInProgress from './student/your-notes-inprogress'
 // import YourNotesCompleted from './student/your-notes-completed'
@@ -35,6 +40,11 @@ const Routes = () => {
             <Stage3ShopPostOffice path="/stage-3/shop-and-post-office" />
             <Stage3PlaySkate path="/stage-3/playpark-skatepark" />
             <Stage3MicroHydro path="/stage-3/micro-hydro" />
+            <Stage3WindTurbine path="/stage-3/wind-turbine" />
+            <Stage3BusinessHub path="/stage-3/business-hub" />
+            <Stage3ForestryScheme path="/stage-3/forestry-scheme" />
+            <Stage3CampsiteCabin path="/stage-3/campsite-cabin" />
+            <Stage3MarketScheme path="/stage-3/market-scheme" />
         </Router>
     )
 }

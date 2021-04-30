@@ -272,6 +272,11 @@ const Stage3Page = () => {
                                             the community and an income from
                                             electricity sold onto the grid.
                                         </p>
+                                        <p>
+                                            <Link to="/student/stage-3/wind-turbine">
+                                                Read more about{' '}
+                                            </Link>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -288,6 +293,11 @@ const Stage3Page = () => {
                                             a new build that could be divided
                                             into units for offices and/or
                                             workshops.
+                                        </p>
+                                        <p>
+                                            <Link to="/student/stage-3/business-hub">
+                                                Read more about{' '}
+                                            </Link>
                                         </p>
                                     </div>
                                 </div>
@@ -309,6 +319,11 @@ const Stage3Page = () => {
                                             walks) and habitat creation as well
                                             as climate mitigation
                                         </p>
+                                        <p>
+                                            <Link to="/student/stage-3/forestry-scheme">
+                                                Read more about{' '}
+                                            </Link>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -329,6 +344,11 @@ const Stage3Page = () => {
                                             campervan and other tourists to use
                                             the facilities.
                                         </p>
+                                        <p>
+                                            <Link to="/student/stage-3/campsite-cabin">
+                                                Read more about{' '}
+                                            </Link>
+                                        </p>
                                     </div>
                                 </div>
 
@@ -346,6 +366,11 @@ const Stage3Page = () => {
                                             the local community and for local
                                             businesses such as the Glenclas
                                             Hotel and Lodge.
+                                        </p>
+                                        <p>
+                                            <Link to="/student/stage-3/market-scheme">
+                                                Read more about{' '}
+                                            </Link>
                                         </p>
                                     </div>
                                 </div>

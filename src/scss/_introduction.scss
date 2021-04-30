@@ -193,17 +193,32 @@
   }
 }
 
+.table-proposal-two .cell {
+  display: table-cell;
+  border: solid;
+  border-width: thin;
+  padding: $grid-unit * 2;
+
+  &:first-of-type {
+    width: 70%;
+  }
+
+  &:last-of-type {
+    width: 30%;
+  }
+}
+
 .table-pricing {
   .roww {
-    &:first-child {
+    .cell:first-child {
       width: 50%;
     }
 
-    &:nth-child(2) {
+    .cell:nth-child(2) {
       width: 25%;
     }
 
-    &:nth-child(3) {
+    .cell:nth-child(3) {
       width: 25%;
     }
   }

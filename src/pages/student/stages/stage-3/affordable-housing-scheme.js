@@ -126,7 +126,7 @@ const Stage3HousingPage = () => {
                                 Grants would be available from:
                             </p>
 
-                            <div className="table table-pricing">
+                            <div className="table table-proposal-two">
                                 <div className="roww">
                                     <div className="cell">
                                         <p>Highland Council:</p>
