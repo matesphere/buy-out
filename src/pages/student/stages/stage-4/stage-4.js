@@ -53,32 +53,34 @@ const Stage4Page = () => {
                             </div>
 
                             <div className="side-grey">
-                                <h3 className="task ticker mb-2">
+                                <h3 className="sm-type-guitar mb-2">Next step:</h3>
+                                <p className="sm-type-lead mb-2">
+                                    You will need to work together and decided and carry out a Feasibility Study on a short list of 3 Options.
+                                </p>
+
+                                <p className="sm-type-lead mb-2">
+                                    Use the SWOT templates to help you confirm your choices.
+                                </p>
+                                <ol className="sm-type-guitar">
+                                    <li className="mb-2"><Link to="/student/stage-4/swot-study-one">SWOT analysis 1</Link>.</li>
+                                    <li className="mb-2"><Link to="/student/stage-4/swot-study-one">SWOT analysis 2</Link>.</li>
+                                    <li className="mb-2"><Link to="/student/stage-4/swot-study-one">SWOT analysis 3</Link>.</li>
+                                </ol>
+
+                                <h4 className="task ticker mb-2 mt-4">
                                     <span className="ticker-sheet">
                                         <TickSheet/>
                                     </span>
                                     <span className="sm-type-drum">
                                         Task to complete:
                                     </span>
-                                </h3>
-                                <p className="sm-type-amp mb-2">
-                                    You will need to work together and decided and carry out a Feasibility Study on a short list of 3 Options.
+                                </h4>
+                                <p className="sm-type-lead mb-2">
+                                    Once you have completed your SWOT analysis proceed to submitting your findings.
                                 </p>
-
-                                <p className="sm-type-amp mb-2">
-                                    Use the SWOT templates to help you decide on your choices.
-                                </p>
-                                <ol className="sm-type-guitar">
-                                    <li className="mb-2">Templates for your <Link to="/student/stage-4/swot-study-one">SWOT analysis 1</Link>.</li>
-                                    <li className="mb-2">Templates for your <Link to="/student/stage-4/swot-study-one">SWOT analysis 2</Link>.</li>
-                                    <li className="mb-2">Templates for your <Link to="/student/stage-4/swot-study-one">SWOT analysis 3</Link>.</li>
-                                </ol>
-
-
-                                <h4 className="sm-type-guitar mb-2 mt-4">Complete the actions below:</h4>
-                                <ol className="sm-type-guitar">
+                                <ul className="sm-type-guitar">
                                     <li className="mb-2">Complete your <Link to="/student/stage-4/feasibility-study-one">Feasibility Study Options here</Link>.</li>
-                                </ol>
+                                </ul>
                             </div>
 
                         </div>
