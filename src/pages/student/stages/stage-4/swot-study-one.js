@@ -1,31 +1,14 @@
-import React from "react";
+import React, { Component } from 'react';
 import { Link } from "gatsby";
 import { Helmet } from "react-helmet";
-import { graphql, useStaticQuery } from "gatsby";
-
+import { graphql } from "gatsby";
+import CKEditor from 'ckeditor4-react';
 import Header from "../../../../components/_header";
 import Footer from "../../../../components/_footer";
 import HelpIcon from "../../../../assets/help-icon.svg";
-
 import "../../../../scss/index.scss";
-import { GatsbyImage } from "gatsby-plugin-image";
-import Ticklr from '../../../../assets/tick-lr.svg'
-import Ticklr2 from '../../../../assets/tick-lr2.svg'
 const Stage4SwotOne = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      image5: file(relativePath: { eq: "micro-hydro.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED)
-        }
-      }
-      image1: file(relativePath: { eq: "micro-hydro-figures.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED)
-        }
-      }
-    }
-  `);
+
   return (
     <>
       <Helmet>
@@ -43,7 +26,6 @@ const Stage4SwotOne = () => {
                 SWOT Analysis 1
               </h2>
               <p className="sm-type-amp">Use the SWOT Analysis to gather information in order to complete the Feasibility Study template. </p>
-
               <div className="mb-2">
                 <label className="form-label sm-type-amp">
                   What Development Options is this SWOT for?
@@ -80,9 +62,14 @@ const Stage4SwotOne = () => {
                     Areas of advantage
                   </p>
                 </div>
-                <form>
-                  <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint"></textarea>
-                </form>
+                <div className="ck-textarea">
+                  <CKEditor
+                      name="editorOne"
+                      config={ {
+                        toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                      } }
+                  />
+                </div>
               </div>
 
             </div>
@@ -97,9 +84,14 @@ const Stage4SwotOne = () => {
                   Areas of challenge
                 </p>
               </div>
-              <form>
-                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint"></textarea>
-              </form>
+                <div className="ck-textarea">
+                  <CKEditor
+                      name="editorOne"
+                      config={ {
+                        toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                      } }
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -115,9 +107,14 @@ const Stage4SwotOne = () => {
                   Positive influences outside your control
                 </p>
               </div>
-              <form>
-                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint"></textarea>
-              </form>
+                <div className="ck-textarea">
+                  <CKEditor
+                      name="editorOne"
+                      config={ {
+                        toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                      } }
+                  />
+                </div>
               </div>
             </div>
 
@@ -131,9 +128,14 @@ const Stage4SwotOne = () => {
                   Negative influences outside your control
                 </p>
               </div>
-              <form>
-                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint"></textarea>
-              </form>
+                <div className="ck-textarea">
+                  <CKEditor
+                      name="editorOne"
+                      config={ {
+                        toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                      } }
+                  />
+                </div>
               </div>
             </div>
           </div>
