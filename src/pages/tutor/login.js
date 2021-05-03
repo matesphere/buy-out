@@ -38,7 +38,8 @@ const handleSubmit = async (e) => {
     await signIn(username.value, password.value)
 }
 
-const TutorLogin = ({ login }) => {
+const TutorLogin = (props) => {
+    console.log(props)
     return (
         <>
             <Helmet>

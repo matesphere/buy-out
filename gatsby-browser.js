@@ -1,3 +1,7 @@
+import React from 'react'
+import { ApolloProvider } from '@apollo/client'
+import { client } from './src/apollo/client'
+
 import Amplify from 'aws-amplify'
 
 Amplify.configure({
@@ -40,20 +44,16 @@ Amplify.configure({
         // clientMetadata: { myCustomKey: 'myCustomValue' },
 
         // OPTIONAL - Hosted UI configuration
-        // oauth: {
-        //     domain: 'your_cognito_domain',
-        //     scope: [
-        //         'phone',
-        //         'email',
-        //         'profile',
-        //         'openid',
-        //         'aws.cognito.signin.user.admin',
-        //     ],
-        //     redirectSignIn: 'http://localhost:3000/',
-        //     redirectSignOut: 'http://localhost:3000/',
-        //     responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
-        // },
+        oauth: {
+            domain: 'https://clq.auth.eu-west-1.amazoncognito.com',
+            scope: ['email', 'openid'],
+            redirectSignIn: 'http://localhost:8000/tutor/hub',
+            redirectSignOut: 'http://localhost:8000/',
+            responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
+        },
     },
 })
 
-export { wrapRootElement } from './src/apollo/wrap-root-element'
+export const wrapRootElement = ({ element }) => (
+    <ApolloProvider client={client}>{element}</ApolloProvider>
+)
