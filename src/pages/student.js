@@ -18,6 +18,9 @@ import Stage3BusinessHub from './student/stages/stage-3/business-hub'
 import Stage3ForestryScheme from './student/stages/stage-3/forestry-scheme'
 import Stage3CampsiteCabin from './student/stages/stage-3/campsite-cabin'
 import Stage3MarketScheme from './student/stages/stage-3/market-scheme'
+import Stage4Page from './student/stages/stage-4/stage-4'
+import Stage4SwotOne from './student/stages/stage-4/swot-study-one'
+import Stage4FeasibilityOne from './student/stages/stage-4/feasibility-study-one'
 // import YourNotesSubmit from './student/your-notes-submit'
 // import YourNotesInProgress from './student/your-notes-inprogress'
 // import YourNotesCompleted from './student/your-notes-completed'
@@ -45,6 +48,11 @@ const Routes = () => {
             <Stage3ForestryScheme path="/stage-3/forestry-scheme" />
             <Stage3CampsiteCabin path="/stage-3/campsite-cabin" />
             <Stage3MarketScheme path="/stage-3/market-scheme" />
+
+            <Stage4Page path="/stage-4" />
+            <Stage4SwotOne path="/stage-4/swot-study-one" />
+            <Stage4FeasibilityOne path="/stage-4/feasibility-study-one" />
+
         </Router>
     )
 }
