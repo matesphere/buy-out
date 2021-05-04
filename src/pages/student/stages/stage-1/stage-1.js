@@ -12,7 +12,6 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 import DogVideo from '../../../../assets/the-quest.mp4'
-import { eng } from '../../../_index.data'
 
 // TODO this will also probably use user ID (or team ID actually)
 const STAGE_1_QUERY = gql`
@@ -139,29 +138,23 @@ const QuestPage = () => {
                                     <source src={DogVideo} type="video/mp4" />
                                 </video>
                             </div>
-                            <p className="sm-type-guitar mb-4">
-                                Here are a series of questions to help you to do
-                                some preliminary exploration. This is your first
-                                opportunity to work together as a team, so the
-                                answers that you provide should be the product
-                                of discussions between each of the team members.
-                            </p>
+                            <div className="side-grey">
+                                <h4 className="task ticker mb-2">
+                                  <span className="ticker-sheet">
+                                      <TickSheet/>
+                                  </span>
+                                                    <span className="sm-type-drum">
+                                      Task to complete:
+                                  </span>
+                                </h4>
 
-                            <h3 className="sm-type-drum sm-type-drum--medium">
-                                Questions
-                            </h3>
-                            <ol>
-                                {eng.map((eng) => (
-                                    <li key={eng.text}>
-                                        <p className="sm-type-guitar">
-                                            {eng.text}
-                                        </p>
-                                        <p className="sm-type-amp mb-4">
-                                            {eng.description}
-                                        </p>
-                                    </li>
-                                ))}
-                            </ol>
+                                <ul className="sm-type-guitar">
+                                    <li className="mb-2">Answer your  <Link to="/student/stage-1/research-page">Research question here</Link>.</li>
+                                </ul>
+                            </div>
+
+
+
                         </div>
 
                         <div className="col-lg-4">

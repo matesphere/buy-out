@@ -173,41 +173,43 @@ const RolesPage = () => {
                                         <li className="mb-2">Chair</li>
                                         <li className="mb-2">Vice-chair</li>
                                         <li className="mb-2">Secretary</li>
-                                        <li className="mb-2">Treasurer.</li>
+                                        <li>Treasurer.</li>
                                     </ol>
 
 
-                                    <div className="form-holder">
-                                        <h4 className="sm-type-guitar mb-2 mt-4">
-                                            Enter the names for the roles below:
-                                        </h4>
-                                        <div className="mb-4" id="form-roles">
-                                            <ul>
-                                                <li className="mb-2">
-                                                    <label className="form-label sm-type-amp">
-                                                        Chair
-                                                    </label>
-                                                    <input class="form-control" />
-                                                </li>
-                                                <li className="mb-2">
-                                                    <label className="form-label sm-type-amp">
-                                                        Vice-chair
-                                                    </label>
-                                                    <input class="form-control" />
-                                                </li>
-                                                <li className="mb-2">
-                                                    <label className="form-label sm-type-amp">
-                                                        Secretary
-                                                    </label>
-                                                    <input class="form-control" />
-                                                </li>
-                                                <li className="mb-2">
-                                                    <label className="form-label sm-type-amp">
-                                                        Treasurer
-                                                    </label>
-                                                    <input class="form-control" />
-                                                </li>
-                                            </ul>
+                                    <div className="form-holder-border">
+                                        <div className="form-holder">
+                                            <h4 className="sm-type-guitar mb-2">
+                                                Enter the names for the roles below:
+                                            </h4>
+                                            <div id="form-roles">
+                                                <ul>
+                                                    <li className="mb-2">
+                                                        <label className="form-label sm-type-amp">
+                                                            Chair
+                                                        </label>
+                                                        <input class="form-control" />
+                                                    </li>
+                                                    <li className="mb-2">
+                                                        <label className="form-label sm-type-amp">
+                                                            Vice-chair
+                                                        </label>
+                                                        <input class="form-control" />
+                                                    </li>
+                                                    <li className="mb-2">
+                                                        <label className="form-label sm-type-amp">
+                                                            Secretary
+                                                        </label>
+                                                        <input class="form-control" />
+                                                    </li>
+                                                    <li className="mb-2">
+                                                        <label className="form-label sm-type-amp">
+                                                            Treasurer
+                                                        </label>
+                                                        <input class="form-control" />
+                                                    </li>
+                                                </ul>
+                                            </div>
 
                                             <button
                                                 onClick={() => {
@@ -221,6 +223,8 @@ const RolesPage = () => {
                                             </button>
                                         </div>
                                     </div>
+
+
                                     <div
                                         className="success-holder mb-4 mt-4"
                                         id="filter-container"

@@ -10,6 +10,9 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
+import scrollTo from "gatsby-plugin-smoothscroll";
+import TickSheet from "../../../../assets/tick-sheet.svg";
+import Tick from "../../../../assets/tick.svg";
 
 const Stage3Page = () => {
     const data = useStaticQuery(graphql`
@@ -391,7 +394,70 @@ const Stage3Page = () => {
                                         </p>
                                     </div>
                                 </div>
+
+
                             </div>
+
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet/>
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task to complete:
+                                    </span>
+                                </h3>
+                                <p className="sm-type-amp mb-2">
+                                    Choose a list of 5 options that you wish to take forward at this stage.
+                                </p>
+                                <div className="form-holder-border">
+                                <div className="form-holder">
+                                    <div className="mb-4" id="form-roles">
+                                        <ul>
+                                            <li className="mb-2">
+                                                <label className="form-label sm-type-amp">
+                                                    Option 1
+                                                </label>
+                                                <input className="form-control"/>
+                                            </li>
+                                            <li className="mb-2">
+                                                <label className="form-label sm-type-amp">
+                                                    Option 2
+                                                </label>
+                                                <input className="form-control"/>
+                                            </li>
+                                            <li className="mb-2">
+                                                <label className="form-label sm-type-amp">
+                                                    Option 3
+                                                </label>
+                                                <input className="form-control"/>
+                                            </li>
+                                            <li className="mb-2">
+                                                <label className="form-label sm-type-amp">
+                                                    Option 4
+                                                </label>
+                                                <input className="form-control"/>
+                                            </li>
+                                            <li className="mb-2">
+                                                <label className="form-label sm-type-amp">
+                                                    Option 5
+                                                </label>
+                                                <input className="form-control"/>
+                                            </li>
+                                        </ul>
+
+                                        <button
+                                            className="btn-solid-lg"
+                                        >
+                                            Submit
+                                        </button>
+                                    </div>
+                                </div>
+                                </div>
+
+                            </div>
+
+
                         </div>
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2">

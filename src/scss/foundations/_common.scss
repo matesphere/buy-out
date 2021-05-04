@@ -402,6 +402,7 @@ p {
     padding: $grid-unit * 4;
     border-radius: ($grid-unit *2);
     border: 4px solid $brand-green;
+    background-color: white;
 }
 
 .form-label {
@@ -704,6 +705,14 @@ input:focus, textarea:focus, select:focus, button:focus {
 
     h6 {
         margin: 0;
+        color: $brand-green;
+        text-decoration: underline;
+    }
+
+    &--selected {
+        h6 {
+            color: $brand-redorange;
+        }
     }
 }
 

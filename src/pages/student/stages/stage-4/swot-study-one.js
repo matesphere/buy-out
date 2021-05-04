@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Link } from "gatsby";
 import { Helmet } from "react-helmet";
-import { graphql } from "gatsby";
 import CKEditor from 'ckeditor4-react';
 import Header from "../../../../components/_header";
 import Footer from "../../../../components/_footer";

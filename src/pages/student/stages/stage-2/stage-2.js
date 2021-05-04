@@ -407,14 +407,19 @@ const Stage2Page = () => {
                                     members then you can double up on the
                                     Secretary and/or Treasurer roles.
                                 </p>
-                                <p className="sm-type-bigamp mb-3">
-                                    Find more{' '}
-                                    <Link href="/student/stage-2/the-roles">
-                                        information about the roles and choose
-                                        your Board here
-                                    </Link>
-                                    .
-                                </p>
+
+                                <div className="form-holder-border">
+                                    <ul>
+                                        <li className="sm-type-guitar">
+                                            Find more{' '}
+                                            <Link href="/student/stage-2/the-roles">
+                                                information about the roles and choose
+                                                your Board here
+                                            </Link>
+                                            .
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div className="col-lg-4">
