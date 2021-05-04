@@ -1,7 +1,9 @@
 import React from 'react'
+import { AmplifySignOut } from '@aws-amplify/ui-react'
+import { Link } from 'gatsby'
 
 import '../scss/index.scss'
-import { Link } from 'gatsby'
+
 const Footer = () => {
     return (
         <footer className="footer">
@@ -14,6 +16,9 @@ const Footer = () => {
                             </li>
                             <li>
                                 <Link to="/student/team-hub/">Team hub</Link>
+                            </li>
+                            <li>
+                                <AmplifySignOut />
                             </li>
                         </ul>
 

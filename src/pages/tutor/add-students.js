@@ -104,7 +104,6 @@ const TutorAddPage = () => {
                                 // id="form-login"
                                 onSubmit={(e) => {
                                     e.preventDefault()
-                                    console.log('submit')
                                     insertStudents({
                                         variables: insertStudentsMapper(
                                             students,

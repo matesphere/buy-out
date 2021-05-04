@@ -2,6 +2,8 @@ import React from 'react'
 import { ApolloProvider } from '@apollo/client'
 import { client } from './src/apollo/client'
 
+import { UserStateProvider } from './src/utils/user-state'
+
 import Amplify from 'aws-amplify'
 
 Amplify.configure({
@@ -55,5 +57,7 @@ Amplify.configure({
 })
 
 export const wrapRootElement = ({ element }) => (
-    <ApolloProvider client={client}>{element}</ApolloProvider>
+    <ApolloProvider client={client}>
+        <UserStateProvider>{element}</UserStateProvider>
+    </ApolloProvider>
 )

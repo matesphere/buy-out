@@ -1,43 +1,27 @@
-import React from 'react'
-import { Router, Route } from '@reach/router'
-import { Auth } from 'aws-amplify'
+import React, { useContext } from 'react'
+import { Router } from '@reach/router'
+import { AmplifyAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react'
 
-import Login from './tutor/login'
 import Hub from './tutor/hub'
 import CurrentQuest from './tutor/current-quest'
 import NewQuest from './tutor/new-quest'
 import AddStudent from './tutor/add-students'
 import CreateTeam from './tutor/create-team'
 
-const loggedInAs = async () => {
-    let data
-    try {
-        data = await Auth.currentSession()
-    } catch (e) {
-        console.log('hmmm', e)
+import { UserStateContext } from '../utils/user-state'
+
+const LoggedInRoute = ({ component: Component, navigate, ...rest }) => {
+    const { isSignedIn, userInfo } = useContext(UserStateContext)
+
+    if (isSignedIn) {
+        if (userInfo.role === 'student') {
+            navigate('/student/team-hub') //TODO: not working...why?? Something to do with client-only?
+        }
+
+        return <Component {...rest} />
     }
 
-    console.log(data)
-}
-
-const LoggedInRoute = ({ component: Component, authed, ...rest }) => {
-    return (
-        <Route
-            {...rest}
-            render={(props) =>
-                authed === true ? (
-                    <Component {...props} />
-                ) : (
-                    <Redirect
-                        to={{
-                            pathname: '/login',
-                            state: { from: props.location },
-                        }}
-                    />
-                )
-            }
-        />
-    )
+    return <AmplifyAuthenticator />
 }
 
 const Routes = () => {
