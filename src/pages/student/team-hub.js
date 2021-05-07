@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -6,6 +6,8 @@ import { gql, useQuery } from '@apollo/client'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+
+import { UserStateContext } from '../../utils/user-state'
 
 import '../../scss/index.scss'
 
@@ -24,28 +26,9 @@ import Ticktb4 from '../../assets/tick-tp4.svg'
 import Tick from '../../assets/tick.svg'
 import HelpIcon from '../../assets/help-icon.svg'
 
-// TODO use this for the real thing! could store team ID once we have it initially & use that, to make team queries a bit easier
-// user_by_pk(id: $id) {
-//     name
-//     student {
-//         team {
-//             name
-//             stage_progresses {
-//                 stage_id
-//                 status
-//             }
-//             students {
-//                 user {
-//                     full_name
-//                 }
-//             }
-//         }
-//     }
-// }
-
 const TEAM_HUB_QUERY = gql`
-    query TeamHubQuery($name: String) {
-        user(where: { first_name: { _eq: $name } }) {
+    query TeamHubQuery($id: uuid!) {
+        user_by_pk(id: $id) {
             full_name
             student {
                 team {
@@ -70,8 +53,8 @@ const TEAM_HUB_QUERY = gql`
 `
 
 const TEAM_HUB_SUB = gql`
-    subscription TeamHubSub($name: String) {
-        user(where: { first_name: { _eq: $name } }) {
+    subscription TeamHubSub($id: uuid!) {
+        user_by_pk(id: $id) {
             full_name
             student {
                 team {
@@ -128,7 +111,11 @@ const StageButton = ({ id, title, status }) => (
     </div>
 )
 
-const QuestPage = () => {
+const TeamHub = () => {
+    const {
+        userInfo: { userId, token },
+    } = useContext(UserStateContext)
+
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "team-logo.jpg" }) {
@@ -143,7 +130,12 @@ const QuestPage = () => {
         TEAM_HUB_QUERY,
         {
             variables: {
-                name: 'Steve',
+                id: userId,
+            },
+            context: {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             },
         }
     )
@@ -151,7 +143,12 @@ const QuestPage = () => {
     subscribeToMore({
         document: TEAM_HUB_SUB,
         variables: {
-            name: 'Steve',
+            id: userId,
+        },
+        context: {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
         },
 
         updateQuery: (prev, { subscriptionData }) => {
@@ -167,7 +164,7 @@ const QuestPage = () => {
                 ...prev,
                 user: [
                     {
-                        ...subscriptionData.data.user[0],
+                        ...subscriptionData.data.user_by_pk[0],
                     },
                 ],
             }
@@ -176,8 +173,6 @@ const QuestPage = () => {
 
     if (loading) return 'Loading...'
     if (error) return `Error! ${error.message}`
-
-    const user = pageData.user[0]
 
     const {
         full_name: fullName,
@@ -188,7 +183,7 @@ const QuestPage = () => {
                 students,
             },
         },
-    } = user
+    } = pageData.user_by_pk
 
     const stages = pageData.stage.map((stage) => {
         const stageProgressForStage =
@@ -392,4 +387,4 @@ const QuestPage = () => {
     )
 }
 
-export default QuestPage
+export default TeamHub

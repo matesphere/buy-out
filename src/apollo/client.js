@@ -11,15 +11,15 @@ import { WebSocketLink } from '@apollo/client/link/ws'
 import { getMainDefinition } from '@apollo/client/utilities'
 import ws from 'ws'
 
-const authMiddleware = new ApolloLink((operation, forward) => {
-    operation.setContext({
-        headers: {
-            'x-hasura-access-key': 'community-land',
-        },
-    })
+// const authMiddleware = new ApolloLink((operation, forward) => {
+//     operation.setContext({
+//         headers: {
+//             'x-hasura-access-key': 'community-land',
+//         },
+//     })
 
-    return forward(operation)
-})
+//     return forward(operation)
+// })
 
 const wsForNode = typeof window === 'undefined' ? ws : null
 
@@ -45,13 +45,13 @@ export const client = new ApolloClient({
             )
         },
         wsLink,
-        from([
-            authMiddleware,
-            new HttpLink({
-                uri: 'https://clq.beanmate.coffee/v1/graphql',
-                fetch,
-            }),
-        ])
+        // from([
+        //     authMiddleware,
+        new HttpLink({
+            uri: 'https://clq.beanmate.coffee/v1/graphql',
+            fetch,
+        })
+        // ])
     ),
     cache: new InMemoryCache(),
 })
