@@ -169,13 +169,6 @@ const RolesPage = () => {
                                         You will need to work together and decided
                                         who will do the following.
                                     </p>
-                                    <ol className="sm-type-guitar">
-                                        <li className="mb-2">Chair</li>
-                                        <li className="mb-2">Vice-chair</li>
-                                        <li className="mb-2">Secretary</li>
-                                        <li>Treasurer.</li>
-                                    </ol>
-
 
                                     <div className="form-holder-border">
                                         <div className="form-holder">
@@ -222,25 +215,24 @@ const RolesPage = () => {
                                                 Submit names
                                             </button>
                                         </div>
-                                    </div>
 
-
-                                    <div
-                                        className="success-holder mb-4 mt-4"
-                                        id="filter-container"
-                                    >
-                                        <h4 className="sm-type-bigdrum sm-type-bigdrum--medium">
-                                            <span class="side-icon">
-                                                <Tick />
-                                            </span>{' '}
-                                            Success
-                                        </h4>
-                                        <p>Your roles have been submitted.</p>
-                                        <p>
-                                            <Link to="/student/your-notes-inprogress">
-                                                You will see your feedback here
-                                            </Link>
-                                        </p>
+                                        <div
+                                            className="success-holder"
+                                            id="filter-container"
+                                        >
+                                            <h4 className="sm-type-bigdrum sm-type-bigdrum--medium">
+                                                <span class="side-icon">
+                                                    <Tick />
+                                                </span>{' '}
+                                                Success
+                                            </h4>
+                                            <p>Your roles have been submitted.</p>
+                                            <p>
+                                                <Link to="/student/your-notes-inprogress">
+                                                    You will see your feedback here
+                                                </Link>
+                                            </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -263,6 +255,12 @@ const RolesPage = () => {
                                     <li>Secretary</li>
                                     <li>Treasurer</li>
                                 </ul>
+
+                                <p className="sm-type-amp">
+                                    <Link href="/student/stage-2">
+                                        Back to Stage 2
+                                    </Link>
+                                </p>
                             </div>
 
                             <p className="sm-type-guitar mb-2">
@@ -272,9 +270,6 @@ const RolesPage = () => {
                                 Your checklist
                             </p>
                             <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Check all task here:
-                                </p>
                                 <div className="multiple-choice">
                                     <input
                                         className="form-control"
@@ -297,15 +292,6 @@ const RolesPage = () => {
                                         You have chosen who will do which role.
                                     </label>
                                 </div>
-
-                                <p className="sm-type-amp">
-                                    You can submit your roles.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link href="/student/stage-2">
-                                        Back to Stage 2
-                                    </Link>
-                                </p>
                             </div>
                         </div>
                     </div>

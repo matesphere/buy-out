@@ -11,7 +11,7 @@ import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Ticklr from "../../../../assets/tick-lr.svg";
 import Ticklr2 from "../../../../assets/tick-lr2.svg";
-const Stage3ForestryScheme = () => {
+const Stage2ForestryScheme = () => {
   const data = useStaticQuery(graphql`
     query {
       image1: file(relativePath: { eq: "forestry-scheme.jpg" }) {
@@ -166,4 +166,4 @@ const Stage3ForestryScheme = () => {
   );
 };
 
-export default Stage3ForestryScheme;
+export default Stage2ForestryScheme;

@@ -8,9 +8,9 @@ import Footer from "../../../../components/_footer";
 import HelpIcon from "../../../../assets/help-icon.svg";
 
 import "../../../../scss/index.scss";
-import { GatsbyImage } from "gatsby-plugin-image";
-import Ticklr from '../../../../assets/tick-lr.svg'
-import Ticklr2 from '../../../../assets/tick-lr2.svg'
+import CKEditor from 'ckeditor4-react';
+import TickSheet from "../../../../assets/tick-sheet.svg";
+
 const Stage4FeasibilityOne = () => {
   const data = useStaticQuery(graphql`
     query {
@@ -31,7 +31,7 @@ const Stage4FeasibilityOne = () => {
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
-          Stage 4 - Feasibility Study 1
+          Stage 4 - Feasibility Study
         </title>
       </Helmet>
       <main className="the-quest">
@@ -40,7 +40,7 @@ const Stage4FeasibilityOne = () => {
           <div className="row">
             <div className="col-lg-8">
               <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                Feasibility Study 1
+                Feasibility Study
               </h2>
                 <form>
                     <ol>
@@ -54,37 +54,13 @@ const Stage4FeasibilityOne = () => {
                             </p>
                             </div>
 
-                            <textarea className="form-textarea" id="more-detail" name="more-detail" rows="15" aria-describedby="more-detail-hint"></textarea>
-
-                        </li>
-                        <li className="mb-4">
-                            <div id="option-detail-hint">
-                                <h2 className="sm-type-bigamp mb-1">
-                                    List the 3 Development Options that you have selected
-                                </h2>
-                                <div className="mb-2">
-                                    <input
-                                        aria-describedby="option-detail-hint"
-                                        type="email"
-                                        className="form-control"
-                                    />
-                                </div>
-
-                                <div className="mb-2">
-                                    <input
-                                        aria-describedby="option-detail-hint"
-                                        type="email"
-                                        className="form-control"
-                                    />
-                                </div>
-
-                                <div className="mb-2">
-                                    <input
-                                        aria-describedby="option-detail-hint"
-                                        type="email"
-                                        className="form-control"
-                                    />
-                                </div>
+                            <div className="ck-textarea">
+                                <CKEditor
+                                    name="editorOne"
+                                    config={ {
+                                        toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                                    } }
+                                />
                             </div>
                         </li>
 
@@ -96,36 +72,74 @@ const Stage4FeasibilityOne = () => {
                             <div className="form-holder-border">
                                 <h4 className="sm-type-drum mb-2">Development Option 1:</h4>
 
-
+                                <div className="mb-2">
+                                    <label className="form-label sm-type-amp" htmlFor="devoptone">
+                                        What is your first development option? (eg. Wind Turbine)
+                                    </label>
+                                    <input
+                                        id="devoptone"
+                                        aria-describedby="option-detail-hint"
+                                        type="email"
+                                        className="form-control"
+                                    />
+                                </div>
                                 <div id="more-detail-hint11">
                                     <p className="sm-type-bigamp mb-1 redorange-highlight">
                                         Benefits to the Community
                                     </p>
                                 </div>
 
-                                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint11"></textarea>
-
+                                <div className="ck-textarea">
+                                    <CKEditor
+                                        name="editorOne"
+                                        config={ {
+                                            toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                                        } }
+                                    />
+                                </div>
                                 <div id="more-detail-hint22">
                                     <p className="sm-type-bigamp mb-1 green-highlight">
                                         Reasons the Scheme is likely to succeed
                                     </p>
                                 </div>
 
-                                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint22"></textarea>
-
+                                <div className="ck-textarea">
+                                    <CKEditor
+                                        name="editorOne"
+                                        config={ {
+                                            toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                                        } }
+                                    />
+                                </div>
                                 <div id="more-detail-hin33">
                                     <p className="sm-type-bigamp mb-1 red-highlight">
                                         Risks that might cause the Scheme to fail
                                     </p>
                                 </div>
 
-                                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint33"></textarea>
-                            </div>
+                                <div className="ck-textarea">
+                                    <CKEditor
+                                        name="editorOne"
+                                        config={ {
+                                            toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                                        } }
+                                    />
+                                </div>                            </div>
 
 
                             <div className="form-holder-border">
                                 <h4 className="sm-type-drum mb-2">Development Option 2:</h4>
-
+                                <div className="mb-2">
+                                    <label className="form-label sm-type-amp" htmlFor="devopttwo">
+                                        What is your second development option? (eg. Camp Glamping Site)
+                                    </label>
+                                    <input
+                                        id="devopttwo"
+                                        aria-describedby="option-detail-hint"
+                                        type="email"
+                                        className="form-control"
+                                    />
+                                </div>
 
                                 <div id="more-detail-hint11">
                                     <p className="sm-type-bigamp mb-1 redorange-highlight">
@@ -133,30 +147,58 @@ const Stage4FeasibilityOne = () => {
                                     </p>
                                 </div>
 
-                                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint11"></textarea>
-
+                                <div className="ck-textarea">
+                                    <CKEditor
+                                        name="editorOne"
+                                        config={ {
+                                            toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                                        } }
+                                    />
+                                </div>
                                 <div id="more-detail-hint22">
                                     <p className="sm-type-bigamp mb-1 green-highlight">
                                         Reasons the Scheme is likely to succeed
                                     </p>
                                 </div>
 
-                                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint22"></textarea>
-
+                                <div className="ck-textarea">
+                                    <CKEditor
+                                        name="editorOne"
+                                        config={ {
+                                            toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                                        } }
+                                    />
+                                </div>
                                 <div id="more-detail-hin33">
                                     <p className="sm-type-bigamp mb-1 red-highlight">
                                         Risks that might cause the Scheme to fail
                                     </p>
                                 </div>
 
-                                <textarea className="form-textarea" id="more-detail" name="more-detail" rows="10" aria-describedby="more-detail-hint33"></textarea>
-                            </div>
+                                <div className="ck-textarea">
+                                    <CKEditor
+                                        name="editorOne"
+                                        config={ {
+                                            toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
+                                        } }
+                                    />
+                                </div>                            </div>
 
 
                             <div className="form-holder-border">
                                 <h4 className="sm-type-drum mb-2">Development Option 3:</h4>
 
-
+                                <div className="mb-2">
+                                    <label className="form-label sm-type-amp" htmlFor="devoptthree">
+                                        What is your first development option? (eg. Market Garden)
+                                    </label>
+                                    <input
+                                        id="devoptthree"
+                                        aria-describedby="option-detail-hint"
+                                        type="email"
+                                        className="form-control"
+                                    />
+                                </div>
                                 <div id="more-detail-hint11">
                                     <p className="sm-type-bigamp mb-1 redorange-highlight">
                                         Benefits to the Community
@@ -207,6 +249,25 @@ const Stage4FeasibilityOne = () => {
                   <Link href="/student/stage-4">Back to Stage 4</Link>
                 </p>
               </div>
+
+                <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-green">
+                                    <TickSheet />
+                                </span>
+                    Your checklist
+                </p>
+                <div className="side-grey">
+                    <div className="multiple-choice">
+                        <input
+                            className="form-control"
+                            id="id1"
+                            type="checkbox"
+                        />
+                        <label className="form-label" htmlFor="id1">
+                            You have completed the feasibility studies on 3 options.
+                        </label>
+                    </div>
+                </div>
             </div>
           </div>
         </section>

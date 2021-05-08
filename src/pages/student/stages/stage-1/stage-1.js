@@ -1,8 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { gql, useQuery, useMutation } from '@apollo/client'
-import { SUBMIT_WORK } from '../../../../gql/mutations'
+import { gql, useQuery } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -30,70 +29,13 @@ const STAGE_1_QUERY = gql`
     }
 `
 
-const useCheckboxListState = (listOfLabels) => {
-    const [checkboxState, setCheckboxState] = useState(
-        listOfLabels.map((label, i) => ({ id: i, label, value: false }))
-    )
-
-    const toggleCheckbox = (id) => {
-        setCheckboxState((state) =>
-            state.map((checkbox) =>
-                checkbox.id === id
-                    ? { id, label: checkbox.label, value: !checkbox.value }
-                    : checkbox
-            )
-        )
-    }
-
-    const allCheckboxesChecked = checkboxState
-        .map((checkbox) => checkbox.value)
-        .every(Boolean)
-
-    return [checkboxState, toggleCheckbox, allCheckboxesChecked]
-}
-
-const CHECKBOX_LIST = ['You have researched and answered all 12 questions']
-
-// TODO: freeze this in place once work submitted (i.e. based on active doc submission in DB)
-const CheckboxList = ({
-    checkboxState,
-    toggleCheckbox,
-    allCheckboxesChecked,
-}) => (
-    <div className="side-grey">
-        <p className="sm-type-amp">Check all task here:</p>
-        {checkboxState.map(({ id, label, value }) => (
-            <div className="multiple-choice">
-                <input
-                    className="form-control"
-                    id={id}
-                    type="checkbox"
-                    value={value ? 'checked' : 'unchecked'}
-                    onChange={() => toggleCheckbox(id)}
-                />
-                <label className="form-label" htmlFor={id}>
-                    {label}
-                </label>
-            </div>
-        ))}
-        {allCheckboxesChecked && (
-            <p className="sm-type-amp">You can now submit your findings.</p>
-        )}
-    </div>
-)
 
 const QuestPage = () => {
-    const [
-        checkboxState,
-        toggleCheckbox,
-        allCheckboxesChecked,
-    ] = useCheckboxListState(CHECKBOX_LIST)
 
     const { loading, error, data: pageData } = useQuery(STAGE_1_QUERY, {
         variables: { name: 'Steve', stageId: 1 },
     })
 
-    const [submitWork, submitWorkResponse] = useMutation(SUBMIT_WORK)
 
     if (loading) return (<section className="container" id="main"><div className="row"><div className="col-lg-12 text-align-center"><div className="loader"></div><p className="sm-type-drum sm-type-drum--medium">Loading...</p></div></div></section>)
     if (error) return `Error! ${error.message}`
@@ -105,8 +47,6 @@ const QuestPage = () => {
             team: { stage_progresses: stageProgresses },
         },
     } = user
-
-    const stageProgressId = stageProgresses[0].id
 
     return (
         <>
@@ -148,9 +88,28 @@ const QuestPage = () => {
                                   </span>
                                 </h4>
 
-                                <ul className="sm-type-guitar">
-                                    <li className="mb-2">Answer your  <Link to="/student/stage-1/research-page">Research question here</Link>.</li>
-                                </ul>
+                                <p className="sm-type-lead">To obtain the key that opens the Quest, you must provide answers to the following questions.</p>
+                                <p className="sm-type-lead">Answers should either be from the whole group as a result of discussion (Gp), or they should be given as different answers from each member of the group (Ind). Some answers, will need you to do some research, probably using the Internet (research)</p>
+                                <ol>
+                                    <li className="mb-2">What do you think that ‘Community’ means, for example, is it just a physical space? (Gp)</li>
+                                    <li className="mb-2">What is your own community? (Ind)</li>
+                                    <li className="mb-2">Why are communities important to us? (Gp)</li>
+                                    <li className="mb-2">What do you think it means to own land or buildings, for example does it give you certain rights? (Gp)</li>
+                                    <li className="mb-2">Does owning property (land, buildings, a shop, a pub) give the owner power? (Gp)</li>
+                                    <li className="mb-2">What do you think is meant by ‘power’ in this context? (Gp)</li>
+                                    <li className="mb-2">Who owns most land in Scotland? (Gp research)</li>
+                                    <li className="mb-2">What does this tell us about Scottish History? (Gp)</li>
+                                    <li className="mb-2">Find out if there are any community landowners in your area and then list their name(s) and what they own.</li>
+                                    <li className="mb-2">Describe the characteristics of your local community landowner(s). (Gp research)</li>
+                                    <li className="mb-2">Why did they decide to buy the property? (Gp research)</li>
+                                    <li className="mb-2">What are they doing, or going to do, with it? (Gp research)</li>
+                                    <li className="mb-2">How do they make their decisions? (Gp research)</li>
+                                </ol>
+                                <div className="form-holder-border">
+                                    <ul>
+                                        <li className="sm-type-guitar">Answer your  <Link to="/student/stage-1/research-page">Research question here</Link>.</li>
+                                    </ul>
+                                </div>
                             </div>
 
 
@@ -205,40 +164,6 @@ const QuestPage = () => {
                                     </li>
                                 </ul>
                             </div>
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <CheckboxList
-                                {...{
-                                    checkboxState,
-                                    toggleCheckbox,
-                                    allCheckboxesChecked,
-                                }}
-                            />
-
-                            <button
-                                className="btn-solid-lg mt-4"
-                                disabled={!allCheckboxesChecked}
-                                onClick={() => {
-                                    submitWork({
-                                        variables: {
-                                            stageProgressId,
-                                            docLink: 'doc.link',
-                                        },
-                                    })
-                                }}
-                            >
-                                Submit Work
-                            </button>
-                            {submitWorkResponse.data && (
-                                <span>
-                                    {`Doc submitted and available at `}
-                                    <a href="doc.link">doc.link</a>
-                                </span>
-                            )}
                         </div>
                     </div>
                 </section>

@@ -236,7 +236,7 @@ const AboutGlenclasPeoplePage = () => {
                                 </div>
                             </div>
                             <p className="sm-type-amp">
-                                <Link to="/student/stage-2/about-glenclas">
+                                <Link to="/student/stage-2/about-glenclas-people">
                                     Back to Glenclas information
                                 </Link>
                             </p>

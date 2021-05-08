@@ -11,7 +11,7 @@ import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Ticklr from '../../../../assets/tick-lr.svg'
 import Ticklr2 from '../../../../assets/tick-lr2.svg'
-const Stage3MicroHydro = () => {
+const Stage2MicroHydro = () => {
   const data = useStaticQuery(graphql`
     query {
       image5: file(relativePath: { eq: "micro-hydro.jpg" }) {
@@ -31,11 +31,11 @@ const Stage3MicroHydro = () => {
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
-          Stage 3 - Lay The Foundations - Micro Hydro
+          Stage 2 - Lay The Foundations - Micro Hydro
         </title>
       </Helmet>
       <main className="the-quest">
-        <Header headerText="Stage 3" />
+        <Header headerText="Stage 2" />
         <section className="container" id="main">
           <div className="row">
             <div className="col-lg-8">
@@ -205,7 +205,7 @@ const Stage3MicroHydro = () => {
                   Make notes of the amenities and the opportunities.
                 </p>
                 <p className="sm-type-amp">
-                  <Link href="/student/stage-3">Back to Stage 3</Link>
+                  <Link href="/student/stage-2">Back to Stage 2</Link>
                 </p>
               </div>
             </div>
@@ -218,4 +218,4 @@ const Stage3MicroHydro = () => {
   );
 };
 
-export default Stage3MicroHydro;
+export default Stage2MicroHydro;

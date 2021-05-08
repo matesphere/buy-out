@@ -118,6 +118,24 @@ const Stage5Page = () => {
                 </p>
               </div>
 
+              <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-green">
+                                    <TickSheet />
+                                </span>
+                Your checklist
+              </p>
+              <div className="side-grey">
+                <div className="multiple-choice">
+                  <input
+                      className="form-control"
+                      id="id1"
+                      type="checkbox"
+                  />
+                  <label className="form-label" htmlFor="id1">
+                    You have completed the Business Plan that will show how much money is required.
+                  </label>
+                </div>
+              </div>
             </div>
           </div>
         </section>

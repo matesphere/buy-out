@@ -56,7 +56,7 @@ const HelpPage = () => {
                                 <li className="sm-type-lead mb-4">
                                     Your help guide will always appear in the
                                     "Helpful information" boxes. <br />
-                                    Look out for this icon{' '}
+                                    Look out for this orange icon{' '}
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
@@ -65,14 +65,18 @@ const HelpPage = () => {
                                     Make sure you read all the information and
                                     check "Your checklist" to make sure you have
                                     completed the task. <br />
-                                    Look out for this icon{' '}
+                                    Look out for this green icon{' '}
                                     <span className="side-icon side-icon-green">
                                         <TickSheet />
                                     </span>
                                 </li>
+
                                 <li className="sm-type-lead mb-4">
-                                    You wont be able to move on until you click
-                                    all the boxes in the "Your checklist" area.
+                                    You will find the task to complete at each stage. <br />
+                                    Look out for this red icon{' '}
+                                    <span className="side-icon side-icon-red">
+                                        <TickSheet />
+                                    </span>
                                 </li>
                             </ol>
                         </div>
@@ -97,9 +101,6 @@ const HelpPage = () => {
                                 Example checklist
                             </p>
                             <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Check all task here:
-                                </p>
                                 <div className="multiple-choice">
                                     <input
                                         className="form-control"

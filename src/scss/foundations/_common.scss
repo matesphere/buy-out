@@ -37,6 +37,14 @@ p {
     text-align: center;
 }
 
+.text-underline {
+    text-decoration: underline;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
 .visuallyhidden {
     border: 0;
     clip: rect(0 0 0 0);
@@ -372,6 +380,10 @@ p {
 
     &-green svg {
         fill: $brand-green;
+    }
+
+    &-red svg {
+        fill: $brand-red;
     }
 }
 
@@ -717,11 +729,24 @@ input:focus, textarea:focus, select:focus, button:focus {
 }
 
 .react-tabs__tab--selected {
-    background: #eeeeee;
     color: black;
     border-radius: 5px 5px 0 0;
     margin: 0;
     color: $brand-body;
+    border-top: 1px solid $brand-darkgreen;
+    border-left: 1px solid $brand-darkgreen;
+    border-right: 1px solid $brand-darkgreen;
+    position: relative;
+
+    &:after {
+        content: " ";
+        position: absolute;
+        height: 2px;
+        width: calc(100% - 2px);
+        border: 2px solid #ffffff;
+        left: 1px;
+        bottom: -1px;
+    }
 }
 
 .react-tabs__tab--disabled {
@@ -740,10 +765,13 @@ input:focus, textarea:focus, select:focus, button:focus {
 
 .react-tabs--information {
   &--inner {
-    background-color: #eeeeee;
     margin-bottom: 16px;
     padding: 16px;
     border-bottom-right-radius: 16px;
     border-bottom-left-radius: 16px;
+      border-top: 1px solid $brand-darkgreen;
+      border-bottom: 1px solid $brand-darkgreen;
+      border-left: 1px solid $brand-darkgreen;
+      border-right: 1px solid $brand-darkgreen;
   }
 }

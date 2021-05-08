@@ -30,14 +30,14 @@ const STAGE_1_COMPLETE_QUERY = gql`
 
 const Stage1Complete = () => {
     const data = useStaticQuery(graphql`
-        query {
-            file(relativePath: { eq: "fairer-scotland.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
+    query {
+      image1: file(relativePath: { eq: "congratulations.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED)
         }
-    `)
+      }
+    }
+  `);
 
     const { loading, error, data: pageData } = useQuery(
         STAGE_1_COMPLETE_QUERY,
@@ -75,81 +75,33 @@ const Stage1Complete = () => {
                             <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 Research: Complete
                             </h1>
-                            <p className="sm-type-guitar sm-type-guitar--medium mt-4 mb-4">
-                                The legitimate place of people in the landscape:
-                                renewing and repopulating rural Scotland
-                            </p>
-                            <ul>
-                                <li>
-                                    <p className="sm-type-lead">
-                                        Contact Community Land Scotland (CLS)
-                                    </p>
-                                    <ul className="mb-4">
-                                        <li className="mb-2">
-                                            Some information to help you here
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <p className="sm-type-lead">
-                                        Find out about what funding is available
-                                    </p>
-                                    <ul className="mb-4">
-                                        <li className="mb-2">
-                                            Some information to help you here
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <p className="sm-type-lead">
-                                        Get in touch with the agencies that can
-                                        support you through the journey
-                                    </p>
-                                    <ul className="mb-4">
-                                        <li className="mb-2">
-                                            Some information to help you here
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <p className="sm-type-lead">
-                                        Look into options: Protocol or CRTB
-                                    </p>
-                                    <ul className="mb-4">
-                                        <li className="mb-2">
-                                            CLS has a ‘Protocol for Negotiated
-                                            Sales of Land with Scottish Land and
-                                            Estates’ (SLE), which provide
-                                            guidance for sales between SLE and
-                                            CLS members
-                                        </li>
-                                        <li>
-                                            'Community Right To Buy' (CRTB) is a
-                                            statutory route that allows
-                                            communities the right to buy land
-                                            when it comes up for sale.
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <p className="sm-type-lead">
-                                        Identify who the landowner is
-                                    </p>
-                                    <ul className="mb-4">
-                                        <li className="mb-2">
-                                            Some information to help you here
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <div className="mb-4">
+
+                            <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
-                                    alt=""
-                                    image={
-                                        data.file.childImageSharp
-                                            .gatsbyImageData
-                                    }
+                                    image={data.image1.childImageSharp.gatsbyImageData}
                                 />
+                            </div>
+                            <p className="sm-type-guitar mb-4">
+                                As the first stage of your Quest, it is
+                                important to gain some background knowledge
+                                about community land ownership in Scotland and
+                                also to think about some of the important
+                                concepts and issues.
+                            </p>
+                            <div className="side-grey">
+                                <p className="sm-type-bigdrum">
+                                    Congratulations!
+                                </p>
+                                <p className="sm-type-drum mb-4">
+                                    <span className="side-icon">
+                                            <Tick />
+                                        </span>
+                                    You have completed Stage 1.
+                                </p>
+                                <p className="sm-type-lead mb-4">
+                                    Your tutor feedback was: <br />"
+                                    {docFeedback}"
+                                </p>
                             </div>
                         </div>
 
@@ -162,20 +114,11 @@ const Stage1Complete = () => {
                             </p>
 
                             <div className="side-grey">
-                                <p className="sm-type-guitar">
-                                    <span className="side-icon">
-                                        <Tick />
-                                    </span>
-                                    Congratulations!
-                                </p>
-                                <p className="sm-type-amp mb-4">
+                                <p className="sm-type-amp mb-2">
                                     You have completed Stage 1.
                                 </p>
-                                <p className="sm-type-amp mb-4">
-                                    Your tutor feedback was: <br />"
-                                    {docFeedback}"
-                                </p>
-                                <p>
+
+                                <p className="sm-type-amp mb-2">
                                     <Link
                                         className="dark-link"
                                         to="/student/your-notes-completed"
@@ -183,9 +126,9 @@ const Stage1Complete = () => {
                                         Your Stage 1 notes
                                     </Link>
                                 </p>
-                                <p>
+                                <p className="sm-type-amp mb-2">
                                     <Link
-                                        className="dark-link"
+                                        className="btn-solid-lg"
                                         to="/student/stage-2"
                                     >
                                         Move onto Stage 2

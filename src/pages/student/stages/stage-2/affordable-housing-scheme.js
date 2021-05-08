@@ -11,7 +11,7 @@ import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
 
-const Stage3HousingPage = () => {
+const Stage2HousingPage = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "modular-house.jpg" }) {
@@ -29,11 +29,11 @@ const Stage3HousingPage = () => {
                     content="width=device-width, initial-scale=1.0"
                 />
                 <title>
-                    Stage 3 - Lay The Foundations - Affordable Housing
+                    Stage 2 - Lay The Foundations - Affordable Housing
                 </title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 3" />
+                <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -192,8 +192,8 @@ const Stage3HousingPage = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link href="/student/stage-3">
-                                        Back to Stage 3
+                                    <Link href="/student/stage-2">
+                                        Back to Stage 2
                                     </Link>
                                 </p>
                             </div>
@@ -207,4 +207,4 @@ const Stage3HousingPage = () => {
     )
 }
 
-export default Stage3HousingPage
+export default Stage2HousingPage

@@ -6,15 +6,14 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import HelpIcon from '../../../../assets/help-icon.svg'
+import TickSheet from '../../../../assets/tick-sheet.svg'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import '../../../../scss/index.scss'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import InfoPick from '../../../../assets/info-pick.svg'
-import scrollTo from "gatsby-plugin-smoothscroll";
-import TickSheet from "../../../../assets/tick-sheet.svg";
-import Tick from "../../../../assets/tick.svg";
+import {GatsbyImage} from "gatsby-plugin-image";
+import InfoPick from "../../../../assets/info-pick.svg";
 
-const Stage3Page = () => {
+const Stage2PlanPage = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "map-zoom.jpg" }) {
@@ -31,16 +30,17 @@ const Stage3Page = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 3 - Lay The Foundations</title>
+                <title>Stage 2 - Consult</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 3" />
+                <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Lay The Foundations
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+                                Consult
                             </h2>
+
                             <p className="sm-type-lead mb-3">
                                 Shown below is a map of Glenclas, with the
                                 locations of proposed development opportunities
@@ -186,7 +186,7 @@ const Stage3Page = () => {
                                             low running costs.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/affordable-housing-scheme">
+                                            <Link to="/student/stage-2/affordable-housing-scheme">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -209,7 +209,7 @@ const Stage3Page = () => {
                                             for older children.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/playpark-skatepark">
+                                            <Link to="/student/stage-2/playpark-skatepark">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -231,7 +231,7 @@ const Stage3Page = () => {
                                             local community and visitors.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/shop-and-post-office">
+                                            <Link to="/student/stage-2/shop-and-post-office">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -254,7 +254,7 @@ const Stage3Page = () => {
                                             electricity sold onto the grid.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/micro-hydro">
+                                            <Link to="/student/stage-2/micro-hydro">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -276,7 +276,7 @@ const Stage3Page = () => {
                                             electricity sold onto the grid.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/wind-turbine">
+                                            <Link to="/student/stage-2/wind-turbine">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -298,7 +298,7 @@ const Stage3Page = () => {
                                             workshops.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/business-hub">
+                                            <Link to="/student/stage-2/business-hub">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -323,7 +323,7 @@ const Stage3Page = () => {
                                             as climate mitigation
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/forestry-scheme">
+                                            <Link to="/student/stage-2/forestry-scheme">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -348,7 +348,7 @@ const Stage3Page = () => {
                                             the facilities.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/campsite-cabin">
+                                            <Link to="/student/stage-2/campsite-cabin">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -371,7 +371,7 @@ const Stage3Page = () => {
                                             Hotel and Lodge.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-3/market-scheme">
+                                            <Link to="/student/stage-2/market-scheme">
                                                 Read more about{' '}
                                             </Link>
                                         </p>
@@ -397,67 +397,6 @@ const Stage3Page = () => {
 
 
                             </div>
-
-                            <div className="side-grey">
-                                <h3 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet/>
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h3>
-                                <p className="sm-type-amp mb-2">
-                                    Choose a list of 5 options that you wish to take forward at this stage.
-                                </p>
-                                <div className="form-holder-border">
-                                <div className="form-holder">
-                                    <div className="mb-4" id="form-roles">
-                                        <ul>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 1
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 2
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 3
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 4
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 5
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                        </ul>
-
-                                        <button
-                                            className="btn-solid-lg"
-                                        >
-                                            Submit
-                                        </button>
-                                    </div>
-                                </div>
-                                </div>
-
-                            </div>
-
-
                         </div>
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2">
@@ -467,6 +406,46 @@ const Stage3Page = () => {
                                 Helpful information
                             </p>
                             <div className="side-grey">
+                                <p className="sm-type-amp">Useful links</p>
+                                <ul>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Civil parish
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Loch_Alsh"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Lochalsh
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Highland_council_area"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Highland
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Inverness-shire"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Inverness-shire
+                                        </a>
+                                    </li>
+                                </ul>
+
                                 <p className="sm-type-amp">
                                     Read all about Glenclas and find out what
                                     you need to move on to the next quest.
@@ -475,32 +454,13 @@ const Stage3Page = () => {
                                     Make notes of the amenities and the
                                     opportunities.
                                 </p>
+
                                 <p className="sm-type-amp">
-                                    <Link to="/student/stage-2/about-glenclas-people">
-                                        Hear from the people of Glenclas
+                                    <Link href="/student/stage-2">
+                                        Back to Stage 2
                                     </Link>
                                 </p>
                             </div>
-
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have decided as a team which 5 options to take forward.
-                                    </label>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </section>
@@ -511,4 +471,4 @@ const Stage3Page = () => {
     )
 }
 
-export default Stage3Page
+export default Stage2PlanPage
