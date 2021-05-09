@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useContext, FC, Dispatch } from 'react'
+import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { useMutation } from '@apollo/client'
-import {
-    INSERT_STUDENTS,
-    insertStudentsMapper,
-    startQuestMapper,
-} from '../../gql/mutations'
+// import { useMutation } from '@apollo/client'
+// import {
+//     INSERT_STUDENTS,
+//     insertStudentsMapper,
+//     startQuestMapper,
+// } from '../../gql/mutations'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
+
+import { NewQuestContext, NewQuestContextType } from '../tutor'
+
+import { StudentType } from '../../gql/types'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import '../../scss/index.scss'
@@ -16,13 +21,28 @@ import '../../scss/index.scss'
 const SCHOOL_ID = 'e89e1d0c-4be6-4716-a597-a7c1f6d0ee6f' // TODO: retrieve & store school ID somewhere
 
 // TODO: validation to check for any missing fields on students - show error in modal?
-const EMPTY_STUDENT = {
+const EMPTY_STUDENT: StudentType = {
     firstName: '',
     lastName: '',
     email: '',
 }
 
-const StudentInput = ({ num, name, email, setStudents }) => (
+interface StudentInputType {
+    num: number
+    name: string
+    email: string
+    setStudents: Dispatch<Array<StudentType>>
+}
+
+const updateField = (studentNum: number, field: string, value: string) => (students) => {
+    const studentsToUpdate = [...students]
+    const updatedStudent = { ...students[studentNum], [field]: value }
+    studentsToUpdate[studentNum] = updatedStudent
+
+    return studentsToUpdate
+}
+
+const StudentInput: FC<StudentInputType> = ({ num, name, email, setStudents }) => (
     <div className="side-grey row mb-4">
         <div className="col-lg-12">
             <p className="sm-type-amp sm-type-amp--medium">Student {num + 1}</p>
@@ -63,36 +83,30 @@ const StudentInput = ({ num, name, email, setStudents }) => (
     </div>
 )
 
-const updateField = (studentNum, field, value) => (students) => {
-    const studentsToUpdate = [...students]
-    const updatedStudent = { ...students[studentNum], [field]: value }
-    studentsToUpdate[studentNum] = updatedStudent
+// const useDelayedRender = (delay) => {
+//     const [delayed, setDelayed] = useState(true)
 
-    return studentsToUpdate
-}
+//     useEffect(() => {
+//         const timeout = setTimeout(() => setDelayed(false), delay)
+//         return () => clearTimeout(timeout)
+//     }, [])
 
-const useDelayedRender = (delay) => {
-    const [delayed, setDelayed] = useState(true)
+//     console.log(delayed)
+//     return (fn) => !delayed && fn()
+// }
 
-    useEffect(() => {
-        const timeout = setTimeout(() => setDelayed(false), delay)
-        return () => clearTimeout(timeout)
-    }, [])
+// const LoadingSpinner = ({ delay }) => {
+//     const delayedRender = useDelayedRender(delay)
 
-    console.log(delayed)
-    return (fn) => !delayed && fn()
-}
-
-const LoadingSpinner = ({ delay }) => {
-    const delayedRender = useDelayedRender(delay)
-
-    return delayedRender(() => <div className="loader"></div>)
-}
+//     return delayedRender(() => <div className="loader"></div>)
+// }
 
 const ConfirmModal = ({ students, setShowModal }) => {
-    const [insertStudents, { loading, error, data }] = useMutation(
-        INSERT_STUDENTS
-    )
+    // const [insertStudents, { loading, error, data }] = useMutation(
+    //     INSERT_STUDENTS
+    // )
+
+    const { studentsToAdd, setStudentsToAdd } = useContext(NewQuestContext)
 
     return (
         <div className="modal-window">
@@ -105,7 +119,7 @@ const ConfirmModal = ({ students, setShowModal }) => {
                     Cancel
                 </button>
 
-                {!data && (
+                {studentsToAdd.length === 0 && (
                     <>
                         <p className="sm-type-guitar sm-type-guitar--medium mt-4">
                             {`You are about to add ${students.length} students! Is this correct?`}{' '}
@@ -114,12 +128,7 @@ const ConfirmModal = ({ students, setShowModal }) => {
                         <button
                             className="btn-solid-lg mt-4"
                             onClick={() => {
-                                insertStudents({
-                                    variables: insertStudentsMapper(
-                                        students,
-                                        SCHOOL_ID
-                                    ),
-                                })
+                                setStudentsToAdd(students)
                             }}
                         >
                             Yes, add students
@@ -127,12 +136,12 @@ const ConfirmModal = ({ students, setShowModal }) => {
                     </>
                 )}
 
-                {loading && <LoadingSpinner delay={200} />}
+                {/* {loading && <LoadingSpinner delay={200} />} */}
 
-                {data && (
+                {studentsToAdd.length > 0 && (
                     <p className="sm-type-guitar sm-type-guitar--medium mt-4">
                         Done!{' '}
-                        <a href="/tutor/create-team">Go to create teams ></a>
+                        <Link to="/tutor/create-team">Go to create teams ></Link>
                     </p>
                 )}
             </div>
@@ -140,8 +149,8 @@ const ConfirmModal = ({ students, setShowModal }) => {
     )
 }
 
-const TutorAddPage = () => {
-    const [students, setStudents] = useState([EMPTY_STUDENT, EMPTY_STUDENT])
+const TutorAddPage: FC = () => {
+    const [students, setStudents] = useState<Array<StudentType>>([EMPTY_STUDENT, EMPTY_STUDENT])
     const [showModal, setShowModal] = useState(false)
 
     return (

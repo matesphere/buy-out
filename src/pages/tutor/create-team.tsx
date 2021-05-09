@@ -1,22 +1,31 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { useQuery, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 
-import { GET_STUDENTS } from '../../gql/queries'
 import {
-    CREATE_TEAMS_WITH_STUDENTS,
+    CREATE_TEAMS,
     START_QUEST,
-    createTeamWithStudentsMapper,
     startQuestMapper,
 } from '../../gql/mutations'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
+import { LoadingSpinner } from '../../components/common/LoadingSpinner'
+
+import {
+    addStudentToTeam,
+    mergeIdsIntoStudents,
+    createStudentsInCognito,
+} from '../../utils/AuthUtils'
+
+import { NewQuestContext } from '../tutor'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import Cross from '../../assets/cross.svg'
 import '../../scss/index.scss'
 
+const SCHOOL_ID = 'e89e1d0c-4be6-4716-a597-a7c1f6d0ee6f'
 const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
 
 // TODO: sort out 'team/teams' pluralisation in modals
@@ -73,9 +82,9 @@ const Team = ({ team: { name, students }, setTeams }) => (
                 <Cross />
             </span>
         </p>
-        {students.map(({ name }, i) => (
+        {students.map(({ firstName, lastName }, i) => (
             <p key={i} className="sm-type-amp">
-                {name}{' '}
+                {firstName} {lastName}
                 <span className="cross-icon">
                     <Cross />
                 </span>
@@ -84,35 +93,11 @@ const Team = ({ team: { name, students }, setTeams }) => (
     </>
 )
 
-const addStudentToTeam = (
-    teamNum,
-    { user_id, school_id, user: { full_name } }
-) => (teams) => {
-    const teamsToUpdate = [
-        ...teams.map((team) => ({
-            ...team,
-            students: team.students.filter(
-                (student) => student.userId !== user_id
-            ),
-        })),
-    ]
-
-    const updatedStudents = [
-        ...teams[teamNum].students,
-        { name: full_name, userId: user_id, schoolId: school_id },
-    ]
-
-    const updatedTeam = { ...teams[teamNum], students: updatedStudents }
-    teamsToUpdate[teamNum] = updatedTeam
-
-    return teamsToUpdate
-}
-
 const Student = ({ student, teams, setTeams }) => (
     <div className="side-grey row mb-4">
         <div className="col-lg-6">
             <p className="sm-type-guitar sm-type-guitar--medium">
-                {student.user.full_name}
+                {student.firstName} {student.lastName}
             </p>
         </div>
         <div className="col-lg-6">
@@ -139,29 +124,62 @@ const Student = ({ student, teams, setTeams }) => (
     </div>
 )
 
-const useDelayedRender = (delay) => {
-    const [delayed, setDelayed] = useState(true)
+const createStudents = async (
+    studentsWithTeamId,
+    setCognitoLoading,
+    setCognitoResponse
+) => {
+    setCognitoLoading(true)
+    const response = await createStudentsInCognito(studentsWithTeamId)
+
+    setCognitoLoading(false)
+    setCognitoResponse(response)
+}
+
+const CreateStudentsSection = ({
+    teamsWithStudents,
+    teamsFromResponse,
+    cognitoResponse,
+    setCognitoResponse,
+}) => {
+    const [cognitoLoading, setCognitoLoading] = useState(false)
+    // TODO: response is array of promises - need to handle rejections
+    // const [cognitoError, setCognitoError] = useState(false)
+
+    const studentsWithTeamId = mergeIdsIntoStudents(
+        teamsWithStudents,
+        teamsFromResponse,
+        SCHOOL_ID
+    )
 
     useEffect(() => {
-        const timeout = setTimeout(() => setDelayed(false), delay)
-        return () => clearTimeout(timeout)
+        if (cognitoResponse.length === 0) {
+            createStudents(
+                studentsWithTeamId,
+                setCognitoLoading,
+                setCognitoResponse
+            )
+        }
     }, [])
 
-    console.log(delayed)
-    return (fn) => !delayed && fn()
-}
+    return (
+        <>
+            {cognitoLoading && (
+                <>
+                    <p>Adding students to teams...</p>
+                    <LoadingSpinner delay={200} />
+                </>
+            )}
 
-const LoadingSpinner = ({ delay }) => {
-    const delayedRender = useDelayedRender(delay)
-
-    return delayedRender(() => <div className="loader"></div>)
-}
-
-const ConfirmModal = ({ teams, showModal, setShowModal }) => {
-    const [createTeams, createTeamsResponse] = useMutation(
-        CREATE_TEAMS_WITH_STUDENTS
+            {/* {cognitoError && <p>Oops, problem adding students!</p>} */}
+        </>
     )
+}
+
+const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
+    const [createTeams, createTeamsResponse] = useMutation(CREATE_TEAMS)
     const [startQuest, startQuestResponse] = useMutation(START_QUEST)
+    const [cognitoResponse, setCognitoResponse] = useState([])
 
     return (
         <>
@@ -186,10 +204,14 @@ const ConfirmModal = ({ teams, showModal, setShowModal }) => {
                                     className="btn-solid-lg mt-4"
                                     onClick={() => {
                                         createTeams({
-                                            variables: createTeamWithStudentsMapper(
-                                                teams,
-                                                TUTOR_ID
-                                            ),
+                                            variables: {
+                                                objects: teams.map(
+                                                    ({ name }) => ({
+                                                        name,
+                                                        tutor_id: TUTOR_ID,
+                                                    })
+                                                ),
+                                            },
                                         })
                                     }}
                                 >
@@ -207,25 +229,44 @@ const ConfirmModal = ({ teams, showModal, setShowModal }) => {
                                 <p className="sm-type-guitar sm-type-guitar--medium">
                                     {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
                                 </p>
-                                <button
-                                    className="btn-solid-lg mt-4 mb-4"
-                                    onClick={() => {
-                                        startQuest({
-                                            variables: startQuestMapper(
-                                                createTeamsResponse.data.insert_team.returning.map(
-                                                    (obj) => obj.id
-                                                )
-                                            ),
-                                        })
-                                        setShowModal(false)
-                                    }}
-                                >
-                                    START QUEST!
-                                </button>
-                                <span>
-                                    This will unlock Stage 1 for all created
-                                    teams
-                                </span>
+
+                                <CreateStudentsSection
+                                    teamsWithStudents={teams}
+                                    teamsFromResponse={
+                                        createTeamsResponse.data.insert_team
+                                            .returning
+                                    }
+                                    cognitoResponse={cognitoResponse}
+                                    setCognitoResponse={setCognitoResponse}
+                                />
+
+                                {cognitoResponse.length > 0 && (
+                                    <>
+                                        <p className="sm-type-guitar sm-type-guitar--medium">
+                                            {`${cognitoResponse.length} students added.`}{' '}
+                                        </p>
+                                        <button
+                                            className="btn-solid-lg mt-4 mb-4"
+                                            onClick={() => {
+                                                startQuest({
+                                                    variables: startQuestMapper(
+                                                        createTeamsResponse.data.insert_team.returning.map(
+                                                            (obj) => obj.id
+                                                        )
+                                                    ),
+                                                })
+                                                setShowModal(false)
+                                                setStudentsToAdd([])
+                                            }}
+                                        >
+                                            START QUEST!
+                                        </button>
+                                        <span>
+                                            This will unlock Stage 1 for all
+                                            created teams
+                                        </span>
+                                    </>
+                                )}
                             </div>
                         )}
                     </div>
@@ -238,12 +279,12 @@ const ConfirmModal = ({ teams, showModal, setShowModal }) => {
                         <p className="sm-type-guitar sm-type-guitar--medium mt-4">
                             {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
                         </p>
-                        <a
-                            href="/tutor/current-quest"
+                        <Link
+                            to="/tutor/current-quest"
                             className="btn-solid-lg mt-4 mb-4"
                         >
                             Go to current quest
-                        </a>
+                        </Link>
                     </div>
                 </div>
             )}
@@ -254,10 +295,11 @@ const ConfirmModal = ({ teams, showModal, setShowModal }) => {
 const TutorAddStudentPage = () => {
     const [teams, setTeams] = useState([])
     const [showModal, setShowModal] = useState(false)
-    const { loading, error, data } = useQuery(GET_STUDENTS)
+    // const { loading, error, data } = useQuery(GET_STUDENTS)
+    const { studentsToAdd, setStudentsToAdd } = useContext(NewQuestContext)
 
-    if (loading) return (<section className="container" id="main"><div className="row"><div className="col-lg-12 text-align-center"><div className="loader"></div><p className="sm-type-drum sm-type-drum--medium">Loading...</p></div></div></section>)
-    if (error) return `Error! ${error.message}`
+    // if (loading) return (<section className="container" id="main"><div className="row"><div className="col-lg-12 text-align-center"><div className="loader"></div><p className="sm-type-drum sm-type-drum--medium">Loading...</p></div></div></section>)
+    // if (error) return `Error! ${error.message}`
 
     return (
         <>
@@ -295,7 +337,7 @@ const TutorAddStudentPage = () => {
                                 id="form-login"
                                 action="/account/tutor-add-student-to-teams"
                             >
-                                {data.student.map((student, i) => (
+                                {studentsToAdd.map((student, i) => (
                                     <Student
                                         key={i}
                                         student={student}
@@ -330,7 +372,6 @@ const TutorAddStudentPage = () => {
                                         {teams.map((team, i) => (
                                             <Team
                                                 key={i}
-                                                pos={i}
                                                 team={team}
                                                 setTeams={setTeams}
                                             />
@@ -342,7 +383,9 @@ const TutorAddStudentPage = () => {
                     </div>
                 </section>
 
-                <ConfirmModal {...{ teams, showModal, setShowModal }} />
+                <ConfirmModal
+                    {...{ teams, showModal, setShowModal, setStudentsToAdd }}
+                />
 
                 <AccountFooter />
             </main>
