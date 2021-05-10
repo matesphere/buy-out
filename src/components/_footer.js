@@ -4,30 +4,27 @@ import { Link } from 'gatsby'
 
 import '../scss/index.scss'
 
-const Footer = () => {
-    return (
-        <footer className="footer">
-            <section className="container">
-                <div className="row">
-                    <div className="col-lg-12">
-                        <ul>
-                            <li>
-                                <Link to="/">Home</Link>
-                            </li>
-                            <li>
-                                <Link to="/student/team-hub/">Team hub</Link>
-                            </li>
-                            <li>
-                                <AmplifySignOut />
-                            </li>
-                        </ul>
+const Footer = () => (
+    <footer className="footer">
+        <section className="container">
+            <div className="row">
+                <div className="col-lg-12">
+                    <ul>
+                        <li>
+                            <Link to="/">Home</Link>
+                        </li>
+                        <li>
+                            <Link to="/student/team-hub/">Team hub</Link>
+                        </li>
+                        <li>
+                            <AmplifySignOut />
+                        </li>
+                    </ul>
 
-                        <p>Copyright 2021. All rights reserved.</p>
-                    </div>
+                    <p>Copyright 2021. All rights reserved.</p>
                 </div>
-            </section>
-        </footer>
-    )
-}
-
+            </div>
+        </section>
+    </footer>
+)
 export default Footer

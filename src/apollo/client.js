@@ -1,10 +1,10 @@
 import fetch from 'cross-fetch'
 import {
     ApolloClient,
-    ApolloLink,
+    // ApolloLink,
     InMemoryCache,
     HttpLink,
-    from,
+    // from,
     split,
 } from '@apollo/client'
 import { WebSocketLink } from '@apollo/client/link/ws'
@@ -27,11 +27,11 @@ const wsLink = new WebSocketLink({
     uri: `wss://clq.beanmate.coffee/v1/graphql`,
     options: {
         reconnect: false,
-        connectionParams: {
-            headers: {
-                'x-hasura-access-key': 'community-land',
-            },
-        },
+        // connectionParams: {
+        //     headers: {
+        //         'x-hasura-access-key': 'community-land',
+        //     },
+        // },
     },
     webSocketImpl: wsForNode,
 })

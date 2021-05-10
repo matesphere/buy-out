@@ -1,20 +1,67 @@
 export const eng = [
     {
-        text: "Representing Scotland’s Community Landowners",
+        text: "What do you think that ‘Community’ means?",
         description:
-            "Community Land Scotland represents Scotland’s new generation of community land owners. Together our members are managing some 560,000 acres of land, home to some 25,000 people.",
+            "(For example, is it just a physical space? You can give some examples of actual communities if it helps you to explain it.)",
     },
     {
-        text: "Supporting Community Land Ownership",
+        text: "What is your own community? ",
         description:
-            "We have a vision of more communities reaping the benefits of community land ownership. We work to inspire aspirant communities and influence the public policies that can help them. Have a look at our Eight Step Guide to a Community Land Buyout.",
+            "(If your team members are from different communities, or you feel that you are all part of a number of communities, then please include them all, showing which team member is linked to which community/communities.)",
     },
     {
-        text: "Promoting a Socially Just Scotland",
+        text: "Why are communities important to us?",
         description:
-            "We believe that we cannot create a more socially just Scotland without tackling land ownership. Half of the country’s privately owned land is held by just 432 owners and a mere 16 owners hold 10% of Scotland (Wightman 2013) – we want to see more of Scotland’s land in the hands of more of Scotland’s people.",
+            "(You need to discuss this carefully amongst the team members and come up with a statement with which you are all happy.)",
+    },
+    {
+        text: "What do you think it means to own land or buildings?",
+        description:
+            "(For example, does it give you certain rights?)",
+    },
+    {
+        text: "What do you think is meant by ‘power’ in this context?",
+        description:
+            "Some people might say that owning property (land, buildings, a shop, a pub), gives the owner power.",
+    },
+    {
+        text: "Who owns most land in Scotland?",
+        description:
+            "(You will need to carry out an Internet search to answer this question. Include information about private individuals as well as public bodies.)",
+    },
+    {
+        text: "What does this tell us about Scottish History?",
+        description:
+            "(In other words how did the current pattern of land ownership in Scotland come about?)",
+    },
+    {
+        text: "Find out if there are any community landowners in your area and then list their name(s) and what they own.",
+        description:
+            "(Most community landowners will have a website that will provide the information that you need for this and the remaining questions.)",
+    },
+    {
+        text: "Describe the characteristics of your local community landowner(s).",
+        description:
+            "",
+    },
+    {
+        text: "Why did they decide to buy the property?",
+        description:
+            "",
+    },
+    {
+        text: "What are they doing, or going to do, with it?",
+        description:
+            "",
+    },
+    {
+        text: "How do they make their decisions?",
+        description:
+            "",
     }
 ]
+
+
 
 export const gae = [
     {

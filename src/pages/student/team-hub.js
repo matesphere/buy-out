@@ -171,7 +171,19 @@ const TeamHub = () => {
         },
     })
 
-    if (loading) return 'Loading...'
+    if (loading)
+        return (
+            <section className="container" id="main">
+                <div className="row">
+                    <div className="col-lg-12 text-align-center">
+                        <div className="loader"></div>
+                        <p className="sm-type-drum sm-type-drum--medium">
+                            Loading...
+                        </p>
+                    </div>
+                </div>
+            </section>
+        )
     if (error) return `Error! ${error.message}`
 
     const {
@@ -208,9 +220,11 @@ const TeamHub = () => {
             <main className="the-quest">
                 <Header headerText="Team Hub" />
                 <section className="container" id="main">
-                    <div className="side-grey">
-                        <p className="sm-type-amp">{`Logged in as ${fullName}`}</p>
-                    </div>
+                    <p className="sm-type-amp mt-4">
+                        {' '}
+                        Logged in as{' '}
+                        <span className="sm-type-lead--medium">{`${fullName}`}</span>
+                    </p>
                     <div className="row">
                         <div className="col-lg-8">
                             <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">

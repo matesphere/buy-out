@@ -26,12 +26,24 @@ const TUTOR_HUB_QUERY = gql`
     }
 `
 
-const IndexPage = () => {
+const TutorHub = () => {
     const { loading, error, data } = useQuery(TUTOR_HUB_QUERY, {
         variables: { tutor_id: TUTOR_ID },
     })
 
-    if (loading) return 'Loading...'
+    if (loading)
+        return (
+            <section className="container" id="main">
+                <div className="row">
+                    <div className="col-lg-12 text-align-center">
+                        <div className="loader"></div>
+                        <p className="sm-type-drum sm-type-drum--medium">
+                            Loading...
+                        </p>
+                    </div>
+                </div>
+            </section>
+        )
     if (error) return `Error! ${error.message}`
 
     const {
@@ -136,4 +148,4 @@ const IndexPage = () => {
     )
 }
 
-export default IndexPage
+export default TutorHub

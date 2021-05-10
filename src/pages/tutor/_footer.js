@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { useMutation } from '@apollo/client'
 
-import '../../scss/index.scss'
-const AccountFooter = () => {
+import { RESET_DB } from '../../gql/mutations'
+
+const TutorFooter = () => {
+    const [resetDB, resetDBResponse] = useMutation(RESET_DB)
+
     return (
         <footer className="footer">
             <section className="container">
@@ -12,6 +16,12 @@ const AccountFooter = () => {
                             <li>
                                 <Link to="/tutor/hub/">Tutor Hub</Link>
                             </li>
+                            <li>
+                                <button onClick={() => resetDB()}>
+                                    Reset DB
+                                </button>
+                            </li>
+                            {resetDBResponse.data && <span> DB reset!</span>}
                         </ul>
 
                         <p>Copyright 2021. All rights reserved.</p>
@@ -22,4 +32,4 @@ const AccountFooter = () => {
     )
 }
 
-export default AccountFooter
+export default TutorFooter
