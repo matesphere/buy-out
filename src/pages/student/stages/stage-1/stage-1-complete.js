@@ -13,7 +13,7 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import '../../../../scss/index.scss'
 
 const STAGE_1_COMPLETE_QUERY = gql`
-    query StageQuery($name: String, $stageId: Int) {
+    query Stage1CompleteQuery($name: String, $stageId: Int) {
         user(where: { first_name: { _eq: $name } }) {
             student {
                 team {
@@ -30,21 +30,33 @@ const STAGE_1_COMPLETE_QUERY = gql`
 
 const Stage1Complete = () => {
     const data = useStaticQuery(graphql`
-    query {
-      image1: file(relativePath: { eq: "congratulations.jpg" }) {
-        childImageSharp {
-          gatsbyImageData(layout: CONSTRAINED)
+        query {
+            image1: file(relativePath: { eq: "congratulations.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
         }
-      }
-    }
-  `);
+    `)
 
     const { loading, error, data: pageData } = useQuery(
         STAGE_1_COMPLETE_QUERY,
         { variables: { name: 'Steve', stageId: 1 } }
     )
 
-    if (loading) return (<section className="container" id="main"><div className="row"><div className="col-lg-12 text-align-center"><div className="loader"></div><p className="sm-type-drum sm-type-drum--medium">Loading...</p></div></div></section>)
+    if (loading)
+        return (
+            <section className="container" id="main">
+                <div className="row">
+                    <div className="col-lg-12 text-align-center">
+                        <div className="loader"></div>
+                        <p className="sm-type-drum sm-type-drum--medium">
+                            Loading...
+                        </p>
+                    </div>
+                </div>
+            </section>
+        )
     if (error) return `Error! ${error.message}`
 
     const user = pageData.user[0]
@@ -78,7 +90,10 @@ const Stage1Complete = () => {
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
-                                    image={data.image1.childImageSharp.gatsbyImageData}
+                                    image={
+                                        data.image1.childImageSharp
+                                            .gatsbyImageData
+                                    }
                                 />
                             </div>
                             <p className="sm-type-guitar mb-4">
@@ -94,8 +109,8 @@ const Stage1Complete = () => {
                                 </p>
                                 <p className="sm-type-drum mb-4">
                                     <span className="side-icon">
-                                            <Tick />
-                                        </span>
+                                        <Tick />
+                                    </span>
                                     You have completed Stage 1.
                                 </p>
                                 <p className="sm-type-lead mb-4">

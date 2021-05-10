@@ -3,20 +3,20 @@ import { Helmet } from 'react-helmet'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
-import CKEditor from 'ckeditor4-react';
+import CKEditor from 'ckeditor4-react'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 import { eng } from '../../../_index.data'
-import {useMutation, useQuery} from "@apollo/client";
-import {SUBMIT_WORK} from "../../../../gql/mutations";
-import {gql} from "@apollo/client/core";
+import { useMutation, useQuery } from '@apollo/client'
+import { SUBMIT_WORK } from '../../../../gql/mutations'
+import { gql } from '@apollo/client/core'
 
 // TODO this will also probably use user ID (or team ID actually)
-const STAGE_1_QUERY = gql`
-    query StageQuery($name: String, $stageId: Int) {
+const STAGE_1_RESEARCH_QUERY = gql`
+    query Stage1ResearchQuery($name: String, $stageId: Int) {
         user(where: { first_name: { _eq: $name } }) {
             student {
                 team {
@@ -56,10 +56,10 @@ const CHECKBOX_LIST = ['You have researched and answered all 12 questions']
 
 // TODO: freeze this in place once work submitted (i.e. based on active doc submission in DB)
 const CheckboxList = ({
-                          checkboxState,
-                          toggleCheckbox,
-                          allCheckboxesChecked,
-                      }) => (
+    checkboxState,
+    toggleCheckbox,
+    allCheckboxesChecked,
+}) => (
     <div className="side-grey">
         <p className="sm-type-amp">Check all task here:</p>
         {checkboxState.map(({ id, label, value }) => (
@@ -83,20 +83,34 @@ const CheckboxList = ({
 )
 
 const Stage1ResearchPage = () => {
-
     const [
         checkboxState,
         toggleCheckbox,
         allCheckboxesChecked,
     ] = useCheckboxListState(CHECKBOX_LIST)
 
-    const { loading, error, data: pageData } = useQuery(STAGE_1_QUERY, {
-        variables: { name: 'Steve', stageId: 1 },
-    })
+    const { loading, error, data: pageData } = useQuery(
+        STAGE_1_RESEARCH_QUERY,
+        {
+            variables: { name: 'Steve', stageId: 1 },
+        }
+    )
 
     const [submitWork, submitWorkResponse] = useMutation(SUBMIT_WORK)
 
-    if (loading) return (<section className="container" id="main"><div className="row"><div className="col-lg-12 text-align-center"><div className="loader"></div><p className="sm-type-drum sm-type-drum--medium">Loading...</p></div></div></section>)
+    if (loading)
+        return (
+            <section className="container" id="main">
+                <div className="row">
+                    <div className="col-lg-12 text-align-center">
+                        <div className="loader"></div>
+                        <p className="sm-type-drum sm-type-drum--medium">
+                            Loading...
+                        </p>
+                    </div>
+                </div>
+            </section>
+        )
     if (error) return `Error! ${error.message}`
 
     const user = pageData.user[0]
@@ -143,9 +157,7 @@ const Stage1ResearchPage = () => {
                             </p>
                             <div className="side-grey">
                                 <p className="sm-type-amp">Useful links</p>
-
                             </div>
-
                         </div>
                     </div>
                     <div className="row">
@@ -166,9 +178,25 @@ const Stage1ResearchPage = () => {
                                             <div className="ck-textarea">
                                                 <CKEditor
                                                     name="editorOne"
-                                                    config={ {
-                                                        toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
-                                                    } }
+                                                    config={{
+                                                        toolbar: [
+                                                            [
+                                                                'Bold',
+                                                                'Italic',
+                                                                'Underline',
+                                                                'Strike',
+                                                                '-',
+                                                                'NumberedList',
+                                                                'BulletedList',
+                                                                '-',
+                                                                'JustifyLeft',
+                                                                'JustifyCenter',
+                                                                'JustifyRight',
+                                                                '-',
+                                                                'Format',
+                                                            ],
+                                                        ],
+                                                    }}
                                                 />
                                             </div>
                                         </li>
@@ -208,11 +236,8 @@ const Stage1ResearchPage = () => {
                                         <a href="doc.link">doc.link</a>
                                     </span>
                                 )}
-
                             </div>
                         </div>
-
-
                     </div>
                 </section>
                 <Footer />

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { gql, useQuery } from '@apollo/client'
 
@@ -12,40 +12,42 @@ import {
     CompletedStageStatus,
 } from '../../components/tutor/CurrentQuest'
 
+import { UserStateContext } from '../../utils/user-state' // TODO: replace with useAuthQuery
+
 import '../../scss/index.scss'
 
 const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
 
 const TUTOR_CURRENT_QUEST_QUERY = gql`
-    query TutorCurrentQuestQuery($tutor_id: uuid!) {
-        tutor_by_pk(id: $tutor_id) {
-            school {
-                name
-            }
-            user {
-                full_name
-                username
-                email
-            }
-            teams {
-                id
-                name
-                students {
-                    id
-                    user {
-                        full_name
-                    }
+    query TutorCurrentQuestQuery($user_id: uuid!) {
+        user_by_pk(id: $user_id) {
+            full_name
+            username
+            email
+            tutor {
+                school {
+                    name
                 }
-                stage_progresses {
+                teams {
                     id
-                    team_id
-                    stage_id
-                    status
-                    documents {
+                    name
+                    students {
                         id
+                        user {
+                            full_name
+                        }
+                    }
+                    stage_progresses {
+                        id
+                        team_id
+                        stage_id
                         status
-                        link
-                        feedback
+                        documents {
+                            id
+                            status
+                            link
+                            feedback
+                        }
                     }
                 }
             }
@@ -58,34 +60,34 @@ const TUTOR_CURRENT_QUEST_QUERY = gql`
 `
 const TUTOR_CURRENT_QUEST_SUB = gql`
     subscription TutorCurrentQuestSub($tutor_id: uuid!) {
-        tutor_by_pk(id: $tutor_id) {
-            school {
-                name
-            }
-            user {
-                full_name
-                username
-                email
-            }
-            teams {
-                id
-                name
-                students {
-                    id
-                    user {
-                        full_name
-                    }
+        user_by_pk(id: $user_id) {
+            full_name
+            username
+            email
+            tutor {
+                school {
+                    name
                 }
-                stage_progresses {
+                teams {
                     id
-                    team_id
-                    stage_id
-                    status
-                    documents {
+                    name
+                    students {
                         id
+                        user {
+                            full_name
+                        }
+                    }
+                    stage_progresses {
+                        id
+                        team_id
+                        stage_id
                         status
-                        link
-                        feedback
+                        documents {
+                            id
+                            status
+                            link
+                            feedback
+                        }
                     }
                 }
             }
@@ -153,19 +155,40 @@ const StageInfoPanel = ({ stages, stageProgresses, teamId }) => (
 )
 
 const TutorPage = () => {
+    const {
+        userInfo: { userId, token },
+    } = useContext(UserStateContext)
+
     const { loading, error, data, subscribeToMore } = useQuery(
         TUTOR_CURRENT_QUEST_QUERY,
         {
-            variables: { tutor_id: TUTOR_ID },
+            variables: { user_id: userId },
+            context: {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            },
         }
     )
 
-    if (loading) return (<section className="container" id="main"><div className="row"><div className="col-lg-12 text-align-center"><div className="loader"></div><p className="sm-type-drum sm-type-drum--medium">Loading...</p></div></div></section>)
+    if (loading)
+        return (
+            <section className="container" id="main">
+                <div className="row">
+                    <div className="col-lg-12 text-align-center">
+                        <div className="loader"></div>
+                        <p className="sm-type-drum sm-type-drum--medium">
+                            Loading...
+                        </p>
+                    </div>
+                </div>
+            </section>
+        )
     if (error) return `Error! ${error.message}`
 
     subscribeToMore({
         document: TUTOR_CURRENT_QUEST_SUB,
-        variables: { tutor_id: TUTOR_ID },
+        variables: { user_id: userId },
 
         updateQuery: (prev, { subscriptionData }) => {
             if (!subscriptionData.data) return prev
@@ -177,16 +200,21 @@ const TutorPage = () => {
             // if (subscriptionData.)
 
             return {
-                tutor_by_pk: {
-                    ...prev.tutor_by_pk,
-                    teams: subscriptionData.data.tutor_by_pk.teams,
+                user_by_pk: {
+                    ...prev.user_by_pk,
+                    tutor: {
+                        ...prev.user_by_pk.tutor,
+                        teams: subscriptionData.data.user_by_pk.tutor.teams,
+                    },
                 },
             }
         },
     })
 
     const {
-        tutor_by_pk: { teams },
+        user_by_pk: {
+            tutor: { teams },
+        },
         stage,
     } = data
 

@@ -27,8 +27,8 @@ import Tick from '../../assets/tick.svg'
 import HelpIcon from '../../assets/help-icon.svg'
 
 const TEAM_HUB_QUERY = gql`
-    query TeamHubQuery($id: uuid!) {
-        user_by_pk(id: $id) {
+    query TeamHubQuery($user_id: uuid!) {
+        user_by_pk(id: $user_id) {
             full_name
             student {
                 team {
@@ -53,8 +53,8 @@ const TEAM_HUB_QUERY = gql`
 `
 
 const TEAM_HUB_SUB = gql`
-    subscription TeamHubSub($id: uuid!) {
-        user_by_pk(id: $id) {
+    subscription TeamHubSub($user_id: uuid!) {
+        user_by_pk(id: $user_id) {
             full_name
             student {
                 team {
@@ -130,7 +130,7 @@ const TeamHub = () => {
         TEAM_HUB_QUERY,
         {
             variables: {
-                id: userId,
+                user_id: userId,
             },
             context: {
                 headers: {

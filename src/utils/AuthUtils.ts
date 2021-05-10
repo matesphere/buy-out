@@ -1,15 +1,31 @@
+import { useContext } from 'react'
+import { useQuery } from '@apollo/client'
 import axios from 'axios'
 
-export const genUsername = (firstName, lastName) =>
+import { UserStateContext } from './user-state'
+
+export const genUsername = (firstName: string, lastName: string) =>
     [firstName.toLowerCase()[0], lastName.toLowerCase()]
         .join('')
-        .concat(Math.floor(Math.random() * 99))
+        .concat(Math.floor(Math.random() * 99).toString())
 
 export const genPassword = () => 'abcdefg123' // TODO: password generator
 
-export const addStudentToTeam = (teamNum, { firstName, lastName, email }) => (
-    teams
-) => {
+interface TeamType {
+    name: string
+    students: Array<StudentType>
+}
+
+interface StudentType {
+    firstName: string
+    lastName: string
+    email: string
+}
+
+export const addStudentToTeam = (
+    teamNum: number,
+    { firstName, lastName, email }: StudentType
+) => (teams: Array<TeamType>) => {
     const teamsToUpdate = [
         ...teams.map((team) => ({
             ...team,
@@ -28,6 +44,36 @@ export const addStudentToTeam = (teamNum, { firstName, lastName, email }) => (
     teamsToUpdate[teamNum] = updatedTeam
 
     return teamsToUpdate
+}
+
+export const useAuthQuery = (query, options, idRequired) => {
+    const {
+        userInfo: { userId, teamId, token },
+    } = useContext(UserStateContext)
+
+    let variables = options?.variables || {}
+
+    if (idRequired === 'userId') {
+        variables = { ...variables, user_id: userId }
+    }
+
+    if (idRequired === 'teamId') {
+        variables = { ...variables, team_id: teamId }
+    }
+
+    console.log(variables)
+
+    const queryProps = useQuery(query, {
+        ...options,
+        variables,
+        context: {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        },
+    })
+
+    return { ...queryProps }
 }
 
 export const mergeIdsIntoStudents = (

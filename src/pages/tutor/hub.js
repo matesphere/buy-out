@@ -5,31 +5,34 @@ import { gql, useQuery } from '@apollo/client'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
+import { useAuthQuery } from '../../utils/AuthUtils'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import '../../scss/index.scss'
 
-const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
+// const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
 
 const TUTOR_HUB_QUERY = gql`
-    query TutorCurrentQuestQuery($tutor_id: uuid!) {
-        tutor_by_pk(id: $tutor_id) {
-            school {
-                name
-            }
-            user {
-                full_name
-                username
-                email
+    query TutorHubQuery($user_id: uuid!) {
+        user_by_pk(id: $user_id) {
+            full_name
+            username
+            email
+            tutor {
+                school {
+                    name
+                }
             }
         }
     }
 `
 
 const TutorHub = () => {
-    const { loading, error, data } = useQuery(TUTOR_HUB_QUERY, {
-        variables: { tutor_id: TUTOR_ID },
-    })
+    const { loading, error, data } = useAuthQuery(
+        TUTOR_HUB_QUERY,
+        null,
+        'userId'
+    )
 
     if (loading)
         return (
@@ -47,9 +50,11 @@ const TutorHub = () => {
     if (error) return `Error! ${error.message}`
 
     const {
-        tutor_by_pk: {
-            school: { name: schoolName },
-            user: { full_name: fullName },
+        user_by_pk: {
+            full_name: fullName,
+            tutor: {
+                school: { name: schoolName },
+            },
         },
     } = data
 
