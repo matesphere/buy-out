@@ -1,7 +1,6 @@
 import React, { createContext, useState } from 'react'
 import { Router } from '@reach/router'
 
-// import Login from './tutor/login'
 import Hub from './tutor/hub'
 import CurrentQuest from './tutor/current-quest'
 import NewQuest from './tutor/new-quest'
@@ -26,7 +25,6 @@ const Routes = () => {
     return (
         <NewQuestContext.Provider value={{ studentsToAdd, setStudentsToAdd }}>
             <Router basepath="/tutor">
-                {/* <Login path="/login" /> */}
                 <Hub path="/hub" />
                 <CurrentQuest path="/current-quest" />
                 <NewQuest path="/new-quest" />

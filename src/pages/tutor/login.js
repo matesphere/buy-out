@@ -1,12 +1,45 @@
 import React from 'react'
+import { Helmet } from 'react-helmet'
+import { withAuthenticator } from '@aws-amplify/ui-react'
+
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
-import '../../scss/index.scss'
 
-import { Helmet } from 'react-helmet'
 import HelpIcon from '../../assets/help-icon.svg'
 
-const IndexPage = () => {
+import '../../scss/index.scss'
+
+// const signUp = async (username, password, email) => {
+//     try {
+//         const { user } = await Auth.signUp({
+//             username,
+//             password,
+//             attributes: {
+//                 email,
+//             },
+//         })
+//         console.log(user)
+//     } catch (error) {
+//         console.log('error signing up:', error)
+//     }
+// }
+
+const signIn = async (username, password) => {
+    try {
+        const user = await Auth.signIn(username, password)
+    } catch (error) {
+        console.log('error signing in', error)
+    }
+}
+
+const handleSubmit = async (e) => {
+    e.preventDefault()
+    const { username, password } = e.target.elements
+    await signIn(username.value, password.value)
+}
+
+const TutorLogin = (props) => {
+    console.log(props)
     return (
         <>
             <Helmet>
@@ -24,20 +57,22 @@ const IndexPage = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                Enter your email and password
+                                Enter your username and password
                             </h2>
 
                             <form
                                 className="login-form mb-4"
                                 id="form-login"
-                                action="/tutor/hub"
+                                // action="/tutor/hub"
+                                onSubmit={handleSubmit}
                             >
                                 <div className="mb-2">
                                     <label className="form-label sm-type-amp">
-                                        Email
+                                        Username
                                     </label>
                                     <input
-                                        type="email"
+                                        id="username"
+                                        type="text"
                                         className="form-control"
                                     />
                                 </div>
@@ -46,6 +81,7 @@ const IndexPage = () => {
                                         Password
                                     </label>
                                     <input
+                                        id="password"
                                         type="password"
                                         className="form-control"
                                     />
@@ -80,4 +116,4 @@ const IndexPage = () => {
     )
 }
 
-export default IndexPage
+export default withAuthenticator(TutorLogin)

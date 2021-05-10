@@ -62,7 +62,6 @@ export const CREATE_TEAMS = gql`
 //             },
 //         },
 //     }))
-
 //     return { objects: mappedTeams }
 // }
 

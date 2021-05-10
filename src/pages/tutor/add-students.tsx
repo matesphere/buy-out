@@ -1,17 +1,11 @@
 import React, { useState, useContext, FC, Dispatch } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-// import { useMutation } from '@apollo/client'
-// import {
-//     INSERT_STUDENTS,
-//     insertStudentsMapper,
-//     startQuestMapper,
-// } from '../../gql/mutations'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
 
-import { NewQuestContext, NewQuestContextType } from '../tutor'
+import { NewQuestContext } from '../tutor'
 
 import { StudentType } from '../../gql/types'
 
