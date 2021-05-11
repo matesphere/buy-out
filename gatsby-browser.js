@@ -9,13 +9,13 @@ import Amplify from 'aws-amplify'
 Amplify.configure({
     Auth: {
         // REQUIRED - Amazon Cognito Region
-        region: process.env.AWS_REGION,
+        region: process.env.CLQ_AWS_REGION,
 
         // OPTIONAL - Amazon Cognito User Pool ID
-        userPoolId: process.env.AWS_USER_POOL_ID,
+        userPoolId: process.env.CLQ_AWS_USER_POOL_ID,
 
         // OPTIONAL - Amazon Cognito Web Client ID (26-char alphanumeric string)
-        userPoolWebClientId: process.env.AWS_APP_CLIENT_ID,
+        userPoolWebClientId: process.env.CLQ_AWS_APP_CLIENT_ID,
 
         // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
         mandatorySignIn: false,
