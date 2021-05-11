@@ -61,8 +61,6 @@ export const useAuthQuery = (query, options, idRequired) => {
         variables = { ...variables, team_id: teamId }
     }
 
-    console.log(variables)
-
     const queryProps = useQuery(query, {
         ...options,
         variables,
