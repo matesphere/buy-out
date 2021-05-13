@@ -59,7 +59,7 @@ const TUTOR_CURRENT_QUEST_QUERY = gql`
     }
 `
 const TUTOR_CURRENT_QUEST_SUB = gql`
-    subscription TutorCurrentQuestSub($tutor_id: uuid!) {
+    subscription TutorCurrentQuestSub($user_id: uuid!) {
         user_by_pk(id: $user_id) {
             full_name
             username

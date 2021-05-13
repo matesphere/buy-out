@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { useQuery } from '@apollo/client'
+import { useQuery, DocumentNode, QueryHookOptions } from '@apollo/client'
 import axios from 'axios'
 
 import { UserStateContext } from './user-state'
@@ -46,7 +46,11 @@ export const addStudentToTeam = (
     return teamsToUpdate
 }
 
-export const useAuthQuery = (query, options, idRequired) => {
+export const useAuthQuery = <TData, TVariables>(
+    query: DocumentNode,
+    options: QueryHookOptions,
+    idRequired: 'userId' | 'teamId'
+) => {
     const {
         userInfo: { userId, teamId, token },
     } = useContext(UserStateContext)
@@ -61,7 +65,7 @@ export const useAuthQuery = (query, options, idRequired) => {
         variables = { ...variables, team_id: teamId }
     }
 
-    const queryProps = useQuery(query, {
+    const queryProps = useQuery<TData, TVariables>(query, {
         ...options,
         variables,
         context: {

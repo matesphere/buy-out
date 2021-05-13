@@ -30,7 +30,7 @@ export const LockedStageStatus = ({ teamId, stageId }) => {
                                                     {
                                                         data: unlockStage,
                                                         fragment: gql`
-                                                            fragment NewStageProgress on StageProgress {
+                                                            fragment NewStageProgress on stage_progress {
                                                                 id
                                                                 team_id
                                                                 stage_id
@@ -82,7 +82,9 @@ export const LockedStageStatus = ({ teamId, stageId }) => {
 export const UnlockedStageStatus = () => (
     <div className="progress">
         <Progress />
-        <span>Unlocked - <span className="green-link">In progress</span></span>
+        <span>
+            Unlocked - <span className="green-link">In progress</span>
+        </span>
     </div>
 )
 
@@ -108,7 +110,7 @@ export const SubmittedStageStatus = ({ documents, stageProgressId }) => {
                                                     {
                                                         data: unlockStage,
                                                         fragment: gql`
-                                                            fragment NewStageProgress on StageProgress {
+                                                            fragment NewStageProgress on stage_progress {
                                                                 id
                                                                 team_id
                                                                 stage_id

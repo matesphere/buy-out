@@ -4,19 +4,19 @@ import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 export const UserStateContext = createContext({
     isSignedIn: false,
     userInfo: {},
-    user: {},
+    // user: {},
 })
 
 export const UserStateProvider = ({ children }) => {
     const [authState, setAuthState] = useState({})
-    const [user, setUser] = useState({})
+    // const [user, setUser] = useState({})
     const [userInfo, setUserInfo] = useState({})
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, authData) => {
             console.log('changed')
             setAuthState(nextAuthState)
-            setUser(authData)
+            // setUser(authData)
             setUserInfo(
                 nextAuthState === AuthState.SignedIn
                     ? {
@@ -31,11 +31,11 @@ export const UserStateProvider = ({ children }) => {
         })
     }, [])
 
-    const isSignedIn = authState === AuthState.SignedIn && !!user
+    const isSignedIn = authState === AuthState.SignedIn && !!userInfo
 
     // TODO: remove user object from here, useful for now as shows all methods etc
     return (
-        <UserStateContext.Provider value={{ isSignedIn, userInfo, user }}>
+        <UserStateContext.Provider value={{ isSignedIn, userInfo }}>
             {children}
         </UserStateContext.Provider>
     )
