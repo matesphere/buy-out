@@ -156,3 +156,22 @@
   height: 26px;
   margin: 0 8px;
 }
+
+.save-icon {
+  width: 12rem;
+  color: white;
+  background-color: $brand-red;
+  border-radius: 4px;
+  position: fixed;
+  right: 10px;
+  bottom: 120px;
+  z-index: 200;
+
+
+  svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+    margin: 10px;
+  }
+}

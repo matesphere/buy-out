@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "gatsby";
 import { Helmet } from "react-helmet";
 import { graphql, useStaticQuery } from "gatsby";
@@ -10,7 +10,6 @@ import HelpIcon from "../../../../assets/help-icon.svg";
 import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
 import TickSheet from "../../../../assets/tick-sheet.svg";
-import CKEditor from "ckeditor4-react";
 
 const Stage5Page = () => {
   const data = useStaticQuery(graphql`
@@ -71,31 +70,13 @@ const Stage5Page = () => {
                   </span>
                 </h3>
                 <p className="sm-type-lead mb-2">
-                  Complete a Business Plan that will show how much money is required.
+                  Once you have completed your SWOT analysis proceed to submitting your findings.
                 </p>
-
                 <div className="form-holder-border">
-                  <div id="more-detail-hint">
-                    <h4 className="sm-type-guitar mb-2">
-                      Business Plan
-                    </h4>
-                    <p className="sm-type-amp mb-1">
-                      Paste your Business Plan below.
-                    </p>
-                  </div>
-                  <div className="ck-textarea">
-                    <CKEditor
-                        name="editorOne"
-                        config={ {
-                          toolbar: [ [ 'Bold', 'Italic', 'Underline', 'Strike', '-', 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', '-', 'Format' ] ]
-                        } }
-                    />
-                  </div>
+                  <ul>
+                    <li className="sm-type-guitar">Complete your <Link to="/student/stage-5/business-plan">Buiness Plan here</Link>.</li>
+                  </ul>
                 </div>
-
-                <button className="btn-solid-lg mt-4">
-                  Submit Work
-                </button>
               </div>
 
             </div>

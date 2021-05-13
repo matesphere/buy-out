@@ -25,6 +25,7 @@ import Stage4Page from './student/stages/stage-4/stage-4'
 import Stage4SwotOne from './student/stages/stage-4/swot-study-one'
 import Stage4FeasibilityOne from './student/stages/stage-4/feasibility-study-one'
 import Stage5Page from './student/stages/stage-5/stage-5'
+import BusinessPlanPage from './student/stages/stage-5/business-plan'
 import Stage6Page from './student/stages/stage-6/stage-6'
 import Stage7Page from './student/stages/stage-7/stage-7'
 import Stage8Page from './student/stages/stage-8/stage-8'
@@ -124,6 +125,10 @@ const Routes = () => {
             />
 
             <LoggedInRoute path="/stage-5" component={Stage5Page} />
+            <LoggedInRoute
+                path="/stage-5/business-plan"
+                component={BusinessPlanPage}
+            />
             <LoggedInRoute path="/stage-6" component={Stage6Page} />
             <LoggedInRoute path="/stage-7" component={Stage7Page} />
             <LoggedInRoute path="/stage-8" component={Stage8Page} />
