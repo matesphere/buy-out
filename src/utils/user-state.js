@@ -14,16 +14,16 @@ export const UserStateProvider = ({ children }) => {
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, authData) => {
-            console.log('changed')
             setAuthState(nextAuthState)
             // setUser(authData)
             setUserInfo(
                 nextAuthState === AuthState.SignedIn
                     ? {
                           username: authData.username,
-                          userId: authData.attributes.sub,
                           role: authData.attributes['custom:role'],
+                          userId: authData.attributes.sub,
                           schoolId: authData.attributes['custom:school_id'],
+                          teamId: authData.attributes['custom:team_id'],
                           token: authData.signInUserSession.idToken.jwtToken,
                       }
                     : {}

@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { gql } from '@apollo/client'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 
-import { useAuthQuery } from '../utils/AuthUtils'
+import { useAuthQuery } from '../utils/auth-utils'
 import { UserStateContext } from '../utils/user-state'
 
 import {

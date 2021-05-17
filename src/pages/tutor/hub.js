@@ -5,7 +5,7 @@ import { gql, useQuery } from '@apollo/client'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
-import { useAuthQuery } from '../../utils/AuthUtils'
+import { useAuthQuery } from '../../utils/auth-utils'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import '../../scss/index.scss'

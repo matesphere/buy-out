@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
+
+import { useAuthQuery } from '../../../../utils/auth-utils'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -14,11 +16,11 @@ import DogVideo from '../../../../assets/the-quest.mp4'
 
 // TODO this will also probably use user ID (or team ID actually)
 const STAGE_1_QUERY = gql`
-    query Stage1Query($name: String, $stageId: Int) {
-        user(where: { first_name: { _eq: $name } }) {
+    query Stage1Query($user_id: uuid!, $stage_id: Int) {
+        user_by_pk(id: $user_id) {
             student {
                 team {
-                    stage_progresses(where: { stage_id: { _eq: $stageId } }) {
+                    stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
                         id
                         stage_id
                         status
@@ -30,9 +32,17 @@ const STAGE_1_QUERY = gql`
 `
 
 const QuestPage = () => {
-    const { loading, error, data: pageData } = useQuery(STAGE_1_QUERY, {
-        variables: { name: 'Steve', stageId: 1 },
-    })
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery(
+        STAGE_1_QUERY,
+        {
+            variables: { stage_id: 1 },
+        },
+        'userId'
+    )
 
     if (loading)
         return (
@@ -49,13 +59,11 @@ const QuestPage = () => {
         )
     if (error) return `Error! ${error.message}`
 
-    const user = pageData.user[0]
-
     const {
         student: {
             team: { stage_progresses: stageProgresses },
         },
-    } = user
+    } = pageData.user_by_pk
 
     return (
         <>

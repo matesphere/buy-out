@@ -17,7 +17,7 @@ import {
     addStudentToTeam,
     mergeIdsIntoStudents,
     createStudentsInCognito,
-} from '../../utils/AuthUtils'
+} from '../../utils/auth-utils'
 
 import { NewQuestContext } from '../tutor'
 

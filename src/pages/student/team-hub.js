@@ -126,50 +126,54 @@ const TeamHub = () => {
         }
     `)
 
-    const { loading, error, data: pageData, subscribeToMore } = useQuery(
-        TEAM_HUB_QUERY,
-        {
-            variables: {
-                user_id: userId,
-            },
-            context: {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            },
-        }
-    )
-
-    subscribeToMore({
-        document: TEAM_HUB_SUB,
+    const {
+        loading,
+        error,
+        data: pageData,
+        // subscribeToMore,
+    } = useQuery(TEAM_HUB_QUERY, {
         variables: {
-            id: userId,
+            user_id: userId,
         },
         context: {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
         },
-
-        updateQuery: (prev, { subscriptionData }) => {
-            if (!subscriptionData.data) return prev
-
-            // TODO big check whether status of any stages has actually changed
-            // const stageProgressesWithStatus =
-            //     subscriptionData.data.user[0].student.team.stage_progresses
-
-            // if (subscriptionData.)
-
-            return {
-                ...prev,
-                user: [
-                    {
-                        ...subscriptionData.data.user_by_pk[0],
-                    },
-                ],
-            }
-        },
     })
+
+    // TODO: sort out passing dynamic auth token to subscription: https://github.com/apollographql/apollo-server/issues/1505 https://github.com/apollographql/apollo-link/issues/197
+
+    // subscribeToMore({
+    //     document: TEAM_HUB_SUB,
+    //     variables: {
+    //         user_id: userId,
+    //     },
+    //     context: {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`,
+    //         },
+    //     },
+
+    //     updateQuery: (prev, { subscriptionData }) => {
+    //         if (!subscriptionData.data) return prev
+
+    //         // TODO big check whether status of any stages has actually changed
+    //         // const stageProgressesWithStatus =
+    //         //     subscriptionData.data.user[0].student.team.stage_progresses
+
+    //         // if (subscriptionData.)
+
+    //         return {
+    //             ...prev,
+    //             user: [
+    //                 {
+    //                     ...subscriptionData.data.user_by_pk[0],
+    //                 },
+    //             ],
+    //         }
+    //     },
+    // })
 
     if (loading)
         return (
