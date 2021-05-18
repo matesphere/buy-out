@@ -10,7 +10,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import '../../../../scss/index.scss'
-import {GatsbyImage} from "gatsby-plugin-image";
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const Stage2Page = () => {
     const data = useStaticQuery(graphql`
@@ -48,6 +48,10 @@ const Stage2Page = () => {
                                 that has come up for sale.
                             </p>
 
+                            <p className="sm-type-lead mb-3">
+                                The land that has come up for sale is next to
+                                the village of GLENCLAS.
+                            </p>
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
                                     image={
@@ -71,28 +75,25 @@ const Stage2Page = () => {
                                 You will now need to design a logo that will
                                 appear on any documentation that you produce.
                             </p>
-                            <p className="sm-type-lead mb-3">
-                                The land that has come up for sale is next to
-                                the (fictional) village of GLENCLAS.
-                            </p>
 
                             <h3 className="sm-type-drum mb-3">
-                                Read about the Glenclas area.
+                                1. Read about the Glenclas area.
                             </h3>
 
                             <p className="sm-type-bigamp mb-3">
-                                Here you will find a
-                                description of Glenclas village and its
-                                community.
+                                Here you will find a description of Glenclas
+                                village and its community.
                             </p>
                             <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/stage-2/about-glenclas-area">Read about the area.</Link>
+                                <Link to="/student/stage-2/about-glenclas-area">
+                                    Read about the area.
+                                </Link>
                             </p>
 
-
-
                             <h3 className="sm-type-drum mb- mt-4">
-                                Read about the potential options here.
+                                2. Consult with the people of Glenclas about
+                                development options that could help the
+                                community.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
                                 Here you will find a map of Glenclas, with the
@@ -100,9 +101,10 @@ const Stage2Page = () => {
                                 marked.
                             </p>
                             <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/stage-2/plan-of-glenclas">See what options are available.</Link>
+                                <Link to="/student/stage-2/plan-of-glenclas">
+                                    See what options are available.
+                                </Link>
                             </p>
-
 
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
@@ -129,8 +131,8 @@ const Stage2Page = () => {
                                         <li className="sm-type-guitar">
                                             Find more{' '}
                                             <Link href="/student/stage-2/the-roles">
-                                                information about the roles and choose
-                                                your Board here
+                                                information about the roles and
+                                                choose your Board here
                                             </Link>
                                             .
                                         </li>
@@ -148,11 +150,6 @@ const Stage2Page = () => {
                             <div className="side-grey">
                                 <p className="sm-type-amp">Useful links</p>
                                 <ul>
-                                    <li>
-                                        <Link to="/student/stage-2/plan-of-glenclas">
-                                            See the potential options map of Glenclas
-                                        </Link>
-                                    </li>
                                     <li>
                                         <a
                                             href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
@@ -215,7 +212,9 @@ const Stage2Page = () => {
                                         type="checkbox"
                                     />
                                     <label className="form-label" htmlFor="id1">
-                                        You have read the information about Glenclas, the geography, atractions and facilities.
+                                        You have read the information about
+                                        Glenclas, the geography, atractions and
+                                        facilities.
                                     </label>
                                 </div>
 
@@ -248,7 +247,8 @@ const Stage2Page = () => {
                                         type="checkbox"
                                     />
                                     <label className="form-label" htmlFor="id1">
-                                        You have decided what roles you will undertake.
+                                        You have decided what roles you will
+                                        undertake.
                                     </label>
                                 </div>
                             </div>

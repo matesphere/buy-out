@@ -14,7 +14,6 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import '../../../../scss/index.scss'
 import DogVideo from '../../../../assets/the-quest.mp4'
 
-// TODO this will also probably use user ID (or team ID actually)
 const STAGE_1_QUERY = gql`
     query Stage1Query($user_id: uuid!, $stage_id: Int) {
         user_by_pk(id: $user_id) {

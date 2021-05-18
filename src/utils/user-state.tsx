@@ -7,13 +7,29 @@ export const UserStateContext = createContext({
     // user: {},
 })
 
+interface AuthDataType {
+    username: string
+    attributes: {
+        sub: string
+        'custom:role': string
+        'custom:school_id': string
+        'custom:team_id': string
+    }
+    signInUserSession: {
+        idToken: {
+            jwtToken: string
+        }
+    }
+}
+
 export const UserStateProvider = ({ children }) => {
     const [authState, setAuthState] = useState({})
     // const [user, setUser] = useState({})
     const [userInfo, setUserInfo] = useState({})
 
     useEffect(() => {
-        return onAuthUIStateChange((nextAuthState, authData) => {
+        return onAuthUIStateChange((nextAuthState, data) => {
+            const authData = data as AuthDataType
             setAuthState(nextAuthState)
             // setUser(authData)
             setUserInfo(

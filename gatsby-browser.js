@@ -20,6 +20,7 @@ Amplify.configure({
         // OPTIONAL - Enforce user authentication prior to accessing AWS resources or not
         mandatorySignIn: false,
 
+        // TODO if we can figure out httpOnly cookies we'll get WS auth for free
         // OPTIONAL - Configuration for cookie storage
         // Note: if the secure flag is set to true, then the cookie transmission requires a secure protocol
         // cookieStorage: {
