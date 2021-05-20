@@ -15,22 +15,18 @@ import '../../../../scss/index.scss'
 import DogVideo from '../../../../assets/the-quest.mp4'
 
 const STAGE_1_QUERY = gql`
-    query Stage1Query($user_id: uuid!, $stage_id: Int) {
-        user_by_pk(id: $user_id) {
-            student {
-                team {
-                    stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
-                        id
-                        stage_id
-                        status
-                    }
-                }
+    query Stage1Query($team_id: uuid!, $stage_id: Int) {
+        team_by_pk(id: $team_id) {
+            stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
+                id
+                stage_id
+                status
             }
         }
     }
 `
 
-const QuestPage = () => {
+const Stage1Page = () => {
     const {
         loading,
         error,
@@ -40,7 +36,7 @@ const QuestPage = () => {
         {
             variables: { stage_id: 1 },
         },
-        'userId'
+        'teamId'
     )
 
     if (loading)
@@ -58,11 +54,7 @@ const QuestPage = () => {
         )
     if (error) return `Error! ${error.message}`
 
-    const {
-        student: {
-            team: { stage_progresses: stageProgresses },
-        },
-    } = pageData.user_by_pk
+    const { stage_progresses: stageProgresses } = pageData.team_by_pk
 
     return (
         <>
@@ -245,4 +237,4 @@ const QuestPage = () => {
     )
 }
 
-export default QuestPage
+export default Stage1Page

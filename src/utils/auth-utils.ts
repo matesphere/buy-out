@@ -1,5 +1,10 @@
 import { useContext } from 'react'
-import { useQuery, DocumentNode, QueryHookOptions } from '@apollo/client'
+import {
+    useQuery,
+    useMutation,
+    DocumentNode,
+    QueryHookOptions,
+} from '@apollo/client'
 import axios from 'axios'
 
 import { UserStateContext } from './user-state'
@@ -22,29 +27,28 @@ interface StudentType {
     email: string
 }
 
-export const addStudentToTeam = (
-    teamNum: number,
-    { firstName, lastName, email }: StudentType
-) => (teams: Array<TeamType>) => {
-    const teamsToUpdate = [
-        ...teams.map((team) => ({
-            ...team,
-            students: team.students.filter(
-                (student) => student.email !== email // remove student in case they are switching from one team to another!
-            ),
-        })),
-    ]
+export const addStudentToTeam =
+    (teamNum: number, { firstName, lastName, email }: StudentType) =>
+    (teams: Array<TeamType>) => {
+        const teamsToUpdate = [
+            ...teams.map((team) => ({
+                ...team,
+                students: team.students.filter(
+                    (student) => student.email !== email // remove student in case they are switching from one team to another!
+                ),
+            })),
+        ]
 
-    const updatedStudents = [
-        ...teams[teamNum].students,
-        { firstName, lastName, email },
-    ]
+        const updatedStudents = [
+            ...teams[teamNum].students,
+            { firstName, lastName, email },
+        ]
 
-    const updatedTeam = { ...teams[teamNum], students: updatedStudents }
-    teamsToUpdate[teamNum] = updatedTeam
+        const updatedTeam = { ...teams[teamNum], students: updatedStudents }
+        teamsToUpdate[teamNum] = updatedTeam
 
-    return teamsToUpdate
-}
+        return teamsToUpdate
+    }
 
 export const useAuthQuery = <TData, TVariables>(
     query: DocumentNode,
@@ -76,6 +80,18 @@ export const useAuthQuery = <TData, TVariables>(
     })
 
     return { ...queryProps }
+}
+
+export const useAuthMutation = (query) => {
+    const {
+        userInfo: { token },
+    } = useContext(UserStateContext)
+
+    const [mutation, mutationResponse] = useMutation(query, {
+        context: { headers: { Authorization: `Bearer ${token}` } },
+    })
+
+    return [mutation, mutationResponse]
 }
 
 export const mergeIdsIntoStudents = (

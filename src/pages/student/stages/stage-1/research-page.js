@@ -1,102 +1,137 @@
-import React, { useState } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
+import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
-import CKEditor from 'ckeditor4-react'
+import { TextEditor } from '../../../../components/common/TextEditor'
+
+import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
+// import { useCheckboxListState } from '../../../../utils/input-utils'
+
+import { SAVE_WORK, SUBMIT_WORK } from '../../../../gql/mutations'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
+// import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 import { eng } from '../../../_index.data'
-import { useMutation, useQuery } from '@apollo/client'
-import { SUBMIT_WORK } from '../../../../gql/mutations'
-import { gql } from '@apollo/client/core'
 
-// TODO this will also probably use user ID (or team ID actually)
 const STAGE_1_RESEARCH_QUERY = gql`
-    query Stage1ResearchQuery($name: String, $stageId: Int) {
-        user(where: { first_name: { _eq: $name } }) {
-            student {
-                team {
-                    stage_progresses(where: { stage_id: { _eq: $stageId } }) {
-                        id
-                        stage_id
-                        status
-                    }
+    query Stage1ResearchQuery($team_id: uuid!, $stage_id: Int) {
+        team_by_pk(id: $team_id) {
+            stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
+                id
+                stage_id
+                status
+                documents(where: { status: { _eq: draft } }) {
+                    id
+                    doc_data
                 }
             }
         }
     }
 `
-const useCheckboxListState = (listOfLabels) => {
-    const [checkboxState, setCheckboxState] = useState(
-        listOfLabels.map((label, i) => ({ id: i, label, value: false }))
-    )
 
-    const toggleCheckbox = (id) => {
-        setCheckboxState((state) =>
-            state.map((checkbox) =>
-                checkbox.id === id
-                    ? { id, label: checkbox.label, value: !checkbox.value }
-                    : checkbox
-            )
-        )
+// const CHECKBOX_LIST = ['You have researched and answered all 12 questions']
+
+// // TODO: freeze this in place once work submitted (i.e. based on active doc submission in DB)
+// const CheckboxList = ({
+//     checkboxState,
+//     toggleCheckbox,
+//     allCheckboxesChecked,
+// }) => (
+//     <div className="side-grey">
+//         <p className="sm-type-amp">Check all task here:</p>
+//         {checkboxState.map(({ id, label, value }, i) => (
+//             <div key={i} className="multiple-choice">
+//                 <input
+//                     className="form-control"
+//                     id={id}
+//                     type="checkbox"
+//                     value={value ? 'checked' : 'unchecked'}
+//                     onChange={() => toggleCheckbox(id)}
+//                 />
+//                 <label className="form-label" htmlFor={id}>
+//                     {label}
+//                 </label>
+//             </div>
+//         ))}
+//         {allCheckboxesChecked && (
+//             <p className="sm-type-amp">You can now submit your findings.</p>
+//         )}
+//     </div>
+// )
+
+const questionReducer = (state, { type, payload }) => {
+    switch (type) {
+        case 'load':
+            return payload
+        case 'update':
+            return {
+                ...state,
+                [payload.question]: payload.answer,
+            }
+        default:
+            return state
     }
-
-    const allCheckboxesChecked = checkboxState
-        .map((checkbox) => checkbox.value)
-        .every(Boolean)
-
-    return [checkboxState, toggleCheckbox, allCheckboxesChecked]
 }
 
-const CHECKBOX_LIST = ['You have researched and answered all 12 questions']
+// TODO: extract this to be generic 'docState' hook, useDocState(query, vars, selector, reducer)
+// TODO: should be able to build in save & submit too (including adding doc ID to state for future save/submits)
+const useQuestionState = () => {
+    const [questionState, questionDispatch] = useReducer(questionReducer, {})
 
-// TODO: freeze this in place once work submitted (i.e. based on active doc submission in DB)
-const CheckboxList = ({
-    checkboxState,
-    toggleCheckbox,
-    allCheckboxesChecked,
-}) => (
-    <div className="side-grey">
-        <p className="sm-type-amp">Check all task here:</p>
-        {checkboxState.map(({ id, label, value }) => (
-            <div className="multiple-choice">
-                <input
-                    className="form-control"
-                    id={id}
-                    type="checkbox"
-                    value={value ? 'checked' : 'unchecked'}
-                    onChange={() => toggleCheckbox(id)}
-                />
-                <label className="form-label" htmlFor={id}>
-                    {label}
-                </label>
-            </div>
-        ))}
-        {allCheckboxesChecked && (
-            <p className="sm-type-amp">You can now submit your findings.</p>
-        )}
-    </div>
-)
-
-const Stage1ResearchPage = () => {
-    const [
-        checkboxState,
-        toggleCheckbox,
-        allCheckboxesChecked,
-    ] = useCheckboxListState(CHECKBOX_LIST)
-
-    const { loading, error, data: pageData } = useQuery(
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery(
         STAGE_1_RESEARCH_QUERY,
         {
-            variables: { name: 'Steve', stageId: 1 },
-        }
+            variables: { stage_id: 1 },
+        },
+        'teamId'
     )
 
-    const [submitWork, submitWorkResponse] = useMutation(SUBMIT_WORK)
+    useEffect(() => {
+        if (loading === false) {
+            const doc_data =
+                pageData?.team_by_pk?.stage_progresses[0]?.documents[0]
+                    ?.doc_data
+
+            if (doc_data) {
+                questionDispatch({
+                    type: 'load',
+                    payload: doc_data,
+                })
+            }
+        }
+    }, [loading, pageData])
+
+    return [loading, error, pageData, questionState, questionDispatch]
+}
+
+const Stage1ResearchPage = () => {
+    // const [checkboxState, toggleCheckbox, allCheckboxesChecked] =
+    //     useCheckboxListState(CHECKBOX_LIST)
+
+    // const {
+    //     loading,
+    //     error,
+    //     data: pageData,
+    // } = useAuthQuery(
+    //     STAGE_1_RESEARCH_QUERY,
+    //     {
+    //         variables: { stage_id: 1 },
+    //     },
+    //     'teamId'
+    // )
+
+    const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
+    const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK)
+    const [loading, error, pageData, questionState, questionDispatch] =
+        useQuestionState()
 
     if (loading)
         return (
@@ -113,15 +148,11 @@ const Stage1ResearchPage = () => {
         )
     if (error) return `Error! ${error.message}`
 
-    const user = pageData.user[0]
+    const { stage_progresses: stageProgresses } = pageData.team_by_pk
 
-    const {
-        student: {
-            team: { stage_progresses: stageProgresses },
-        },
-    } = user
-
+    // const docData = stageProgresses.documents[0].doc_data
     const stageProgressId = stageProgresses[0].id
+
     return (
         <>
             <Helmet>
@@ -167,7 +198,7 @@ const Stage1ResearchPage = () => {
                                     Questions
                                 </h3>
                                 <ol>
-                                    {eng.map((eng) => (
+                                    {eng.map((eng, i) => (
                                         <li key={eng.text}>
                                             <p className="sm-type-guitar">
                                                 {eng.text}
@@ -176,33 +207,25 @@ const Stage1ResearchPage = () => {
                                                 {eng.description}
                                             </p>
                                             <div className="ck-textarea">
-                                                <CKEditor
-                                                    name="editorOne"
-                                                    config={{
-                                                        toolbar: [
-                                                            [
-                                                                'Bold',
-                                                                'Italic',
-                                                                'Underline',
-                                                                'Strike',
-                                                                '-',
-                                                                'NumberedList',
-                                                                'BulletedList',
-                                                                '-',
-                                                                'JustifyLeft',
-                                                                'JustifyCenter',
-                                                                'JustifyRight',
-                                                                '-',
-                                                                'Format',
-                                                            ],
-                                                        ],
-                                                    }}
+                                                <TextEditor
+                                                    data={
+                                                        questionState[i] || ''
+                                                    }
+                                                    onChange={(data) =>
+                                                        questionDispatch({
+                                                            type: 'update',
+                                                            payload: {
+                                                                question: i,
+                                                                answer: data,
+                                                            },
+                                                        })
+                                                    }
                                                 />
                                             </div>
                                         </li>
                                     ))}
                                 </ol>
-                                <p className="sm-type-guitar mb-2">
+                                {/* <p className="sm-type-guitar mb-2">
                                     <span className="side-icon side-icon-green">
                                         <TickSheet />
                                     </span>
@@ -214,22 +237,38 @@ const Stage1ResearchPage = () => {
                                         toggleCheckbox,
                                         allCheckboxesChecked,
                                     }}
-                                />
+                                /> */}
 
                                 <button
                                     className="btn-solid-lg mt-4"
-                                    disabled={!allCheckboxesChecked}
+                                    onClick={() => {
+                                        saveWork({
+                                            variables: {
+                                                stageProgressId,
+                                                doc_data: questionState,
+                                            },
+                                        })
+                                    }}
+                                >
+                                    Save Work
+                                </button>
+
+                                <button
+                                    className="btn-solid-lg mt-4"
+                                    disabled={
+                                        Object.keys(questionState).length < 12
+                                    }
                                     onClick={() => {
                                         submitWork({
                                             variables: {
                                                 stageProgressId,
-                                                docLink: 'doc.link',
                                             },
                                         })
                                     }}
                                 >
                                     Submit Work
                                 </button>
+
                                 {submitWorkResponse.data && (
                                     <span>
                                         {`Doc submitted and available at `}

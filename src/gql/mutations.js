@@ -100,21 +100,37 @@ export const UNLOCK_STAGE = gql`
     }
 `
 
-export const SUBMIT_WORK = gql`
-    mutation SubmitWork($stageProgressId: uuid, $docLink: String) {
+// TODO: can't use stageProgressID & status as primary key, as team could have e.g. 2 failed attempts
+// think we will need to use ID - return it when saving then use it to save/submit
+export const SAVE_WORK = gql`
+    mutation SaveWork($stageProgressId: uuid, $doc_data: jsonb) {
         insert_document_one(
             object: {
                 stage_progress_id: $stageProgressId
-                link: $docLink
-                status: submitted
+                doc_data: $doc_data
+                status: draft
+            }
+            on_conflict: {
+                constraint: document_pkey
+                update_columns: [doc_data]
             }
         ) {
             id
-            link
             status
         }
-        update_stage_progress(
-            where: { id: { _eq: $stageProgressId } }
+    }
+`
+
+// TODO: need to insert directly as submitted if students do the whole thing without hitting save
+// can't use upsert in same way as we are using a compound primary key of stageProgressID & status...and this would be passing status='submitted'
+
+export const SUBMIT_WORK = gql`
+    mutation SubmitWork($stageProgressId: uuid, $doc_data: jsonb) {
+        update_document(
+            where: {
+                stage_progress_id: { _eq: $stageProgressId }
+                status: { _eq: draft }
+            }
             _set: { status: submitted }
         ) {
             returning {
