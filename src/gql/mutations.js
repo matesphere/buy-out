@@ -100,19 +100,13 @@ export const UNLOCK_STAGE = gql`
     }
 `
 
-// TODO: can't use stageProgressID & status as primary key, as team could have e.g. 2 failed attempts
-// think we will need to use ID - return it when saving then use it to save/submit
-export const SAVE_WORK = gql`
-    mutation SaveWork($stageProgressId: uuid, $doc_data: jsonb) {
+export const SAVE_WORK_INITIAL = gql`
+    mutation SaveWorkInitial($stageProgressId: uuid!, $docData: jsonb!) {
         insert_document_one(
             object: {
                 stage_progress_id: $stageProgressId
-                doc_data: $doc_data
+                doc_data: $docData
                 status: draft
-            }
-            on_conflict: {
-                constraint: document_pkey
-                update_columns: [doc_data]
             }
         ) {
             id
@@ -121,31 +115,50 @@ export const SAVE_WORK = gql`
     }
 `
 
-// TODO: need to insert directly as submitted if students do the whole thing without hitting save
-// can't use upsert in same way as we are using a compound primary key of stageProgressID & status...and this would be passing status='submitted'
+export const SAVE_WORK = gql`
+    mutation SaveWork($docId: uuid!, $docData: jsonb!) {
+        update_document_by_pk(
+            pk_columns: { id: $docId }
+            _set: { doc_data: $docData }
+        ) {
+            id
+            status
+        }
+    }
+`
+
+export const SUBMIT_WORK_INITIAL = gql`
+    mutation SubmitWorkInitial($stageProgressId: uuid, $docData: jsonb!) {
+        insert_document_one(
+            object: {
+                stage_progress_id: $stageProgressId
+                doc_data: $docData
+                status: submitted
+            }
+        ) {
+            id
+            status
+        }
+    }
+`
 
 export const SUBMIT_WORK = gql`
-    mutation SubmitWork($stageProgressId: uuid, $doc_data: jsonb) {
-        update_document(
-            where: {
-                stage_progress_id: { _eq: $stageProgressId }
-                status: { _eq: draft }
-            }
-            _set: { status: submitted }
+    mutation SubmitWork($docId: uuid!, $docData: jsonb!) {
+        update_document_by_pk(
+            pk_columns: { id: $docId }
+            _set: { doc_data: $docData, status: submitted }
         ) {
-            returning {
-                id
-                status
-            }
+            id
+            status
         }
     }
 `
 
 export const MARK_PASSED = gql`
-    mutation MarkPassed($documentId: uuid, $stageProgressId: uuid) {
+    mutation MarkPassed($docId: uuid, $stageProgressId: uuid) {
         update_document(
             _set: { status: marked_passed, feedback: "nice job" }
-            where: { id: { _eq: $documentId } }
+            where: { id: { _eq: $docId } }
         ) {
             returning {
                 id

@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react'
+import React, { useState, useReducer, useEffect } from 'react'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
 
@@ -7,12 +7,15 @@ import Footer from '../../../../components/_footer'
 import { TextEditor } from '../../../../components/common/TextEditor'
 
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
-// import { useCheckboxListState } from '../../../../utils/input-utils'
 
-import { SAVE_WORK, SUBMIT_WORK } from '../../../../gql/mutations'
+import {
+    SAVE_WORK_INITIAL,
+    SAVE_WORK,
+    SUBMIT_WORK_INITIAL,
+    SUBMIT_WORK,
+} from '../../../../gql/mutations'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
-// import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 import { eng } from '../../../_index.data'
@@ -33,37 +36,7 @@ const STAGE_1_RESEARCH_QUERY = gql`
     }
 `
 
-// const CHECKBOX_LIST = ['You have researched and answered all 12 questions']
-
-// // TODO: freeze this in place once work submitted (i.e. based on active doc submission in DB)
-// const CheckboxList = ({
-//     checkboxState,
-//     toggleCheckbox,
-//     allCheckboxesChecked,
-// }) => (
-//     <div className="side-grey">
-//         <p className="sm-type-amp">Check all task here:</p>
-//         {checkboxState.map(({ id, label, value }, i) => (
-//             <div key={i} className="multiple-choice">
-//                 <input
-//                     className="form-control"
-//                     id={id}
-//                     type="checkbox"
-//                     value={value ? 'checked' : 'unchecked'}
-//                     onChange={() => toggleCheckbox(id)}
-//                 />
-//                 <label className="form-label" htmlFor={id}>
-//                     {label}
-//                 </label>
-//             </div>
-//         ))}
-//         {allCheckboxesChecked && (
-//             <p className="sm-type-amp">You can now submit your findings.</p>
-//         )}
-//     </div>
-// )
-
-const questionReducer = (state, { type, payload }) => {
+const stage1QuestionReducer = (state, { type, payload }) => {
     switch (type) {
         case 'load':
             return payload
@@ -77,31 +50,40 @@ const questionReducer = (state, { type, payload }) => {
     }
 }
 
-// TODO: extract this to be generic 'docState' hook, useDocState(query, vars, selector, reducer)
-// TODO: should be able to build in save & submit too (including adding doc ID to state for future save/submits)
-const useQuestionState = () => {
-    const [questionState, questionDispatch] = useReducer(questionReducer, {})
+const stage1DocSelector = (data) =>
+    data?.team_by_pk?.stage_progresses[0]?.documents[0] || {}
+
+const useWorkState = (docQuery, docQueryVars, docSelector, workReducer) => {
+    const [docId, setDocId] = useState('')
+    const [workState, workDispatch] = useReducer(workReducer, {})
+
+    const [saveWorkInitial, saveWorkInitialResponse] =
+        useAuthMutation(SAVE_WORK_INITIAL)
+    const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
+    const [submitWorkInitial, submitWorkInitialResponse] =
+        useAuthMutation(SUBMIT_WORK_INITIAL)
+    const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK)
+
+    useEffect(() => {
+        const { called, loading, data } = saveWorkInitialResponse
+        if (called && !loading) {
+            setDocId(data.insert_document_one.id)
+        }
+    }, [saveWorkInitialResponse.called])
 
     const {
         loading,
         error,
         data: pageData,
-    } = useAuthQuery(
-        STAGE_1_RESEARCH_QUERY,
-        {
-            variables: { stage_id: 1 },
-        },
-        'teamId'
-    )
+    } = useAuthQuery(docQuery, { variables: docQueryVars }, 'teamId')
 
     useEffect(() => {
-        if (loading === false) {
-            const doc_data =
-                pageData?.team_by_pk?.stage_progresses[0]?.documents[0]
-                    ?.doc_data
+        if (!loading) {
+            const { id, doc_data } = docSelector(pageData)
 
-            if (doc_data) {
-                questionDispatch({
+            if (id && doc_data) {
+                setDocId(id)
+                workDispatch({
                     type: 'load',
                     payload: doc_data,
                 })
@@ -109,29 +91,67 @@ const useQuestionState = () => {
         }
     }, [loading, pageData])
 
-    return [loading, error, pageData, questionState, questionDispatch]
+    const stageProgressId =
+        pageData?.team_by_pk?.stage_progresses[0]?.id || null
+
+    const saveWorkObj = !!docId
+        ? {
+              call: () =>
+                  saveWork({
+                      variables: { docId, docData: workState },
+                  }),
+              response: saveWorkResponse,
+          }
+        : {
+              call: () =>
+                  saveWorkInitial({
+                      variables: { stageProgressId, docData: workState },
+                  }),
+              response: saveWorkInitialResponse,
+          }
+
+    const submitWorkObj = !!docId
+        ? {
+              call: () =>
+                  submitWork({
+                      variables: { docId, docData: workState },
+                  }),
+              response: submitWorkResponse,
+          }
+        : {
+              call: () =>
+                  submitWorkInitial({
+                      variables: { stageProgressId, docData: workState },
+                  }),
+              response: submitWorkInitialResponse,
+          }
+
+    return {
+        loading,
+        error,
+        pageData,
+        workState,
+        workDispatch,
+        saveWorkObj,
+        submitWorkObj,
+    }
 }
 
 const Stage1ResearchPage = () => {
-    // const [checkboxState, toggleCheckbox, allCheckboxesChecked] =
-    //     useCheckboxListState(CHECKBOX_LIST)
-
-    // const {
-    //     loading,
-    //     error,
-    //     data: pageData,
-    // } = useAuthQuery(
-    //     STAGE_1_RESEARCH_QUERY,
-    //     {
-    //         variables: { stage_id: 1 },
-    //     },
-    //     'teamId'
-    // )
-
-    const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
-    const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK)
-    const [loading, error, pageData, questionState, questionDispatch] =
-        useQuestionState()
+    const {
+        loading,
+        error,
+        // pageData,
+        workState,
+        workDispatch,
+        saveWorkObj,
+        submitWorkObj,
+    } = useWorkState(
+        STAGE_1_RESEARCH_QUERY,
+        { stage_id: 1 },
+        stage1DocSelector,
+        stage1QuestionReducer
+    )
 
     if (loading)
         return (
@@ -147,11 +167,6 @@ const Stage1ResearchPage = () => {
             </section>
         )
     if (error) return `Error! ${error.message}`
-
-    const { stage_progresses: stageProgresses } = pageData.team_by_pk
-
-    // const docData = stageProgresses.documents[0].doc_data
-    const stageProgressId = stageProgresses[0].id
 
     return (
         <>
@@ -207,73 +222,59 @@ const Stage1ResearchPage = () => {
                                                 {eng.description}
                                             </p>
                                             <div className="ck-textarea">
-                                                <TextEditor
-                                                    data={
-                                                        questionState[i] || ''
-                                                    }
-                                                    onChange={(data) =>
-                                                        questionDispatch({
-                                                            type: 'update',
-                                                            payload: {
-                                                                question: i,
-                                                                answer: data,
-                                                            },
-                                                        })
-                                                    }
-                                                />
+                                                {submitWorkObj.response.data ? (
+                                                    <div
+                                                        dangerouslySetInnerHTML={{
+                                                            __html: workState[
+                                                                i
+                                                            ],
+                                                        }}
+                                                    />
+                                                ) : (
+                                                    <TextEditor
+                                                        data={
+                                                            workState[i] || ''
+                                                        }
+                                                        onChange={(data) =>
+                                                            workDispatch({
+                                                                type: 'update',
+                                                                payload: {
+                                                                    question: i,
+                                                                    answer: data,
+                                                                },
+                                                            })
+                                                        }
+                                                    />
+                                                )}
                                             </div>
                                         </li>
                                     ))}
                                 </ol>
-                                {/* <p className="sm-type-guitar mb-2">
-                                    <span className="side-icon side-icon-green">
-                                        <TickSheet />
-                                    </span>
-                                    Your checklist
-                                </p>
-                                <CheckboxList
-                                    {...{
-                                        checkboxState,
-                                        toggleCheckbox,
-                                        allCheckboxesChecked,
-                                    }}
-                                /> */}
 
-                                <button
-                                    className="btn-solid-lg mt-4"
-                                    onClick={() => {
-                                        saveWork({
-                                            variables: {
-                                                stageProgressId,
-                                                doc_data: questionState,
-                                            },
-                                        })
-                                    }}
-                                >
-                                    Save Work
-                                </button>
+                                {!submitWorkObj.response.data && (
+                                    <>
+                                        <button
+                                            className="btn-solid-lg mt-4"
+                                            onClick={saveWorkObj.call}
+                                        >
+                                            Save Work
+                                        </button>
 
-                                <button
-                                    className="btn-solid-lg mt-4"
-                                    disabled={
-                                        Object.keys(questionState).length < 12
-                                    }
-                                    onClick={() => {
-                                        submitWork({
-                                            variables: {
-                                                stageProgressId,
-                                            },
-                                        })
-                                    }}
-                                >
-                                    Submit Work
-                                </button>
+                                        <button
+                                            className="btn-solid-lg mt-4"
+                                            disabled={
+                                                Object.keys(workState).length <
+                                                12
+                                            }
+                                            onClick={submitWorkObj.call}
+                                        >
+                                            Submit Work
+                                        </button>
+                                    </>
+                                )}
 
-                                {submitWorkResponse.data && (
-                                    <span>
-                                        {`Doc submitted and available at `}
-                                        <a href="doc.link">doc.link</a>
-                                    </span>
+                                {submitWorkObj.response.data && (
+                                    <span>Work submitted - good luck!</span>
                                 )}
                             </div>
                         </div>

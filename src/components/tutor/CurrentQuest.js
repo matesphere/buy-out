@@ -26,8 +26,8 @@ export const LockedStageStatus = ({ teamId, stageId }) => {
                                             stage_progresses(
                                                 stageProgressesRef
                                             ) {
-                                                const newStageProgressRef = cache.writeFragment(
-                                                    {
+                                                const newStageProgressRef =
+                                                    cache.writeFragment({
                                                         data: unlockStage,
                                                         fragment: gql`
                                                             fragment NewStageProgress on stage_progress {
@@ -37,8 +37,7 @@ export const LockedStageStatus = ({ teamId, stageId }) => {
                                                                 status
                                                             }
                                                         `,
-                                                    }
-                                                )
+                                                    })
                                                 return [
                                                     ...stageProgressesRef,
                                                     newStageProgressRef,
@@ -99,15 +98,14 @@ export const SubmittedStageStatus = ({ documents, stageProgressId }) => {
                             fields: {
                                 teams(currentTeams) {
                                     const updatedTeam = cache.modify({
-                                        id:
-                                            markPassed.update_stage_progress
-                                                .returning.team_id,
+                                        id: markPassed.update_stage_progress
+                                            .returning.team_id,
                                         fields: {
                                             stage_progresses(
                                                 stageProgressesRef
                                             ) {
-                                                const newStageProgressRef = cache.writeFragment(
-                                                    {
+                                                const newStageProgressRef =
+                                                    cache.writeFragment({
                                                         data: unlockStage,
                                                         fragment: gql`
                                                             fragment NewStageProgress on stage_progress {
@@ -117,8 +115,7 @@ export const SubmittedStageStatus = ({ documents, stageProgressId }) => {
                                                                 status
                                                             }
                                                         `,
-                                                    }
-                                                )
+                                                    })
                                                 return [
                                                     ...stageProgressesRef,
                                                     newStageProgressRef,
@@ -156,7 +153,7 @@ export const SubmittedStageStatus = ({ documents, stageProgressId }) => {
                         e.preventDefault()
                         markPassed({
                             variables: {
-                                documentId: documents[0].id,
+                                docId: documents[0].id,
                                 stageProgressId,
                             },
                         })
