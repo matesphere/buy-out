@@ -9,7 +9,7 @@ import { TextEditor } from '../../../../components/common/TextEditor'
 import HelpIcon from '../../../../assets/help-icon.svg'
 import '../../../../scss/index.scss'
 
-const Stage4SwotOne = () => {
+const Stage3SwotOne = () => {
     return (
         <>
             <Helmet>
@@ -17,10 +17,10 @@ const Stage4SwotOne = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 4 - Progress Your Plans (SWOT Analysis)</title>
+                <title>Stage 3 - Progress Your Plans (SWOT Analysis)</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 4" />
+                <Header headerText="Stage 3" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -32,12 +32,9 @@ const Stage4SwotOne = () => {
                                 order to complete the Feasibility Study
                                 template.{' '}
                             </p>
-                            <div className="mb-2">
-                                <label className="form-label sm-type-amp">
-                                    What Development Options is this SWOT for?
-                                </label>
-                                <input className="form-control" />
-                            </div>
+                            <h3 className="sm-type-drum sm-type-drum--medium mt-4">
+                                Option: XXXXX
+                            </h3>
                         </div>
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2">
@@ -142,4 +139,4 @@ const Stage4SwotOne = () => {
     )
 }
 
-export default Stage4SwotOne
+export default Stage3SwotOne

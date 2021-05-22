@@ -11,7 +11,8 @@ import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Ticklr from "../../../../assets/tick-lr.svg";
 import Ticklr2 from "../../../../assets/tick-lr2.svg";
-const Stage2ForestryScheme = () => {
+import TickSheet from "../../../../assets/tick-sheet.svg";
+const Stage3ForestryScheme = () => {
   const data = useStaticQuery(graphql`
     query {
       image1: file(relativePath: { eq: "forestry-scheme.jpg" }) {
@@ -25,7 +26,7 @@ const Stage2ForestryScheme = () => {
     <>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Stage 3 - Lay The Foundations - Forestry Scheme</title>
+        <title>Stage 3 - Forestry Scheme</title>
       </Helmet>
       <main className="the-quest">
         <Header headerText="Stage 3" />
@@ -55,7 +56,7 @@ const Stage2ForestryScheme = () => {
                 climate mitigation strategies and the storage of carbon in the
                 soil would exceed that sored in softwood plantations. From the
                 community’s point of view the forest would provide the potential
-                of woodland walks and enhance the scenic beauty of the are for
+                of woodland walks and enhance the scenic beauty of the area for
                 generations to come.
               </p>
               <p className="sm-type-bigamp mb-2">
@@ -137,8 +138,43 @@ const Stage2ForestryScheme = () => {
                 payments for up to 20 years.
               </p>
 
+              <div className="side-grey">
+                <p className="sm-type-guitar sm-type-guitar--medium">
+                    <span className="side-icon side-icon-orange">
+                      <HelpIcon />
+                    </span>
+                  Funding Options
+                </p>
+                <p className="sm-type-bigamp">
+                  On the extensive hill behind the village, an area of some 15 acres to be planted as mixed woodland. Potential for income from the softwood, amenity value (woodland walks) and habitat creation as well as climate mitigation.
+                </p>
+                <ul>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://forestryandland.gov.scot/business-and-services" target="_blank" rel="external">Forestry and Land Scotland</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.tnlcommunityfund.org.uk/funding/programmes/grants-for-community-led-activity" target="_blank" rel="external">Community Fund - Community Led</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.tnlcommunityfund.org.uk/funding/programmes/climate-action-fund-round-1" target="_blank" rel="external">Community Fund - Climate Action Fund</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.nature.scot/professional-advice/land-and-sea-management/managing-land/scottish-rural-development-programme" target="_blank" rel="external">Scottish Rural Development Programme - Forestry Grant Scheme </a>
+                    </p>
+                  </li>
+
+                </ul>
+              </div>
+
               <p className="sm-type-bigamp mb-4">
-                <Link href="/student/stage-3">Back to Stage 3</Link>
+                <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
               </p>
             </div>
             <div className="col-lg-4">
@@ -153,9 +189,28 @@ const Stage2ForestryScheme = () => {
                   Make notes of the amenities and the opportunities.
                 </p>
                 <p className="sm-type-amp">
-                  <Link href="/student/stage-3">Back to Stage 3</Link>
+                  <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
                 </p>
               </div>
+
+              <p className="sm-type-guitar mb-2">
+                <span className="side-icon side-icon-green">
+                    <TickSheet />
+                </span>
+                Your checklist
+              </p>
+              <div className="side-grey">
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have read the information for Forestry Scheme.</p>
+                </div>
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have seen the funding options for Forestry Scheme.</p>
+                </div>
+              </div>
+
+
             </div>
           </div>
         </section>
@@ -166,4 +221,4 @@ const Stage2ForestryScheme = () => {
   );
 };
 
-export default Stage2ForestryScheme;
+export default Stage3ForestryScheme;

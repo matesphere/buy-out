@@ -70,11 +70,99 @@ const Stage5Page = () => {
                   </span>
                 </h3>
                 <p className="sm-type-lead mb-2">
-                  Once you have completed your SWOT analysis proceed to submitting your findings.
+                  Complete the first section below, then move onto your business plan for each of your options.
                 </p>
+
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="form-holder-border">
+                      <p className="sm-type-lead sm-type-lead--medium mb-2">
+                        1. Cost of the Land
+                      </p>
+                      <p className="sm-type-amp mb-2">
+                  <span className="sm-type-amp--medium redorange-highlight">
+                    NOTE:
+                  </span>{" "}
+                        In this section you will need to refer to the{" "}
+                        <Link to="/student/stage-2/plan-of-glenclas">
+                          map of Glenclas
+                        </Link>{" "}
+                        and using the scale, calculate the Asking Price of the area of
+                        land for sale. Then show how the sale will be funded.
+                      </p>
+
+                      <div className="row side-grey mb-2">
+                        <div className="col-lg-12">
+                          <p className="sm-type-lead sm-type-lead--medium mb-2 redorange-highlight">
+                            Costs
+                          </p>
+                        </div>
+                        <div className="col-lg-4">
+                          <label className="form-label sm-type-amp">
+                            Area of land (ha)
+                          </label>
+                          <input className="form-control" />
+                        </div>
+                        <div className="col-lg-4">
+                          <label className="form-label sm-type-amp">
+                            Price (£/ha)
+                          </label>
+                          <input className="form-control" />
+                        </div>
+
+                        <div className="col-lg-4">
+                          <label className="form-label sm-type-amp">
+                            Asking price (£)
+                          </label>
+                          <input className="form-control" />
+                        </div>
+                      </div>
+
+                      <div className="row side-grey mb-2">
+                        <div className="col-lg-12">
+                          <p className="sm-type-lead sm-type-lead--medium mb-2 redorange-highlight">
+                            How will the asking price be funded?
+                          </p>
+                        </div>
+                        <div className="col-lg-6">
+                          <label className="form-label sm-type-amp">
+                            Name of funder
+                          </label>
+                          <input
+                              className="form-control"
+                              value="Scottish Land Fund"
+                          />
+                        </div>
+                        <div className="col-lg-6">
+                          <label className="form-label sm-type-amp">
+                            Amount of funding (£)
+                          </label>
+                          <input className="form-control" />
+                        </div>
+                      </div>
+                      <p className="sm-type-amp sm-type-amp--medium mb-2">
+                        <span className="sm-type-amp--medium redorange-highlight">
+                          NOTE:
+                        </span>{" "}
+                        Save your "Cost of the Land" then move onto step 2.
+                      </p>
+                      <div className="mb-2 mt-2">
+                        <button className="btn-solid-lg mt-4">
+                          Save costs
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 <div className="form-holder-border">
+
+                  <p className="sm-type-lead sm-type-lead--medium mb-2">
+                    2. Complete your business plans.
+                  </p>
                   <ul>
-                    <li className="sm-type-guitar">Complete your <Link to="/student/stage-5/business-plan">Buiness Plan here</Link>.</li>
+                    <li className="sm-type-guitar"><Link to="/student/stage-5/business-plan">XXXXXX Buiness Plan</Link></li>
+                    <li className="sm-type-guitar"><Link to="/student/stage-5/business-plan">XXXXXX Buiness Plan</Link></li>
+                    <li className="sm-type-guitar"><Link to="/student/stage-5/business-plan">XXXXXX Buiness Plan</Link></li>
                   </ul>
                 </div>
               </div>

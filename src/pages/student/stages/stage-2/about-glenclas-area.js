@@ -52,8 +52,32 @@ const AboutGlenclasAreaPage = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 About the area Glenclas
                             </h2>
+                            <p className="sm-type-lead mb-3">
+                                Click on the tabs below to read about the area, geography, attractions and more.
+                            </p>
+                        </div>
+                        <div className="col-lg-4">
+                            <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-orange">
+                                    <HelpIcon />
+                                </span>
+                                Helpful information
+                            </p>
+                            <div className="side-grey">
+                                <p className="sm-type-amp">
+                                    Read all about the area of Glenclas. Make notes on useful information.
+                                </p>
 
-
+                                <p className="sm-type-amp">
+                                    <Link to="/student/stage-2">
+                                        Back to Stage 2
+                                    </Link>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-12">
                             <Tabs>
                                 <TabList>
                                     <Tab>
@@ -354,30 +378,6 @@ const AboutGlenclasAreaPage = () => {
                                     </div>
                                 </TabPanel>
                             </Tabs>
-                        </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Read all about the people of Glenclas and
-                                    find out what you need to move on to the
-                                    next quest.
-                                </p>
-                                <p className="sm-type-amp">
-                                    They all have a story to tell about
-                                    Glenclas.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/student/stage-2">
-                                        Back to Stage 2
-                                    </Link>
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </section>

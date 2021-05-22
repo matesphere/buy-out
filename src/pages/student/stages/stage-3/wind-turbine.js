@@ -11,10 +11,16 @@ import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Ticklr from '../../../../assets/tick-lr.svg'
 import Ticklr2 from '../../../../assets/tick-lr2.svg'
-const Stage2WindTurbine = () => {
+import TickSheet from "../../../../assets/tick-sheet.svg";
+const Stage3WindTurbine = () => {
   const data = useStaticQuery(graphql`
     query {
       image1: file(relativePath: { eq: "wind-turbine.jpg" }) {
+        childImageSharp {
+          gatsbyImageData(layout: CONSTRAINED)
+        }
+      }
+      image2: file(relativePath: { eq: "micro-hydro-figures.jpg" }) {
         childImageSharp {
           gatsbyImageData(layout: CONSTRAINED)
         }
@@ -25,10 +31,10 @@ const Stage2WindTurbine = () => {
     <>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Stage 2 - Lay The Foundations - Wind turbine Scheme</title>
+        <title>Stage 3 - Wind turbine Scheme</title>
       </Helmet>
       <main className="the-quest">
-        <Header headerText="Stage 2" />
+        <Header headerText="Stage 3" />
         <section className="container" id="main">
           <div className="row">
             <div className="col-lg-8">
@@ -101,7 +107,7 @@ const Stage2WindTurbine = () => {
                 <p className="sm-type-bigamp mb-4">
                   Glenclas wind turbine: 35% x 900 x 365days x 24hrs = XKwh
                 </p>
-                <p className="sm-type-bigamp mb-4">
+                <p className="sm-type-bigamp">
                   The number of houses that could be powered by the system =
                   X/5000 houses
                 </p>
@@ -130,21 +136,21 @@ const Stage2WindTurbine = () => {
                 would need upgraded I'd say more like £1.5m.
               </p>
 
-              <p className="sm-type-guitar sm-type-bigamp--medium mb-2">
-                Given we don't have FiTs anymore, what returns might be
-                expected? (I'm assuming that it is better to sell the power to
+              <p className="sm-type-guitar mb-2">
+                <span className=" sm-type-bigamp--medium">Given we don't have FiTs anymore, what returns might be
+                  expected?</span> (I'm assuming that it is better to sell the power to
                 locals in preference to selling to the grid as much as
                 possible.)
               </p>
               <p className="sm-type-bigamp mb-4">
                 Yes, no FiTs
-                (https://www.ofgem.gov.uk/environmental-programmes/fit) and now
+                (<a href="https://www.ofgem.gov.uk/environmental-programmes/fit" target="_blank" rel="external">https://www.ofgem.gov.uk</a>) and now
                 we only have ‘Contracts for Difference’ which are competitive
                 and only work out for large companies with lots of capital.
               </p>
               <p className="sm-type-bigamp mb-4">
                 I think electricity still sells at 4.5p per kWh
-                (https://www.ofgem.gov.uk/data-portal/all-charts/policy-area/electricity-wholesale-markets).
+                (<a href="https://www.ofgem.gov.uk/data-portal/all-charts/policy-area/electricity-wholesale-markets" target="_blank" rel="external">https://www.ofgem.gov.uk</a>).
                 You're correct about selling locally. Best to look at if there
                 is a big user of energy in the area and sell direct to them.
                 E.g. a school, factory etc. Environmentally it could be a great
@@ -177,8 +183,8 @@ const Stage2WindTurbine = () => {
                 environmental benefits such as switching from oil to renewable
                 electricity is much more interesting for current funders. We
                 can't go to Europe for funding anymore so we've been going to
-                UKRI (https://www.ukri.org/apply-for-funding) and also BEIS
-                (https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy).
+                UKRI (<a href="https://www.ukri.org/apply-for-funding" target="_blank" rel="external">https://www.ukri.org</a>) and also BEIS
+                (<a href="https://www.gov.uk/government/organisations/department-for-business-energy-and-industrial-strategy" target="_blank" rel="external">https://www.gov.uk</a>).
               </p>
 
               <p className="sm-type-guitar sm-type-bigamp--medium mb-2">
@@ -236,8 +242,59 @@ const Stage2WindTurbine = () => {
                 <li className="mb-2">Environmental designations...</li>
               </ul>
 
+
+              <p className="sm-type-bigamp mb-2">Using the figures provided by the industry expert, here are the projections over 6 years. The first table is based on selling the electricity at 5p per unit and the second is if the electricity is sold at 10p per unit. There is a row in both tables for Community Projects – this has been left blank as there will only be money for these projects once the Running Balance is positive (it would then be shown in green).</p>
+
+              <p className="sm-type-bigamp mb-2">Clearly, if funding was found from other sources for part of the scheme then the bank loan would be reduced and the Running Balance would become positive quicker, allowing funds to be available for the Community Projects. The same would be true if a Community Share Scheme was used to raise money.</p>
+
+              <a
+                  target="_blank"
+                  href="/static/e546e23c9bfc64e4b2736e8cd188628a/f7607/micro-hydro-figures.webp"
+              >
+                <GatsbyImage
+                    image={data.image2.childImageSharp.gatsbyImageData}
+                />
+              </a>
               <p className="sm-type-bigamp mb-4">
-                <Link href="/student/stage-3">Back to Stage 3</Link>
+                  <a
+                      target="_blank"
+                      href="/static/e546e23c9bfc64e4b2736e8cd188628a/f7607/micro-hydro-figures.webp"
+                  >
+                      View larger figures image.
+                  </a>
+              </p>
+
+              <div className="side-grey">
+                <p className="sm-type-guitar sm-type-guitar--medium">
+                    <span className="side-icon side-icon-orange">
+                      <HelpIcon />
+                    </span>
+                  Funding Options
+                </p>
+                <p className="sm-type-bigamp">
+                  Situated on the hill behind the village. Providing both power for the community and an income from electricity sold onto the grid
+                </p>
+                <ul>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.communityenergyscotland.org.uk/community-support/" target="_blank" rel="external">Community Energy Scotland</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.localenergy.scot/funding/" target="_blank" rel="external">Community and Renewable Energy Scheme (CARES)</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.foundationscotland.org.uk/set-up-fund/fund-management-for-communities" target="_blank" rel="external">Foundation Scotland</a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+
+              <p className="sm-type-bigamp mb-4">
+                <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
               </p>
             </div>
             <div className="col-lg-4">
@@ -252,9 +309,27 @@ const Stage2WindTurbine = () => {
                   Make notes of the amenities and the opportunities.
                 </p>
                 <p className="sm-type-amp">
-                  <Link href="/student/stage-2">Back to Stage 2</Link>
+                  <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
                 </p>
               </div>
+
+              <p className="sm-type-guitar mb-2">
+                <span className="side-icon side-icon-green">
+                    <TickSheet />
+                </span>
+                Your checklist
+              </p>
+              <div className="side-grey">
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have read the information for Wind turbine Scheme.</p>
+                </div>
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have seen the funding options for Wind turbine Scheme.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
@@ -265,4 +340,4 @@ const Stage2WindTurbine = () => {
   );
 };
 
-export default Stage2WindTurbine;
+export default Stage3WindTurbine;

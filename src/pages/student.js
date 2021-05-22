@@ -10,24 +10,27 @@ import RolesPage from './student/stages/stage-2/the-roles'
 import Stage2Page from './student/stages/stage-2/stage-2'
 import AboutGlenclasPeoplePage from './student/stages/stage-2/about-glenclas-people'
 import AboutGlenclasAreaPage from './student/stages/stage-2/about-glenclas-area'
+import CommunityHousingPage from './student/stages/stage-2/community'
+import Stage3HousingPage from './student/stages/stage-3/affordable-housing-scheme'
+import Stage3PlaySkate from './student/stages/stage-3/playpark-skatepark'
+import Stage3ShopPostOffice from './student/stages/stage-3/shop-and-post-office'
+import Stage3MicroHydro from './student/stages/stage-3/micro-hydro'
+import Stage3WindTurbine from './student/stages/stage-3/wind-turbine'
+import Stage3BusinessHub from './student/stages/stage-3/business-hub'
+import Stage3ForestryScheme from './student/stages/stage-3/forestry-scheme'
+import Stage3CampsiteCabin from './student/stages/stage-3/campsite-cabin'
+import Stage3MarketScheme from './student/stages/stage-3/market-scheme'
 import Stage3Page from './student/stages/stage-3/stage-3'
-import Stage2PlanPage from './student/stages/stage-2/plan-of-glenclas'
-import Stage2HousingPage from './student/stages/stage-2/affordable-housing-scheme'
-import Stage2PlaySkate from './student/stages/stage-2/playpark-skatepark'
-import Stage2ShopPostOffice from './student/stages/stage-2/shop-and-post-office'
-import Stage2MicroHydro from './student/stages/stage-2/micro-hydro'
-import Stage2WindTurbine from './student/stages/stage-2/wind-turbine'
-import Stage2BusinessHub from './student/stages/stage-2/business-hub'
-import Stage2ForestryScheme from './student/stages/stage-2/forestry-scheme'
-import Stage2CampsiteCabin from './student/stages/stage-2/campsite-cabin'
-import Stage2MarketScheme from './student/stages/stage-2/market-scheme'
+import Stage3PlanPage from './student/stages/stage-3/glenclas-map-options'
+import Stage3SwotOne from './student/stages/stage-3/swot-study'
 import Stage4Page from './student/stages/stage-4/stage-4'
-import Stage4SwotOne from './student/stages/stage-4/swot-study-one'
 import Stage4FeasibilityOne from './student/stages/stage-4/feasibility-study-one'
 import Stage5Page from './student/stages/stage-5/stage-5'
 import BusinessPlanPage from './student/stages/stage-5/business-plan'
 import Stage6Page from './student/stages/stage-6/stage-6'
+import Stage6TipsPage from './student/stages/stage-6/presentation-tips'
 import Stage7Page from './student/stages/stage-7/stage-7'
+import Stage7TipsPage from './student/stages/stage-7/presentation-tips'
 import Stage8Page from './student/stages/stage-8/stage-8'
 
 import { UserStateContext } from '../utils/user-state'
@@ -64,10 +67,6 @@ const Routes = () => {
             <LoggedInRoute path="/stage-2" component={Stage2Page} />
             <LoggedInRoute path="/stage-2/the-roles" component={RolesPage} />
             <LoggedInRoute
-                path="/stage-2/plan-of-glenclas"
-                component={Stage2PlanPage}
-            />
-            <LoggedInRoute
                 path="/stage-2/about-glenclas-people"
                 component={AboutGlenclasPeoplePage}
             />
@@ -76,49 +75,58 @@ const Routes = () => {
                 component={AboutGlenclasAreaPage}
             />
             <LoggedInRoute
-                path="/stage-2/affordable-housing-scheme"
-                component={Stage2HousingPage}
+                path="/stage-3/affordable-housing-scheme"
+                component={Stage3HousingPage}
             />
             <LoggedInRoute
-                path="/stage-2/shop-and-post-office"
-                component={Stage2ShopPostOffice}
+                path="/stage-3/shop-and-post-office"
+                component={Stage3ShopPostOffice}
             />
             <LoggedInRoute
-                path="/stage-2/playpark-skatepark"
-                component={Stage2PlaySkate}
+                path="/stage-3/playpark-skatepark"
+                component={Stage3PlaySkate}
             />
             <LoggedInRoute
-                path="/stage-2/micro-hydro"
-                component={Stage2MicroHydro}
+                path="/stage-3/micro-hydro"
+                component={Stage3MicroHydro}
             />
             <LoggedInRoute
-                path="/stage-2/wind-turbine"
-                component={Stage2WindTurbine}
+                path="/stage-3/wind-turbine"
+                component={Stage3WindTurbine}
             />
             <LoggedInRoute
-                path="/stage-2/business-hub"
-                component={Stage2BusinessHub}
+                path="/stage-3/business-hub"
+                component={Stage3BusinessHub}
             />
             <LoggedInRoute
-                path="/stage-2/forestry-scheme"
-                component={Stage2ForestryScheme}
+                path="/stage-3/forestry-scheme"
+                component={Stage3ForestryScheme}
             />
             <LoggedInRoute
-                path="/stage-2/campsite-cabin"
-                component={Stage2CampsiteCabin}
+                path="/stage-3/campsite-cabin"
+                component={Stage3CampsiteCabin}
             />
             <LoggedInRoute
-                path="/stage-2/market-scheme"
-                component={Stage2MarketScheme}
+                path="/stage-3/market-scheme"
+                component={Stage3MarketScheme}
             />
+            <LoggedInRoute
+                path="/stage-3/community"
+                component={CommunityHousingPage}
+            />
+
 
             <LoggedInRoute path="/stage-3" component={Stage3Page} />
-
-            <LoggedInRoute path="/stage-4" component={Stage4Page} />
             <LoggedInRoute
-                path="/stage-4/swot-study-one"
-                component={Stage4SwotOne}
+                path="/stage-3/glenclas-map-options"
+                component={Stage3PlanPage}
             />
+            <LoggedInRoute
+                path="/stage-3/swot-study"
+                component={Stage3SwotOne}
+            />
+            <LoggedInRoute path="/stage-4" component={Stage4Page} />
+
             <LoggedInRoute
                 path="/stage-4/feasibility-study-one"
                 component={Stage4FeasibilityOne}
@@ -130,7 +138,9 @@ const Routes = () => {
                 component={BusinessPlanPage}
             />
             <LoggedInRoute path="/stage-6" component={Stage6Page} />
+            <LoggedInRoute path="/stage-6/presentation-tips" component={Stage6TipsPage} />
             <LoggedInRoute path="/stage-7" component={Stage7Page} />
+                <LoggedInRoute path="/stage-7/presentation-tips" component={Stage7TipsPage} />
             <LoggedInRoute path="/stage-8" component={Stage8Page} />
         </Router>
     )

@@ -9,8 +9,9 @@ import HelpIcon from "../../../../assets/help-icon.svg";
 
 import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
+import TickSheet from "../../../../assets/tick-sheet.svg";
 
-const Stage2CampsiteCabin = () => {
+const Stage3CampsiteCabin = () => {
   const data = useStaticQuery(graphql`
     query {
       image1: file(relativePath: { eq: "camping-cabins.jpg" }) {
@@ -25,11 +26,11 @@ const Stage2CampsiteCabin = () => {
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
-          Stage 2 - Lay The Foundations - Campsite and Cabins Scheme
+          Stage 3 - Campsite and Cabins Scheme
         </title>
       </Helmet>
       <main className="the-quest">
-        <Header headerText="Stage 2" />
+        <Header headerText="Stage 3" />
         <section className="container" id="main">
           <div className="row">
             <div className="col-lg-8">
@@ -266,8 +267,32 @@ const Stage2CampsiteCabin = () => {
                 £700 each per year.
               </p>
 
+              <div className="side-grey">
+                <p className="sm-type-guitar sm-type-guitar--medium">
+                    <span className="side-icon side-icon-orange">
+                      <HelpIcon />
+                    </span>
+                  Funding Options
+                </p>
+                <p className="sm-type-bigamp">
+                  Potential for a community owned campsite and area for cabins or wigwams. The shower toilet block could be made available to public use (for a fee) to allow campervan and other tourists to use the facilities
+                </p>
+                <ul>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://forestryandland.gov.scot/business-and-services" target="_blank" rel="external">Forestry and Land Scotland</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.nature.scot/doc/better-places-green-recovery-fund-round-2-information-applicants#What+kind+of+activity+will+we+fund?" target="_blank" rel="external">NatureScot - Better Places Green Recovery Fund</a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+
               <p className="sm-type-bigamp mb-4">
-                <Link href="/student/stage-3">Back to Stage 3</Link>
+                <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
               </p>
             </div>
             <div className="col-lg-4">
@@ -282,9 +307,27 @@ const Stage2CampsiteCabin = () => {
                   Make notes of the amenities and the opportunities.
                 </p>
                 <p className="sm-type-amp">
-                  <Link href="/student/stage-2">Back to Stage 2</Link>
+                  <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
                 </p>
               </div>
+
+              <p className="sm-type-guitar mb-2">
+                <span className="side-icon side-icon-green">
+                    <TickSheet />
+                </span>
+                Your checklist
+              </p>
+              <div className="side-grey">
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have read the information for Campsite and Cabins Scheme.</p>
+                </div>
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have seen the funding options for Campsite and Cabins Scheme.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
@@ -295,4 +338,4 @@ const Stage2CampsiteCabin = () => {
   );
 };
 
-export default Stage2CampsiteCabin;
+export default Stage3CampsiteCabin;

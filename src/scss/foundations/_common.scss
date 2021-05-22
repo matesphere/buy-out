@@ -577,6 +577,40 @@ button:focus {
     opacity: 0;
 }
 
+.checklist {
+    display: flex;
+    position: relative;
+    margin-bottom: 10px;
+    min-height: 40px;
+
+    .tick {
+        background: transparent;
+        width: 34px;
+        height: 34px;
+        display: block;
+        position: relative;
+        flex: 0 0 34px;
+        margin-right: 16px;
+
+        &:after {
+            content: '';
+            border: solid;
+            border-width: 0 0 4px 4px;
+            background: transparent;
+            border-top-color: transparent;
+            width: 20px;
+            height: 9px;
+            position: absolute;
+            top: 8px;
+            left: 6px;
+            transform: rotate(-45deg);
+            zoom: 1;
+            filter: alpha(opacity=0);
+            border-color: $brand-midgreen;
+        }
+    }
+}
+
 .multiple-choice input:checked + label::after {
     zoom: 1;
     filter: alpha(opacity=100);
@@ -594,10 +628,6 @@ button:focus {
     position: absolute;
     top: 12px;
     left: 8px;
-    -moz-transform: rotate(-45deg);
-    -o-transform: rotate(-45deg);
-    -webkit-transform: rotate(-45deg);
-    -ms-transform: rotate(-45deg);
     transform: rotate(-45deg);
     zoom: 1;
     filter: alpha(opacity=0);
@@ -742,9 +772,7 @@ button:focus {
     border-radius: 5px 5px 0 0;
     margin: 0;
     color: $brand-body;
-    border-top: 1px solid $brand-darkgreen;
-    border-left: 1px solid $brand-darkgreen;
-    border-right: 1px solid $brand-darkgreen;
+    background-color: $brand-greybg;
     position: relative;
 
     &:after {
@@ -752,7 +780,7 @@ button:focus {
         position: absolute;
         height: 2px;
         width: calc(100% - 2px);
-        border: 2px solid #ffffff;
+        border: 2px solid $brand-greybg;
         left: 1px;
         bottom: -1px;
     }
@@ -777,9 +805,6 @@ button:focus {
         padding: 16px;
         border-bottom-right-radius: 16px;
         border-bottom-left-radius: 16px;
-        border-top: 1px solid $brand-darkgreen;
-        border-bottom: 1px solid $brand-darkgreen;
-        border-left: 1px solid $brand-darkgreen;
-        border-right: 1px solid $brand-darkgreen;
+        background-color: $brand-greybg;
     }
 }

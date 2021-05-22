@@ -45,10 +45,7 @@ const Stage3Page = () => {
                                 Shown below is a map of Glenclas, with the
                                 locations of proposed development opportunities
                                 marked. Your task is to investigate each of the
-                                opportunities, and consult with experts and
-                                local residents to familiarise yourselves with
-                                what each option entails. Think about how each
-                                might benefit the community!
+                                opportunities and produce a SWOT analysis for each option.
                             </p>
                             <div className="image-map mb-4 mt-4">
                                 <div className="image-map-holder">
@@ -161,242 +158,8 @@ const Stage3Page = () => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="table table-proposal">
-                                <div className="heading">
-                                    <div className="cell">
-                                        <p>Options</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>Notes</p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="greydot"></span> 1.
-                                            Affordable Housing Scheme
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Space for 3 pairs of semi-detached
-                                            houses behind a row of existing
-                                            houses. Affordable rent charged and
-                                            low running costs.
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/affordable-housing-scheme">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="yellowdot"></span>{' '}
-                                            2. Play Park and/or Skate Park
-                                            Scheme
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Could be located behind the school
-                                            and provide a facility for the
-                                            primary school children as well as
-                                            for older children.
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/playpark-skatepark">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="reddot"></span> 3.
-                                            Shop and PO
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Could be situated just of the ‘High
-                                            Street’ a purpose-built mini
-                                            supermarket and shop, to service the
-                                            local community and visitors.
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/shop-and-post-office">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="yellowdot"></span>{' '}
-                                            4. Micro-hydro Scheme
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Making use of the stream coming off
-                                            the hill behind the village.
-                                            Providing both power for the
-                                            community and an income from
-                                            electricity sold onto the grid.
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/micro-hydro">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="yellowdot"></span>{' '}
-                                            5. Wind turbine Scheme
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Situated on the hill behind the
-                                            village. Providing both power for
-                                            the community and an income from
-                                            electricity sold onto the grid.
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/wind-turbine">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="yellowdot"></span>{' '}
-                                            6. Business hub Shceme
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Situated off the main thoroughfare,
-                                            a new build that could be divided
-                                            into units for offices and/or
-                                            workshops.
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/business-hub">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="tealdot"></span> 7.
-                                            Forestry Scheme
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            On the extensive hill behind the
-                                            village, an area of some 15 acres to
-                                            be planted as mixed woodland.
-                                            Potential for income from the
-                                            softwood, amenity value (woodland
-                                            walks) and habitat creation as well
-                                            as climate mitigation
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/forestry-scheme">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="purpledot"></span>{' '}
-                                            8. Campsite and Cabins Scheme
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Potential for a community owned
-                                            campsite and areas for caravans,
-                                            campervans and Cabins. The shower
-                                            toilet block could be made available
-                                            to public use (for a fee) to allow
-                                            campervan and other tourists to use
-                                            the facilities.
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/campsite-cabin">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>
-                                            <span className="purpledot"></span>{' '}
-                                            9. Market Garden Scheme
-                                        </p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            A commercial operation to grow
-                                            year-round fruit and vegetables for
-                                            the local community and for local
-                                            businesses such as the Glenclas
-                                            Hotel and Lodge.
-                                        </p>
-                                        <p>
-                                            <Link to="/student/stage-3/market-scheme">
-                                                Read more about{' '}
-                                            </Link>
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>10. Team Choice</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Your Team can develop your own idea.
-                                            You will need to carry out a SWOT
-                                            analysis, determine your Capital
-                                            Costs and Running Costs and also
-                                            find out where the funding to both
-                                            start and keep your scheme running
-                                            would come from.
-                                        </p>
-                                    </div>
-                                </div>
 
 
-                            </div>
 
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
@@ -407,52 +170,36 @@ const Stage3Page = () => {
                                         Task to complete:
                                     </span>
                                 </h3>
-                                <p className="sm-type-amp mb-2">
-                                    Choose a list of 5 options that you wish to take forward at this stage.
-                                </p>
-                                <div className="form-holder-border">
-                                <div className="form-holder">
-                                    <div className="mb-4" id="form-roles">
-                                        <ul>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 1
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 2
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 3
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 4
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                            <li className="mb-2">
-                                                <label className="form-label sm-type-amp">
-                                                    Option 5
-                                                </label>
-                                                <input className="form-control"/>
-                                            </li>
-                                        </ul>
 
-                                        <button
-                                            className="btn-solid-lg"
-                                        >
-                                            Submit
-                                        </button>
-                                    </div>
+                                <p className="sm-type-lead mb-2">
+                                    You will need to work together and decided and carry out a SWOT analysis on 5 Options.
+                                </p>
+
+                                <div className="form-holder-border">
+                                    <p className="sm-type-lead mb-2">
+                                        Use the map link below to find detailed information for each option.
+                                    </p>
+                                    <ol>
+                                        <li className="sm-type-guitar"><Link to="/student/stage-3/glenclas-map-options">View the map</Link></li>
+                                    </ol>
                                 </div>
+
+                                <div className="form-holder-border">
+                                    <p className="sm-type-lead mb-2">
+                                        Complete the 5 SWOT analysis to determine which 5 options you wish to take forward.
+                                    </p>
+                                    <p className="sm-type-lead mb-2">
+                                        Use the SWOT templates to help you confirm your choices. Complete one to open up the next SWOT.
+                                    </p>
+
+                                    <ol>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
+                                        <li className="sm-type-guitar mb-2"><span className="not-available">SWOT analysis 2</span></li>
+                                        <li className="sm-type-guitar mb-2"><span className="not-available">SWOT analysis 3</span></li>
+                                        <li className="sm-type-guitar mb-2"><span className="not-available">SWOT analysis 4</span></li>
+                                        <li className="sm-type-guitar"><span className="not-available">SWOT analysis 5</span></li>
+
+                                    </ol>
                                 </div>
 
                             </div>
@@ -476,28 +223,32 @@ const Stage3Page = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
+                                    <Link to="/student/stage-3/glenclas-map-options">
+                                        View map of Glenclas
+                                    </Link>
+                                </p>
+
+                                <p className="sm-type-amp">
                                     <Link to="/student/stage-2/about-glenclas-people">
                                         Hear from the people of Glenclas
                                     </Link>
                                 </p>
                             </div>
 
-                            <p className="sm-type-guitar mb-2">
+                            <p className="sm-type-guitar mb-2 mt-4">
                                 <span className="side-icon side-icon-green">
                                     <TickSheet />
                                 </span>
                                 Your checklist
                             </p>
                             <div className="side-grey">
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have decided as a team which 5 options to take forward.
-                                    </label>
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">You have seen the map and the detailed information on each option.</p>
+                                </div>
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">You have completed 5 SWOT analysis.</p>
                                 </div>
                             </div>
 

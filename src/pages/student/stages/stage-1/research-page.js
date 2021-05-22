@@ -7,6 +7,7 @@ import Footer from '../../../../components/_footer'
 import { TextEditor } from '../../../../components/common/TextEditor'
 
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
+import SaveIcon from "../../../../assets/save-icon.svg";
 
 import {
     SAVE_WORK_INITIAL,
@@ -254,9 +255,10 @@ const Stage1ResearchPage = () => {
                                 {!submitWorkObj.response.data && (
                                     <>
                                         <button
-                                            className="btn-solid-lg mt-4"
+                                            className="btn-outline-lg mt-4 btn-icon"
                                             onClick={saveWorkObj.call}
                                         >
+                                            <SaveIcon />
                                             Save Work
                                         </button>
 

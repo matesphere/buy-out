@@ -10,8 +10,9 @@ import HelpIcon from "../../../../assets/help-icon.svg";
 import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
 import InfoPick from "../../../../assets/info-pick.svg";
+import TickSheet from "../../../../assets/tick-sheet.svg";
 
-const Stage2ShopPostOffice = () => {
+const Stage3ShopPostOffice = () => {
   const data = useStaticQuery(graphql`
     query {
       image5: file(relativePath: { eq: "shop-post-office.jpg" }) {
@@ -26,11 +27,11 @@ const Stage2ShopPostOffice = () => {
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>
-          Stage 2 - Lay The Foundations - Community Shop and Post Office
+          Stage 3 - Community Shop and Post Office
         </title>
       </Helmet>
       <main className="the-quest">
-        <Header headerText="Stage 2" />
+        <Header headerText="Stage 3" />
         <section className="container" id="main">
           <div className="row">
             <div className="col-lg-8">
@@ -217,10 +218,37 @@ const Stage2ShopPostOffice = () => {
                 </div>
               </div>
 
-
+              <div className="side-grey">
+                <p className="sm-type-guitar sm-type-guitar--medium">
+                    <span className="side-icon side-icon-orange">
+                      <HelpIcon />
+                    </span>
+                  Funding Options
+                </p>
+                <p className="sm-type-bigamp">
+                  Could be situated just off the 'High Street' a purpose-built mini-supermarket and shop, to service the local community and visitors
+                </p>
+                <ul>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://esmeefairbairn.org.uk/our-aims/creative-confident-communities/community-ownership-and-regeneration/" target="_blank" rel="external">Esmée Fairbairn Foundation</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.tnlcommunityfund.org.uk/funding/programmes/scottish-land-fund#section-1" target="_blank" rel="external">Scottish Land Fund</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://plunkett.co.uk/support-for-early-stages/" target="_blank" rel="external">Plunkett Foundation</a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
 
               <p className="sm-type-bigamp mb-4">
-                <Link href="/student/stage-3">Back to Stage 3</Link>
+                <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
               </p>
             </div>
             <div className="col-lg-4">
@@ -235,9 +263,27 @@ const Stage2ShopPostOffice = () => {
                   Make notes of the amenities and the opportunities.
                 </p>
                 <p className="sm-type-amp">
-                  <Link href="/student/stage-2">Back to Stage 2</Link>
+                  <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
                 </p>
               </div>
+
+              <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-green">
+                                    <TickSheet />
+                                </span>
+                Your checklist
+              </p>
+              <div className="side-grey">
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have read the information for Shop and Post Office.</p>
+                </div>
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have seen the funding options for Shop and Post Office.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
@@ -248,4 +294,4 @@ const Stage2ShopPostOffice = () => {
   );
 };
 
-export default Stage2ShopPostOffice;
+export default Stage3ShopPostOffice;

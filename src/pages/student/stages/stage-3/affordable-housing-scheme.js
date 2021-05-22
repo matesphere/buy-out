@@ -10,8 +10,9 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
+import TickSheet from "../../../../assets/tick-sheet.svg";
 
-const Stage2HousingPage = () => {
+const Stage3HousingPage = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "modular-house.jpg" }) {
@@ -29,11 +30,11 @@ const Stage2HousingPage = () => {
                     content="width=device-width, initial-scale=1.0"
                 />
                 <title>
-                    Stage 2 - Lay The Foundations - Affordable Housing
+                    Stage 3 - Affordable Housing
                 </title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 2" />
+                <Header headerText="Stage 3" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -173,10 +174,33 @@ const Stage2HousingPage = () => {
                                 month, giving a total of £3000 per month.
                             </p>
 
+                            <div className="side-grey">
+                                <p className="sm-type-guitar sm-type-guitar--medium">
+                                    <span className="side-icon side-icon-orange">
+                                    <HelpIcon />
+                                </span>
+                                    Funding Options
+                                </p>
+                                <p className="sm-type-bigamp">
+                                    Space for three pairs of semi-detached houses behind a row of existing houses
+                                </p>
+                                <ul>
+                                    <li>
+                                        <p className="sm-type-bigamp">
+                                            <a href="https://www.gov.scot/policies/more-homes/rural-housing-fund/" target="_blank" rel="external">Rural and Islands Housing Funds</a>
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <p className="sm-type-bigamp">
+                                            <a href="https://www.ecology.co.uk/mortgages/community-and-commercial-mortgages/community-led-housing/" target="_blank" rel="external">Ecology Building Society</a>
+                                        </p>
+                                    </li>
+                                </ul>
+                            </div>
+
                             <p className="sm-type-bigamp mb-4">
-                                <Link href="/student/stage-3">
-                                    Back to Stage 3
-                                </Link>
+                                <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
+
                             </p>
                         </div>
                         <div className="col-lg-4">
@@ -192,10 +216,25 @@ const Stage2HousingPage = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link href="/student/stage-2">
-                                        Back to Stage 2
-                                    </Link>
+                                    <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
                                 </p>
+                            </div>
+
+                            <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-green">
+                                    <TickSheet />
+                                </span>
+                                Your checklist
+                            </p>
+                            <div className="side-grey">
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">You have read the information for Affordable Housing.</p>
+                                </div>
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">You have seen the funding options for Affordable Housing.</p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -207,4 +246,4 @@ const Stage2HousingPage = () => {
     )
 }
 
-export default Stage2HousingPage
+export default Stage3HousingPage

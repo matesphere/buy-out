@@ -11,7 +11,8 @@ import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Ticklr from "../../../../assets/tick-lr.svg";
 import Ticklr2 from "../../../../assets/tick-lr2.svg";
-const Stage2BusinessHub = () => {
+import TickSheet from "../../../../assets/tick-sheet.svg";
+const Stage3BusinessHub = () => {
   const data = useStaticQuery(graphql`
     query {
       image1: file(relativePath: { eq: "business-hub.jpg" }) {
@@ -25,10 +26,10 @@ const Stage2BusinessHub = () => {
     <>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Stage 2 - Lay The Foundations - Business Hub</title>
+        <title>Stage 3 - Business Hub</title>
       </Helmet>
       <main className="the-quest">
-        <Header headerText="Stage 2" />
+        <Header headerText="Stage 3" />
         <section className="container" id="main">
           <div className="row">
             <div className="col-lg-8">
@@ -126,12 +127,43 @@ const Stage2BusinessHub = () => {
                 Funding would be available from:
               </p>
               <p className="sm-type-bigamp mb-4">
-                The tenants would pay a rent of £600 each per month, giving a
-                total of £2400 per month.
+                Funding would be available from: Scottish Land Fund, Ecology Building Society and/or the Robertson Trust.
+              </p>
+              <p className="sm-type-bigamp mb-4">
+                The tenants would pay a rent of £600 each per month, giving a total of £2400 per month.
               </p>
 
+              <div className="side-grey">
+                <p className="sm-type-guitar sm-type-guitar--medium">
+                    <span className="side-icon side-icon-orange">
+                      <HelpIcon />
+                    </span>
+                  Funding Options
+                </p>
+                <p className="sm-type-bigamp">
+                  Siutated off the main thoroughfare, a new build that could be divided into units for offices and / or workshops
+                </p>
+                <ul>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.tnlcommunityfund.org.uk/funding/programmes/scottish-land-fund#section-1" target="_blank" rel="external">Scottish Land Fund</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.ecology.co.uk/mortgages/community-and-commercial-mortgages/sustainable-business/" target="_blank" rel="external">Ecology Building Society</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.therobertsontrust.org.uk/funding/community-building-grants/" target="_blank" rel="external">Robertson Trust</a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+
               <p className="sm-type-bigamp mb-4">
-                <Link href="/student/stage-3">Back to Stage 3</Link>
+                <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
               </p>
             </div>
             <div className="col-lg-4">
@@ -146,9 +178,27 @@ const Stage2BusinessHub = () => {
                   Make notes of the amenities and the opportunities.
                 </p>
                 <p className="sm-type-amp">
-                  <Link href="/student/stage-2">Back to Stage 2</Link>
+                  <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
                 </p>
               </div>
+
+              <p className="sm-type-guitar mb-2">
+                <span className="side-icon side-icon-green">
+                    <TickSheet />
+                </span>
+                Your checklist
+              </p>
+              <div className="side-grey">
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have read the information for Business hub Scheme.</p>
+                </div>
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have seen the funding options for Business hub Scheme.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
@@ -159,4 +209,4 @@ const Stage2BusinessHub = () => {
   );
 };
 
-export default Stage2BusinessHub;
+export default Stage3BusinessHub;

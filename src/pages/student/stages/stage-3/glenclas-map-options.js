@@ -6,14 +6,15 @@ import { graphql, useStaticQuery } from 'gatsby'
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import '../../../../scss/index.scss'
-import {GatsbyImage} from "gatsby-plugin-image";
-import InfoPick from "../../../../assets/info-pick.svg";
+import { GatsbyImage } from 'gatsby-plugin-image'
+import InfoPick from '../../../../assets/info-pick.svg'
+import scrollTo from "gatsby-plugin-smoothscroll";
+import TickSheet from "../../../../assets/tick-sheet.svg";
+import Tick from "../../../../assets/tick.svg";
 
-const Stage2PlanPage = () => {
+const Stage3PlanPage = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "map-zoom.jpg" }) {
@@ -30,17 +31,16 @@ const Stage2PlanPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 2 - Consult</title>
+                <title>Stage 3 - Lay The Foundations</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 2" />
+                <Header headerText="Stage 3" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Consult
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
+                                Map of options in Glenclas
                             </h2>
-
                             <p className="sm-type-lead mb-3">
                                 Shown below is a map of Glenclas, with the
                                 locations of proposed development opportunities
@@ -186,8 +186,8 @@ const Stage2PlanPage = () => {
                                             low running costs.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/affordable-housing-scheme">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/affordable-housing-scheme">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -209,8 +209,8 @@ const Stage2PlanPage = () => {
                                             for older children.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/playpark-skatepark">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/playpark-skatepark">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -231,8 +231,8 @@ const Stage2PlanPage = () => {
                                             local community and visitors.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/shop-and-post-office">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/shop-and-post-office">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -254,8 +254,8 @@ const Stage2PlanPage = () => {
                                             electricity sold onto the grid.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/micro-hydro">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/micro-hydro">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -276,8 +276,8 @@ const Stage2PlanPage = () => {
                                             electricity sold onto the grid.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/wind-turbine">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/wind-turbine">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -287,7 +287,7 @@ const Stage2PlanPage = () => {
                                     <div className="cell">
                                         <p>
                                             <span className="yellowdot"></span>{' '}
-                                            6. Business hub Shceme
+                                            6. Business hub Scheme
                                         </p>
                                     </div>
                                     <div className="cell">
@@ -298,8 +298,8 @@ const Stage2PlanPage = () => {
                                             workshops.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/business-hub">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/business-hub">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -323,8 +323,8 @@ const Stage2PlanPage = () => {
                                             as climate mitigation
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/forestry-scheme">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/forestry-scheme">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -348,8 +348,8 @@ const Stage2PlanPage = () => {
                                             the facilities.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/campsite-cabin">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/campsite-cabin">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -371,8 +371,8 @@ const Stage2PlanPage = () => {
                                             Hotel and Lodge.
                                         </p>
                                         <p>
-                                            <Link to="/student/stage-2/market-scheme">
-                                                Read more about{' '}
+                                            <Link to="/student/stage-3/market-scheme">
+                                                Read more
                                             </Link>
                                         </p>
                                     </div>
@@ -397,6 +397,8 @@ const Stage2PlanPage = () => {
 
 
                             </div>
+
+
                         </div>
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2">
@@ -406,46 +408,6 @@ const Stage2PlanPage = () => {
                                 Helpful information
                             </p>
                             <div className="side-grey">
-                                <p className="sm-type-amp">Useful links</p>
-                                <ul>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Civil parish
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Loch_Alsh"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Lochalsh
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Highland_council_area"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Highland
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Inverness-shire"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Inverness-shire
-                                        </a>
-                                    </li>
-                                </ul>
-
                                 <p className="sm-type-amp">
                                     Read all about Glenclas and find out what
                                     you need to move on to the next quest.
@@ -454,13 +416,24 @@ const Stage2PlanPage = () => {
                                     Make notes of the amenities and the
                                     opportunities.
                                 </p>
-
                                 <p className="sm-type-amp">
-                                    <Link href="/student/stage-2">
-                                        Back to Stage 2
-                                    </Link>
+                                    Look at Funding Options on each Option.
                                 </p>
                             </div>
+
+                            <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-green">
+                                    <TickSheet />
+                                </span>
+                                Your checklist
+                            </p>
+                            <div className="side-grey">
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">You have seen the map and the detailed information on each option.</p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </section>
@@ -471,4 +444,4 @@ const Stage2PlanPage = () => {
     )
 }
 
-export default Stage2PlanPage
+export default Stage3PlanPage

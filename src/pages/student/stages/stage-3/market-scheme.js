@@ -11,7 +11,8 @@ import "../../../../scss/index.scss";
 import { GatsbyImage } from "gatsby-plugin-image";
 import Ticklr from '../../../../assets/tick-lr.svg'
 import Ticklr2 from '../../../../assets/tick-lr2.svg'
-const Stage2MarketScheme = () => {
+import TickSheet from "../../../../assets/tick-sheet.svg";
+const Stage3MarketScheme = () => {
   const data = useStaticQuery(graphql`
     query {
       image1: file(relativePath: { eq: "market-scheme.jpg" }) {
@@ -25,10 +26,10 @@ const Stage2MarketScheme = () => {
     <>
       <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Stage 2 - Lay The Foundations - Market Scheme</title>
+        <title>Stage 3 - Market Scheme</title>
       </Helmet>
       <main className="the-quest">
-        <Header headerText="Stage 2" />
+        <Header headerText="Stage 3" />
         <section className="container" id="main">
           <div className="row">
             <div className="col-lg-8">
@@ -109,14 +110,41 @@ const Stage2MarketScheme = () => {
                   </div>
                 </div>
 
-
-
-
               <p className="sm-type-bigamp mb-4">Funding for a scheme like this could come from Scottish Rural Development Programme (SRDP) the Small Farms Grant Scheme, the Community Growing Fund. The scheme will also attract funding from agencies seeking to support schemes tackling Climate Change as production of local food for local consumption reduces food miles and therefore carbon emissions.</p>
               <p className="sm-type-bigamp mb-4">It is likely that 100% of the capital costs would be funded. The business is likely to take time to develop and so it is to be expected that it would only ‘break even’ (income = costs) by the third year. You will need to estimate income over the first 4 years of the Scheme for completion of the Business Plan.</p>
 
+              <div className="side-grey">
+                <p className="sm-type-guitar sm-type-guitar--medium">
+                    <span className="side-icon side-icon-orange">
+                      <HelpIcon />
+                    </span>
+                  Funding Options
+                </p>
+                <p className="sm-type-bigamp">
+                  A commercial operation to grow year-round fruit and vegetables for the local community and for local businesses such as the Glancas Hotel and Lodge
+                </p>
+                <ul>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://forestryandland.gov.scot/business-and-services" target="_blank" rel="external">Forestry and Land Scotland</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://esmeefairbairn.org.uk/our-aims/our-natural-world/" target="_blank" rel="external">Esmée Fairbairn Foundation</a>
+                    </p>
+                  </li>
+                  <li>
+                    <p className="sm-type-bigamp">
+                      <a href="https://www.tnlcommunityfund.org.uk/funding/programmes/climate-action-fund-round-1" target="_blank" rel="external">Big Lottery - Climate Action Fund</a>
+                    </p>
+                  </li>
+
+                </ul>
+              </div>
+
               <p className="sm-type-bigamp mb-4">
-                <Link href="/student/stage-3">Back to Stage 3</Link>
+                <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
               </p>
             </div>
             <div className="col-lg-4">
@@ -131,9 +159,27 @@ const Stage2MarketScheme = () => {
                   Make notes of the amenities and the opportunities.
                 </p>
                 <p className="sm-type-amp">
-                  <Link href="/student/stage-2">Back to Stage 2</Link>
+                  <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
                 </p>
               </div>
+
+              <p className="sm-type-guitar mb-2">
+                <span className="side-icon side-icon-green">
+                    <TickSheet />
+                </span>
+                Your checklist
+              </p>
+              <div className="side-grey">
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have read the information for Market Garden Scheme.</p>
+                </div>
+                <div className="checklist">
+                  <div className="tick"></div>
+                  <p className="sm-type-lead">You have seen the funding options for Market Garden Scheme.</p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
@@ -144,4 +190,4 @@ const Stage2MarketScheme = () => {
   );
 };
 
-export default Stage2MarketScheme;
+export default Stage3MarketScheme;

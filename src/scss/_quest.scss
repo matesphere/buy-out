@@ -175,3 +175,43 @@
     margin: 10px;
   }
 }
+
+.not-available {
+  color: $brand-greybg;
+
+  &:hover {
+    cursor: not-allowed;
+  }
+}
+
+.accordion-item.collapsed {
+  display: none;
+}
+
+.accordion-item.expanded {
+  display: block;
+}
+
+.accordion-button {
+  display: block;
+  width: 100%;
+  border: none;
+  text-align: left;
+  position: relative;
+  padding-left: 60px;
+  background-color: transparent;
+
+  &:hover {
+    color: $brand-green;
+    text-decoration: underline;
+  }
+}
+
+.button-collapsed {
+  &:after {
+    content: "+";
+    position: absolute;
+    left: 20px;
+    top: 0px;
+  }
+}

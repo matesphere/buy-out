@@ -101,39 +101,19 @@ const HelpPage = () => {
                                 Example checklist
                             </p>
                             <div className="side-grey">
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        Did you find the "Helpful information"
-                                        location?
-                                    </label>
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">Did you find the "Helpful information"
+                                        location?</p>
                                 </div>
-
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id2"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id2">
-                                        Did you find the "Your checklist"
-                                        location?
-                                    </label>
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">Did you find the "Your checklist"
+                                        location?</p>
                                 </div>
-
-                                <div className="multiple-choice mb-4">
-                                    <input
-                                        className="form-control"
-                                        id="id3"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id3">
-                                        Have you read all actions?
-                                    </label>
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">Have you read all actions?</p>
                                 </div>
                             </div>
                         </div>

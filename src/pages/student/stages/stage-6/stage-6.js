@@ -66,9 +66,12 @@ const Stage6Page = () => {
                   </span>
                 </h4>
                 <div className="form-holder-border">
-                <ul>
-                  <li className="sm-type-guitar">Present your findings to the class.</li>
-                </ul>
+                  <p className="sm-type-lead mb-3">
+                    Use the <Link href="/student/stage-6/presentation-tips">tips here</Link> to help you with your presentation.
+                  </p>
+                  <ul>
+                    <li className="sm-type-guitar">Prepare your presentation.</li>
+                  </ul>
                 </div>
               </div>
             </div>
@@ -80,15 +83,8 @@ const Stage6Page = () => {
                 Helpful information
               </p>
               <div className="side-grey">
-                <p className="sm-type-amp mb-4">
-                    Present your Feasibility Studies, including the
-                    reasons for your choice of options (the SWOT analyses will be
-                    important).
-                </p>
-
                 <p className="sm-type-amp">
-                  Present your Business Plan to their Community (in this
-                    case, to the rest of their class).
+                    Prepare your presentation using your Feasibility Studies and SWOT analyses.
                 </p>
               </div>
             </div>

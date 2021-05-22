@@ -7,7 +7,7 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { stage2CheckList } from './_stage2.data'
 
 import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -96,12 +96,10 @@ const Stage2Page = () => {
                                 community.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
-                                Here you will find a map of Glenclas, with the
-                                locations of proposed development opportunities
-                                marked.
+                                See what the community and experts have to say.
                             </p>
                             <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/stage-2/plan-of-glenclas">
+                                <Link to="/student/stage-2/community">
                                     See what options are available.
                                 </Link>
                             </p>
@@ -151,43 +149,16 @@ const Stage2Page = () => {
                                 <p className="sm-type-amp">Useful links</p>
                                 <ul>
                                     <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Civil parish
-                                        </a>
+                                        <Link to="/student/stage-2/about-glenclas-area">
+                                            Read about the area.
+                                        </Link>
                                     </li>
                                     <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Loch_Alsh"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Lochalsh
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Highland_council_area"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Highland
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Inverness-shire"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Inverness-shire
-                                        </a>
+                                        <Link to="/student/stage-2/community">
+                                            See what the community and experts have to say.
+                                        </Link>
                                     </li>
                                 </ul>
-
                                 <p className="sm-type-amp">
                                     Read all about Glenclas and find out what
                                     you need to move on to the next quest.
@@ -198,60 +169,22 @@ const Stage2Page = () => {
                                 </p>
                             </div>
 
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have read the information about
-                                        Glenclas, the geography, atractions and
-                                        facilities.
-                                    </label>
-                                </div>
 
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have read the development options.
-                                    </label>
-                                </div>
+                            <ul>
+                                {stage2CheckList.map((stage2CheckList, i) => (
+                                    <li key={stage2CheckList.text}>
+                                        <p className="sm-type-guitar">
+                                            {stage2CheckList.text}
+                                        </p>
+                                        <p className="sm-type-amp mb-4">
+                                            {stage2CheckList.description}
+                                        </p>
+                                    </li>
+                                    ))
+                                }
+                            </ul>
 
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have read what the roles entail.
-                                    </label>
-                                </div>
 
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have decided what roles you will
-                                        undertake.
-                                    </label>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </section>

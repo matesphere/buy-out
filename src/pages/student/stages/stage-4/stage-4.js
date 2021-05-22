@@ -58,29 +58,7 @@ const Stage4Page = () => {
                                         <TickSheet/>
                                     </span>
                                     <span className="sm-type-drum">
-                                        Task 1 to complete:
-                                    </span>
-                                </h4>                                <p className="sm-type-lead mb-2">
-                                    You will need to work together and decided and carry out a Feasibility Study on a short list of 3 Options.
-                                </p>
-
-                                <p className="sm-type-lead mb-2">
-                                    Use the SWOT templates to help you confirm your choices.
-                                </p>
-                                <div className="form-holder-border">
-                                <ol>
-                                    <li className="sm-type-guitar mb-2"><Link to="/student/stage-4/swot-study-one">SWOT analysis 1</Link>.</li>
-                                    <li className="sm-type-guitar mb-2"><Link to="/student/stage-4/swot-study-one">SWOT analysis 2</Link>.</li>
-                                    <li className="sm-type-guitar"><Link to="/student/stage-4/swot-study-one">SWOT analysis 3</Link>.</li>
-                                </ol>
-                                </div>
-
-                                <h4 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet/>
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task 2 to complete:
+                                        Task to complete:
                                     </span>
                                 </h4>
                                 <p className="sm-type-lead mb-2">
