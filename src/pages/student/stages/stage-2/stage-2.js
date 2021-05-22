@@ -7,7 +7,7 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-import { stage2CheckList } from './_stage2.data'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -168,21 +168,6 @@ const Stage2Page = () => {
                                     opportunities.
                                 </p>
                             </div>
-
-
-                            <ul>
-                                {stage2CheckList.map((stage2CheckList, i) => (
-                                    <li key={stage2CheckList.text}>
-                                        <p className="sm-type-guitar">
-                                            {stage2CheckList.text}
-                                        </p>
-                                        <p className="sm-type-amp mb-4">
-                                            {stage2CheckList.description}
-                                        </p>
-                                    </li>
-                                    ))
-                                }
-                            </ul>
 
 
                         </div>
