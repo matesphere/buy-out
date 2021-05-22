@@ -111,7 +111,7 @@ const Routes = () => {
                 component={Stage3MarketScheme}
             />
             <LoggedInRoute
-                path="/stage-3/community"
+                path="/stage-2/community"
                 component={CommunityHousingPage}
             />
 

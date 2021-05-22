@@ -7,7 +7,6 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -148,7 +147,7 @@ const Stage2Page = () => {
                             <div className="side-grey">
                                 <p className="sm-type-amp">Useful links</p>
                                 <ul>
-                                    <li>
+                                    <li className="mb-2">
                                         <Link to="/student/stage-2/about-glenclas-area">
                                             Read about the area.
                                         </Link>
@@ -162,10 +161,6 @@ const Stage2Page = () => {
                                 <p className="sm-type-amp">
                                     Read all about Glenclas and find out what
                                     you need to move on to the next quest.
-                                </p>
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
                                 </p>
                             </div>
 
