@@ -58,35 +58,43 @@ const RolesPage = () => {
                                         <h6 className="sm-type-amp">Chair</h6>
                                     </Tab>
                                     <Tab>
-                                        <h6 className="sm-type-amp">Vice-chair</h6>
+                                        <h6 className="sm-type-amp">
+                                            Vice-chair
+                                        </h6>
                                     </Tab>
                                     <Tab>
-                                        <h6 className="sm-type-amp">Secretary</h6>
+                                        <h6 className="sm-type-amp">
+                                            Secretary
+                                        </h6>
                                     </Tab>
                                     <Tab>
-                                        <h6 className="sm-type-amp">Treasurer</h6>
+                                        <h6 className="sm-type-amp">
+                                            Treasurer
+                                        </h6>
                                     </Tab>
                                 </TabList>
                                 <TabPanel className="react-tabs--information">
                                     <div className="react-tabs--information--inner">
-                                        <h2 className="sm-type-guitar mb-2">Chair</h2>
+                                        <h2 className="sm-type-guitar mb-2">
+                                            Chair
+                                        </h2>
                                         <p className="sm-type-lead mb-2">
-                                            To chair the Board meetings, keep the
-                                            members ‘on track’, ensuring that all
-                                            members are involved in the tasks and in the
-                                            decision making.
+                                            To chair the Board meetings, keep
+                                            the members ‘on track’, ensuring
+                                            that all members are involved in the
+                                            tasks and in the decision making.
                                         </p>
                                         <p className="sm-type-lead mb-2">
                                             To have the ’casting vote’ over any
                                             decisions.
                                         </p>
                                         <p className="sm-type-lead mb-2">
-                                            To lead the long- and short-listing of the
-                                            Development Options.
+                                            To lead the long- and short-listing
+                                            of the Development Options.
                                         </p>
                                         <p className="sm-type-lead mb-2">
-                                            To lead the feedback presentation to the
-                                            Community.
+                                            To lead the feedback presentation to
+                                            the Community.
                                         </p>
                                     </div>
                                 </TabPanel>
@@ -96,18 +104,19 @@ const RolesPage = () => {
                                             Vice-chair
                                         </h2>
                                         <p className="sm-type-lead mb-2">
-                                            To deputise for the Chair, as necessary.
+                                            To deputise for the Chair, as
+                                            necessary.
                                         </p>
                                         <p className="sm-type-lead mb-2">
-                                            To oversee the choice of the Group name and
-                                            the design of the logo.
+                                            To oversee the choice of the Group
+                                            name and the design of the logo.
                                         </p>
                                         <p className="sm-type-lead mb-2">
                                             To lead the SWOT analysis.
                                         </p>
                                         <p className="sm-type-lead mb-24">
-                                            To assist the Chair in the presentation to
-                                            the Community.
+                                            To assist the Chair in the
+                                            presentation to the Community.
                                         </p>
                                     </div>
                                 </TabPanel>
@@ -117,16 +126,18 @@ const RolesPage = () => {
                                             Secretary
                                         </h2>
                                         <p className="sm-type-lead mb-2">
-                                            To enter the text and data into the Quest
-                                            forms.
+                                            To enter the text and data into the
+                                            Quest forms.
                                         </p>
                                         <p className="sm-type-lead mb-2">
-                                            To record decisions made at ‘meetings’.
+                                            To record decisions made at
+                                            ‘meetings’.
                                         </p>
                                         <p className="sm-type-lead mb-2">
-                                            To lead the writing of the Feasibility Study
-                                            which will be presented to the Community,
-                                            together with the Business Plan.
+                                            To lead the writing of the
+                                            Feasibility Study which will be
+                                            presented to the Community, together
+                                            with the Business Plan.
                                         </p>
                                     </div>
                                 </TabPanel>
@@ -136,44 +147,44 @@ const RolesPage = () => {
                                             Treasurer
                                         </h2>
                                         <p className="sm-type-lead mb-2">
-                                            To oversee any calculations that need to be
-                                            competed.
+                                            To oversee any calculations that
+                                            need to be competed.
                                         </p>
                                         <p className="sm-type-lead mb-2">
-                                            To build the Business Plan which will detail
-                                            costs, income and funding streams for the
-                                            purchase of the land and for setting up and
+                                            To build the Business Plan which
+                                            will detail costs, income and
+                                            funding streams for the purchase of
+                                            the land and for setting up and
                                             running the Development Schemes.
                                         </p>
                                     </div>
                                 </TabPanel>
                             </Tabs>
 
-
                             <div
                                 className={`filters-container${
                                     showFilters ? ' show' : ''
                                 }`}
                             >
-
                                 <div className="side-grey">
                                     <h3 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
+                                        <span className="ticker-sheet">
+                                            <TickSheet />
+                                        </span>
                                         <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
+                                            Task to complete:
+                                        </span>
                                     </h3>
                                     <p className="sm-type-amp mb-2">
-                                        You will need to work together and decided
-                                        who will do the following.
+                                        You will need to work together and
+                                        decided who will do the following.
                                     </p>
 
                                     <div className="form-holder-border">
                                         <div className="form-holder">
                                             <h4 className="sm-type-guitar mb-2">
-                                                Enter the names for the roles below:
+                                                Enter the names for the roles
+                                                below:
                                             </h4>
                                             <div id="form-roles">
                                                 <ul>
@@ -207,7 +218,9 @@ const RolesPage = () => {
                                             <button
                                                 onClick={() => {
                                                     setShowFilters(!showFilters)
-                                                    scrollTo('#filter-container')
+                                                    scrollTo(
+                                                        '#filter-container'
+                                                    )
                                                 }}
                                                 className="btn-solid-lg"
                                                 to="/introduction"
@@ -226,10 +239,13 @@ const RolesPage = () => {
                                                 </span>{' '}
                                                 Success
                                             </h4>
-                                            <p>Your roles have been submitted.</p>
+                                            <p>
+                                                Your roles have been submitted.
+                                            </p>
                                             <p>
                                                 <Link to="/student/your-notes-inprogress">
-                                                    You will see your feedback here
+                                                    You will see your feedback
+                                                    here
                                                 </Link>
                                             </p>
                                         </div>
@@ -257,7 +273,7 @@ const RolesPage = () => {
                                 </ul>
 
                                 <p className="sm-type-amp">
-                                    <Link href="/student/stage-2">
+                                    <Link to="/student/stage-2">
                                         Back to Stage 2
                                     </Link>
                                 </p>

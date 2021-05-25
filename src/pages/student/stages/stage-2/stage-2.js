@@ -127,7 +127,7 @@ const Stage2Page = () => {
                                     <ul>
                                         <li className="sm-type-guitar">
                                             Find more{' '}
-                                            <Link href="/student/stage-2/the-roles">
+                                            <Link to="/student/stage-2/the-roles">
                                                 information about the roles and
                                                 choose your Board here
                                             </Link>
@@ -154,7 +154,8 @@ const Stage2Page = () => {
                                     </li>
                                     <li>
                                         <Link to="/student/stage-2/community">
-                                            See what the community and experts have to say.
+                                            See what the community and experts
+                                            have to say.
                                         </Link>
                                     </li>
                                 </ul>
@@ -163,8 +164,6 @@ const Stage2Page = () => {
                                     you need to move on to the next quest.
                                 </p>
                             </div>
-
-
                         </div>
                     </div>
                 </section>

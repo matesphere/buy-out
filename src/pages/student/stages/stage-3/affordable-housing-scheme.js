@@ -10,7 +10,7 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
-import TickSheet from "../../../../assets/tick-sheet.svg";
+import TickSheet from '../../../../assets/tick-sheet.svg'
 
 const Stage3HousingPage = () => {
     const data = useStaticQuery(graphql`
@@ -29,9 +29,7 @@ const Stage3HousingPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>
-                    Stage 3 - Affordable Housing
-                </title>
+                <title>Stage 3 - Affordable Housing</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Stage 3" />
@@ -177,30 +175,44 @@ const Stage3HousingPage = () => {
                             <div className="side-grey">
                                 <p className="sm-type-guitar sm-type-guitar--medium">
                                     <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
+                                        <HelpIcon />
+                                    </span>
                                     Funding Options
                                 </p>
                                 <p className="sm-type-bigamp">
-                                    Space for three pairs of semi-detached houses behind a row of existing houses
+                                    Space for three pairs of semi-detached
+                                    houses behind a row of existing houses
                                 </p>
                                 <ul>
                                     <li>
                                         <p className="sm-type-bigamp">
-                                            <a href="https://www.gov.scot/policies/more-homes/rural-housing-fund/" target="_blank" rel="external">Rural and Islands Housing Funds</a>
+                                            <a
+                                                href="https://www.gov.scot/policies/more-homes/rural-housing-fund/"
+                                                target="_blank"
+                                                rel="external"
+                                            >
+                                                Rural and Islands Housing Funds
+                                            </a>
                                         </p>
                                     </li>
                                     <li>
                                         <p className="sm-type-bigamp">
-                                            <a href="https://www.ecology.co.uk/mortgages/community-and-commercial-mortgages/community-led-housing/" target="_blank" rel="external">Ecology Building Society</a>
+                                            <a
+                                                href="https://www.ecology.co.uk/mortgages/community-and-commercial-mortgages/community-led-housing/"
+                                                target="_blank"
+                                                rel="external"
+                                            >
+                                                Ecology Building Society
+                                            </a>
                                         </p>
                                     </li>
                                 </ul>
                             </div>
 
                             <p className="sm-type-bigamp mb-4">
-                                <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
-
+                                <Link to="/student/stage-3/glenclas-map-options">
+                                    Back to the map
+                                </Link>
                             </p>
                         </div>
                         <div className="col-lg-4">
@@ -216,7 +228,9 @@ const Stage3HousingPage = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link href="/student/stage-3/glenclas-map-options">Back to the map</Link>
+                                    <Link to="/student/stage-3/glenclas-map-options">
+                                        Back to the map
+                                    </Link>
                                 </p>
                             </div>
 
@@ -229,11 +243,17 @@ const Stage3HousingPage = () => {
                             <div className="side-grey">
                                 <div className="checklist">
                                     <div className="tick"></div>
-                                    <p className="sm-type-lead">You have read the information for Affordable Housing.</p>
+                                    <p className="sm-type-lead">
+                                        You have read the information for
+                                        Affordable Housing.
+                                    </p>
                                 </div>
                                 <div className="checklist">
                                     <div className="tick"></div>
-                                    <p className="sm-type-lead">You have seen the funding options for Affordable Housing.</p>
+                                    <p className="sm-type-lead">
+                                        You have seen the funding options for
+                                        Affordable Housing.
+                                    </p>
                                 </div>
                             </div>
                         </div>
