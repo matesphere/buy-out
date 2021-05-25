@@ -96,10 +96,6 @@ const StudentInput: FC<StudentInputType> = ({ num, name, email, setStudents }) =
 // }
 
 const ConfirmModal = ({ students, setShowModal }) => {
-    // const [insertStudents, { loading, error, data }] = useMutation(
-    //     INSERT_STUDENTS
-    // )
-
     const { studentsToAdd, setStudentsToAdd } = useContext(NewQuestContext)
 
     return (
@@ -143,7 +139,7 @@ const ConfirmModal = ({ students, setShowModal }) => {
     )
 }
 
-const TutorAddPage: FC = () => {
+const TutorAddStudentsPage: FC = () => {
     const [students, setStudents] = useState<Array<StudentType>>([EMPTY_STUDENT, EMPTY_STUDENT])
     const [showModal, setShowModal] = useState(false)
 
@@ -235,4 +231,4 @@ const TutorAddPage: FC = () => {
     )
 }
 
-export default TutorAddPage
+export default TutorAddStudentsPage

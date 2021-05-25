@@ -4,7 +4,6 @@ import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import Hub from './tutor/hub'
 import CurrentQuest from './tutor/current-quest'
-import NewQuest from './tutor/new-quest'
 import AddStudents from './tutor/add-students'
 import CreateTeam from './tutor/create-team'
 
@@ -44,7 +43,6 @@ const Routes = () => {
             <Router basepath="/tutor">
                 <LoggedInRoute path="/hub" component={Hub} />
                 <LoggedInRoute path="/current-quest" component={CurrentQuest} />
-                <LoggedInRoute path="/new-quest" component={NewQuest} />
                 <LoggedInRoute path="/add-students" component={AddStudents} />
                 <LoggedInRoute path="/create-team" component={CreateTeam} />
             </Router>

@@ -4,7 +4,7 @@ import { Helmet } from 'react-helmet'
 import { useMutation } from '@apollo/client'
 
 import {
-    CREATE_TEAMS,
+    CREATE_QUEST_WITH_TEAMS,
     START_QUEST,
     startQuestMapper,
 } from '../../gql/mutations'
@@ -177,7 +177,9 @@ const CreateStudentsSection = ({
 }
 
 const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
-    const [createTeams, createTeamsResponse] = useMutation(CREATE_TEAMS)
+    const [createQuestWithTeams, createQuestWithTeamsResponse] = useMutation(
+        CREATE_QUEST_WITH_TEAMS
+    )
     const [startQuest, startQuestResponse] = useMutation(START_QUEST)
     const [cognitoResponse, setCognitoResponse] = useState([])
 
@@ -194,7 +196,7 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                             Cancel
                         </button>
 
-                        {!createTeamsResponse.data && (
+                        {!createQuestWithTeamsResponse.data && (
                             <>
                                 <p className="sm-type-guitar sm-type-guitar--medium mt-4">
                                     {`You are about to create ${teams.length} teams! Is this correct?`}{' '}
@@ -203,12 +205,17 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                                 <button
                                     className="btn-solid-lg mt-4"
                                     onClick={() => {
-                                        createTeams({
+                                        createQuestWithTeams({
                                             variables: {
                                                 objects: teams.map(
                                                     ({ name }) => ({
                                                         name,
-                                                        tutor_id: TUTOR_ID,
+                                                        quest: {
+                                                            data: {
+                                                                tutor_id:
+                                                                    TUTOR_ID,
+                                                            },
+                                                        },
                                                     })
                                                 ),
                                             },
@@ -220,21 +227,21 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                             </>
                         )}
 
-                        {createTeamsResponse.loading && (
+                        {createQuestWithTeamsResponse.loading && (
                             <LoadingSpinner delay={200} />
                         )}
 
-                        {createTeamsResponse.data && (
+                        {createQuestWithTeamsResponse.data && (
                             <div>
                                 <p className="sm-type-guitar sm-type-guitar--medium">
-                                    {`Created ${createTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
+                                    {`Created ${createQuestWithTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
                                 </p>
 
                                 <CreateStudentsSection
                                     teamsWithStudents={teams}
                                     teamsFromResponse={
-                                        createTeamsResponse.data.insert_team
-                                            .returning
+                                        createQuestWithTeamsResponse.data
+                                            .insert_team.returning
                                     }
                                     cognitoResponse={cognitoResponse}
                                     setCognitoResponse={setCognitoResponse}
@@ -249,11 +256,14 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                                             className="btn-solid-lg mt-4 mb-4"
                                             onClick={() => {
                                                 startQuest({
-                                                    variables: startQuestMapper(
-                                                        createTeamsResponse.data.insert_team.returning.map(
-                                                            (obj) => obj.id
-                                                        )
-                                                    ),
+                                                    variables: {
+                                                        quest_id:
+                                                            createQuestWithTeamsResponse
+                                                                .data
+                                                                .insert_team
+                                                                .returning
+                                                                .quest_id,
+                                                    },
                                                 })
                                                 setShowModal(false)
                                                 setStudentsToAdd([])
@@ -262,8 +272,8 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                                             START QUEST!
                                         </button>
                                         <span>
-                                            This will unlock Stage 1 for all
-                                            created teams
+                                            You'll now be able to access this
+                                            quest from your hub
                                         </span>
                                     </>
                                 )}
@@ -277,13 +287,13 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                 <div className="modal-window">
                     <div>
                         <p className="sm-type-guitar sm-type-guitar--medium mt-4">
-                            {`Stage 1 unlocked for ${startQuestResponse.data.insert_stage_progress.returning.length} teams!`}{' '}
+                            Quest created!{' '}
                         </p>
                         <Link
                             to="/tutor/current-quest"
                             className="btn-solid-lg mt-4 mb-4"
                         >
-                            Go to current quest
+                            View current quests
                         </Link>
                     </div>
                 </div>
@@ -292,7 +302,7 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
     )
 }
 
-const TutorAddStudentPage = () => {
+const TutorCreateTeamPage = () => {
     const [teams, setTeams] = useState([])
     const [showModal, setShowModal] = useState(false)
     // const { loading, error, data } = useQuery(GET_STUDENTS)
@@ -393,4 +403,4 @@ const TutorAddStudentPage = () => {
     )
 }
 
-export default TutorAddStudentPage
+export default TutorCreateTeamPage
