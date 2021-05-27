@@ -41,6 +41,10 @@ p {
     text-align: right;
 }
 
+.italic {
+    font-style: italic;
+}
+
 .text-underline {
     text-decoration: underline;
 
@@ -931,7 +935,7 @@ button:focus {
     font-size: 12px;
     line-height: 0;
     position: absolute;
-    top: 50%;
+    top: 20%;
     display: block;
     width: 100px;
     height: 20px;
@@ -948,7 +952,7 @@ button:focus {
 }
 
 .slick-prev{
-    left: 0px;
+    left: 20px;
     width: 50px;
     height: 50px;
     z-index: 999;
@@ -970,7 +974,7 @@ button:focus {
     width: 50px;
     height: 50px;
     z-index: 999;
-    right: -0px;
+    right: 20px;
     svg {
         transform: rotate(180deg);
     }
@@ -1047,6 +1051,7 @@ button:focus {
     background-color: white;
     border-radius: 8px;
     padding: 4px;
+    text-align: center;
 
     p {
         text-align: center;

@@ -8,7 +8,7 @@ import Stage1ResearchPage from './student/stages/stage-1/research-page'
 import Stage1 from './student/stages/stage-1/stage-1'
 import RolesPage from './student/stages/stage-2/the-roles'
 import Stage2Page from './student/stages/stage-2/stage-2'
-import AboutGlenclasPeoplePage from './student/stages/stage-2/about-glenclas-people'
+import Stage2PageComplete from './student/stages/stage-2/stage-2-complete'
 import AboutGlenclasAreaPage from './student/stages/stage-2/about-glenclas-area'
 import CommunityHousingPage from './student/stages/stage-2/community'
 import Stage3HousingPage from './student/stages/stage-3/affordable-housing-scheme'
@@ -67,13 +67,17 @@ const Routes = () => {
             <LoggedInRoute path="/stage-2" component={Stage2Page} />
             <LoggedInRoute path="/stage-2/the-roles" component={RolesPage} />
             <LoggedInRoute
-                path="/stage-2/about-glenclas-people"
-                component={AboutGlenclasPeoplePage}
-            />
-            <LoggedInRoute
                 path="/stage-2/about-glenclas-area"
                 component={AboutGlenclasAreaPage}
             />
+                <LoggedInRoute
+                    path="/stage-2-complete"
+                    component={Stage2PageComplete}
+                />
+                <LoggedInRoute
+                    path="/stage-2/community"
+                    component={CommunityHousingPage}
+                />
             <LoggedInRoute
                 path="/stage-3/affordable-housing-scheme"
                 component={Stage3HousingPage}
@@ -109,10 +113,6 @@ const Routes = () => {
             <LoggedInRoute
                 path="/stage-3/market-scheme"
                 component={Stage3MarketScheme}
-            />
-            <LoggedInRoute
-                path="/stage-2/community"
-                component={CommunityHousingPage}
             />
 
             <LoggedInRoute path="/stage-3" component={Stage3Page} />
