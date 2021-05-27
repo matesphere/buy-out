@@ -5,9 +5,10 @@ import {
     SUBMIT_WORK_INITIAL,
     SUBMIT_WORK,
 } from '../gql/mutations'
-import { gql } from '@apollo/client'
 
 import { useAuthQuery, useAuthMutation } from './auth-utils'
+
+import { DOCUMENT_QUERY } from '../gql/queries'
 import {
     DocumentQuery,
     DocumentQueryVariables,
@@ -40,26 +41,8 @@ export enum ActionType {
     UpdateAction,
 }
 
-const DOCUMENT_QUERY = gql`
-    query DocumentQuery($team_id: uuid!, $stage_id: Int) {
-        team_by_pk(id: $team_id) {
-            stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
-                id
-                stage_id
-                status
-                documents(where: { status: { _eq: draft } }) {
-                    id
-                    doc_data
-                }
-            }
-        }
-    }
-`
-
 export const useWorkState = <InputState, Action>(
-    // docQuery: DocumentNode,
     stageId: number,
-    // docSelector: (data: any) => any,
     workReducer: Reducer<InputState, Action>
 ) => {
     const [docId, setDocId] = useState('')

@@ -2,22 +2,42 @@ import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import scrollTo from 'gatsby-plugin-smoothscroll'
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
-
-import TickSheet from '../../../../assets/tick-sheet.svg'
-import Tick from '../../../../assets/tick.svg'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { Loading } from '../../../../components/common/Loading'
 import CheckList from '../../../../components/common/checklist'
 import Helpful from '../../../../components/common/helpful'
 
+import { useAuthQuery } from '../../../../utils/auth-utils'
+import { TEAM_QUERY } from '../../../../gql/queries'
+import { TeamQuery, TeamQueryVariables } from '../../../../gql/types/TeamQuery'
+
+import TickSheet from '../../../../assets/tick-sheet.svg'
+import Tick from '../../../../assets/tick.svg'
+
 import '../../../../scss/index.scss'
 
-import { stage2CheckListEng, stage2HelpfulEng, stage2DataTitleEng, stage2DataSubTitleEng, stage2DataTextEng } from './_stage2.data'
+import {
+    stage2CheckListEng,
+    stage2HelpfulEng,
+    stage2DataTitleEng,
+    stage2DataSubTitleEng,
+    stage2DataTextEng,
+} from './_stage2.data'
 
-const RolesPage = ({items}) => {
+const RolesPage = ({ items }) => {
     const [showFilters, setShowFilters] = useState(false)
+    const [roles, setRoles] = useState({})
+
+    const { loading, error, data } = useAuthQuery<
+        TeamQuery,
+        TeamQueryVariables
+    >(TEAM_QUERY, {}, 'teamId')
+
+    if (loading) return <Loading />
+    if (error) return `Error! ${error.message}`
 
     return (
         <>
@@ -34,19 +54,28 @@ const RolesPage = ({items}) => {
                     <div className="row">
                         <div className="col-lg-9">
                             {stage2DataTitleEng.map((check) => (
-                                <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4" key={check.title}>
+                                <h2
+                                    className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4"
+                                    key={check.title}
+                                >
                                     {check.title}
                                 </h2>
                             ))}
 
                             {stage2DataSubTitleEng.map((check) => (
-                                <p className="sm-type-guitar mb-4" key={check.subtitle}>
+                                <p
+                                    className="sm-type-guitar mb-4"
+                                    key={check.subtitle}
+                                >
                                     {check.subtitle}
                                 </p>
                             ))}
 
                             {stage2DataTextEng.map((check) => (
-                                <p className="sm-type-lead mb-4" key={check.text}>
+                                <p
+                                    className="sm-type-lead mb-4"
+                                    key={check.text}
+                                >
                                     {check.text}
                                 </p>
                             ))}
@@ -182,38 +211,64 @@ const RolesPage = ({items}) => {
                                     <div className="form-holder-border">
                                         <div className="form-holder">
                                             <h4 className="sm-type-guitar mb-2">
-                                                Enter the names for the roles
-                                                below:
+                                                Choose a role for each team
+                                                member:
                                             </h4>
                                             <div id="form-roles">
                                                 <ul>
-                                                    <li className="mb-2">
-                                                        <label className="form-label sm-type-amp">
-                                                            Chair
-                                                        </label>
-                                                        <input type="text" class="form-control" />
-                                                    </li>
-                                                    <li className="mb-2">
-                                                        <label className="form-label sm-type-amp">
-                                                            Vice-chair
-                                                        </label>
-                                                        <input type="text" class="form-control" />
-                                                    </li>
-                                                    <li className="mb-2">
-                                                        <label className="form-label sm-type-amp">
-                                                            Secretary
-                                                        </label>
-                                                        <input type="text" class="form-control" />
-                                                    </li>
-                                                    <li className="mb-2">
-                                                        <label className="form-label sm-type-amp">
-                                                            Treasurer
-                                                        </label>
-                                                        <input type="text" class="form-control" />
-                                                    </li>
+                                                    {data.team_by_pk.students.map(
+                                                        ({
+                                                            user: {
+                                                                username,
+                                                                full_name,
+                                                            },
+                                                        }) => (
+                                                            <li className="mb-2">
+                                                                <label className="form-label sm-type-amp">
+                                                                    {full_name}
+                                                                </label>
+                                                                <select
+                                                                    className="form-control"
+                                                                    value={
+                                                                        roles[
+                                                                            username
+                                                                        ]
+                                                                    }
+                                                                    onChange={({
+                                                                        target: {
+                                                                            value,
+                                                                        },
+                                                                    }) =>
+                                                                        setRoles(
+                                                                            (
+                                                                                roles
+                                                                            ) => ({
+                                                                                ...roles,
+                                                                                [username]:
+                                                                                    value,
+                                                                            })
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    <option value="chairperson">
+                                                                        Chair
+                                                                    </option>
+                                                                    <option value="vicechairperson">
+                                                                        Vice-chair
+                                                                    </option>
+                                                                    <option value="secretary">
+                                                                        Secretary
+                                                                    </option>
+                                                                    <option value="treasurer">
+                                                                        Treasurer
+                                                                    </option>
+                                                                </select>
+                                                            </li>
+                                                        )
+                                                    )}
                                                 </ul>
                                             </div>
-
+                                            {/* TODO: multi-mutation of all students in team to set roles */}
                                             <button
                                                 onClick={() => {
                                                     setShowFilters(!showFilters)

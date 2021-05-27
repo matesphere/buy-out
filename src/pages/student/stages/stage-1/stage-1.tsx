@@ -1,57 +1,39 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { gql } from '@apollo/client'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
+import { Loading } from '../../../../components/common/Loading'
+
+import { STAGE_QUERY } from '../../../../gql/queries'
+import {
+    StageQuery,
+    StageQueryVariables,
+} from '../../../../gql/types/StageQuery'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-
-import '../../../../scss/index.scss'
 import DogVideo from '../../../../assets/the-quest.mp4'
 
-const STAGE_1_QUERY = gql`
-    query Stage1Query($team_id: uuid!, $stage_id: Int) {
-        team_by_pk(id: $team_id) {
-            stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
-                id
-                stage_id
-                status
-            }
-        }
-    }
-`
+import '../../../../scss/index.scss'
 
 const Stage1Page = () => {
     const {
         loading,
         error,
         data: pageData,
-    } = useAuthQuery(
-        STAGE_1_QUERY,
+    } = useAuthQuery<StageQuery, StageQueryVariables>(
+        STAGE_QUERY,
         {
             variables: { stage_id: 1 },
         },
         'teamId'
     )
 
-    if (loading)
-        return (
-            <section className="container" id="main">
-                <div className="row">
-                    <div className="col-lg-12 text-align-center">
-                        <div className="loader"></div>
-                        <p className="sm-type-drum sm-type-drum--medium">
-                            Loading...
-                        </p>
-                    </div>
-                </div>
-            </section>
-        )
+    if (loading) return <Loading />
     if (error) return `Error! ${error.message}`
 
     const { stage_progresses: stageProgresses } = pageData.team_by_pk
