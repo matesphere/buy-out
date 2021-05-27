@@ -11,6 +11,8 @@ import Stage2Page from './student/stages/stage-2/stage-2'
 import Stage2PageComplete from './student/stages/stage-2/stage-2-complete'
 import AboutGlenclasAreaPage from './student/stages/stage-2/about-glenclas-area'
 import CommunityHousingPage from './student/stages/stage-2/community'
+import Stage3Page from './student/stages/stage-3/stage-3'
+import Stage3PageComplete from './student/stages/stage-3/stage-3-complete'
 import Stage3HousingPage from './student/stages/stage-3/affordable-housing-scheme'
 import Stage3PlaySkate from './student/stages/stage-3/playpark-skatepark'
 import Stage3ShopPostOffice from './student/stages/stage-3/shop-and-post-office'
@@ -20,7 +22,6 @@ import Stage3BusinessHub from './student/stages/stage-3/business-hub'
 import Stage3ForestryScheme from './student/stages/stage-3/forestry-scheme'
 import Stage3CampsiteCabin from './student/stages/stage-3/campsite-cabin'
 import Stage3MarketScheme from './student/stages/stage-3/market-scheme'
-import Stage3Page from './student/stages/stage-3/stage-3'
 import Stage3PlanPage from './student/stages/stage-3/glenclas-map-options'
 import Stage3SwotOne from './student/stages/stage-3/swot-study'
 import Stage4Page from './student/stages/stage-4/stage-4'
@@ -78,6 +79,9 @@ const Routes = () => {
                     path="/stage-2/community"
                     component={CommunityHousingPage}
                 />
+            <LoggedInRoute path="/stage-3" component={Stage3Page} />
+            <LoggedInRoute path="/stage-3-complete" component={Stage3PageComplete} />
+
             <LoggedInRoute
                 path="/stage-3/affordable-housing-scheme"
                 component={Stage3HousingPage}
@@ -114,8 +118,6 @@ const Routes = () => {
                 path="/stage-3/market-scheme"
                 component={Stage3MarketScheme}
             />
-
-            <LoggedInRoute path="/stage-3" component={Stage3Page} />
             <LoggedInRoute
                 path="/stage-3/glenclas-map-options"
                 component={Stage3PlanPage}

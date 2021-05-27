@@ -12,7 +12,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
-const Stage3Page = () => {
+const Stage3PageComplete = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "map-zoom.jpg" }) {
@@ -39,6 +39,53 @@ const Stage3Page = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Lay The Foundations
                             </h2>
+
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet/>
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task complete
+                                    </span>
+                                </h3>
+
+
+                                <div className="form-holder-border">
+                                    <h4 className="sm-type-guitar mb-2 green-highlight">Tutor feedback.</h4>
+                                    <p className="sm-type-lead mb-3 italic">
+                                        This looks like a great choice, dont forget to work together
+                                        to achieve your goals. You cannot do this without everyone
+                                        doing their bit.
+                                    </p>
+
+                                    <h4 className="sm-type-guitar mb-2">
+                                        You have chosen the 5 options
+                                    </h4>
+                                    <ul>
+                                        <li className="sm-type-guitar">Micro Hydro</li>
+                                        <li className="sm-type-guitar">Micro Hydro</li>
+                                        <li className="sm-type-guitar">Micro Hydro</li>
+                                        <li className="sm-type-guitar">Micro Hydro</li>
+                                        <li className="sm-type-guitar">Micro Hydro</li>
+                                    </ul>
+                                </div>
+
+                                <div className="form-holder-border">
+                                    <h4 className="sm-type-guitar mb-2">
+                                        Completed SWOT analysis.
+                                    </h4>
+                                    <ol>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis for Micro Hydro</Link></li>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis for Micro Hydro</Link></li>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis for Micro Hydro</Link></li>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis for Micro Hydro</Link></li>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis for Micro Hydro</Link></li>
+
+                                    </ol>
+                                </div>
+                            </div>
+
                             <p className="sm-type-lead mb-3">
                                 Shown below is a map of Glenclas, with the
                                 locations of proposed development opportunities
@@ -156,53 +203,6 @@ const Stage3Page = () => {
                                     </div>
                                 </div>
                             </div>
-
-
-
-                            <div className="side-grey">
-                                <h3 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet/>
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h3>
-
-                                <p className="sm-type-lead mb-2">
-                                    You will need to work together and decided and carry out a SWOT analysis on 5 Options.
-                                </p>
-
-                                <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-2">
-                                        Use the map link below to find detailed information for each option.
-                                    </p>
-                                    <ul>
-                                        <li className="sm-type-guitar"><Link to="/student/stage-3/glenclas-map-options">View the map</Link></li>
-                                    </ul>
-                                </div>
-
-                                <div className="form-holder-border not-available-holder">
-                                    <p className="sm-type-lead mb-2">
-                                        Complete the 5 SWOT analysis to determine which 5 options you wish to take forward.
-                                    </p>
-                                    <p className="sm-type-lead mb-2">
-                                        Use the SWOT templates to help you confirm your choices. Complete one to open up the next SWOT.
-                                    </p>
-
-                                    <ol>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                    </ol>
-                                </div>
-
-                                <Link to="/student/stage-3/swot-study">Link to SWOT temp</Link>
-                            </div>
-
-
                         </div>
                         <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
@@ -254,4 +254,4 @@ const Stage3Page = () => {
     )
 }
 
-export default Stage3Page
+export default Stage3PageComplete
