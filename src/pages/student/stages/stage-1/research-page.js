@@ -183,7 +183,7 @@ const Stage1ResearchPage = () => {
                 <Header headerText="Stage 1" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 Research
                             </h2>
@@ -194,21 +194,7 @@ const Stage1ResearchPage = () => {
                                 answers that you provide should be the product
                                 of discussions between each of the team members.
                             </p>
-                        </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">Useful links</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12">
+
                             <div className="form-holder-border">
                                 <h3 className="sm-type-drum sm-type-drum--medium">
                                     Questions
@@ -228,7 +214,7 @@ const Stage1ResearchPage = () => {
                                                         dangerouslySetInnerHTML={{
                                                             __html: workState[
                                                                 i
-                                                            ],
+                                                                ],
                                                         }}
                                                     />
                                                 ) : (
@@ -278,6 +264,55 @@ const Stage1ResearchPage = () => {
                                 {submitWorkObj.response.data && (
                                     <span>Work submitted - good luck!</span>
                                 )}
+                            </div>
+                        </div>
+                        <div className="col-lg-3">
+                            <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-orange">
+                                    <HelpIcon />
+                                </span>
+                                Helpful information
+                            </p>
+                            <div className="side-grey">
+                                <p className="sm-type-amp">Useful links</p>
+                                <ul>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Civil parish
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Loch_Alsh"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Lochalsh
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Highland_council_area"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Highland
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a
+                                            href="https://en.wikipedia.org/wiki/Inverness-shire"
+                                            target="_blank"
+                                            rel="external"
+                                        >
+                                            Inverness-shire
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
                     </div>

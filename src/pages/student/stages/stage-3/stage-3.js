@@ -35,7 +35,7 @@ const Stage3Page = () => {
                 <Header headerText="Stage 3" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Lay The Foundations
                             </h2>
@@ -182,7 +182,7 @@ const Stage3Page = () => {
                                     </ol>
                                 </div>
 
-                                <div className="form-holder-border">
+                                <div className="form-holder-border not-available-holder">
                                     <p className="sm-type-lead mb-2">
                                         Complete the 5 SWOT analysis to determine which 5 options you wish to take forward.
                                     </p>
@@ -192,19 +192,19 @@ const Stage3Page = () => {
 
                                     <ol>
                                         <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><span className="not-available">SWOT analysis 2</span></li>
-                                        <li className="sm-type-guitar mb-2"><span className="not-available">SWOT analysis 3</span></li>
-                                        <li className="sm-type-guitar mb-2"><span className="not-available">SWOT analysis 4</span></li>
-                                        <li className="sm-type-guitar"><span className="not-available">SWOT analysis 5</span></li>
-
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
+                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
                                     </ol>
                                 </div>
 
+                                <Link to="/student/stage-3/swot-study">Link to SWOT temp</Link>
                             </div>
 
 
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
                                     <HelpIcon />
@@ -223,12 +223,6 @@ const Stage3Page = () => {
                                 <p className="sm-type-amp">
                                     <Link to="/student/stage-3/glenclas-map-options">
                                         View map of Glenclas
-                                    </Link>
-                                </p>
-
-                                <p className="sm-type-amp">
-                                    <Link to="/student/stage-2/about-glenclas-people">
-                                        Hear from the people of Glenclas
                                     </Link>
                                 </p>
                             </div>

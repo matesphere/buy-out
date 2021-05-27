@@ -103,7 +103,7 @@ const CommunityHousingPage = () => {
                 <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Community
                             </h2>
@@ -112,36 +112,6 @@ const CommunityHousingPage = () => {
                                 Click on the buttons, or swipe left below to see what the community and experts have to say.
                             </p>
 
-
-                        </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-lead sm-type-lead-medium green-highlight mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Hear from the community of Glenclas and experts.
-                                    Find out what you need to move on to the
-                                    next quest.
-                                </p>
-                                <p className="sm-type-amp">
-                                    They all have facts and opinions about
-                                    Glenclas.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/student/stage-2">
-                                        Back to Stage 2
-                                    </Link>
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className="row">
-                        <div className="col-lg-12">
                             <Slider {...settings}>
                                 <div className="side-grey">
                                     <div className="row">
@@ -157,15 +127,15 @@ const CommunityHousingPage = () => {
                                         <div className="col-lg-4">
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
-                                                <GatsbyImage
-                                                    image={
-                                                        data.image1.childImageSharp
-                                                            .gatsbyImageData
-                                                    }
-                                                />
-                                                <p className="sm-type-amp sm-type-amp--medium">
-                                                    Community member
-                                                </p>
+                                                    <GatsbyImage
+                                                        image={
+                                                            data.image1.childImageSharp
+                                                                .gatsbyImageData
+                                                        }
+                                                    />
+                                                    <p className="sm-type-amp sm-type-amp--medium">
+                                                        Community member
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -283,15 +253,15 @@ const CommunityHousingPage = () => {
                                         <div className="col-lg-4">
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
-                                                <GatsbyImage
-                                                    image={
-                                                        data.image4.childImageSharp
-                                                            .gatsbyImageData
-                                                    }
-                                                />
-                                                <p className="sm-type-amp sm-type-amp--medium">
-                                                    Expert
-                                                </p>
+                                                    <GatsbyImage
+                                                        image={
+                                                            data.image4.childImageSharp
+                                                                .gatsbyImageData
+                                                        }
+                                                    />
+                                                    <p className="sm-type-amp sm-type-amp--medium">
+                                                        Expert
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -326,15 +296,15 @@ const CommunityHousingPage = () => {
                                         <div className="col-lg-4">
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
-                                                <GatsbyImage
-                                                    image={
-                                                        data.image5.childImageSharp
-                                                            .gatsbyImageData
-                                                    }
-                                                />
+                                                    <GatsbyImage
+                                                        image={
+                                                            data.image5.childImageSharp
+                                                                .gatsbyImageData
+                                                        }
+                                                    />
                                                     <p className="sm-type-amp sm-type-amp--medium">
-                                                    Expert
-                                                </p>
+                                                        Expert
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -368,15 +338,15 @@ const CommunityHousingPage = () => {
                                         <div className="col-lg-4">
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
-                                                <GatsbyImage
-                                                    image={
-                                                        data.image6.childImageSharp
-                                                            .gatsbyImageData
-                                                    }
-                                                />
+                                                    <GatsbyImage
+                                                        image={
+                                                            data.image6.childImageSharp
+                                                                .gatsbyImageData
+                                                        }
+                                                    />
                                                     <p className="sm-type-amp sm-type-amp--medium">
-                                                    Community member
-                                                </p>
+                                                        Community member
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -415,15 +385,15 @@ const CommunityHousingPage = () => {
                                         <div className="col-lg-4">
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
-                                                <GatsbyImage
-                                                    image={
-                                                        data.image7.childImageSharp
-                                                            .gatsbyImageData
-                                                    }
-                                                />
+                                                    <GatsbyImage
+                                                        image={
+                                                            data.image7.childImageSharp
+                                                                .gatsbyImageData
+                                                        }
+                                                    />
                                                     <p className="sm-type-amp sm-type-amp--medium">
-                                                    Community member
-                                                </p>
+                                                        Community member
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -454,15 +424,15 @@ const CommunityHousingPage = () => {
                                         <div className="col-lg-4">
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
-                                                <GatsbyImage
-                                                    image={
-                                                        data.image8.childImageSharp
-                                                            .gatsbyImageData
-                                                    }
-                                                />
+                                                    <GatsbyImage
+                                                        image={
+                                                            data.image8.childImageSharp
+                                                                .gatsbyImageData
+                                                        }
+                                                    />
                                                     <p className="sm-type-amp sm-type-amp--medium">
-                                                    Community member
-                                                </p>
+                                                        Community member
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -495,15 +465,15 @@ const CommunityHousingPage = () => {
                                         <div className="col-lg-4">
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
-                                                <GatsbyImage
-                                                    image={
-                                                        data.image9.childImageSharp
-                                                            .gatsbyImageData
-                                                    }
-                                                />
+                                                    <GatsbyImage
+                                                        image={
+                                                            data.image9.childImageSharp
+                                                                .gatsbyImageData
+                                                        }
+                                                    />
                                                     <p className="sm-type-amp sm-type-amp--medium">
-                                                    Expert
-                                                </p>
+                                                        Expert
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -526,6 +496,36 @@ const CommunityHousingPage = () => {
                                     </div>
                                 </div>
                             </Slider>
+                        </div>
+                        <div className="col-lg-3">
+                            <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-orange">
+                                    <HelpIcon />
+                                </span>
+                                Helpful information
+                            </p>
+                            <div className="side-grey">
+                                <p className="sm-type-amp">
+                                    Hear from the community of Glenclas and experts.
+                                    Find out what you need to move on to the
+                                    next quest.
+                                </p>
+                                <p className="sm-type-amp">
+                                    They all have facts and opinions about
+                                    Glenclas.
+                                </p>
+                                <p className="sm-type-amp">
+                                    <Link to="/student/stage-2">
+                                        Back to Stage 2
+                                    </Link>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-lg-12">
+
                         </div>
                     </div>
                 </section>

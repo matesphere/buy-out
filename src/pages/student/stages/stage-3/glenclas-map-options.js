@@ -37,7 +37,7 @@ const Stage3PlanPage = () => {
                 <Header headerText="Stage 3" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Map of options in Glenclas
                             </h2>
@@ -399,8 +399,134 @@ const Stage3PlanPage = () => {
                             </div>
 
 
+
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet/>
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task to complete:
+                                    </span>
+                                </h3>
+
+                                <p className="sm-type-lead mb-2">
+                                    Choose your 5 options to take forward to the next stage.
+                                </p>
+
+                                <div className="form-holder-border">
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="housing"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="housing">
+                                            Affordable Housing Scheme
+                                        </label>
+                                    </div>
+
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="playpark"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="playpark">
+                                            Play Park and/or Skate Park Scheme
+                                        </label>
+                                    </div>
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="shop"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="shop">
+                                            Shop and Post Office
+                                        </label>
+                                    </div>
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="hydro"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="hydro">
+                                            Micro-hydro Scheme
+                                        </label>
+                                    </div>
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="wind"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="wind">
+                                            Wind turbine Scheme
+                                        </label>
+                                    </div>
+
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="business"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="business">
+                                            Business hub Scheme
+                                        </label>
+                                    </div>
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="forestry"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="forestry">
+                                            Forestry Scheme
+                                        </label>
+                                    </div>
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="campsite"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="campsite">
+                                            Campsite and Cabins Scheme
+                                        </label>
+                                    </div>
+
+                                    <div className="multiple-choice">
+                                        <input
+                                            className="form-control"
+                                            id="market"
+                                            type="checkbox"
+                                        />
+                                        <label className="form-label" htmlFor="market">
+                                            Market Garden Scheme
+                                        </label>
+                                    </div>
+                                    <p className="sm-type-lead sm-type-lead--medium mt-4">Or choose your own option - Enter your option name here.</p>
+                                    <div className="mb-4">
+                                        <label className="form-label sm-type-amp">
+                                            Team Choice
+                                        </label>
+                                        <input type="text" className="form-control"/>
+                                    </div>
+
+                                    <button
+                                        className="btn-solid-lg mt-4"
+                                    >
+                                        Submit options
+                                    </button>
+                                </div>
+
+
+                            </div>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
                                     <HelpIcon />

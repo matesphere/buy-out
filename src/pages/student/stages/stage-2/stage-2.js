@@ -35,7 +35,7 @@ const Stage2Page = () => {
                 <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 Consult
                             </h2>
@@ -136,7 +136,7 @@ const Stage2Page = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
                                     <HelpIcon />

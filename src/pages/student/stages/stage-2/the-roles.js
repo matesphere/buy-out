@@ -32,7 +32,7 @@ const RolesPage = ({items}) => {
                 <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             {stage2DataTitleEng.map((check) => (
                                 <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4" key={check.title}>
                                     {check.title}
@@ -191,25 +191,25 @@ const RolesPage = ({items}) => {
                                                         <label className="form-label sm-type-amp">
                                                             Chair
                                                         </label>
-                                                        <input class="form-control" />
+                                                        <input type="text" class="form-control" />
                                                     </li>
                                                     <li className="mb-2">
                                                         <label className="form-label sm-type-amp">
                                                             Vice-chair
                                                         </label>
-                                                        <input class="form-control" />
+                                                        <input type="text" class="form-control" />
                                                     </li>
                                                     <li className="mb-2">
                                                         <label className="form-label sm-type-amp">
                                                             Secretary
                                                         </label>
-                                                        <input class="form-control" />
+                                                        <input type="text" class="form-control" />
                                                     </li>
                                                     <li className="mb-2">
                                                         <label className="form-label sm-type-amp">
                                                             Treasurer
                                                         </label>
-                                                        <input class="form-control" />
+                                                        <input type="text" class="form-control" />
                                                     </li>
                                                 </ul>
                                             </div>
@@ -252,7 +252,7 @@ const RolesPage = ({items}) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <Helpful items={stage2HelpfulEng} />
                             <CheckList items={stage2CheckListEng} />
                         </div>
