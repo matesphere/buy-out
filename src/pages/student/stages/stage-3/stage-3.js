@@ -10,9 +10,7 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
-import scrollTo from "gatsby-plugin-smoothscroll";
-import TickSheet from "../../../../assets/tick-sheet.svg";
-import Tick from "../../../../assets/tick.svg";
+import TickSheet from '../../../../assets/tick-sheet.svg'
 
 const Stage3Page = () => {
     const data = useStaticQuery(graphql`

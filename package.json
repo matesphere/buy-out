@@ -45,8 +45,10 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
+    "react-slick": "^0.28.1",
     "react-tabs": "^3.2.2",
     "sass": "^1.32.8",
+    "slick-carousel": "^1.8.1",
     "subscriptions-transport-ws": "^0.9.18",
     "uuid": "^8.3.2",
     "ws": "^7.4.4"

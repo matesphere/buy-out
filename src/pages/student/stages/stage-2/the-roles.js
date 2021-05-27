@@ -8,12 +8,15 @@ import Footer from '../../../../components/_footer'
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
-import HelpIcon from '../../../../assets/help-icon.svg'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import CheckList from '../../../../components/common/checklist'
+import Helpful from '../../../../components/common/helpful'
 
 import '../../../../scss/index.scss'
 
-const RolesPage = () => {
+import { stage2CheckListEng, stage2HelpfulEng, stage2DataTitleEng, stage2DataSubTitleEng, stage2DataTextEng } from './_stage2.data'
+
+const RolesPage = ({items}) => {
     const [showFilters, setShowFilters] = useState(false)
 
     return (
@@ -30,27 +33,23 @@ const RolesPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Elect your steering group
-                            </h2>
+                            {stage2DataTitleEng.map((check) => (
+                                <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4" key={check.title}>
+                                    {check.title}
+                                </h2>
+                            ))}
 
-                            <p className="sm-type-guitar mb-4">
-                                You are going to work as the board of a
-                                community group who will lead the purchase of
-                                some land that has come up for sale.
-                            </p>
+                            {stage2DataSubTitleEng.map((check) => (
+                                <p className="sm-type-guitar mb-4" key={check.subtitle}>
+                                    {check.subtitle}
+                                </p>
+                            ))}
 
-                            <p className="sm-type-lead mb-4">
-                                You will each adopt a specific role within the
-                                board, but throughout, you will need to work as
-                                a team. Each decision that you make must take
-                                into account the views of everyone in the team.
-                                That does not mean that you will agree on
-                                everything, in fact it is inevitable that you
-                                will disagree at times. However, you must work
-                                out how you will reach decisions when there is
-                                disagreement amongst the team.
-                            </p>
+                            {stage2DataTextEng.map((check) => (
+                                <p className="sm-type-lead mb-4" key={check.text}>
+                                    {check.text}
+                                </p>
+                            ))}
 
                             <Tabs>
                                 <TabList>
@@ -254,61 +253,8 @@ const RolesPage = () => {
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp ticker">
-                                    You will need to work together and decided
-                                    who will do the following.
-                                </p>
-                                <ul className="sm-type-amp">
-                                    <li>Chair</li>
-                                    <li>Vice-chair</li>
-                                    <li>Secretary</li>
-                                    <li>Treasurer</li>
-                                </ul>
-
-                                <p className="sm-type-amp">
-                                    <Link to="/student/stage-2">
-                                        Back to Stage 2
-                                    </Link>
-                                </p>
-                            </div>
-
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have read the information about the
-                                        roles.
-                                    </label>
-                                </div>
-
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have chosen who will do which role.
-                                    </label>
-                                </div>
-                            </div>
+                            <Helpful items={stage2HelpfulEng} />
+                            <CheckList items={stage2CheckListEng} />
                         </div>
                     </div>
                 </section>

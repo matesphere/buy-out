@@ -11,6 +11,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import '../../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
+
 const Stage2Page = () => {
     const data = useStaticQuery(graphql`
         query {
@@ -76,7 +77,7 @@ const Stage2Page = () => {
                             </p>
 
                             <h3 className="sm-type-drum mb-3">
-                                1. Read about the Glenclas area.
+                                Read about the Glenclas area.
                             </h3>
 
                             <p className="sm-type-bigamp mb-3">
@@ -88,21 +89,19 @@ const Stage2Page = () => {
                                     Read about the area.
                                 </Link>
                             </p>
-
-                            <h3 className="sm-type-drum mb- mt-4">
-                                2. Consult with the people of Glenclas about
-                                development options that could help the
-                                community.
+                            <h3 className="sm-type-drum mt-4">
+                                See what the community and experts have to say.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
-                                See what the community and experts have to say.
+                                Consult with the people about
+                                development options that could help the
+                                community.
                             </p>
                             <p className="sm-type-bigamp mb-3">
                                 <Link to="/student/stage-2/community">
-                                    See what options are available.
+                                    See what the experts and the community have to say.
                                 </Link>
                             </p>
-
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet">
