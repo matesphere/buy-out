@@ -13,7 +13,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "gen-schema": "apollo client:codegen --endpoint=\"https://clq.beanmate.coffee/v1/graphql\" --no-addTypename --outputFlat --tagName=gql --target=typescript src/gql --header=\"X-Hasura-Access-Key: community-land\""
+    "gen-schema": "apollo client:codegen --endpoint=\"https://clq.beanmate.coffee/v1/graphql\" --no-addTypename --outputFlat --tagName=gql --target=typescript src/gql/types --header=\"X-Hasura-Access-Key: community-land\""
   },
   "dependencies": {
     "@apollo/client": "^3.3.13",

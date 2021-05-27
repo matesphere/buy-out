@@ -28,25 +28,26 @@ const TUTOR_CURRENT_QUEST_QUERY = gql`
                 school {
                     name
                 }
-                teams {
-                    id
-                    name
-                    students {
+                quests(where: { status: { _eq: "active" } }) {
+                    teams {
                         id
-                        user {
-                            full_name
-                        }
-                    }
-                    stage_progresses {
-                        id
-                        team_id
-                        stage_id
-                        status
-                        documents {
+                        name
+                        students {
                             id
+                            user {
+                                full_name
+                            }
+                        }
+                        stage_progresses {
+                            id
+                            team_id
+                            stage_id
                             status
-                            link
-                            feedback
+                            documents {
+                                id
+                                status
+                                feedback
+                            }
                         }
                     }
                 }
@@ -68,25 +69,26 @@ const TUTOR_CURRENT_QUEST_SUB = gql`
                 school {
                     name
                 }
-                teams {
-                    id
-                    name
-                    students {
+                quests(where: { status: { _eq: "active" } }) {
+                    teams {
                         id
-                        user {
-                            full_name
-                        }
-                    }
-                    stage_progresses {
-                        id
-                        team_id
-                        stage_id
-                        status
-                        documents {
+                        name
+                        students {
                             id
+                            user {
+                                full_name
+                            }
+                        }
+                        stage_progresses {
+                            id
+                            team_id
+                            stage_id
                             status
-                            link
-                            feedback
+                            documents {
+                                id
+                                status
+                                feedback
+                            }
                         }
                     }
                 }
@@ -204,7 +206,10 @@ const TutorPage = () => {
                     ...prev.user_by_pk,
                     tutor: {
                         ...prev.user_by_pk.tutor,
-                        teams: subscriptionData.data.user_by_pk.tutor.teams,
+                        quests: {
+                            ...prev.user_by_pk.tutor.quests,
+                            teams: subscriptionData.data.user_by_pk.tutor.teams,
+                        },
                     },
                 },
             }
@@ -213,7 +218,9 @@ const TutorPage = () => {
 
     const {
         user_by_pk: {
-            tutor: { teams },
+            tutor: {
+                quests: { teams },
+            },
         },
         stage,
     } = data

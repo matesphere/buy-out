@@ -1,142 +1,54 @@
-import React, { useState, useReducer, useEffect } from 'react'
+import React, { Reducer } from 'react'
 import { Helmet } from 'react-helmet'
-import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { TextEditor } from '../../../../components/common/TextEditor'
 
-import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
-import SaveIcon from "../../../../assets/save-icon.svg";
+// import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
+import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
-import {
-    SAVE_WORK_INITIAL,
-    SAVE_WORK,
-    SUBMIT_WORK_INITIAL,
-    SUBMIT_WORK,
-} from '../../../../gql/mutations'
-
+import SaveIcon from '../../../../assets/save-icon.svg'
 import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
 import { eng } from '../../../_index.data'
 
-const STAGE_1_RESEARCH_QUERY = gql`
-    query Stage1ResearchQuery($team_id: uuid!, $stage_id: Int) {
-        team_by_pk(id: $team_id) {
-            stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
-                id
-                stage_id
-                status
-                documents(where: { status: { _eq: draft } }) {
-                    id
-                    doc_data
-                }
-            }
-        }
-    }
-`
+type WorkState = {
+    [key: number]: string
+}
 
-const stage1QuestionReducer = (state, { type, payload }) => {
-    switch (type) {
-        case 'load':
-            return payload
-        case 'update':
+// enum ActionType {
+//     LoadAction,
+//     UpdateAction,
+// }
+
+type Action =
+    | {
+          type: ActionType.LoadAction
+          payload: WorkState
+      }
+    | {
+          type: ActionType.UpdateAction
+          payload: { question: number; answer: string }
+      }
+
+const stage1QuestionReducer: Reducer<WorkState, Action> = (state, action) => {
+    switch (action.type) {
+        case ActionType.LoadAction:
+            return action.payload
+        case ActionType.UpdateAction:
             return {
                 ...state,
-                [payload.question]: payload.answer,
+                [action.payload.question]: action.payload.answer,
             }
         default:
             return state
     }
 }
 
-const stage1DocSelector = (data) =>
-    data?.team_by_pk?.stage_progresses[0]?.documents[0] || {}
-
-const useWorkState = (docQuery, docQueryVars, docSelector, workReducer) => {
-    const [docId, setDocId] = useState('')
-    const [workState, workDispatch] = useReducer(workReducer, {})
-
-    const [saveWorkInitial, saveWorkInitialResponse] =
-        useAuthMutation(SAVE_WORK_INITIAL)
-    const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
-    const [submitWorkInitial, submitWorkInitialResponse] =
-        useAuthMutation(SUBMIT_WORK_INITIAL)
-    const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK)
-
-    useEffect(() => {
-        const { called, loading, data } = saveWorkInitialResponse
-        if (called && !loading) {
-            setDocId(data.insert_document_one.id)
-        }
-    }, [saveWorkInitialResponse.called])
-
-    const {
-        loading,
-        error,
-        data: pageData,
-    } = useAuthQuery(docQuery, { variables: docQueryVars }, 'teamId')
-
-    useEffect(() => {
-        if (!loading) {
-            const { id, doc_data } = docSelector(pageData)
-
-            if (id && doc_data) {
-                setDocId(id)
-                workDispatch({
-                    type: 'load',
-                    payload: doc_data,
-                })
-            }
-        }
-    }, [loading, pageData])
-
-    const stageProgressId =
-        pageData?.team_by_pk?.stage_progresses[0]?.id || null
-
-    const saveWorkObj = !!docId
-        ? {
-              call: () =>
-                  saveWork({
-                      variables: { docId, docData: workState },
-                  }),
-              response: saveWorkResponse,
-          }
-        : {
-              call: () =>
-                  saveWorkInitial({
-                      variables: { stageProgressId, docData: workState },
-                  }),
-              response: saveWorkInitialResponse,
-          }
-
-    const submitWorkObj = !!docId
-        ? {
-              call: () =>
-                  submitWork({
-                      variables: { docId, docData: workState },
-                  }),
-              response: submitWorkResponse,
-          }
-        : {
-              call: () =>
-                  submitWorkInitial({
-                      variables: { stageProgressId, docData: workState },
-                  }),
-              response: submitWorkInitialResponse,
-          }
-
-    return {
-        loading,
-        error,
-        pageData,
-        workState,
-        workDispatch,
-        saveWorkObj,
-        submitWorkObj,
-    }
-}
+// const stage1DocSelector = (data) =>
+//     data?.team_by_pk?.stage_progresses[0]?.documents[0] || {}
 
 const Stage1ResearchPage = () => {
     const {
@@ -147,10 +59,10 @@ const Stage1ResearchPage = () => {
         workDispatch,
         saveWorkObj,
         submitWorkObj,
-    } = useWorkState(
-        STAGE_1_RESEARCH_QUERY,
-        { stage_id: 1 },
-        stage1DocSelector,
+    } = useWorkState<WorkState, Action>(
+        // STAGE_1_RESEARCH_QUERY,
+        1,
+        // stage1DocSelector,
         stage1QuestionReducer
     )
 
@@ -224,7 +136,8 @@ const Stage1ResearchPage = () => {
                                                         }
                                                         onChange={(data) =>
                                                             workDispatch({
-                                                                type: 'update',
+                                                                // type: 'update',
+                                                                type: ActionType.UpdateAction,
                                                                 payload: {
                                                                     question: i,
                                                                     answer: data,

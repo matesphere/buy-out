@@ -1,10 +1,30 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
 
-export const UserStateContext = createContext({
+const signedOutUserInfo = {
+    username: '',
+    role: '',
+    userId: '',
+    schoolId: '',
+    teamId: '',
+    token: '',
+}
+
+interface UserStateContextType {
+    isSignedIn: boolean
+    userInfo: {
+        username: string
+        userId: string
+        teamId: string
+        schoolId: string
+        role: string
+        token: string
+    }
+}
+
+export const UserStateContext = createContext<UserStateContextType>({
     isSignedIn: false,
-    userInfo: {},
-    // user: {},
+    userInfo: signedOutUserInfo,
 })
 
 interface AuthDataType {
@@ -25,7 +45,7 @@ interface AuthDataType {
 export const UserStateProvider = ({ children }) => {
     const [authState, setAuthState] = useState({})
     // const [user, setUser] = useState({})
-    const [userInfo, setUserInfo] = useState({})
+    const [userInfo, setUserInfo] = useState(signedOutUserInfo)
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, data) => {
@@ -42,7 +62,7 @@ export const UserStateProvider = ({ children }) => {
                           teamId: authData.attributes['custom:team_id'],
                           token: authData.signInUserSession.idToken.jwtToken,
                       }
-                    : {}
+                    : signedOutUserInfo
             )
         })
     }, [])

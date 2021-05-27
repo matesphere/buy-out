@@ -2,15 +2,20 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import scrollTo from 'gatsby-plugin-smoothscroll'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
-import HelpIcon from '../../../../assets/help-icon.svg'
 
-import '../../../../scss/index.scss'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import HelpIcon from '../../../../assets/help-icon.svg'
 import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
+import Tick from '../../../../assets/tick.svg'
+
+import '../../../../scss/index.scss'
+
+const SwotLinks = () => {}
 
 const Stage3Page = () => {
     const data = useStaticQuery(graphql`
@@ -43,7 +48,8 @@ const Stage3Page = () => {
                                 Shown below is a map of Glenclas, with the
                                 locations of proposed development opportunities
                                 marked. Your task is to investigate each of the
-                                opportunities and produce a SWOT analysis for each option.
+                                opportunities and produce a SWOT analysis for
+                                each option.
                             </p>
                             <div className="image-map mb-4 mt-4">
                                 <div className="image-map-holder">
@@ -157,12 +163,10 @@ const Stage3Page = () => {
                                 </div>
                             </div>
 
-
-
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet">
-                                        <TickSheet/>
+                                        <TickSheet />
                                     </span>
                                     <span className="sm-type-drum">
                                         Task to complete:
@@ -170,39 +174,83 @@ const Stage3Page = () => {
                                 </h3>
 
                                 <p className="sm-type-lead mb-2">
-                                    You will need to work together and decided and carry out a SWOT analysis on 5 Options.
+                                    You will need to work together to discuss
+                                    the available development options and decide
+                                    on five which you think offer the best
+                                    chance of providing benefits to the
+                                    community - whether these be financial,
+                                    social or otherwise.
+                                </p>
+                                <p className="sm-type-lead mb-2">
+                                    Once decided upon, you'll then be asked to
+                                    complete a SWOT analysis for each of these.{' '}
+                                    <Link to="#">Click here</Link> to find out
+                                    more about what is meant by SWOT and how you
+                                    can complete this task.
                                 </p>
 
                                 <div className="form-holder-border">
                                     <p className="sm-type-lead mb-2">
-                                        Use the map link below to find detailed information for each option.
+                                        Use the link below to find detailed
+                                        information for each option, and then
+                                        submit the 5 options your team will be
+                                        taking forward.
                                     </p>
                                     <ul>
-                                        <li className="sm-type-guitar"><Link to="/student/stage-3/glenclas-map-options">View the map</Link></li>
+                                        <li className="sm-type-guitar">
+                                            <Link to="/student/stage-3/glenclas-map-options">
+                                                View the development options
+                                            </Link>
+                                        </li>
                                     </ul>
                                 </div>
 
                                 <div className="form-holder-border not-available-holder">
                                     <p className="sm-type-lead mb-2">
-                                        Complete the 5 SWOT analysis to determine which 5 options you wish to take forward.
+                                        Complete the 5 SWOT analyses to
+                                        determine which 5 options you wish to
+                                        take forward.
                                     </p>
                                     <p className="sm-type-lead mb-2">
-                                        Use the SWOT templates to help you confirm your choices. Complete one to open up the next SWOT.
+                                        Use the SWOT templates to help you
+                                        confirm your choices. Make sure to hit
+                                        'save' before returning to this screen;
+                                        this will then unlock the next SWOT.
                                     </p>
 
                                     <ol>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
-                                        <li className="sm-type-guitar mb-2"><Link to="/student/stage-3/swot-study">SWOT analysis 1</Link></li>
+                                        <li className="sm-type-guitar mb-2">
+                                            <Link to="/student/stage-3/swot-study">
+                                                SWOT analysis 1
+                                            </Link>
+                                        </li>
+                                        <li className="sm-type-guitar mb-2">
+                                            <Link to="/student/stage-3/swot-study">
+                                                SWOT analysis 1
+                                            </Link>
+                                        </li>
+                                        <li className="sm-type-guitar mb-2">
+                                            <Link to="/student/stage-3/swot-study">
+                                                SWOT analysis 1
+                                            </Link>
+                                        </li>
+                                        <li className="sm-type-guitar mb-2">
+                                            <Link to="/student/stage-3/swot-study">
+                                                SWOT analysis 1
+                                            </Link>
+                                        </li>
+                                        <li className="sm-type-guitar mb-2">
+                                            <Link to="/student/stage-3/swot-study">
+                                                SWOT analysis 1
+                                            </Link>
+                                        </li>
                                     </ol>
                                 </div>
 
-                                <Link to="/student/stage-3/swot-study">Link to SWOT temp</Link>
+                                <Link to="/student/stage-3/swot-study">
+                                    Link to SWOT temp
+                                </Link>
                             </div>
-
-
                         </div>
                         <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
@@ -236,14 +284,18 @@ const Stage3Page = () => {
                             <div className="side-grey">
                                 <div className="checklist">
                                     <div className="tick"></div>
-                                    <p className="sm-type-lead">You have seen the map and the detailed information on each option.</p>
+                                    <p className="sm-type-lead">
+                                        You have seen the map and the detailed
+                                        information on each option.
+                                    </p>
                                 </div>
                                 <div className="checklist">
                                     <div className="tick"></div>
-                                    <p className="sm-type-lead">You have completed 5 SWOT analysis.</p>
+                                    <p className="sm-type-lead">
+                                        You have completed 5 SWOT analysis.
+                                    </p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>

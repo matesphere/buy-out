@@ -91,7 +91,7 @@ export const useAuthMutation = (query) => {
         context: { headers: { Authorization: `Bearer ${token}` } },
     })
 
-    return [mutation, mutationResponse]
+    return [mutation, mutationResponse] as const
 }
 
 export const mergeIdsIntoStudents = (

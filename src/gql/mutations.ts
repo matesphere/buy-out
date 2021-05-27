@@ -97,7 +97,6 @@ export const MARK_PASSED = gql`
         ) {
             returning {
                 id
-                link
                 feedback
                 status
             }
