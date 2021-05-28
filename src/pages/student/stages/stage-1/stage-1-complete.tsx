@@ -2,33 +2,24 @@ import React from 'react'
 import { graphql, useStaticQuery, Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
+
+import { useAuthQuery } from '../../../../utils/auth-utils'
+import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
+import {
+    DocumentCompleteQuery,
+    DocumentCompleteQueryVariables,
+} from '../../../../gql/types/DocumentCompleteQuery'
 
 import Tick from '../../../../assets/tick.svg'
 import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
 
-const STAGE_1_COMPLETE_QUERY = gql`
-    query Stage1CompleteQuery($name: String, $stageId: Int) {
-        user(where: { first_name: { _eq: $name } }) {
-            student {
-                team {
-                    stage_progresses(where: { stage_id: { _eq: $stageId } }) {
-                        documents {
-                            feedback
-                        }
-                    }
-                }
-            }
-        }
-    }
-`
-
-const Stage1Complete = () => {
+const Stage1CompletePage = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "congratulations.jpg" }) {
@@ -39,10 +30,10 @@ const Stage1Complete = () => {
         }
     `)
 
-    const { loading, error, data: pageData } = useQuery(
-        STAGE_1_COMPLETE_QUERY,
-        { variables: { name: 'Steve', stageId: 1 } }
-    )
+    const { loading, error, data: pageData } = useAuthQuery<
+        DocumentCompleteQuery,
+        DocumentCompleteQueryVariables
+    >(DOCUMENT_COMPLETE_QUERY, { variables: { stageId: 1 } }, 'teamId')
 
     if (loading)
         return (
@@ -59,15 +50,8 @@ const Stage1Complete = () => {
         )
     if (error) return `Error! ${error.message}`
 
-    const user = pageData.user[0]
-
-    const {
-        student: {
-            team: { stage_progresses: stageProgresses },
-        },
-    } = user
-
-    const docFeedback = stageProgresses[0].documents[0].feedback
+    const docFeedback =
+        pageData.team_by_pk.stage_progresses[0].documents[0].feedback
 
     return (
         <>
@@ -159,4 +143,4 @@ const Stage1Complete = () => {
     )
 }
 
-export default Stage1Complete
+export default Stage1CompletePage

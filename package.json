@@ -13,7 +13,7 @@
     "build": "gatsby build",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "gen-schema": "apollo client:codegen --endpoint=\"https://clq.beanmate.coffee/v1/graphql\" --no-addTypename --outputFlat --tagName=gql --target=typescript src/gql/types --header=\"X-Hasura-Access-Key: community-land\""
+    "gen-schema": "rimraf src/gql/types && apollo client:codegen --endpoint=\"https://clq.beanmate.coffee/v1/graphql\" --no-addTypename --outputFlat --tagName=gql --target=typescript src/gql/types --header=\"X-Hasura-Access-Key: community-land\""
   },
   "dependencies": {
     "@apollo/client": "^3.3.13",
@@ -57,6 +57,7 @@
     "@babel/plugin-syntax-flow": "^7.12.13",
     "@types/reach__router": "^1.3.7",
     "@types/react-helmet": "^6.1.1",
+    "apollo": "^2.33.4",
     "prettier": "^2.2.1",
     "typescript": "^4.2.3"
   }

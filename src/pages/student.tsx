@@ -3,9 +3,9 @@ import { Router } from '@reach/router'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import TeamHub from './student/team-hub'
+import Stage1Landing from './student/stages/stage-1/stage-1-landing'
+import Stage1Task from './student/stages/stage-1/stage-1-task'
 import Stage1Complete from './student/stages/stage-1/stage-1-complete'
-import Stage1ResearchPage from './student/stages/stage-1/research-page'
-import Stage1 from './student/stages/stage-1/stage-1'
 import RolesPage from './student/stages/stage-2/the-roles'
 import Stage2Page from './student/stages/stage-2/stage-2'
 import Stage2PageComplete from './student/stages/stage-2/stage-2-complete'
@@ -55,11 +55,8 @@ const Routes = () => {
         <Router basepath="/student">
             <LoggedInRoute path="/team-hub" component={TeamHub} />
 
-            <LoggedInRoute path="/stage-1" component={Stage1} />
-            <LoggedInRoute
-                path="/stage-1/research-page"
-                component={Stage1ResearchPage}
-            />
+            <LoggedInRoute path="/stage-1" component={Stage1Landing} />
+            <LoggedInRoute path="/stage-1/task" component={Stage1Task} />
             <LoggedInRoute
                 path="/stage-1/complete"
                 component={Stage1Complete}
@@ -71,16 +68,19 @@ const Routes = () => {
                 path="/stage-2/about-glenclas-area"
                 component={AboutGlenclasAreaPage}
             />
-                <LoggedInRoute
-                    path="/stage-2-complete"
-                    component={Stage2PageComplete}
-                />
-                <LoggedInRoute
-                    path="/stage-2/community"
-                    component={CommunityHousingPage}
-                />
+            <LoggedInRoute
+                path="/stage-2-complete"
+                component={Stage2PageComplete}
+            />
+            <LoggedInRoute
+                path="/stage-2/community"
+                component={CommunityHousingPage}
+            />
             <LoggedInRoute path="/stage-3" component={Stage3Page} />
-            <LoggedInRoute path="/stage-3-complete" component={Stage3PageComplete} />
+            <LoggedInRoute
+                path="/stage-3-complete"
+                component={Stage3PageComplete}
+            />
 
             <LoggedInRoute
                 path="/stage-3/affordable-housing-scheme"

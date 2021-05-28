@@ -28,6 +28,30 @@ export const DOCUMENT_QUERY = gql`
     }
 `
 
+export const DOCUMENT_COMPLETE_QUERY = gql`
+    query DocumentCompleteQuery($team_id: uuid!, $stage_id: Int) {
+        team_by_pk(id: $team_id) {
+            stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
+                id
+                stage_id
+                status
+                documents(
+                    where: {
+                        _or: [
+                            { status: { _eq: submitted } }
+                            { status: { _eq: marked_passed } }
+                        ]
+                    }
+                ) {
+                    id
+                    doc_data
+                    feedback
+                }
+            }
+        }
+    }
+`
+
 export const TEAM_QUERY = gql`
     query TeamQuery($team_id: uuid!) {
         team_by_pk(id: $team_id) {

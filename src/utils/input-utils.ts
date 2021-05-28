@@ -51,11 +51,13 @@ export const useWorkState = <InputState, Action>(
         {} as InputState
     )
 
-    const [saveWorkInitial, saveWorkInitialResponse] =
-        useAuthMutation(SAVE_WORK_INITIAL)
+    const [saveWorkInitial, saveWorkInitialResponse] = useAuthMutation(
+        SAVE_WORK_INITIAL
+    )
     const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
-    const [submitWorkInitial, submitWorkInitialResponse] =
-        useAuthMutation(SUBMIT_WORK_INITIAL)
+    const [submitWorkInitial, submitWorkInitialResponse] = useAuthMutation(
+        SUBMIT_WORK_INITIAL
+    )
     const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK)
 
     useEffect(() => {
@@ -65,22 +67,18 @@ export const useWorkState = <InputState, Action>(
         }
     }, [saveWorkInitialResponse.called])
 
-    const {
-        loading,
-        error,
-        data: pageData,
-    } = useAuthQuery<DocumentQuery, DocumentQueryVariables>(
-        DOCUMENT_QUERY,
-        { variables: { stage_id: stageId } },
-        'teamId'
-    )
+    const { loading, error, data: pageData } = useAuthQuery<
+        DocumentQuery,
+        DocumentQueryVariables
+    >(DOCUMENT_QUERY, { variables: { stage_id: stageId } }, 'teamId')
 
     useEffect(() => {
         if (!loading) {
-            const { id, doc_data } =
-                pageData?.team_by_pk?.stage_progresses[0]?.documents[0]
+            const doc = pageData?.team_by_pk?.stage_progresses[0]?.documents[0]
 
-            if (id && doc_data) {
+            if (doc) {
+                const { id, doc_data } = doc
+
                 setDocId(id)
 
                 // TODO: how do we convince TS that this is OK? i.e. where should Action live; load is called in here, update called in page

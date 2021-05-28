@@ -20,12 +20,11 @@ import DogVideo from '../../../../assets/the-quest.mp4'
 
 import '../../../../scss/index.scss'
 
-const Stage1Page = () => {
-    const {
-        loading,
-        error,
-        data: pageData,
-    } = useAuthQuery<StageQuery, StageQueryVariables>(
+const Stage1LandingPage = () => {
+    const { loading, error, data: pageData } = useAuthQuery<
+        StageQuery,
+        StageQueryVariables
+    >(
         STAGE_QUERY,
         {
             variables: { stage_id: 1 },
@@ -152,7 +151,7 @@ const Stage1Page = () => {
                                     <ul>
                                         <li className="sm-type-guitar">
                                             Answer your{' '}
-                                            <Link to="/student/stage-1/research-page">
+                                            <Link to="/student/stage-1/task">
                                                 Research question here
                                             </Link>
                                             .
@@ -219,4 +218,4 @@ const Stage1Page = () => {
     )
 }
 
-export default Stage1Page
+export default Stage1LandingPage

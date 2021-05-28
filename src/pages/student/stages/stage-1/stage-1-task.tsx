@@ -50,7 +50,7 @@ const stage1QuestionReducer: Reducer<WorkState, Action> = (state, action) => {
 // const stage1DocSelector = (data) =>
 //     data?.team_by_pk?.stage_progresses[0]?.documents[0] || {}
 
-const Stage1ResearchPage = () => {
+const Stage1WorkPage = () => {
     const {
         loading,
         error,
@@ -124,9 +124,8 @@ const Stage1ResearchPage = () => {
                                                 {submitWorkObj.response.data ? (
                                                     <div
                                                         dangerouslySetInnerHTML={{
-                                                            __html: workState[
-                                                                i
-                                                                ],
+                                                            __html:
+                                                                workState[i],
                                                         }}
                                                     />
                                                 ) : (
@@ -137,7 +136,8 @@ const Stage1ResearchPage = () => {
                                                         onChange={(data) =>
                                                             workDispatch({
                                                                 // type: 'update',
-                                                                type: ActionType.UpdateAction,
+                                                                type:
+                                                                    ActionType.UpdateAction,
                                                                 payload: {
                                                                     question: i,
                                                                     answer: data,
@@ -236,4 +236,4 @@ const Stage1ResearchPage = () => {
     )
 }
 
-export default Stage1ResearchPage
+export default Stage1WorkPage
