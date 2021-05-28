@@ -358,7 +358,7 @@ p {
     }
 }
 
-.ticker {
+.ticker, .ticker-complete {
     display: flex;
     align-items: center;
 
@@ -371,6 +371,18 @@ p {
         width: 30px;
         height: 30px;
         margin-right: 8px;
+    }
+}
+
+.ticker {
+    svg {
+        fill: $brand-red;
+    }
+}
+
+.ticker-complete {
+    svg {
+        fill: $brand-green;
     }
 }
 

@@ -10,6 +10,7 @@ import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
 import SaveIcon from '../../../../assets/save-icon.svg'
 import HelpIcon from '../../../../assets/help-icon.svg'
+import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 import { eng } from '../../../_index.data'
@@ -106,77 +107,86 @@ const Stage1WorkPage = () => {
                                 answers that you provide should be the product
                                 of discussions between each of the team members.
                             </p>
-
-                            <div className="form-holder-border">
-                                <h3 className="sm-type-drum sm-type-drum--medium">
-                                    Questions
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet />
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task to complete:
+                                    </span>
                                 </h3>
-                                <ol>
-                                    {eng.map((eng, i) => (
-                                        <li key={eng.text}>
-                                            <p className="sm-type-guitar">
-                                                {eng.text}
-                                            </p>
-                                            <p className="sm-type-amp mb-4">
-                                                {eng.description}
-                                            </p>
-                                            <div className="ck-textarea">
-                                                {submitWorkObj.response.data ? (
-                                                    <div
-                                                        dangerouslySetInnerHTML={{
-                                                            __html:
-                                                                workState[i],
-                                                        }}
-                                                    />
-                                                ) : (
-                                                    <TextEditor
-                                                        data={
-                                                            workState[i] || ''
-                                                        }
-                                                        onChange={(data) =>
-                                                            workDispatch({
-                                                                // type: 'update',
-                                                                type:
-                                                                    ActionType.UpdateAction,
-                                                                payload: {
-                                                                    question: i,
-                                                                    answer: data,
-                                                                },
-                                                            })
-                                                        }
-                                                    />
-                                                )}
-                                            </div>
-                                        </li>
-                                    ))}
-                                </ol>
+                                <div className="form-holder-border">
+                                    <h4 className="sm-type-drum sm-type-drum--medium">
+                                        Questions
+                                    </h4>
+                                    <ol>
+                                        {eng.map((eng, i) => (
+                                            <li key={eng.text}>
+                                                <p className="sm-type-guitar">
+                                                    {eng.text}
+                                                </p>
+                                                <p className="sm-type-amp mb-4">
+                                                    {eng.description}
+                                                </p>
+                                                <div className="ck-textarea">
+                                                    {submitWorkObj.response.data ? (
+                                                        <div
+                                                            dangerouslySetInnerHTML={{
+                                                                __html:
+                                                                    workState[i],
+                                                            }}
+                                                        />
+                                                    ) : (
+                                                        <TextEditor
+                                                            data={
+                                                                workState[i] || ''
+                                                            }
+                                                            onChange={(data) =>
+                                                                workDispatch({
+                                                                    // type: 'update',
+                                                                    type:
+                                                                        ActionType.UpdateAction,
+                                                                    payload: {
+                                                                        question: i,
+                                                                        answer: data,
+                                                                    },
+                                                                })
+                                                            }
+                                                        />
+                                                    )}
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ol>
 
-                                {!submitWorkObj.response.data && (
-                                    <>
-                                        <button
-                                            className="btn-outline-lg mt-4 btn-icon"
-                                            onClick={saveWorkObj.call}
-                                        >
-                                            <SaveIcon />
-                                            Save Work
-                                        </button>
+                                    {!submitWorkObj.response.data && (
+                                        <>
+                                            <button
+                                                className="btn-outline-lg mt-4 btn-icon"
+                                                onClick={saveWorkObj.call}
+                                            >
+                                                <SaveIcon />
+                                                Save Work
+                                            </button>
 
-                                        <button
-                                            className="btn-solid-lg mt-4"
-                                            disabled={
-                                                Object.keys(workState).length <
-                                                12
-                                            }
-                                            onClick={submitWorkObj.call}
-                                        >
-                                            Submit Work
-                                        </button>
-                                    </>
-                                )}
+                                            <button
+                                                className="btn-solid-lg mt-4"
+                                                disabled={
+                                                    Object.keys(workState).length <
+                                                    12
+                                                }
+                                                onClick={submitWorkObj.call}
+                                            >
+                                                Submit Work
+                                            </button>
+                                        </>
+                                    )}
 
-                                {submitWorkObj.response.data && (
-                                    <span>Work submitted - good luck!</span>
-                                )}
+                                    {submitWorkObj.response.data && (
+                                        <span>Work submitted - good luck!</span>
+                                    )}
+                                </div>
                             </div>
                         </div>
                         <div className="col-lg-3">
