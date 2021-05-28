@@ -159,6 +159,28 @@ const Stage1LandingPage = () => {
                                     </ul>
                                 </div>
                             </div>
+
+                            <div className="side-grey">
+                                <h4 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet />
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task complete:
+                                    </span>
+                                </h4>
+                                <div className="form-holder-border">
+                                    <ul>
+                                        <li className="sm-type-guitar">
+                                            See your{' '}
+                                            <Link to="/student/stage-1/task">
+                                                Research question here
+                                            </Link>
+                                            .
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
 
                         <div className="col-lg-3">
