@@ -212,8 +212,7 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                                                         name,
                                                         quest: {
                                                             data: {
-                                                                tutor_id:
-                                                                    TUTOR_ID,
+                                                                tutor_id: TUTOR_ID,
                                                             },
                                                         },
                                                     })
