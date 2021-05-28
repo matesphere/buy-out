@@ -173,7 +173,7 @@ const Stage1LandingPage = () => {
                                     <ul>
                                         <li className="sm-type-guitar">
                                             See your{' '}
-                                            <Link to="/student/stage-1/task">
+                                            <Link to="/student/stage-1/complete">
                                                 Research question here
                                             </Link>
                                             .
