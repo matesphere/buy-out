@@ -10,9 +10,11 @@ import { Loading } from '../../../../components/common/Loading'
 import CheckList from '../../../../components/common/checklist'
 import Helpful from '../../../../components/common/helpful'
 
-import { useAuthQuery } from '../../../../utils/auth-utils'
+import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 import { TEAM_QUERY } from '../../../../gql/queries'
+import { SET_TEAM_POSITIONS } from '../../../../gql/mutations'
 import { TeamQuery, TeamQueryVariables } from '../../../../gql/types/TeamQuery'
+// import { SetTeamPositions, SetTeamPositionsVariables } from '../../../../gql/types/SetTeamPositions'
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
@@ -27,9 +29,11 @@ import {
     stage2DataTextEng,
 } from './_stage2.data'
 
-const RolesPage = ({ items }) => {
+const RolesPage = () => {
     const [showFilters, setShowFilters] = useState(false)
-    const [roles, setRoles] = useState({})
+    const [positions, setPositions] = useState([])
+    const [submitPositions, submitPositionResponse] =
+        useAuthMutation(SET_TEAM_POSITIONS)
 
     const { loading, error, data } = useAuthQuery<
         TeamQuery,
@@ -222,6 +226,8 @@ const RolesPage = ({ items }) => {
                                                                 username,
                                                                 full_name,
                                                             },
+                                                            user_id,
+                                                            school_id,
                                                         }) => (
                                                             <li className="mb-2">
                                                                 <label className="form-label sm-type-amp">
@@ -230,7 +236,7 @@ const RolesPage = ({ items }) => {
                                                                 <select
                                                                     className="form-control"
                                                                     value={
-                                                                        roles[
+                                                                        positions[
                                                                             username
                                                                         ]
                                                                     }
@@ -239,14 +245,18 @@ const RolesPage = ({ items }) => {
                                                                             value,
                                                                         },
                                                                     }) =>
-                                                                        setRoles(
+                                                                        setPositions(
                                                                             (
-                                                                                roles
-                                                                            ) => ({
-                                                                                ...roles,
-                                                                                [username]:
-                                                                                    value,
-                                                                            })
+                                                                                positions
+                                                                            ) => [
+                                                                                ...positions,
+                                                                                {
+                                                                                    user_id,
+                                                                                    school_id,
+                                                                                    position:
+                                                                                        value,
+                                                                                },
+                                                                            ]
                                                                         )
                                                                     }
                                                                 >
@@ -268,16 +278,18 @@ const RolesPage = ({ items }) => {
                                                     )}
                                                 </ul>
                                             </div>
-                                            {/* TODO: multi-mutation of all students in team to set roles */}
                                             <button
                                                 onClick={() => {
-                                                    setShowFilters(!showFilters)
-                                                    scrollTo(
-                                                        '#filter-container'
-                                                    )
+                                                    submitPositions({
+                                                        variables: {
+                                                            objects:
+                                                                Object.values(
+                                                                    positions
+                                                                ),
+                                                        },
+                                                    })
                                                 }}
                                                 className="btn-solid-lg"
-                                                to="/introduction"
                                             >
                                                 Submit names
                                             </button>
@@ -288,7 +300,7 @@ const RolesPage = ({ items }) => {
                                             id="filter-container"
                                         >
                                             <h4 className="sm-type-bigdrum sm-type-bigdrum--medium">
-                                                <span class="side-icon">
+                                                <span className="side-icon">
                                                     <Tick />
                                                 </span>{' '}
                                                 Success
