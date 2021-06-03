@@ -1,15 +1,17 @@
 import React from 'react'
 import '../scss/index.scss'
 
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import Squiggle from "../assets/squiggle.svg";
+import Squiggle from '../assets/squiggle.svg'
+import PinLogo from '../assets/pin-logo.svg'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const IndexPage = () => {
-    const data = useStaticQuery(graphql`
+    const data1 = useStaticQuery(graphql`
         query {
-            file(relativePath: { eq: "cls-ppt3-no-text-crop-1024x322.jpg" }) {
+            file(relativePath: { eq: "logo.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -30,6 +32,24 @@ const IndexPage = () => {
             </Helmet>
             <section className="container top-section">
                 <Squiggle className="squiggle" />
+                <div className="row">
+                    <div className="col-lg-8">
+                        <h1 className="main-header">
+                            <PinLogo />
+                            <span>The Quest</span>
+                        </h1>
+                    </div>
+                    <div className="col-lg-4">
+                        <div className="cls-logo">
+                            <GatsbyImage
+                                alt=""
+                                image={
+                                    data1.file.childImageSharp.gatsbyImageData
+                                }
+                            />
+                        </div>
+                    </div>
+                </div>
             </section>
             <main className="homepage">
                 <section className="container" id="main">
@@ -43,11 +63,11 @@ const IndexPage = () => {
                     </div>
                     <div className="row">
                         <div className="col-lg-6">
-                            <a className="btn-outline-lg" href="/tutor/login">Tutor login</a>
+                            <a className="btn-outline-lg" href="/login">Tutor login</a>
                         </div>
 
                         <div className="col-lg-6">
-                            <a className="btn-outline-lg" href="/student/login">Student login</a>
+                            <a className="btn-outline-lg" href="/login">Student login</a>
                         </div>
                     </div>
                 </section>
