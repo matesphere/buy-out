@@ -56,6 +56,10 @@ export const TEAM_QUERY = gql`
     query TeamQuery($team_id: uuid!) {
         team_by_pk(id: $team_id) {
             students {
+                id
+                user_id
+                school_id
+                team_id
                 user {
                     username
                     full_name

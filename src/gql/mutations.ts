@@ -89,6 +89,22 @@ export const SUBMIT_WORK = gql`
     }
 `
 
+export const SET_TEAM_POSITIONS = gql`
+    mutation SetTeamPositions($objects: [student_insert_input!]!) {
+        insert_student(
+            objects: $objects
+            on_conflict: {
+                constraint: student_user_id_key
+                update_columns: [position]
+            }
+        ) {
+            returning {
+                id
+            }
+        }
+    }
+`
+
 export const MARK_PASSED = gql`
     mutation MarkPassed($docId: uuid, $stageProgressId: uuid) {
         update_document(
