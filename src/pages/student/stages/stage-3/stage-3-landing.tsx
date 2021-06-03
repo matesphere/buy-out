@@ -3,22 +3,84 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import scrollTo from 'gatsby-plugin-smoothscroll'
+// import scrollTo from 'gatsby-plugin-smoothscroll'
+// import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
+import { Loading } from '../../../../components/common/Loading'
+import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
+
+import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
+// import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
+import { useWorkState, ActionType } from '../../../../utils/input-utils'
+
+// import {
+//     Stage3Query,
+//     Stage3QueryVariables,
+// } from '../../../../gql/types/Stage3Query'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-import Tick from '../../../../assets/tick.svg'
+// import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
 
-const SwotLinks = () => {}
+// export const STAGE_3_QUERY = gql`
+//     query Stage3Query($team_id: uuid!, $stage_id: Int) {
+//         team_by_pk(id: $team_id) {
+//             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
+//                 id
+//                 stage_id
+//                 status
+//                 documents(where: { status: { _eq: draft } }) {
+//                     id
+//                     doc_data
+//                 }
+//             }
+//             team_development_options {
+//                 id
+//                 team_choice_name
+//                 development_option {
+//                     display_name
+//                     option
+//                 }
+//             }
+//         }
+//     }
+// `
 
-const Stage3Page = () => {
-    const data = useStaticQuery(graphql`
+// TODO turn DONE into an icon
+const SwotLinks = ({ devOptions, completedSwots }) => (
+    <ol>
+        {devOptions.map(
+            (
+                {
+                    id,
+                    team_choice_name,
+                    development_option: { display_name, option },
+                },
+                i
+            ) => (
+                <li
+                    key={i}
+                    className={`sm-type-guitar mb-2${
+                        completedSwots.length >= i ? '' : ' disabled'
+                    }`}
+                >
+                    <Link to={`/student/stage-3/swot?id=${id}`}>
+                        {team_choice_name || display_name}
+                    </Link>
+                    {completedSwots.includes(option) && <span> DONE</span>}
+                </li>
+            )
+        )}
+    </ol>
+)
+
+const Stage3LandingPage = () => {
+    const imageData = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "map-zoom.jpg" }) {
                 childImageSharp {
@@ -27,6 +89,29 @@ const Stage3Page = () => {
             }
         }
     `)
+
+    const { loading, error, pageData, submitWorkObj } = useWorkState<
+        WorkState,
+        Action
+    >(3, stage3SwotReducer, true)
+
+    // const { data, loading, error } = useAuthQuery<
+    //     Stage3Query,
+    //     Stage3QueryVariables
+    // >(
+    //     STAGE_3_QUERY,
+    //     { variables: { stage_id: 3 }, fetchPolicy: 'no-cache' },
+    //     'teamId'
+    // )
+
+    if (loading) return <Loading />
+    if (error) return `Error! ${error.message}`
+
+    const { team_development_options: devOptions } = pageData.team_by_pk
+    const doc =
+        pageData.team_by_pk.stage_progresses[0]?.documents[0]?.doc_data || {}
+    const completedSwots = Object.keys(doc)
+
     return (
         <>
             <Helmet>
@@ -56,7 +141,7 @@ const Stage3Page = () => {
                                     <div>
                                         <GatsbyImage
                                             image={
-                                                data.image5.childImageSharp
+                                                imageData.image5.childImageSharp
                                                     .gatsbyImageData
                                             }
                                         />
@@ -190,6 +275,7 @@ const Stage3Page = () => {
                                 </p>
 
                                 <div className="form-holder-border">
+                                    <p className="sm-type-lead mb-2">Part I</p>
                                     <p className="sm-type-lead mb-2">
                                         Use the link below to find detailed
                                         information for each option, and then
@@ -198,18 +284,23 @@ const Stage3Page = () => {
                                     </p>
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            <Link to="/student/stage-3/glenclas-map-options">
+                                            <Link to="/student/stage-3/task">
                                                 View the development options
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
 
-                                <div className="form-holder-border not-available-holder">
+                                <div
+                                    className={`form-holder-border ${
+                                        devOptions.length === 0 &&
+                                        'not-available-holder'
+                                    }`}
+                                >
+                                    <p className="sm-type-lead mb-2">Part II</p>
                                     <p className="sm-type-lead mb-2">
-                                        Complete the 5 SWOT analyses to
-                                        determine which 5 options you wish to
-                                        take forward.
+                                        Complete a SWOT analysis for each of the
+                                        development options you chose in Part I.
                                     </p>
                                     <p className="sm-type-lead mb-2">
                                         Use the SWOT templates to help you
@@ -218,38 +309,17 @@ const Stage3Page = () => {
                                         this will then unlock the next SWOT.
                                     </p>
 
-                                    <ol>
-                                        <li className="sm-type-guitar mb-2">
-                                            <Link to="/student/stage-3/swot-study">
-                                                SWOT analysis 1
-                                            </Link>
-                                        </li>
-                                        <li className="sm-type-guitar mb-2">
-                                            <Link to="/student/stage-3/swot-study">
-                                                SWOT analysis 1
-                                            </Link>
-                                        </li>
-                                        <li className="sm-type-guitar mb-2">
-                                            <Link to="/student/stage-3/swot-study">
-                                                SWOT analysis 1
-                                            </Link>
-                                        </li>
-                                        <li className="sm-type-guitar mb-2">
-                                            <Link to="/student/stage-3/swot-study">
-                                                SWOT analysis 1
-                                            </Link>
-                                        </li>
-                                        <li className="sm-type-guitar mb-2">
-                                            <Link to="/student/stage-3/swot-study">
-                                                SWOT analysis 1
-                                            </Link>
-                                        </li>
-                                    </ol>
+                                    <SwotLinks
+                                        devOptions={devOptions}
+                                        completedSwots={completedSwots}
+                                    />
+                                    <SaveSubmitSection
+                                        submitWorkObj={submitWorkObj}
+                                        disableSubmit={
+                                            completedSwots.length !== 5
+                                        }
+                                    />
                                 </div>
-
-                                <Link to="/student/stage-3/swot-study">
-                                    Link to SWOT temp
-                                </Link>
                             </div>
                         </div>
                         <div className="col-lg-3">
@@ -285,14 +355,21 @@ const Stage3Page = () => {
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        You have seen the map and the detailed
-                                        information on each option.
+                                        Read carefully through the detailed
+                                        information on each development option.
                                     </p>
                                 </div>
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        You have completed 5 SWOT analysis.
+                                        Select your 5 options to take forward.
+                                    </p>
+                                </div>
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">
+                                        Complete a SWOT analysis for each
+                                        option.
                                     </p>
                                 </div>
                             </div>
@@ -306,4 +383,4 @@ const Stage3Page = () => {
     )
 }
 
-export default Stage3Page
+export default Stage3LandingPage

@@ -1,20 +1,100 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
+import scrollTo from 'gatsby-plugin-smoothscroll'
+import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
-import HelpIcon from '../../../../assets/help-icon.svg'
+import { Loading } from '../../../../components/common/Loading'
 
-import '../../../../scss/index.scss'
+import { UserStateContext } from '../../../../utils/user-state'
+import { useCheckboxState } from '../../../../utils/input-utils'
+import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
+import { CHOOSE_DEVELOPMENT_OPTIONS } from '../../../../gql/mutations'
+
+import { Stage3TaskQuery } from '../../../../gql/types/Stage3TaskQuery'
+
+import HelpIcon from '../../../../assets/help-icon.svg'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
-import scrollTo from "gatsby-plugin-smoothscroll";
-import TickSheet from "../../../../assets/tick-sheet.svg";
-import Tick from "../../../../assets/tick.svg";
+import TickSheet from '../../../../assets/tick-sheet.svg'
+import Tick from '../../../../assets/tick.svg'
 
-const Stage3PlanPage = () => {
+import '../../../../scss/index.scss'
+
+const STAGE_3_TASK_QUERY = gql`
+    query Stage3TaskQuery {
+        development_option {
+            id
+            option
+            display_name
+        }
+    }
+`
+
+// TODO: sort out checked/onChange, drop into page, disable submit until 5 selected
+const ChooseOptionsCheckboxes = ({
+    devOptions,
+    selectedOptions,
+    toggleValue,
+    teamChoiceName,
+    setTeamChoiceName,
+}) => (
+    <>
+        {devOptions.map(({ id, display_name }, i) =>
+            id === 10 ? (
+                <>
+                    <p className="sm-type-lead sm-type-lead--medium mt-4">
+                        Or choose your own option - check the box and enter your
+                        option name here!
+                    </p>
+                    <div className="multiple-choice">
+                        <input
+                            className="form-control"
+                            id="10"
+                            type="checkbox"
+                            checked={selectedOptions.includes(10)}
+                            onChange={() => toggleValue(10)}
+                        />
+                        <label className="form-label" htmlFor="housing">
+                            Team choice
+                        </label>
+                    </div>
+                    <div className="mb-4">
+                        <label className="form-label sm-type-amp">
+                            Team Choice
+                        </label>
+                        <input
+                            type="text"
+                            className="form-control"
+                            value={teamChoiceName}
+                            onChange={({ target: { value } }) =>
+                                setTeamChoiceName(value)
+                            }
+                        />
+                    </div>
+                </>
+            ) : (
+                <div key={i} className="multiple-choice">
+                    <input
+                        className="form-control"
+                        id={id}
+                        type="checkbox"
+                        checked={selectedOptions.includes(id)}
+                        onChange={() => toggleValue(id)}
+                    />
+                    <label className="form-label" htmlFor={id}>
+                        {display_name}
+                    </label>
+                </div>
+            )
+        )}
+    </>
+)
+
+const Stage3TaskPage = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "map-zoom.jpg" }) {
@@ -24,6 +104,28 @@ const Stage3PlanPage = () => {
             }
         }
     `)
+
+    const {
+        userInfo: { teamId },
+    } = useContext(UserStateContext)
+
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<Stage3TaskQuery, null>(STAGE_3_TASK_QUERY, {})
+
+    const [teamChoiceName, setTeamChoiceName] = useState('')
+    const [selectedOptions, toggleValue, allowedNumberSelected] =
+        useCheckboxState<number>([], 5)
+
+    const [chooseDevOptions, chooseDevOptionsResponse] = useAuthMutation(
+        CHOOSE_DEVELOPMENT_OPTIONS
+    )
+
+    if (loading) return <Loading />
+    if (error) return `Error! ${error.message}`
+
     return (
         <>
             <Helmet>
@@ -394,16 +496,12 @@ const Stage3PlanPage = () => {
                                         </p>
                                     </div>
                                 </div>
-
-
                             </div>
-
-
 
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet">
-                                        <TickSheet/>
+                                        <TickSheet />
                                     </span>
                                     <span className="sm-type-drum">
                                         Task to complete:
@@ -411,119 +509,63 @@ const Stage3PlanPage = () => {
                                 </h3>
 
                                 <p className="sm-type-lead mb-2">
-                                    Choose your 5 options to take forward to the next stage.
+                                    Choose your 5 options to take forward to the
+                                    next stage.
                                 </p>
 
                                 <div className="form-holder-border">
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="housing"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="housing">
-                                            Affordable Housing Scheme
-                                        </label>
-                                    </div>
-
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="playpark"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="playpark">
-                                            Play Park and/or Skate Park Scheme
-                                        </label>
-                                    </div>
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="shop"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="shop">
-                                            Shop and Post Office
-                                        </label>
-                                    </div>
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="hydro"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="hydro">
-                                            Micro-hydro Scheme
-                                        </label>
-                                    </div>
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="wind"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="wind">
-                                            Wind turbine Scheme
-                                        </label>
-                                    </div>
-
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="business"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="business">
-                                            Business hub Scheme
-                                        </label>
-                                    </div>
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="forestry"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="forestry">
-                                            Forestry Scheme
-                                        </label>
-                                    </div>
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="campsite"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="campsite">
-                                            Campsite and Cabins Scheme
-                                        </label>
-                                    </div>
-
-                                    <div className="multiple-choice">
-                                        <input
-                                            className="form-control"
-                                            id="market"
-                                            type="checkbox"
-                                        />
-                                        <label className="form-label" htmlFor="market">
-                                            Market Garden Scheme
-                                        </label>
-                                    </div>
-                                    <p className="sm-type-lead sm-type-lead--medium mt-4">Or choose your own option - Enter your option name here.</p>
-                                    <div className="mb-4">
-                                        <label className="form-label sm-type-amp">
-                                            Team Choice
-                                        </label>
-                                        <input type="text" className="form-control"/>
-                                    </div>
+                                    <ChooseOptionsCheckboxes
+                                        devOptions={pageData.development_option}
+                                        selectedOptions={selectedOptions}
+                                        toggleValue={toggleValue}
+                                        teamChoiceName={teamChoiceName}
+                                        setTeamChoiceName={setTeamChoiceName}
+                                    />
 
                                     <button
                                         className="btn-solid-lg mt-4"
+                                        disabled={
+                                            !allowedNumberSelected ||
+                                            (selectedOptions.includes(10) &&
+                                                !teamChoiceName)
+                                        }
+                                        onClick={() => {
+                                            const objects = selectedOptions.map(
+                                                (id) => {
+                                                    if (id === 10) {
+                                                        return {
+                                                            team_id: teamId,
+                                                            development_option_id:
+                                                                id,
+                                                            team_choice_name:
+                                                                teamChoiceName,
+                                                        }
+                                                    }
+
+                                                    return {
+                                                        team_id: teamId,
+                                                        development_option_id:
+                                                            id,
+                                                    }
+                                                }
+                                            )
+
+                                            chooseDevOptions({
+                                                variables: {
+                                                    objects,
+                                                },
+                                            })
+                                        }}
                                     >
                                         Submit options
                                     </button>
+
+                                    {chooseDevOptionsResponse.data && (
+                                        <p className="sm-type-amp">
+                                            Submitted!
+                                        </p>
+                                    )}
                                 </div>
-
-
                             </div>
                         </div>
                         <div className="col-lg-3">
@@ -556,10 +598,12 @@ const Stage3PlanPage = () => {
                             <div className="side-grey">
                                 <div className="checklist">
                                     <div className="tick"></div>
-                                    <p className="sm-type-lead">You have seen the map and the detailed information on each option.</p>
+                                    <p className="sm-type-lead">
+                                        You have seen the map and the detailed
+                                        information on each option.
+                                    </p>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </section>
@@ -570,4 +614,4 @@ const Stage3PlanPage = () => {
     )
 }
 
-export default Stage3PlanPage
+export default Stage3TaskPage

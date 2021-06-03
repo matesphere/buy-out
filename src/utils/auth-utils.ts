@@ -53,7 +53,7 @@ export const addStudentToTeam =
 export const useAuthQuery = <TData, TVariables>(
     query: DocumentNode,
     options: QueryHookOptions,
-    idRequired: 'userId' | 'teamId'
+    idRequired?: 'userId' | 'teamId'
 ) => {
     const {
         userInfo: { userId, teamId, token },

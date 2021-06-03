@@ -9,7 +9,7 @@ import Footer from '../../components/_footer'
 
 import { UserStateContext } from '../../utils/user-state'
 
-import '../../scss/index.scss'
+import { TeamHubQuery } from '../../gql/types/TeamHubQuery'
 
 import Lock from '../../assets/lock.svg'
 import Ticktrbl from '../../assets/tick-trbl.svg'
@@ -26,6 +26,8 @@ import Ticktb4 from '../../assets/tick-tp4.svg'
 import Tick from '../../assets/tick.svg'
 import HelpIcon from '../../assets/help-icon.svg'
 
+import '../../scss/index.scss'
+
 const TEAM_HUB_QUERY = gql`
     query TeamHubQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
@@ -40,6 +42,13 @@ const TEAM_HUB_QUERY = gql`
                     students {
                         user {
                             full_name
+                        }
+                    }
+                    team_development_options {
+                        development_option {
+                            id
+                            display_name
+                            option
                         }
                     }
                 }
@@ -66,6 +75,13 @@ const TEAM_HUB_SUB = gql`
                     students {
                         user {
                             full_name
+                        }
+                    }
+                    team_development_options {
+                        development_option {
+                            id
+                            display_name
+                            option
                         }
                     }
                 }
@@ -126,12 +142,13 @@ const TeamHub = () => {
         }
     `)
 
+    // TODO: use authQuery once subscription is fixed
     const {
         loading,
         error,
         data: pageData,
         // subscribeToMore,
-    } = useQuery(TEAM_HUB_QUERY, {
+    } = useQuery<TeamHubQuery>(TEAM_HUB_QUERY, {
         variables: {
             user_id: userId,
         },
@@ -202,10 +219,9 @@ const TeamHub = () => {
     } = pageData.user_by_pk
 
     const stages = pageData.stage.map((stage) => {
-        const stageProgressForStage =
-            stageProgresses.find((sp) => sp.stage_id === stage.id) || {} // TODO optional chaining here once TS is in
-
-        const status = stageProgressForStage.status || 'locked'
+        const status =
+            stageProgresses.find((sp) => sp.stage_id === stage.id)?.status ||
+            'locked'
 
         return <StageButton {...{ ...stage, status }} />
     })

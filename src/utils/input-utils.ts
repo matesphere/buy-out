@@ -14,27 +14,56 @@ import {
     DocumentQueryVariables,
 } from '../gql/types/DocumentQuery'
 
-export const useCheckboxListState = (listOfLabels) => {
-    const [checkboxState, setCheckboxState] = useState(
-        listOfLabels.map((label, i) => ({ id: i, label, value: false }))
-    )
+export const useCheckboxState = <T>(
+    initialSelected: Array<T>,
+    limit?: number
+) => {
+    const [selectedValues, setSelectedValues] =
+        useState<Array<T>>(initialSelected)
 
-    const toggleCheckbox = (id) => {
-        setCheckboxState((state) =>
-            state.map((checkbox) =>
-                checkbox.id === id
-                    ? { id, label: checkbox.label, value: !checkbox.value }
-                    : checkbox
-            )
-        )
-    }
+    const toggleValue = (newValue: T) =>
+        selectedValues.includes(newValue)
+            ? setSelectedValues(
+                  selectedValues.filter((value) => value !== newValue)
+              )
+            : selectedValues.length === limit
+            ? setSelectedValues([...selectedValues.slice(1), newValue])
+            : setSelectedValues([...selectedValues, newValue])
 
-    const allCheckboxesChecked = checkboxState
-        .map((checkbox) => checkbox.value)
-        .every(Boolean)
+    const allowedNumberSelected = selectedValues.length === limit
 
-    return [checkboxState, toggleCheckbox, allCheckboxesChecked] as const
+    return [selectedValues, toggleValue, allowedNumberSelected] as const
 }
+
+// export const useCheckboxListState = (
+//     listOfLabels: Array<string>,
+//     limit?: number
+// ) => {
+//     const [checkboxState, setCheckboxState] = useState(
+//         listOfLabels.map((label, i) => ({ id: i, label, value: false }))
+//     )
+
+//     const toggleCheckbox = (id) => {
+//         setCheckboxState((state) =>
+//             state.map((checkbox) =>
+//                 checkbox.id === id
+//                     ? { id, label: checkbox.label, value: !checkbox.value }
+//                     : checkbox
+//             )
+//         )
+//     }
+
+//     const allRequiredCheckboxesChecked = limit
+//         ? checkboxState.map((checkbox) => checkbox.value).filter(Boolean)
+//               .length === limit
+//         : checkboxState.map((checkbox) => checkbox.value).every(Boolean)
+
+//     return [
+//         checkboxState,
+//         toggleCheckbox,
+//         allRequiredCheckboxesChecked,
+//     ] as const
+// }
 
 export enum ActionType {
     LoadAction,
@@ -43,7 +72,8 @@ export enum ActionType {
 
 export const useWorkState = <InputState, Action>(
     stageId: number,
-    workReducer: Reducer<InputState, Action>
+    workReducer: Reducer<InputState, Action>,
+    includeDevOptions?: boolean
 ) => {
     const [docId, setDocId] = useState('')
     const [workState, workDispatch] = useReducer<Reducer<InputState, Action>>(
@@ -51,13 +81,11 @@ export const useWorkState = <InputState, Action>(
         {} as InputState
     )
 
-    const [saveWorkInitial, saveWorkInitialResponse] = useAuthMutation(
-        SAVE_WORK_INITIAL
-    )
+    const [saveWorkInitial, saveWorkInitialResponse] =
+        useAuthMutation(SAVE_WORK_INITIAL)
     const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
-    const [submitWorkInitial, submitWorkInitialResponse] = useAuthMutation(
-        SUBMIT_WORK_INITIAL
-    )
+    const [submitWorkInitial, submitWorkInitialResponse] =
+        useAuthMutation(SUBMIT_WORK_INITIAL)
     const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK)
 
     useEffect(() => {
@@ -67,10 +95,20 @@ export const useWorkState = <InputState, Action>(
         }
     }, [saveWorkInitialResponse.called])
 
-    const { loading, error, data: pageData } = useAuthQuery<
-        DocumentQuery,
-        DocumentQueryVariables
-    >(DOCUMENT_QUERY, { variables: { stage_id: stageId } }, 'teamId')
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<DocumentQuery, DocumentQueryVariables>(
+        DOCUMENT_QUERY,
+        {
+            variables: {
+                stage_id: stageId,
+                includeDevOptions: !!includeDevOptions,
+            },
+        },
+        'teamId'
+    )
 
     useEffect(() => {
         if (!loading) {

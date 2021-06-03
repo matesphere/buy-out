@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { TextEditor } from '../../../../components/common/TextEditor'
+import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
 
 // import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
@@ -18,11 +19,6 @@ import { eng } from '../../../_index.data'
 type WorkState = {
     [key: number]: string
 }
-
-// enum ActionType {
-//     LoadAction,
-//     UpdateAction,
-// }
 
 type Action =
     | {
@@ -48,24 +44,15 @@ const stage1QuestionReducer: Reducer<WorkState, Action> = (state, action) => {
     }
 }
 
-// const stage1DocSelector = (data) =>
-//     data?.team_by_pk?.stage_progresses[0]?.documents[0] || {}
-
 const Stage1WorkPage = () => {
     const {
         loading,
         error,
-        // pageData,
         workState,
         workDispatch,
         saveWorkObj,
         submitWorkObj,
-    } = useWorkState<WorkState, Action>(
-        // STAGE_1_RESEARCH_QUERY,
-        1,
-        // stage1DocSelector,
-        stage1QuestionReducer
-    )
+    } = useWorkState<WorkState, Action>(1, stage1QuestionReducer)
 
     if (loading)
         return (
@@ -130,25 +117,27 @@ const Stage1WorkPage = () => {
                                                     {eng.description}
                                                 </p>
                                                 <div className="ck-textarea">
-                                                    {submitWorkObj.response.data ? (
+                                                    {submitWorkObj.response
+                                                        .data ? (
                                                         <div
                                                             dangerouslySetInnerHTML={{
-                                                                __html:
-                                                                    workState[i],
+                                                                __html: workState[
+                                                                    i
+                                                                ],
                                                             }}
                                                         />
                                                     ) : (
                                                         <TextEditor
                                                             data={
-                                                                workState[i] || ''
+                                                                workState[i] ||
+                                                                ''
                                                             }
                                                             onChange={(data) =>
                                                                 workDispatch({
-                                                                    // type: 'update',
-                                                                    type:
-                                                                        ActionType.UpdateAction,
+                                                                    type: ActionType.UpdateAction,
                                                                     payload: {
-                                                                        question: i,
+                                                                        question:
+                                                                            i,
                                                                         answer: data,
                                                                     },
                                                                 })
@@ -160,7 +149,15 @@ const Stage1WorkPage = () => {
                                         ))}
                                     </ol>
 
-                                    {!submitWorkObj.response.data && (
+                                    <SaveSubmitSection
+                                        saveWorkObj={saveWorkObj}
+                                        submitWorkObj={submitWorkObj}
+                                        disableSubmit={
+                                            Object.keys(workState).length < 12
+                                        }
+                                    />
+
+                                    {/* {!submitWorkObj.response.data && (
                                         <>
                                             <button
                                                 className="btn-outline-lg mt-4 btn-icon"
@@ -173,8 +170,8 @@ const Stage1WorkPage = () => {
                                             <button
                                                 className="btn-solid-lg mt-4"
                                                 disabled={
-                                                    Object.keys(workState).length <
-                                                    12
+                                                    Object.keys(workState)
+                                                        .length < 12
                                                 }
                                                 onClick={submitWorkObj.call}
                                             >
@@ -185,7 +182,7 @@ const Stage1WorkPage = () => {
 
                                     {submitWorkObj.response.data && (
                                         <span>Work submitted - good luck!</span>
-                                    )}
+                                    )} */}
                                 </div>
                             </div>
                         </div>

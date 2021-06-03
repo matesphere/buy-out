@@ -1,39 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const CREATE_QUEST_WITH_TEAMS = gql`
-    mutation InsertTeam($objects: [team_insert_input!]!) {
-        insert_team(objects: $objects) {
-            returning {
-                quest_id
-            }
-        }
-    }
-`
-
-export const START_QUEST = gql`
-    mutation StartQuest($quest_id: uuid!) {
-        update_quest_by_pk(
-            pk_columns: { id: $quest_id }
-            _set: { status: "active" }
-        ) {
-            id
-            status
-        }
-    }
-`
-
-export const UNLOCK_STAGE = gql`
-    mutation UnlockStage($teamId: uuid, $stageId: Int) {
-        insert_stage_progress_one(
-            object: { team_id: $teamId, stage_id: $stageId, status: unlocked }
-        ) {
-            id
-            team_id
-            stage_id
-            status
-        }
-    }
-`
+// student
 
 export const SAVE_WORK_INITIAL = gql`
     mutation SaveWorkInitial($stageProgressId: uuid!, $docData: jsonb!) {
@@ -101,6 +68,55 @@ export const SET_TEAM_POSITIONS = gql`
             returning {
                 id
             }
+        }
+    }
+`
+
+export const CHOOSE_DEVELOPMENT_OPTIONS = gql`
+    mutation ChooseDevelopmentOptions(
+        $objects: [team_development_option_insert_input!]!
+    ) {
+        insert_team_development_option(objects: $objects) {
+            returning {
+                id
+            }
+        }
+    }
+`
+
+// tutor
+
+export const CREATE_QUEST_WITH_TEAMS = gql`
+    mutation InsertTeam($objects: [team_insert_input!]!) {
+        insert_team(objects: $objects) {
+            returning {
+                quest_id
+            }
+        }
+    }
+`
+
+export const START_QUEST = gql`
+    mutation StartQuest($quest_id: uuid!) {
+        update_quest_by_pk(
+            pk_columns: { id: $quest_id }
+            _set: { status: "active" }
+        ) {
+            id
+            status
+        }
+    }
+`
+
+export const UNLOCK_STAGE = gql`
+    mutation UnlockStage($teamId: uuid, $stageId: Int) {
+        insert_stage_progress_one(
+            object: { team_id: $teamId, stage_id: $stageId, status: unlocked }
+        ) {
+            id
+            team_id
+            stage_id
+            status
         }
     }
 `

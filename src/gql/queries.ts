@@ -13,7 +13,11 @@ export const STAGE_QUERY = gql`
 `
 
 export const DOCUMENT_QUERY = gql`
-    query DocumentQuery($team_id: uuid!, $stage_id: Int) {
+    query DocumentQuery(
+        $team_id: uuid!
+        $stage_id: Int!
+        $includeDevOptions: Boolean!
+    ) {
         team_by_pk(id: $team_id) {
             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
                 id
@@ -22,6 +26,15 @@ export const DOCUMENT_QUERY = gql`
                 documents(where: { status: { _eq: draft } }) {
                     id
                     doc_data
+                }
+            }
+            team_development_options @include(if: $includeDevOptions) {
+                id
+                team_choice_name
+                development_option {
+                    id
+                    display_name
+                    option
                 }
             }
         }
