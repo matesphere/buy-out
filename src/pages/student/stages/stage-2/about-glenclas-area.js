@@ -6,38 +6,8 @@ import '../../../../scss/index.scss'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import HelpIcon from '../../../../assets/help-icon.svg'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import Slider from 'react-slick'
-
-const settings = {
-    dots: true,
-    infinite: true,
-    speed: 1000,
-    autoplaySpeed: 3000,
-    fadeIn: false,
-    autoplay: false,
-    pauseOnHover: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    responsive: [
-        {
-            breakpoint: 1000,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true,
-            },
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-            },
-        },
-    ],
-}
+import { slickSettings } from '../../../../utils/slicksettings'
 
 const AboutGlenclasAreaPage = () => {
     const data = useStaticQuery(graphql`
@@ -86,7 +56,7 @@ const AboutGlenclasAreaPage = () => {
                                 Click on the tabs below to read about the area, geography, attractions and more.
                             </p>
 
-                            <Slider {...settings}>
+                            <Slider {...slickSettings}>
                                 <div className="side-grey">
 
                                     <h3 className="sm-type-drum sm-type-drum--medium">

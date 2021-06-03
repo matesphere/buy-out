@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import scrollTo from 'gatsby-plugin-smoothscroll'
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -15,7 +13,8 @@ import { TEAM_QUERY } from '../../../../gql/queries'
 import { SET_TEAM_POSITIONS } from '../../../../gql/mutations'
 import { TeamQuery, TeamQueryVariables } from '../../../../gql/types/TeamQuery'
 // import { SetTeamPositions, SetTeamPositionsVariables } from '../../../../gql/types/SetTeamPositions'
-
+import Slider from 'react-slick'
+import { slickSettings } from '../../../../utils/slicksettings'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
@@ -84,28 +83,8 @@ const RolesPage = () => {
                                 </p>
                             ))}
 
-                            <Tabs>
-                                <TabList>
-                                    <Tab>
-                                        <h6 className="sm-type-amp">Chair</h6>
-                                    </Tab>
-                                    <Tab>
-                                        <h6 className="sm-type-amp">
-                                            Vice-chair
-                                        </h6>
-                                    </Tab>
-                                    <Tab>
-                                        <h6 className="sm-type-amp">
-                                            Secretary
-                                        </h6>
-                                    </Tab>
-                                    <Tab>
-                                        <h6 className="sm-type-amp">
-                                            Treasurer
-                                        </h6>
-                                    </Tab>
-                                </TabList>
-                                <TabPanel className="react-tabs--information">
+                            <Slider {...slickSettings}>
+                                <div  className="side-grey">
                                     <div className="react-tabs--information--inner">
                                         <h2 className="sm-type-guitar mb-2">
                                             Chair
@@ -129,8 +108,8 @@ const RolesPage = () => {
                                             the Community.
                                         </p>
                                     </div>
-                                </TabPanel>
-                                <TabPanel className="react-tabs--information">
+                                </div>
+                                <div  className="side-grey">
                                     <div className="react-tabs--information--inner">
                                         <h2 className="sm-type-guitar mb-2">
                                             Vice-chair
@@ -151,8 +130,8 @@ const RolesPage = () => {
                                             presentation to the Community.
                                         </p>
                                     </div>
-                                </TabPanel>
-                                <TabPanel className="react-tabs--information">
+                                </div>
+                                <div  className="side-grey">
                                     <div className="react-tabs--information--inner">
                                         <h2 className="sm-type-guitar mb-2">
                                             Secretary
@@ -172,8 +151,8 @@ const RolesPage = () => {
                                             with the Business Plan.
                                         </p>
                                     </div>
-                                </TabPanel>
-                                <TabPanel className="react-tabs--information">
+                                </div>
+                                <div  className="side-grey">
                                     <div className="react-tabs--information--inner">
                                         <h2 className="sm-type-guitar mb-2">
                                             Treasurer
@@ -190,8 +169,8 @@ const RolesPage = () => {
                                             running the Development Schemes.
                                         </p>
                                     </div>
-                                </TabPanel>
-                            </Tabs>
+                                </div>
+                            </Slider>
 
                             <div
                                 className={`filters-container${

@@ -7,36 +7,8 @@ import { graphql, Link, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
 import HelpIcon from '../../../../assets/help-icon.svg'
+import { slickSettings } from '../../../../utils/slicksettings'
 
-const settings = {
-    dots: true,
-    infinite: true,
-    speed: 1000,
-    autoplaySpeed: 3000,
-    fadeIn: false,
-    autoplay: false,
-    pauseOnHover: false,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    responsive: [
-        {
-            breakpoint: 1000,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true,
-            },
-        },
-        {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-            },
-        },
-    ],
-}
 
 const CommunityHousingPage = () => {
     const data = useStaticQuery(graphql`
@@ -112,7 +84,7 @@ const CommunityHousingPage = () => {
                                 Click on the buttons, or swipe left below to see what the community and experts have to say.
                             </p>
 
-                            <Slider {...settings}>
+                            <Slider {...slickSettings}>
                                 <div className="side-grey">
                                     <div className="row">
                                         <div className="col-lg-8">

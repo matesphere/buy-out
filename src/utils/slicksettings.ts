@@ -1,4 +1,3 @@
-
 export const slickSettings = {
     dots: true,
     infinite: true,
