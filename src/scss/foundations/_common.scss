@@ -343,6 +343,12 @@ p {
 .mb-8 {
     margin-bottom: $grid-unit * 8;
 }
+.ml-2 {
+    margin-left: $grid-unit * 2;
+}
+.ml-4 {
+    margin-left: $grid-unit * 4;
+}
 
 .hide-on-narrow {
     display: none;
@@ -502,10 +508,13 @@ button:focus {
 .ck-textarea {
     display: block;
     width: 100%;
-    min-height: 40px;
+    min-height: 8em;
     margin-bottom: 20px;
-    border: 2px solid #0b0c0c;
+    border: 1px solid $brand-orange;
     border-radius: 0;
+    &:focus {
+        border: 2px solid $brand-green;
+    }
 }
 
 .green-highlight {
@@ -1069,4 +1078,8 @@ button:focus {
         text-align: center;
         padding: 4px;
     }
+}
+
+.submitted-holder {
+  padding: 8px;
 }
