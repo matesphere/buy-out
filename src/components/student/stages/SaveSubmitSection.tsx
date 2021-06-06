@@ -52,23 +52,33 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
 
             {showModal && (
                 <div className="modal-window">
-                    <div>
                     <button
                         onClick={() => setShowModal(false)}
                         title="Close"
                         className="modal-close"
-                        >
+                    >
                         Close
                     </button>
-                        <p>Are you sure?</p>
-                        <button
-                            className="btn-solid-lg mt-4"
-                            disabled={disableSubmit}
-                            onClick={submitWorkObj.call}
-                        >
-                            Yes submit Work
-                        </button>
-                    </div>
+                    {submitWorkObj.response.data ? (
+                        <>
+                            <p className="sm-type-drum">
+                                Work submitted - good luck!
+                            </p>
+                        </>
+                    ) : (
+                        <div>
+
+                            <p>Are you sure?</p>
+                            <button
+                                className="btn-solid-lg mt-4"
+                                disabled={disableSubmit}
+                                onClick={submitWorkObj.call}
+                            >
+                                Yes submit Work
+                            </button>
+                        </div>
+                    )
+                    }
                 </div>
             )}
 
@@ -91,21 +101,6 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
             {/*        )}*/}
             {/*    </>*/}
             {/*)}*/}
-
-            {submitWorkObj.response.data && (
-                <>
-                    <button
-                        onClick={() => setShowModal(false)}
-                        title="Close"
-                        className="modal-close"
-                    >
-                        Close
-                    </button>
-                    <p className="sm-type-drum">
-                        Work submitted - good luck!
-                    </p>
-                </>
-            )}
         </>
     )
 }
