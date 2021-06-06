@@ -21,7 +21,6 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
 
@@ -156,6 +155,7 @@ const Stage3TaskPage = () => {
                                 <div className="image-map-holder">
                                     <div>
                                         <GatsbyImage
+                                            alt={' '}
                                             image={
                                                 data.image5.childImageSharp
                                                     .gatsbyImageData

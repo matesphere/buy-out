@@ -11,7 +11,6 @@ import { SaveSubmitSection } from "../../../../components/student/stages/SaveSub
 // import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 import { useWorkState, ActionType } from "../../../../utils/input-utils";
 
-import SaveIcon from "../../../../assets/save-icon.svg";
 import HelpIcon from "../../../../assets/help-icon.svg";
 import TickSheet from "../../../../assets/tick-sheet.svg";
 

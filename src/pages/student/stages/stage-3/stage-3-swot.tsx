@@ -93,14 +93,34 @@ const Stage3Swot = ({ location: { search } }) => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 SWOT Analysis 1
                             </h2>
-                            <p className="sm-type-amp">
+                            <p className="sm-type-amp mb-4">
                                 Use the SWOT Analysis to gather information in
                                 order to complete the Feasibility Study
                                 template.{' '}
                             </p>
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                  <span className="ticker-sheet ticker-feedback">
+                                    <HelpIcon />
+                                  </span>
+                                                    <span className="sm-type-drum green-highlight">
+                                    Tutor feedback:
+                                  </span>
+                                </h3>
+                                <div className="form-holder-border">
+                                    <p className="sm-type-lead">
+                                        Here are a series of questions to help you to do some
+                                        preliminary exploration. This is your first opportunity to
+                                        work together as a team, so the answers that you provide
+                                        should be the product of discussions between each of the
+                                        team members.
+                                    </p>
+                                </div>
+                            </div>
+
                             <h3 className="sm-type-drum sm-type-drum--medium mt-4">
                                 Option: {devOption.display_name}
                             </h3>
