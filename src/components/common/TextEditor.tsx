@@ -50,6 +50,7 @@ export const TextEditor = ({ data, onChange }) => {
             // }}
             config={{
                 toolbar: ['undo', 'redo', '|', 'numberedList', 'bulletedList'],
+                height:['300px']
             }}
         />
     ) : null

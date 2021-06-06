@@ -66,6 +66,10 @@
   padding: ($grid-unit * 2) 0;
   background-color: #e5ffb8;
   margin-top: $grid-unit * 4;
+  .button {
+    background-color: transparent !important;
+    display: inline-block;
+  }
 }
 
 .cls-logo {

@@ -67,7 +67,7 @@ const ChooseRoute = () => {
                     <div className="col-lg-8">
                         <h1 className="main-header">
                             <PinLogo />
-                            <span>The Quest</span>
+                            <span>Community Land Quest</span>
                         </h1>
                     </div>
                     <div className="col-lg-4">

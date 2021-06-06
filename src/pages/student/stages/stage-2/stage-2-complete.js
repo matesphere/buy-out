@@ -19,8 +19,14 @@ const Stage2Page = () => {
           gatsbyImageData(layout: CONSTRAINED)
         }
       }
+      image2: file(relativePath: { eq: "congratulations.jpg" }) {
+            childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+            }
+        }
     }
   `);
+
   return (
     <>
       <Helmet>
@@ -35,6 +41,14 @@ const Stage2Page = () => {
               <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                 Consult
               </h2>
+              <div className="mt-4 mb-4 image-holder">
+                <GatsbyImage
+                    image={
+                      data.image2.childImageSharp
+                          .gatsbyImageData
+                    }
+                />
+              </div>
 
               <div className="side-grey">
                 <h3 className="task ticker mb-2">

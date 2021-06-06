@@ -228,11 +228,6 @@ const TeamHub = () => {
             <main className="the-quest">
                 <Header headerText="Team Hub" />
                 <section className="container" id="main">
-                    <p className="sm-type-amp mt-4">
-                        {' '}
-                        Logged in as{' '}
-                        <span className="sm-type-lead--medium">{`${fullName}`}</span>
-                    </p>
                     <div className="row">
                         <div className="col-lg-8">
                             <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
@@ -242,6 +237,11 @@ const TeamHub = () => {
                             <div className="container side-grey">
                                 <div className="row">
                                     <div className="col-lg-8">
+                                        <p className="sm-type-amp mt-4">
+                                            {' '}
+                                            Logged in as{' '}
+                                            <span className="sm-type-lead--medium">{`${fullName}`}</span>
+                                        </p>
                                         <h2 className="sm-type-drum sm-type-drum--medium">
                                             {teamName}
                                         </h2>
@@ -267,7 +267,7 @@ const TeamHub = () => {
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
+                            <p className="sm-type-guitar mb-2 mt-4">
                                 <span className="side-icon side-icon-orange">
                                     <HelpIcon />
                                 </span>

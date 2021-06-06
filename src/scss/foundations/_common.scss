@@ -392,6 +392,12 @@ p {
     }
 }
 
+.ticker-feedback {
+    svg {
+        fill: $brand-midgreen;
+    }
+}
+
 .side-icon {
     display: inline-block;
     width: 30px;
@@ -515,6 +521,9 @@ button:focus {
     &:focus {
         border: 2px solid $brand-green;
     }
+}
+.ck-editor__editable {
+    min-height: 200px;
 }
 
 .green-highlight {

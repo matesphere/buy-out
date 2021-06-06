@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 // import scrollTo from 'gatsby-plugin-smoothscroll'
+import Tick from '../../../../assets/tick.svg'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -41,7 +42,9 @@ const SwotLinks = ({ devOptions, completedSwots }) => (
                     <Link to={`/student/stage-3/swot?id=${id}`}>
                         {team_choice_name || display_name}
                     </Link>
-                    {completedSwots.includes(option) && <span> DONE</span>}
+                    {completedSwots.includes(option) && <span className="ml-2 side-icon">
+                                                    <Tick />
+                                                </span>}
                 </li>
             )
         )}

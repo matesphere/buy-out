@@ -36,7 +36,7 @@ const IndexPage = () => {
                     <div className="col-lg-8">
                         <h1 className="main-header">
                             <PinLogo />
-                            <span>The Quest</span>
+                            <span>Community Land Quest</span>
                         </h1>
                     </div>
                     <div className="col-lg-4">
@@ -62,12 +62,8 @@ const IndexPage = () => {
                         </div>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6">
-                            <a className="btn-outline-lg" href="/login">Tutor login</a>
-                        </div>
-
-                        <div className="col-lg-6">
-                            <a className="btn-outline-lg" href="/login">Student login</a>
+                        <div className="col-lg-12">
+                            <a className="btn-outline-lg" href="/login">Login</a>
                         </div>
                     </div>
                 </section>

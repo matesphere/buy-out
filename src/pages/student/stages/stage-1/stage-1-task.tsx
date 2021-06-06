@@ -84,7 +84,7 @@ const Stage1WorkPage = () => {
 
               <div className="side-grey">
                 <h3 className="task ticker mb-2">
-                  <span className="ticker-sheet ticker-complete">
+                  <span className="ticker-sheet ticker-feedback">
                     <HelpIcon />
                   </span>
                   <span className="sm-type-drum green-highlight">
