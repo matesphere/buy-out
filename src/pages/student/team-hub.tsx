@@ -142,26 +142,24 @@ const TeamInfoSection = ({
     image,
 }) => (
     <>
-        <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-            Your Team
-        </h1>
-
-        <div className="container side-grey">
-            <div className="row">
-                <div className="col-lg-8">
-                    <p className="sm-type-amp mt-4">
-                        Logged in as{' '}
-                        <span className="sm-type-lead--medium">{`${fullName}`}</span>
-                    </p>
-                    <h2 className="sm-type-drum sm-type-drum--medium">
+        <div className="container mt-4 side-grey">
+            <div className="row mb-2">
+                <div className="col-lg-6">
+                    <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium">
                         {teamName}
-                    </h2>
-                    <p className="sm-type-guitar mb-2 mt-4">Members</p>
-                    <ol
-                        style={{
-                            'list-style-type': 'none',
-                        }}
-                    >
+                    </h1>
+                </div>
+                <div className="col-lg-6 mt-2">
+                    <span className="sm-type-drum loggedin">
+                        Logged in as{' '}
+                        <span className="sm-type-drum--medium">{`${fullName}`}</span>
+                    </span>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-lg-4">
+                    <p className="sm-type-guitar sm-type-guitar--medium">Members:</p>
+                    <ul className="form-holder-border">
                         {students.map((student, i) => (
                             <li key={i}>
                                 <p className="sm-type-lead">
@@ -172,11 +170,13 @@ const TeamInfoSection = ({
                                 </p>
                             </li>
                         ))}
-                    </ol>
-                    <p className="sm-type-guitar mb-2 mt-4">
-                        Development options
+                    </ul>
+                </div>
+                <div className="col-lg-5">
+                    <p className="sm-type-guitar sm-type-guitar--medium">
+                            Development options:
                     </p>
-                    <ol>
+                    <ol className="form-holder-border">
                         {devOptions.map(({ development_option: opt }, i) => (
                             <li key={i}>
                                 <p className="sm-type-lead">
@@ -186,8 +186,14 @@ const TeamInfoSection = ({
                         ))}
                     </ol>
                 </div>
-                <div className="col-lg-4">
-                    <GatsbyImage alt="" image={image} />
+
+                <div className="col-lg-3">
+                    <p className="sm-type-guitar sm-type-guitar--medium">
+                        Team logo:
+                    </p>
+                    <div className="form-holder-border">
+                        <GatsbyImage alt="" image={image} />
+                    </div>
                 </div>
             </div>
         </div>
@@ -291,7 +297,7 @@ const TeamHub = () => {
                 <Header headerText="Team Hub" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                             <TeamInfoSection
                                 fullName={fullName}
                                 teamName={teamName}
@@ -301,21 +307,6 @@ const TeamHub = () => {
                                     data.image1.childImageSharp.gatsbyImageData
                                 }
                             />
-                        </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2 mt-4">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Click on the quests below that have been
-                                    unlocked. Check your progress and view your
-                                    work.
-                                </p>
-                            </div>
                         </div>
                     </div>
                     <div className="row">
