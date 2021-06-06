@@ -2,15 +2,25 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
+import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
+
+import { useAuthQuery } from '../../../../utils/auth-utils'
+
+import { STAGE_QUERY } from '../../../../gql/queries'
+import {
+    StageQuery,
+    StageQueryVariables,
+} from '../../../../gql/types/StageQuery'
+
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
-import { GatsbyImage } from 'gatsby-plugin-image'
-
 
 const Stage2Page = () => {
     const data = useStaticQuery(graphql`
@@ -22,6 +32,24 @@ const Stage2Page = () => {
             }
         }
     `)
+
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<StageQuery, StageQueryVariables>(
+        STAGE_QUERY,
+        {
+            variables: { stage_id: 2 },
+        },
+        'teamId'
+    )
+
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
+
+    const { title: stageTitle } = pageData.stage_by_pk
+
     return (
         <>
             <Helmet>
@@ -29,7 +57,7 @@ const Stage2Page = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 2 - Consult</title>
+                <title>Stage 2 - {stageTitle}</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Stage 2" />
@@ -37,7 +65,7 @@ const Stage2Page = () => {
                     <div className="row">
                         <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Consult
+                                {stageTitle}
                             </h2>
 
                             <p className="sm-type-lead mb-3">
@@ -93,13 +121,13 @@ const Stage2Page = () => {
                                 See what the community and experts have to say.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
-                                Consult with the people about
-                                development options that could help the
-                                community.
+                                Consult with the people about development
+                                options that could help the community.
                             </p>
                             <p className="sm-type-bigamp mb-3">
                                 <Link to="/student/stage-2/community">
-                                    See what the experts and the community have to say.
+                                    See what the experts and the community have
+                                    to say.
                                 </Link>
                             </p>
                             <div className="side-grey">

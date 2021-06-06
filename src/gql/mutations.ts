@@ -121,10 +121,38 @@ export const UNLOCK_STAGE = gql`
     }
 `
 
+export const SUBMIT_FEEDBACK = gql`
+    mutation SubmitFeedback($docId: uuid!, $feedbackData: jsonb!) {
+        update_document_by_pk(
+            pk_columns: { id: $docId }
+            _set: { feedback: $feedbackData, status: submitted }
+        ) {
+            id
+            status
+        }
+    }
+`
+
+//? should we create new doc_data copy from failed??
+export const MARK_FAILED = gql`
+    mutation MarkFailed($docId: uuid) {
+        update_document(
+            _set: { status: draft }
+            where: { id: { _eq: $docId } }
+        ) {
+            returning {
+                id
+                feedback
+                status
+            }
+        }
+    }
+`
+
 export const MARK_PASSED = gql`
     mutation MarkPassed($docId: uuid, $stageProgressId: uuid) {
         update_document(
-            _set: { status: marked_passed, feedback: "nice job" }
+            _set: { status: marked_passed }
             where: { id: { _eq: $docId } }
         ) {
             returning {

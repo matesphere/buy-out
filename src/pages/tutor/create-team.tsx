@@ -212,7 +212,8 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                                                         name,
                                                         quest: {
                                                             data: {
-                                                                tutor_id: TUTOR_ID,
+                                                                tutor_id:
+                                                                    TUTOR_ID,
                                                             },
                                                         },
                                                     })
@@ -318,7 +319,7 @@ const TutorCreateTeamPage = () => {
             </Helmet>
 
             <main className="the-quest">
-                <LoginHeader headerText="New Quest" />
+                <LoginHeader headerText="New Quest" hideLinks={true} />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">

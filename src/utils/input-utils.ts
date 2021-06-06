@@ -1,18 +1,25 @@
 import { useState, useReducer, useEffect, Reducer } from 'react'
+import QueryString from 'query-string'
+
+import { useAuthQuery, useAuthMutation } from './auth-utils'
+
 import {
     SAVE_WORK_INITIAL,
     SAVE_WORK,
     SUBMIT_WORK_INITIAL,
     SUBMIT_WORK,
+    SUBMIT_FEEDBACK,
 } from '../gql/mutations'
 
-import { useAuthQuery, useAuthMutation } from './auth-utils'
-
-import { DOCUMENT_QUERY } from '../gql/queries'
+import { DOCUMENT_QUERY, TUTOR_DOCUMENT_QUERY } from '../gql/queries'
 import {
     DocumentQuery,
     DocumentQueryVariables,
 } from '../gql/types/DocumentQuery'
+import {
+    TutorDocumentQuery,
+    TutorDocumentQueryVariables,
+} from '../gql/types/TutorDocumentQuery'
 
 export const useCheckboxState = <T>(
     initialSelected: Array<T>,
@@ -81,6 +88,7 @@ export const useWorkState = <InputState, Action>(
         {} as InputState
     )
     const [docSubmitted, setDocSubmitted] = useState(false)
+    const [docFeedback, setDocFeedback] = useState('') //? do we need to do this with useState?
 
     const [saveWorkInitial, saveWorkInitialResponse] =
         useAuthMutation(SAVE_WORK_INITIAL)
@@ -145,6 +153,10 @@ export const useWorkState = <InputState, Action>(
                 if (doc.status === 'submitted') {
                     setDocSubmitted(true)
                 }
+
+                if (doc.feedback) {
+                    setDocFeedback(doc.feedback)
+                }
             }
         }
     }, [loading, pageData])
@@ -197,5 +209,86 @@ export const useWorkState = <InputState, Action>(
         saveWorkObj,
         submitWorkObj,
         docSubmitted,
+        docFeedback,
+    }
+}
+
+export const useFeedbackState = <InputState, Action>(
+    // stageId: number,
+    feedbackReducer: Reducer<InputState, Action>,
+    searchString: string,
+    includeDevOptions?: boolean
+) => {
+    const { id: stageProgressId } = QueryString.parse(searchString)
+
+    const [docId, setDocId] = useState('')
+    const [feedbackState, feedbackDispatch] = useReducer<
+        Reducer<InputState, Action>
+    >(feedbackReducer, {} as InputState)
+
+    // const [saveWorkInitial, saveWorkInitialResponse] =
+    //     useAuthMutation(SAVE_WORK_INITIAL)
+    // const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
+
+    const [submitFeedback, submitFeedbackResponse] = useAuthMutation(
+        SUBMIT_FEEDBACK,
+        {
+            query: TUTOR_DOCUMENT_QUERY,
+            variables: {
+                stage_progress_id: stageProgressId,
+                includeDevOptions: !!includeDevOptions,
+            },
+        }
+    )
+
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<TutorDocumentQuery, TutorDocumentQueryVariables>(
+        TUTOR_DOCUMENT_QUERY,
+        {
+            variables: {
+                stage_progress_id: stageProgressId,
+                includeDevOptions: !!includeDevOptions,
+            },
+        },
+        'userId'
+    )
+
+    useEffect(() => {
+        if (!loading) {
+            const doc = pageData?.stage_progress_by_pk?.documents[0]
+
+            if (doc) {
+                const { id, feedback } = doc
+
+                setDocId(id)
+
+                // TODO: how do we convince TS that this is OK? i.e. where should Action live; load is called in here, update called in page
+                feedbackDispatch({
+                    type: ActionType.LoadAction,
+                    payload: feedback,
+                })
+            }
+        }
+    }, [loading, pageData])
+
+    const submitFeedbackObj = {
+        call: () => {
+            submitFeedback({
+                variables: { docId, feedbackData: feedbackState },
+            })
+        },
+        response: submitFeedbackResponse,
+    }
+
+    return {
+        loading,
+        error,
+        pageData,
+        feedbackState,
+        feedbackDispatch,
+        submitFeedbackObj,
     }
 }

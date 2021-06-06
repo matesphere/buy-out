@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import Slider from 'react-slick'
+import { slickSettings } from '../../../../utils/slicksettings'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -14,8 +16,7 @@ import { TEAM_QUERY } from '../../../../gql/queries'
 import { SET_TEAM_POSITIONS } from '../../../../gql/mutations'
 import { TeamQuery, TeamQueryVariables } from '../../../../gql/types/TeamQuery'
 // import { SetTeamPositions, SetTeamPositionsVariables } from '../../../../gql/types/SetTeamPositions'
-import Slider from 'react-slick'
-import { slickSettings } from '../../../../utils/slicksettings'
+
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 

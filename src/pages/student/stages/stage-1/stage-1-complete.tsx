@@ -48,8 +48,10 @@ const Stage1CompletePage = () => {
     if (loading) return <Loading />
     if (error) return <Error error={error} />
 
-    const docFeedback =
+    const { feedback: docFeedback } =
         pageData.team_by_pk.stage_progresses[0].documents[0].feedback
+
+    const { title: stageTitle } = pageData.stage_by_pk
 
     return (
         <>
@@ -58,7 +60,7 @@ const Stage1CompletePage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 1 - Research - Complete</title>
+                <title>Stage 1 - {stageTitle} - Complete</title>
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">
@@ -67,7 +69,7 @@ const Stage1CompletePage = () => {
                     <div className="row">
                         <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Research
+                                {stageTitle}
                             </h2>
                             <p className="sm-type-guitar mb-4">
                                 Here are a series of questions to help you to do
@@ -95,15 +97,14 @@ const Stage1CompletePage = () => {
                                 </h3>
                                 <div className="form-holder-border">
                                     <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
-                                        Tutor feedback.
+                                        Tutor feedback
                                     </h4>
-                                    <p className="sm-type-lead mb-3 italic">
-                                        {docFeedback}
-                                        This looks like a great choice, dont
-                                        forget to work together to achieve your
-                                        goals. You cannot do this without
-                                        everyone doing their bit.
-                                    </p>
+                                    <p
+                                        className="sm-type-lead mb-3 italic"
+                                        dangerouslySetInnerHTML={{
+                                            __html: docFeedback,
+                                        }}
+                                    />
                                     <h4 className="sm-type-drum sm-type-drum--medium">
                                         Questions
                                     </h4>

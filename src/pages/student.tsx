@@ -6,8 +6,8 @@ import TeamHub from './student/team-hub'
 import Stage1Landing from './student/stages/stage-1/stage-1-landing'
 import Stage1Task from './student/stages/stage-1/stage-1-task'
 import Stage1Complete from './student/stages/stage-1/stage-1-complete'
-import RolesPage from './student/stages/stage-2/the-roles'
-import Stage2Page from './student/stages/stage-2/stage-2'
+import Stage2Landing from './student/stages/stage-2/stage-2-landing'
+import Stage2Task from './student/stages/stage-2/stage-2-task'
 import Stage2PageComplete from './student/stages/stage-2/stage-2-complete'
 import AboutGlenclasAreaPage from './student/stages/stage-2/about-glenclas-area'
 import CommunityHousingPage from './student/stages/stage-2/community'
@@ -70,20 +70,21 @@ const Routes = () => {
                 component={Stage1Complete}
             />
 
-            <LoggedInRoute path="/stage-2" component={Stage2Page} />
-            <LoggedInRoute path="/stage-2/the-roles" component={RolesPage} />
+            <LoggedInRoute path="/stage-2" component={Stage2Landing} />
             <LoggedInRoute
                 path="/stage-2/about-glenclas-area"
                 component={AboutGlenclasAreaPage}
             />
             <LoggedInRoute
-                path="/stage-2-complete"
-                component={Stage2PageComplete}
-            />
-            <LoggedInRoute
                 path="/stage-2/community"
                 component={CommunityHousingPage}
             />
+            <LoggedInRoute path="/stage-2/task" component={Stage2Task} />
+            <LoggedInRoute
+                path="/stage-2-complete"
+                component={Stage2PageComplete}
+            />
+
             <LoggedInRoute path="/stage-3" component={Stage3Landing} />
             <LoggedInRoute path="/stage-3/task" component={Stage3Task} />
             <LoggedInRoute

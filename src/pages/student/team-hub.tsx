@@ -46,6 +46,7 @@ const TEAM_HUB_QUERY = gql`
                         status
                     }
                     students {
+                        position
                         user {
                             full_name
                         }
@@ -156,7 +157,7 @@ const TeamHub = () => {
         // subscribeToMore,
     } = useAuthQuery<TeamHubQuery, TeamHubQueryVariables>(
         TEAM_HUB_QUERY,
-        {},
+        { fetchPolicy: 'network-only' },
         'userId'
     )
 

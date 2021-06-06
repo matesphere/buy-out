@@ -1,17 +1,26 @@
-import React, { createContext, useState, useContext } from 'react'
-import { Router } from '@reach/router'
+import React, { createContext, useState, useContext, FC } from 'react'
+import { Router, RouteComponentProps } from '@reach/router'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import Hub from './tutor/hub'
 import CurrentQuest from './tutor/current-quest'
 import AddStudents from './tutor/add-students'
 import CreateTeam from './tutor/create-team'
+import Stage1Task from './tutor/stages/stage-1/tutor-stage-1-task'
 
 import { StudentType } from '../gql/types'
 
 import { UserStateContext } from '../utils/user-state'
 
-const LoggedInRoute = ({ component: Component, navigate, ...rest }) => {
+type LoggedInRouteProps = RouteComponentProps & {
+    component: () => string | JSX.Element
+}
+
+const LoggedInRoute: FC<LoggedInRouteProps> = ({
+    component: Component,
+    navigate,
+    ...rest
+}) => {
     const { isSignedIn, userInfo } = useContext(UserStateContext)
 
     if (isSignedIn) {
@@ -45,6 +54,11 @@ const Routes = () => {
                 <LoggedInRoute path="/current-quest" component={CurrentQuest} />
                 <LoggedInRoute path="/add-students" component={AddStudents} />
                 <LoggedInRoute path="/create-team" component={CreateTeam} />
+
+                <LoggedInRoute
+                    path="/stage-1/submitted"
+                    component={Stage1Task}
+                />
             </Router>
         </NewQuestContext.Provider>
     )

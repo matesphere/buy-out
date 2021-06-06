@@ -81,16 +81,16 @@ const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
                             stageProgressId={stageProgress.id}
                         />
                     )
-                case 'failed':
+                case 'marked_failed':
                     return (
                         <FailedStageStatus
                             documents={stageProgress.documents}
                         />
                     )
-                case 'completed':
+                case 'marked_passed':
                     return (
                         <CompletedStageStatus
-                            documents={stageProgress.documents}
+                            stageProgressId={stageProgress.id}
                         />
                     )
                 default:
@@ -139,7 +139,7 @@ const TutorCurrentQuestPage = () => {
     const { loading, error, data } = useAuthQuery<
         TutorCurrentQuestQuery,
         TutorCurrentQuestQueryVariables
-    >(TUTOR_CURRENT_QUEST_QUERY, {}, 'userId')
+    >(TUTOR_CURRENT_QUEST_QUERY, { fetchPolicy: 'network-only' }, 'userId')
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />
@@ -195,7 +195,7 @@ const TutorCurrentQuestPage = () => {
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="notes">
-                <LoginHeader headerText="Current Quest" />
+                <LoginHeader headerText="Current Quests" />
                 <section className="container" id="main">
                     <Tabs>
                         <TabList>

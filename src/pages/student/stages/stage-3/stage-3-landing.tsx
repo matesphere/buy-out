@@ -21,7 +21,6 @@ import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
 
-// TODO turn DONE into an icon
 const SwotLinks = ({ devOptions, completedSwots }) => (
     <ol>
         {devOptions.map(
@@ -42,9 +41,11 @@ const SwotLinks = ({ devOptions, completedSwots }) => (
                     <Link to={`/student/stage-3/swot?id=${id}`}>
                         {team_choice_name || display_name}
                     </Link>
-                    {completedSwots.includes(option) && <span className="ml-2 side-icon">
-                                                    <Tick />
-                                                </span>}
+                    {completedSwots.includes(option) && (
+                        <span className="ml-2 side-icon">
+                            <Tick />
+                        </span>
+                    )}
                 </li>
             )
         )}

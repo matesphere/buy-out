@@ -1,53 +1,32 @@
-import React, { useState, FC, useContext } from 'react'
+import React, { useState, FC } from 'react'
 import { MutationResult } from '@apollo/client'
 
-import SaveIcon from '../../../assets/save-icon.svg'
-
-interface SaveSubmitSectionProps {
-    saveWorkObj?: {
-        call: () => Promise<any>
-        response: MutationResult<any>
-    }
-    submitWorkObj: {
+interface SubmitFeedbackSectionProps {
+    submitFeedbackObj: {
         call: () => Promise<any>
         response: MutationResult<any>
     }
     disableSubmit: boolean
-    docSubmitted: boolean
     showModal: boolean
 }
 
 // TODO bring in confirm modals
-export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
-    saveWorkObj,
-    submitWorkObj,
+export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
+    submitFeedbackObj,
     disableSubmit,
-    docSubmitted,
 }) => {
     const [showModal, setShowModal] = useState(true)
 
     return (
         <>
-            {!submitWorkObj.response.data && !docSubmitted && (
-                <>
-                    {!!saveWorkObj && (
-                        <button
-                            className="btn-outline-lg mt-4 btn-icon"
-                            onClick={saveWorkObj.call}
-                        >
-                            <SaveIcon />
-                            Save Work
-                        </button>
-                    )}
-
-                    <button
-                        className="btn-solid-lg mt-4"
-                        disabled={disableSubmit}
-                        onClick={submitWorkObj.call}
-                    >
-                        Submit Work
-                    </button>
-                </>
+            {!submitFeedbackObj.response.data && (
+                <button
+                    className="btn-solid-lg mt-4"
+                    disabled={disableSubmit}
+                    onClick={submitFeedbackObj.call}
+                >
+                    Submit Feedback
+                </button>
             )}
 
             {/*{saveWorkObj.response.data && (*/}
@@ -69,7 +48,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
             {/*    </>*/}
             {/*)}*/}
 
-            {submitWorkObj.response.data && (
+            {submitFeedbackObj.response.data && (
                 <>
                     {showModal && (
                         <div className="modal-window">
@@ -82,7 +61,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                                     Close
                                 </button>
                                 <p className="sm-type-drum">
-                                    Work submitted - good luck!
+                                    Feedback submitted
                                 </p>
                             </div>
                         </div>

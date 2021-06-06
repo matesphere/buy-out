@@ -1,12 +1,20 @@
-import React from 'react'
+import React, { FC } from 'react'
 import '../../scss/index.scss'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
+import Nav from './_tutor-nav'
+
 import Squiggle from '../../assets/squiggle.svg'
 import PinLogo from '../../assets/pin-logo.svg'
 
-const LoginHeader = ({ headerText }) => {
+const LoginHeader = ({
+    headerText,
+    hideLinks,
+}: {
+    headerText: string
+    hideLinks?: boolean
+}) => {
     const data = useStaticQuery(graphql`
         query {
             file(relativePath: { eq: "logo.jpg" }) {
@@ -23,6 +31,7 @@ const LoginHeader = ({ headerText }) => {
             </a>
             <section className="container top-section">
                 <Squiggle className="squiggle" />
+                {!hideLinks && <Nav />}
                 <div className="row">
                     <div className="col-lg-8">
                         <h1 className="main-header mt-4">
