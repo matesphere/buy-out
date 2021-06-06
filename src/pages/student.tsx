@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
-import { Router } from '@reach/router'
+import React, { useContext, FC } from 'react'
+import { Router, RouteComponentProps } from '@reach/router'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import TeamHub from './student/team-hub'
@@ -36,7 +36,15 @@ import Stage8Page from './student/stages/stage-8/stage-8'
 
 import { UserStateContext } from '../utils/user-state'
 
-const LoggedInRoute = ({ component: Component, navigate, ...rest }) => {
+type LoggedInRouteProps = RouteComponentProps & {
+    component: () => string | JSX.Element
+}
+
+const LoggedInRoute: FC<LoggedInRouteProps> = ({
+    component: Component,
+    navigate,
+    ...rest
+}) => {
     const { isSignedIn, userInfo } = useContext(UserStateContext)
 
     if (isSignedIn) {

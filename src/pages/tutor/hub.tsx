@@ -1,16 +1,22 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
+import { Loading } from '../../components/common/Loading'
+import { Error } from '../../components/common/Error'
+
 import { useAuthQuery } from '../../utils/auth-utils'
+
+import {
+    TutorHubQuery,
+    TutorHubQueryVariables,
+} from '../../gql/types/TutorHubQuery'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import '../../scss/index.scss'
-
-// const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
 
 const TUTOR_HUB_QUERY = gql`
     query TutorHubQuery($user_id: uuid!) {
@@ -28,26 +34,13 @@ const TUTOR_HUB_QUERY = gql`
 `
 
 const TutorHub = () => {
-    const { loading, error, data } = useAuthQuery(
-        TUTOR_HUB_QUERY,
-        null,
-        'userId'
-    )
+    const { loading, error, data } = useAuthQuery<
+        TutorHubQuery,
+        TutorHubQueryVariables
+    >(TUTOR_HUB_QUERY, null, 'userId')
 
-    if (loading)
-        return (
-            <section className="container" id="main">
-                <div className="row">
-                    <div className="col-lg-12 text-align-center">
-                        <div className="loader"></div>
-                        <p className="sm-type-drum sm-type-drum--medium">
-                            Loading...
-                        </p>
-                    </div>
-                </div>
-            </section>
-        )
-    if (error) return `Error! ${error.message}`
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
 
     const {
         user_by_pk: {

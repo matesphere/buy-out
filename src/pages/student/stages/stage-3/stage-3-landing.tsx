@@ -8,6 +8,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
 import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
 
 import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
@@ -64,7 +65,7 @@ const Stage3LandingPage = () => {
     >(3, stage3SwotReducer, true)
 
     if (loading) return <Loading />
-    if (error) return `Error! ${error.message}`
+    if (error) return <Error error={error} />
 
     const { team_development_options: devOptions } = pageData.team_by_pk
     const doc =

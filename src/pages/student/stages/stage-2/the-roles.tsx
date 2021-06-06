@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
 import CheckList from '../../../../components/common/checklist'
 import Helpful from '../../../../components/common/helpful'
 
@@ -40,7 +41,7 @@ const RolesPage = () => {
     >(TEAM_QUERY, {}, 'teamId')
 
     if (loading) return <Loading />
-    if (error) return `Error! ${error.message}`
+    if (error) return <Error error={error} />
 
     return (
         <>
@@ -84,7 +85,7 @@ const RolesPage = () => {
                             ))}
 
                             <Slider {...slickSettings}>
-                                <div  className="side-grey">
+                                <div className="side-grey">
                                     <div className="react-tabs--information--inner">
                                         <h2 className="sm-type-guitar mb-2">
                                             Chair
@@ -109,7 +110,7 @@ const RolesPage = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div  className="side-grey">
+                                <div className="side-grey">
                                     <div className="react-tabs--information--inner">
                                         <h2 className="sm-type-guitar mb-2">
                                             Vice-chair
@@ -131,7 +132,7 @@ const RolesPage = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div  className="side-grey">
+                                <div className="side-grey">
                                     <div className="react-tabs--information--inner">
                                         <h2 className="sm-type-guitar mb-2">
                                             Secretary
@@ -152,7 +153,7 @@ const RolesPage = () => {
                                         </p>
                                     </div>
                                 </div>
-                                <div  className="side-grey">
+                                <div className="side-grey">
                                     <div className="react-tabs--information--inner">
                                         <h2 className="sm-type-guitar mb-2">
                                             Treasurer

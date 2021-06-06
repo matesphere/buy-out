@@ -1,7 +1,10 @@
 import React, { useContext } from 'react'
-import {graphql, Link, useStaticQuery} from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import { gql } from '@apollo/client'
 import { withAuthenticator } from '@aws-amplify/ui-react'
+
+import { Loading } from '../components/common/Loading'
+import { Error } from '../components/common/Error'
 
 import { useAuthQuery } from '../utils/auth-utils'
 import { UserStateContext } from '../utils/user-state'
@@ -33,8 +36,8 @@ const ChooseRoute = () => {
         LoggedInQueryVariables
     >(LOGGED_IN_QUERY, null, 'userId')
 
-    if (loading) return <div>...</div>
-    if (error) return <div>OK, so that didn't quite work.</div>
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
 
     const data1 = useStaticQuery(graphql`
         query {
@@ -86,7 +89,6 @@ const ChooseRoute = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 text-align-center">
                                 Hello, {data.user_by_pk.first_name}!
                             </h2>
-
                         </div>
                     </div>
                     <div className="row">
@@ -95,7 +97,14 @@ const ChooseRoute = () => {
                                 Let's get started shall we?
                             </p>
                             <p className="text-align-center">
-                                <Link to={role === 'tutor' ? '/tutor/hub' : '/student/team-hub'} className="btn-solid-reg">
+                                <Link
+                                    to={
+                                        role === 'tutor'
+                                            ? '/tutor/hub'
+                                            : '/student/team-hub'
+                                    }
+                                    className="btn-solid-reg"
+                                >
                                     Enter The Quest
                                 </Link>
                             </p>

@@ -2,14 +2,20 @@ import React, { useContext } from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Loading } from '../../components/common/Loading'
+import { Error } from '../../components/common/Error'
 
 import { UserStateContext } from '../../utils/user-state'
+import { useAuthQuery } from '../../utils/auth-utils'
 
-import { TeamHubQuery } from '../../gql/types/TeamHubQuery'
+import {
+    TeamHubQuery,
+    TeamHubQueryVariables,
+} from '../../gql/types/TeamHubQuery'
 
 import Lock from '../../assets/lock.svg'
 import Ticktrbl from '../../assets/tick-trbl.svg'
@@ -148,19 +154,13 @@ const TeamHub = () => {
         error,
         data: pageData,
         // subscribeToMore,
-    } = useQuery<TeamHubQuery>(TEAM_HUB_QUERY, {
-        variables: {
-            user_id: userId,
-        },
-        context: {
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        },
-    })
+    } = useAuthQuery<TeamHubQuery, TeamHubQueryVariables>(
+        TEAM_HUB_QUERY,
+        {},
+        'userId'
+    )
 
     // TODO: sort out passing dynamic auth token to subscription: https://github.com/apollographql/apollo-server/issues/1505 https://github.com/apollographql/apollo-link/issues/197
-
     // subscribeToMore({
     //     document: TEAM_HUB_SUB,
     //     variables: {
@@ -192,20 +192,8 @@ const TeamHub = () => {
     //     },
     // })
 
-    if (loading)
-        return (
-            <section className="container" id="main">
-                <div className="row">
-                    <div className="col-lg-12 text-align-center">
-                        <div className="loader"></div>
-                        <p className="sm-type-drum sm-type-drum--medium">
-                            Loading...
-                        </p>
-                    </div>
-                </div>
-            </section>
-        )
-    if (error) return `Error! ${error.message}`
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
 
     const {
         full_name: fullName,

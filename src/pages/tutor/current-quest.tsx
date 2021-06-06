@@ -5,6 +5,8 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
+import { Loading } from '../../components/common/Loading'
+import { Error } from '../../components/common/Error'
 import {
     LockedStageStatus,
     UnlockedStageStatus,
@@ -139,21 +141,8 @@ const TutorCurrentQuestPage = () => {
         TutorCurrentQuestQueryVariables
     >(TUTOR_CURRENT_QUEST_QUERY, {}, 'userId')
 
-    if (loading)
-        return (
-            <section className="container" id="main">
-                <div className="row">
-                    <div className="col-lg-12 text-align-center">
-                        <div className="loader"></div>
-                        <p className="sm-type-drum sm-type-drum--medium">
-                            Loading...
-                        </p>
-                    </div>
-                </div>
-            </section>
-        )
-
-    if (error) return `Error! ${error.message}`
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
 
     // subscribeToMore({
     //     document: TUTOR_CURRENT_QUEST_SUB,

@@ -7,6 +7,7 @@ import { useAuthQuery } from '../../../../utils/auth-utils'
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
 
 import { STAGE_QUERY } from '../../../../gql/queries'
 import {
@@ -21,10 +22,11 @@ import DogVideo from '../../../../assets/the-quest.mp4'
 import '../../../../scss/index.scss'
 
 const Stage1LandingPage = () => {
-    const { loading, error, data: pageData } = useAuthQuery<
-        StageQuery,
-        StageQueryVariables
-    >(
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<StageQuery, StageQueryVariables>(
         STAGE_QUERY,
         {
             variables: { stage_id: 1 },
@@ -33,7 +35,7 @@ const Stage1LandingPage = () => {
     )
 
     if (loading) return <Loading />
-    if (error) return `Error! ${error.message}`
+    if (error) return <Error error={error} />
 
     const { stage_progresses: stageProgresses } = pageData.team_by_pk
 

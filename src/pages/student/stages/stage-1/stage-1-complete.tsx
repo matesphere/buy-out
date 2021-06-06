@@ -6,6 +6,9 @@ import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
+import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
+
 import { eng } from '../../../_index.data'
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -42,20 +45,8 @@ const Stage1CompletePage = () => {
         'teamId'
     )
 
-    if (loading)
-        return (
-            <section className="container" id="main">
-                <div className="row">
-                    <div className="col-lg-12 text-align-center">
-                        <div className="loader"></div>
-                        <p className="sm-type-drum sm-type-drum--medium">
-                            Loading...
-                        </p>
-                    </div>
-                </div>
-            </section>
-        )
-    if (error) return `Error! ${error.message}`
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
 
     const docFeedback =
         pageData.team_by_pk.stage_progresses[0].documents[0].feedback

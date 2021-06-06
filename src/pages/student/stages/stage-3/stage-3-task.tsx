@@ -8,6 +8,7 @@ import { gql } from '@apollo/client'
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
 
 import { UserStateContext } from '../../../../utils/user-state'
 import { useCheckboxState } from '../../../../utils/input-utils'
@@ -123,7 +124,7 @@ const Stage3TaskPage = () => {
     )
 
     if (loading) return <Loading />
-    if (error) return `Error! ${error.message}`
+    if (error) return <Error error={error} />
 
     return (
         <>

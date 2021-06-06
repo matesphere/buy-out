@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
+import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
 import { TextEditor } from '../../../../components/common/TextEditor'
 import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
 
@@ -54,20 +56,8 @@ const Stage1WorkPage = () => {
         submitWorkObj,
     } = useWorkState<WorkState, Action>(1, stage1QuestionReducer)
 
-    if (loading)
-        return (
-            <section className="container" id="main">
-                <div className="row">
-                    <div className="col-lg-12 text-align-center">
-                        <div className="loader"></div>
-                        <p className="sm-type-drum sm-type-drum--medium">
-                            Loading...
-                        </p>
-                    </div>
-                </div>
-            </section>
-        )
-    if (error) return `Error! ${error.message}`
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
 
     return (
         <>
