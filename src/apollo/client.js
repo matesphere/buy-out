@@ -7,51 +7,52 @@ import {
     // from,
     split,
 } from '@apollo/client'
-import { WebSocketLink } from '@apollo/client/link/ws'
-import { getMainDefinition } from '@apollo/client/utilities'
-import ws from 'ws'
+// import { WebSocketLink } from '@apollo/client/link/ws'
+// import { getMainDefinition } from '@apollo/client/utilities'
+// import ws from 'ws'
 
-// const authMiddleware = new ApolloLink((operation, forward) => {
-//     operation.setContext({
-//         headers: {
-//             'x-hasura-access-key': 'community-land',
-//         },
-//     })
+// const wsForNode = typeof window === 'undefined' ? ws : null
 
-//     return forward(operation)
+// const wsLink = new WebSocketLink({
+//     uri: `wss://clq.beanmate.coffee/v1/graphql`,
+//     options: {
+//         reconnect: false,
+//         // connectionParams: {
+//         //     headers: {
+//         //         'x-hasura-access-key': 'community-land',
+//         //     },
+//         // },
+//     },
+//     webSocketImpl: wsForNode,
 // })
 
-const wsForNode = typeof window === 'undefined' ? ws : null
-
-const wsLink = new WebSocketLink({
-    uri: `wss://clq.beanmate.coffee/v1/graphql`,
-    options: {
-        reconnect: false,
-        // connectionParams: {
-        //     headers: {
-        //         'x-hasura-access-key': 'community-land',
-        //     },
-        // },
-    },
-    webSocketImpl: wsForNode,
-})
+// export const subClient = new ApolloClient({
+//     link: split(
+//         ({ query }) => {
+//             const { kind, operation } = getMainDefinition(query)
+//             return (
+//                 kind === 'OperationDefinition' && operation === 'subscription'
+//             )
+//         },
+//         wsLink,
+//         new HttpLink({
+//             uri: 'https://clq.beanmate.coffee/v1/graphql',
+//             fetch,
+//             fetchOptions: {
+//                 credentials: 'same-origin',
+//             },
+//         })
+//     ),
+//     cache: new InMemoryCache(),
+// })
 
 export const client = new ApolloClient({
-    link: split(
-        ({ query }) => {
-            const { kind, operation } = getMainDefinition(query)
-            return (
-                kind === 'OperationDefinition' && operation === 'subscription'
-            )
+    link: new HttpLink({
+        uri: 'https://clq.beanmate.coffee/v1/graphql',
+        fetch,
+        fetchOptions: {
+            credentials: 'same-origin',
         },
-        wsLink,
-        // from([
-        //     authMiddleware,
-        new HttpLink({
-            uri: 'https://clq.beanmate.coffee/v1/graphql',
-            fetch,
-        })
-        // ])
-    ),
+    }),
     cache: new InMemoryCache(),
 })

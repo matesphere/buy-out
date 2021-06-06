@@ -2,7 +2,6 @@ import React, { FC } from 'react'
 import { MutationResult } from '@apollo/client'
 
 import SaveIcon from '../../../assets/save-icon.svg'
-
 interface SaveSubmitSectionProps {
     saveWorkObj?: {
         call: (options?: any) => Promise<any>
@@ -15,6 +14,7 @@ interface SaveSubmitSectionProps {
     disableSubmit: boolean
 }
 
+// TODO bring in confirm modals
 export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
     saveWorkObj,
     submitWorkObj,

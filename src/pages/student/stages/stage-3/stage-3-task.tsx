@@ -34,7 +34,6 @@ const STAGE_3_TASK_QUERY = gql`
     }
 `
 
-// TODO: sort out checked/onChange, drop into page, disable submit until 5 selected
 const ChooseOptionsCheckboxes = ({
     devOptions,
     selectedOptions,
@@ -45,7 +44,7 @@ const ChooseOptionsCheckboxes = ({
     <>
         {devOptions.map(({ id, display_name }, i) =>
             id === 10 ? (
-                <>
+                <div key={i}>
                     <p className="sm-type-lead sm-type-lead--medium mt-4">
                         Or choose your own option - check the box and enter your
                         option name here!
@@ -64,7 +63,7 @@ const ChooseOptionsCheckboxes = ({
                     </div>
                     <div className="mb-4">
                         <label className="form-label sm-type-amp">
-                            Team Choice
+                            Development option name
                         </label>
                         <input
                             type="text"
@@ -75,7 +74,7 @@ const ChooseOptionsCheckboxes = ({
                             }
                         />
                     </div>
-                </>
+                </div>
             ) : (
                 <div key={i} className="multiple-choice">
                     <input
@@ -113,7 +112,7 @@ const Stage3TaskPage = () => {
         loading,
         error,
         data: pageData,
-    } = useAuthQuery<Stage3TaskQuery, null>(STAGE_3_TASK_QUERY, {})
+    } = useAuthQuery<Stage3TaskQuery, null>(STAGE_3_TASK_QUERY, {}, 'userId')
 
     const [teamChoiceName, setTeamChoiceName] = useState('')
     const [selectedOptions, toggleValue, allowedNumberSelected] =
@@ -599,8 +598,17 @@ const Stage3TaskPage = () => {
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        You have seen the map and the detailed
-                                        information on each option.
+                                        Check the map and read through the
+                                        detailed information on each option.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="side-grey">
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">
+                                        Based on what you've read, choose 5 of
+                                        the options to investigate further.
                                     </p>
                                 </div>
                             </div>

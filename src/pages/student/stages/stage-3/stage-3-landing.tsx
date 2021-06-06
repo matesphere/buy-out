@@ -4,7 +4,6 @@ import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 // import scrollTo from 'gatsby-plugin-smoothscroll'
-// import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -12,44 +11,13 @@ import { Loading } from '../../../../components/common/Loading'
 import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
 
 import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
-// import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
-import { useWorkState, ActionType } from '../../../../utils/input-utils'
-
-// import {
-//     Stage3Query,
-//     Stage3QueryVariables,
-// } from '../../../../gql/types/Stage3Query'
+import { useWorkState } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-// import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
-
-// export const STAGE_3_QUERY = gql`
-//     query Stage3Query($team_id: uuid!, $stage_id: Int) {
-//         team_by_pk(id: $team_id) {
-//             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
-//                 id
-//                 stage_id
-//                 status
-//                 documents(where: { status: { _eq: draft } }) {
-//                     id
-//                     doc_data
-//                 }
-//             }
-//             team_development_options {
-//                 id
-//                 team_choice_name
-//                 development_option {
-//                     display_name
-//                     option
-//                 }
-//             }
-//         }
-//     }
-// `
 
 // TODO turn DONE into an icon
 const SwotLinks = ({ devOptions, completedSwots }) => (
@@ -94,15 +62,6 @@ const Stage3LandingPage = () => {
         WorkState,
         Action
     >(3, stage3SwotReducer, true)
-
-    // const { data, loading, error } = useAuthQuery<
-    //     Stage3Query,
-    //     Stage3QueryVariables
-    // >(
-    //     STAGE_3_QUERY,
-    //     { variables: { stage_id: 3 }, fetchPolicy: 'no-cache' },
-    //     'teamId'
-    // )
 
     if (loading) return <Loading />
     if (error) return `Error! ${error.message}`

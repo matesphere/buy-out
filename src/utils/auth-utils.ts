@@ -4,6 +4,7 @@ import {
     useMutation,
     DocumentNode,
     QueryHookOptions,
+    BaseMutationOptions,
 } from '@apollo/client'
 import axios from 'axios'
 
@@ -52,14 +53,14 @@ export const addStudentToTeam =
 
 export const useAuthQuery = <TData, TVariables>(
     query: DocumentNode,
-    options: QueryHookOptions,
+    options: QueryHookOptions<TData, TVariables>,
     idRequired?: 'userId' | 'teamId'
 ) => {
     const {
         userInfo: { userId, teamId, token },
     } = useContext(UserStateContext)
 
-    let variables = options?.variables || {}
+    let variables = options?.variables || null
 
     if (idRequired === 'userId') {
         variables = { ...variables, user_id: userId }
@@ -82,16 +83,57 @@ export const useAuthQuery = <TData, TVariables>(
     return { ...queryProps }
 }
 
-export const useAuthMutation = (query) => {
+export const useAuthMutation = <TData, TVariables>(
+    query: DocumentNode,
+    // options?: BaseMutationOptions<TData, TVariables>,
+    refetchObj?: {
+        query: DocumentNode
+        variables: any
+        idRequired: 'userId' | 'teamId'
+    }
+) => {
     const {
-        userInfo: { token },
+        userInfo: { token, userId, teamId },
     } = useContext(UserStateContext)
 
-    const [mutation, mutationResponse] = useMutation(query, {
+    let mutationOptions: BaseMutationOptions<TData, TVariables> = {
+        // ...options,
         context: { headers: { Authorization: `Bearer ${token}` } },
-    })
+    }
 
-    return [mutation, mutationResponse] as const
+    if (refetchObj) {
+        let refetchVars = {
+            ...refetchObj.variables,
+        }
+
+        if (refetchObj.idRequired === 'userId') {
+            refetchVars = { ...refetchVars, user_id: userId }
+        }
+
+        if (refetchObj.idRequired === 'teamId') {
+            refetchVars = { ...refetchVars, team_id: teamId }
+        }
+
+        const refetch = {
+            query: refetchObj.query,
+            variables: refetchVars,
+            context: { headers: { Authorization: `Bearer ${token}` } },
+        }
+
+        mutationOptions = {
+            ...mutationOptions,
+            refetchQueries: [refetch],
+        }
+    }
+
+    const [mutation, mutationResponse] = useMutation<TData, TVariables>(query)
+
+    const callMutation = async (vars) => {
+        console.log({ ...mutationOptions, ...vars })
+        mutation({ ...mutationOptions, ...vars })
+    }
+
+    return [callMutation, mutationResponse] as const
 }
 
 export const mergeIdsIntoStudents = (

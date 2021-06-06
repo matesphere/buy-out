@@ -1,5 +1,7 @@
 import { gql } from '@apollo/client'
 
+// student
+
 export const STAGE_QUERY = gql`
     query StageQuery($team_id: uuid!, $stage_id: Int) {
         team_by_pk(id: $team_id) {
@@ -78,6 +80,50 @@ export const TEAM_QUERY = gql`
                     full_name
                 }
             }
+        }
+    }
+`
+
+// tutor
+
+export const TUTOR_CURRENT_QUEST_QUERY = gql`
+    query TutorCurrentQuestQuery($user_id: uuid!) {
+        user_by_pk(id: $user_id) {
+            full_name
+            username
+            email
+            tutor {
+                school {
+                    name
+                }
+                quests(where: { status: { _eq: "active" } }) {
+                    teams {
+                        id
+                        name
+                        students {
+                            id
+                            user {
+                                full_name
+                            }
+                        }
+                        stage_progresses {
+                            id
+                            team_id
+                            stage_id
+                            status
+                            documents {
+                                id
+                                status
+                                feedback
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        stage {
+            id
+            title
         }
     }
 `

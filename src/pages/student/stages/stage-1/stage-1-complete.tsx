@@ -18,8 +18,8 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
-import {TextEditor} from "../../../../components/common/TextEditor";
-import {ActionType} from "../../../../utils/input-utils";
+import { TextEditor } from '../../../../components/common/TextEditor'
+import { ActionType } from '../../../../utils/input-utils'
 
 const Stage1CompletePage = () => {
     const data = useStaticQuery(graphql`
@@ -32,10 +32,15 @@ const Stage1CompletePage = () => {
         }
     `)
 
-    const { loading, error, data: pageData } = useAuthQuery<
-        DocumentCompleteQuery,
-        DocumentCompleteQueryVariables
-    >(DOCUMENT_COMPLETE_QUERY, { variables: { stageId: 1 } }, 'teamId')
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<DocumentCompleteQuery, DocumentCompleteQueryVariables>(
+        DOCUMENT_COMPLETE_QUERY,
+        { variables: { stage_id: 1 } },
+        'teamId'
+    )
 
     if (loading)
         return (
@@ -98,12 +103,15 @@ const Stage1CompletePage = () => {
                                     </span>
                                 </h3>
                                 <div className="form-holder-border">
-                                    <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">Tutor feedback.</h4>
+                                    <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
+                                        Tutor feedback.
+                                    </h4>
                                     <p className="sm-type-lead mb-3 italic">
                                         {docFeedback}
-                                        This looks like a great choice, dont forget to work together
-                                        to achieve your goals. You cannot do this without everyone
-                                        doing their bit.
+                                        This looks like a great choice, dont
+                                        forget to work together to achieve your
+                                        goals. You cannot do this without
+                                        everyone doing their bit.
                                     </p>
                                     <h4 className="sm-type-drum sm-type-drum--medium">
                                         Questions
