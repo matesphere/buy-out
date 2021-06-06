@@ -51,6 +51,7 @@ export const DOCUMENT_QUERY = gql`
     }
 `
 
+// TODO: change state to marked_passed for this!
 export const DOCUMENT_COMPLETE_QUERY = gql`
     query DocumentCompleteQuery($team_id: uuid!, $stage_id: Int) {
         team_by_pk(id: $team_id) {
@@ -58,9 +59,7 @@ export const DOCUMENT_COMPLETE_QUERY = gql`
                 id
                 stage_id
                 status
-                documents(
-                    where: { _or: [{ status: { _eq: marked_passed } }] }
-                ) {
+                documents(where: { _or: [{ status: { _eq: submitted } }] }) {
                     id
                     doc_data
                     feedback
