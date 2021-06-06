@@ -134,6 +134,66 @@ const StageButton = ({ id, title, status }) => (
     </div>
 )
 
+const TeamInfoSection = ({
+    fullName,
+    teamName,
+    students,
+    devOptions,
+    image,
+}) => (
+    <>
+        <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+            Your Team
+        </h1>
+
+        <div className="container side-grey">
+            <div className="row">
+                <div className="col-lg-8">
+                    <p className="sm-type-amp mt-4">
+                        Logged in as{' '}
+                        <span className="sm-type-lead--medium">{`${fullName}`}</span>
+                    </p>
+                    <h2 className="sm-type-drum sm-type-drum--medium">
+                        {teamName}
+                    </h2>
+                    <p className="sm-type-guitar mb-2 mt-4">Members</p>
+                    <ol
+                        style={{
+                            'list-style-type': 'none',
+                        }}
+                    >
+                        {students.map((student, i) => (
+                            <li key={i}>
+                                <p className="sm-type-lead">
+                                    <span>{student.user.full_name}</span>
+                                    <span>
+                                        <i>{student.position}</i>
+                                    </span>
+                                </p>
+                            </li>
+                        ))}
+                    </ol>
+                    <p className="sm-type-guitar mb-2 mt-4">
+                        Development options
+                    </p>
+                    <ol>
+                        {devOptions.map(({ development_option: opt }, i) => (
+                            <li key={i}>
+                                <p className="sm-type-lead">
+                                    <span>{opt.display_name}</span>
+                                </p>
+                            </li>
+                        ))}
+                    </ol>
+                </div>
+                <div className="col-lg-4">
+                    <GatsbyImage alt="" image={image} />
+                </div>
+            </div>
+        </div>
+    </>
+)
+
 const TeamHub = () => {
     const {
         userInfo: { userId, token },
@@ -203,6 +263,7 @@ const TeamHub = () => {
                 name: teamName,
                 stage_progresses: stageProgresses,
                 students,
+                team_development_options: devOptions,
             },
         },
     } = pageData.user_by_pk
@@ -231,41 +292,15 @@ const TeamHub = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <h1 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Your Team
-                            </h1>
-
-                            <div className="container side-grey">
-                                <div className="row">
-                                    <div className="col-lg-8">
-                                        <p className="sm-type-amp mt-4">
-                                            {' '}
-                                            Logged in as{' '}
-                                            <span className="sm-type-lead--medium">{`${fullName}`}</span>
-                                        </p>
-                                        <h2 className="sm-type-drum sm-type-drum--medium">
-                                            {teamName}
-                                        </h2>
-                                        <p className="sm-type-lead">
-                                            {students
-                                                .map(
-                                                    (student) =>
-                                                        student.user.full_name
-                                                )
-                                                .join(', ')}
-                                        </p>
-                                    </div>
-                                    <div className="col-lg-4">
-                                        <GatsbyImage
-                                            alt=""
-                                            image={
-                                                data.image1.childImageSharp
-                                                    .gatsbyImageData
-                                            }
-                                        />
-                                    </div>
-                                </div>
-                            </div>
+                            <TeamInfoSection
+                                fullName={fullName}
+                                teamName={teamName}
+                                students={students}
+                                devOptions={devOptions}
+                                image={
+                                    data.image1.childImageSharp.gatsbyImageData
+                                }
+                            />
                         </div>
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2 mt-4">
