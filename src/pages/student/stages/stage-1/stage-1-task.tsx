@@ -54,6 +54,7 @@ const Stage1WorkPage = () => {
         workDispatch,
         saveWorkObj,
         submitWorkObj,
+        docSubmitted,
     } = useWorkState<WorkState, Action>(1, stage1QuestionReducer)
 
     if (loading) return <Loading />
@@ -107,8 +108,7 @@ const Stage1WorkPage = () => {
                                                     {eng.description}
                                                 </p>
                                                 <div className="ck-textarea">
-                                                    {submitWorkObj.response
-                                                        .data ? (
+                                                    {docSubmitted ? (
                                                         <div
                                                             dangerouslySetInnerHTML={{
                                                                 __html: workState[
@@ -145,34 +145,8 @@ const Stage1WorkPage = () => {
                                         disableSubmit={
                                             Object.keys(workState).length < 12
                                         }
+                                        submitted={docSubmitted}
                                     />
-
-                                    {/* {!submitWorkObj.response.data && (
-                                        <>
-                                            <button
-                                                className="btn-outline-lg mt-4 btn-icon"
-                                                onClick={saveWorkObj.call}
-                                            >
-                                                <SaveIcon />
-                                                Save Work
-                                            </button>
-
-                                            <button
-                                                className="btn-solid-lg mt-4"
-                                                disabled={
-                                                    Object.keys(workState)
-                                                        .length < 12
-                                                }
-                                                onClick={submitWorkObj.call}
-                                            >
-                                                Submit Work
-                                            </button>
-                                        </>
-                                    )}
-
-                                    {submitWorkObj.response.data && (
-                                        <span>Work submitted - good luck!</span>
-                                    )} */}
                                 </div>
                             </div>
                         </div>

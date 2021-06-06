@@ -80,13 +80,30 @@ export const useWorkState = <InputState, Action>(
         workReducer,
         {} as InputState
     )
+    const [docSubmitted, setDocSubmitted] = useState(false)
 
     const [saveWorkInitial, saveWorkInitialResponse] =
         useAuthMutation(SAVE_WORK_INITIAL)
     const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
-    const [submitWorkInitial, submitWorkInitialResponse] =
-        useAuthMutation(SUBMIT_WORK_INITIAL)
-    const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK)
+    const [submitWorkInitial, submitWorkInitialResponse] = useAuthMutation(
+        SUBMIT_WORK_INITIAL,
+        {
+            query: DOCUMENT_QUERY,
+            variables: {
+                stage_id: stageId,
+                includeDevOptions: !!includeDevOptions,
+            },
+            idRequired: 'teamId',
+        }
+    )
+    const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK, {
+        query: DOCUMENT_QUERY,
+        variables: {
+            stage_id: stageId,
+            includeDevOptions: !!includeDevOptions,
+        },
+        idRequired: 'teamId',
+    })
 
     useEffect(() => {
         const { called, loading, data } = saveWorkInitialResponse
@@ -124,6 +141,10 @@ export const useWorkState = <InputState, Action>(
                     type: ActionType.LoadAction,
                     payload: doc_data,
                 })
+
+                if (doc.status === 'submitted') {
+                    setDocSubmitted(true)
+                }
             }
         }
     }, [loading, pageData])
@@ -149,17 +170,21 @@ export const useWorkState = <InputState, Action>(
 
     const submitWorkObj = !!docId
         ? {
-              call: () =>
+              call: () => {
+                  setDocSubmitted(true)
                   submitWork({
                       variables: { docId, docData: workState },
-                  }),
+                  })
+              },
               response: submitWorkResponse,
           }
         : {
-              call: () =>
+              call: () => {
+                  setDocSubmitted(true)
                   submitWorkInitial({
                       variables: { stageProgressId, docData: workState },
-                  }),
+                  })
+              },
               response: submitWorkInitialResponse,
           }
 
@@ -171,5 +196,6 @@ export const useWorkState = <InputState, Action>(
         workDispatch,
         saveWorkObj,
         submitWorkObj,
+        docSubmitted,
     }
 }

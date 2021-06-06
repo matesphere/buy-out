@@ -25,9 +25,17 @@ export const DOCUMENT_QUERY = gql`
                 id
                 stage_id
                 status
-                documents(where: { status: { _eq: draft } }) {
+                documents(
+                    where: {
+                        _or: [
+                            { status: { _eq: draft } }
+                            { status: { _eq: submitted } }
+                        ]
+                    }
+                ) {
                     id
                     doc_data
+                    status
                 }
             }
             team_development_options @include(if: $includeDevOptions) {
@@ -51,12 +59,7 @@ export const DOCUMENT_COMPLETE_QUERY = gql`
                 stage_id
                 status
                 documents(
-                    where: {
-                        _or: [
-                            { status: { _eq: submitted } }
-                            { status: { _eq: marked_passed } }
-                        ]
-                    }
+                    where: { _or: [{ status: { _eq: marked_passed } }] }
                 ) {
                     id
                     doc_data
