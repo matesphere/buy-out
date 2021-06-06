@@ -143,4 +143,19 @@
   text-align: center;
 }
 
+.indeximage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+  text-align:center;
+}
 
+.index-holder {
+  background-color: white;
+  position: relative;
+  border-radius: ($grid-unit * 2);
+  border: 4px solid $brand-green;
+}
