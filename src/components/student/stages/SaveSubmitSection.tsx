@@ -24,7 +24,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
     disableSubmit,
     docSubmitted,
 }) => {
-    const [showModal, setShowModal] = useState(true)
+    const [showModal, setShowModal] = useState(false)
 
     return (
         <>
@@ -43,12 +43,35 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                     <button
                         className="btn-solid-lg mt-4"
                         disabled={disableSubmit}
-                        onClick={submitWorkObj.call}
+                        onClick={() => setShowModal(true)}
                     >
                         Submit Work
                     </button>
                 </>
             )}
+
+            {showModal && (
+                <div className="modal-window">
+                    <div>
+                    <button
+                        onClick={() => setShowModal(false)}
+                        title="Close"
+                        className="modal-close"
+                        >
+                        Close
+                    </button>
+                        <p>Are you sure?</p>
+                        <button
+                            className="btn-solid-lg mt-4"
+                            disabled={disableSubmit}
+                            onClick={submitWorkObj.call}
+                        >
+                            Yes submit Work
+                        </button>
+                    </div>
+                </div>
+            )}
+
 
             {/*{saveWorkObj.response.data && (*/}
             {/*    <>*/}
@@ -71,22 +94,16 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
 
             {submitWorkObj.response.data && (
                 <>
-                    {showModal && (
-                        <div className="modal-window">
-                            <div>
-                                <button
-                                    onClick={() => setShowModal(false)}
-                                    title="Close"
-                                    className="modal-close"
-                                >
-                                    Close
-                                </button>
-                                <p className="sm-type-drum">
-                                    Work submitted - good luck!
-                                </p>
-                            </div>
-                        </div>
-                    )}
+                    <button
+                        onClick={() => setShowModal(false)}
+                        title="Close"
+                        className="modal-close"
+                    >
+                        Close
+                    </button>
+                    <p className="sm-type-drum">
+                        Work submitted - good luck!
+                    </p>
                 </>
             )}
         </>
