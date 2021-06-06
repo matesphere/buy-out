@@ -50,24 +50,24 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                 </>
             )}
 
-            {saveWorkObj.response.data && (
-                <>
-                    {showModal && (
-                        <div className="modal-window">
-                            <div>
-                                <button
-                                    onClick={() => setShowModal(false)}
-                                    title="Close"
-                                    className="modal-close"
-                                >
-                                    Close
-                                </button>
-                                <p className="sm-type-drum">Work saved.</p>
-                            </div>
-                        </div>
-                    )}
-                </>
-            )}
+            {/*{saveWorkObj.response.data && (*/}
+            {/*    <>*/}
+            {/*        {showModal && (*/}
+            {/*            <div className="modal-window">*/}
+            {/*                <div>*/}
+            {/*                    <button*/}
+            {/*                        onClick={() => setShowModal(false)}*/}
+            {/*                        title="Close"*/}
+            {/*                        className="modal-close"*/}
+            {/*                    >*/}
+            {/*                        Close*/}
+            {/*                    </button>*/}
+            {/*                    <p className="sm-type-drum">Work saved.</p>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*        )}*/}
+            {/*    </>*/}
+            {/*)}*/}
 
             {submitWorkObj.response.data && (
                 <>
