@@ -152,7 +152,11 @@ const TutorCurrentQuestPage = () => {
     const { loading, error, data } = useAuthQuery<
         TutorCurrentQuestQuery,
         TutorCurrentQuestQueryVariables
-    >(TUTOR_CURRENT_QUEST_QUERY, { fetchPolicy: 'network-only' }, 'userId')
+    >(
+        TUTOR_CURRENT_QUEST_QUERY,
+        { fetchPolicy: 'network-only', pollInterval: 2000 },
+        'userId'
+    )
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />

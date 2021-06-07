@@ -242,7 +242,7 @@ const TeamHub = () => {
         // subscribeToMore,
     } = useAuthQuery<TeamHubQuery, TeamHubQueryVariables>(
         TEAM_HUB_QUERY,
-        { fetchPolicy: 'network-only' },
+        { fetchPolicy: 'network-only', pollInterval: 2000 },
         'userId'
     )
 
