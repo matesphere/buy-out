@@ -2,15 +2,18 @@ import React, { useContext } from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { gql } from '@apollo/client'
 import { withAuthenticator } from '@aws-amplify/ui-react'
+import { Helmet } from 'react-helmet'
 
 import { Loading } from '../components/common/Loading'
 import { Error } from '../components/common/Error'
 
 import { useAuthQuery } from '../utils/auth-utils'
 import { UserStateContext } from '../utils/user-state'
+
 import Squiggle from '../assets/squiggle.svg'
-import { Helmet } from 'react-helmet'
 import PinLogo from '../assets/pin-logo.svg'
+
+import '../scss/index.scss'
 
 import {
     LoggedInQuery,

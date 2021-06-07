@@ -1,12 +1,12 @@
 import React from 'react'
-import '../scss/index.scss'
-
-import { graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
 
 import Squiggle from '../assets/squiggle.svg'
 import PinLogo from '../assets/pin-logo.svg'
-import { GatsbyImage } from 'gatsby-plugin-image'
+
+import '../scss/index.scss'
 
 const IndexPage = () => {
     const data = useStaticQuery(graphql`
@@ -60,26 +60,27 @@ const IndexPage = () => {
                 <section className="container" id="main">
                     <div className="indeximage">
                         <GatsbyImage
-                            image={
-                                data.image2.childImageSharp
-                                    .gatsbyImageData
-                            }
+                            image={data.image2.childImageSharp.gatsbyImageData}
                         />
                     </div>
                     <div className="row mt-4">
                         <div className="col-lg-2"></div>
                         <div className="col-lg-8 index-holder">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 text-align-center">
-                                Make your community a landowner!
+                                Your chance to take part in a community land buy
+                                out!
                             </h2>
-                            <a className="btn-solid-lg mt-2 mb-4" href="/login">Login</a>
+                            <Link
+                                className="btn-solid-lg mt-2 mb-4"
+                                to="/login"
+                            >
+                                Login
+                            </Link>
                         </div>
                         <div className="col-lg-2"></div>
                     </div>
-
                 </section>
             </main>
-
         </>
     )
 }
