@@ -16,9 +16,9 @@ const Footer = () => (
                         <li>
                             <Link to="/student/team-hub/">Team hub</Link>
                         </li>
-                        <li>
+                        {/* <li>
                             <AmplifySignOut />
-                        </li>
+                        </li> */}
                     </ul>
 
                     <p>Copyright 2021. All rights reserved.</p>

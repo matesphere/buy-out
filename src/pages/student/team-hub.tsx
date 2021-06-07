@@ -163,7 +163,17 @@ const TeamInfoSection = ({
                     </span>
                 </div>
             </div>
+
             <div className="row">
+                <div className="col-lg-3">
+                    <p className="sm-type-guitar sm-type-guitar--medium">
+                        Team logo:
+                    </p>
+                    <div className="form-holder-border">
+                        <GatsbyImage alt="" image={image} />
+                    </div>
+                </div>
+
                 <div className="col-lg-4">
                     <p className="sm-type-guitar sm-type-guitar--medium">
                         Members:
@@ -173,40 +183,41 @@ const TeamInfoSection = ({
                             <li key={i}>
                                 <p className="sm-type-lead">
                                     <span>{student.user.full_name}</span>
-                                    <span>
-                                        <i>
-                                            {' - '}
-                                            {positionMapping[student.position]}
-                                        </i>
-                                    </span>
+                                    {student.position && (
+                                        <span>
+                                            <i>
+                                                {` - ${
+                                                    positionMapping[
+                                                        student.position
+                                                    ]
+                                                }`}
+                                            </i>
+                                        </span>
+                                    )}
                                 </p>
                             </li>
                         ))}
                     </ul>
                 </div>
-                <div className="col-lg-5">
-                    <p className="sm-type-guitar sm-type-guitar--medium">
-                        Development options:
-                    </p>
-                    <ol className="form-holder-border">
-                        {devOptions.map(({ development_option: opt }, i) => (
-                            <li key={i}>
-                                <p className="sm-type-lead">
-                                    <span>{opt.display_name}</span>
-                                </p>
-                            </li>
-                        ))}
-                    </ol>
-                </div>
 
-                <div className="col-lg-3">
-                    <p className="sm-type-guitar sm-type-guitar--medium">
-                        Team logo:
-                    </p>
-                    <div className="form-holder-border">
-                        <GatsbyImage alt="" image={image} />
+                {devOptions.length > 0 && (
+                    <div className="col-lg-5">
+                        <p className="sm-type-guitar sm-type-guitar--medium">
+                            Development options:
+                        </p>
+                        <ol className="form-holder-border">
+                            {devOptions.map(
+                                ({ development_option: opt }, i) => (
+                                    <li key={i}>
+                                        <p className="sm-type-lead">
+                                            <span>{opt.display_name}</span>
+                                        </p>
+                                    </li>
+                                )
+                            )}
+                        </ol>
                     </div>
-                </div>
+                )}
             </div>
         </div>
     </>
