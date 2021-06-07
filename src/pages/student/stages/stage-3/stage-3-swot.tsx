@@ -67,6 +67,7 @@ const Stage3Swot = ({ location: { search } }) => {
         workDispatch,
         saveWorkObj,
         submitWorkObj,
+        docFeedback,
     } = useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
     if (loading) return <Loading />
@@ -79,6 +80,7 @@ const Stage3Swot = ({ location: { search } }) => {
 
     const swotState = workState[devOption.option]
 
+    // TODO: feedback split out by SWOT
     return (
         <>
             <Helmet>
@@ -101,25 +103,24 @@ const Stage3Swot = ({ location: { search } }) => {
                                 order to complete the Feasibility Study
                                 template.{' '}
                             </p>
-                            <div className="side-grey">
-                                <h3 className="task ticker mb-2">
-                                  <span className="ticker-sheet ticker-feedback">
-                                    <HelpIcon />
-                                  </span>
-                                                    <span className="sm-type-drum green-highlight">
-                                    Tutor feedback:
-                                  </span>
-                                </h3>
-                                <div className="form-holder-border">
-                                    <p className="sm-type-lead">
-                                        Here are a series of questions to help you to do some
-                                        preliminary exploration. This is your first opportunity to
-                                        work together as a team, so the answers that you provide
-                                        should be the product of discussions between each of the
-                                        team members.
-                                    </p>
+
+                            {docFeedback && (
+                                <div className="side-grey">
+                                    <h3 className="task ticker mb-2">
+                                        <span className="ticker-sheet ticker-feedback">
+                                            <HelpIcon />
+                                        </span>
+                                        <span className="sm-type-drum green-highlight">
+                                            Tutor feedback:
+                                        </span>
+                                    </h3>
+                                    <div className="form-holder-border">
+                                        <p className="sm-type-lead">
+                                            {docFeedback.feedback}
+                                        </p>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
 
                             <h3 className="sm-type-drum sm-type-drum--medium mt-4">
                                 Option: {devOption.display_name}

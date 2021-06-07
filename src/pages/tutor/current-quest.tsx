@@ -11,6 +11,7 @@ import {
     LockedStageStatus,
     UnlockedStageStatus,
     SubmittedStageStatus,
+    DocumentlessSubmittedStageStatus,
     FailedStageStatus,
     CompletedStageStatus,
 } from '../../components/tutor/CurrentQuest'
@@ -79,6 +80,7 @@ const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
                         <SubmittedStageStatus
                             documents={stageProgress.documents}
                             stageProgressId={stageProgress.id}
+                            stageId={stageId}
                         />
                     )
                 case 'marked_failed':
@@ -97,6 +99,17 @@ const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
                     return <UnlockedStageStatus />
             }
         } else {
+            if (stageProgress.status === 'completed') {
+                return (
+                    <CompletedStageStatus stageProgressId={stageProgress.id} />
+                )
+            } else if (stageProgress.status === 'submitted' && !document) {
+                return (
+                    <DocumentlessSubmittedStageStatus
+                        stageProgressId={stageProgress.id}
+                    />
+                )
+            }
             return <UnlockedStageStatus />
         }
     } else {

@@ -34,6 +34,13 @@ import HelpIcon from '../../assets/help-icon.svg'
 
 import '../../scss/index.scss'
 
+const positionMapping = {
+    chairperson: 'Chair',
+    vicechairperson: 'Vice-chair',
+    treasurer: 'Treasurer',
+    secretary: 'Secretary',
+}
+
 const TEAM_HUB_QUERY = gql`
     query TeamHubQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
@@ -158,14 +165,19 @@ const TeamInfoSection = ({
             </div>
             <div className="row">
                 <div className="col-lg-4">
-                    <p className="sm-type-guitar sm-type-guitar--medium">Members:</p>
+                    <p className="sm-type-guitar sm-type-guitar--medium">
+                        Members:
+                    </p>
                     <ul className="form-holder-border">
                         {students.map((student, i) => (
                             <li key={i}>
                                 <p className="sm-type-lead">
                                     <span>{student.user.full_name}</span>
                                     <span>
-                                        <i>{student.position}</i>
+                                        <i>
+                                            {' - '}
+                                            {positionMapping[student.position]}
+                                        </i>
                                     </span>
                                 </p>
                             </li>
@@ -174,7 +186,7 @@ const TeamInfoSection = ({
                 </div>
                 <div className="col-lg-5">
                     <p className="sm-type-guitar sm-type-guitar--medium">
-                            Development options:
+                        Development options:
                     </p>
                     <ol className="form-holder-border">
                         {devOptions.map(({ development_option: opt }, i) => (
@@ -201,10 +213,6 @@ const TeamInfoSection = ({
 )
 
 const TeamHub = () => {
-    const {
-        userInfo: { userId, token },
-    } = useContext(UserStateContext)
-
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "team-logo.jpg" }) {

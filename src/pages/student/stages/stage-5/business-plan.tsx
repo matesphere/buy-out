@@ -48,7 +48,7 @@ const Stage5BusinessPlanPage = () => {
                                 business plan.
                             </p>
                             <h3 className="sm-type-drum sm-type-drum--medium mb-2 redorange-highlight">
-                                Option 1 : XXXXX
+                                Option 1: Affordable Housing Scheme
                             </h3>
                         </div>
                         <div className="col-lg-4">

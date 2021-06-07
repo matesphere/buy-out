@@ -177,17 +177,19 @@ const Stage5Page = () => {
                                     <ul>
                                         <li className="sm-type-guitar">
                                             <Link to="/student/stage-5/business-plan">
-                                                XXXXXX Business Plan
+                                                Affordable Housing Scheme
+                                                Business Plan
                                             </Link>
                                         </li>
                                         <li className="sm-type-guitar">
                                             <Link to="/student/stage-5/business-plan">
-                                                XXXXXX Business Plan
+                                                Play Park Business Plan
                                             </Link>
                                         </li>
                                         <li className="sm-type-guitar">
                                             <Link to="/student/stage-5/business-plan">
-                                                XXXXXX Business Plan
+                                                Shop and Post Office Business
+                                                Plan
                                             </Link>
                                         </li>
                                     </ul>

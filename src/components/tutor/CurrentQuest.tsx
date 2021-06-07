@@ -3,7 +3,12 @@ import { Link } from 'gatsby'
 import { gql } from '@apollo/client'
 
 import { useAuthMutation } from '../../utils/auth-utils'
-import { UNLOCK_STAGE, MARK_PASSED, MARK_FAILED } from '../../gql/mutations'
+import {
+    UNLOCK_STAGE,
+    MARK_PASSED,
+    MARK_FAILED,
+    COMPLETE_STAGE,
+} from '../../gql/mutations'
 import { TUTOR_CURRENT_QUEST_QUERY } from '../../gql/queries'
 
 import Lock from '../../assets/lock.svg'
@@ -59,7 +64,11 @@ export const InProgressStageStatus = () => (
     </div>
 )
 
-export const SubmittedStageStatus = ({ documents, stageProgressId }) => {
+export const SubmittedStageStatus = ({
+    documents,
+    stageProgressId,
+    stageId,
+}) => {
     const [markFailed] = useAuthMutation(MARK_FAILED, {
         query: TUTOR_CURRENT_QUEST_QUERY,
         variables: {},
@@ -79,7 +88,9 @@ export const SubmittedStageStatus = ({ documents, stageProgressId }) => {
                 {documents[0].feedback ? 'Feedback provided' : 'Work submitted'}
             </span>
             <span>
-                <Link to={`/tutor/stage-1/submitted?id=${stageProgressId}`}>
+                <Link
+                    to={`/tutor/stage-${stageId}/submitted?id=${stageProgressId}`}
+                >
                     View submitted work
                 </Link>
             </span>
@@ -106,6 +117,41 @@ export const SubmittedStageStatus = ({ documents, stageProgressId }) => {
                         markPassed({
                             variables: {
                                 docId: documents[0].id,
+                                stageProgressId,
+                            },
+                        })
+                    }}
+                >
+                    Complete stage
+                </a>
+            </span>
+        </div>
+    )
+}
+
+export const DocumentlessSubmittedStageStatus = ({ stageProgressId }) => {
+    const [completeStage] = useAuthMutation(COMPLETE_STAGE, {
+        query: TUTOR_CURRENT_QUEST_QUERY,
+        variables: {},
+        idRequired: 'userId',
+    })
+
+    return (
+        <div>
+            <Submitted />
+            <span className="orange-link">Work submitted</span>
+            <span>
+                <Link to={`/tutor/stage-2/submitted?id=${stageProgressId}`}>
+                    View submitted work
+                </Link>
+            </span>
+            <span>
+                <a
+                    className="green-link text-underline"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        completeStage({
+                            variables: {
                                 stageProgressId,
                             },
                         })

@@ -1,8 +1,7 @@
 import React from 'react'
-import { graphql, useStaticQuery, Link } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
-import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -21,8 +20,6 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
-import { TextEditor } from '../../../../components/common/TextEditor'
-import { ActionType } from '../../../../utils/input-utils'
 
 const Stage1CompletePage = () => {
     const data = useStaticQuery(graphql`

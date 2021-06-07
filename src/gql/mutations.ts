@@ -57,7 +57,10 @@ export const SUBMIT_WORK = gql`
 `
 
 export const SET_TEAM_POSITIONS = gql`
-    mutation SetTeamPositions($objects: [student_insert_input!]!) {
+    mutation SetTeamPositions(
+        $objects: [student_insert_input!]!
+        $stageProgressId: uuid!
+    ) {
         insert_student(
             objects: $objects
             on_conflict: {
@@ -66,7 +69,24 @@ export const SET_TEAM_POSITIONS = gql`
             }
         ) {
             returning {
+                user {
+                    id
+                }
+                position
+            }
+        }
+        update_stage_progress(
+            _set: { status: submitted }
+            where: { id: { _eq: $stageProgressId } }
+        ) {
+            returning {
                 id
+                stage {
+                    id
+                    title
+                }
+                status
+                team_id
             }
         }
     }
@@ -161,6 +181,25 @@ export const MARK_PASSED = gql`
                 status
             }
         }
+        update_stage_progress(
+            _set: { status: completed }
+            where: { id: { _eq: $stageProgressId } }
+        ) {
+            returning {
+                id
+                stage {
+                    id
+                    title
+                }
+                status
+                team_id
+            }
+        }
+    }
+`
+
+export const COMPLETE_STAGE = gql`
+    mutation CompleteStage($stageProgressId: uuid!) {
         update_stage_progress(
             _set: { status: completed }
             where: { id: { _eq: $stageProgressId } }

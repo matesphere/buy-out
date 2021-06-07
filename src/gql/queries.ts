@@ -89,6 +89,7 @@ export const TEAM_QUERY = gql`
                 user_id
                 school_id
                 team_id
+                position
                 user {
                     username
                     full_name

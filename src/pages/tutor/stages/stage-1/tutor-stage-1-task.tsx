@@ -146,17 +146,14 @@ const TutorStage1TaskPage = ({ location: { search } }) => {
                                         )}
                                     </p>
 
-                                    {!doc.feedback && (
-                                        <SubmitFeedbackSection
-                                            submitFeedbackObj={
-                                                submitFeedbackObj
-                                            }
-                                            disableSubmit={
-                                                feedbackState &&
-                                                !feedbackState.feedback
-                                            }
-                                        />
-                                    )}
+                                    <SubmitFeedbackSection
+                                        submittedFeedback={doc.feedback}
+                                        submitFeedbackObj={submitFeedbackObj}
+                                        disableSubmit={
+                                            feedbackState &&
+                                            !feedbackState.feedback
+                                        }
+                                    />
                                 </div>
                             </div>
 

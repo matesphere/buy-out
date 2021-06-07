@@ -2,6 +2,7 @@ import React, { useState, FC } from 'react'
 import { MutationResult } from '@apollo/client'
 
 interface SubmitFeedbackSectionProps {
+    submittedFeedback: { feedback: any }
     submitFeedbackObj: {
         call: () => Promise<any>
         response: MutationResult<any>
@@ -10,63 +11,53 @@ interface SubmitFeedbackSectionProps {
     showModal: boolean
 }
 
-// TODO bring in confirm modals
 export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
+    submittedFeedback,
     submitFeedbackObj,
     disableSubmit,
 }) => {
-    const [showModal, setShowModal] = useState(true)
+    const [showModal, setShowModal] = useState(false)
+    console.log(showModal)
 
     return (
         <>
-            {!submitFeedbackObj.response.data && (
+            {!submitFeedbackObj.response.data && !submittedFeedback && (
                 <button
                     className="btn-solid-lg mt-4"
                     disabled={disableSubmit}
-                    onClick={submitFeedbackObj.call}
+                    onClick={() => setShowModal(true)}
                 >
                     Submit Feedback
                 </button>
             )}
 
-            {/*{saveWorkObj.response.data && (*/}
-            {/*    <>*/}
-            {/*        {showModal && (*/}
-            {/*            <div className="modal-window">*/}
-            {/*                <div>*/}
-            {/*                    <button*/}
-            {/*                        onClick={() => setShowModal(false)}*/}
-            {/*                        title="Close"*/}
-            {/*                        className="modal-close"*/}
-            {/*                    >*/}
-            {/*                        Close*/}
-            {/*                    </button>*/}
-            {/*                    <p className="sm-type-drum">Work saved.</p>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        )}*/}
-            {/*    </>*/}
-            {/*)}*/}
+            {showModal && (
+                <div className="modal-window">
+                    <div>
+                        <button
+                            onClick={() => setShowModal(false)}
+                            title="Close"
+                            className="modal-close"
+                        >
+                            Close
+                        </button>
 
-            {submitFeedbackObj.response.data && (
-                <>
-                    {showModal && (
-                        <div className="modal-window">
-                            <div>
+                        {submitFeedbackObj.response.data ? (
+                            <p className="sm-type-drum">Feedback submitted</p>
+                        ) : (
+                            <>
+                                <p>Are you sure?</p>
                                 <button
-                                    onClick={() => setShowModal(false)}
-                                    title="Close"
-                                    className="modal-close"
+                                    className="btn-solid-lg mt-4"
+                                    disabled={disableSubmit}
+                                    onClick={submitFeedbackObj.call}
                                 >
-                                    Close
+                                    Yes, submit feedback
                                 </button>
-                                <p className="sm-type-drum">
-                                    Feedback submitted
-                                </p>
-                            </div>
-                        </div>
-                    )}
-                </>
+                            </>
+                        )}
+                    </div>
+                </div>
             )}
         </>
     )

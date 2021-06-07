@@ -81,7 +81,7 @@ const Routes = () => {
             />
             <LoggedInRoute path="/stage-2/task" component={Stage2Task} />
             <LoggedInRoute
-                path="/stage-2-complete"
+                path="/stage-2/complete"
                 component={Stage2PageComplete}
             />
 

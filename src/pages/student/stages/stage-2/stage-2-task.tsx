@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import Slider from 'react-slick'
 import { slickSettings } from '../../../../utils/slicksettings'
+import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -10,12 +11,19 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import CheckList from '../../../../components/common/checklist'
 import Helpful from '../../../../components/common/helpful'
+import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
 
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
-import { TEAM_QUERY } from '../../../../gql/queries'
+
 import { SET_TEAM_POSITIONS } from '../../../../gql/mutations'
-import { TeamQuery, TeamQueryVariables } from '../../../../gql/types/TeamQuery'
-// import { SetTeamPositions, SetTeamPositionsVariables } from '../../../../gql/types/SetTeamPositions'
+import {
+    SetTeamPositions,
+    SetTeamPositionsVariables,
+} from '../../../../gql/types/SetTeamPositions'
+import {
+    Stage2TaskQuery,
+    Stage2TaskQueryVariables,
+} from '../../../../gql/types/Stage2TaskQuery'
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
@@ -30,19 +38,44 @@ import {
     stage2DataTextEng,
 } from './_stage2.data'
 
-const RolesPage = () => {
+const STAGE_2_TASK_QUERY = gql`
+    query Stage2TaskQuery($team_id: uuid!) {
+        team_by_pk(id: $team_id) {
+            students {
+                id
+                user_id
+                school_id
+                team_id
+                position
+                user {
+                    username
+                    full_name
+                }
+            }
+            stage_progresses(where: { stage_id: { _eq: 2 } }) {
+                id
+            }
+        }
+    }
+`
+
+const Stage2TaskPage = () => {
     const [showFilters, setShowFilters] = useState(false)
     const [positions, setPositions] = useState([])
     const [submitPositions, submitPositionResponse] =
-        useAuthMutation(SET_TEAM_POSITIONS)
+        useAuthMutation<SetTeamPositions, SetTeamPositionsVariables>(
+            SET_TEAM_POSITIONS
+        )
 
     const { loading, error, data } = useAuthQuery<
-        TeamQuery,
-        TeamQueryVariables
-    >(TEAM_QUERY, {}, 'teamId')
+        Stage2TaskQuery,
+        Stage2TaskQueryVariables
+    >(STAGE_2_TASK_QUERY, {}, 'teamId')
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />
+
+    const { id: stageProgressId } = data.team_by_pk.stage_progresses[0]
 
     return (
         <>
@@ -51,7 +84,7 @@ const RolesPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 2 - Consult - Team Roles</title>
+                <title>Stage 2 - Consult - Task</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Stage 2" />
@@ -217,9 +250,23 @@ const RolesPage = () => {
                                                                 <select
                                                                     className="form-control"
                                                                     value={
-                                                                        positions[
-                                                                            username
-                                                                        ]
+                                                                        submitPositionResponse.data
+                                                                            ? submitPositionResponse.data.insert_student.returning.find(
+                                                                                  (
+                                                                                      student
+                                                                                  ) =>
+                                                                                      student
+                                                                                          .user
+                                                                                          .id ===
+                                                                                      user_id
+                                                                              )
+                                                                                  ?.position
+                                                                            : positions[
+                                                                                  username
+                                                                              ]
+                                                                    }
+                                                                    disabled={
+                                                                        !!submitPositionResponse.data
                                                                     }
                                                                     onChange={({
                                                                         target: {
@@ -241,6 +288,12 @@ const RolesPage = () => {
                                                                         )
                                                                     }
                                                                 >
+                                                                    <option
+                                                                        value="1"
+                                                                        disabled
+                                                                    >
+                                                                        Select
+                                                                    </option>
                                                                     <option value="chairperson">
                                                                         Chair
                                                                     </option>
@@ -259,21 +312,25 @@ const RolesPage = () => {
                                                     )}
                                                 </ul>
                                             </div>
-                                            <button
-                                                onClick={() => {
-                                                    submitPositions({
-                                                        variables: {
-                                                            objects:
-                                                                Object.values(
-                                                                    positions
-                                                                ),
-                                                        },
-                                                    })
+
+                                            <SaveSubmitSection
+                                                submitWorkObj={{
+                                                    call: () => {
+                                                        submitPositions({
+                                                            variables: {
+                                                                objects:
+                                                                    Object.values(
+                                                                        positions
+                                                                    ),
+                                                                stageProgressId,
+                                                            },
+                                                        })
+                                                    },
+                                                    response:
+                                                        submitPositionResponse,
                                                 }}
-                                                className="btn-solid-lg"
-                                            >
-                                                Submit names
-                                            </button>
+                                                disableSubmit={false}
+                                            />
                                         </div>
 
                                         <div
@@ -313,4 +370,4 @@ const RolesPage = () => {
     )
 }
 
-export default RolesPage
+export default Stage2TaskPage

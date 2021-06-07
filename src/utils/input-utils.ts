@@ -120,6 +120,7 @@ export const useWorkState = <InputState, Action>(
         }
     }, [saveWorkInitialResponse.called])
 
+    //TODO: check whether network-only is OK here
     const {
         loading,
         error,
@@ -131,6 +132,7 @@ export const useWorkState = <InputState, Action>(
                 stage_id: stageId,
                 includeDevOptions: !!includeDevOptions,
             },
+            fetchPolicy: 'network-only',
         },
         'teamId'
     )

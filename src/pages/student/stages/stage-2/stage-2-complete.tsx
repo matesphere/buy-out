@@ -10,22 +10,30 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
-
-import { STAGE_QUERY } from '../../../../gql/queries'
-import {
-    StageQuery,
-    StageQueryVariables,
-} from '../../../../gql/types/StageQuery'
+import { TEAM_QUERY } from '../../../../gql/queries'
+import { TeamQuery, TeamQueryVariables } from '../../../../gql/types/TeamQuery'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
-const Stage2LandingPage = () => {
+const positions = [
+    { value: 'chairperson', displayName: 'Chair' },
+    { value: 'vicechairperson', displayName: 'Vice-chair' },
+    { value: 'treasurer', displayName: 'Treasurer' },
+    { value: 'secretary', displayName: 'Secretary' },
+]
+
+const Stage2CompletePage = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "glenclas.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image2: file(relativePath: { eq: "congratulations.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -37,18 +45,12 @@ const Stage2LandingPage = () => {
         loading,
         error,
         data: pageData,
-    } = useAuthQuery<StageQuery, StageQueryVariables>(
-        STAGE_QUERY,
-        {
-            variables: { stage_id: 2 },
-        },
-        'teamId'
-    )
+    } = useAuthQuery<TeamQuery, TeamQueryVariables>(TEAM_QUERY, {}, 'teamId')
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />
 
-    const { title: stageTitle } = pageData.stage_by_pk
+    const { students } = pageData.team_by_pk
 
     return (
         <>
@@ -57,16 +59,71 @@ const Stage2LandingPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 2 - {stageTitle}</title>
+                <title>Stage 2 - Consult - Complete</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-9">
+                        <div className="col-lg-8">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                {stageTitle}
+                                Consult
                             </h2>
+                            <div className="mt-4 mb-4 image-holder">
+                                <GatsbyImage
+                                    image={
+                                        data.image2.childImageSharp
+                                            .gatsbyImageData
+                                    }
+                                />
+                            </div>
+
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet />
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task completed:
+                                    </span>
+                                </h3>
+
+                                <div className="form-holder-border">
+                                    {/* <h4 className="sm-type-guitar mb-2 green-highlight">
+                                        Tutor feedback.
+                                    </h4>
+                                    <p className="sm-type-lead mb-3 italic">
+                                        This looks like a great choice, dont
+                                        forget to work together to achieve your
+                                        goals. You cannot do this without
+                                        everyone doing their bit.
+                                    </p> */}
+                                    <h4 className="sm-type-guitar mb-2">
+                                        You have chosen the following for your
+                                        board.
+                                    </h4>
+
+                                    {positions.map((pos) => (
+                                        <p className="sm-type-lead mb-3">
+                                            <span className="sm-type-lead--medium">
+                                                {pos.displayName}
+                                            </span>{' '}
+                                            -{' '}
+                                            {students
+                                                .filter(
+                                                    (student) =>
+                                                        student.position ===
+                                                        pos.value
+                                                )
+                                                .map(
+                                                    (student) =>
+                                                        student.user.full_name
+                                                )
+                                                .join(', ')}
+                                        </p>
+                                    ))}
+                                </div>
+                            </div>
 
                             <p className="sm-type-lead mb-3">
                                 Welcome to Stage 2 of the Community Buyout
@@ -130,41 +187,8 @@ const Stage2LandingPage = () => {
                                     to say.
                                 </Link>
                             </p>
-                            <div className="side-grey">
-                                <h3 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h3>
-                                <p className="sm-type-bigamp mb-3">
-                                    It is now time to allocate the members of
-                                    your team to the roles within the Board.
-                                    Each role will have specific tasks to
-                                    perform, but every decision that you make
-                                    must be taken by the complete Board of
-                                    Directors. If your team has more than 4
-                                    members then you can double up on the
-                                    Secretary and/or Treasurer roles.
-                                </p>
-
-                                <div className="form-holder-border">
-                                    <ul>
-                                        <li className="sm-type-guitar">
-                                            Find more{' '}
-                                            <Link to="/student/stage-2/task">
-                                                information about the roles and
-                                                choose your Board here
-                                            </Link>
-                                            .
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
                         </div>
-                        <div className="col-lg-3">
+                        <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
                                     <HelpIcon />
@@ -201,4 +225,4 @@ const Stage2LandingPage = () => {
     )
 }
 
-export default Stage2LandingPage
+export default Stage2CompletePage

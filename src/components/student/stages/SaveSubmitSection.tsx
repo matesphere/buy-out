@@ -5,19 +5,17 @@ import SaveIcon from '../../../assets/save-icon.svg'
 
 interface SaveSubmitSectionProps {
     saveWorkObj?: {
-        call: () => Promise<any>
+        call: () => void
         response: MutationResult<any>
     }
     submitWorkObj: {
-        call: () => Promise<any>
+        call: () => void
         response: MutationResult<any>
     }
     disableSubmit: boolean
-    docSubmitted: boolean
-    showModal: boolean
+    docSubmitted?: boolean
 }
 
-// TODO bring in confirm modals
 export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
     saveWorkObj,
     submitWorkObj,
@@ -45,7 +43,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                         disabled={disableSubmit}
                         onClick={() => setShowModal(true)}
                     >
-                        Submit Work
+                        Submit
                     </button>
                 </>
             )}
@@ -60,10 +58,11 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                         >
                             Close
                         </button>
+
                         {submitWorkObj.response.data ? (
-                                <p className="sm-type-drum">
-                                    Work submitted - good luck!
-                                </p>
+                            <p className="sm-type-drum">
+                                Work submitted - good luck!
+                            </p>
                         ) : (
                             <>
                                 <p>Are you sure?</p>
@@ -72,34 +71,13 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                                     disabled={disableSubmit}
                                     onClick={submitWorkObj.call}
                                 >
-                                    Yes submit Work
+                                    Yes, submit Work
                                 </button>
                             </>
-                        )
-                        }
+                        )}
                     </div>
                 </div>
             )}
-
-
-            {/*{saveWorkObj.response.data && (*/}
-            {/*    <>*/}
-            {/*        {showModal && (*/}
-            {/*            <div className="modal-window">*/}
-            {/*                <div>*/}
-            {/*                    <button*/}
-            {/*                        onClick={() => setShowModal(false)}*/}
-            {/*                        title="Close"*/}
-            {/*                        className="modal-close"*/}
-            {/*                    >*/}
-            {/*                        Close*/}
-            {/*                    </button>*/}
-            {/*                    <p className="sm-type-drum">Work saved.</p>*/}
-            {/*                </div>*/}
-            {/*            </div>*/}
-            {/*        )}*/}
-            {/*    </>*/}
-            {/*)}*/}
         </>
     )
 }

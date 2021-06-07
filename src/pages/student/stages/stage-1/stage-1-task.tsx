@@ -70,7 +70,7 @@ const Stage1TaskPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 1 - {stageTitle}</title>
+                <title>Stage 1 - {stageTitle} - Task</title>
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">
