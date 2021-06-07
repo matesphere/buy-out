@@ -235,15 +235,21 @@ const Stage2TaskPage = () => {
                                             <div id="form-roles">
                                                 <ul>
                                                     {data.team_by_pk.students.map(
-                                                        ({
-                                                            user: {
-                                                                username,
-                                                                full_name,
+                                                        (
+                                                            {
+                                                                user: {
+                                                                    username,
+                                                                    full_name,
+                                                                },
+                                                                user_id,
+                                                                school_id,
                                                             },
-                                                            user_id,
-                                                            school_id,
-                                                        }) => (
-                                                            <li className="mb-2">
+                                                            i
+                                                        ) => (
+                                                            <li
+                                                                key={i}
+                                                                className="mb-2"
+                                                            >
                                                                 <label className="form-label sm-type-amp">
                                                                     {full_name}
                                                                 </label>
@@ -289,8 +295,8 @@ const Stage2TaskPage = () => {
                                                                     }
                                                                 >
                                                                     <option
-                                                                        value="1"
-                                                                        disabled
+                                                                        value=""
+                                                                        defaultChecked
                                                                     >
                                                                         Select
                                                                     </option>
