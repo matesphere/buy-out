@@ -1,4 +1,4 @@
-import React, { Reducer } from 'react'
+import React, { Reducer, useState } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
@@ -48,6 +48,8 @@ const TutorStage1TaskPage = ({ location: { search } }) => {
         feedbackDispatch,
         submitFeedbackObj,
     } = useFeedbackState<WorkState, Action>(stage1FeedbackReducer, search)
+
+    const [allowUpdate, setAllowUpdate] = useState(false)
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />
@@ -121,7 +123,7 @@ const TutorStage1TaskPage = ({ location: { search } }) => {
                                 </h3>
                                 <div className="form-holder-border">
                                     <p className="sm-type-lead">
-                                        {doc.feedback ? (
+                                        {doc.feedback && !allowUpdate ? (
                                             <div
                                                 dangerouslySetInnerHTML={{
                                                     __html: doc.feedback
@@ -153,9 +155,19 @@ const TutorStage1TaskPage = ({ location: { search } }) => {
                                             feedbackState &&
                                             !feedbackState.feedback
                                         }
+                                        allowUpdate={allowUpdate}
                                     />
                                 </div>
                             </div>
+
+                            {doc.feedback && !allowUpdate && (
+                                <button
+                                    className="btn-solid-lg mt-4"
+                                    onClick={() => setAllowUpdate(true)}
+                                >
+                                    Update Feedback
+                                </button>
+                            )}
 
                             <p className="sm-type-amp">
                                 <Link to="/tutor/current-quest">

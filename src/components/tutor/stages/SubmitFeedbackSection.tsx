@@ -9,19 +9,21 @@ interface SubmitFeedbackSectionProps {
     }
     disableSubmit: boolean
     showModal: boolean
+    allowUpdate: boolean
 }
 
 export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
     submittedFeedback,
     submitFeedbackObj,
     disableSubmit,
+    allowUpdate,
 }) => {
     const [showModal, setShowModal] = useState(false)
-    console.log(showModal)
 
     return (
         <>
-            {!submitFeedbackObj.response.data && !submittedFeedback && (
+            {((!submitFeedbackObj.response.data && !submittedFeedback) ||
+                allowUpdate) && (
                 <button
                     className="btn-solid-lg mt-4"
                     disabled={disableSubmit}

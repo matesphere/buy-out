@@ -45,8 +45,7 @@ const Stage1CompletePage = () => {
     if (loading) return <Loading />
     if (error) return <Error error={error} />
 
-    const { feedback: docFeedback } =
-        pageData.team_by_pk.stage_progresses[0].documents[0].feedback
+    const doc = pageData.team_by_pk.stage_progresses[0].documents[0]
 
     const { title: stageTitle } = pageData.stage_by_pk
 
@@ -99,7 +98,7 @@ const Stage1CompletePage = () => {
                                     <p
                                         className="sm-type-lead mb-3 italic"
                                         dangerouslySetInnerHTML={{
-                                            __html: docFeedback,
+                                            __html: doc.feedback.feedback,
                                         }}
                                     />
                                     <h4 className="sm-type-drum sm-type-drum--medium">
@@ -111,9 +110,12 @@ const Stage1CompletePage = () => {
                                                 <p className="sm-type-guitar">
                                                     {eng.text}
                                                 </p>
-                                                <p className="sm-type-amp mb-4">
-                                                    This would be an answer
-                                                </p>
+                                                <p
+                                                    className="sm-type-amp mb-4"
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: doc.doc_data[i],
+                                                    }}
+                                                />
                                             </li>
                                         ))}
                                     </ol>

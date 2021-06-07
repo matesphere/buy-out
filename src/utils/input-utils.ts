@@ -254,6 +254,7 @@ export const useFeedbackState = <InputState, Action>(
                 stage_progress_id: stageProgressId,
                 includeDevOptions: !!includeDevOptions,
             },
+            fetchPolicy: 'network-only',
         },
         'userId'
     )
