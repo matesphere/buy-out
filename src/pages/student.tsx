@@ -3,14 +3,17 @@ import { Router, RouteComponentProps } from '@reach/router'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import TeamHub from './student/team-hub'
+
 import Stage1Landing from './student/stages/stage-1/stage-1-landing'
 import Stage1Task from './student/stages/stage-1/stage-1-task'
 import Stage1Complete from './student/stages/stage-1/stage-1-complete'
+
 import Stage2Landing from './student/stages/stage-2/stage-2-landing'
 import Stage2Task from './student/stages/stage-2/stage-2-task'
 import Stage2PageComplete from './student/stages/stage-2/stage-2-complete'
 import AboutGlenclasAreaPage from './student/stages/stage-2/about-glenclas-area'
-import CommunityHousingPage from './student/stages/stage-2/community'
+import Stage2Community from './student/stages/stage-2/stage-2-community'
+
 import Stage3Landing from './student/stages/stage-3/stage-3-landing'
 import Stage3Task from './student/stages/stage-3/stage-3-task'
 import Stage3Swot from './student/stages/stage-3/stage-3-swot'
@@ -24,14 +27,19 @@ import Stage3BusinessHub from './student/stages/stage-3/business-hub'
 import Stage3ForestryScheme from './student/stages/stage-3/forestry-scheme'
 import Stage3CampsiteCabin from './student/stages/stage-3/campsite-cabin'
 import Stage3MarketScheme from './student/stages/stage-3/market-scheme'
-import Stage4Page from './student/stages/stage-4/stage-4'
-import Stage4FeasibilityOne from './student/stages/stage-4/feasibility-study-one'
+
+import Stage4Landing from './student/stages/stage-4/stage-4-landing'
+import Stage4Task from './student/stages/stage-4/stage-4-task'
+
 import Stage5Page from './student/stages/stage-5/stage-5'
 import Stage5BusinessPlanPage from './student/stages/stage-5/business-plan'
+
 import Stage6Page from './student/stages/stage-6/stage-6'
 import Stage6TipsPage from './student/stages/stage-6/presentation-tips'
+
 import Stage7Page from './student/stages/stage-7/stage-7'
 import Stage7TipsPage from './student/stages/stage-7/presentation-tips'
+
 import Stage8Page from './student/stages/stage-8/stage-8'
 
 import { UserStateContext } from '../utils/user-state'
@@ -77,7 +85,7 @@ const Routes = () => {
             />
             <LoggedInRoute
                 path="/stage-2/community"
-                component={CommunityHousingPage}
+                component={Stage2Community}
             />
             <LoggedInRoute path="/stage-2/task" component={Stage2Task} />
             <LoggedInRoute
@@ -129,12 +137,9 @@ const Routes = () => {
                 component={Stage3MarketScheme}
             />
             <LoggedInRoute path="/stage-3/swot" component={Stage3Swot} />
-            <LoggedInRoute path="/stage-4" component={Stage4Page} />
 
-            <LoggedInRoute
-                path="/stage-4/feasibility-study-one"
-                component={Stage4FeasibilityOne}
-            />
+            <LoggedInRoute path="/stage-4" component={Stage4Landing} />
+            <LoggedInRoute path="/stage-4/task" component={Stage4Task} />
 
             <LoggedInRoute path="/stage-5" component={Stage5Page} />
             <LoggedInRoute

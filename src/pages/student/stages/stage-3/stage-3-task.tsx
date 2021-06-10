@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
 import scrollTo from 'gatsby-plugin-smoothscroll'
 import { gql } from '@apollo/client'
 
@@ -15,17 +15,24 @@ import { useCheckboxState } from '../../../../utils/input-utils'
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 import { CHOOSE_DEVELOPMENT_OPTIONS } from '../../../../gql/mutations'
 
-import { Stage3TaskQuery } from '../../../../gql/types/Stage3TaskQuery'
+import {
+    Stage3TaskQuery,
+    Stage3TaskQueryVariables,
+} from '../../../../gql/types/Stage3TaskQuery'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
-import { GatsbyImage } from 'gatsby-plugin-image'
 import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
 const STAGE_3_TASK_QUERY = gql`
-    query Stage3TaskQuery {
+    query Stage3TaskQuery($team_id: uuid!) {
+        team_by_pk(id: $team_id) {
+            team_development_options {
+                id
+            }
+        }
         development_option {
             id
             option
@@ -93,6 +100,110 @@ const ChooseOptionsCheckboxes = ({
     </>
 )
 
+// TODO: move this out to components
+const Stage3Task = () => {
+    const {
+        userInfo: { teamId },
+    } = useContext(UserStateContext)
+
+    const [teamChoiceName, setTeamChoiceName] = useState('')
+    const [selectedOptions, toggleValue, allowedNumberSelected] =
+        useCheckboxState<number>([], 5)
+    const [chooseDevOptions, chooseDevOptionsResponse] = useAuthMutation(
+        CHOOSE_DEVELOPMENT_OPTIONS
+    )
+
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<Stage3TaskQuery, Stage3TaskQueryVariables>(
+        STAGE_3_TASK_QUERY,
+        {},
+        'teamId'
+    )
+
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
+
+    const { team_development_options: devOptions } = pageData.team_by_pk
+    const taskComplete = devOptions.length === 5
+
+    return (
+        <div className="side-grey">
+            <h3 className="task ticker mb-2">
+                <span className="ticker-sheet">
+                    <TickSheet />
+                </span>
+                <span className="sm-type-drum">
+                    Task {taskComplete ? 'complete' : 'to complete:'}
+                </span>
+            </h3>
+            {taskComplete ? (
+                <>
+                    <p className="sm-type-lead mb-2">
+                        Development option list submitted!
+                    </p>
+                    <Link to="/student/stage-3">Back to Stage 3</Link>
+                </>
+            ) : (
+                <>
+                    <p className="sm-type-lead mb-2">
+                        Choose your 5 options to take forward to the next stage.
+                    </p>
+
+                    <div className="form-holder-border">
+                        <ChooseOptionsCheckboxes
+                            devOptions={pageData.development_option}
+                            selectedOptions={selectedOptions}
+                            toggleValue={toggleValue}
+                            teamChoiceName={teamChoiceName}
+                            setTeamChoiceName={setTeamChoiceName}
+                        />
+
+                        <button
+                            className="btn-solid-lg mt-4"
+                            disabled={
+                                !allowedNumberSelected ||
+                                (selectedOptions.includes(10) &&
+                                    !teamChoiceName)
+                            }
+                            onClick={() => {
+                                const objects = selectedOptions.map((id) => {
+                                    if (id === 10) {
+                                        return {
+                                            team_id: teamId,
+                                            development_option_id: id,
+                                            team_choice_name: teamChoiceName,
+                                        }
+                                    }
+
+                                    return {
+                                        team_id: teamId,
+                                        development_option_id: id,
+                                    }
+                                })
+
+                                chooseDevOptions({
+                                    variables: {
+                                        objects,
+                                    },
+                                })
+                            }}
+                        >
+                            Submit options
+                        </button>
+
+                        {chooseDevOptionsResponse.data && (
+                            <p className="sm-type-amp">Submitted!</p>
+                        )}
+                    </div>
+                </>
+            )}
+        </div>
+    )
+}
+
 const Stage3TaskPage = () => {
     const data = useStaticQuery(graphql`
         query {
@@ -103,27 +214,6 @@ const Stage3TaskPage = () => {
             }
         }
     `)
-
-    const {
-        userInfo: { teamId },
-    } = useContext(UserStateContext)
-
-    const {
-        loading,
-        error,
-        data: pageData,
-    } = useAuthQuery<Stage3TaskQuery, null>(STAGE_3_TASK_QUERY, {}, 'userId')
-
-    const [teamChoiceName, setTeamChoiceName] = useState('')
-    const [selectedOptions, toggleValue, allowedNumberSelected] =
-        useCheckboxState<number>([], 5)
-
-    const [chooseDevOptions, chooseDevOptionsResponse] = useAuthMutation(
-        CHOOSE_DEVELOPMENT_OPTIONS
-    )
-
-    if (loading) return <Loading />
-    if (error) return <Error error={error} />
 
     return (
         <>
@@ -498,76 +588,9 @@ const Stage3TaskPage = () => {
                                 </div>
                             </div>
 
-                            <div className="side-grey">
-                                <h3 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h3>
-
-                                <p className="sm-type-lead mb-2">
-                                    Choose your 5 options to take forward to the
-                                    next stage.
-                                </p>
-
-                                <div className="form-holder-border">
-                                    <ChooseOptionsCheckboxes
-                                        devOptions={pageData.development_option}
-                                        selectedOptions={selectedOptions}
-                                        toggleValue={toggleValue}
-                                        teamChoiceName={teamChoiceName}
-                                        setTeamChoiceName={setTeamChoiceName}
-                                    />
-
-                                    <button
-                                        className="btn-solid-lg mt-4"
-                                        disabled={
-                                            !allowedNumberSelected ||
-                                            (selectedOptions.includes(10) &&
-                                                !teamChoiceName)
-                                        }
-                                        onClick={() => {
-                                            const objects = selectedOptions.map(
-                                                (id) => {
-                                                    if (id === 10) {
-                                                        return {
-                                                            team_id: teamId,
-                                                            development_option_id:
-                                                                id,
-                                                            team_choice_name:
-                                                                teamChoiceName,
-                                                        }
-                                                    }
-
-                                                    return {
-                                                        team_id: teamId,
-                                                        development_option_id:
-                                                            id,
-                                                    }
-                                                }
-                                            )
-
-                                            chooseDevOptions({
-                                                variables: {
-                                                    objects,
-                                                },
-                                            })
-                                        }}
-                                    >
-                                        Submit options
-                                    </button>
-
-                                    {chooseDevOptionsResponse.data && (
-                                        <p className="sm-type-amp">
-                                            Submitted!
-                                        </p>
-                                    )}
-                                </div>
-                            </div>
+                            <Stage3Task />
                         </div>
+                        // TODO: this can also be a common component
                         <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">

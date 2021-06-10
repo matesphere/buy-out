@@ -3,12 +3,26 @@ import { gql } from '@apollo/client'
 // student
 
 export const STAGE_QUERY = gql`
-    query StageQuery($team_id: uuid!, $stage_id: Int!) {
+    query StageQuery(
+        $team_id: uuid!
+        $stage_id: Int!
+        $includeDevOptions: Boolean!
+    ) {
         team_by_pk(id: $team_id) {
             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
                 id
                 stage_id
                 status
+            }
+            team_development_options @include(if: $includeDevOptions) {
+                id
+                team_choice_name
+                shortlist
+                development_option {
+                    id
+                    display_name
+                    option
+                }
             }
         }
         stage_by_pk(id: $stage_id) {
@@ -45,6 +59,7 @@ export const DOCUMENT_QUERY = gql`
             team_development_options @include(if: $includeDevOptions) {
                 id
                 team_choice_name
+                shortlist
                 development_option {
                     id
                     display_name

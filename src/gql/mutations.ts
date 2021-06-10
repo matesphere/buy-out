@@ -104,6 +104,22 @@ export const CHOOSE_DEVELOPMENT_OPTIONS = gql`
     }
 `
 
+export const CHOOSE_SHORTLIST_OPTIONS = gql`
+    mutation ChooseShortlistOptions($optionsToUpate: [uuid!]!) {
+        update_team_development_option(
+            where: { id: { _in: $optionsToUpate } }
+            _set: { shortlist: true }
+        ) {
+            returning {
+                development_option {
+                    display_name
+                }
+                shortlist
+            }
+        }
+    }
+`
+
 // tutor
 
 export const CREATE_QUEST_WITH_TEAMS = gql`

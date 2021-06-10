@@ -10,7 +10,7 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import { slickSettings } from '../../../../utils/slicksettings'
 
 
-const CommunityHousingPage = () => {
+const Stage2CommunityPage = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "community-housing.jpg" }) {
@@ -508,4 +508,4 @@ const CommunityHousingPage = () => {
     )
 }
 
-export default CommunityHousingPage
+export default Stage2CommunityPage
