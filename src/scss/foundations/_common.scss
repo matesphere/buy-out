@@ -768,78 +768,77 @@ button:focus {
     display: flex;
 }
 
-.react-tabs {
-    -webkit-tap-highlight-color: transparent;
-    width: 100%;
-}
-
-.react-tabs__tab-list {
-    margin: 0;
-    padding: 0;
-}
-
-.react-tabs__tab {
-    display: inline-block;
-    border-bottom: none;
-    bottom: -1px;
-    padding: $grid-unit $grid-unit * 2;
-    position: relative;
-    list-style: none;
-    cursor: pointer;
-    color: $brand-red;
-
-    h6 {
-        margin: 0;
-        color: $brand-green;
-        text-decoration: underline;
+#currentquest {
+    .react-tabs {
+        -webkit-tap-highlight-color: transparent;
+        width: 100%;
     }
 
-    &--selected {
+    .react-tabs__tab-list {
+        margin: 0;
+        padding: 0;
+        border-bottom: 8px solid $brand-midgreen;
+    }
+
+    .react-tabs__tab {
+        display: inline-block;
+        border-bottom: none;
+        bottom: -2px;
+        font-size: 18px;
+        font-weight: 500;
+        padding: $grid-unit * 2 !important;
+        position: relative;
+        list-style: none;
+        cursor: pointer;
+        color: $brand-midgreen;
+
         h6 {
-            color: $brand-redorange;
+            margin: 0;
+            color: $brand-green;
+            text-decoration: underline;
+        }
+
+        &--selected {
+            h6 {
+                color: $brand-redorange;
+            }
         }
     }
-}
 
-.react-tabs__tab--selected {
-    color: black;
-    border-radius: 5px 5px 0 0;
-    margin: 0;
-    color: $brand-body;
-    background-color: $brand-greybg;
-    position: relative;
-
-    &:after {
-        content: ' ';
-        position: absolute;
-        height: 2px;
-        width: calc(100% - 2px);
-        border: 2px solid $brand-greybg;
-        left: 1px;
-        bottom: -1px;
+    .react-tabs__tab--selected {
+        color: black;
+        border-radius: 5px 5px 0 0;
+        margin: 0;
+        color: white;
+        background-color: $brand-midgreen;
+        position: relative;
+        border-left: 2px solid $brand-midgreen;
+        border-right: 2px solid $brand-midgreen;
+        border-top: 2px solid $brand-midgreen;
+        border-bottom: none;
     }
-}
 
-.react-tabs__tab--disabled {
-    color: GrayText;
-    cursor: default;
-}
+    .react-tabs__tab--disabled {
+        color: GrayText;
+        cursor: default;
+    }
 
-.react-tabs__tab-panel {
-    display: none;
-}
+    .react-tabs__tab-panel {
+        display: none;
+    }
 
-.react-tabs__tab-panel--selected {
-    display: block;
-}
+    .react-tabs__tab-panel--selected {
+        display: block;
+    }
 
-.react-tabs--information {
-    &--inner {
-        margin-bottom: 16px;
-        padding: 16px;
-        border-bottom-right-radius: 16px;
-        border-bottom-left-radius: 16px;
-        background-color: $brand-greybg;
+    .react-tabs--information {
+        &--inner {
+            margin-bottom: 16px;
+            padding: 16px;
+            border-bottom-right-radius: 16px;
+            border-bottom-left-radius: 16px;
+            background-color: $brand-greybg;
+        }
     }
 }
 

@@ -82,50 +82,54 @@ export const SubmittedStageStatus = ({
     })
 
     return (
-        <div>
-            <Submitted />
-            <span className="orange-link">
-                {documents[0].feedback ? 'Feedback provided' : 'Work submitted'}
-            </span>
-            <span>
-                <Link
-                    to={`/tutor/stage-${stageId}/submitted?id=${stageProgressId}`}
-                >
-                    View submitted work
-                </Link>
-            </span>
-            <span>
-                <a
-                    className="green-link text-underline"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        markFailed({
-                            variables: {
-                                docId: documents[0].id,
-                            },
-                        })
-                    }}
-                >
-                    Re-enable submission
-                </a>
-            </span>
-            <span>
-                <a
-                    className="green-link text-underline"
-                    onClick={(e) => {
-                        e.preventDefault()
-                        markPassed({
-                            variables: {
-                                docId: documents[0].id,
-                                stageProgressId,
-                            },
-                        })
-                    }}
-                >
-                    Complete stage
-                </a>
-            </span>
-        </div>
+        <>
+            <p className="orange-link">
+                <Submitted />
+                <span className="redorange-highlight">
+                    {documents[0].feedback ? 'Feedback provided' : 'Work submitted'}
+                </span>
+            </p>
+            <ul className="current-steps">
+                <li>
+                    <Link
+                        to={`/tutor/stage-${stageId}/submitted?id=${stageProgressId}`}
+                    >
+                        View submitted work
+                    </Link>
+                </li>
+                <li>
+                    <a
+                        className="green-link text-underline"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            markFailed({
+                                variables: {
+                                    docId: documents[0].id,
+                                },
+                            })
+                        }}
+                    >
+                        Re-enable submission
+                    </a>
+                </li>
+                <li>
+                    <a
+                        className="green-link text-underline"
+                        onClick={(e) => {
+                            e.preventDefault()
+                            markPassed({
+                                variables: {
+                                    docId: documents[0].id,
+                                    stageProgressId,
+                                },
+                            })
+                        }}
+                    >
+                        Complete stage
+                    </a>
+                </li>
+            </ul>
+        </>
     )
 }
 
@@ -139,7 +143,7 @@ export const DocumentlessSubmittedStageStatus = ({ stageProgressId }) => {
     return (
         <div>
             <Submitted />
-            <span className="orange-link">Work submitted</span>
+            <span className="redorange-highlight">Work submitted</span>
             <span>
                 <Link to={`/tutor/stage-2/submitted?id=${stageProgressId}`}>
                     View submitted work

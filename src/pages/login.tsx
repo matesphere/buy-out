@@ -49,6 +49,11 @@ const ChooseRoute = () => {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
             }
+            image2: file(relativePath: { eq: "indexpage.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
         }
     `)
 
@@ -65,6 +70,7 @@ const ChooseRoute = () => {
                 {/*<meta name="image" content={image} />*/}
             </Helmet>
             <section className="container top-section">
+
                 <Squiggle className="squiggle" />
                 <div className="row">
                     <div className="col-lg-8">
@@ -87,19 +93,22 @@ const ChooseRoute = () => {
             </section>
             <main className="homepage">
                 <section className="container" id="main">
-                    <div className="row">
-                        <div className="col-lg-12">
+                    <div className="indeximage">
+                        <GatsbyImage
+                            alt=" "
+                            image={data1.image2.childImageSharp.gatsbyImageData}
+                        />
+                    </div>
+                    <div className="row mt-4">
+                        <div className="col-lg-2"></div>
+                        <div className="col-lg-8 index-holder">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 text-align-center">
                                 Hello, {data.user_by_pk.first_name}!
                             </h2>
-                        </div>
-                    </div>
-                    <div className="row">
-                        <div className="col-lg-12">
                             <p className="sm-type-drum text-align-center">
                                 Let's get started shall we?
                             </p>
-                            <p className="text-align-center">
+                            <p className="text-align-center mb-4">
                                 <Link
                                     to={
                                         role === 'tutor'
@@ -112,6 +121,8 @@ const ChooseRoute = () => {
                                 </Link>
                             </p>
                         </div>
+                        <div className="col-lg-2"></div>
+
                     </div>
                 </section>
             </main>

@@ -233,3 +233,15 @@
     top: 0px;
   }
 }
+
+.notification-alert {
+  border-right: 2px solid $brand-red;
+  border-top: 2px solid $brand-red;
+  border-bottom: 2px solid $brand-red;
+  border-left: 16px solid $brand-red;
+  padding: $grid-unit;
+  text-align: center;
+  border-radius: 4px;
+  color: $brand-red;
+  background-color: white;
+}

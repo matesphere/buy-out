@@ -110,28 +110,24 @@ const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
                     />
                 )
             }
-            return <UnlockedStageStatus />
+            return <ul className="current-steps"><li><UnlockedStageStatus /></li></ul>
         }
     } else {
-        return <LockedStageStatus teamId={teamId} stageId={stageId} />
+        return <ul className="current-steps"><li><LockedStageStatus teamId={teamId} stageId={stageId} /></li></ul>
     }
 }
 
 const TeamInfoPanel = ({ listNum, teamName, students }) => (
     <>
-        <div className="quest-step quest-step-complete step">
-            <div className="quest-step-text">
-                <span className="quest-step-number">{listNum + 1}</span>
-                {teamName}
-            </div>
-        </div>
-        <div className="mt-3">
+        <p className="mb-2 sm-type-guitar sm-type-guitar--medium red-highlight mt-2">{listNum + 1}. {teamName}</p>
+        <p className="sm-type-lead sm-type-lead--medium">Team members:</p>
+        <ul className="mb-2">
             {students.map(({ user: { full_name } }, i) => (
-                <p key={i} className="sm-type-amp">
+                <li key={i} className="sm-type-amp">
                     {full_name}
-                </p>
+                </li>
             ))}
-        </div>
+        </ul>
     </>
 )
 
@@ -142,7 +138,9 @@ const StageInfoPanel = ({ stages, stageProgresses, teamId }) => (
                 <p className="steps-step sm-type-lead sm-type-lead--medium">
                     {`Stage ${id}: ${title}`}
                 </p>
-                {getStageStatusDisplay(id, stageProgresses, teamId)}
+                <div className="form-holder-border">
+                    {getStageStatusDisplay(id, stageProgresses, teamId)}
+                </div>
             </li>
         ))}
     </ul>
@@ -213,7 +211,7 @@ const TutorCurrentQuestPage = () => {
             </Helmet>
             <main className="notes">
                 <LoginHeader headerText="Current Quests" />
-                <section className="container" id="main">
+                <section className="container" id="currentquest">
                     <Tabs>
                         <TabList>
                             {quests.map((_, i) => (
@@ -233,15 +231,15 @@ const TutorCurrentQuestPage = () => {
                                         },
                                         i
                                     ) => (
-                                        <div key={i} className="row tutor mt-4">
-                                            <div className="col-lg-4">
+                                        <div key={i} className="row tutor mt-4 side-grey">
+                                            <div className="col-lg-3">
                                                 <TeamInfoPanel
                                                     listNum={i}
                                                     teamName={name}
                                                     students={students}
                                                 />
                                             </div>
-                                            <div className="col-lg-8">
+                                            <div className="col-lg-9">
                                                 <StageInfoPanel
                                                     stages={stage}
                                                     stageProgresses={

@@ -12,15 +12,19 @@
         margin-right: ($grid-unit * 2);
       }
 
-      div {
-        display: flex;
-        align-items: center;
-      }
-
       span {
         margin-right: ($grid-unit * 3);
       }
     }
 
+  }
+
+  .current-steps {
+    margin: 0 0 0 ($grid-unit * 3);
+    padding: 0 0 0 ($grid-unit * 2);
+
+    li {
+      list-style: circle;
+    }
   }
 }
