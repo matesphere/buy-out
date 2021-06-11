@@ -105,7 +105,7 @@ const Stage2LandingPage = () => {
                             </p>
 
                             <h3 className="sm-type-drum mb-3">
-                                Read about the Glenclas area.
+                                1. Read about the Glenclas area.
                             </h3>
 
                             <p className="sm-type-bigamp mb-3">
@@ -113,21 +113,32 @@ const Stage2LandingPage = () => {
                                 village and its community.
                             </p>
                             <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/stage-2/about-glenclas-area">
+                                <Link to="/student/information/about-glenclas-area">
                                     Read about the area.
                                 </Link>
                             </p>
                             <h3 className="sm-type-drum mt-4">
-                                See what the community and experts have to say.
+                                2. Listen to the  experts and the community.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
                                 Consult with the people about development
                                 options that could help the community.
                             </p>
                             <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/stage-2/community">
+                                <Link to="/student/information/community">
                                     See what the experts and the community have
                                     to say.
+                                </Link>
+                            </p>
+                            <h3 className="sm-type-drum mt-4">
+                                3. What are each roles responsibilities.
+                            </h3>
+                            <p className="sm-type-bigamp mb-3">
+                                Find out what each role is responsible for and elect a steering group.
+                            </p>
+                            <p className="sm-type-bigamp mb-3">
+                                <Link to="/student/information/about-the-roles">
+                                   Read about the roles.
                                 </Link>
                             </p>
                             <div className="side-grey">
@@ -153,10 +164,9 @@ const Stage2LandingPage = () => {
                                 <div className="form-holder-border">
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            Find more{' '}
+
                                             <Link to="/student/stage-2/task">
-                                                information about the roles and
-                                                choose your Board here
+                                                Choose your Board here
                                             </Link>
                                             .
                                         </li>

@@ -248,12 +248,20 @@ const Stage3LandingPage = () => {
                                     </p>
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            <Link to="/student/stage-3/task">
+                                            <Link to="/student/information/development-options">
                                                 View the development options
                                             </Link>
                                         </li>
                                     </ul>
+                                    <ul>
+                                        <li className="sm-type-guitar">
+                                            <Link to="/student/stage-3/task">
+                                                Choose the option to take forward.
+                                            </Link>
+                                        </li>
+                                    </ul>
                                 </div>
+
 
                                 <div
                                     className={`form-holder-border ${

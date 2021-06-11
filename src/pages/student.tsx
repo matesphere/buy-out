@@ -11,22 +11,24 @@ import Stage1Complete from './student/stages/stage-1/stage-1-complete'
 import Stage2Landing from './student/stages/stage-2/stage-2-landing'
 import Stage2Task from './student/stages/stage-2/stage-2-task'
 import Stage2PageComplete from './student/stages/stage-2/stage-2-complete'
-import AboutGlenclasAreaPage from './student/stages/stage-2/about-glenclas-area'
-import Stage2Community from './student/stages/stage-2/stage-2-community'
-
+import AboutGlenclasAreaPage from './student/information/about-glenclas-area'
+import AboutTheRoles from './student/information/about-the-roles'
+import InformationPage from './student/information-page'
+import Stage2Community from './student/information/community'
 import Stage3Landing from './student/stages/stage-3/stage-3-landing'
-import Stage3Task from './student/stages/stage-3/stage-3-task'
+import DevelopmentOptions from './student/information/development-options'
 import Stage3Swot from './student/stages/stage-3/stage-3-swot'
 import Stage3Complete from './student/stages/stage-3/stage-3-complete'
-import Stage3HousingPage from './student/stages/stage-3/affordable-housing-scheme'
-import Stage3PlaySkate from './student/stages/stage-3/playpark-skatepark'
-import Stage3ShopPostOffice from './student/stages/stage-3/shop-and-post-office'
-import Stage3MicroHydro from './student/stages/stage-3/micro-hydro'
-import Stage3WindTurbine from './student/stages/stage-3/wind-turbine'
-import Stage3BusinessHub from './student/stages/stage-3/business-hub'
-import Stage3ForestryScheme from './student/stages/stage-3/forestry-scheme'
-import Stage3CampsiteCabin from './student/stages/stage-3/campsite-cabin'
-import Stage3MarketScheme from './student/stages/stage-3/market-scheme'
+import Stage3HousingPage from './student/information/affordable-housing-scheme'
+import Stage3PlaySkate from './student/information/playpark-skatepark'
+import Stage3ShopPostOffice from './student/information/shop-and-post-office'
+import Stage3MicroHydro from './student/information/micro-hydro'
+import Stage3WindTurbine from './student/information/wind-turbine'
+import Stage3BusinessHub from './student/information/business-hub'
+import Stage3ForestryScheme from './student/information/forestry-scheme'
+import Stage3CampsiteCabin from './student/information/campsite-cabin'
+import Stage3MarketScheme from './student/information/market-scheme'
+import Stage3TaskPage from "./student/stages/stage-3/stage-3-task";
 
 import Stage4Landing from './student/stages/stage-4/stage-4-landing'
 import Stage4Task from './student/stages/stage-4/stage-4-task'
@@ -80,60 +82,71 @@ const Routes = () => {
 
             <LoggedInRoute path="/stage-2" component={Stage2Landing} />
             <LoggedInRoute
-                path="/stage-2/about-glenclas-area"
+                path="/information/about-glenclas-area"
                 component={AboutGlenclasAreaPage}
             />
             <LoggedInRoute
-                path="/stage-2/community"
+                path="/information/community"
                 component={Stage2Community}
+            />
+            <LoggedInRoute
+                path="/information/about-the-roles"
+                component={AboutTheRoles}
+            />
+            <LoggedInRoute
+                path="/information"
+                component={InformationPage}
             />
             <LoggedInRoute path="/stage-2/task" component={Stage2Task} />
             <LoggedInRoute
                 path="/stage-2/complete"
                 component={Stage2PageComplete}
             />
-
+            <LoggedInRoute
+              path="/stage-3/task"
+                component={Stage3TaskPage}
+            />
             <LoggedInRoute path="/stage-3" component={Stage3Landing} />
-            <LoggedInRoute path="/stage-3/task" component={Stage3Task} />
+            <LoggedInRoute path="/information/development-options" component={DevelopmentOptions} />
             <LoggedInRoute
                 path="/stage-3/complete"
                 component={Stage3Complete}
             />
 
             <LoggedInRoute
-                path="/stage-3/affordable-housing-scheme"
+                path="/information/affordable-housing-scheme"
                 component={Stage3HousingPage}
             />
             <LoggedInRoute
-                path="/stage-3/shop-and-post-office"
+                path="/information/shop-and-post-office"
                 component={Stage3ShopPostOffice}
             />
             <LoggedInRoute
-                path="/stage-3/playpark-skatepark"
+                path="/information/playpark-skatepark"
                 component={Stage3PlaySkate}
             />
             <LoggedInRoute
-                path="/stage-3/micro-hydro"
+                path="/information/micro-hydro"
                 component={Stage3MicroHydro}
             />
             <LoggedInRoute
-                path="/stage-3/wind-turbine"
+                path="/information/wind-turbine"
                 component={Stage3WindTurbine}
             />
             <LoggedInRoute
-                path="/stage-3/business-hub"
+                path="/information/business-hub"
                 component={Stage3BusinessHub}
             />
             <LoggedInRoute
-                path="/stage-3/forestry-scheme"
+                path="/information/forestry-scheme"
                 component={Stage3ForestryScheme}
             />
             <LoggedInRoute
-                path="/stage-3/campsite-cabin"
+                path="/information/campsite-cabin"
                 component={Stage3CampsiteCabin}
             />
             <LoggedInRoute
-                path="/stage-3/market-scheme"
+                path="/information/market-scheme"
                 component={Stage3MarketScheme}
             />
             <LoggedInRoute path="/stage-3/swot" component={Stage3Swot} />

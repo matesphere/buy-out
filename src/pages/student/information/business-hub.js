@@ -3,15 +3,15 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
-import HelpIcon from '../../../../assets/help-icon.svg'
+import Header from '../../../components/_header'
+import Footer from '../../../components/_footer'
+import HelpIcon from '../../../assets/help-icon.svg'
 
-import '../../../../scss/index.scss'
+import '../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import Ticklr from '../../../../assets/tick-lr.svg'
-import Ticklr2 from '../../../../assets/tick-lr2.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
+import Ticklr from '../../../assets/tick-lr.svg'
+import Ticklr2 from '../../../assets/tick-lr2.svg'
+import TickSheet from '../../../assets/tick-sheet.svg'
 const Stage3BusinessHub = () => {
     const data = useStaticQuery(graphql`
         query {
@@ -29,10 +29,10 @@ const Stage3BusinessHub = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 3 - Business Hub</title>
+                <title>Business Hub</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 3" />
+                <Header headerText="Information" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -212,7 +212,7 @@ const Stage3BusinessHub = () => {
                             </div>
 
                             <p className="sm-type-bigamp mb-4">
-                                <Link to="/student/stage-3/glenclas-map-options">
+                                <Link to="/student/information/development-options">
                                     Back to the map
                                 </Link>
                             </p>
@@ -230,7 +230,7 @@ const Stage3BusinessHub = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link to="/student/stage-3/glenclas-map-options">
+                                    <Link to="/student/information/development-options">
                                         Back to the map
                                     </Link>
                                 </p>

@@ -1,13 +1,13 @@
 import React from 'react'
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
-import '../../../../scss/index.scss'
+import Header from '../../../components/_header'
+import Footer from '../../../components/_footer'
+import '../../../scss/index.scss'
 
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import HelpIcon from '../../../../assets/help-icon.svg'
+import HelpIcon from '../../../assets/help-icon.svg'
 import Slider from 'react-slick'
-import { slickSettings } from '../../../../utils/slicksettings'
+import { slickSettings } from '../../../utils/slicksettings'
 
 const AboutGlenclasAreaPage = () => {
     const data = useStaticQuery(graphql`
@@ -42,10 +42,10 @@ const AboutGlenclasAreaPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 2 - About Glenclas</title>
+                <title>Information - About Glenclas</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 2" />
+                <Header headerText="Information" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">

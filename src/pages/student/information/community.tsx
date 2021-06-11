@@ -1,13 +1,13 @@
 import React from 'react'
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
-import '../../../../scss/index.scss'
+import Header from '../../../components/_header'
+import Footer from '../../../components/_footer'
+import '../../../scss/index.scss'
 import Slider from 'react-slick'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
-import HelpIcon from '../../../../assets/help-icon.svg'
-import { slickSettings } from '../../../../utils/slicksettings'
+import HelpIcon from '../../../assets/help-icon.svg'
+import { slickSettings } from '../../../utils/slicksettings'
 
 
 const Stage2CommunityPage = () => {
@@ -69,15 +69,15 @@ const Stage2CommunityPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 2 - Community</title>
+                <title>Information - Community and Experts</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 2" />
+                <Header headerText="Information" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Community
+                                Community and Experts
                             </h2>
 
                             <p className="sm-type-guitar sm-type-guitar--medium mb-2">
