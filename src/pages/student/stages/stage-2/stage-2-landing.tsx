@@ -40,7 +40,7 @@ const Stage2LandingPage = () => {
     } = useAuthQuery<StageQuery, StageQueryVariables>(
         STAGE_QUERY,
         {
-            variables: { stage_id: 2 },
+            variables: { stage_id: 2, includeDevOptions: false },
         },
         'teamId'
     )
