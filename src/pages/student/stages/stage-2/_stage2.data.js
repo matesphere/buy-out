@@ -25,7 +25,7 @@ export const stage2DataTitleEng = [
 export const stage2DataSubTitleEng = [
     {
         subtitle:
-            'You are going to work as the board of a community group who will lead the purchase of some land that has come up for sale.',
+            'You are going to work as the board of a community group who will lead the purchase of the land that has come up for sale.',
     },
 ]
 

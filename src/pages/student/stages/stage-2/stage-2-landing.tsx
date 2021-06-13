@@ -69,16 +69,19 @@ const Stage2LandingPage = () => {
                             </h2>
 
                             <p className="sm-type-lead mb-3">
-                                Welcome to Stage 2 of the Community Buyout
-                                Quest. In this stage you will form the board of
-                                a community group (known as the 'steering
-                                group') who will lead the purchase of some land
-                                that has come up for sale.
+                                In this stage you will consult with a community
+                                in order to better understand how it could
+                                benefit from a land buy-out. If you conclude
+                                that there is community appetite for such a
+                                project, you will form the board of a community
+                                group (known as the 'steering group') who will
+                                lead the purchase of some land that has come up
+                                for sale.
                             </p>
 
                             <p className="sm-type-lead mb-3">
-                                The land that has come up for sale is next to
-                                the village of GLENCLAS.
+                                A plot of land has come up for sale next to the
+                                village of GLENCLAS.
                             </p>
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
@@ -89,23 +92,23 @@ const Stage2LandingPage = () => {
                                 />
                             </div>
                             <p className="sm-type-lead mb-3">
-                                You will each adopt a specific role within the
-                                Board, but throughout, you will need to work as
-                                a team. Each decision that you make must take
-                                into account the views of everyone in the team.
-                                That does not mean that you will agree on
-                                everything, in fact it is inevitable that you
-                                will disagree at times. However, you must work
-                                out how you will reach decisions when there is
-                                disagreement amongst the team.
+                                In order to make the correct decisions for this
+                                community, you'll need to make sure you are
+                                aware of what problems it faces and the opinions
+                                of the people living there.
                             </p>
                             <p className="sm-type-lead mb-3">
-                                You will now need to design a logo that will
-                                appear on any documentation that you produce.
+                                To do this, follow the links below. The first
+                                will give you some background information on
+                                Glenclas, while the second provides some
+                                responses from local community members and
+                                experts - each of whom has an idea for a scheme
+                                which you could investigate as a potential use
+                                of the land.
                             </p>
 
                             <h3 className="sm-type-drum mb-3">
-                                1. Read about the Glenclas area.
+                                Read about the Glenclas area
                             </h3>
 
                             <p className="sm-type-bigamp mb-3">
@@ -114,33 +117,23 @@ const Stage2LandingPage = () => {
                             </p>
                             <p className="sm-type-bigamp mb-3">
                                 <Link to="/student/information/about-glenclas-area">
-                                    Read about the area.
+                                    Read about the area
                                 </Link>
                             </p>
                             <h3 className="sm-type-drum mt-4">
-                                2. Listen to the  experts and the community.
+                                Listen to the experts and the community
                             </h3>
                             <p className="sm-type-bigamp mb-3">
-                                Consult with the people about development
+                                Consult with the locals about development
                                 options that could help the community.
                             </p>
                             <p className="sm-type-bigamp mb-3">
                                 <Link to="/student/information/community">
                                     See what the experts and the community have
-                                    to say.
+                                    to say
                                 </Link>
                             </p>
-                            <h3 className="sm-type-drum mt-4">
-                                3. What are each roles responsibilities.
-                            </h3>
-                            <p className="sm-type-bigamp mb-3">
-                                Find out what each role is responsible for and elect a steering group.
-                            </p>
-                            <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/information/about-the-roles">
-                                   Read about the roles.
-                                </Link>
-                            </p>
+
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet">
@@ -151,24 +144,21 @@ const Stage2LandingPage = () => {
                                     </span>
                                 </h3>
                                 <p className="sm-type-bigamp mb-3">
-                                    It is now time to allocate the members of
+                                    Having determined that the community of
+                                    Glenclas will support you in this endeavour,
+                                    it is now time to allocate the members of
                                     your team to the roles within the Board.
                                     Each role will have specific tasks to
                                     perform, but every decision that you make
-                                    must be taken by the complete Board of
-                                    Directors. If your team has more than 4
-                                    members then you can double up on the
-                                    Secretary and/or Treasurer roles.
+                                    must be taken by the whole group.
                                 </p>
 
                                 <div className="form-holder-border">
                                     <ul>
                                         <li className="sm-type-guitar">
-
                                             <Link to="/student/stage-2/task">
                                                 Choose your Board here
                                             </Link>
-                                            .
                                         </li>
                                     </ul>
                                 </div>

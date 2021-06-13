@@ -212,31 +212,31 @@ const Stage3LandingPage = () => {
                                 </div>
                             </div>
 
+                            <p className="sm-type-lead mb-2">
+                                You will need to work together to discuss the
+                                available development options and decide on a
+                                'longlist' of five which you think offer the
+                                best chance of providing benefits to the
+                                community - whether these be financial, social
+                                or otherwise.
+                            </p>
+                            <p className="sm-type-lead mb-2">
+                                Once decided upon, you'll then be asked to
+                                complete a SWOT analysis for each of these.{' '}
+                                <Link to="#">Click here</Link> to find out more
+                                about what is meant by SWOT and how you can
+                                complete this task.
+                            </p>
+
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet">
                                         <TickSheet />
                                     </span>
                                     <span className="sm-type-drum">
-                                        Task to complete:
+                                        Tasks to complete:
                                     </span>
                                 </h3>
-
-                                <p className="sm-type-lead mb-2">
-                                    You will need to work together to discuss
-                                    the available development options and decide
-                                    on five which you think offer the best
-                                    chance of providing benefits to the
-                                    community - whether these be financial,
-                                    social or otherwise.
-                                </p>
-                                <p className="sm-type-lead mb-2">
-                                    Once decided upon, you'll then be asked to
-                                    complete a SWOT analysis for each of these.{' '}
-                                    <Link to="#">Click here</Link> to find out
-                                    more about what is meant by SWOT and how you
-                                    can complete this task.
-                                </p>
 
                                 <div className="form-holder-border">
                                     <p className="sm-type-lead mb-2">Part I</p>
@@ -248,20 +248,14 @@ const Stage3LandingPage = () => {
                                     </p>
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            <Link to="/student/information/development-options">
-                                                View the development options
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                    <ul>
-                                        <li className="sm-type-guitar">
                                             <Link to="/student/stage-3/task">
-                                                Choose the option to take forward.
+                                                Read about the development
+                                                options and choose your
+                                                'longlist'
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
-
 
                                 <div
                                     className={`form-holder-border ${

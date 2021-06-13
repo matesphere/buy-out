@@ -1,5 +1,5 @@
-import React, { Reducer } from 'react'
-import { Link } from 'gatsby'
+import React, { Reducer, FC } from 'react'
+import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import QueryString from 'query-string'
 
@@ -58,7 +58,7 @@ export const stage3SwotReducer: Reducer<WorkState, Action> = (
     }
 }
 
-const Stage3Swot = ({ location: { search } }) => {
+const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
     const {
         loading,
         error,

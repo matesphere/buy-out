@@ -1,9 +1,9 @@
-import React, { Reducer, useState } from 'react'
-import { Link } from 'gatsby'
+import React, { Reducer, useState, FC } from 'react'
+import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import Header from '../../../tutor/_header'
-import Footer from '../../../tutor/_footer'
+import Header from '../../_header'
+import Footer from '../../_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { TextEditor } from '../../../../components/common/TextEditor'
@@ -39,7 +39,7 @@ const stage1FeedbackReducer: Reducer<WorkState, Action> = (state, action) => {
     }
 }
 
-const TutorStage1TaskPage = ({ location: { search } }) => {
+const TutorStage1TaskPage: FC<PageProps> = ({ location: { search } }) => {
     const {
         loading,
         error,

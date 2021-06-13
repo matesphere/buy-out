@@ -108,6 +108,17 @@ const Stage2TaskPage = () => {
                                 </p>
                             ))}
 
+                            <p className="sm-type-bigamp mb-3">
+                                Your steering group will consist of four
+                                different roles. Follow the link below to find
+                                out what each of these is responsible for.
+                            </p>
+                            <p className="sm-type-bigamp mb-3">
+                                <Link to="/student/information/about-the-roles">
+                                    Read about the roles here
+                                </Link>
+                            </p>
+
                             <div
                                 className={`filters-container${
                                     showFilters ? ' show' : ''
@@ -123,8 +134,18 @@ const Stage2TaskPage = () => {
                                         </span>
                                     </h3>
                                     <p className="sm-type-amp mb-2">
-                                        You will need to work together and
-                                        decided who will do the following.
+                                        Use the dropdowns below to select which
+                                        team member will perform which role. Try
+                                        and match the roles to the strengths of
+                                        each member!
+                                    </p>
+                                    <p className="sm-type-amp mb-2">
+                                        <b>
+                                            Your team must have at least one of
+                                            each role!
+                                        </b>{' '}
+                                        If you have more than 4 members in your
+                                        team you may double up on roles.
                                     </p>
 
                                     <div className="form-holder-border">

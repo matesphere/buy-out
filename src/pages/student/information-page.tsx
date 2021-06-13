@@ -1,11 +1,13 @@
 import React from 'react'
-import Header from '../../components/_header'
-import Footer from '../../components/_footer'
-import '../../scss/index.scss'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
+
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
+
 import HelpIcon from '../../assets/help-icon.svg'
 
+import '../../scss/index.scss'
 
 const InformationPage = () => {
     return (
@@ -27,7 +29,8 @@ const InformationPage = () => {
                             </h2>
 
                             <p className="sm-type-guitar sm-type-guitar--medium mb-2">
-                                All the information is listed below to help you on your quest.
+                                All the information is listed below to help you
+                                on your quest.
                             </p>
 
                             <h3 className="sm-type-drum mb-3">
@@ -44,7 +47,7 @@ const InformationPage = () => {
                                 </Link>
                             </p>
                             <h3 className="sm-type-drum mt-4">
-                                2. Listen to the  experts and the community.
+                                2. Listen to the experts and the community.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
                                 Consult with the people about development
@@ -60,7 +63,8 @@ const InformationPage = () => {
                                 3. What are each roles responsibilities.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
-                                Find out what each role is responsible for and elect a steering group.
+                                Find out what each role is responsible for and
+                                elect a steering group.
                             </p>
                             <p className="sm-type-bigamp mb-3">
                                 <Link to="/student/information/about-the-roles">
@@ -72,14 +76,14 @@ const InformationPage = () => {
                                 4. Development options.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
-                                Look at the map and see what options are available to help you choose.
+                                Look at the map and see what options are
+                                available to help you choose.
                             </p>
                             <p className="sm-type-bigamp mb-3">
                                 <Link to="/student/information/development-options">
                                     Read about the development options.
                                 </Link>
                             </p>
-
                         </div>
                         <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
@@ -97,9 +101,7 @@ const InformationPage = () => {
                     </div>
 
                     <div className="row">
-                        <div className="col-lg-12">
-
-                        </div>
+                        <div className="col-lg-12"></div>
                     </div>
                 </section>
 
