@@ -13,8 +13,12 @@ const Nav = () => {
                     <Link to="/help">Help</Link>
                 </li>
                 <li className="nav-links">
+                    <Link to="/student/information">Information</Link>
+                </li>
+                <li className="nav-links">
                     <Link to="/student/team-hub/">
-                        Team hub<span className="nav-links-notification"></span>
+                        Team hub
+                        {/*<span className="nav-links-notification"></span>*/}
                     </Link>
                 </li>
                 {/* <li className="nav-links">
