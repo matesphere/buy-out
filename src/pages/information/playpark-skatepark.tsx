@@ -1,18 +1,18 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
-
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
-import HelpIcon from '../../../assets/help-icon.svg'
-
-import '../../../scss/index.scss'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import InfoPick from '../../../assets/info-pick.svg'
-import TickSheet from '../../../assets/tick-sheet.svg'
+import { Helmet } from 'react-helmet'
 
-const Stage3PlaySkate = () => {
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
+
+import HelpIcon from '../../assets/help-icon.svg'
+import InfoPick from '../../assets/info-pick.svg'
+import TickSheet from '../../assets/tick-sheet.svg'
+
+import '../../scss/index.scss'
+
+const InfoPlaySkate = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "skate-park.jpg" }) {
@@ -22,6 +22,7 @@ const Stage3PlaySkate = () => {
             }
         }
     `)
+
     return (
         <>
             <Helmet>
@@ -222,7 +223,7 @@ const Stage3PlaySkate = () => {
                             </div>
 
                             <p className="sm-type-bigamp mb-4">
-                                <Link to="/student/information/development-options">
+                                <Link to="/information/development-options">
                                     Back to the map
                                 </Link>
                             </p>
@@ -240,7 +241,7 @@ const Stage3PlaySkate = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link to="/student/information/development-options">
+                                    <Link to="/information/development-options">
                                         Back to the map
                                     </Link>
                                 </p>
@@ -278,4 +279,4 @@ const Stage3PlaySkate = () => {
     )
 }
 
-export default Stage3PlaySkate
+export default InfoPlaySkate

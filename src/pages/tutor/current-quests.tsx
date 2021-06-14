@@ -37,7 +37,7 @@ const TUTOR_CURRENT_QUEST_SUB = gql`
                 school {
                     name
                 }
-                quests(where: { status: { _eq: "active" } }) {
+                quests(where: { status: { _eq: active } }) {
                     teams {
                         id
                         name
@@ -110,16 +110,18 @@ const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
                     />
                 )
             }
-            return <ul className="current-steps"><li><UnlockedStageStatus /></li></ul>
+            return <UnlockedStageStatus />
         }
     } else {
-        return <ul className="current-steps"><li><LockedStageStatus teamId={teamId} stageId={stageId} /></li></ul>
+        return <LockedStageStatus teamId={teamId} stageId={stageId} />
     }
 }
 
 const TeamInfoPanel = ({ listNum, teamName, students }) => (
     <>
-        <p className="mb-2 sm-type-guitar sm-type-guitar--medium red-highlight mt-2">{listNum + 1}. {teamName}</p>
+        <p className="mb-2 sm-type-guitar sm-type-guitar--medium red-highlight mt-2">
+            {teamName}
+        </p>
         <p className="sm-type-lead sm-type-lead--medium">Team members:</p>
         <ul className="mb-2">
             {students.map(({ user: { full_name } }, i) => (
@@ -152,7 +154,10 @@ const TutorCurrentQuestPage = () => {
         TutorCurrentQuestQueryVariables
     >(
         TUTOR_CURRENT_QUEST_QUERY,
-        { fetchPolicy: 'network-only', pollInterval: 2000 },
+        {
+            fetchPolicy: 'network-only',
+            // pollInterval: 2000
+        },
         'userId'
     )
 
@@ -231,7 +236,10 @@ const TutorCurrentQuestPage = () => {
                                         },
                                         i
                                     ) => (
-                                        <div key={i} className="row tutor mt-4 side-grey">
+                                        <div
+                                            key={i}
+                                            className="row tutor mt-4 side-grey"
+                                        >
                                             <div className="col-lg-3">
                                                 <TeamInfoPanel
                                                     listNum={i}

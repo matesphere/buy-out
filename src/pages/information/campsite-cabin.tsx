@@ -1,17 +1,17 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
-
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
-import HelpIcon from '../../../assets/help-icon.svg'
-
-import '../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import TickSheet from '../../../assets/tick-sheet.svg'
 
-const Stage3CampsiteCabin = () => {
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
+
+import HelpIcon from '../../assets/help-icon.svg'
+import TickSheet from '../../assets/tick-sheet.svg'
+
+import '../../scss/index.scss'
+
+const InfoCampsiteCabin = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "camping-cabins.jpg" }) {
@@ -21,6 +21,7 @@ const Stage3CampsiteCabin = () => {
             }
         }
     `)
+
     return (
         <>
             <Helmet>
@@ -334,7 +335,7 @@ const Stage3CampsiteCabin = () => {
                             </div>
 
                             <p className="sm-type-bigamp mb-4">
-                                <Link to="/student/information/development-options">
+                                <Link to="/information/development-options">
                                     Back to the map
                                 </Link>
                             </p>
@@ -352,7 +353,7 @@ const Stage3CampsiteCabin = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link to="/student/information/development-options">
+                                    <Link to="/information/development-options">
                                         Back to the map
                                     </Link>
                                 </p>
@@ -390,4 +391,4 @@ const Stage3CampsiteCabin = () => {
     )
 }
 
-export default Stage3CampsiteCabin
+export default InfoCampsiteCabin

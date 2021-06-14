@@ -1,20 +1,18 @@
-import React, { useState, useContext } from 'react'
+import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
-import scrollTo from 'gatsby-plugin-smoothscroll'
-import { gql } from '@apollo/client'
 
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
 
-import HelpIcon from '../../../assets/help-icon.svg'
-import InfoPick from '../../../assets/info-pick.svg'
-import TickSheet from '../../../assets/tick-sheet.svg'
+import HelpIcon from '../../assets/help-icon.svg'
+import InfoPick from '../../assets/info-pick.svg'
+import TickSheet from '../../assets/tick-sheet.svg'
 
-import '../../../scss/index.scss'
+import '../../scss/index.scss'
 
-const Stage3TaskPage = () => {
+const InfoDevOptions = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "map-zoom.jpg" }) {
@@ -188,7 +186,7 @@ const Stage3TaskPage = () => {
                                             low running costs.
                                         </p>
                                         <p>
-                                            <Link to="/student/information/affordable-housing-scheme">
+                                            <Link to="/information/affordable-housing-scheme">
                                                 Read more
                                             </Link>
                                         </p>
@@ -211,7 +209,7 @@ const Stage3TaskPage = () => {
                                             for older children.
                                         </p>
                                         <p>
-                                            <Link to="/student/information/playpark-skatepark">
+                                            <Link to="/information/playpark-skatepark">
                                                 Read more
                                             </Link>
                                         </p>
@@ -233,7 +231,7 @@ const Stage3TaskPage = () => {
                                             local community and visitors.
                                         </p>
                                         <p>
-                                            <Link to="/student/information/shop-and-post-office">
+                                            <Link to="/information/shop-and-post-office">
                                                 Read more
                                             </Link>
                                         </p>
@@ -256,7 +254,7 @@ const Stage3TaskPage = () => {
                                             electricity sold onto the grid.
                                         </p>
                                         <p>
-                                            <Link to="/student/information/micro-hydro">
+                                            <Link to="/information/micro-hydro">
                                                 Read more
                                             </Link>
                                         </p>
@@ -278,7 +276,7 @@ const Stage3TaskPage = () => {
                                             electricity sold onto the grid.
                                         </p>
                                         <p>
-                                            <Link to="/student/information/wind-turbine">
+                                            <Link to="/information/wind-turbine">
                                                 Read more
                                             </Link>
                                         </p>
@@ -300,7 +298,7 @@ const Stage3TaskPage = () => {
                                             workshops.
                                         </p>
                                         <p>
-                                            <Link to="/student/information/business-hub">
+                                            <Link to="/information/business-hub">
                                                 Read more
                                             </Link>
                                         </p>
@@ -325,7 +323,7 @@ const Stage3TaskPage = () => {
                                             as climate mitigation
                                         </p>
                                         <p>
-                                            <Link to="/student/information/forestry-scheme">
+                                            <Link to="/information/forestry-scheme">
                                                 Read more
                                             </Link>
                                         </p>
@@ -350,7 +348,7 @@ const Stage3TaskPage = () => {
                                             the facilities.
                                         </p>
                                         <p>
-                                            <Link to="/student/information/campsite-cabin">
+                                            <Link to="/information/campsite-cabin">
                                                 Read more
                                             </Link>
                                         </p>
@@ -373,7 +371,7 @@ const Stage3TaskPage = () => {
                                             Hotel and Lodge.
                                         </p>
                                         <p>
-                                            <Link to="/student/information/market-scheme">
+                                            <Link to="/information/market-scheme">
                                                 Read more
                                             </Link>
                                         </p>
@@ -454,4 +452,4 @@ const Stage3TaskPage = () => {
     )
 }
 
-export default Stage3TaskPage
+export default InfoDevOptions

@@ -5,20 +5,20 @@ import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import TeamHub from './student/team-hub'
 
-import AboutGlenclasAreaPage from './student/information/about-glenclas-area'
-import AboutTheRoles from './student/information/about-the-roles'
-import InformationPage from './student/information-page'
-import CommunityInformation from './student/information/community'
-import DevelopmentOptions from './student/information/development-options'
-import DevOptionHousing from './student/information/affordable-housing-scheme'
-import DevOptionPlaySkate from './student/information/playpark-skatepark'
-import DevOptionShopPostOffice from './student/information/shop-and-post-office'
-import DevOptionMicroHydro from './student/information/micro-hydro'
-import DevOptionWindTurbine from './student/information/wind-turbine'
-import DevOptionBusinessHub from './student/information/business-hub'
-import DevOptionForestryScheme from './student/information/forestry-scheme'
-import DevOptionCampsiteCabin from './student/information/campsite-cabin'
-import DevOptionMarketScheme from './student/information/market-scheme'
+// import AboutGlenclasAreaPage from './information/about-glenclas-area'
+// import AboutTheRoles from './information/about-the-roles'
+// import InformationPage from './student/information-page'
+// import CommunityInformation from './information/community'
+// import DevelopmentOptions from './information/development-options'
+// import DevOptionHousing from './information/affordable-housing-scheme'
+// import DevOptionPlaySkate from './information/playpark-skatepark'
+// import DevOptionShopPostOffice from './information/shop-and-post-office'
+// import DevOptionMicroHydro from './information/micro-hydro'
+// import DevOptionWindTurbine from './information/wind-turbine'
+// import DevOptionBusinessHub from './information/business-hub'
+// import DevOptionForestryScheme from './information/forestry-scheme'
+// import DevOptionCampsiteCabin from './information/campsite-cabin'
+// import DevOptionMarketScheme from './information/market-scheme'
 
 import Stage1Landing from './student/stages/stage-1/stage-1-landing'
 import Stage1Task from './student/stages/stage-1/stage-1-task'
@@ -76,7 +76,7 @@ const Routes = () => {
         <Router basepath="/student">
             <LoggedInRoute path="/team-hub" component={TeamHub} />
 
-            <LoggedInRoute path="/information" component={InformationPage} />
+            {/* <LoggedInRoute path="/information" component={InformationPage} />
             <LoggedInRoute
                 path="/information/about-glenclas-area"
                 component={AboutGlenclasAreaPage}
@@ -128,7 +128,7 @@ const Routes = () => {
             <LoggedInRoute
                 path="/information/market-scheme"
                 component={DevOptionMarketScheme}
-            />
+            /> */}
 
             <LoggedInRoute path="/stage-1" component={Stage1Landing} />
             <LoggedInRoute path="/stage-1/task" component={Stage1Task} />

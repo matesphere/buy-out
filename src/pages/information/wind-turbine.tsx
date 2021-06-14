@@ -1,15 +1,17 @@
 import React from 'react'
-import { Link } from 'gatsby'
-import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
-
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
-import HelpIcon from '../../../assets/help-icon.svg'
-import '../../../scss/index.scss'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import TickSheet from '../../../assets/tick-sheet.svg'
-const Stage3WindTurbine = () => {
+import { Helmet } from 'react-helmet'
+
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
+
+import HelpIcon from '../../assets/help-icon.svg'
+import TickSheet from '../../assets/tick-sheet.svg'
+
+import '../../scss/index.scss'
+
+const InfoWindTurbine = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "wind-turbine.jpg" }) {
@@ -24,6 +26,7 @@ const Stage3WindTurbine = () => {
             }
         }
     `)
+
     return (
         <>
             <Helmet>
@@ -409,7 +412,7 @@ const Stage3WindTurbine = () => {
                             </div>
 
                             <p className="sm-type-bigamp mb-4">
-                                <Link to="/student/information/development-options">
+                                <Link to="/information/development-options">
                                     Back to the map
                                 </Link>
                             </p>
@@ -427,7 +430,7 @@ const Stage3WindTurbine = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link to="/student/information/development-options">
+                                    <Link to="/information/development-options">
                                         Back to the map
                                     </Link>
                                 </p>
@@ -465,4 +468,4 @@ const Stage3WindTurbine = () => {
     )
 }
 
-export default Stage3WindTurbine
+export default InfoWindTurbine

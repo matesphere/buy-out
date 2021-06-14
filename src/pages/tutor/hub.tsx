@@ -28,10 +28,45 @@ const TUTOR_HUB_QUERY = gql`
                 school {
                     name
                 }
+                quests {
+                    id
+                    status
+                    started_at
+                    completed_at
+                    teams {
+                        id
+                        name
+                    }
+                }
             }
         }
     }
 `
+
+const getDateFromTimestamp = (timestamp) => {
+    const date = new Date(timestamp)
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`
+}
+
+const PreviousQuestDisplay = ({ quest }) => (
+    <>
+        <span>
+            {getDateFromTimestamp(quest.started_at)} -{' '}
+            {getDateFromTimestamp(quest.completed_at)}, {quest.teams.length}{' '}
+            teams
+        </span>
+        <Link to="/login">View</Link>
+    </>
+)
+
+const CurrentQuestDisplay = ({ quest }) => (
+    <>
+        <span>
+            Started on {getDateFromTimestamp(quest.started_at)},{' '}
+            {quest.teams.length} teams
+        </span>{' '}
+    </>
+)
 
 const TutorHub = () => {
     const { loading, error, data } = useAuthQuery<
@@ -47,6 +82,7 @@ const TutorHub = () => {
             full_name: fullName,
             tutor: {
                 school: { name: schoolName },
+                quests,
             },
         },
     } = data
@@ -80,36 +116,45 @@ const TutorHub = () => {
                                     Previous Quests
                                 </p>
                                 <ul>
-                                    <li className="sm-type-amp mb-2">
-                                        <Link to="/login">
-                                            03.04.2019 - Class 4B 2019
-                                        </Link>
-                                    </li>
-                                    <li className="sm-type-amp mb-2">
-                                        <Link to="/login">
-                                            03.10.2019 - Class 4A 2019
-                                        </Link>
-                                    </li>
-                                    <li className="sm-type-amp mb-2">
-                                        <Link to="/login">
-                                            03.05.2020 - Class 4B 2020
-                                        </Link>
-                                    </li>
+                                    {quests
+                                        .filter(
+                                            (quest) =>
+                                                quest.status === 'complete'
+                                        )
+                                        .map((quest, i) => (
+                                            <li
+                                                key={i}
+                                                className="sm-type-amp mb-2"
+                                            >
+                                                <PreviousQuestDisplay
+                                                    quest={quest}
+                                                />
+                                            </li>
+                                        ))}
                                 </ul>
                             </div>
+
                             <div className="side-grey mb-2">
                                 <p className="sm-type-lead sm-type-lead--medium">
-                                    Current Quest
+                                    Current Quest(s)
                                 </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/tutor/current-quest">
-                                        Your current Quest
-                                    </Link>{' '}
-                                    <span className="sm-type-amp--medium">
-                                        Class 4B 2021
-                                    </span>{' '}
-                                    started on 03.05.2021
-                                </p>
+                                <ul>
+                                    {quests
+                                        .filter(
+                                            (quest) => quest.status === 'active'
+                                        )
+                                        .map((quest, i) => (
+                                            <li
+                                                key={i}
+                                                className="sm-type-amp mb-2"
+                                            >
+                                                <CurrentQuestDisplay
+                                                    quest={quest}
+                                                />
+                                            </li>
+                                        ))}
+                                </ul>
+                                <Link to="/tutor/current-quests">View all</Link>
                             </div>
                             <div className="side-grey mb-2">
                                 <p className="sm-type-lead sm-type-lead--medium">

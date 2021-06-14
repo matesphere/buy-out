@@ -1,15 +1,15 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import Slider from 'react-slick'
-import { slickSettings } from '../../../utils/slicksettings'
 
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
+import CheckList from '../../components/common/checklist'
+import Helpful from '../../components/common/helpful'
 
-import CheckList from '../../../components/common/checklist'
-import Helpful from '../../../components/common/helpful'
+import { slickSettings } from '../../utils/slicksettings'
 
-import '../../../scss/index.scss'
+import '../../scss/index.scss'
 
 import {
     stage2CheckListEng,
@@ -19,9 +19,7 @@ import {
     stage2DataTextEng,
 } from './_roles.data'
 
-
 const Stage2TaskPage = () => {
-
     return (
         <>
             <Helmet>

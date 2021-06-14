@@ -1,11 +1,12 @@
 import React from 'react'
 import Nav from './_nav'
-import '../scss/index.scss'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Squiggle from '../assets/squiggle.svg'
 import PinLogo from '../assets/pin-logo.svg'
+
+import '../scss/index.scss'
 
 const Header = ({ headerText }) => {
     const data = useStaticQuery(graphql`

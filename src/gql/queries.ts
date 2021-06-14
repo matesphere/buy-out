@@ -126,12 +126,13 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                 school {
                     name
                 }
-                quests(where: { status: { _eq: "active" } }) {
+                quests(where: { status: { _eq: active } }) {
                     teams {
                         id
                         name
                         students {
                             id
+                            position
                             user {
                                 full_name
                             }
@@ -145,6 +146,13 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                                 id
                                 status
                                 feedback
+                            }
+                        }
+                        team_development_options {
+                            development_option {
+                                id
+                                display_name
+                                option
                             }
                         }
                     }

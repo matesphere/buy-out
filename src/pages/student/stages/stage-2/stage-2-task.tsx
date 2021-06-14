@@ -113,11 +113,20 @@ const Stage2TaskPage = () => {
                                 different roles. Follow the link below to find
                                 out what each of these is responsible for.
                             </p>
-                            <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/information/about-the-roles">
+                            {/* <p className="sm-type-bigamp mb-3">
+                                <Link to="/information/about-the-roles">
                                     Read about the roles here
                                 </Link>
-                            </p>
+                            </p> */}
+                            <div className="form-holder-border">
+                                <ul>
+                                    <li className="sm-type-guitar">
+                                        <Link to="/information/about-the-roles">
+                                            Read about the roles here
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
 
                             <div
                                 className={`filters-container${

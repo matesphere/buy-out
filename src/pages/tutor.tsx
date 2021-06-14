@@ -3,7 +3,7 @@ import { Router, RouteComponentProps } from '@reach/router'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import Hub from './tutor/hub'
-import CurrentQuest from './tutor/current-quest'
+import CurrentQuest from './tutor/current-quests'
 import AddStudents from './tutor/add-students'
 import CreateTeam from './tutor/create-team'
 import Stage1Submitted from './tutor/stages/stage-1/tutor-stage-1-submitted'
@@ -51,7 +51,10 @@ const Routes = () => {
         <NewQuestContext.Provider value={{ studentsToAdd, setStudentsToAdd }}>
             <Router basepath="/tutor">
                 <LoggedInRoute path="/hub" component={Hub} />
-                <LoggedInRoute path="/current-quest" component={CurrentQuest} />
+                <LoggedInRoute
+                    path="/current-quests"
+                    component={CurrentQuest}
+                />
                 <LoggedInRoute path="/add-students" component={AddStudents} />
                 <LoggedInRoute path="/create-team" component={CreateTeam} />
 

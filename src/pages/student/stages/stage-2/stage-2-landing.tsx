@@ -116,7 +116,7 @@ const Stage2LandingPage = () => {
                                 village and its community.
                             </p>
                             <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/information/about-glenclas-area">
+                                <Link to="/information/about-glenclas-area">
                                     Read about the area
                                 </Link>
                             </p>
@@ -128,7 +128,7 @@ const Stage2LandingPage = () => {
                                 options that could help the community.
                             </p>
                             <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/information/community">
+                                <Link to="/information/community">
                                     See what the experts and the community have
                                     to say
                                 </Link>

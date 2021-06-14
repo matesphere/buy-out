@@ -136,7 +136,7 @@ export const START_QUEST = gql`
     mutation StartQuest($quest_id: uuid!) {
         update_quest_by_pk(
             pk_columns: { id: $quest_id }
-            _set: { status: "active" }
+            _set: { status: active }
         ) {
             id
             status

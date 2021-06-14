@@ -1,18 +1,19 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
-
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
-import HelpIcon from '../../../assets/help-icon.svg'
-
-import '../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import Ticklr from '../../../assets/tick-lr.svg'
-import Ticklr2 from '../../../assets/tick-lr2.svg'
-import TickSheet from '../../../assets/tick-sheet.svg'
-const Stage3ForestryScheme = () => {
+
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
+
+import HelpIcon from '../../assets/help-icon.svg'
+import Ticklr from '../../assets/tick-lr.svg'
+import Ticklr2 from '../../assets/tick-lr2.svg'
+import TickSheet from '../../assets/tick-sheet.svg'
+
+import '../../scss/index.scss'
+
+const InfoForestryScheme = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "forestry-scheme.jpg" }) {
@@ -22,6 +23,7 @@ const Stage3ForestryScheme = () => {
             }
         }
     `)
+
     return (
         <>
             <Helmet>
@@ -221,7 +223,7 @@ const Stage3ForestryScheme = () => {
                             </div>
 
                             <p className="sm-type-bigamp mb-4">
-                                <Link to="/student/information/development-options">
+                                <Link to="/information/development-options">
                                     Back to the map
                                 </Link>
                             </p>
@@ -239,7 +241,7 @@ const Stage3ForestryScheme = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link to="/student/information/development-options">
+                                    <Link to="/information/development-options">
                                         Back to the map
                                     </Link>
                                 </p>
@@ -277,4 +279,4 @@ const Stage3ForestryScheme = () => {
     )
 }
 
-export default Stage3ForestryScheme
+export default InfoForestryScheme

@@ -1,18 +1,18 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
-
-import Header from '../../../components/_header'
-import Footer from '../../../components/_footer'
-import HelpIcon from '../../../assets/help-icon.svg'
-
-import '../../../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import InfoPick from '../../../assets/info-pick.svg'
-import TickSheet from '../../../assets/tick-sheet.svg'
 
-const Stage3ShopPostOffice = () => {
+import Header from '../../components/_header'
+import Footer from '../../components/_footer'
+
+import HelpIcon from '../../assets/help-icon.svg'
+import InfoPick from '../../assets/info-pick.svg'
+import TickSheet from '../../assets/tick-sheet.svg'
+
+import '../../scss/index.scss'
+
+const InfoShopPostOffice = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "shop-post-office.jpg" }) {
@@ -22,6 +22,7 @@ const Stage3ShopPostOffice = () => {
             }
         }
     `)
+
     return (
         <>
             <Helmet>
@@ -386,7 +387,7 @@ const Stage3ShopPostOffice = () => {
                             </div>
 
                             <p className="sm-type-bigamp mb-4">
-                                <Link to="/student/information/development-options">
+                                <Link to="/information/development-options">
                                     Back to the map
                                 </Link>
                             </p>
@@ -404,7 +405,7 @@ const Stage3ShopPostOffice = () => {
                                     opportunities.
                                 </p>
                                 <p className="sm-type-amp">
-                                    <Link to="/student/information/development-options">
+                                    <Link to="/information/development-options">
                                         Back to the map
                                     </Link>
                                 </p>
@@ -442,4 +443,4 @@ const Stage3ShopPostOffice = () => {
     )
 }
 
-export default Stage3ShopPostOffice
+export default InfoShopPostOffice
