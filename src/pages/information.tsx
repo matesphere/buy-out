@@ -34,7 +34,7 @@ const InformationPage = () => {
                             </p>
 
                             <h3 className="sm-type-drum mb-3">
-                                1. Read about the Glenclas area.
+                                Read about the Glenclas area.
                             </h3>
 
                             <p className="sm-type-bigamp mb-3">
@@ -47,7 +47,7 @@ const InformationPage = () => {
                                 </Link>
                             </p>
                             <h3 className="sm-type-drum mt-4">
-                                2. Listen to the experts and the community.
+                                Listen to the experts and the community.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
                                 Consult with the people about development
@@ -60,7 +60,7 @@ const InformationPage = () => {
                                 </Link>
                             </p>
                             <h3 className="sm-type-drum mt-4">
-                                3. What are each roles responsibilities.
+                                What are each roles responsibilities.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
                                 Find out what each role is responsible for and
@@ -73,7 +73,7 @@ const InformationPage = () => {
                             </p>
 
                             <h3 className="sm-type-drum mt-4">
-                                4. Development options.
+                                Development options.
                             </h3>
                             <p className="sm-type-bigamp mb-3">
                                 Look at the map and see what options are
