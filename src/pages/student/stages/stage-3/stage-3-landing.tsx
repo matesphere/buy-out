@@ -271,8 +271,7 @@ const Stage3LandingPage = () => {
                                     <p className="sm-type-lead mb-2">
                                         Use the SWOT templates to help you
                                         confirm your choices. Make sure to hit
-                                        'save' before returning to this screen;
-                                        this will then unlock the next SWOT.
+                                        'save' before returning to this screen!
                                     </p>
 
                                     <SwotLinks

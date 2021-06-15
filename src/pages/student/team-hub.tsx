@@ -9,8 +9,8 @@ import Footer from '../../components/_footer'
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
 
-import { UserStateContext } from '../../utils/user-state'
 import { useAuthQuery } from '../../utils/auth-utils'
+import { POSITION_DISPLAY_NAME } from '../../utils/common-utils'
 
 import {
     TeamHubQuery,
@@ -33,13 +33,6 @@ import Tick from '../../assets/tick.svg'
 import HelpIcon from '../../assets/help-icon.svg'
 
 import '../../scss/index.scss'
-
-const positionMapping = {
-    chairperson: 'Chair',
-    vicechairperson: 'Vice-chair',
-    treasurer: 'Treasurer',
-    secretary: 'Secretary',
-}
 
 const TEAM_HUB_QUERY = gql`
     query TeamHubQuery($user_id: uuid!) {
@@ -168,7 +161,8 @@ const TeamInfoSection = ({
                 <div className="col-lg-2"></div>
                 <div className="col-lg-8">
                     <p className="notification-alert sm-type-lead">
-                        ! You have a notification, check your current stage for feedback.
+                        ! You have a notification, check your current stage for
+                        feedback.
                     </p>
                 </div>
                 <div className="col-lg-2"></div>
@@ -197,7 +191,7 @@ const TeamInfoSection = ({
                                         <span>
                                             <i>
                                                 {` - ${
-                                                    positionMapping[
+                                                    POSITION_DISPLAY_NAME[
                                                         student.position
                                                     ]
                                                 }`}

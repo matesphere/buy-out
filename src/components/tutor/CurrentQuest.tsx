@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'gatsby'
-import { gql } from '@apollo/client'
 
 import { useAuthMutation } from '../../utils/auth-utils'
 import {
@@ -8,8 +7,17 @@ import {
     MARK_PASSED,
     MARK_FAILED,
     COMPLETE_STAGE,
+    SAVE_WORK_INITIAL,
+    SAVE_WORK,
 } from '../../gql/mutations'
+
 import { TUTOR_CURRENT_QUEST_QUERY } from '../../gql/queries'
+import { UnlockStage, UnlockStageVariables } from '../../gql/types/UnlockStage'
+import {
+    SaveWorkInitial,
+    SaveWorkInitialVariables,
+} from '../../gql/types/SaveWorkInitial'
+import { SaveWork, SaveWorkVariables } from '../../gql/types/SaveWork'
 
 import Lock from '../../assets/lock.svg'
 import Tick from '../../assets/tick.svg'
@@ -18,11 +26,14 @@ import Progress from '../../assets/progress.svg'
 import Submitted from '../../assets/submitted.svg'
 
 export const LockedStageStatus = ({ teamId, stageId }) => {
-    const [unlockStage] = useAuthMutation(UNLOCK_STAGE, {
-        query: TUTOR_CURRENT_QUEST_QUERY,
-        variables: {},
-        idRequired: 'userId',
-    })
+    const [unlockStage] = useAuthMutation<UnlockStage, UnlockStageVariables>(
+        UNLOCK_STAGE,
+        {
+            query: TUTOR_CURRENT_QUEST_QUERY,
+            variables: {},
+            idRequired: 'userId',
+        }
+    )
 
     return (
         <div>
@@ -55,6 +66,133 @@ export const UnlockedStageStatus = () => (
     </div>
 )
 
+//? Pulls out display names of SWOTs which were provided as model answers
+const getDocProvidedAnswers = (doc, devOptions) =>
+    Object.entries(doc.doc_data)
+        .filter(([_, data]) => data.provided)
+        .map(
+            ([option, _]) =>
+                devOptions.find((devOpt) => devOpt.option === option)
+                    .display_name
+        )
+
+//? Has a document already, i.e. when providing a model answer we add to the existing keys
+export const UnlockedStage3Status = ({ devOptions, doc }) => {
+    const [devOption, setDevOption] = useState('')
+
+    const [saveWork] = useAuthMutation<SaveWork, SaveWorkVariables>(SAVE_WORK, {
+        query: TUTOR_CURRENT_QUEST_QUERY,
+        variables: {},
+        idRequired: 'userId',
+    })
+
+    const providedAnswers = getDocProvidedAnswers(doc, devOptions)
+    console.log(providedAnswers)
+
+    return (
+        <div className="progress">
+            <Progress />
+            <span>Unlocked</span>
+
+            <label className="form-label sm-type-amp">Model answers: </label>
+            <select
+                className="form-control"
+                value={devOption}
+                onChange={({ target: { value } }) => setDevOption(value)}
+            >
+                <option value="" defaultChecked>
+                    Select
+                </option>
+                {devOptions.map(({ option, display_name }, i) => (
+                    <option key={i} value={option}>
+                        {display_name}
+                    </option>
+                ))}
+            </select>
+            <button
+                onClick={() => {
+                    saveWork({
+                        variables: {
+                            docId: doc.id,
+                            docData: {
+                                ...doc.doc_data,
+                                [devOption]: {
+                                    ...devOptions.find(
+                                        (opt) => opt.option === devOption
+                                    ).model_swot,
+                                    provided: true,
+                                },
+                            },
+                        },
+                    })
+                }}
+            >
+                Provide
+            </button>
+
+            {providedAnswers.length > 0 && (
+                <p>Provided: {providedAnswers.join(', ')}</p>
+            )}
+        </div>
+    )
+}
+
+//? Does not yet have a document, e.g. SWOT is being provided as example
+export const UnlockedStage3NoDocStatus = ({ stageProgressId, devOptions }) => {
+    const [devOption, setDevOption] = useState('')
+
+    const [saveWorkInitial] = useAuthMutation<
+        SaveWorkInitial,
+        SaveWorkInitialVariables
+    >(SAVE_WORK_INITIAL, {
+        query: TUTOR_CURRENT_QUEST_QUERY,
+        variables: {},
+        idRequired: 'userId',
+    })
+
+    return (
+        <div className="progress">
+            <Progress />
+            <span>Unlocked</span>
+
+            <label className="form-label sm-type-amp">Model answers: </label>
+            <select
+                className="form-control"
+                value={devOption}
+                onChange={({ target: { value } }) => setDevOption(value)}
+            >
+                <option value="" defaultChecked>
+                    Select
+                </option>
+                {devOptions.map(({ option, display_name }, i) => (
+                    <option key={i} value={option}>
+                        {display_name}
+                    </option>
+                ))}
+            </select>
+            <button
+                onClick={() => {
+                    saveWorkInitial({
+                        variables: {
+                            stageProgressId,
+                            docData: {
+                                [devOption]: {
+                                    ...devOptions.find(
+                                        (opt) => opt.option === devOption
+                                    ).model_swot,
+                                    provided: true,
+                                },
+                            },
+                        },
+                    })
+                }}
+            >
+                Provide
+            </button>
+        </div>
+    )
+}
+
 export const InProgressStageStatus = () => (
     <div className="progress">
         <Progress />
@@ -86,7 +224,9 @@ export const SubmittedStageStatus = ({
             <p className="orange-link">
                 <Submitted />
                 <span className="redorange-highlight">
-                    {documents[0].feedback ? 'Feedback provided' : 'Work submitted'}
+                    {documents[0].feedback
+                        ? 'Feedback provided'
+                        : 'Work submitted'}
                 </span>
             </p>
             <ul className="current-steps">

@@ -145,10 +145,12 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                             documents {
                                 id
                                 status
+                                doc_data
                                 feedback
                             }
                         }
                         team_development_options {
+                            shortlist
                             development_option {
                                 id
                                 display_name
@@ -158,6 +160,11 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                     }
                 }
             }
+        }
+        development_option {
+            option
+            display_name
+            model_swot
         }
         stage {
             id

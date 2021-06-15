@@ -1,6 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Helmet } from 'react-helmet'
-import { gql, useQuery } from '@apollo/client'
+import { gql } from '@apollo/client'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import LoginHeader from './_header'
@@ -10,6 +10,8 @@ import { Error } from '../../components/common/Error'
 import {
     LockedStageStatus,
     UnlockedStageStatus,
+    UnlockedStage3Status,
+    UnlockedStage3NoDocStatus,
     SubmittedStageStatus,
     DocumentlessSubmittedStageStatus,
     FailedStageStatus,
@@ -17,12 +19,18 @@ import {
 } from '../../components/tutor/CurrentQuest'
 
 import { useAuthQuery } from '../../utils/auth-utils'
+import { POSITION_DISPLAY_NAME } from '../../utils/common-utils'
+
 import { TUTOR_CURRENT_QUEST_QUERY } from '../../gql/queries'
 
 import {
     TutorCurrentQuestQuery,
     TutorCurrentQuestQueryVariables,
+    TutorCurrentQuestQuery_user_by_pk_tutor_quests_teams_team_development_options,
+    TutorCurrentQuestQuery_user_by_pk_tutor_quests_teams_students,
 } from '../../gql/types/TutorCurrentQuestQuery'
+
+import Tick from '../../assets/tick.svg'
 
 import 'react-tabs/style/react-tabs.css'
 import '../../scss/index.scss'
@@ -65,12 +73,18 @@ const TUTOR_CURRENT_QUEST_SUB = gql`
     }
 `
 
-const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
+const getStageStatusDisplay = (
+    stageId,
+    stageProgresses,
+    devOptions,
+    teamId
+) => {
     const stageProgress = stageProgresses.find(
         (stageProgress) => stageProgress.stage_id === stageId
     )
 
     const document = stageProgress?.documents[0] || null
+    console.log(document)
 
     if (stageProgress) {
         if (document) {
@@ -96,7 +110,14 @@ const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
                         />
                     )
                 default:
-                    return <UnlockedStageStatus />
+                    return stageId === 3 ? (
+                        <UnlockedStage3Status
+                            devOptions={devOptions}
+                            doc={document}
+                        />
+                    ) : (
+                        <UnlockedStageStatus />
+                    )
             }
         } else {
             if (stageProgress.status === 'completed') {
@@ -110,30 +131,67 @@ const getStageStatusDisplay = (stageId, stageProgresses, teamId) => {
                     />
                 )
             }
-            return <UnlockedStageStatus />
+            return stageId === 3 ? (
+                <UnlockedStage3NoDocStatus
+                    stageProgressId={stageProgress.id}
+                    devOptions={devOptions}
+                />
+            ) : (
+                <UnlockedStageStatus />
+            )
         }
     } else {
         return <LockedStageStatus teamId={teamId} stageId={stageId} />
     }
 }
 
-const TeamInfoPanel = ({ listNum, teamName, students }) => (
+interface TeamInfoPanelProps {
+    teamName: string
+    devOptions: Array<TutorCurrentQuestQuery_user_by_pk_tutor_quests_teams_team_development_options>
+    students: Array<TutorCurrentQuestQuery_user_by_pk_tutor_quests_teams_students>
+}
+
+const TeamInfoPanel = ({
+    teamName,
+    devOptions,
+    students,
+}: TeamInfoPanelProps) => (
     <>
         <p className="mb-2 sm-type-guitar sm-type-guitar--medium red-highlight mt-2">
             {teamName}
         </p>
         <p className="sm-type-lead sm-type-lead--medium">Team members:</p>
         <ul className="mb-2">
-            {students.map(({ user: { full_name } }, i) => (
+            {students.map(({ position, user: { full_name } }, i) => (
                 <li key={i} className="sm-type-amp">
                     {full_name}
+                    {position && ` - ${POSITION_DISPLAY_NAME[position]}`}
                 </li>
             ))}
         </ul>
+        {devOptions.length > 0 && (
+            <>
+                <p className="sm-type-lead sm-type-lead--medium">
+                    Development options:
+                </p>
+                <ul className="mb-2">
+                    {devOptions.map(
+                        (
+                            { shortlist, development_option: { display_name } },
+                            i
+                        ) => (
+                            <li key={i} className="sm-type-amp">
+                                {display_name} {shortlist && <Tick />}
+                            </li>
+                        )
+                    )}
+                </ul>
+            </>
+        )}
     </>
 )
 
-const StageInfoPanel = ({ stages, stageProgresses, teamId }) => (
+const StageInfoPanel = ({ stages, stageProgresses, devOptions, teamId }) => (
     <ul className="steps">
         {stages.map(({ id, title }, i) => (
             <li key={i}>
@@ -141,7 +199,12 @@ const StageInfoPanel = ({ stages, stageProgresses, teamId }) => (
                     {`Stage ${id}: ${title}`}
                 </p>
                 <div className="form-holder-border">
-                    {getStageStatusDisplay(id, stageProgresses, teamId)}
+                    {getStageStatusDisplay(
+                        id,
+                        stageProgresses,
+                        devOptions,
+                        teamId
+                    )}
                 </div>
             </li>
         ))}
@@ -201,6 +264,7 @@ const TutorCurrentQuestPage = () => {
         user_by_pk: {
             tutor: { quests },
         },
+        development_option: devOptions,
         stage,
     } = data
 
@@ -232,6 +296,7 @@ const TutorCurrentQuestPage = () => {
                                             id,
                                             name,
                                             students,
+                                            team_development_options,
                                             stage_progresses,
                                         },
                                         i
@@ -242,8 +307,10 @@ const TutorCurrentQuestPage = () => {
                                         >
                                             <div className="col-lg-3">
                                                 <TeamInfoPanel
-                                                    listNum={i}
                                                     teamName={name}
+                                                    devOptions={
+                                                        team_development_options
+                                                    }
                                                     students={students}
                                                 />
                                             </div>
@@ -253,6 +320,7 @@ const TutorCurrentQuestPage = () => {
                                                     stageProgresses={
                                                         stage_progresses
                                                     }
+                                                    devOptions={devOptions}
                                                     teamId={id}
                                                 />
                                             </div>

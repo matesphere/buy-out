@@ -157,6 +157,17 @@ export const UNLOCK_STAGE = gql`
     }
 `
 
+export const PROVIDE_MODEL_SWOT = gql`
+    mutation UpdateSwotDoc($docId: uuid!, $modelSwot: jsonb!) {
+        update_document_by_pk(
+            pk_columns: { id: $docId }
+            _append: { doc_data: $modelSwot }
+        ) {
+            id
+        }
+    }
+`
+
 export const SUBMIT_FEEDBACK = gql`
     mutation SubmitFeedback($docId: uuid!, $feedbackData: jsonb!) {
         update_document_by_pk(
