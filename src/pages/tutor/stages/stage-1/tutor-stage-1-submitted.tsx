@@ -128,7 +128,6 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                     </span>
                                 </h3>
 
-                                {/* TODO: the div switch has moved into TextEditor - does it work with feedback? */}
                                 <div className="form-holder-border">
                                     <p className="sm-type-lead">
                                         <TextEditor

@@ -53,7 +53,7 @@ const PreviousQuestDisplay = ({ quest }) => (
         <span>
             {getDateFromTimestamp(quest.started_at)} -{' '}
             {getDateFromTimestamp(quest.completed_at)}, {quest.teams.length}{' '}
-            teams
+            teams{' '}
         </span>
         <Link to="/login">View</Link>
     </>
