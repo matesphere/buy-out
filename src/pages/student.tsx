@@ -16,6 +16,7 @@ import Stage2PageComplete from './student/stages/stage-2/stage-2-complete'
 import Stage3Landing from './student/stages/stage-3/stage-3-landing'
 import Stage3TaskPage from './student/stages/stage-3/stage-3-task'
 import Stage3Swot from './student/stages/stage-3/stage-3-swot'
+import Stage3SwotExample from './student/stages/stage-3/stage-3-swot-example'
 import Stage3Complete from './student/stages/stage-3/stage-3-complete'
 
 import Stage4Landing from './student/stages/stage-4/stage-4-landing'
@@ -77,6 +78,10 @@ const Routes = () => {
             <LoggedInRoute path="/stage-3" component={Stage3Landing} />
             <LoggedInRoute path="/stage-3/task" component={Stage3TaskPage} />
             <LoggedInRoute path="/stage-3/swot" component={Stage3Swot} />
+            <LoggedInRoute
+                path="/stage-3/swot/example"
+                component={Stage3SwotExample}
+            />
             <LoggedInRoute
                 path="/stage-3/complete"
                 component={Stage3Complete}

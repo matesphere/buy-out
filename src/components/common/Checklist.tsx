@@ -1,6 +1,5 @@
 import React from 'react'
 
-// @ts-ignore
 import TickSheet from '../../assets/tick-sheet.svg'
 
 const CheckList = ({ items }) => {

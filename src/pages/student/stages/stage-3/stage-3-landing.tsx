@@ -32,13 +32,8 @@ const SwotLinks = ({ devOptions, completedSwots }) => (
                 },
                 i
             ) => (
-                <li
-                    key={i}
-                    className={`sm-type-guitar mb-2${
-                        completedSwots.length >= i ? '' : ' disabled'
-                    }`}
-                >
-                    <Link to={`/student/stage-3/swot?id=${id}`}>
+                <li key={i} className="sm-type-guitar mb-2">
+                    <Link to={`/student/stage-3/swot?num=${i}&id=${id}`}>
                         {team_choice_name || display_name}
                     </Link>
                     {completedSwots.includes(option) && (
@@ -52,13 +47,24 @@ const SwotLinks = ({ devOptions, completedSwots }) => (
     </ol>
 )
 
-const ExampleSwotLinks = ({ devOptions, exampleSwots }) => (
+const ExampleSwotLinks = ({ exampleSwots }) => (
     <>
         <p className="sm-type-lead mb-2">
             {`Your teacher has provided the following example${
-                exampleSwots.length > 1 && 's'
+                exampleSwots.length > 1 ? 's' : ''
             } to help:`}
         </p>
+        <ul>
+            {exampleSwots.map((swotOption, i) => (
+                <li key={i} className="sm-type-guitar mb-2">
+                    <Link
+                        to={`/student/stage-3/swot/example?option=${swotOption}`}
+                    >
+                        Example {i + 1}
+                    </Link>
+                </li>
+            ))}
+        </ul>
     </>
 )
 
@@ -84,7 +90,20 @@ const Stage3LandingPage = () => {
     const { team_development_options: devOptions } = pageData.team_by_pk
     const doc =
         pageData.team_by_pk.stage_progresses[0]?.documents[0]?.doc_data || {}
-    const completedSwots = Object.keys(doc)
+
+    // TODO: can use reduce to combine these 2 expressions, i.e. divide array
+    const completedSwots = Object.keys(doc).filter((opt) =>
+        devOptions
+            .map(({ development_option: { option } }) => option)
+            .includes(opt)
+    )
+
+    const exampleSwotOptions = Object.keys(doc).filter(
+        (swot) =>
+            !devOptions
+                .map(({ development_option: { option } }) => option)
+                .includes(swot)
+    )
 
     return (
         <>
@@ -288,6 +307,13 @@ const Stage3LandingPage = () => {
                                         devOptions={devOptions}
                                         completedSwots={completedSwots}
                                     />
+
+                                    {exampleSwotOptions.length > 0 && (
+                                        <ExampleSwotLinks
+                                            exampleSwots={exampleSwotOptions}
+                                        />
+                                    )}
+
                                     <SaveSubmitSection
                                         submitWorkObj={submitWorkObj}
                                         disableSubmit={

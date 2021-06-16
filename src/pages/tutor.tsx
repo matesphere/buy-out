@@ -7,6 +7,7 @@ import CurrentQuest from './tutor/current-quests'
 import AddStudents from './tutor/add-students'
 import CreateTeam from './tutor/create-team'
 import Stage1Submitted from './tutor/stages/stage-1/tutor-stage-1-submitted'
+import Stage3Submitted from './tutor/stages/stage-3/tutor-stage-3-submitted'
 
 import { StudentType } from '../gql/types'
 
@@ -61,6 +62,11 @@ const Routes = () => {
                 <LoggedInRoute
                     path="/stage-1/submitted"
                     component={Stage1Submitted}
+                />
+
+                <LoggedInRoute
+                    path="/stage-3/submitted"
+                    component={Stage3Submitted}
                 />
             </Router>
         </NewQuestContext.Provider>

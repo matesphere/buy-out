@@ -49,54 +49,57 @@ const ChooseOptionsCheckboxes = ({
     setTeamChoiceName,
 }) => (
     <>
-        {devOptions.map(({ id, display_name }, i) =>
-            id === 10 ? (
-                <div key={i}>
-                    <p className="sm-type-lead sm-type-lead--medium mt-4">
-                        Or choose your own option - check the box and enter your
-                        option name here!
-                    </p>
-                    <div className="multiple-choice">
+        {devOptions
+            .slice()
+            .sort((a, b) => a.id - b.id)
+            .map(({ id, display_name }, i) =>
+                id === 10 ? (
+                    <div key={i}>
+                        <p className="sm-type-lead sm-type-lead--medium mt-4">
+                            Or choose your own option - check the box and enter
+                            your option name here!
+                        </p>
+                        <div className="multiple-choice">
+                            <input
+                                className="form-control"
+                                id="10"
+                                type="checkbox"
+                                checked={selectedOptions.includes(10)}
+                                onChange={() => toggleValue(10)}
+                            />
+                            <label className="form-label" htmlFor="housing">
+                                Team choice
+                            </label>
+                        </div>
+                        <div className="mb-4">
+                            <label className="form-label sm-type-amp">
+                                Development option name
+                            </label>
+                            <input
+                                type="text"
+                                className="form-control"
+                                value={teamChoiceName}
+                                onChange={({ target: { value } }) =>
+                                    setTeamChoiceName(value)
+                                }
+                            />
+                        </div>
+                    </div>
+                ) : (
+                    <div key={i} className="multiple-choice">
                         <input
                             className="form-control"
-                            id="10"
+                            id={id}
                             type="checkbox"
-                            checked={selectedOptions.includes(10)}
-                            onChange={() => toggleValue(10)}
+                            checked={selectedOptions.includes(id)}
+                            onChange={() => toggleValue(id)}
                         />
-                        <label className="form-label" htmlFor="housing">
-                            Team choice
+                        <label className="form-label" htmlFor={id}>
+                            {display_name}
                         </label>
                     </div>
-                    <div className="mb-4">
-                        <label className="form-label sm-type-amp">
-                            Development option name
-                        </label>
-                        <input
-                            type="text"
-                            className="form-control"
-                            value={teamChoiceName}
-                            onChange={({ target: { value } }) =>
-                                setTeamChoiceName(value)
-                            }
-                        />
-                    </div>
-                </div>
-            ) : (
-                <div key={i} className="multiple-choice">
-                    <input
-                        className="form-control"
-                        id={id}
-                        type="checkbox"
-                        checked={selectedOptions.includes(id)}
-                        onChange={() => toggleValue(id)}
-                    />
-                    <label className="form-label" htmlFor={id}>
-                        {display_name}
-                    </label>
-                </div>
-            )
-        )}
+                )
+            )}
     </>
 )
 
@@ -139,6 +142,7 @@ const Stage3Task = () => {
                     Task {taskComplete ? 'complete' : 'to complete:'}
                 </span>
             </h3>
+
             {taskComplete ? (
                 <>
                     <p className="sm-type-lead mb-2">
@@ -199,7 +203,12 @@ const Stage3Task = () => {
                         </button>
 
                         {chooseDevOptionsResponse.data && (
-                            <p className="sm-type-amp">Submitted!</p>
+                            <>
+                                <p className="sm-type-amp">Submitted!</p>
+                                <Link to="/student/stage-3">
+                                    Back to Stage 3
+                                </Link>
+                            </>
                         )}
                     </div>
                 </>

@@ -6,6 +6,15 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
+import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
+
+import { useAuthQuery } from '../../../../utils/auth-utils'
+import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
+import {
+    DocumentCompleteQuery,
+    DocumentCompleteQueryVariables,
+} from '../../../../gql/types/DocumentCompleteQuery'
 
 import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
@@ -13,7 +22,7 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
 
-const Stage3PageComplete = () => {
+const Stage3CompletePage = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "map-zoom.jpg" }) {
@@ -23,6 +32,24 @@ const Stage3PageComplete = () => {
             }
         }
     `)
+
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<DocumentCompleteQuery, DocumentCompleteQueryVariables>(
+        DOCUMENT_COMPLETE_QUERY,
+        { variables: { stage_id: 3 } },
+        'teamId'
+    )
+
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
+
+    const doc = pageData.team_by_pk.stage_progresses[0].documents[0]
+
+    const { title: stageTitle } = pageData.stage_by_pk
+
     return (
         <>
             <Helmet>
@@ -30,7 +57,7 @@ const Stage3PageComplete = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 3 - Lay The Foundations</title>
+                <title>Stage 3 - {stageTitle} - Lay The Foundations</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Stage 3" />
@@ -291,4 +318,4 @@ const Stage3PageComplete = () => {
     )
 }
 
-export default Stage3PageComplete
+export default Stage3CompletePage

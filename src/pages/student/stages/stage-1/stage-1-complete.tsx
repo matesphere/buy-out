@@ -8,7 +8,6 @@ import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 
-import { eng } from '../../../_index.data'
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
 import {
@@ -18,6 +17,8 @@ import {
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
+
+import { eng } from '../../../_index.data'
 
 import '../../../../scss/index.scss'
 

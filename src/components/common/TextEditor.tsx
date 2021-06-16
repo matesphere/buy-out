@@ -15,7 +15,7 @@ export const TextEditor = ({ data, onChange, docSubmitted }) => {
             }
             setEditorLoaded(true)
         }
-    }, [])
+    }, [docSubmitted])
 
     if (docSubmitted) {
         return (

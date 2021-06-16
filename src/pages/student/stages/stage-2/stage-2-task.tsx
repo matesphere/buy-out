@@ -8,8 +8,8 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-import CheckList from '../../../../components/common/checklist'
-import Helpful from '../../../../components/common/helpful'
+import CheckList from '../../../../components/common/Checklist'
+import Helpful from '../../../../components/common/Helpful'
 import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
 
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
@@ -214,7 +214,13 @@ const Stage2TaskPage = () => {
                                                                             (
                                                                                 positions
                                                                             ) => [
-                                                                                ...positions,
+                                                                                ...positions.filter(
+                                                                                    (
+                                                                                        pos
+                                                                                    ) =>
+                                                                                        pos.user_id !==
+                                                                                        user_id
+                                                                                ),
                                                                                 {
                                                                                     user_id,
                                                                                     school_id,

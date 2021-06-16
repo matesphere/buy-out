@@ -84,7 +84,6 @@ const getStageStatusDisplay = (
     )
 
     const document = stageProgress?.documents[0] || null
-    console.log(document)
 
     if (stageProgress) {
         if (document) {
@@ -93,8 +92,8 @@ const getStageStatusDisplay = (
                     return (
                         <SubmittedStageStatus
                             documents={stageProgress.documents}
-                            stageProgressId={stageProgress.id}
                             stageId={stageId}
+                            stageProgressId={stageProgress.id}
                         />
                     )
                 case 'marked_failed':
@@ -106,6 +105,7 @@ const getStageStatusDisplay = (
                 case 'marked_passed':
                     return (
                         <CompletedStageStatus
+                            stageId={stageId}
                             stageProgressId={stageProgress.id}
                         />
                     )
@@ -122,7 +122,10 @@ const getStageStatusDisplay = (
         } else {
             if (stageProgress.status === 'completed') {
                 return (
-                    <CompletedStageStatus stageProgressId={stageProgress.id} />
+                    <CompletedStageStatus
+                        stageId={stageId}
+                        stageProgressId={stageProgress.id}
+                    />
                 )
             } else if (stageProgress.status === 'submitted' && !document) {
                 return (
@@ -219,7 +222,7 @@ const TutorCurrentQuestPage = () => {
         TUTOR_CURRENT_QUEST_QUERY,
         {
             fetchPolicy: 'network-only',
-            // pollInterval: 2000
+            pollInterval: 2000,
         },
         'userId'
     )

@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { useMutation } from '@apollo/client'
+import { gql } from '@apollo/client'
 
-import {
-    CREATE_QUEST_WITH_TEAMS,
-    START_QUEST,
-    startQuestMapper,
-} from '../../gql/mutations'
+import { Loading } from '../../components/common/Loading'
+import { Error } from '../../components/common/Error'
+
+import { useAuthQuery, useAuthMutation } from '../../utils/auth-utils'
+import { CREATE_QUEST_WITH_TEAMS, START_QUEST } from '../../gql/mutations'
 
 import LoginHeader from './_header'
 import AccountFooter from './_footer'
@@ -19,14 +19,13 @@ import {
     createStudentsInCognito,
 } from '../../utils/auth-utils'
 
+import { UserStateContext } from '../../utils/user-state'
 import { NewQuestContext } from '../tutor'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import Cross from '../../assets/cross.svg'
-import '../../scss/index.scss'
 
-const SCHOOL_ID = 'e89e1d0c-4be6-4716-a597-a7c1f6d0ee6f'
-const TUTOR_ID = 'da6b4b46-09e1-4ff3-89d6-91cba1cfe6ca' // TODO another one to store
+import '../../scss/index.scss'
 
 // TODO: sort out 'team/teams' pluralisation in modals
 
@@ -141,6 +140,7 @@ const CreateStudentsSection = ({
     teamsFromResponse,
     cognitoResponse,
     setCognitoResponse,
+    schoolId,
 }) => {
     const [cognitoLoading, setCognitoLoading] = useState(false)
     // TODO: response is array of promises - need to handle rejections
@@ -149,7 +149,7 @@ const CreateStudentsSection = ({
     const studentsWithTeamId = mergeIdsIntoStudents(
         teamsWithStudents,
         teamsFromResponse,
-        SCHOOL_ID
+        schoolId
     )
 
     useEffect(() => {
@@ -176,12 +176,21 @@ const CreateStudentsSection = ({
     )
 }
 
-const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
-    const [createQuestWithTeams, createQuestWithTeamsResponse] = useMutation(
-        CREATE_QUEST_WITH_TEAMS
-    )
-    const [startQuest, startQuestResponse] = useMutation(START_QUEST)
+const ConfirmModal = ({
+    teams,
+    showModal,
+    setShowModal,
+    setStudentsToAdd,
+    tutorId,
+    schoolId,
+}) => {
+    const [createQuestWithTeams, createQuestWithTeamsResponse] =
+        useAuthMutation(CREATE_QUEST_WITH_TEAMS)
+    const [startQuest, startQuestResponse] = useAuthMutation(START_QUEST)
+
     const [cognitoResponse, setCognitoResponse] = useState([])
+
+    console.log(createQuestWithTeamsResponse)
 
     return (
         <>
@@ -213,7 +222,7 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                                                         quest: {
                                                             data: {
                                                                 tutor_id:
-                                                                    TUTOR_ID,
+                                                                    tutorId,
                                                             },
                                                         },
                                                     })
@@ -234,17 +243,19 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                         {createQuestWithTeamsResponse.data && (
                             <div>
                                 <p className="sm-type-guitar sm-type-guitar--medium">
-                                    {`Created ${createQuestWithTeamsResponse.data.insert_team.returning.length} teams!`}{' '}
+                                    {`Created ${createQuestWithTeamsResponse.data.insert_team.returning[0].quest.teams.length} teams!`}{' '}
                                 </p>
 
                                 <CreateStudentsSection
                                     teamsWithStudents={teams}
                                     teamsFromResponse={
                                         createQuestWithTeamsResponse.data
-                                            .insert_team.returning
+                                            .insert_team.returning[0].quest
+                                            .teams
                                     }
                                     cognitoResponse={cognitoResponse}
                                     setCognitoResponse={setCognitoResponse}
+                                    schoolId={schoolId}
                                 />
 
                                 {cognitoResponse.length > 0 && (
@@ -261,8 +272,8 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                                                             createQuestWithTeamsResponse
                                                                 .data
                                                                 .insert_team
-                                                                .returning
-                                                                .quest_id,
+                                                                .returning[0]
+                                                                .quest.id,
                                                     },
                                                 })
                                                 setShowModal(false)
@@ -290,7 +301,7 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
                             Quest created!{' '}
                         </p>
                         <Link
-                            to="/tutor/current-quest"
+                            to="/tutor/current-quests"
                             className="btn-solid-lg mt-4 mb-4"
                         >
                             View current quests
@@ -302,10 +313,35 @@ const ConfirmModal = ({ teams, showModal, setShowModal, setStudentsToAdd }) => {
     )
 }
 
+const CREATE_TEAM_QUERY = gql`
+    query CreateTeamQuery($user_id: uuid!) {
+        user_by_pk(id: $user_id) {
+            tutor {
+                id
+            }
+        }
+    }
+`
+
 const TutorCreateTeamPage = () => {
     const [teams, setTeams] = useState([])
     const [showModal, setShowModal] = useState(false)
+
     const { studentsToAdd, setStudentsToAdd } = useContext(NewQuestContext)
+    const {
+        userInfo: { schoolId, userId },
+    } = useContext(UserStateContext)
+
+    const { loading, error, data } = useAuthQuery(
+        CREATE_TEAM_QUERY,
+        {},
+        'userId'
+    )
+
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
+
+    const { id: tutorId } = data.user_by_pk.tutor
 
     return (
         <>
@@ -390,7 +426,14 @@ const TutorCreateTeamPage = () => {
                 </section>
 
                 <ConfirmModal
-                    {...{ teams, showModal, setShowModal, setStudentsToAdd }}
+                    {...{
+                        teams,
+                        showModal,
+                        setShowModal,
+                        setStudentsToAdd,
+                        tutorId,
+                        schoolId,
+                    }}
                 />
 
                 <AccountFooter />

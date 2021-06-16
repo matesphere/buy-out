@@ -10,6 +10,7 @@ interface SubmitFeedbackSectionProps {
     disableSubmit: boolean
     showModal: boolean
     allowUpdate: boolean
+    setAllowUpdate: (value: boolean) => void
 }
 
 export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
@@ -17,6 +18,7 @@ export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
     submitFeedbackObj,
     disableSubmit,
     allowUpdate,
+    setAllowUpdate,
 }) => {
     const [showModal, setShowModal] = useState(false)
 
@@ -52,7 +54,10 @@ export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
                                 <button
                                     className="btn-solid-lg mt-4"
                                     disabled={disableSubmit}
-                                    onClick={submitFeedbackObj.call}
+                                    onClick={() => {
+                                        submitFeedbackObj.call()
+                                        setAllowUpdate(false)
+                                    }}
                                 >
                                     Yes, submit feedback
                                 </button>

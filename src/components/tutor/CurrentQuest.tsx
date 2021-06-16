@@ -87,7 +87,6 @@ export const UnlockedStage3Status = ({ devOptions, doc }) => {
     })
 
     const providedAnswers = getDocProvidedAnswers(doc, devOptions)
-    console.log(providedAnswers)
 
     return (
         <div className="progress">
@@ -284,11 +283,11 @@ export const DocumentlessSubmittedStageStatus = ({ stageProgressId }) => {
         <div>
             <Submitted />
             <span className="redorange-highlight">Work submitted</span>
-            <span>
+            {/* <span>
                 <Link to={`/tutor/stage-2/submitted?id=${stageProgressId}`}>
                     View submitted work
                 </Link>
-            </span>
+            </span> */}
             <span>
                 <a
                     className="green-link text-underline"
@@ -321,12 +320,14 @@ export const FailedStageStatus = ({ documents }) => (
     </div>
 )
 
-export const CompletedStageStatus = ({ stageProgressId }) => (
+export const CompletedStageStatus = ({ stageId, stageProgressId }) => (
     <div>
         <Tick />
         <span>Completed</span>
         <span>
-            <Link to={`/tutor/stage-1/submitted?id=${stageProgressId}`}>
+            <Link
+                to={`/tutor/stage-${stageId}/submitted?id=${stageProgressId}`}
+            >
                 View completed work
             </Link>
         </span>

@@ -21,15 +21,20 @@ type WorkState = {
     feedback: string
 }
 
-type Action = {
-    type: ActionType.UpdateAction
-    payload: WorkState
-}
+type Action =
+    | {
+          type: ActionType.LoadAction
+          payload: WorkState
+      }
+    | {
+          type: ActionType.UpdateAction
+          payload: WorkState
+      }
 
 const stage1FeedbackReducer: Reducer<WorkState, Action> = (state, action) => {
     switch (action.type) {
-        // case ActionType.LoadAction:
-        //     return action.payload
+        case ActionType.LoadAction:
+            return action.payload
         case ActionType.UpdateAction:
             return {
                 feedback: action.payload.feedback,
@@ -39,7 +44,7 @@ const stage1FeedbackReducer: Reducer<WorkState, Action> = (state, action) => {
     }
 }
 
-const TutorStage1TaskPage: FC<PageProps> = ({ location: { search } }) => {
+const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     const {
         loading,
         error,
@@ -112,6 +117,7 @@ const TutorStage1TaskPage: FC<PageProps> = ({ location: { search } }) => {
                                 </div>
                             </div>
 
+                            {/* TODO: this feels like a FeedbackComponent to me */}
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet ticker-feedback">
@@ -121,31 +127,24 @@ const TutorStage1TaskPage: FC<PageProps> = ({ location: { search } }) => {
                                         Your feedback:
                                     </span>
                                 </h3>
+
+                                {/* TODO: the div switch has moved into TextEditor - does it work with feedback? */}
                                 <div className="form-holder-border">
                                     <p className="sm-type-lead">
-                                        {doc.feedback && !allowUpdate ? (
-                                            <div
-                                                dangerouslySetInnerHTML={{
-                                                    __html: doc.feedback
-                                                        .feedback,
-                                                }}
-                                            />
-                                        ) : (
-                                            <TextEditor
-                                                data={
-                                                    feedbackState?.feedback ||
-                                                    ''
-                                                }
-                                                onChange={(data) =>
-                                                    feedbackDispatch({
-                                                        type: ActionType.UpdateAction,
-                                                        payload: {
-                                                            feedback: data,
-                                                        },
-                                                    })
-                                                }
-                                            />
-                                        )}
+                                        <TextEditor
+                                            data={feedbackState?.feedback || ''}
+                                            onChange={(data) =>
+                                                feedbackDispatch({
+                                                    type: ActionType.UpdateAction,
+                                                    payload: {
+                                                        feedback: data,
+                                                    },
+                                                })
+                                            }
+                                            docSubmitted={
+                                                doc.feedback && !allowUpdate
+                                            }
+                                        />
                                     </p>
 
                                     <SubmitFeedbackSection
@@ -156,6 +155,7 @@ const TutorStage1TaskPage: FC<PageProps> = ({ location: { search } }) => {
                                             !feedbackState.feedback
                                         }
                                         allowUpdate={allowUpdate}
+                                        setAllowUpdate={setAllowUpdate}
                                     />
                                 </div>
                             </div>
@@ -170,7 +170,7 @@ const TutorStage1TaskPage: FC<PageProps> = ({ location: { search } }) => {
                             )}
 
                             <p className="sm-type-amp">
-                                <Link to="/tutor/current-quest">
+                                <Link to="/tutor/current-quests">
                                     Back to Current Quests
                                 </Link>
                             </p>
@@ -183,4 +183,4 @@ const TutorStage1TaskPage: FC<PageProps> = ({ location: { search } }) => {
     )
 }
 
-export default TutorStage1TaskPage
+export default TutorStage1SubmittedPage

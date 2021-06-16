@@ -126,7 +126,13 @@ export const CREATE_QUEST_WITH_TEAMS = gql`
     mutation InsertTeam($objects: [team_insert_input!]!) {
         insert_team(objects: $objects) {
             returning {
-                quest_id
+                quest {
+                    id
+                    teams {
+                        id
+                        name
+                    }
+                }
             }
         }
     }
@@ -172,7 +178,7 @@ export const SUBMIT_FEEDBACK = gql`
     mutation SubmitFeedback($docId: uuid!, $feedbackData: jsonb!) {
         update_document_by_pk(
             pk_columns: { id: $docId }
-            _set: { feedback: $feedbackData, status: submitted }
+            _set: { feedback: $feedbackData }
         ) {
             id
             status
