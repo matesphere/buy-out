@@ -64,9 +64,12 @@ export const SWOT: FC<SWOTProps> = ({
                             </span>
                         </h3>
                         <div className="form-holder-border">
-                            <p className="sm-type-lead">
-                                {docFeedback.feedback}
-                            </p>
+                            <p
+                                className="sm-type-lead"
+                                dangerouslySetInnerHTML={{
+                                    __html: docFeedback.feedback,
+                                }}
+                            />
                         </div>
                     </div>
                 )}

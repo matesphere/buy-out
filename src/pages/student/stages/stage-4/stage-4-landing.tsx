@@ -111,7 +111,7 @@ const Stage4LandingPage = () => {
                                     to:
                                     <ul>
                                         <li>
-                                            <Link to="/student/stage-2/community">
+                                            <Link to="/information/community">
                                                 the statements made by members
                                                 of the community and experts in
                                                 Stage 2
@@ -119,7 +119,7 @@ const Stage4LandingPage = () => {
                                             ;
                                         </li>
                                         <li>
-                                            <Link to="/student/stage-3/task">
+                                            <Link to="/information/development-options">
                                                 the detailed notes about each
                                                 development option
                                             </Link>
@@ -141,7 +141,7 @@ const Stage4LandingPage = () => {
                                                     ) => (
                                                         <li key={i}>
                                                             <Link
-                                                                to={`/student/stage-3/swot?id=${id}`}
+                                                                to={`/student/stage-3/swot?num=${i}&id=${id}`}
                                                             >
                                                                 {display_name}
                                                             </Link>
@@ -167,10 +167,10 @@ const Stage4LandingPage = () => {
                                         </li>
                                     </ul>
                                 </div>
-                                // TODO: alter this logic to check for shortlist
+                                {/* TODO: alter this logic to check for shortlist */}
                                 <div
                                     className={`form-holder-border ${
-                                        devOptions.length === 5 &&
+                                        !devOptions.length === 5 &&
                                         'not-available-holder'
                                     }`}
                                 >
@@ -186,6 +186,13 @@ const Stage4LandingPage = () => {
                                         their approval to purchase the land and
                                         adopt your Development Options.
                                     </p>
+                                    <ul>
+                                        <li className="sm-type-guitar">
+                                            <Link to="/student/stage-4/task">
+                                                Complete your Feasibility Study
+                                            </Link>
+                                        </li>
+                                    </ul>
 
                                     {/* <SwotLinks
                                         devOptions={devOptions}

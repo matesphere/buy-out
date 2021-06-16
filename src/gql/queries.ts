@@ -47,6 +47,7 @@ export const DOCUMENT_QUERY = gql`
                         _or: [
                             { status: { _eq: draft } }
                             { status: { _eq: submitted } }
+                            { status: { _eq: marked_passed } }
                         ]
                     }
                 ) {

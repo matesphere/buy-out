@@ -152,7 +152,10 @@ export const useWorkState = <InputState, Action>(
                     payload: doc_data,
                 })
 
-                if (doc.status === 'submitted') {
+                if (
+                    doc.status === 'submitted' ||
+                    doc.status === 'marked_passed'
+                ) {
                     setDocSubmitted(true)
                 }
 
