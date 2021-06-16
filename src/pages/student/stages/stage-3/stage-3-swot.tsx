@@ -66,7 +66,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
         workState,
         workDispatch,
         saveWorkObj,
-        submitWorkObj,
+        docSubmitted,
         docFeedback,
     } = useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
@@ -178,6 +178,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                                                 },
                                             })
                                         }
+                                        docSubmitted={docSubmitted}
                                     />
                                 </div>
                             </div>
@@ -206,6 +207,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                                                 },
                                             })
                                         }
+                                        docSubmitted={docSubmitted}
                                     />
                                 </div>
                             </div>
@@ -238,6 +240,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                                                 },
                                             })
                                         }
+                                        docSubmitted={docSubmitted}
                                     />
                                 </div>
                             </div>
@@ -266,6 +269,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                                                 },
                                             })
                                         }
+                                        docSubmitted={docSubmitted}
                                     />
                                 </div>
                             </div>

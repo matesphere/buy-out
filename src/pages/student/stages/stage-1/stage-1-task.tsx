@@ -137,33 +137,23 @@ const Stage1TaskPage = () => {
                                                     {eng.description}
                                                 </p>
                                                 <div className="ck-textarea">
-                                                    {docSubmitted ? (
-                                                        <div
-                                                            className="submitted-holder"
-                                                            dangerouslySetInnerHTML={{
-                                                                __html: workState[
-                                                                    i
-                                                                ],
-                                                            }}
-                                                        />
-                                                    ) : (
-                                                        <TextEditor
-                                                            data={
-                                                                workState[i] ||
-                                                                ''
-                                                            }
-                                                            onChange={(data) =>
-                                                                workDispatch({
-                                                                    type: ActionType.UpdateAction,
-                                                                    payload: {
-                                                                        question:
-                                                                            i,
-                                                                        answer: data,
-                                                                    },
-                                                                })
-                                                            }
-                                                        />
-                                                    )}
+                                                    <TextEditor
+                                                        data={
+                                                            workState[i] || ''
+                                                        }
+                                                        onChange={(data) =>
+                                                            workDispatch({
+                                                                type: ActionType.UpdateAction,
+                                                                payload: {
+                                                                    question: i,
+                                                                    answer: data,
+                                                                },
+                                                            })
+                                                        }
+                                                        docSubmitted={
+                                                            docSubmitted
+                                                        }
+                                                    />
                                                 </div>
                                             </li>
                                         ))}

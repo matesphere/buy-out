@@ -52,6 +52,16 @@ const SwotLinks = ({ devOptions, completedSwots }) => (
     </ol>
 )
 
+const ExampleSwotLinks = ({ devOptions, exampleSwots }) => (
+    <>
+        <p className="sm-type-lead mb-2">
+            {`Your teacher has provided the following example${
+                exampleSwots.length > 1 && 's'
+            } to help:`}
+        </p>
+    </>
+)
+
 const Stage3LandingPage = () => {
     const imageData = useStaticQuery(graphql`
         query {

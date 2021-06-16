@@ -2,18 +2,31 @@ import React, { useState, useEffect, useRef } from 'react'
 // import { CKEditor } from '@ckeditor/ckeditor5-react'
 // import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 
-export const TextEditor = ({ data, onChange }) => {
+export const TextEditor = ({ data, onChange, docSubmitted }) => {
     const editorRef = useRef<any>()
     const [editorLoaded, setEditorLoaded] = useState(false)
     const { CKEditor, ClassicEditor } = editorRef.current || {}
 
     useEffect(() => {
-        editorRef.current = {
-            CKEditor: require('@ckeditor/ckeditor5-react').CKEditor,
-            ClassicEditor: require('@ckeditor/ckeditor5-build-classic'),
+        if (!docSubmitted) {
+            editorRef.current = {
+                CKEditor: require('@ckeditor/ckeditor5-react').CKEditor,
+                ClassicEditor: require('@ckeditor/ckeditor5-build-classic'),
+            }
+            setEditorLoaded(true)
         }
-        setEditorLoaded(true)
     }, [])
+
+    if (docSubmitted) {
+        return (
+            <div
+                className="submitted-holder"
+                dangerouslySetInnerHTML={{
+                    __html: data,
+                }}
+            />
+        )
+    }
 
     return editorLoaded ? (
         <CKEditor
@@ -50,7 +63,7 @@ export const TextEditor = ({ data, onChange }) => {
             // }}
             config={{
                 toolbar: ['undo', 'redo', '|', 'numberedList', 'bulletedList'],
-                height:['300px']
+                height: ['300px'],
             }}
         />
     ) : null
