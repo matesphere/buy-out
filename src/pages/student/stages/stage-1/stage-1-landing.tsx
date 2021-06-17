@@ -17,7 +17,7 @@ import {
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-import DogVideo from '../../../../assets/the-quest.mp4'
+import DogVideo from '../../../../assets/the-quest-intro.mp4'
 
 import '../../../../scss/index.scss'
 
