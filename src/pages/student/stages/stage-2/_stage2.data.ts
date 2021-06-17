@@ -1,5 +1,8 @@
 export const stage2CheckListEng = [
     {
+        title: 'Choose a logo.',
+    },
+    {
         title: 'Read the information provided about the responsibilities of each role in the steering group.',
     },
     {
@@ -9,7 +12,7 @@ export const stage2CheckListEng = [
 
 export const stage2HelpfulEng = [
     {
-        title: 'You will need to work together and decided who will do the following.',
+        title: 'You will need to work together and decided who will be responsible for the following.',
     },
     {
         title: 'Chair, Vice-chair, Secretary, Treasurer',
@@ -25,7 +28,7 @@ export const stage2DataTitleEng = [
 export const stage2DataSubTitleEng = [
     {
         subtitle:
-            'You are going to work as the board of a community group who will lead the purchase of the land that has come up for sale.',
+            'You are going to work as the board of a community group who will lead the purchase of the land that has come up for sale. You will also choose a logo for your team.',
     },
 ]
 

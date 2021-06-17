@@ -163,33 +163,31 @@ const TeamInfoPanel = ({
         <p className="mb-2 sm-type-guitar sm-type-guitar--medium red-highlight mt-2">
             {teamName}
         </p>
-        <p className="sm-type-lead sm-type-lead--medium">Team members:</p>
-        <ul className="mb-2">
+        <div className="form-holder-border">
+            <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">Team members:</p>
             {students.map(({ position, user: { full_name } }, i) => (
-                <li key={i} className="sm-type-amp">
+                <p key={i} className="sm-type-bigamp">
                     {full_name}
                     {position && ` - ${POSITION_DISPLAY_NAME[position]}`}
-                </li>
-            ))}
-        </ul>
-        {devOptions.length > 0 && (
-            <>
-                <p className="sm-type-lead sm-type-lead--medium">
-                    Development options:
                 </p>
-                <ul className="mb-2">
-                    {devOptions.map(
-                        (
-                            { shortlist, development_option: { display_name } },
-                            i
-                        ) => (
-                            <li key={i} className="sm-type-amp">
-                                {display_name} {shortlist && <Tick />}
-                            </li>
-                        )
-                    )}
-                </ul>
-            </>
+            ))}
+        </div>
+        {devOptions.length > 0 && (
+            <div className="form-holder-border">
+                <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
+                    Shortlisted options:
+                </p>
+                {devOptions.map(
+                    (
+                        { shortlist, development_option: { display_name } },
+                        i
+                    ) => (
+                        <p key={i} className="sm-type-bigamp">
+                            {display_name} {shortlist && <Tick />}
+                        </p>
+                    )
+                )}
+            </div>
         )}
     </>
 )
@@ -308,7 +306,7 @@ const TutorCurrentQuestPage = () => {
                                             key={i}
                                             className="row tutor mt-4 side-grey"
                                         >
-                                            <div className="col-lg-3">
+                                            <div className="col-lg-4">
                                                 <TeamInfoPanel
                                                     teamName={name}
                                                     devOptions={
@@ -317,7 +315,7 @@ const TutorCurrentQuestPage = () => {
                                                     students={students}
                                                 />
                                             </div>
-                                            <div className="col-lg-9">
+                                            <div className="col-lg-8 mt-4">
                                                 <StageInfoPanel
                                                     stages={stage}
                                                     stageProgresses={

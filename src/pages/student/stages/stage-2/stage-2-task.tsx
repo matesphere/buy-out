@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import { Helmet } from 'react-helmet'
 
 import { gql } from '@apollo/client'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
@@ -76,6 +77,94 @@ const Stage2TaskPage = () => {
 
     const { id: stageProgressId } = data.team_by_pk.stage_progresses[0]
 
+    const data2 = useStaticQuery(graphql`
+        query {
+            image1: file(relativePath: { eq: "team-logo-1.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image2: file(relativePath: { eq: "team-logo-2.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image3: file(relativePath: { eq: "team-logo-3.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image4: file(relativePath: { eq: "team-logo-4.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image5: file(relativePath: { eq: "team-logo-5.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image6: file(relativePath: { eq: "team-logo-6.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image7: file(relativePath: { eq: "team-logo-7.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image8: file(relativePath: { eq: "team-logo-8.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image9: file(relativePath: { eq: "team-logo-9.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image10: file(relativePath: { eq: "team-logo-10.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+        }
+    `)
+
+    const stage2Logo = [
+        {
+            logo: 'team-logo-1',
+        },
+        {
+            logo: 'team-logo-2',
+        },
+        {
+            logo: 'team-logo-3',
+        },
+        {
+            logo: 'team-logo-4',
+        },
+        {
+            logo: 'team-logo-5',
+        },
+        {
+            logo: 'team-logo-6',
+        },
+        {
+            logo: 'team-logo-7',
+        },
+        {
+            logo: 'team-logo-8',
+        },
+        {
+            logo: 'team-logo-9',
+        },
+        {
+            logo: 'team-logo-10',
+        },
+    ]
+
     return (
         <>
             <Helmet>
@@ -142,27 +231,58 @@ const Stage2TaskPage = () => {
                                             Task to complete:
                                         </span>
                                     </h3>
-                                    <p className="sm-type-amp mb-2">
-                                        Use the dropdowns below to select which
-                                        team member will perform which role. Try
-                                        and match the roles to the strengths of
-                                        each member!
-                                    </p>
-                                    <p className="sm-type-amp mb-2">
-                                        <b>
-                                            Your team must have at least one of
-                                            each role!
-                                        </b>{' '}
-                                        If you have more than 4 members in your
-                                        team you may double up on roles.
-                                    </p>
-
                                     <div className="form-holder-border">
                                         <div className="form-holder">
+                                            <h3 className="sm-type-guitar mb-2">
+                                                Choose a logo for your team:
+                                            </h3>
+                                            <div className="row">
+                                                {stage2Logo.map((check) => (
+
+                                                    <div className="col-lg-3 mb-2" key={check.logo}>
+
+                                                        <div className="multiple-choice">
+                                                            <input
+                                                                className="form-control"
+                                                                id={check.logo}
+                                                                value={check.logo}
+                                                                type="radio"
+                                                                name="choose-logo"
+                                                            />
+                                                            <label className="form-label" htmlFor={check.logo}>
+                                                                <GatsbyImage
+                                                                    alt="logo"
+                                                                    image={
+                                                                        data2.image1
+                                                                            .childImageSharp
+                                                                            .gatsbyImageData
+                                                                    }
+                                                                />
+                                                                <span className="visuallyhidden">{check.logo}</span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                ))}
+                                            </div>
                                             <h4 className="sm-type-guitar mb-2">
                                                 Choose a role for each team
                                                 member:
                                             </h4>
+                                            <p className="sm-type-amp mb-2">
+                                                Use the dropdowns below to select which
+                                                team member will perform which role. Try
+                                                and match the roles to the strengths of
+                                                each member!
+                                            </p>
+
+                                            <p className="sm-type-amp mb-2">
+                                                <b>
+                                                    Your team must have at least one of
+                                                    each role!
+                                                </b>{' '}
+                                                If you have more than 4 members in your
+                                                team you may double up on roles.
+                                            </p>
                                             <div id="form-roles">
                                                 <ul>
                                                     {data.team_by_pk.students.map(
