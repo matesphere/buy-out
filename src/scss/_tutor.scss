@@ -28,3 +28,12 @@
     }
   }
 }
+
+.model-answers {
+  display: flex;
+  .form-control {
+    flex: 0 0 60%;
+    margin: 8px 40px 8px 8px;
+    height: 60px;
+  }
+}
