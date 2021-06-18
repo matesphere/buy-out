@@ -15,10 +15,9 @@ import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
 import { useWorkState } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
-import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
-
+import MapOptions from '../../../../pages/information/_map'
 import '../../../../scss/index.scss'
 
 const SwotLinks = ({ devOptions, completedSwots }) => (
@@ -122,124 +121,6 @@ const Stage3LandingPage = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Lay The Foundations
                             </h2>
-                            <p className="sm-type-lead mb-3">
-                                Shown below is a map of Glenclas, with the
-                                locations of proposed development opportunities
-                                marked. Your task is to investigate each of the
-                                opportunities and produce a SWOT analysis for
-                                each option.
-                            </p>
-                            <div className="image-map mb-4 mt-4">
-                                <div className="image-map-holder">
-                                    <div>
-                                        <GatsbyImage
-                                            image={
-                                                imageData.image5.childImageSharp
-                                                    .gatsbyImageData
-                                            }
-                                        />
-                                    </div>
-                                    <div className="hover-pins">
-                                        <p className="sm-type-amp">
-                                            Hover over the pins to see more
-                                            information
-                                        </p>
-                                    </div>
-                                    <div className="outer-grid">
-                                        <div className="outer-square">
-                                            <div className="inner-grid inner-grid-1">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="reddot"></span>{' '}
-                                                            Shop and Post Office
-                                                        </p>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            <div className="inner-grid inner-grid-2">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="greydot"></span>{' '}
-                                                            Affordable Housing
-                                                            area
-                                                        </p>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            <div className="inner-grid inner-grid-3">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-r">
-                                                        <p className="sm-type-amp">
-                                                            <span className="purpledot"></span>{' '}
-                                                            Campsite / Cabins
-                                                        </p>
-                                                        <p className="sm-type-amp">
-                                                            <span className="purpledot"></span>{' '}
-                                                            Market gardening
-                                                        </p>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            <div className="inner-grid inner-grid-4">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="yellowdot"></span>{' '}
-                                                            Play park / Skate
-                                                            park
-                                                        </p>
-                                                        <p className="sm-type-amp">
-                                                            <span className="yellowdot"></span>{' '}
-                                                            Wind turbine
-                                                        </p>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            <div className="inner-grid inner-grid-5">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="yellowdot"></span>{' '}
-                                                            Business hub
-                                                        </p>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            <div className="inner-grid inner-grid-6">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-r">
-                                                        <p className="sm-type-amp">
-                                                            <span className="tealdot"></span>{' '}
-                                                            Forest area
-                                                        </p>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            <div className="inner-grid inner-grid-7"></div>
-                                            <div className="inner-grid inner-grid-8">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="yellowdot"></span>{' '}
-                                                            Micro Hydro
-                                                        </p>
-                                                    </div>
-                                                </span>
-                                            </div>
-                                            <div className="inner-grid inner-grid-9"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
 
                             <p className="sm-type-lead mb-2">
                                 You will need to work together to discuss the
@@ -249,13 +130,24 @@ const Stage3LandingPage = () => {
                                 community - whether these be financial, social
                                 or otherwise.
                             </p>
-                            <p className="sm-type-lead mb-2">
+                            <p className="sm-type-lead mb-4">
                                 Once decided upon, you'll then be asked to
                                 complete a SWOT analysis for each of these.{' '}
                                 <Link to="#">Click here</Link> to find out more
                                 about what is meant by SWOT and how you can
                                 complete this task.
                             </p>
+
+                            <p className="sm-type-bigamp mb-3">
+                                Shown below is a map of Glenclas, with the
+                                locations of proposed development opportunities
+                                marked. Your task is to investigate each of the
+                                opportunities and produce a SWOT analysis for
+                                each option.
+                            </p>
+                            <MapOptions />
+
+
 
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
