@@ -68,13 +68,6 @@ const Stage1CompletePage = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
-                            <p className="sm-type-guitar mb-4">
-                                Here are a series of questions to help you to do
-                                some preliminary exploration. This is your first
-                                opportunity to work together as a team, so the
-                                answers that you provide should be the product
-                                of discussions between each of the team members.
-                            </p>
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     image={

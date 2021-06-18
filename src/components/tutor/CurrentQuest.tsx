@@ -157,40 +157,43 @@ export const UnlockedStage3NoDocStatus = ({ stageProgressId, devOptions }) => {
             <Progress />
             <span>Unlocked</span>
 
-            <label className="form-label sm-type-amp">Model answers: </label>
-            <select
-                className="form-control"
-                value={devOption}
-                onChange={({ target: { value } }) => setDevOption(value)}
-            >
-                <option value="" defaultChecked>
-                    Select
-                </option>
-                {devOptions.map(({ option, display_name }, i) => (
-                    <option key={i} value={option}>
-                        {display_name}
+            <p className="sm-type-lead sm-type-lead--medium mt-4">Provide Model Answers: </p>
+            <div className="model-answers">
+                <select
+                    className="form-control"
+                    value={devOption}
+                    onChange={({ target: { value } }) => setDevOption(value)}
+                >
+                    <option value="" defaultChecked>
+                        Select
                     </option>
-                ))}
-            </select>
-            <button
-                onClick={() => {
-                    saveWorkInitial({
-                        variables: {
-                            stageProgressId,
-                            docData: {
-                                [devOption]: {
-                                    ...devOptions.find(
-                                        (opt) => opt.option === devOption
-                                    ).model_swot,
-                                    provided: true,
+                    {devOptions.map(({ option, display_name }, i) => (
+                        <option key={i} value={option}>
+                            {display_name}
+                        </option>
+                    ))}
+                </select>
+                <button
+                    className="btn-outline-reg"
+                    onClick={() => {
+                        saveWorkInitial({
+                            variables: {
+                                stageProgressId,
+                                docData: {
+                                    [devOption]: {
+                                        ...devOptions.find(
+                                            (opt) => opt.option === devOption
+                                        ).model_swot,
+                                        provided: true,
+                                    },
                                 },
                             },
-                        },
-                    })
-                }}
-            >
-                Provide
-            </button>
+                        })
+                    }}
+                >
+                    Provide
+                </button>
+            </div>
         </div>
     )
 }

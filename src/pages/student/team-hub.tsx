@@ -157,16 +157,16 @@ const TeamInfoSection = ({
                 </div>
             </div>
 
-            <div className="row mt-2 mb-4">
-                <div className="col-lg-2"></div>
-                <div className="col-lg-8">
-                    <p className="notification-alert sm-type-lead">
-                        ! You have a notification, check your current stage for
-                        feedback.
-                    </p>
-                </div>
-                <div className="col-lg-2"></div>
-            </div>
+            {/*<div className="row mt-2 mb-4">*/}
+            {/*    <div className="col-lg-2"></div>*/}
+            {/*    <div className="col-lg-8">*/}
+            {/*        <p className="notification-alert sm-type-lead">*/}
+            {/*            ! You have a notification, check your current stage for*/}
+            {/*            feedback.*/}
+            {/*        </p>*/}
+            {/*    </div>*/}
+            {/*    <div className="col-lg-2"></div>*/}
+            {/*</div>*/}
 
             <div className="row">
                 <div className="col-lg-3">

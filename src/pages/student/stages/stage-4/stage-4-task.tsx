@@ -103,7 +103,7 @@ const Stage4FeasibilityOne = () => {
                                                     <input
                                                         id="devoptone"
                                                         aria-describedby="option-detail-hint"
-                                                        type="email"
+                                                        type="text"
                                                         className="form-control"
                                                     />
                                                 </div>
@@ -151,7 +151,7 @@ const Stage4FeasibilityOne = () => {
                                                     <input
                                                         id="devopttwo"
                                                         aria-describedby="option-detail-hint"
-                                                        type="email"
+                                                        type="text"
                                                         className="form-control"
                                                     />
                                                 </div>
@@ -200,7 +200,7 @@ const Stage4FeasibilityOne = () => {
                                                     <input
                                                         id="devoptthree"
                                                         aria-describedby="option-detail-hint"
-                                                        type="email"
+                                                        type="text"
                                                         className="form-control"
                                                     />
                                                 </div>

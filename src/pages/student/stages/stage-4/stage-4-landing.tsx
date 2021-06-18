@@ -109,49 +109,50 @@ const Stage4LandingPage = () => {
                                 <p className="sm-type-lead mb-2">
                                     To complete this task, you should refer back
                                     to:
-                                    <ul>
-                                        <li>
-                                            <Link to="/information/community">
-                                                the statements made by members
-                                                of the community and experts in
-                                                Stage 2
-                                            </Link>
-                                            ;
-                                        </li>
-                                        <li>
-                                            <Link to="/information/development-options">
-                                                the detailed notes about each
-                                                development option
-                                            </Link>
-                                            ;
-                                        </li>
-                                        <li>
-                                            and your SWOT analyses:
-                                            <ol>
-                                                {devOptions.map(
-                                                    (
-                                                        {
-                                                            id,
-                                                            development_option:
-                                                                {
-                                                                    display_name,
-                                                                },
-                                                        },
-                                                        i
-                                                    ) => (
-                                                        <li key={i}>
-                                                            <Link
-                                                                to={`/student/stage-3/swot?num=${i}&id=${id}`}
-                                                            >
-                                                                {display_name}
-                                                            </Link>
-                                                        </li>
-                                                    )
-                                                )}
-                                            </ol>
-                                        </li>
-                                    </ul>
                                 </p>
+                                <ul className="sm-type-bigamp">
+                                    <li className="mb-2">
+                                        <Link to="/information/community">
+                                            The statements made by members
+                                            of the community and experts in
+                                            Stage 2
+                                        </Link>
+                                        ;
+                                    </li>
+                                    <li className="mb-2">
+                                        <Link to="/information/development-options">
+                                            The detailed notes about each
+                                            development option
+                                        </Link>
+                                        ;
+                                    </li>
+                                    <li className="mb-2">
+                                        Your SWOT analyses:
+                                        <ol>
+                                            {devOptions.map(
+                                                (
+                                                    {
+                                                        id,
+                                                        development_option:
+                                                            {
+                                                                display_name,
+                                                            },
+                                                    },
+                                                    i
+                                                ) => (
+                                                    <li key={i}>
+                                                        <Link
+                                                            to={`/student/stage-3/swot?num=${i}&id=${id}`}
+                                                        >
+                                                            {display_name}
+                                                        </Link>
+                                                    </li>
+                                                )
+                                            )}
+                                        </ol>
+                                    </li>
+                                </ul>
+
                                 <div className="form-holder-border">
                                     <p className="sm-type-lead mb-2">Part I</p>
                                     <p className="sm-type-lead mb-2">
@@ -161,7 +162,7 @@ const Stage4LandingPage = () => {
                                     </p>
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            <Link to="/student/stage-3/task">
+                                            <Link to="/information/development-options">
                                                 View the development options
                                             </Link>
                                         </li>

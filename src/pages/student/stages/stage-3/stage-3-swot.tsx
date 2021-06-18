@@ -114,7 +114,6 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                         saveWorkObj={saveWorkObj}
                         docSubmitted={docSubmitted}
                     />
-                    <Link to="/student/stage-3">Back to Stage 3</Link>
                 </section>
                 <Footer />
             </main>

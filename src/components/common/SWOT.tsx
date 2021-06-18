@@ -209,9 +209,12 @@ export const SWOT: FC<SWOTProps> = ({
         )}
 
         {saveWorkObj?.response.data && (
-            <>
-                <p className="sm-type-amp mb-4">SWOT Saved!</p>
-            </>
+            <div className="modal-window">
+                <div>
+                    <p className="sm-type-guitar sm-type-guitar--medium mt-2 mb-2">SWOT Saved!</p>
+                    <Link to="/student/stage-3">Back to Stage 3</Link>
+                </div>
+            </div>
         )}
     </>
 )
