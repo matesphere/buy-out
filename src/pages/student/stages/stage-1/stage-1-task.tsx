@@ -17,6 +17,13 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import '../../../../scss/index.scss'
 import { eng } from '../../../_index.data'
 
+import {
+    stage1CheckListEng,
+    stage1DataSubTitleEng,
+    stage1DataTaskInstructionsEng,
+} from './_stage1.data'
+import CheckList from "../../../../components/common/Checklist";
+
 type WorkState = {
     [key: number]: string
 }
@@ -81,14 +88,14 @@ const Stage1TaskPage = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
-                            <p className="sm-type-guitar mb-4">
-                                Answer the following questions, using the links
-                                provided and your own knowledge.
-                            </p>
-                            <p className="sm-type-guitar mb-4">
-                                You can save your progress if necessary, then
-                                submit when you're happy.
-                            </p>
+                            {stage1DataTaskInstructionsEng.map((check) => (
+                                <p
+                                    className="sm-type-guitar mb-4"
+                                    key={check.text}
+                                >
+                                    {check.text}
+                                </p>
+                            ))}
 
                             {docFeedback && (
                                 <div className="side-grey">
@@ -218,6 +225,7 @@ const Stage1TaskPage = () => {
                                     </li>
                                 </ul>
                             </div>
+                            <CheckList items={stage1CheckListEng} />
                         </div>
                     </div>
                 </section>

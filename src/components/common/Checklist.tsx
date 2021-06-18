@@ -15,7 +15,7 @@ const CheckList = ({ items }) => {
                 {items.map((check) => (
                     <div className="checklist" key={check.title}>
                         <div className="tick"></div>
-                        <p className="sm-type-lead">{check.title}</p>
+                        <p className="sm-type-bigamp">{check.title}</p>
                     </div>
                 ))}
             </div>

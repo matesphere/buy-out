@@ -15,11 +15,16 @@ import {
     StageQueryVariables,
 } from '../../../../gql/types/StageQuery'
 
-import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import DogVideo from '../../../../assets/the-quest-intro.mp4'
 
 import '../../../../scss/index.scss'
+import CheckList from "../../../../components/common/Checklist";
+import {
+    stage1CheckListEng,
+    stage1DataSubTitleEng,
+    stage1DataTaskEng,
+} from './_stage1.data'
 
 const Stage1LandingPage = () => {
     const {
@@ -57,13 +62,16 @@ const Stage1LandingPage = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
-                            <p className="sm-type-guitar mb-4">
-                                As the first stage of your Quest, it is
-                                important to gain some background knowledge
-                                about community land ownership in Scotland and
-                                also to think about some of the important
-                                concepts and issues.
-                            </p>
+
+                            {stage1DataSubTitleEng.map((check) => (
+                                <p
+                                    className="sm-type-guitar mb-4"
+                                    key={check.subtitle}
+                                >
+                                    {check.subtitle}
+                                </p>
+                            ))}
+
                             <div className="homepage-image mb-4">
                                 <video controls>
                                     <source src={DogVideo} type="video/mp4" />
@@ -79,80 +87,28 @@ const Stage1LandingPage = () => {
                                     </span>
                                 </h4>
 
-                                <p className="sm-type-lead">
-                                    Your task for this stage is to answer a
-                                    series of questions designed to help you to
-                                    do some preliminary exploration.
-                                </p>
-                                <p className="sm-type-lead">
-                                    This is your first opportunity to work
-                                    together as a team, so the answers that you
-                                    provide should be the product of discussions
-                                    between each of the team members.
-                                </p>
-                                <br />
+                                {stage1DataTaskEng.map((check) => (
+                                    <p
+                                        className="sm-type-bigamp mb-2"
+                                        key={check.text}
+                                    >
+                                        {check.text}
+                                    </p>
+                                ))}
 
                                 <div className="form-holder-border">
                                     <ul>
                                         <li className="sm-type-guitar">
                                             <Link to="/student/stage-1/task">
-                                                Click here to attempt the Stage
-                                                1 task
+                                                Click here to answer a series of questions
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-
                         <div className="col-lg-3">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">Useful links</p>
-                                <ul>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Civil parish
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Loch_Alsh"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Lochalsh
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Highland_council_area"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Highland
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Inverness-shire"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Inverness-shire
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
+                            <CheckList items={stage1CheckListEng} />
                         </div>
                     </div>
                 </section>
