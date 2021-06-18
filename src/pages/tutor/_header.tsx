@@ -31,9 +31,9 @@ const LoginHeader = ({
             </a>
             <section className="container top-section">
                 <Squiggle className="squiggle" />
-                {!hideLinks && <Nav />}
                 <div className="row">
                     <div className="col-lg-8">
+                        {!hideLinks && <Nav />}
                         <h1 className="main-header mt-4">
                             <PinLogo />
                             <span>{headerText}</span>

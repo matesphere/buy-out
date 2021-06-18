@@ -50,12 +50,11 @@ const getDateFromTimestamp = (timestamp) => {
 
 const PreviousQuestDisplay = ({ quest }) => (
     <>
-        <span>
+        <span className="sm-type-bigamp">
             {getDateFromTimestamp(quest.started_at)} -{' '}
             {getDateFromTimestamp(quest.completed_at)}, {quest.teams.length}{' '}
             teams{' '}
-        </span>
-        <Link to="/login">View</Link>
+        </span> - - <Link to="/login">View</Link>
     </>
 )
 
@@ -113,6 +112,30 @@ const TutorHub = () => {
 
                             <div className="side-grey mb-2">
                                 <p className="sm-type-lead sm-type-lead--medium">
+                                    Current Quests
+                                </p>
+                                <ul>
+                                    <li className="sm-type-bigamp">
+                                    {quests
+                                        .filter(
+                                            (quest) => quest.status === 'active'
+                                        )
+                                        .map((quest, i) => (
+                                            <span
+                                                key={i}
+                                            >
+                                                <CurrentQuestDisplay
+                                                    quest={quest}
+                                                />
+                                            </span>
+                                        ))}
+                                         - -  <Link to="/tutor/current-quests">View</Link>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div className="side-grey mb-2">
+                                <p className="sm-type-lead sm-type-lead--medium">
                                     Previous Quests
                                 </p>
                                 <ul>
@@ -124,7 +147,7 @@ const TutorHub = () => {
                                         .map((quest, i) => (
                                             <li
                                                 key={i}
-                                                className="sm-type-amp mb-2"
+                                                className="sm-type-amp"
                                             >
                                                 <PreviousQuestDisplay
                                                     quest={quest}
@@ -132,41 +155,6 @@ const TutorHub = () => {
                                             </li>
                                         ))}
                                 </ul>
-                            </div>
-
-                            <div className="side-grey mb-2">
-                                <p className="sm-type-lead sm-type-lead--medium">
-                                    Current Quest(s)
-                                </p>
-                                <ul>
-                                    {quests
-                                        .filter(
-                                            (quest) => quest.status === 'active'
-                                        )
-                                        .map((quest, i) => (
-                                            <li
-                                                key={i}
-                                                className="sm-type-amp mb-2"
-                                            >
-                                                <CurrentQuestDisplay
-                                                    quest={quest}
-                                                />
-                                            </li>
-                                        ))}
-                                </ul>
-                                <Link to="/tutor/current-quests">View all</Link>
-                            </div>
-                            <div className="side-grey mb-2">
-                                <p className="sm-type-lead sm-type-lead--medium">
-                                    Start New Quest
-                                </p>
-                                <p className="sm-type-amp">
-                                    Start a new{' '}
-                                    <Link to="/tutor/add-students">
-                                        Quest here
-                                    </Link>
-                                    .
-                                </p>
                             </div>
                         </div>
                         <div className="col-lg-4">
@@ -176,11 +164,13 @@ const TutorHub = () => {
                                 </span>
                                 Helpful information
                             </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Here you can see your previous and current
-                                    Quests. You can also start a new Quest
+                            <div className="side-grey mb-2">
+                                <p className="sm-type-lead sm-type-lead--medium">
+                                    Start New Quest
                                 </p>
+                                <Link className="btn-solid-lg" to="/tutor/add-students">
+                                    Start a new Quest
+                                </Link>
                             </div>
                         </div>
                     </div>
