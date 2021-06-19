@@ -14,13 +14,14 @@ import Stage2Task from './student/stages/stage-2/stage-2-task'
 import Stage2PageComplete from './student/stages/stage-2/stage-2-complete'
 
 import Stage3Landing from './student/stages/stage-3/stage-3-landing'
-import Stage3TaskPage from './student/stages/stage-3/stage-3-task'
+import Stage3ChooseOptions from './student/stages/stage-3/stage-3-choose-options'
 import Stage3Swot from './student/stages/stage-3/stage-3-swot'
 import Stage3SwotExample from './student/stages/stage-3/stage-3-swot-example'
 import Stage3Complete from './student/stages/stage-3/stage-3-complete'
 
 import Stage4Landing from './student/stages/stage-4/stage-4-landing'
-import Stage4Task from './student/stages/stage-4/stage-4-task'
+import Stage4ChooseOptions from './student/stages/stage-4/stage-4-choose-options'
+import Stage4Feasibility from './student/stages/stage-4/stage-4-feasibility'
 
 import Stage5Page from './student/stages/stage-5/stage-5'
 import Stage5BusinessPlanPage from './student/stages/stage-5/business-plan'
@@ -76,7 +77,10 @@ const Routes = () => {
                 component={Stage2PageComplete}
             />
             <LoggedInRoute path="/stage-3" component={Stage3Landing} />
-            <LoggedInRoute path="/stage-3/task" component={Stage3TaskPage} />
+            <LoggedInRoute
+                path="/stage-3/options"
+                component={Stage3ChooseOptions}
+            />
             <LoggedInRoute path="/stage-3/swot" component={Stage3Swot} />
             <LoggedInRoute
                 path="/stage-3/swot/example"
@@ -88,7 +92,14 @@ const Routes = () => {
             />
 
             <LoggedInRoute path="/stage-4" component={Stage4Landing} />
-            <LoggedInRoute path="/stage-4/task" component={Stage4Task} />
+            <LoggedInRoute
+                path="/stage-4/options"
+                component={Stage4ChooseOptions}
+            />
+            <LoggedInRoute
+                path="/stage-4/feasibility"
+                component={Stage4Feasibility}
+            />
 
             <LoggedInRoute path="/stage-5" component={Stage5Page} />
             <LoggedInRoute

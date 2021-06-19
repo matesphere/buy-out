@@ -30,6 +30,7 @@ interface SwotType {
 const SWOT_EXAMPLE_QUERY = gql`
     query SwotExampleQuery($team_id: uuid!) {
         team_by_pk(id: $team_id) {
+            id
             stage_progresses(where: { stage_id: { _eq: 3 } }) {
                 documents(
                     where: {

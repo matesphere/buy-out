@@ -49,6 +49,7 @@ const Stage4LandingPage = () => {
 
     const { title: stageTitle } = pageData.stage_by_pk
     const { team_development_options: devOptions } = pageData.team_by_pk
+    const shortlist = devOptions.filter((opt) => opt.shortlist)
 
     return (
         <>
@@ -113,9 +114,8 @@ const Stage4LandingPage = () => {
                                 <ul className="sm-type-bigamp">
                                     <li className="mb-2">
                                         <Link to="/information/community">
-                                            The statements made by members
-                                            of the community and experts in
-                                            Stage 2
+                                            The statements made by members of
+                                            the community and experts in Stage 2
                                         </Link>
                                         ;
                                     </li>
@@ -133,10 +133,9 @@ const Stage4LandingPage = () => {
                                                 (
                                                     {
                                                         id,
-                                                        development_option:
-                                                            {
-                                                                display_name,
-                                                            },
+                                                        development_option: {
+                                                            display_name,
+                                                        },
                                                     },
                                                     i
                                                 ) => (
@@ -162,16 +161,16 @@ const Stage4LandingPage = () => {
                                     </p>
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            <Link to="/information/development-options">
-                                                View the development options
+                                            <Link to="/student/stage-4/options">
+                                                Choose your shortlist
                                             </Link>
                                         </li>
                                     </ul>
                                 </div>
-                                {/* TODO: alter this logic to check for shortlist */}
+
                                 <div
                                     className={`form-holder-border ${
-                                        !devOptions.length === 5 &&
+                                        shortlist.length !== 3 &&
                                         'not-available-holder'
                                     }`}
                                 >
@@ -187,24 +186,15 @@ const Stage4LandingPage = () => {
                                         their approval to purchase the land and
                                         adopt your Development Options.
                                     </p>
+
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            <Link to="/student/stage-4/task">
-                                                Complete your Feasibility Study
+                                            <Link to="/student/stage-4/feasibility">
+                                                Complete your Feasibility
+                                                Studies
                                             </Link>
                                         </li>
                                     </ul>
-
-                                    {/* <SwotLinks
-                                        devOptions={devOptions}
-                                        completedSwots={completedSwots}
-                                    />
-                                    <SaveSubmitSection
-                                        submitWorkObj={submitWorkObj}
-                                        disableSubmit={
-                                            completedSwots.length !== 5
-                                        }
-                                    /> */}
                                 </div>
                             </div>
                         </div>

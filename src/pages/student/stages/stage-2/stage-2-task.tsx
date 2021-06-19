@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {graphql, Link, useStaticQuery} from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
 import { gql } from '@apollo/client'
@@ -9,9 +9,9 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-import CheckList from '../../../../components/common/Checklist'
-import Helpful from '../../../../components/common/Helpful'
 import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
+import { CheckList } from '../../../../components/common/Checklist'
+import { Helpful } from '../../../../components/common/Helpful'
 
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 
@@ -41,6 +41,7 @@ import {
 const STAGE_2_TASK_QUERY = gql`
     query Stage2TaskQuery($team_id: uuid!) {
         team_by_pk(id: $team_id) {
+            id
             students {
                 id
                 user_id
@@ -238,27 +239,38 @@ const Stage2TaskPage = () => {
                                             </h3>
                                             <div className="row">
                                                 {stage2Logo.map((check) => (
-
-                                                    <div className="col-lg-3 mb-2" key={check.logo}>
-
+                                                    <div
+                                                        className="col-lg-3 mb-2"
+                                                        key={check.logo}
+                                                    >
                                                         <div className="multiple-choice">
                                                             <input
                                                                 className="form-control"
                                                                 id={check.logo}
-                                                                value={check.logo}
+                                                                value={
+                                                                    check.logo
+                                                                }
                                                                 type="radio"
                                                                 name="choose-logo"
                                                             />
-                                                            <label className="form-label" htmlFor={check.logo}>
+                                                            <label
+                                                                className="form-label"
+                                                                htmlFor={
+                                                                    check.logo
+                                                                }
+                                                            >
                                                                 <GatsbyImage
                                                                     alt="logo"
                                                                     image={
-                                                                        data2.image1
+                                                                        data2
+                                                                            .image1
                                                                             .childImageSharp
                                                                             .gatsbyImageData
                                                                     }
                                                                 />
-                                                                <span className="visuallyhidden">{check.logo}</span>
+                                                                <span className="visuallyhidden">
+                                                                    {check.logo}
+                                                                </span>
                                                             </label>
                                                         </div>
                                                     </div>
@@ -269,19 +281,21 @@ const Stage2TaskPage = () => {
                                                 member:
                                             </h4>
                                             <p className="sm-type-amp mb-2">
-                                                Use the dropdowns below to select which
-                                                team member will perform which role. Try
-                                                and match the roles to the strengths of
-                                                each member!
+                                                Use the dropdowns below to
+                                                select which team member will
+                                                perform which role. Try and
+                                                match the roles to the strengths
+                                                of each member!
                                             </p>
 
                                             <p className="sm-type-amp mb-2">
                                                 <b>
-                                                    Your team must have at least one of
-                                                    each role!
+                                                    Your team must have at least
+                                                    one of each role!
                                                 </b>{' '}
-                                                If you have more than 4 members in your
-                                                team you may double up on roles.
+                                                If you have more than 4 members
+                                                in your team you may double up
+                                                on roles.
                                             </p>
                                             <div id="form-roles">
                                                 <ul>

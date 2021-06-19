@@ -105,9 +105,9 @@ export const CHOOSE_DEVELOPMENT_OPTIONS = gql`
 `
 
 export const CHOOSE_SHORTLIST_OPTIONS = gql`
-    mutation ChooseShortlistOptions($optionsToUpate: [uuid!]!) {
+    mutation ChooseShortlistOptions($optionsToUpdate: [uuid!]!) {
         update_team_development_option(
-            where: { id: { _in: $optionsToUpate } }
+            where: { id: { _in: $optionsToUpdate } }
             _set: { shortlist: true }
         ) {
             returning {

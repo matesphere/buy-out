@@ -1,8 +1,6 @@
 import React, { useState, useContext } from 'react'
-import { Link, graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import scrollTo from 'gatsby-plugin-smoothscroll'
 import { gql } from '@apollo/client'
 
 import Header from '../../../../components/_header'
@@ -21,7 +19,6 @@ import {
 } from '../../../../gql/types/Stage3TaskQuery'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
-import InfoPick from '../../../../assets/info-pick.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
@@ -29,6 +26,7 @@ import '../../../../scss/index.scss'
 const STAGE_3_TASK_QUERY = gql`
     query Stage3TaskQuery($team_id: uuid!) {
         team_by_pk(id: $team_id) {
+            id
             team_development_options {
                 id
             }
@@ -110,10 +108,17 @@ const Stage3Task = () => {
     } = useContext(UserStateContext)
 
     const [teamChoiceName, setTeamChoiceName] = useState('')
+
     const [selectedOptions, toggleValue, allowedNumberSelected] =
         useCheckboxState<number>([], 5)
+
     const [chooseDevOptions, chooseDevOptionsResponse] = useAuthMutation(
-        CHOOSE_DEVELOPMENT_OPTIONS
+        CHOOSE_DEVELOPMENT_OPTIONS,
+        {
+            query: STAGE_3_TASK_QUERY,
+            variables: {},
+            idRequired: 'teamId',
+        }
     )
 
     const {
@@ -144,12 +149,9 @@ const Stage3Task = () => {
             </h3>
 
             {taskComplete ? (
-                <>
-                    <p className="sm-type-lead mb-2">
-                        Development option list submitted!
-                    </p>
-                    <Link to="/student/stage-3">Back to Stage 3</Link>
-                </>
+                <p className="sm-type-lead mb-2">
+                    Development option list submitted!
+                </p>
             ) : (
                 <>
                     <p className="sm-type-lead mb-2">
@@ -202,14 +204,10 @@ const Stage3Task = () => {
                             Submit options
                         </button>
 
-                        {chooseDevOptionsResponse.data && (
-                            <>
-                                <p className="sm-type-amp">Submitted!</p>
-                                <Link to="/student/stage-3">
-                                    Back to Stage 3
-                                </Link>
-                            </>
-                        )}
+                        {/* TODO: replace with proper 'submitted' notification component...if needed? */}
+                        {/* {chooseDevOptionsResponse.data && (
+                            <p className="sm-type-amp">Submitted!</p>
+                        )} */}
                     </div>
                 </>
             )}
@@ -217,115 +215,107 @@ const Stage3Task = () => {
     )
 }
 
-const Stage3TaskPage = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            image5: file(relativePath: { eq: "map-zoom.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-        }
-    `)
+const Stage3ChooseOptionsPage = () => (
+    <>
+        <Helmet>
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
+            />
+            <title>Stage 3 - Lay The Foundations - Choose Longlist</title>
+        </Helmet>
 
-    return (
-        <>
-            <Helmet>
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                />
-                <title>Stage 3 - Lay The Foundations</title>
-            </Helmet>
-            <main className="the-quest">
-                <Header headerText="Stage 3" />
-                <section className="container" id="main">
-                    <div className="row">
-                        <div className="col-lg-9">
-                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Lay The Foundations
-                            </h2>
-                            <p className="sm-type-lead mb-3">
-                                You will need to work together to discuss the
-                                available development options and decide on five
-                                which you think offer the best chance of
-                                providing benefits to the community - whether
-                                these be financial, social or otherwise.
-                            </p>
-                            <p className="sm-type-lead mb-3">
-                                All information required about each of the
-                                options is provided and can be accessed here:
-                            </p>
-                            {/* <p className="sm-type-bigamp mb-3">
+        <main className="the-quest">
+            <Header headerText="Stage 3" />
+
+            <section className="container" id="main">
+                <div className="row">
+                    <div className="col-lg-9">
+                        <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+                            Choose Your Longlist
+                        </h2>
+                        <p className="sm-type-lead mb-3">
+                            You will need to work together to discuss the
+                            available development options and decide on five
+                            which you think offer the best chance of providing
+                            benefits to the community - whether these be
+                            financial, social or otherwise.
+                        </p>
+                        <p className="sm-type-lead mb-3">
+                            All information required about each of the options
+                            is provided and can be accessed here:
+                        </p>
+                        {/* <p className="sm-type-bigamp mb-3">
                                 <Link to="/information/development-options">
                                     View the development options
                                 </Link>
                             </p> */}
-                            <div className="form-holder-border">
-                                <ul>
-                                    <li className="sm-type-guitar">
-                                        <Link to="/information/development-options">
-                                            View the development options
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <Stage3Task />
+                        <div className="form-holder-border">
+                            <ul>
+                                <li className="sm-type-guitar">
+                                    <Link to="/information/development-options">
+                                        View the development options
+                                    </Link>
+                                </li>
+                            </ul>
                         </div>
-                        <div className="col-lg-3">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Read all about Glenclas and find out what
-                                    you need to move on to the next quest.
-                                </p>
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    Look at Funding Options on each Option.
-                                </p>
-                            </div>
 
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
+                        <Stage3Task />
+                    </div>
+                    <div className="col-lg-3">
+                        <p className="sm-type-guitar mb-2">
+                            <span className="side-icon side-icon-orange">
+                                <HelpIcon />
+                            </span>
+                            Helpful information
+                        </p>
+                        <div className="side-grey">
+                            <p className="sm-type-amp">
+                                Read all about Glenclas and find out what you
+                                need to move on to the next quest.
                             </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        Check the map and read through the
-                                        detailed information on each option.
-                                    </p>
-                                </div>
+                            <p className="sm-type-amp">
+                                Make notes of the amenities and the
+                                opportunities.
+                            </p>
+                            <p className="sm-type-amp">
+                                Look at Funding Options on each Option.
+                            </p>
+                        </div>
+
+                        <p className="sm-type-guitar mb-2">
+                            <span className="side-icon side-icon-green">
+                                <TickSheet />
+                            </span>
+                            Your checklist
+                        </p>
+                        <div className="side-grey">
+                            <div className="checklist">
+                                <div className="tick"></div>
+                                <p className="sm-type-lead">
+                                    Check the map and read through the detailed
+                                    information on each option.
+                                </p>
                             </div>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        Based on what you've read, choose 5 of
-                                        the options to investigate further.
-                                    </p>
-                                </div>
+                        </div>
+                        <div className="side-grey">
+                            <div className="checklist">
+                                <div className="tick"></div>
+                                <p className="sm-type-lead">
+                                    Based on what you've read, choose 5 of the
+                                    options to investigate further.
+                                </p>
                             </div>
                         </div>
                     </div>
-                </section>
+                </div>
 
-                <Footer />
-            </main>
-        </>
-    )
-}
+                <Link to="/student/stage-3">Back to Stage 3</Link>
+            </section>
 
-export default Stage3TaskPage
+            <Footer />
+        </main>
+    </>
+)
+
+export default Stage3ChooseOptionsPage

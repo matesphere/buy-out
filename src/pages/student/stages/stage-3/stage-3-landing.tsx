@@ -10,17 +10,28 @@ import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
+import MapOptions from '../../../../pages/information/_map'
 
 import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
 import { useWorkState } from '../../../../utils/input-utils'
 
+import { DocumentCompleteQuery_team_by_pk_team_development_options } from '../../../../gql/types/DocumentCompleteQuery'
+
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
-import MapOptions from '../../../../pages/information/_map'
+
 import '../../../../scss/index.scss'
 
-const SwotLinks = ({ devOptions, completedSwots }) => (
+interface SwotLinksType {
+    devOptions: Array<DocumentCompleteQuery_team_by_pk_team_development_options>
+    completedSwots?: Array<string>
+}
+
+export const SwotLinks = ({
+    devOptions,
+    completedSwots = [],
+}: SwotLinksType) => (
     <ol>
         {devOptions.map(
             (
@@ -147,8 +158,6 @@ const Stage3LandingPage = () => {
                             </p>
                             <MapOptions />
 
-
-
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet">
@@ -169,7 +178,7 @@ const Stage3LandingPage = () => {
                                     </p>
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            <Link to="/student/stage-3/task">
+                                            <Link to="/student/stage-3/options">
                                                 Read about the development
                                                 options and choose your
                                                 'longlist'

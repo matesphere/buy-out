@@ -9,6 +9,7 @@ export const STAGE_QUERY = gql`
         $includeDevOptions: Boolean!
     ) {
         team_by_pk(id: $team_id) {
+            id
             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
                 id
                 stage_id
@@ -81,6 +82,7 @@ export const DOCUMENT_COMPLETE_QUERY = gql`
         $includeDevOptions: Boolean!
     ) {
         team_by_pk(id: $team_id) {
+            id
             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
                 id
                 stage_id
@@ -112,6 +114,7 @@ export const DOCUMENT_COMPLETE_QUERY = gql`
 
 export const TEAM_QUERY = gql`
     query TeamQuery($team_id: uuid!) {
+        id
         team_by_pk(id: $team_id) {
             students {
                 id

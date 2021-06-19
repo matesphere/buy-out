@@ -2,24 +2,24 @@ import React from 'react'
 
 import HelpIcon from '../../assets/help-icon.svg'
 
-const Helpful = ({ items }) => {
-    return (
-        <>
-            <p className="sm-type-guitar mb-2">
-                <span className="side-icon side-icon-orange">
-                    <HelpIcon />
-                </span>
-                Helpful information
-            </p>
-            <div className="side-grey">
-                {items.map((check) => (
-                    <p className="sm-type-amp ticker" key={check.title}>
-                        {check.title}
-                    </p>
-                ))}
-            </div>
-        </>
-    )
+interface HelpfulProps {
+    items: Array<string>
 }
 
-export default Helpful
+export const Helpful = ({ items }: HelpfulProps) => (
+    <>
+        <p className="sm-type-guitar mb-2">
+            <span className="side-icon side-icon-orange">
+                <HelpIcon />
+            </span>
+            Helpful information
+        </p>
+        <div className="side-grey">
+            {items.map((item, i) => (
+                <p className="sm-type-amp ticker" key={i}>
+                    {item}
+                </p>
+            ))}
+        </div>
+    </>
+)

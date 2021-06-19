@@ -8,7 +8,8 @@ import { Error } from '../../../../components/common/Error'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
-import { SWOT } from '../../../../components/common/SWOT'
+// import { SWOT } from '../../../../components/common/SWOT'
+import { SwotLinks } from './stage-3-landing'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -21,7 +22,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
-const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
+const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "congratulations.jpg" }) {
@@ -89,7 +90,11 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                             />
                         </div>
 
-                        {devOptions.map((opt) => (
+                        <div className="form-holder-border">
+                            <SwotLinks devOptions={devOptions} />
+                        </div>
+
+                        {/* {devOptions.map((opt) => (
                             <SWOT
                                 devOption={opt.development_option}
                                 swotState={
@@ -97,7 +102,7 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                 }
                                 docSubmitted={true}
                             />
-                        ))}
+                        ))} */}
                     </div>
 
                     <p className="sm-type-amp">
@@ -111,4 +116,4 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     )
 }
 
-export default TutorStage3SubmittedPage
+export default Stage3CompletePage

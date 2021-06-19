@@ -1,22 +1,13 @@
 export const stage2CheckListEng = [
-    {
-        title: 'Choose a logo.',
-    },
-    {
-        title: 'Read the information provided about the responsibilities of each role in the steering group.',
-    },
-    {
-        title: 'Decide who in your team will perform which role. You need at least one of each role to continue!',
-    },
+    'Choose a logo.',
+    'Read the information provided about the responsibilities of each role in the steering group.',
+    'Decide who in your team will perform which role. You need at least one of each role to continue!',
 ]
 
 export const stage2HelpfulEng = [
-    {
-        title: 'You will need to work together and decided who will be responsible for the following.',
-    },
-    {
-        title: 'Chair, Vice-chair, Secretary, Treasurer',
-    },
+    'You will need to work together and decided who in your group will take the following roles:',
+    'Chair, Vice-chair, Secretary, Treasurer.',
+    'Follow the link to read about each of the roles!',
 ]
 
 export const stage2DataTitleEng = [

@@ -1,11 +1,10 @@
 import React, { Reducer, FC } from 'react'
-import { Link, PageProps } from 'gatsby'
+import { PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import QueryString from 'query-string'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
-
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { SWOT } from '../../../../components/common/SWOT'
@@ -77,7 +76,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
         workDispatch,
         saveWorkObj,
         docSubmitted,
-        docFeedback,
+        // docFeedback,
     } = useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
     if (loading) return <Loading />
@@ -104,10 +103,11 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
 
             <main className="the-quest">
                 <Header headerText="Stage 3" />
+
                 <section className="container" id="main">
                     <SWOT
                         swotTitle={`SWOT Analysis ${num + 1}`}
-                        docFeedback={docFeedback}
+                        // docFeedback={docFeedback}
                         devOption={devOption}
                         swotState={workState[devOption.option]}
                         changeFunc={onChangeEditor(workDispatch, devOption)}
@@ -115,6 +115,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                         docSubmitted={docSubmitted}
                     />
                 </section>
+
                 <Footer />
             </main>
         </>
