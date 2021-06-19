@@ -5,18 +5,15 @@ import { Helmet } from 'react-helmet'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
+import Header from '../../_header'
+import Footer from '../../_footer'
 import { SWOT } from '../../../../components/common/SWOT'
 import { TextEditor } from '../../../../components/common/TextEditor'
 import { SubmitFeedbackSection } from '../../../../components/tutor/stages/SubmitFeedbackSection'
 
 import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
 
-import { eng } from '../../../_index.data'
-
 import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
@@ -34,7 +31,7 @@ type Action =
           payload: WorkState
       }
 
-const stage1FeedbackReducer: Reducer<WorkState, Action> = (state, action) => {
+const stage3FeedbackReducer: Reducer<WorkState, Action> = (state, action) => {
     switch (action.type) {
         case ActionType.LoadAction:
             return action.payload
@@ -55,7 +52,7 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
         feedbackState,
         feedbackDispatch,
         submitFeedbackObj,
-    } = useFeedbackState<WorkState, Action>(stage1FeedbackReducer, search, true)
+    } = useFeedbackState<WorkState, Action>(stage3FeedbackReducer, search, true)
 
     const [allowUpdate, setAllowUpdate] = useState(false)
 
@@ -81,8 +78,6 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                 <section className="container" id="main">
                     {devOptions.map((opt) => (
                         <SWOT
-                            pageTitle="Stage 3 - Progress Your Plans (SWOT Analysis)"
-                            headerText="Stage 3 Submission"
                             devOption={opt.development_option}
                             swotState={
                                 doc.doc_data[opt.development_option.option]

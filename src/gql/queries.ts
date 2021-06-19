@@ -75,7 +75,11 @@ export const DOCUMENT_QUERY = gql`
 `
 
 export const DOCUMENT_COMPLETE_QUERY = gql`
-    query DocumentCompleteQuery($team_id: uuid!, $stage_id: Int!) {
+    query DocumentCompleteQuery(
+        $team_id: uuid!
+        $stage_id: Int!
+        $includeDevOptions: Boolean!
+    ) {
         team_by_pk(id: $team_id) {
             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
                 id
@@ -87,6 +91,16 @@ export const DOCUMENT_COMPLETE_QUERY = gql`
                     id
                     doc_data
                     feedback
+                }
+            }
+            team_development_options @include(if: $includeDevOptions) {
+                id
+                team_choice_name
+                shortlist
+                development_option {
+                    id
+                    display_name
+                    option
                 }
             }
         }

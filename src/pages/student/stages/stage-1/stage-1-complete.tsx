@@ -39,7 +39,7 @@ const Stage1CompletePage = () => {
         data: pageData,
     } = useAuthQuery<DocumentCompleteQuery, DocumentCompleteQueryVariables>(
         DOCUMENT_COMPLETE_QUERY,
-        { variables: { stage_id: 1 } },
+        { variables: { stage_id: 1, includeDevOptions: false } },
         'teamId'
     )
 
@@ -60,14 +60,17 @@ const Stage1CompletePage = () => {
                 <title>Stage 1 - {stageTitle} - Complete</title>
                 <meta name="description" content="The description" />
             </Helmet>
+
             <main className="the-quest">
                 <Header headerText="Stage 1" />
+
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
+
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     image={
@@ -76,6 +79,7 @@ const Stage1CompletePage = () => {
                                     }
                                 />
                             </div>
+
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
                                     <span className="ticker-sheet">
