@@ -14,7 +14,7 @@ const Nav = () => {
                     <Link to="/tutor/hub">Tutor hub</Link>
                 </li>
                 <li className="nav-links">
-                    <Link to="/tutor/current-quest/">Current Quests</Link>
+                    <Link to="/tutor/current-quests/">Current Quests</Link>
                 </li>
             </ul>
         </nav>

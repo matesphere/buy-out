@@ -6,6 +6,7 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { CheckList } from '../../../../components/common/Checklist'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 
@@ -15,16 +16,16 @@ import {
     StageQueryVariables,
 } from '../../../../gql/types/StageQuery'
 
-import TickSheet from '../../../../assets/tick-sheet.svg'
-import DogVideo from '../../../../assets/the-quest-intro.mp4'
-
-import '../../../../scss/index.scss'
-import CheckList from "../../../../components/common/Checklist";
 import {
     stage1CheckListEng,
     stage1DataSubTitleEng,
     stage1DataTaskEng,
 } from './_stage1.data'
+
+import TickSheet from '../../../../assets/tick-sheet.svg'
+import DogVideo from '../../../../assets/the-quest-intro.mp4'
+
+import '../../../../scss/index.scss'
 
 const Stage1LandingPage = () => {
     const {
@@ -63,12 +64,9 @@ const Stage1LandingPage = () => {
                                 {stageTitle}
                             </h2>
 
-                            {stage1DataSubTitleEng.map((check) => (
-                                <p
-                                    className="sm-type-guitar mb-4"
-                                    key={check.subtitle}
-                                >
-                                    {check.subtitle}
+                            {stage1DataSubTitleEng.map((text, i) => (
+                                <p key={i} className="sm-type-guitar mb-4">
+                                    {text}
                                 </p>
                             ))}
 
@@ -87,12 +85,9 @@ const Stage1LandingPage = () => {
                                     </span>
                                 </h4>
 
-                                {stage1DataTaskEng.map((check) => (
-                                    <p
-                                        className="sm-type-bigamp mb-2"
-                                        key={check.text}
-                                    >
-                                        {check.text}
+                                {stage1DataTaskEng.map((text, i) => (
+                                    <p key={i} className="sm-type-bigamp mb-2">
+                                        {text}
                                     </p>
                                 ))}
 
@@ -100,7 +95,8 @@ const Stage1LandingPage = () => {
                                     <ul>
                                         <li className="sm-type-guitar">
                                             <Link to="/student/stage-1/task">
-                                                Click here to answer a series of questions
+                                                Click here to answer a series of
+                                                questions
                                             </Link>
                                         </li>
                                     </ul>

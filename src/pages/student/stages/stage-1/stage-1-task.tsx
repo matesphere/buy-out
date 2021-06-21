@@ -7,14 +7,10 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { TextEditor } from '../../../../components/common/TextEditor'
 import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
+import { CheckList } from '../../../../components/common/Checklist'
 
-// import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
-import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
-
-import '../../../../scss/index.scss'
 import { eng } from '../../../_index.data'
 
 import {
@@ -22,7 +18,11 @@ import {
     stage1DataSubTitleEng,
     stage1DataTaskInstructionsEng,
 } from './_stage1.data'
-import CheckList from "../../../../components/common/Checklist";
+
+import HelpIcon from '../../../../assets/help-icon.svg'
+import TickSheet from '../../../../assets/tick-sheet.svg'
+
+import '../../../../scss/index.scss'
 
 type WorkState = {
     [key: number]: string
@@ -88,12 +88,9 @@ const Stage1TaskPage = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
-                            {stage1DataTaskInstructionsEng.map((check) => (
-                                <p
-                                    className="sm-type-guitar mb-4"
-                                    key={check.text}
-                                >
-                                    {check.text}
+                            {stage1DataTaskInstructionsEng.map((text, i) => (
+                                <p key={i} className="sm-type-guitar mb-4">
+                                    {text}
                                 </p>
                             ))}
 

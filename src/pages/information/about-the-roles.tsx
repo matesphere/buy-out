@@ -4,8 +4,8 @@ import Slider from 'react-slick'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
-import CheckList from '../../components/common/Checklist'
-import Helpful from '../../components/common/Helpful'
+import { CheckList } from '../../components/common/Checklist'
+import { Helpful } from '../../components/common/Helpful'
 
 import { slickSettings } from '../../utils/slicksettings'
 
@@ -34,30 +34,24 @@ const Stage2TaskPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            {stage2DataTitleEng.map((check) => (
+                            {stage2DataTitleEng.map((text, i) => (
                                 <h2
+                                    key={i}
                                     className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4"
-                                    key={check.title}
                                 >
-                                    {check.title}
+                                    {text}
                                 </h2>
                             ))}
 
-                            {stage2DataSubTitleEng.map((check) => (
-                                <p
-                                    className="sm-type-guitar mb-4"
-                                    key={check.subtitle}
-                                >
-                                    {check.subtitle}
+                            {stage2DataSubTitleEng.map((text, i) => (
+                                <p key={i} className="sm-type-guitar mb-4">
+                                    {text}
                                 </p>
                             ))}
 
-                            {stage2DataTextEng.map((check) => (
-                                <p
-                                    className="sm-type-lead mb-4"
-                                    key={check.text}
-                                >
-                                    {check.text}
+                            {stage2DataTextEng.map((text, i) => (
+                                <p key={i} className="sm-type-lead mb-4">
+                                    {text}
                                 </p>
                             ))}
 
