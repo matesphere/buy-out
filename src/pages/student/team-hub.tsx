@@ -173,7 +173,7 @@ const TeamInfoSection = ({
             <div className="row">
                 <div className="col-lg-3">
                     <div className="form-holder-border">
-                        <p className="sm-type-guitar sm-type-guitar--medium">
+                        <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
                             Team logo:
                         </p>
                         <GatsbyImage alt="" image={image} />
@@ -182,7 +182,7 @@ const TeamInfoSection = ({
 
                 <div className="col-lg-4">
                     <div className="form-holder-border">
-                        <p className="sm-type-guitar sm-type-guitar--medium">
+                        <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
                             Members:
                         </p>
                         <ul>
@@ -211,7 +211,7 @@ const TeamInfoSection = ({
                 {devOptions.length > 0 && (
                     <div className="col-lg-5">
                         <div className="form-holder-border">
-                            <p className="sm-type-guitar sm-type-guitar--medium">
+                            <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
                                 Development options:
                             </p>
                             <ol>
