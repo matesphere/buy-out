@@ -52,6 +52,7 @@ const TEAM_HUB_QUERY = gql`
                         }
                     }
                     team_development_options {
+                        shortlist
                         development_option {
                             id
                             display_name
@@ -85,6 +86,7 @@ const TEAM_HUB_SUB = gql`
                         }
                     }
                     team_development_options {
+                        shortlist
                         development_option {
                             id
                             display_name
@@ -170,56 +172,61 @@ const TeamInfoSection = ({
 
             <div className="row">
                 <div className="col-lg-3">
-                    <p className="sm-type-guitar sm-type-guitar--medium">
-                        Team logo:
-                    </p>
                     <div className="form-holder-border">
+                        <p className="sm-type-guitar sm-type-guitar--medium">
+                            Team logo:
+                        </p>
                         <GatsbyImage alt="" image={image} />
                     </div>
                 </div>
 
                 <div className="col-lg-4">
-                    <p className="sm-type-guitar sm-type-guitar--medium">
-                        Members:
-                    </p>
-                    <ul className="form-holder-border">
-                        {students.map((student, i) => (
-                            <li key={i}>
-                                <p className="sm-type-lead">
-                                    <span>{student.user.full_name}</span>
-                                    {student.position && (
-                                        <span>
-                                            <i>
-                                                {` - ${
-                                                    POSITION_DISPLAY_NAME[
-                                                        student.position
-                                                    ]
-                                                }`}
-                                            </i>
-                                        </span>
-                                    )}
-                                </p>
-                            </li>
-                        ))}
-                    </ul>
+                    <div className="form-holder-border">
+                        <p className="sm-type-guitar sm-type-guitar--medium">
+                            Members:
+                        </p>
+                        <ul>
+                            {students.map((student, i) => (
+                                <li key={i}>
+                                    <p className="sm-type-lead">
+                                        <span>{student.user.full_name}</span>
+                                        {student.position && (
+                                            <span>
+                                                <i>
+                                                    {` - ${
+                                                        POSITION_DISPLAY_NAME[
+                                                            student.position
+                                                        ]
+                                                    }`}
+                                                </i>
+                                            </span>
+                                        )}
+                                    </p>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
                 </div>
 
                 {devOptions.length > 0 && (
                     <div className="col-lg-5">
-                        <p className="sm-type-guitar sm-type-guitar--medium">
-                            Development options:
-                        </p>
-                        <ol className="form-holder-border">
-                            {devOptions.map(
-                                ({ development_option: opt }, i) => (
-                                    <li key={i}>
-                                        <p className="sm-type-lead">
-                                            <span>{opt.display_name}</span>
-                                        </p>
-                                    </li>
-                                )
-                            )}
-                        </ol>
+                        <div className="form-holder-border">
+                            <p className="sm-type-guitar sm-type-guitar--medium">
+                                Development options:
+                            </p>
+                            <ol>
+                                {devOptions.map(
+                                    (
+                                        { shortlist, development_option: { display_name } },
+                                        i
+                                    ) => (
+                                        <li key={i} className="sm-type-bigamp mb-2">
+                                            {display_name} {shortlist && <span className="shortlist-tick"><Tick /></span>}
+                                        </li>
+                                    )
+                                )}
+                            </ol>
+                        </div>
                     </div>
                 )}
             </div>
