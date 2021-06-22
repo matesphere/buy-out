@@ -183,7 +183,7 @@ const TeamInfoPanel = ({
                         i
                     ) => (
                         <p key={i} className="sm-type-bigamp">
-                            {display_name} {shortlist && <Tick />}
+                            {shortlist && <span className="shortlist-tick"><Tick /></span>} {display_name}
                         </p>
                     )
                 )}

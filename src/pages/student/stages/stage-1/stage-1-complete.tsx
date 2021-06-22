@@ -66,7 +66,7 @@ const Stage1CompletePage = () => {
 
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-9">
+                        <div className="col-lg-12">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
@@ -118,56 +118,6 @@ const Stage1CompletePage = () => {
                                         ))}
                                     </ol>
                                 </div>
-                            </div>
-                        </div>
-
-                        <div className="col-lg-3">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">Useful links</p>
-                                <ul>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Civil parish
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Loch_Alsh"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Lochalsh
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Highland_council_area"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Highland
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Inverness-shire"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Inverness-shire
-                                        </a>
-                                    </li>
-                                </ul>
                             </div>
                         </div>
                     </div>
