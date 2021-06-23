@@ -51,7 +51,9 @@ const TEAM_HUB_QUERY = gql`
                             full_name
                         }
                     }
-                    team_development_options {
+                    team_development_options(
+                        order_by: { development_option: { id: asc } }
+                    ) {
                         shortlist
                         development_option {
                             id
@@ -62,7 +64,7 @@ const TEAM_HUB_QUERY = gql`
                 }
             }
         }
-        stage {
+        stage(order_by: { id: asc }) {
             id
             title
         }
@@ -217,11 +219,24 @@ const TeamInfoSection = ({
                             <ol>
                                 {devOptions.map(
                                     (
-                                        { shortlist, development_option: { display_name } },
+                                        {
+                                            shortlist,
+                                            development_option: {
+                                                display_name,
+                                            },
+                                        },
                                         i
                                     ) => (
-                                        <li key={i} className="sm-type-bigamp mb-2">
-                                            {display_name} {shortlist && <span className="shortlist-tick"><Tick /></span>}
+                                        <li
+                                            key={i}
+                                            className="sm-type-bigamp mb-2"
+                                        >
+                                            {display_name}{' '}
+                                            {shortlist && (
+                                                <span className="shortlist-tick">
+                                                    <Tick />
+                                                </span>
+                                            )}
                                         </li>
                                     )
                                 )}

@@ -2,7 +2,7 @@ import React, { FC } from 'react'
 
 import { TextEditor } from '../TextEditor'
 
-import '../../scss/index.scss'
+import '../../../scss/index.scss'
 
 interface FeasibilityStudyType {
     benefits: string

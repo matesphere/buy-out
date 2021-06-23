@@ -27,7 +27,9 @@ const STAGE_4_TASK_QUERY = gql`
     query Stage4TaskQuery($team_id: uuid!) {
         team_by_pk(id: $team_id) {
             id
-            team_development_options {
+            team_development_options(
+                order_by: { development_option: { id: asc } }
+            ) {
                 id
                 team_choice_name
                 shortlist
@@ -49,7 +51,6 @@ const ChooseOptionsCheckboxes = ({
     <>
         {devOptions
             .slice()
-            .sort((a, b) => a.id - b.id)
             .map(
                 (
                     {

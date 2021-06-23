@@ -166,7 +166,9 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                                 feedback
                             }
                         }
-                        team_development_options {
+                        team_development_options(
+                            order_by: { development_option: { id: asc } }
+                        ) {
                             shortlist
                             development_option {
                                 id
@@ -183,7 +185,7 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
             display_name
             model_swot
         }
-        stage {
+        stage(order_by: { id: asc }) {
             id
             title
         }

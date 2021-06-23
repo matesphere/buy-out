@@ -1,37 +1,71 @@
 import React, { useState, FC } from 'react'
 import { MutationResult } from '@apollo/client'
 
+import { TextEditor } from '../../components/common/TextEditor'
+
+import HelpIcon from '../../assets/help-icon.svg'
+
 interface SubmitFeedbackSectionProps {
+    feedbackState: { feedback: any }
+    changeFunc: (data: any) => void
     submittedFeedback: { feedback: any }
     submitFeedbackObj: {
         call: () => Promise<any>
         response: MutationResult<any>
     }
     disableSubmit: boolean
-    showModal: boolean
-    allowUpdate: boolean
-    setAllowUpdate: (value: boolean) => void
 }
 
 export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
+    feedbackState,
+    changeFunc,
     submittedFeedback,
     submitFeedbackObj,
     disableSubmit,
-    allowUpdate,
-    setAllowUpdate,
 }) => {
+    const [allowUpdate, setAllowUpdate] = useState(false)
     const [showModal, setShowModal] = useState(false)
 
     return (
         <>
-            {((!submitFeedbackObj.response.data && !submittedFeedback) ||
-                allowUpdate) && (
+            <div className="side-grey">
+                <h3 className="task ticker mb-2">
+                    <span className="ticker-sheet ticker-feedback">
+                        <HelpIcon />
+                    </span>
+                    <span className="sm-type-drum green-highlight">
+                        Your feedback:
+                    </span>
+                </h3>
+                <div className="form-holder-border">
+                    <p className="sm-type-lead">
+                        <TextEditor
+                            data={feedbackState?.feedback || ''}
+                            onChange={changeFunc}
+                            docSubmitted={submittedFeedback && !allowUpdate}
+                        />
+                    </p>
+
+                    {((!submitFeedbackObj.response.data &&
+                        !submittedFeedback) ||
+                        allowUpdate) && (
+                        <button
+                            className="btn-solid-lg mt-4"
+                            disabled={disableSubmit}
+                            onClick={() => setShowModal(true)}
+                        >
+                            Submit Feedback
+                        </button>
+                    )}
+                </div>
+            </div>
+
+            {submittedFeedback && !allowUpdate && (
                 <button
                     className="btn-solid-lg mt-4"
-                    disabled={disableSubmit}
-                    onClick={() => setShowModal(true)}
+                    onClick={() => setAllowUpdate(true)}
                 >
-                    Submit Feedback
+                    Update Feedback
                 </button>
             )}
 

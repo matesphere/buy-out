@@ -85,12 +85,12 @@ export const useAuthQuery = <TData, TVariables>(
 
 export const useAuthMutation = <TData, TVariables>(
     query: DocumentNode,
-    // options?: BaseMutationOptions<TData, TVariables>,
     refetchObj?: {
         query: DocumentNode
         variables: any
         idRequired?: 'userId' | 'teamId'
     }
+    // options?: BaseMutationOptions<TData, TVariables>
 ) => {
     const {
         userInfo: { token, userId, teamId },
