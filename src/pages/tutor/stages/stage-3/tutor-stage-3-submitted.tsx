@@ -17,33 +17,6 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
 
-type WorkState = {
-    feedback: string
-}
-
-type Action =
-    | {
-          type: ActionType.LoadAction
-          payload: WorkState
-      }
-    | {
-          type: ActionType.UpdateAction
-          payload: WorkState
-      }
-
-const stage3FeedbackReducer: Reducer<WorkState, Action> = (state, action) => {
-    switch (action.type) {
-        case ActionType.LoadAction:
-            return action.payload
-        case ActionType.UpdateAction:
-            return {
-                feedback: action.payload.feedback,
-            }
-        default:
-            return state
-    }
-}
-
 const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     const {
         loading,
@@ -52,7 +25,7 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
         feedbackState,
         feedbackDispatch,
         submitFeedbackObj,
-    } = useFeedbackState<WorkState, Action>(stage3FeedbackReducer, search, true)
+    } = useFeedbackState(search, true)
 
     const [allowUpdate, setAllowUpdate] = useState(false)
 
@@ -70,7 +43,7 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 3 - Progress Your Plans (SWOT Analysis)</title>
+                <title>Stage 3 - Lay the Foundations - Submitted</title>
             </Helmet>
 
             <main className="the-quest">

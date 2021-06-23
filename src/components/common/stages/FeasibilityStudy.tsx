@@ -49,7 +49,9 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
                 <div className="ck-textarea">
                     <TextEditor
                         data={workState.whyBuy || ''}
-                        onChange={changeFunc(null, null)}
+                        onChange={
+                            changeFunc ? changeFunc(null, null) : () => {}
+                        }
                         docSubmitted={docSubmitted}
                     />
                 </div>
@@ -75,7 +77,11 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
                         <div className="ck-textarea">
                             <TextEditor
                                 data={workState[option]?.['benefits'] || ''}
-                                onChange={changeFunc(option, 'benefits')}
+                                onChange={
+                                    changeFunc
+                                        ? changeFunc(option, 'benefits')
+                                        : () => {}
+                                }
                                 docSubmitted={docSubmitted}
                             />
                         </div>
@@ -89,7 +95,11 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
                                 data={
                                     workState[option]?.['reasonsSucceed'] || ''
                                 }
-                                onChange={changeFunc(option, 'reasonsSucceed')}
+                                onChange={
+                                    changeFunc
+                                        ? changeFunc(option, 'reasonsSucceed')
+                                        : () => {}
+                                }
                                 docSubmitted={docSubmitted}
                             />
                         </div>
@@ -101,7 +111,11 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
                         <div className="ck-textarea">
                             <TextEditor
                                 data={workState[option]?.['reasonsFail'] || ''}
-                                onChange={changeFunc(option, 'reasonsFail')}
+                                onChange={
+                                    changeFunc
+                                        ? changeFunc(option, 'reasonsFail')
+                                        : () => {}
+                                }
                                 docSubmitted={docSubmitted}
                             />
                         </div>

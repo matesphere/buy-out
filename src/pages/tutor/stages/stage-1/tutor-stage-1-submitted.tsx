@@ -17,33 +17,6 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import '../../../../scss/index.scss'
 import { eng } from '../../../_index.data'
 
-type WorkState = {
-    feedback: string
-}
-
-type Action =
-    | {
-          type: ActionType.LoadAction
-          payload: WorkState
-      }
-    | {
-          type: ActionType.UpdateAction
-          payload: WorkState
-      }
-
-const stage1FeedbackReducer: Reducer<WorkState, Action> = (state, action) => {
-    switch (action.type) {
-        case ActionType.LoadAction:
-            return action.payload
-        case ActionType.UpdateAction:
-            return {
-                feedback: action.payload.feedback,
-            }
-        default:
-            return state
-    }
-}
-
 const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     const {
         loading,
@@ -52,7 +25,7 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
         feedbackState,
         feedbackDispatch,
         submitFeedbackObj,
-    } = useFeedbackState<WorkState, Action>(stage1FeedbackReducer, search)
+    } = useFeedbackState(search)
 
     const [allowUpdate, setAllowUpdate] = useState(false)
 
@@ -68,7 +41,7 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 1 - Research</title>
+                <title>Stage 1 - Research - Submitted</title>
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">

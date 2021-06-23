@@ -98,7 +98,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 3 - Progress Your Plans (SWOT Analysis)</title>
+                <title>Stage 3 - Lay the Foundations - SWOT</title>
             </Helmet>
 
             <main className="the-quest">

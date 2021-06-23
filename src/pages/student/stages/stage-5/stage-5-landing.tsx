@@ -128,12 +128,15 @@ const Stage5LandingPage: FC = () => {
                             </h2>
 
                             <p className="sm-type-lead mb-3">
-                                The teams will complete a Business Plan that
-                                will show how much money is required to be
-                                raised to buy the land and to provide the
-                                Capital Costs to get the 3 options off the
-                                ground and it will include a list of funders who
-                                ‘will’ provide those funds.
+                                Your task for this stage is to complete a
+                                Business Plan that will show how much money is
+                                required to be raised to buy the land, as well
+                                as the capital costs to get each of your 3
+                                options off the ground.
+                            </p>
+                            <p className="sm-type-lead mb-3">
+                                You will also be required to include a list of
+                                funders who will provide funding.
                             </p>
 
                             <div className="mt-4 mb-2 image-holder">
@@ -146,13 +149,15 @@ const Stage5LandingPage: FC = () => {
                             </div>
 
                             <p className="sm-type-lead mb-3">
-                                The Business Plan will also require the Groups
-                                to show estimates of the costs and income
-                                expected over the first 4 years of operations.
-                                In some cases the figures required will be found
-                                in the information provided for the Options, but
-                                in some cases the Groups will need to make their
-                                own ‘best estimates’ of either costs or income.
+                                The Business Plan will also require you to show
+                                estimates of the costs and income expected over
+                                the first 4 years of operations.
+                            </p>
+                            <p className="sm-type-lead mb-3">
+                                You should be able to find most of the figures
+                                required in the development option information,
+                                but in some cases you may need to make your own
+                                ‘best estimates’ of either costs or income!
                             </p>
 
                             <div className="side-grey">

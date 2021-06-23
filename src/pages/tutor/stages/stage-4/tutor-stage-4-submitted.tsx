@@ -7,7 +7,8 @@ import { Error } from '../../../../components/common/Error'
 
 import Header from '../../_header'
 import Footer from '../../_footer'
-import { SWOT } from '../../../../components/common/stages/SWOT'
+
+import { FeasibilityStudy } from '../../../../components/common/stages/FeasibilityStudy'
 import { TextEditor } from '../../../../components/common/TextEditor'
 import { SubmitFeedbackSection } from '../../../../components/tutor/SubmitFeedbackSection'
 
@@ -17,33 +18,6 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
 
-type WorkState = {
-    feedback: string
-}
-
-type Action =
-    | {
-          type: ActionType.LoadAction
-          payload: WorkState
-      }
-    | {
-          type: ActionType.UpdateAction
-          payload: WorkState
-      }
-
-const stage3FeedbackReducer: Reducer<WorkState, Action> = (state, action) => {
-    switch (action.type) {
-        case ActionType.LoadAction:
-            return action.payload
-        case ActionType.UpdateAction:
-            return {
-                feedback: action.payload.feedback,
-            }
-        default:
-            return state
-    }
-}
-
 const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     const {
         loading,
@@ -52,7 +26,7 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
         feedbackState,
         feedbackDispatch,
         submitFeedbackObj,
-    } = useFeedbackState<WorkState, Action>(stage3FeedbackReducer, search, true)
+    } = useFeedbackState(search, true)
 
     const [allowUpdate, setAllowUpdate] = useState(false)
 
@@ -60,7 +34,9 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     if (error) return <Error error={error} />
 
     const devOptions =
-        pageData.stage_progress_by_pk.team.team_development_options
+        pageData.stage_progress_by_pk.team.team_development_options.filter(
+            (opt) => opt.shortlist
+        )
     const doc = pageData.stage_progress_by_pk.documents[0]
 
     return (
@@ -70,21 +46,20 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 3 - Progress Your Plans (SWOT Analysis)</title>
+                <title>
+                    Stage 4 - Progress Your Plans (Feasibility Study) -
+                    Submitted
+                </title>
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Stage 3" />
+                <Header headerText="Stage 4" />
                 <section className="container" id="main">
-                    {devOptions.map((opt) => (
-                        <SWOT
-                            devOption={opt.development_option}
-                            swotState={
-                                doc.doc_data[opt.development_option.option]
-                            }
-                            docSubmitted={true}
-                        />
-                    ))}
+                    <FeasibilityStudy
+                        devOptions={devOptions}
+                        workState={doc.doc_data}
+                        docSubmitted={true}
+                    />
 
                     <div className="side-grey">
                         <h3 className="task ticker mb-2">

@@ -89,10 +89,8 @@ const Stage3LandingPage = () => {
         }
     `)
 
-    const { loading, error, pageData, submitWorkObj } = useWorkState<
-        WorkState,
-        Action
-    >(3, stage3SwotReducer, true)
+    const { loading, error, pageData, submitWorkObj, docSubmitted } =
+        useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />
@@ -230,6 +228,7 @@ const Stage3LandingPage = () => {
                                         disableSubmit={
                                             completedSwots.length !== 5
                                         }
+                                        docSubmitted={docSubmitted}
                                     />
                                 </div>
                             </div>

@@ -114,8 +114,8 @@ export const DOCUMENT_COMPLETE_QUERY = gql`
 
 export const TEAM_QUERY = gql`
     query TeamQuery($team_id: uuid!) {
-        id
         team_by_pk(id: $team_id) {
+            id
             students {
                 id
                 user_id
@@ -216,6 +216,7 @@ export const TUTOR_DOCUMENT_QUERY = gql`
                 team_development_options @include(if: $includeDevOptions) {
                     id
                     team_choice_name
+                    shortlist
                     development_option {
                         id
                         display_name

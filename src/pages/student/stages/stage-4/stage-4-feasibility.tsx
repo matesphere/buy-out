@@ -6,10 +6,11 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-import { TextEditor } from '../../../../components/common/TextEditor'
-import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import { CheckList } from '../../../../components/common/Checklist'
 import { Helpful } from '../../../../components/common/Helpful'
+
+import { FeasibilityStudy } from '../../../../components/common/stages/FeasibilityStudy'
+import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
@@ -67,7 +68,7 @@ export const stage4Reducer: Reducer<WorkState, Action> = (
     }
 }
 
-const onChangeEditor = (workDispatch, option, section) => (data) =>
+const changeFunc = (workDispatch) => (option, section) => (data) =>
     workDispatch({
         type: ActionType.UpdateAction,
         payload: {
@@ -76,6 +77,18 @@ const onChangeEditor = (workDispatch, option, section) => (data) =>
             input: data,
         },
     })
+
+const feasibilityComplete = ({ whyBuy, ...rest }: WorkState) => {
+    const studies = rest as { [key: string]: FeasibilityStudyType }
+
+    return (
+        !!whyBuy &&
+        Object.values(studies).every(
+            ({ benefits, reasonsSucceed, reasonsFail }) =>
+                !!benefits && !!reasonsSucceed && reasonsFail
+        )
+    )
+}
 
 const Stage4FeasibilityPage: FC = () => {
     const {
@@ -126,154 +139,20 @@ const Stage4FeasibilityPage: FC = () => {
                                     </span>
                                 </h4>
 
-                                <ol>
-                                    <li className="mb-4">
-                                        <div id="more-detail-hint">
-                                            <h2 className="sm-type-bigamp mb-1">
-                                                Why does the Community want to
-                                                buy this land? (You should not
-                                                refer to specific schemes but
-                                                rather explain what it would
-                                                mean to the community to own
-                                                this land.)
-                                            </h2>
-                                        </div>
-                                        <div className="form-holder-border">
-                                            <p className="sm-type-amp mb-1">
-                                                Enter your finding on the text
-                                                box below.
-                                            </p>
-                                            <div className="ck-textarea">
-                                                <TextEditor
-                                                    data={
-                                                        workState.whyBuy || ''
-                                                    }
-                                                    onChange={(data) =>
-                                                        workDispatch({
-                                                            type: ActionType.UpdateAction,
-                                                            payload: {
-                                                                input: data,
-                                                            },
-                                                        })
-                                                    }
-                                                    docSubmitted={docSubmitted}
-                                                />
-                                            </div>
-                                        </div>
-                                    </li>
-
-                                    <li className="mb-4">
-                                        <h2 className="sm-type-bigamp mb-2">
-                                            For each Development Option,
-                                            describe the expected benefits to
-                                            the community, the reasons that the
-                                            scheme is likely to succeed and the
-                                            risks that might cause it to fail.
-                                        </h2>
-
-                                        {devOptions.map(
-                                            (
-                                                {
-                                                    development_option: {
-                                                        option,
-                                                        display_name,
-                                                    },
-                                                },
-                                                i
-                                            ) => (
-                                                <div
-                                                    key={i}
-                                                    className="form-holder-border"
-                                                >
-                                                    <h4 className="sm-type-drum mb-2">
-                                                        {display_name}
-                                                    </h4>
-                                                    <div id="more-detail-hint11">
-                                                        <p className="sm-type-bigamp mb-1 redorange-highlight">
-                                                            Benefits to the
-                                                            Community
-                                                        </p>
-                                                    </div>
-                                                    <div className="ck-textarea">
-                                                        <TextEditor
-                                                            data={
-                                                                workState[
-                                                                    option
-                                                                ]?.[
-                                                                    'benefits'
-                                                                ] || ''
-                                                            }
-                                                            onChange={onChangeEditor(
-                                                                workDispatch,
-                                                                option,
-                                                                'benefits'
-                                                            )}
-                                                            docSubmitted={
-                                                                docSubmitted
-                                                            }
-                                                        />
-                                                    </div>
-                                                    <div id="more-detail-hint22">
-                                                        <p className="sm-type-bigamp mb-1 green-highlight">
-                                                            Reasons the Scheme
-                                                            is likely to succeed
-                                                        </p>
-                                                    </div>
-                                                    <div className="ck-textarea">
-                                                        <TextEditor
-                                                            data={
-                                                                workState[
-                                                                    option
-                                                                ]?.[
-                                                                    'reasonsSucceed'
-                                                                ] || ''
-                                                            }
-                                                            onChange={onChangeEditor(
-                                                                workDispatch,
-                                                                option,
-                                                                'reasonsSucceed'
-                                                            )}
-                                                            docSubmitted={
-                                                                docSubmitted
-                                                            }
-                                                        />
-                                                    </div>
-                                                    <div id="more-detail-hin33">
-                                                        <p className="sm-type-bigamp mb-1 red-highlight">
-                                                            Risks that might
-                                                            cause the Scheme to
-                                                            fail
-                                                        </p>
-                                                    </div>
-                                                    <div className="ck-textarea">
-                                                        <TextEditor
-                                                            data={
-                                                                workState[
-                                                                    option
-                                                                ]?.[
-                                                                    'reasonsFail'
-                                                                ] || ''
-                                                            }
-                                                            onChange={onChangeEditor(
-                                                                workDispatch,
-                                                                option,
-                                                                'reasonsFail'
-                                                            )}
-                                                            docSubmitted={
-                                                                docSubmitted
-                                                            }
-                                                        />
-                                                    </div>
-                                                </div>
-                                            )
-                                        )}
-                                    </li>
-                                </ol>
+                                <FeasibilityStudy
+                                    devOptions={devOptions}
+                                    workState={workState}
+                                    changeFunc={changeFunc(workDispatch)}
+                                    docSubmitted={docSubmitted}
+                                />
 
                                 <SaveSubmitSection
                                     saveWorkObj={saveWorkObj}
                                     submitWorkObj={submitWorkObj}
-                                    disableSubmit={false}
+                                    disableSubmit={
+                                        !feasibilityComplete(workState)
+                                    }
+                                    docSubmitted={docSubmitted}
                                 />
                             </div>
                         </div>
@@ -293,6 +172,7 @@ const Stage4FeasibilityPage: FC = () => {
                             />
                         </div>
                     </div>
+                    <Link to="/student/stage-4">Back to Stage 4</Link>
                 </section>
 
                 <Footer />

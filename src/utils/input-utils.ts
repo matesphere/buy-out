@@ -218,9 +218,37 @@ export const useWorkState = <InputState, Action>(
     }
 }
 
-export const useFeedbackState = <InputState, Action>(
-    // stageId: number,
-    feedbackReducer: Reducer<InputState, Action>,
+type FeedbackState = {
+    feedback: string
+}
+
+type FeedbackAction =
+    | {
+          type: ActionType.LoadAction
+          payload: FeedbackState
+      }
+    | {
+          type: ActionType.UpdateAction
+          payload: FeedbackState
+      }
+
+const feedbackReducer: Reducer<FeedbackState, FeedbackAction> = (
+    state,
+    action
+) => {
+    switch (action.type) {
+        case ActionType.LoadAction:
+            return action.payload
+        case ActionType.UpdateAction:
+            return {
+                feedback: action.payload.feedback,
+            }
+        default:
+            return state
+    }
+}
+
+export const useFeedbackState = (
     searchString: string,
     includeDevOptions?: boolean
 ) => {
@@ -228,12 +256,8 @@ export const useFeedbackState = <InputState, Action>(
 
     const [docId, setDocId] = useState('')
     const [feedbackState, feedbackDispatch] = useReducer<
-        Reducer<InputState, Action>
-    >(feedbackReducer, {} as InputState)
-
-    // const [saveWorkInitial, saveWorkInitialResponse] =
-    //     useAuthMutation(SAVE_WORK_INITIAL)
-    // const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
+        Reducer<FeedbackState, FeedbackAction>
+    >(feedbackReducer, {} as FeedbackState)
 
     const [submitFeedback, submitFeedbackResponse] = useAuthMutation(
         SUBMIT_FEEDBACK,
