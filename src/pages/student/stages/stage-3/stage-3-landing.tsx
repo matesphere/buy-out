@@ -143,13 +143,23 @@ const Stage3LandingPage = () => {
                             </p>
                             <p className="sm-type-lead mb-4">
                                 Once decided upon, you'll then be asked to
-                                complete a SWOT analysis for each of these.{' '}
-                                <Link to="#">Click here</Link> to find out more
-                                about what is meant by SWOT and how you can
+                                complete a SWOT analysis for each of these.
+                                Read the <b>SWOT</b> guide to find out more
+                                about what is meant by <b>SWOT</b> and how you can
                                 complete this task.
                             </p>
 
-                            <p className="sm-type-bigamp mb-3">
+                            <p className="sm-type-guitar mb-4">
+                                <span className="side-icon side-icon-orange">
+                                    <HelpIcon />
+                                </span>
+                                Read the {' '}
+                                <Link to="/information/about-swot">
+                                    SWOT guide
+                                </Link> here.
+                            </p>
+
+                            <p className="sm-type-bigamp mb-3 mt-2">
                                 Shown below is a map of Glenclas, with the
                                 locations of proposed development opportunities
                                 marked. Your task is to investigate each of the
@@ -245,6 +255,11 @@ const Stage3LandingPage = () => {
                                         View map of Glenclas
                                     </Link>
                                 </p>
+                                <p className="sm-type-amp">
+                                    <Link to="/information/about-swot">
+                                        SWOT guide
+                                    </Link>
+                                </p>
                             </div>
 
                             <p className="sm-type-guitar mb-2 mt-4">
@@ -270,10 +285,17 @@ const Stage3LandingPage = () => {
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
+                                        Read the SWOT guide to help you complete them.
+                                    </p>
+                                </div>
+                                <div className="checklist">
+                                    <div className="tick"></div>
+                                    <p className="sm-type-lead">
                                         Complete a SWOT analysis for each
                                         option.
                                     </p>
                                 </div>
+
                             </div>
                         </div>
                     </div>
