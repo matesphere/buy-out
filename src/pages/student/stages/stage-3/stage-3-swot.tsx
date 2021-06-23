@@ -7,7 +7,7 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-import { SWOT } from '../../../../components/common/SWOT'
+import { SWOT } from '../../../../components/common/stages/SWOT'
 
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
 

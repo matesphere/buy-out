@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import { TextEditor } from './TextEditor'
+import { TextEditor } from '../TextEditor'
 
 import '../../scss/index.scss'
 

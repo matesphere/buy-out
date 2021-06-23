@@ -7,9 +7,9 @@ import { Error } from '../../../../components/common/Error'
 
 import Header from '../../_header'
 import Footer from '../../_footer'
-import { SWOT } from '../../../../components/common/SWOT'
+import { SWOT } from '../../../../components/common/stages/SWOT'
 import { TextEditor } from '../../../../components/common/TextEditor'
-import { SubmitFeedbackSection } from '../../../../components/tutor/stages/SubmitFeedbackSection'
+import { SubmitFeedbackSection } from '../../../../components/tutor/SubmitFeedbackSection'
 
 import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
 

@@ -23,8 +23,8 @@ import Stage4Landing from './student/stages/stage-4/stage-4-landing'
 import Stage4ChooseOptions from './student/stages/stage-4/stage-4-choose-options'
 import Stage4Feasibility from './student/stages/stage-4/stage-4-feasibility'
 
-import Stage5Page from './student/stages/stage-5/stage-5'
-import Stage5BusinessPlanPage from './student/stages/stage-5/business-plan'
+import Stage5Landing from './student/stages/stage-5/stage-5-landing'
+import Stage5BusinessPlan from './student/stages/stage-5/stage-5-business-plan'
 
 import Stage6Page from './student/stages/stage-6/stage-6'
 import Stage6TipsPage from './student/stages/stage-6/presentation-tips'
@@ -101,10 +101,10 @@ const Routes = () => {
                 component={Stage4Feasibility}
             />
 
-            <LoggedInRoute path="/stage-5" component={Stage5Page} />
+            <LoggedInRoute path="/stage-5" component={Stage5Landing} />
             <LoggedInRoute
                 path="/stage-5/business-plan"
-                component={Stage5BusinessPlanPage}
+                component={Stage5BusinessPlan}
             />
 
             <LoggedInRoute path="/stage-6" component={Stage6Page} />

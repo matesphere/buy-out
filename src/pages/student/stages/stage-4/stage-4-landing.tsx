@@ -62,11 +62,12 @@ const Stage4LandingPage = () => {
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Stage 4" />
+
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Progress Your Plans - Feasibility Study
+                                {stageTitle}
                             </h2>
 
                             <p className="sm-type-lead mb-3">

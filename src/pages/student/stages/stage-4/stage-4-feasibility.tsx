@@ -7,7 +7,7 @@ import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { TextEditor } from '../../../../components/common/TextEditor'
-import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
+import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import { CheckList } from '../../../../components/common/Checklist'
 import { Helpful } from '../../../../components/common/Helpful'
 

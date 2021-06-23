@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Reducer, FC } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -6,13 +6,85 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
+import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
+
+import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
-const Stage5Page = () => {
+interface LandCostType {
+    area: number
+    price: number
+}
+
+interface FourYearCosts {
+    year1: number
+    year2: number
+    year3: number
+    year4: number
+}
+
+interface BusinessPlanType {
+    capitalCosts: {
+        costs: Array<{ details: string; cost: number }>
+        funding: Array<{ funderName: string; amount: number }>
+    }
+    runningCosts: Array<{ details: string } & FourYearCosts>
+    cashFlow: {
+        income: FourYearCosts
+        costs: FourYearCosts
+        balance: FourYearCosts
+    }
+}
+
+export interface WorkState {
+    [key: string]: LandCostType | BusinessPlanType
+}
+
+export type Action =
+    | {
+          type: ActionType.LoadAction
+          payload: WorkState
+      }
+    | {
+          type: ActionType.UpdateAction
+          payload: {
+              option?: string
+              section?: 'benefits' | 'reasonsSucceed' | 'reasonsFail'
+              input: string
+          }
+      }
+
+export const stage5Reducer: Reducer<WorkState, Action> = (
+    state,
+    action
+): WorkState => {
+    switch (action.type) {
+        case ActionType.LoadAction:
+            return action.payload
+        case ActionType.UpdateAction:
+            if (action.payload.option) {
+                return {
+                    ...state,
+                    [action.payload.option]: {
+                        ...state[action.payload.option],
+                        [action.payload.section]: action.payload.input,
+                    },
+                }
+            } else {
+                return {
+                    ...state,
+                    whyBuy: action.payload.input,
+                }
+            }
+    }
+}
+
+const Stage5LandingPage: FC = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "business-plans.jpg" }) {
@@ -23,6 +95,19 @@ const Stage5Page = () => {
         }
     `)
 
+    const { loading, error, pageData, saveWorkObj, submitWorkObj } =
+        useWorkState<WorkState, Action>(3, stage5Reducer, true)
+
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
+
+    if (loading) return <Loading />
+    if (error) return <Error error={error} />
+
+    const { title: stageTitle } = pageData.stage_by_pk
+    const { team_development_options: devOptions } = pageData.team_by_pk
+    const shortlist = devOptions.filter((opt) => opt.shortlist)
+
     return (
         <>
             <Helmet>
@@ -30,15 +115,16 @@ const Stage5Page = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 5 - Business Plan</title>
+                <title>Stage 5 - {stageTitle}</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Stage 5" />
+
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Business Plan
+                                {stageTitle}
                             </h2>
 
                             <p className="sm-type-lead mb-3">
@@ -170,28 +256,34 @@ const Stage5Page = () => {
                                         </div>
                                     </div>
                                 </div>
+
                                 <div className="form-holder-border">
                                     <p className="sm-type-lead sm-type-lead--medium mb-2">
                                         2. Complete your business plans.
                                     </p>
                                     <ul>
-                                        <li className="sm-type-guitar">
-                                            <Link to="/student/stage-5/business-plan">
-                                                Affordable Housing Scheme
-                                                Business Plan
-                                            </Link>
-                                        </li>
-                                        <li className="sm-type-guitar">
-                                            <Link to="/student/stage-5/business-plan">
-                                                Play Park Business Plan
-                                            </Link>
-                                        </li>
-                                        <li className="sm-type-guitar">
-                                            <Link to="/student/stage-5/business-plan">
-                                                Shop and Post Office Business
-                                                Plan
-                                            </Link>
-                                        </li>
+                                        {shortlist.map(
+                                            (
+                                                {
+                                                    id,
+                                                    development_option: {
+                                                        display_name,
+                                                    },
+                                                },
+                                                i
+                                            ) => (
+                                                <li
+                                                    key={i}
+                                                    className="sm-type-guitar"
+                                                >
+                                                    <Link
+                                                        to={`/student/stage-5/business-plan?num=${i}&id=${id}`}
+                                                    >
+                                                        {display_name}
+                                                    </Link>
+                                                </li>
+                                            )
+                                        )}
                                     </ul>
                                 </div>
                             </div>
@@ -246,4 +338,4 @@ const Stage5Page = () => {
     )
 }
 
-export default Stage5Page
+export default Stage5LandingPage

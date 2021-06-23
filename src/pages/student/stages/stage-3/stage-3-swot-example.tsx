@@ -9,7 +9,7 @@ import Footer from '../../../../components/_footer'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-import { SWOT } from '../../../../components/common/SWOT'
+import { SWOT } from '../../../../components/common/stages/SWOT'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 

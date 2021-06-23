@@ -7,7 +7,7 @@ import Footer from '../../_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { TextEditor } from '../../../../components/common/TextEditor'
-import { SubmitFeedbackSection } from '../../../../components/tutor/stages/SubmitFeedbackSection'
+import { SubmitFeedbackSection } from '../../../../components/tutor/SubmitFeedbackSection'
 
 import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
 

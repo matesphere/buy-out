@@ -1,12 +1,12 @@
 import React, { FC } from 'react'
 import { Link } from 'gatsby'
 
-import { TextEditor } from './TextEditor'
+import { TextEditor } from '../TextEditor'
 
-import SaveIcon from '../../assets/save-icon.svg'
-import HelpIcon from '../../assets/help-icon.svg'
+import SaveIcon from '../../../assets/save-icon.svg'
+import HelpIcon from '../../../assets/help-icon.svg'
 
-import '../../scss/index.scss'
+import '../../../scss/index.scss'
 
 interface SwotType {
     strengths: string
@@ -211,7 +211,9 @@ export const SWOT: FC<SWOTProps> = ({
         {saveWorkObj?.response.data && (
             <div className="modal-window">
                 <div>
-                    <p className="sm-type-guitar sm-type-guitar--medium mt-2 mb-2">SWOT Saved!</p>
+                    <p className="sm-type-guitar sm-type-guitar--medium mt-2 mb-2">
+                        SWOT Saved!
+                    </p>
                     <Link to="/student/stage-3">Back to Stage 3</Link>
                 </div>
             </div>

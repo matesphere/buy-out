@@ -9,7 +9,7 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-import { SaveSubmitSection } from '../../../../components/student/stages/SaveSubmitSection'
+import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import MapOptions from '../../../../pages/information/_map'
 
 import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
