@@ -60,6 +60,9 @@ export const SwotLinks = ({
 const ExampleSwotLinks = ({ exampleSwots }) => (
     <>
         <p className="sm-type-lead mb-2">
+            <span className="side-icon side-icon-orange shake">
+                <HelpIcon />
+            </span>
             {`Your teacher has provided the following example${
                 exampleSwots.length > 1 ? 's' : ''
             } to help:`}
@@ -79,16 +82,6 @@ const ExampleSwotLinks = ({ exampleSwots }) => (
 )
 
 const Stage3LandingPage = () => {
-    const imageData = useStaticQuery(graphql`
-        query {
-            image5: file(relativePath: { eq: "map-zoom.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-        }
-    `)
-
     const { loading, error, pageData, submitWorkObj, docSubmitted } =
         useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
@@ -148,7 +141,7 @@ const Stage3LandingPage = () => {
                             </p>
 
                             <p className="sm-type-guitar mb-4">
-                                <span className="side-icon side-icon-orange">
+                                <span className="side-icon side-icon-orange shake">
                                     <HelpIcon />
                                 </span>
                                 Read the {' '}
@@ -184,15 +177,16 @@ const Stage3LandingPage = () => {
                                         submit the 5 options your team will be
                                         taking forward.
                                     </p>
-                                    <ul>
-                                        <li className="sm-type-guitar">
-                                            <Link to="/student/stage-3/options">
-                                                Read about the development
-                                                options and choose your
-                                                'longlist'
-                                            </Link>
-                                        </li>
-                                    </ul>
+                                    <p className="sm-type-guitar">
+                                        <span className="side-icon side-icon-orange shake">
+                                            <HelpIcon />
+                                        </span>
+                                        <Link to="/student/stage-3/options">
+                                            Read about the development
+                                            options and choose your
+                                            'longlist'
+                                        </Link>
+                                    </p>
                                 </div>
 
                                 <div

@@ -92,14 +92,19 @@ export const SWOT: FC<SWOTProps> = ({
                             Fill out the SWOT diagram, using the information
                             provided elsewhere in stage 3 to help you.
                         </p>
+
+                        <p className="sm-type-amp">
+                            Read the {' '}
+                            <Link to="/information/about-swot">
+                                SWOT guide
+                            </Link>
+                            {' '}here
+                        </p>
                         <p className="sm-type-amp">
                             <strong>
                                 Remember to hit 'save work' on each of your
                                 SWOTs, before leaving the page!
                             </strong>
-                        </p>
-                        <p className="sm-type-amp">
-                            <Link to="/student/stage-3">Back to Stage 3</Link>
                         </p>
                     </div>
                 </div>

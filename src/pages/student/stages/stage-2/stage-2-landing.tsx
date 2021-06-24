@@ -156,9 +156,11 @@ const Stage2LandingPage = () => {
                                 <div className="form-holder-border">
                                     <ul>
                                         <li className="sm-type-guitar">
+                                            Choose your{' '}
                                             <Link to="/student/stage-2/task">
-                                                Choose your Board here
+                                                Team Logo and Board
                                             </Link>
+
                                         </li>
                                     </ul>
                                 </div>

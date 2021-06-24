@@ -37,7 +37,7 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    padding: ($grid-unit);
+    padding: ($grid-unit) ($grid-unit*4);
 
     a {
       display: flex;
@@ -58,6 +58,9 @@
     line-height: ($grid-unit * 6);
     margin-right: $grid-unit;
     color: $brand-body;
+    flex: 0 0 ($grid-unit * 6);
+    font-size: 18px;
+    font-weight: bold;
   }
 
   &-complete {
@@ -81,8 +84,38 @@
     }
   }
 
+  &-unlocked {
+    background-color: $brand-body;
+
+    &:hover {
+      box-shadow: 0 8px 12px -4px rgb(0 0 0 / 40%), 0 0 2px rgb(0 0 0 / 40%);
+      transition: ease-in 0.2s;
+
+      svg {
+        transform: scale(1.05);
+      }
+    }
+
+    svg {
+      fill: black;
+    }
+
+    .quest-step-number {
+      background-color: $brand-orange;
+    }
+  }
+
   &-highlight {
     box-shadow: 0px 0px 15px 2px $brand-green;
+  }
+
+  .medium-icon {
+    width: ($grid-unit * 4);
+    height: ($grid-unit * 4);
+    svg {
+      width: ($grid-unit * 4);
+      height: ($grid-unit * 4);
+    }
   }
 }
 .step {
@@ -244,4 +277,19 @@
   border-radius: 4px;
   color: $brand-red;
   background-color: white;
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(3deg) scale(1); }
+  50% { transform: translate(1px, 1px) rotate(-3deg) scale(1.2); }
+  60% { transform: translate(1px, 1px) rotate(3deg) scale(1.2); }
+  65% { transform: translate(1px, 1px) rotate(-3deg) scale(1.2); }
+  70% { transform: translate(1px, 1px) rotate(3deg) scale(1.2); }
+  75% { transform: translate(1px, 1px) rotate(-3deg) scale(1.2); }
+  100% { transform: translate(1px, 1px) rotate(3deg) scale(1); }
+}
+
+.shake {
+  animation: shake 2s;
+  animation-iteration-count: infinite;
 }

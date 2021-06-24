@@ -104,7 +104,7 @@ const TEAM_HUB_SUB = gql`
 const getStageClasses = (status) => {
     switch (status) {
         case 'unlocked':
-            return 'quest-step-complete quest-step-highlight'
+            return 'quest-step-unlocked quest-step-highlight'
         case 'submitted':
             return 'quest-step-complete'
         case 'completed':

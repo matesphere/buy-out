@@ -65,7 +65,7 @@ const Stage2CompletePage = () => {
                 <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 Consult
                             </h2>
@@ -187,34 +187,6 @@ const Stage2CompletePage = () => {
                                     to say.
                                 </Link>
                             </p>
-                        </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">Useful links</p>
-                                <ul>
-                                    <li className="mb-2">
-                                        <Link to="/student/stage-2/about-glenclas-area">
-                                            Read about the area.
-                                        </Link>
-                                    </li>
-                                    <li>
-                                        <Link to="/student/stage-2/community">
-                                            See what the community and experts
-                                            have to say.
-                                        </Link>
-                                    </li>
-                                </ul>
-                                <p className="sm-type-amp">
-                                    Read all about Glenclas and find out what
-                                    you need to move on to the next quest.
-                                </p>
-                            </div>
                         </div>
                     </div>
                 </section>
