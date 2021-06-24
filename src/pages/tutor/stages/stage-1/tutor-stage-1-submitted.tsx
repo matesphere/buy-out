@@ -44,7 +44,7 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                 <Header headerText="Stage 1" />
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-9">
+                        <div className="col-lg-12">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 Research
                             </h2>

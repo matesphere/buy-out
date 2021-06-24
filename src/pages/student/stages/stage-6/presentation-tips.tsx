@@ -37,6 +37,19 @@ const Stage6TipsPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
+                            <div className="breadcrumb-list-container">
+                                <span className="crumb">
+                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="leaf crumb-caps">
+                                    <Link to="/student/stage-6">Stage 6</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="leaf crumb-caps">
+                                    Presentation Hints
+                                </span>
+                            </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Presentation Hints
                             </h2>

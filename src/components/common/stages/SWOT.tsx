@@ -40,6 +40,19 @@ export const SWOT: FC<SWOTProps> = ({
     <>
         <div className="row">
             <div className="col-lg-8">
+                <div className="breadcrumb-list-container">
+                    <span className="crumb">
+                        <Link to="/student/team-hub/">Team Hub</Link>
+                        <span className="crumb-spacer">›</span>
+                    </span>
+                    <span className="leaf crumb-caps">
+                        <Link to="/student/stage-3">Stage 3</Link>
+                        <span className="crumb-spacer">›</span>
+                    </span>
+                    <span className="leaf crumb-caps">
+                        {swotTitle}
+                    </span>
+                </div>
                 {swotTitle && (
                     <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                         {swotTitle}
@@ -47,7 +60,7 @@ export const SWOT: FC<SWOTProps> = ({
                 )}
 
                 {!docSubmitted && (
-                    <p className="sm-type-amp mb-4">
+                    <p className="sm-type-lead mb-4">
                         Use the SWOT Analysis to gather information in order to
                         complete the Feasibility Study template.
                     </p>
@@ -73,10 +86,6 @@ export const SWOT: FC<SWOTProps> = ({
                         </div>
                     </div>
                 )}
-
-                <h3 className="sm-type-drum sm-type-drum--medium mt-4">
-                    Option: {devOption.display_name}
-                </h3>
             </div>
 
             {!docSubmitted && (
@@ -111,6 +120,13 @@ export const SWOT: FC<SWOTProps> = ({
             )}
         </div>
 
+        <div className="row">
+            <div className="col-lg-12">
+                <h3 className="sm-type-drum sm-type-drum--medium mt-4">
+                    Option: {devOption.display_name}
+                </h3>
+            </div>
+        </div>
         <div className="row mt-4">
             <div className="col-lg-6">
                 <div className="form-holder-border">

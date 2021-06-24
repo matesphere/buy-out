@@ -18,6 +18,7 @@ import {
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
+import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
 
@@ -50,7 +51,7 @@ const Stage4LandingPage = () => {
     const { title: stageTitle } = pageData.stage_by_pk
     const { team_development_options: devOptions } = pageData.team_by_pk
     const shortlist = devOptions.filter((opt) => opt.shortlist)
-
+    const task1Complete = devOptions.filter((opt) => opt.shortlist).length === 3
     return (
         <>
             <Helmet>
@@ -66,6 +67,15 @@ const Stage4LandingPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
+                            <div className="breadcrumb-list-container">
+                                <span className="crumb">
+                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="leaf crumb-caps">
+                                    Stage 4
+                                </span>
+                            </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
                             </h2>
@@ -160,13 +170,22 @@ const Stage4LandingPage = () => {
                                         which of your development options you
                                         will progress to your shortlist.
                                     </p>
-                                    <ul>
-                                        <li className="sm-type-guitar">
-                                            <Link to="/student/stage-4/options">
-                                                Choose your shortlist
-                                            </Link>
-                                        </li>
-                                    </ul>
+
+                                    {task1Complete ? (
+                                        <ul>
+                                            <li className="sm-type-guitar">
+                                            Shortlist submitted <span className="shortlist-tick"><Tick /></span>
+                                            </li>
+                                        </ul>
+                                    ) : (
+                                        <ul>
+                                            <li className="sm-type-guitar">
+                                                <Link to="/student/stage-4/options">
+                                                    Choose your shortlist
+                                                </Link>
+                                            </li>
+                                        </ul>
+                                        )}
                                 </div>
 
                                 <div

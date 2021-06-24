@@ -39,6 +39,19 @@ const Stage5BusinessPlanPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
+                            <div className="breadcrumb-list-container">
+                                <span className="crumb">
+                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="crumb">
+                                    <Link to="/student/stage-5">Stage 5</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="leaf crumb-caps">
+                                    Business Plan
+                                </span>
+                            </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Business Plan
                             </h2>

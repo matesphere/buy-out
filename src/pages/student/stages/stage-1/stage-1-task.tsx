@@ -1,4 +1,5 @@
 import React, { Reducer } from 'react'
+import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
 import Header from '../../../../components/_header'
@@ -85,6 +86,19 @@ const Stage1TaskPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
+                            <div className="breadcrumb-list-container">
+                                <span className="crumb">
+                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="crumb">
+                                    <Link to="/student/stage-1">Stage 1</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="leaf crumb-caps">
+                                    Research Task
+                                </span>
+                            </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>

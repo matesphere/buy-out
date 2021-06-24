@@ -63,7 +63,7 @@
     font-weight: bold;
   }
 
-  &-complete {
+  &-complete, &-submitted, &-unlocked {
     background-color: $brand-body;
 
     &:hover {
@@ -78,28 +78,21 @@
     svg {
       fill: black;
     }
+  }
 
+  &-complete {
     .quest-step-number {
       background-color: $brand-green;
     }
   }
 
+  &-submitted {
+    .quest-step-number {
+      background-color: $brand-greybg;
+    }
+  }
+
   &-unlocked {
-    background-color: $brand-body;
-
-    &:hover {
-      box-shadow: 0 8px 12px -4px rgb(0 0 0 / 40%), 0 0 2px rgb(0 0 0 / 40%);
-      transition: ease-in 0.2s;
-
-      svg {
-        transform: scale(1.05);
-      }
-    }
-
-    svg {
-      fill: black;
-    }
-
     .quest-step-number {
       background-color: $brand-orange;
     }
@@ -292,4 +285,22 @@
 .shake {
   animation: shake 2s;
   animation-iteration-count: infinite;
+}
+
+.breadcrumb-list-container {
+  margin: $grid-unit 0;
+  font-size: 14px;
+
+  a {
+    color: $brand-red;
+  }
+
+  .crumb-spacer {
+    margin-left: 4px;
+    margin-right: 4px;
+  }
+
+  .crumb-caps {
+    text-transform: capitalize;
+  }
 }

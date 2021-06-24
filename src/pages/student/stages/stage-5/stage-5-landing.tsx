@@ -13,6 +13,8 @@ import { useWorkState } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
+import { CheckList } from '../../../../components/common/Checklist'
+import { Helpful } from '../../../../components/common/Helpful'
 
 import '../../../../scss/index.scss'
 interface FourYearCosts {
@@ -153,6 +155,15 @@ const Stage5LandingPage: FC = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
+                            <div className="breadcrumb-list-container">
+                                <span className="crumb">
+                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="leaf crumb-caps">
+                                    Stage 5
+                                </span>
+                            </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
                             </h2>
@@ -398,45 +409,21 @@ const Stage5LandingPage: FC = () => {
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp mb-4">
-                                    Complete a Business Plan that will show how
-                                    much money is required.
-                                </p>
+                            <Helpful
+                                items={[
+                                    'Complete a Business Plan that will show how much money is required.',
+                                    'Show estimates of the costs and income expected over the first 4 years of operations.',
+                                ]}
+                            />
 
-                                <p className="sm-type-amp">
-                                    Show estimates of the costs and income
-                                    expected over the first 4 years of
-                                    operations.
-                                </p>
-                            </div>
+                            <CheckList
+                                items={[
+                                    'You have calculated the Cost of Land.',
+                                    'You have completed the Business Plans that will show how much money is required.',
+                                ]}
+                            />
 
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="multiple-choice">
-                                    <input
-                                        className="form-control"
-                                        id="id1"
-                                        type="checkbox"
-                                    />
-                                    <label className="form-label" htmlFor="id1">
-                                        You have completed the Business Plan
-                                        that will show how much money is
-                                        required.
-                                    </label>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </section>

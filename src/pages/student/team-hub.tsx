@@ -106,7 +106,7 @@ const getStageClasses = (status) => {
         case 'unlocked':
             return 'quest-step-unlocked quest-step-highlight'
         case 'submitted':
-            return 'quest-step-complete'
+            return 'quest-step-submitted'
         case 'completed':
             return 'quest-step-complete'
         default:
@@ -127,7 +127,19 @@ const StageButton = ({ id, title, status }) => (
                 <span className="quest-step-number">
                     {status === 'locked' ? <Lock /> : id}
                 </span>
-                {title.toUpperCase()}
+                <div>
+                    {title.toUpperCase()}
+                    {status === 'completed' && (
+                        <span className="greenlight-highlight sm-type-amp"><br />completed</span>
+                    )}
+                    {status === 'submitted' && (
+                        <span className="greenlight-highlight sm-type-amp"><br />submitted</span>
+                    )}
+                    {status === 'unlocked' && (
+                        <span className="orange-highlight sm-type-amp"><br />unlocked</span>
+
+                    )}
+                </div>
                 {status === 'completed' && (
                     <span className="medium-icon">
                         <Tick />

@@ -65,49 +65,65 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                 <Header headerText="Stage 3" />
 
                 <section className="container" id="main">
-                    <div className="mt-4 mb-4 image-holder">
-                        <GatsbyImage
-                            image={data.image1.childImageSharp.gatsbyImageData}
-                        />
-                    </div>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="breadcrumb-list-container">
+                                <span className="crumb">
+                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="leaf crumb-caps">
+                                    Stage 3 Complete
+                                </span>
+                            </div>
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+                                Consult
+                            </h2>
+                            <div className="mt-4 mb-4 image-holder">
+                                <GatsbyImage
+                                    image={data.image1.childImageSharp.gatsbyImageData}
+                                />
+                            </div>
 
-                    <div className="side-grey">
-                        <h3 className="task ticker mb-2">
-                            <span className="ticker-sheet">
-                                <TickSheet />
-                            </span>
-                            <span className="sm-type-drum">Task complete:</span>
-                        </h3>
-                        <div className="form-holder-border">
-                            <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
-                                Tutor feedback
-                            </h4>
-                            <p
-                                className="sm-type-lead mb-3 italic"
-                                dangerouslySetInnerHTML={{
-                                    __html: doc.feedback.feedback,
-                                }}
-                            />
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet />
+                                    </span>
+                                    <span className="sm-type-drum">Task complete:</span>
+                                </h3>
+                                <div className="form-holder-border">
+                                    <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
+                                        Tutor feedback
+                                    </h4>
+                                    <p
+                                        className="sm-type-lead mb-3 italic"
+                                        dangerouslySetInnerHTML={{
+                                            __html: doc.feedback.feedback,
+                                        }}
+                                    />
+                                </div>
+
+                                <div className="form-holder-border">
+                                    <SwotLinks devOptions={devOptions} />
+                                </div>
+
+                                {/* {devOptions.map((opt) => (
+                                    <SWOT
+                                        devOption={opt.development_option}
+                                        swotState={
+                                            doc.doc_data[opt.development_option.option]
+                                        }
+                                        docSubmitted={true}
+                                    />
+                                ))} */}
+                            </div>
+
+                            <p className="sm-type-amp">
+                                <Link to="/student/team-hub">Back to Team Hub</Link>
+                            </p>
                         </div>
-
-                        <div className="form-holder-border">
-                            <SwotLinks devOptions={devOptions} />
-                        </div>
-
-                        {/* {devOptions.map((opt) => (
-                            <SWOT
-                                devOption={opt.development_option}
-                                swotState={
-                                    doc.doc_data[opt.development_option.option]
-                                }
-                                docSubmitted={true}
-                            />
-                        ))} */}
                     </div>
-
-                    <p className="sm-type-amp">
-                        <Link to="/student/team-hub">Back to Team Hub</Link>
-                    </p>
                 </section>
 
                 <Footer />
