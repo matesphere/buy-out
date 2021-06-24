@@ -9,18 +9,12 @@ import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 
-import { useWorkState, ActionType } from '../../../../utils/input-utils'
+import { useWorkState } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
-
-interface LandCostType {
-    area: number
-    price: number
-}
-
 interface FourYearCosts {
     year1: number
     year2: number
@@ -28,35 +22,63 @@ interface FourYearCosts {
     year4: number
 }
 
-interface BusinessPlanType {
-    capitalCosts: {
-        costs: Array<{ details: string; cost: number }>
-        funding: Array<{ funderName: string; amount: number }>
-    }
-    runningCosts: Array<{ details: string } & FourYearCosts>
-    cashFlow: {
-        income: FourYearCosts
-        costs: FourYearCosts
-        balance: FourYearCosts
-    }
+interface LandCost {
+    area: number
+    price: number
+    funder: string
+    amountOfFunding: number
+}
+
+interface CapitalCosts {
+    costs: Array<{ details: string; cost: number }>
+    funding: Array<{ funderName: string; amount: number }>
+}
+
+type RunningCosts = Array<{ details: string } & FourYearCosts>
+
+interface CashFlow {
+    income: FourYearCosts
+    costs: FourYearCosts
+    balance: FourYearCosts
+}
+interface BusinessPlan {
+    capitalCosts: CapitalCosts
+    runningCosts: RunningCosts
+    cashFlow: CashFlow
+}
+
+enum ActionType {
+    Load,
+    UpdateLandCost,
+    UpdateCapitalCosts,
+    UpdateRunningCosts,
+    UpdateCashFlow,
 }
 
 export interface WorkState {
-    [key: string]: LandCostType | BusinessPlanType
+    [key: string]: LandCost | BusinessPlan
 }
 
 export type Action =
     | {
-          type: ActionType.LoadAction
+          type: ActionType.Load
           payload: WorkState
       }
     | {
-          type: ActionType.UpdateAction
-          payload: {
-              option?: string
-              section?: 'benefits' | 'reasonsSucceed' | 'reasonsFail'
-              input: string
-          }
+          type: ActionType.UpdateLandCost
+          payload: LandCost
+      }
+    | {
+          type: ActionType.UpdateCapitalCosts
+          payload: CapitalCosts
+      }
+    | {
+          type: ActionType.UpdateRunningCosts
+          payload: RunningCosts
+      }
+    | {
+          type: ActionType.UpdateCashFlow
+          payload: CashFlow
       }
 
 export const stage5Reducer: Reducer<WorkState, Action> = (
@@ -64,22 +86,23 @@ export const stage5Reducer: Reducer<WorkState, Action> = (
     action
 ): WorkState => {
     switch (action.type) {
-        case ActionType.LoadAction:
+        case ActionType.Load:
             return action.payload
-        case ActionType.UpdateAction:
-            if (action.payload.option) {
-                return {
-                    ...state,
-                    [action.payload.option]: {
-                        ...state[action.payload.option],
-                        [action.payload.section]: action.payload.input,
-                    },
-                }
-            } else {
-                return {
-                    ...state,
-                    whyBuy: action.payload.input,
-                }
+        case ActionType.UpdateLandCost:
+            return {
+                ...state,
+                landCost: {
+                    ...state.landCost,
+                    ...action.payload,
+                },
+            }
+        case ActionType.UpdateCapitalCosts:
+            return {
+                ...state,
+                [action.payload.option]: {
+                    ...action.payload.option,
+                    ...action.payload,
+                },
             }
     }
 }
@@ -95,8 +118,15 @@ const Stage5LandingPage: FC = () => {
         }
     `)
 
-    const { loading, error, pageData, saveWorkObj, submitWorkObj } =
-        useWorkState<WorkState, Action>(3, stage5Reducer, true)
+    const {
+        loading,
+        error,
+        pageData,
+        workState,
+        workDispatch,
+        saveWorkObj,
+        submitWorkObj,
+    } = useWorkState<WorkState, Action>(3, stage5Reducer, true)
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />
@@ -206,20 +236,59 @@ const Stage5LandingPage: FC = () => {
                                                     <label className="form-label sm-type-amp">
                                                         Area of land (ha)
                                                     </label>
-                                                    <input className="form-control" />
-                                                </div>
-                                                <div className="col-lg-4">
-                                                    <label className="form-label sm-type-amp">
-                                                        Price (£/ha)
-                                                    </label>
-                                                    <input className="form-control" />
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        value={
+                                                            workState.landCost
+                                                                ?.area || ''
+                                                        }
+                                                        onChange={({
+                                                            target: { value },
+                                                        }) =>
+                                                            workDispatch({
+                                                                type: ActionType.UpdateLandCost,
+                                                                payload: {
+                                                                    area: value,
+                                                                },
+                                                            })
+                                                        }
+                                                    />
                                                 </div>
 
                                                 <div className="col-lg-4">
                                                     <label className="form-label sm-type-amp">
-                                                        Asking price (£)
+                                                        Price (£/ha)
                                                     </label>
-                                                    <input className="form-control" />
+                                                    <input
+                                                        className="form-control"
+                                                        defaultValue={5000}
+                                                        readOnly
+                                                    />
+                                                </div>
+
+                                                <div className="col-lg-4">
+                                                    <label className="form-label sm-type-amp">
+                                                        Total asking price (£)
+                                                    </label>
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        value={
+                                                            workState.landCost
+                                                                ?.price || ''
+                                                        }
+                                                        onChange={({
+                                                            target: { value },
+                                                        }) =>
+                                                            workDispatch({
+                                                                type: ActionType.UpdateLandCost,
+                                                                payload: {
+                                                                    price: value,
+                                                                },
+                                                            })
+                                                        }
+                                                    />
                                                 </div>
                                             </div>
 
@@ -236,16 +305,50 @@ const Stage5LandingPage: FC = () => {
                                                     </label>
                                                     <input
                                                         className="form-control"
-                                                        value="Scottish Land Fund"
+                                                        value={
+                                                            workState.landCost
+                                                                ?.funder || ''
+                                                        }
+                                                        onChange={({
+                                                            target: { value },
+                                                        }) =>
+                                                            workDispatch({
+                                                                type: ActionType.UpdateLandCost,
+                                                                payload: {
+                                                                    funder: value,
+                                                                },
+                                                            })
+                                                        }
                                                     />
                                                 </div>
+
                                                 <div className="col-lg-6">
                                                     <label className="form-label sm-type-amp">
                                                         Amount of funding (£)
                                                     </label>
-                                                    <input className="form-control" />
+                                                    <input
+                                                        className="form-control"
+                                                        type="number"
+                                                        value={
+                                                            workState.landCost
+                                                                ?.amountOfFunding ||
+                                                            ''
+                                                        }
+                                                        onChange={({
+                                                            target: { value },
+                                                        }) =>
+                                                            workDispatch({
+                                                                type: ActionType.UpdateLandCost,
+                                                                payload: {
+                                                                    amountOfFunding:
+                                                                        value,
+                                                                },
+                                                            })
+                                                        }
+                                                    />
                                                 </div>
                                             </div>
+
                                             <p className="sm-type-amp sm-type-amp--medium mb-2">
                                                 <span className="sm-type-amp--medium redorange-highlight">
                                                     NOTE:
@@ -253,6 +356,7 @@ const Stage5LandingPage: FC = () => {
                                                 Save your "Cost of the Land"
                                                 then move onto step 2.
                                             </p>
+
                                             <div className="mb-2 mt-2">
                                                 <button className="btn-solid-lg mt-4">
                                                     Save costs
