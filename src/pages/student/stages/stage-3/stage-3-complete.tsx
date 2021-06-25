@@ -5,10 +5,6 @@ import { Helmet } from 'react-helmet'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
-// import { SWOT } from '../../../../components/common/SWOT'
 import { SwotLinks } from './stage-3-landing'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'

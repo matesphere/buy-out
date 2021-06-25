@@ -4,9 +4,6 @@ import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
-
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 

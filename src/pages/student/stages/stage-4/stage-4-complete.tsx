@@ -6,9 +6,6 @@ import { Helmet } from 'react-helmet'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
-
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
 import {

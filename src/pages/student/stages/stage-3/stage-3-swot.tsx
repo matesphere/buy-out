@@ -3,8 +3,6 @@ import { PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import QueryString from 'query-string'
 
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { SWOT } from '../../../../components/common/stages/SWOT'

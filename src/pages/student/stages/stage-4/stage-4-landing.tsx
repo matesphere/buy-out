@@ -3,8 +3,6 @@ import { Helmet } from 'react-helmet'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 

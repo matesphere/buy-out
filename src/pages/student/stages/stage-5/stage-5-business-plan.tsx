@@ -3,8 +3,6 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 
-import Header from '../../../../components/_header'
-import Footer from '../../../../components/_footer'
 import HelpIcon from '../../../../assets/help-icon.svg'
 import SaveIcon from '../../../../assets/save-icon.svg'
 
