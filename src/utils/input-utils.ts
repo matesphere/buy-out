@@ -88,7 +88,7 @@ export const useWorkState = <InputState, Action>(
         {} as InputState
     )
     const [docSubmitted, setDocSubmitted] = useState(false)
-    const [docFeedback, setDocFeedback] = useState('') //? do we need to do this with useState?
+    const [docFeedback, setDocFeedback] = useState<{ feedback: string }>() //? do we need to do this with useState?
 
     const [saveWorkInitial, saveWorkInitialResponse] =
         useAuthMutation(SAVE_WORK_INITIAL)

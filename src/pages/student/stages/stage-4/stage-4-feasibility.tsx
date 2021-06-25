@@ -121,8 +121,6 @@ const Stage4FeasibilityPage: FC = () => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Stage 4" />
-
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
@@ -174,8 +172,6 @@ const Stage4FeasibilityPage: FC = () => {
                     </div>
                     <Link to="/student/stage-4">Back to Stage 4</Link>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

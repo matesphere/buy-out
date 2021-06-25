@@ -130,14 +130,22 @@ const StageButton = ({ id, title, status }) => (
                 <div>
                     {title.toUpperCase()}
                     {status === 'completed' && (
-                        <span className="greenlight-highlight sm-type-amp"><br />completed</span>
+                        <span className="greenlight-highlight sm-type-amp">
+                            <br />
+                            completed
+                        </span>
                     )}
                     {status === 'submitted' && (
-                        <span className="greenlight-highlight sm-type-amp"><br />submitted</span>
+                        <span className="greenlight-highlight sm-type-amp">
+                            <br />
+                            submitted
+                        </span>
                     )}
                     {status === 'unlocked' && (
-                        <span className="orange-highlight sm-type-amp"><br />unlocked</span>
-
+                        <span className="orange-highlight sm-type-amp">
+                            <br />
+                            unlocked
+                        </span>
                     )}
                 </div>
                 {status === 'completed' && (
@@ -351,7 +359,6 @@ const TeamHub = () => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Team Hub" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-12">
@@ -487,7 +494,6 @@ const TeamHub = () => {
                         </div>
                     </div>
                 </section>
-                <Footer />
             </main>
         </>
     )

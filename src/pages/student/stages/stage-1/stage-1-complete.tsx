@@ -63,14 +63,14 @@ const Stage1CompletePage = () => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Stage 1" />
-
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="leaf crumb-caps">
@@ -133,7 +133,6 @@ const Stage1CompletePage = () => {
                         </div>
                     </div>
                 </section>
-                <Footer />
             </main>
         </>
     )

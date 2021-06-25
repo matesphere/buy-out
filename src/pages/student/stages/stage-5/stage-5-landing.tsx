@@ -8,13 +8,14 @@ import Header from '../../../../components/_header'
 import Footer from '../../../../components/_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { CheckList } from '../../../../components/common/Checklist'
+import { Helpful } from '../../../../components/common/Helpful'
+import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 
 import { useWorkState } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
-import { CheckList } from '../../../../components/common/Checklist'
-import { Helpful } from '../../../../components/common/Helpful'
 
 import '../../../../scss/index.scss'
 interface FourYearCosts {
@@ -43,13 +44,13 @@ interface CashFlow {
     costs: FourYearCosts
     balance: FourYearCosts
 }
-interface BusinessPlan {
+export interface BusinessPlan {
     capitalCosts: CapitalCosts
     runningCosts: RunningCosts
     cashFlow: CashFlow
 }
 
-enum ActionType {
+export enum ActionType {
     Load,
     UpdateLandCost,
     UpdateCapitalCosts,
@@ -106,6 +107,8 @@ export const stage5Reducer: Reducer<WorkState, Action> = (
                     ...action.payload,
                 },
             }
+        default:
+            return state
     }
 }
 
@@ -150,19 +153,17 @@ const Stage5LandingPage: FC = () => {
                 <title>Stage 5 - {stageTitle}</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 5" />
-
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
-                                <span className="leaf crumb-caps">
-                                    Stage 5
-                                </span>
+                                <span className="leaf crumb-caps">Stage 5</span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
@@ -422,13 +423,9 @@ const Stage5LandingPage: FC = () => {
                                     'You have completed the Business Plans that will show how much money is required.',
                                 ]}
                             />
-
-
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

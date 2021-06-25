@@ -79,7 +79,6 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Stage 3" />
                 <section className="container" id="main">
                     <SWOT
                         swotTitle="Example SWOT Analysis"
@@ -89,7 +88,6 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                     />
                     <Link to="/student/stage-3">Back to Stage 3</Link>
                 </section>
-                <Footer />
             </main>
         </>
     )

@@ -102,8 +102,6 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Stage 3" />
-
                 <section className="container" id="main">
                     <SWOT
                         swotTitle={`SWOT Analysis ${num + 1}`}
@@ -115,8 +113,6 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                         docSubmitted={docSubmitted}
                     />
                 </section>
-
-                <Footer />
             </main>
         </>
     )

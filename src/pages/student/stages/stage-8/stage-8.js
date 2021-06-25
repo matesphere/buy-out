@@ -32,7 +32,6 @@ const Stage8Page = () => {
                 <title>Stage 8 - Celebrate</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 8" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -73,8 +72,6 @@ const Stage8Page = () => {
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

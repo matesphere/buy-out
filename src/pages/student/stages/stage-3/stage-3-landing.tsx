@@ -116,18 +116,17 @@ const Stage3LandingPage = () => {
                 <title>Stage 3 - Lay The Foundations</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 3" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
-                                <span className="leaf crumb-caps">
-                                    Stage 3
-                                </span>
+                                <span className="leaf crumb-caps">Stage 3</span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Lay The Foundations
@@ -143,9 +142,9 @@ const Stage3LandingPage = () => {
                             </p>
                             <p className="sm-type-lead mb-4">
                                 Once decided upon, you'll then be asked to
-                                complete a SWOT analysis for each of these.
-                                Read the <b>SWOT</b> guide to find out more
-                                about what is meant by <b>SWOT</b> and how you can
+                                complete a SWOT analysis for each of these. Read
+                                the <b>SWOT</b> guide to find out more about
+                                what is meant by <b>SWOT</b> and how you can
                                 complete this task.
                             </p>
 
@@ -153,10 +152,11 @@ const Stage3LandingPage = () => {
                                 <span className="side-icon side-icon-orange shake">
                                     <HelpIcon />
                                 </span>
-                                Read the {' '}
+                                Read the{' '}
                                 <Link to="/information/about-swot">
                                     SWOT guide
-                                </Link> here.
+                                </Link>{' '}
+                                here.
                             </p>
 
                             <p className="sm-type-bigamp mb-3 mt-2">
@@ -188,9 +188,8 @@ const Stage3LandingPage = () => {
                                     </p>
                                     <p className="sm-type-guitar">
                                         <Link to="/student/stage-3/options">
-                                            Read about the development
-                                            options and choose your
-                                            'longlist'
+                                            Read about the development options
+                                            and choose your 'longlist'
                                         </Link>
                                     </p>
                                 </div>
@@ -284,7 +283,8 @@ const Stage3LandingPage = () => {
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        Read the SWOT guide to help you complete them.
+                                        Read the SWOT guide to help you complete
+                                        them.
                                     </p>
                                 </div>
                                 <div className="checklist">
@@ -294,13 +294,10 @@ const Stage3LandingPage = () => {
                                         option.
                                     </p>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

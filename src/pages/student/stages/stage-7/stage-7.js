@@ -32,18 +32,17 @@ const Stage7Page = () => {
                 <title>Stage 7 - Present findings</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 7" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
-                                <span className="leaf crumb-caps">
-                                    Stage 7
-                                </span>
+                                <span className="leaf crumb-caps">Stage 7</span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Present findings
@@ -99,8 +98,6 @@ const Stage7Page = () => {
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

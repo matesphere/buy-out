@@ -6,9 +6,6 @@ import '../scss/index.scss'
 const Nav = () => (
     <nav className="nav">
         <ul>
-            {/*<li className="nav-links">*/}
-            {/*    <Link to="/">Home</Link>*/}
-            {/*</li>*/}
             <li className="nav-links">
                 <Link to="/help">Help</Link>
             </li>
@@ -21,12 +18,6 @@ const Nav = () => (
                     {/*<span className="nav-links-notification"></span>*/}
                 </Link>
             </li>
-            {/* <li className="nav-links">
-                    <Link to="/tutor/hub">
-                        Tutor hub
-                        <span className="nav-links-notification"></span>
-                    </Link>
-                </li> */}
         </ul>
     </nav>
 )

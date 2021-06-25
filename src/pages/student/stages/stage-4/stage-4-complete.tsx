@@ -61,14 +61,14 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Stage 4" />
-
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="leaf crumb-caps">
@@ -81,7 +81,10 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     alt=""
-                                    image={data.image1.childImageSharp.gatsbyImageData}
+                                    image={
+                                        data.image1.childImageSharp
+                                            .gatsbyImageData
+                                    }
                                 />
                             </div>
 
@@ -90,7 +93,9 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                     <span className="ticker-sheet">
                                         <TickSheet />
                                     </span>
-                                    <span className="sm-type-drum">Task complete:</span>
+                                    <span className="sm-type-drum">
+                                        Task complete:
+                                    </span>
                                 </h3>
 
                                 <div className="form-holder-border">
@@ -111,8 +116,6 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                     docSubmitted={true}
                                 />
 
-
-
                                 {/* {devOptions.map((opt) => (
                                     <SWOT
                                         devOption={opt.development_option}
@@ -125,13 +128,13 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
                             </div>
 
                             <p className="sm-type-amp">
-                                <Link to="/student/team-hub">Back to Team Hub</Link>
+                                <Link to="/student/team-hub">
+                                    Back to Team Hub
+                                </Link>
                             </p>
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

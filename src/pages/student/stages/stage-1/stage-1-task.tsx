@@ -24,6 +24,7 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
+import { ApolloError } from '@apollo/client'
 
 type WorkState = {
     [key: number]: string
@@ -67,7 +68,15 @@ const Stage1TaskPage = () => {
     } = useWorkState<WorkState, Action>(1, stage1QuestionReducer)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { title: stageTitle } = pageData.stage_by_pk
 
@@ -82,13 +91,14 @@ const Stage1TaskPage = () => {
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 1" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="crumb">
@@ -240,7 +250,6 @@ const Stage1TaskPage = () => {
                         </div>
                     </div>
                 </section>
-                <Footer />
             </main>
         </>
     )

@@ -31,8 +31,6 @@ const Stage5BusinessPlanPage = () => {
                 <title>Stage 5 - Business Plan</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 5" />
-
                 {/*<div className="save-icon">*/}
                 {/*    <SaveIcon /> Save progress*/}
                 {/*</div>*/}
@@ -41,7 +39,9 @@ const Stage5BusinessPlanPage = () => {
                         <div className="col-lg-8">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="crumb">
@@ -469,8 +469,6 @@ const Stage5BusinessPlanPage = () => {
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

@@ -223,8 +223,6 @@ const Stage3ChooseOptionsPage = () => (
         </Helmet>
 
         <main className="the-quest">
-            <Header headerText="Stage 3" />
-
             <section className="container" id="main">
                 <div className="row">
                     <div className="col-lg-9">
@@ -258,13 +256,12 @@ const Stage3ChooseOptionsPage = () => (
 
                         <p className="sm-type-guitar mb-4">
                             <span className="side-icon side-icon-orange shake">
-                                    <HelpIcon />
-                                </span>
+                                <HelpIcon />
+                            </span>
                             <Link to="/information/development-options">
                                 View the development options
                             </Link>
                         </p>
-
 
                         <Stage3Task />
                     </div>
@@ -318,8 +315,6 @@ const Stage3ChooseOptionsPage = () => (
 
                 <Link to="/student/stage-3">Back to Stage 3</Link>
             </section>
-
-            <Footer />
         </main>
     </>
 )

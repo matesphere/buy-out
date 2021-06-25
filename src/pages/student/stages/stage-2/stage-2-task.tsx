@@ -177,13 +177,14 @@ const Stage2TaskPage = () => {
                 <title>Stage 2 - Consult - Task</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 2" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="crumb">
@@ -227,7 +228,6 @@ const Stage2TaskPage = () => {
                                     Read about the roles here
                                 </Link>
                             </p>
-
 
                             <div
                                 className={`filters-container${
@@ -461,8 +461,6 @@ const Stage2TaskPage = () => {
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

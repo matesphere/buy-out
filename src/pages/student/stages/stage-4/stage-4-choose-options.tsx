@@ -164,7 +164,10 @@ const Stage4Task = () => {
                 </>
             )}
 
-            <p className="sm-type-lead mb-2">Once you have submitted your shortlist, go back and complete Part II</p>
+            <p className="sm-type-lead mb-2">
+                Once you have submitted your shortlist, go back and complete
+                Part II
+            </p>
         </div>
     )
 }
@@ -180,8 +183,6 @@ const Stage4ChooseOptionsPage = () => (
         </Helmet>
 
         <main className="the-quest">
-            <Header headerText="Stage 4" />
-
             <section className="container" id="main">
                 <div className="row">
                     <div className="col-lg-9">
@@ -261,8 +262,6 @@ const Stage4ChooseOptionsPage = () => (
 
                 <Link to="/student/stage-4">Back to Stage 4</Link>
             </section>
-
-            <Footer />
         </main>
     </>
 )

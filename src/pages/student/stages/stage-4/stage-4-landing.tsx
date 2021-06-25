@@ -62,19 +62,17 @@ const Stage4LandingPage = () => {
                 <title>Stage 4 - {stageTitle}</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 4" />
-
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
-                                <span className="leaf crumb-caps">
-                                    Stage 4
-                                </span>
+                                <span className="leaf crumb-caps">Stage 4</span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
@@ -174,7 +172,10 @@ const Stage4LandingPage = () => {
                                     {task1Complete ? (
                                         <ul>
                                             <li className="sm-type-guitar">
-                                            Shortlist submitted <span className="shortlist-tick"><Tick /></span>
+                                                Shortlist submitted{' '}
+                                                <span className="shortlist-tick">
+                                                    <Tick />
+                                                </span>
                                             </li>
                                         </ul>
                                     ) : (
@@ -185,7 +186,7 @@ const Stage4LandingPage = () => {
                                                 </Link>
                                             </li>
                                         </ul>
-                                        )}
+                                    )}
                                 </div>
 
                                 <div
@@ -267,8 +268,6 @@ const Stage4LandingPage = () => {
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )
