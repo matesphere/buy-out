@@ -1,6 +1,6 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import {graphql, useStaticQuery} from "gatsby";
+import {graphql, Link, useStaticQuery} from "gatsby";
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../components/_header'
@@ -43,6 +43,19 @@ const AboutSwotPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
+                            <div className="breadcrumb-list-container">
+                                <span className="crumb">
+                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="crumb">
+                                    <Link to="/information">Information</Link>
+                                    <span className="crumb-spacer">›</span>
+                                </span>
+                                <span className="leaf crumb-caps">
+                                    About SWOT
+                                </span>
+                            </div>
                             {stage2DataTitleEng.map((text, i) => (
                                 <h2
                                     key={i}

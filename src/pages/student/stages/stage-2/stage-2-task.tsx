@@ -27,6 +27,7 @@ import {
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
+import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
 
@@ -217,20 +218,16 @@ const Stage2TaskPage = () => {
                                 different roles. Follow the link below to find
                                 out what each of these is responsible for.
                             </p>
-                            {/* <p className="sm-type-bigamp mb-3">
+
+                            <p className="sm-type-guitar mb-4">
+                                <span className="side-icon side-icon-orange shake">
+                                    <HelpIcon />
+                                </span>
                                 <Link to="/information/about-the-roles">
                                     Read about the roles here
                                 </Link>
-                            </p> */}
-                            <div className="form-holder-border">
-                                <ul>
-                                    <li className="sm-type-guitar">
-                                        <Link to="/information/about-the-roles">
-                                            Read about the roles here
-                                        </Link>
-                                    </li>
-                                </ul>
-                            </div>
+                            </p>
+
 
                             <div
                                 className={`filters-container${
@@ -248,9 +245,12 @@ const Stage2TaskPage = () => {
                                     </h3>
                                     <div className="form-holder-border">
                                         <div className="form-holder">
-                                            <h3 className="sm-type-guitar mb-2">
+                                            <p className="sm-type-lead mb-2">
+                                                Part I
+                                            </p>
+                                            <p className="sm-type-lead mb-4">
                                                 Choose a logo for your team:
-                                            </h3>
+                                            </p>
                                             <div className="row">
                                                 {stage2Logo.map((check) => (
                                                     <div
@@ -290,10 +290,17 @@ const Stage2TaskPage = () => {
                                                     </div>
                                                 ))}
                                             </div>
-                                            <h4 className="sm-type-guitar mb-2">
+                                        </div>
+                                    </div>
+                                    <div className="form-holder-border">
+                                        <div className="form-holder">
+                                            <p className="sm-type-lead mb-2">
+                                                Part II
+                                            </p>
+                                            <p className="sm-type-lead mb-4">
                                                 Choose a role for each team
                                                 member:
-                                            </h4>
+                                            </p>
                                             <p className="sm-type-amp mb-2">
                                                 Use the dropdowns below to
                                                 select which team member will

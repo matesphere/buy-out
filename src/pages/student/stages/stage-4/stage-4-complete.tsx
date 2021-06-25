@@ -93,12 +93,6 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                     <span className="sm-type-drum">Task complete:</span>
                                 </h3>
 
-                                <FeasibilityStudy
-                                    devOptions={devOptions}
-                                    workState={doc.doc_data}
-                                    docSubmitted={true}
-                                />
-
                                 <div className="form-holder-border">
                                     <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
                                         Tutor feedback
@@ -111,9 +105,13 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                     />
                                 </div>
 
-                                <div className="form-holder-border">
-                                    Complete
-                                </div>
+                                <FeasibilityStudy
+                                    devOptions={devOptions}
+                                    workState={doc.doc_data}
+                                    docSubmitted={true}
+                                />
+
+
 
                                 {/* {devOptions.map((opt) => (
                                     <SWOT

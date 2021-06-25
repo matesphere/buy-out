@@ -255,20 +255,16 @@ const Stage3ChooseOptionsPage = () => (
                             All information required about each of the options
                             is provided and can be accessed here:
                         </p>
-                        {/* <p className="sm-type-bigamp mb-3">
-                                <Link to="/information/development-options">
-                                    View the development options
-                                </Link>
-                            </p> */}
-                        <div className="form-holder-border">
-                            <ul>
-                                <li className="sm-type-guitar">
-                                    <Link to="/information/development-options">
-                                        View the development options
-                                    </Link>
-                                </li>
-                            </ul>
-                        </div>
+
+                        <p className="sm-type-guitar mb-4">
+                            <span className="side-icon side-icon-orange shake">
+                                    <HelpIcon />
+                                </span>
+                            <Link to="/information/development-options">
+                                View the development options
+                            </Link>
+                        </p>
+
 
                         <Stage3Task />
                     </div>

@@ -133,69 +133,6 @@ const Stage2CompletePage = () => {
                                     ))}
                                 </div>
                             </div>
-
-                            <p className="sm-type-lead mb-3">
-                                Welcome to Stage 2 of the Community Buyout
-                                Quest. In this stage you will form the board of
-                                a community group (known as the 'steering
-                                group') who will lead the purchase of some land
-                                that has come up for sale.
-                            </p>
-
-                            <p className="sm-type-lead mb-3">
-                                The land that has come up for sale is next to
-                                the village of GLENCLAS.
-                            </p>
-                            <div className="mt-4 mb-2 image-holder">
-                                <GatsbyImage
-                                    image={
-                                        data.image1.childImageSharp
-                                            .gatsbyImageData
-                                    }
-                                />
-                            </div>
-                            <p className="sm-type-lead mb-3">
-                                You will each adopt a specific role within the
-                                Board, but throughout, you will need to work as
-                                a team. Each decision that you make must take
-                                into account the views of everyone in the team.
-                                That does not mean that you will agree on
-                                everything, in fact it is inevitable that you
-                                will disagree at times. However, you must work
-                                out how you will reach decisions when there is
-                                disagreement amongst the team.
-                            </p>
-                            <p className="sm-type-lead mb-3">
-                                You will now need to design a logo that will
-                                appear on any documentation that you produce.
-                            </p>
-
-                            <h3 className="sm-type-drum mb-3">
-                                Read about the Glenclas area.
-                            </h3>
-
-                            <p className="sm-type-bigamp mb-3">
-                                Here you will find a description of Glenclas
-                                village and its community.
-                            </p>
-                            <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/stage-2/about-glenclas-area">
-                                    Read about the area.
-                                </Link>
-                            </p>
-                            <h3 className="sm-type-drum mt-4">
-                                See what the community and experts have to say.
-                            </h3>
-                            <p className="sm-type-bigamp mb-3">
-                                Consult with the people about development
-                                options that could help the community.
-                            </p>
-                            <p className="sm-type-bigamp mb-3">
-                                <Link to="/student/stage-2/community">
-                                    See what the experts and the community have
-                                    to say.
-                                </Link>
-                            </p>
                         </div>
                     </div>
                 </section>

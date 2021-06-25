@@ -33,9 +33,9 @@ const Stage5BusinessPlanPage = () => {
             <main className="the-quest">
                 <Header headerText="Stage 5" />
 
-                <div className="save-icon">
-                    <SaveIcon /> Save progress
-                </div>
+                {/*<div className="save-icon">*/}
+                {/*    <SaveIcon /> Save progress*/}
+                {/*</div>*/}
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">

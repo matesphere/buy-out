@@ -108,6 +108,8 @@ const Stage1CompletePage = () => {
                                             __html: doc.feedback.feedback,
                                         }}
                                     />
+                                </div>
+                                <div className="form-holder-border">
                                     <h4 className="sm-type-drum sm-type-drum--medium">
                                         Questions
                                     </h4>

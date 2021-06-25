@@ -154,7 +154,7 @@ const Stage5LandingPage: FC = () => {
 
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
                                     <Link to="/student/team-hub/">Team Hub</Link>
@@ -408,7 +408,7 @@ const Stage5LandingPage: FC = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <Helpful
                                 items={[
                                     'Complete a Business Plan that will show how much money is required.',

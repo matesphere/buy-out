@@ -187,9 +187,6 @@ const Stage3LandingPage = () => {
                                         taking forward.
                                     </p>
                                     <p className="sm-type-guitar">
-                                        <span className="side-icon side-icon-orange shake">
-                                            <HelpIcon />
-                                        </span>
                                         <Link to="/student/stage-3/options">
                                             Read about the development
                                             options and choose your
