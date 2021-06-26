@@ -6,7 +6,6 @@ import { Helmet } from 'react-helmet'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
-import { SwotLinks } from './stage-3-landing'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -36,7 +35,7 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
         data: pageData,
     } = useAuthQuery<DocumentCompleteQuery, DocumentCompleteQueryVariables>(
         DOCUMENT_COMPLETE_QUERY,
-        { variables: { stage_id: 3, includeDevOptions: true } },
+        { variables: { stage_id: 5, includeDevOptions: true } },
         'teamId'
     )
 
@@ -55,7 +54,7 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 3 - {stageTitle} - Complete</title>
+                <title>Stage 5 - {stageTitle} - Complete</title>
             </Helmet>
 
             <main className="the-quest">
@@ -69,7 +68,7 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                         url: '/student/team-hub/',
                                     },
                                 ]}
-                                currentDisplayName="Stage 3"
+                                currentDisplayName="Stage 5"
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 Consult
@@ -104,19 +103,9 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                     />
                                 </div>
 
-                                <div className="form-holder-border">
+                                {/* <div className="form-holder-border">
                                     <SwotLinks devOptions={devOptions} />
-                                </div>
-
-                                {/* {devOptions.map((opt) => (
-                                    <SWOT
-                                        devOption={opt.development_option}
-                                        swotState={
-                                            doc.doc_data[opt.development_option.option]
-                                        }
-                                        docSubmitted={true}
-                                    />
-                                ))} */}
+                                </div> */}
                             </div>
 
                             <p className="sm-type-amp">

@@ -186,8 +186,9 @@ export const useWorkState = <InputState, Action>(
         }
     }, [loading, pageData])
 
-    const stageProgressId =
-        pageData?.team_by_pk?.stage_progresses[0]?.id || null
+    const stageProgress = pageData?.team_by_pk?.stage_progresses[0]
+    const stageProgressId = stageProgress?.id || null
+    const stageComplete = stageProgress?.status === 'completed'
 
     const saveWorkObj = !!docId
         ? {
@@ -235,6 +236,7 @@ export const useWorkState = <InputState, Action>(
         submitWorkObj,
         docSubmitted,
         docFeedback,
+        stageComplete,
     }
 }
 

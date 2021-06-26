@@ -8,6 +8,7 @@ import { Error } from '../../../../components/common/Error'
 import { TextEditor } from '../../../../components/common/TextEditor'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import { CheckList } from '../../../../components/common/Checklist'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
@@ -63,6 +64,7 @@ const Stage1TaskPage = () => {
         submitWorkObj,
         docSubmitted,
         docFeedback,
+        stageComplete,
     } = useWorkState<WorkState, Action>(1, stage1QuestionReducer)
 
     if (loading) return <Loading />
@@ -92,21 +94,22 @@ const Stage1TaskPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/student/stage-1">Stage 1</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Research Task
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Stage 1',
+                                        url: stageComplete
+                                            ? '/student/stage-1/complete'
+                                            : '/student/stage-1',
+                                    },
+                                ]}
+                                currentDisplayName="Research Task"
+                            />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
@@ -195,7 +198,15 @@ const Stage1TaskPage = () => {
                                     />
                                 </div>
                             </div>
-                            <Link to="/student/stage-1">Back to Stage 1</Link>
+                            <Link
+                                to={
+                                    stageComplete
+                                        ? '/student/stage-1/complete'
+                                        : '/student/stage-1'
+                                }
+                            >
+                                Back to Stage 1
+                            </Link>
                         </div>
 
                         <div className="col-lg-3">

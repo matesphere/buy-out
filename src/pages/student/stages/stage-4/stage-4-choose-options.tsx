@@ -5,6 +5,7 @@ import { gql } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { UserStateContext } from '../../../../utils/user-state'
 import { useCheckboxState } from '../../../../utils/input-utils'
@@ -184,19 +185,19 @@ const Stage4ChooseOptionsPage = () => (
             <section className="container" id="main">
                 <div className="row">
                     <div className="col-lg-9">
-                        <div className="breadcrumb-list-container">
-                            <span className="crumb">
-                                <Link to="/student/team-hub/">Team Hub</Link>
-                                <span className="crumb-spacer">›</span>
-                            </span>
-                            <span className="leaf crumb-caps">
-                                <Link to="/student/stage-4">Stage 4</Link>
-                                <span className="crumb-spacer">›</span>
-                            </span>
-                            <span className="leaf crumb-caps">
-                                Choose your shortlist
-                            </span>
-                        </div>
+                        <Breadcrumbs
+                            previous={[
+                                {
+                                    displayName: 'Team Hub',
+                                    url: '/student/team-hub/',
+                                },
+                                {
+                                    displayName: 'Stage 4',
+                                    url: '/student/stage-4/',
+                                },
+                            ]}
+                            currentDisplayName="Choose Your Shortlist"
+                        />
                         <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                             Choose Your Shortlist
                         </h2>

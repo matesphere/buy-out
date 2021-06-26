@@ -7,6 +7,7 @@ import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { CheckList } from '../../../../components/common/Checklist'
 import { Helpful } from '../../../../components/common/Helpful'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
@@ -57,8 +58,6 @@ export enum ActionType {
     Load,
     UpdateLandCost,
     UpdateBusinessPlan,
-    // UpdateRunningCosts,
-    // UpdateCashFlow,
 }
 
 export interface WorkState {
@@ -207,15 +206,15 @@ const Stage5LandingPage: FC = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">Stage 5</span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                ]}
+                                currentDisplayName="Stage 5"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
                             </h2>

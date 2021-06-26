@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
@@ -6,6 +6,7 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { CheckList } from '../../../../components/common/Checklist'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 
@@ -26,7 +27,7 @@ import DogVideo from '../../../../assets/the-quest-intro.mp4'
 
 import '../../../../scss/index.scss'
 
-const Stage1LandingPage = () => {
+const Stage1LandingPage: FC = () => {
     const {
         loading,
         error,
@@ -66,15 +67,15 @@ const Stage1LandingPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">Stage 1</span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                ]}
+                                currentDisplayName="Stage 1"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>

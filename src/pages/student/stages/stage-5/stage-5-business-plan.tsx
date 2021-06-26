@@ -7,6 +7,7 @@ import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { CapitalCostsSection } from '../../../../components/common/stages/business-plan/CapitalCostsSection'
 import { RunningCostsSection } from '../../../../components/common/stages/business-plan/RunningCostsSection'
@@ -48,6 +49,7 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
         workDispatch,
         saveWorkObj,
         docSubmitted,
+        stageComplete,
     } = useWorkState<WorkState, Action>(5, stage5Reducer, true)
 
     if (loading) return <Loading />
@@ -87,21 +89,21 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/student/stage-5">Stage 5</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Business Plan {num + 1}
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Stage 5',
+                                        url: stageComplete
+                                            ? '/student/stage-5/complete'
+                                            : '/student/stage-5/',
+                                    },
+                                ]}
+                                currentDisplayName="Feasibility Studies"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Business Plan {num + 1}
                             </h2>
@@ -164,7 +166,15 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                         saveWorkObj={saveWorkObj}
                         docSubmitted={docSubmitted}
                     />
-                    <Link to="/student/stage-5">Back to Stage 5</Link>
+                    <Link
+                        to={
+                            stageComplete
+                                ? '/student/stage-5/complete'
+                                : '/student/stage-5/'
+                        }
+                    >
+                        Back to Stage 5
+                    </Link>
                 </section>
             </main>
         </>

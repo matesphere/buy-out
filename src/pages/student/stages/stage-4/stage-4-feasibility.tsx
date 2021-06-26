@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { CheckList } from '../../../../components/common/Checklist'
 import { Helpful } from '../../../../components/common/Helpful'
 
@@ -99,6 +100,7 @@ const Stage4FeasibilityPage: FC = () => {
         submitWorkObj,
         docSubmitted,
         docFeedback,
+        stageComplete,
     } = useWorkState<WorkState, Action>(4, stage4Reducer, true)
 
     if (loading) return <Loading />
@@ -122,8 +124,23 @@ const Stage4FeasibilityPage: FC = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Stage 4',
+                                        url: stageComplete
+                                            ? '/student/stage-4/complete'
+                                            : '/student/stage-4',
+                                    },
+                                ]}
+                                currentDisplayName="Feasibility Studies"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Feasibility Study
+                                Feasibility Studies
                             </h2>
                             <div className="side-grey">
                                 <h4 className="task ticker mb-2">
@@ -168,7 +185,15 @@ const Stage4FeasibilityPage: FC = () => {
                             />
                         </div>
                     </div>
-                    <Link to="/student/stage-4">Back to Stage 4</Link>
+                    <Link
+                        to={
+                            stageComplete
+                                ? '/student/stage-4'
+                                : '/student/stage-4'
+                        }
+                    >
+                        Back to Stage 4
+                    </Link>
                 </section>
             </main>
         </>

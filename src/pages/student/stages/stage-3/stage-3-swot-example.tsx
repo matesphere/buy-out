@@ -6,6 +6,7 @@ import { gql } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { SWOT } from '../../../../components/common/stages/SWOT'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
@@ -77,6 +78,19 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
 
             <main className="the-quest">
                 <section className="container" id="main">
+                    <Breadcrumbs
+                        previous={[
+                            {
+                                displayName: 'Team Hub',
+                                url: '/student/team-hub/',
+                            },
+                            {
+                                displayName: 'Stage 3',
+                                url: '/student/stage-3/',
+                            },
+                        ]}
+                        currentDisplayName="Example SWOT Analysis"
+                    />
                     <SWOT
                         swotTitle="Example SWOT Analysis"
                         devOption={devOption}

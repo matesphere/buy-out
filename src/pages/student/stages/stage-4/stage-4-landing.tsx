@@ -5,6 +5,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 
@@ -63,15 +64,15 @@ const Stage4LandingPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">Stage 4</span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                ]}
+                                currentDisplayName="Stage 4"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
                             </h2>
@@ -160,7 +161,9 @@ const Stage4LandingPage = () => {
                                 </ul>
 
                                 <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-2">Part I</p>
+                                    <p className="sm-type-lead mb-2">
+                                        Part I - Shortlist
+                                    </p>
                                     <p className="sm-type-lead mb-2">
                                         Use the links above to help you decide
                                         which of your development options you
@@ -193,7 +196,9 @@ const Stage4LandingPage = () => {
                                         'not-available-holder'
                                     }`}
                                 >
-                                    <p className="sm-type-lead mb-2">Part II</p>
+                                    <p className="sm-type-lead mb-2">
+                                        Part II - Feasibility Studies
+                                    </p>
                                     <p className="sm-type-lead mb-2">
                                         Complete a Feasibility Study for each of
                                         your 3 shortlisted development options.

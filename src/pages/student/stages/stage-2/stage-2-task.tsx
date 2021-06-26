@@ -10,6 +10,7 @@ import { Error } from '../../../../components/common/Error'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import { CheckList } from '../../../../components/common/Checklist'
 import { Helpful } from '../../../../components/common/Helpful'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 
@@ -54,6 +55,7 @@ const STAGE_2_TASK_QUERY = gql`
             }
             stage_progresses(where: { stage_id: { _eq: 2 } }) {
                 id
+                status
             }
         }
     }
@@ -178,21 +180,19 @@ const Stage2TaskPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/student/stage-2">Stage 2</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Consult Task
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Stage 2',
+                                        url: '/student/stage-2/',
+                                    },
+                                ]}
+                                currentDisplayName="Consult Task"
+                            />
 
                             {stage2DataTitleEng.map((check) => (
                                 <h2
@@ -244,7 +244,7 @@ const Stage2TaskPage = () => {
                                     <div className="form-holder-border">
                                         <div className="form-holder">
                                             <p className="sm-type-lead mb-2">
-                                                Part I
+                                                Part I - Team Logo
                                             </p>
                                             <p className="sm-type-lead mb-4">
                                                 Choose a logo for your team:
@@ -293,7 +293,7 @@ const Stage2TaskPage = () => {
                                     <div className="form-holder-border">
                                         <div className="form-holder">
                                             <p className="sm-type-lead mb-2">
-                                                Part II
+                                                Part II - Team Roles
                                             </p>
                                             <p className="sm-type-lead mb-4">
                                                 Choose a role for each team

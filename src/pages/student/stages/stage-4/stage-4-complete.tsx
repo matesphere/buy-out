@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -61,17 +62,15 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Stage 4 Complete
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                ]}
+                                currentDisplayName="Stage 4"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 Progress Your Plans I
                             </h2>

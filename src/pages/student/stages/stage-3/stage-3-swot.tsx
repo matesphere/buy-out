@@ -6,6 +6,7 @@ import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { SWOT } from '../../../../components/common/stages/SWOT'
 
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
@@ -76,6 +77,7 @@ const Stage3SwotPage: FC<PageProps> = ({ location: { search } }) => {
         saveWorkObj,
         docSubmitted,
         // docFeedback,
+        stageComplete,
     } = useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
     if (loading) return <Loading />
@@ -110,6 +112,21 @@ const Stage3SwotPage: FC<PageProps> = ({ location: { search } }) => {
 
             <main className="the-quest">
                 <section className="container" id="main">
+                    <Breadcrumbs
+                        previous={[
+                            {
+                                displayName: 'Team Hub',
+                                url: '/student/team-hub/',
+                            },
+                            {
+                                displayName: 'Stage 3',
+                                url: stageComplete
+                                    ? '/student/stage-3/complete'
+                                    : '/student/stage-3/',
+                            },
+                        ]}
+                        currentDisplayName={`SWOT Analysis ${num + 1}`}
+                    />
                     <SWOT
                         swotTitle={`SWOT Analysis ${num + 1}`}
                         // docFeedback={docFeedback}
@@ -119,7 +136,15 @@ const Stage3SwotPage: FC<PageProps> = ({ location: { search } }) => {
                         saveWorkObj={saveWorkObj}
                         docSubmitted={docSubmitted}
                     />
-                    <Link to="/student/stage-3">Back to Stage 3</Link>
+                    <Link
+                        to={
+                            stageComplete
+                                ? '/student/stage-3/complete'
+                                : '/student/stage-3'
+                        }
+                    >
+                        Back to Stage 3
+                    </Link>
                 </section>
             </main>
         </>

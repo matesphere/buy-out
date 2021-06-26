@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 // import scrollTo from 'gatsby-plugin-smoothscroll'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import MapOptions from '../../../../pages/information/_map'
 
@@ -53,7 +54,9 @@ export const SwotLinks = ({
     </ol>
 )
 
-const ExampleSwotLinks = ({ exampleSwots }) => (
+const ExampleSwotLinks: FC<{ exampleSwots: Array<string> }> = ({
+    exampleSwots,
+}) => (
     <>
         <p className="sm-type-lead mb-2">
             <span className="side-icon side-icon-orange shake">
@@ -77,7 +80,7 @@ const ExampleSwotLinks = ({ exampleSwots }) => (
     </>
 )
 
-const Stage3LandingPage = () => {
+const Stage3LandingPage: FC = () => {
     const { loading, error, pageData, submitWorkObj, docSubmitted } =
         useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
@@ -115,15 +118,15 @@ const Stage3LandingPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">Stage 3</span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                ]}
+                                currentDisplayName="Stage 3"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Lay The Foundations
                             </h2>
