@@ -8,14 +8,14 @@ import {
 import { SectionProps } from '../../../../pages/student/stages/stage-5/stage-5-business-plan'
 
 export const RunningCostsSection: FC<SectionProps> = ({
-    id,
+    devOption: { option },
     workState,
     workDispatch,
 }) => {
     let optionState: BusinessPlan | undefined
 
-    if (workState[id]) {
-        optionState = workState[id] as BusinessPlan
+    if (workState[option]) {
+        optionState = workState[option] as BusinessPlan
     }
 
     const sectionState: RunningCosts = optionState?.runningCosts || {
@@ -84,7 +84,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
 
                                     workDispatch({
                                         type: ActionType.UpdateBusinessPlan,
-                                        option: id,
+                                        option,
                                         planSection: 'runningCosts',
                                         payload: {
                                             costs: arrayToUpdate,
@@ -113,7 +113,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
 
                                     workDispatch({
                                         type: ActionType.UpdateBusinessPlan,
-                                        option: id,
+                                        option,
                                         planSection: 'runningCosts',
                                         payload: {
                                             costs: arrayToUpdate,
@@ -142,7 +142,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
 
                                     workDispatch({
                                         type: ActionType.UpdateBusinessPlan,
-                                        option: id,
+                                        option,
                                         planSection: 'runningCosts',
                                         payload: {
                                             costs: arrayToUpdate,
@@ -171,7 +171,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
 
                                     workDispatch({
                                         type: ActionType.UpdateBusinessPlan,
-                                        option: id,
+                                        option,
                                         planSection: 'runningCosts',
                                         payload: {
                                             costs: arrayToUpdate,
@@ -200,7 +200,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
 
                                     workDispatch({
                                         type: ActionType.UpdateBusinessPlan,
-                                        option: id,
+                                        option,
                                         planSection: 'runningCosts',
                                         payload: {
                                             costs: arrayToUpdate,

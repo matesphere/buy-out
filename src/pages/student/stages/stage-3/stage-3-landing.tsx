@@ -19,7 +19,7 @@ import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
 
-interface SwotLinksType {
+interface SwotLinksProps {
     devOptions: Array<DocumentCompleteQuery_team_by_pk_team_development_options>
     completedSwots?: Array<string>
 }
@@ -27,7 +27,7 @@ interface SwotLinksType {
 export const SwotLinks = ({
     devOptions,
     completedSwots = [],
-}: SwotLinksType) => (
+}: SwotLinksProps) => (
     <ol>
         {devOptions.map(
             (
@@ -175,7 +175,9 @@ const Stage3LandingPage = () => {
                                 </h3>
 
                                 <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-2">Part I</p>
+                                    <p className="sm-type-lead mb-2">
+                                        Part I - Longlist
+                                    </p>
                                     <p className="sm-type-lead mb-2">
                                         Use the link below to find detailed
                                         information for each option, and then
@@ -196,7 +198,9 @@ const Stage3LandingPage = () => {
                                         'not-available-holder'
                                     }`}
                                 >
-                                    <p className="sm-type-lead mb-2">Part II</p>
+                                    <p className="sm-type-lead mb-2">
+                                        Part II - SWOT
+                                    </p>
                                     <p className="sm-type-lead mb-2">
                                         Complete a SWOT analysis for each of the
                                         development options you chose in Part I.
@@ -293,6 +297,7 @@ const Stage3LandingPage = () => {
                             </div>
                         </div>
                     </div>
+                    <Link to="/student/team-hub">Back to Team Hub</Link>
                 </section>
             </main>
         </>

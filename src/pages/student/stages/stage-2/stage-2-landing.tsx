@@ -200,6 +200,7 @@ const Stage2LandingPage = () => {
                             </div>
                         </div>
                     </div>
+                    <Link to="/student/team-hub">Back to Team Hub</Link>
                 </section>
             </main>
         </>

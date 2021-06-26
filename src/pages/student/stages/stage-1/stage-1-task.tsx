@@ -195,7 +195,9 @@ const Stage1TaskPage = () => {
                                     />
                                 </div>
                             </div>
+                            <Link to="/student/stage-1">Back to Stage 1</Link>
                         </div>
+
                         <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">

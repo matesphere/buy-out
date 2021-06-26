@@ -13,8 +13,10 @@ import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubm
 
 import { useWorkState } from '../../../../utils/input-utils'
 
-import HelpIcon from '../../../../assets/help-icon.svg'
+import { DocumentCompleteQuery_team_by_pk_team_development_options } from '../../../../gql/types/DocumentCompleteQuery'
+
 import TickSheet from '../../../../assets/tick-sheet.svg'
+import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
 interface FourYearCosts {
@@ -25,10 +27,10 @@ interface FourYearCosts {
 }
 
 interface LandCost {
-    area: number
-    price: number
+    area: number | ''
+    price: number | ''
     funder: string
-    amountOfFunding: number
+    amountOfFunding: number | ''
 }
 
 export interface CapitalCosts {
@@ -71,8 +73,12 @@ export type Action =
       }
     | {
           type: ActionType.UpdateLandCost
-          option: string
-          payload: LandCost
+          payload: {
+              area?: number | ''
+              price?: number | ''
+              funder?: string
+              amountOfFunding?: number | ''
+          }
       }
     | {
           type: ActionType.UpdateBusinessPlan
@@ -80,6 +86,35 @@ export type Action =
           planSection: 'capitalCosts' | 'runningCosts' | 'cashFlow'
           payload: CapitalCosts | RunningCosts | CashFlow
       }
+
+interface BusinessPlanLinksProps {
+    shortlist: Array<DocumentCompleteQuery_team_by_pk_team_development_options>
+    completedPlans: Array<string>
+}
+
+const BusinessPlanLinks: FC<BusinessPlanLinksProps> = ({
+    shortlist,
+    completedPlans,
+}) => (
+    <ol>
+        {shortlist.map(
+            ({ id, development_option: { option, display_name } }, i) => (
+                <li key={i} className="sm-type-guitar">
+                    <Link
+                        to={`/student/stage-5/business-plan?num=${i}&id=${id}`}
+                    >
+                        {display_name}
+                    </Link>
+                    {completedPlans.includes(option) && (
+                        <span className="ml-2 side-icon">
+                            <Tick />
+                        </span>
+                    )}
+                </li>
+            )
+        )}
+    </ol>
+)
 
 export const stage5Reducer: Reducer<WorkState, Action> = (
     state,
@@ -131,7 +166,7 @@ const Stage5LandingPage: FC = () => {
         saveWorkObj,
         submitWorkObj,
         docSubmitted,
-    } = useWorkState<WorkState, Action>(3, stage5Reducer, true)
+    } = useWorkState<WorkState, Action>(5, stage5Reducer, true)
 
     if (loading) return <Loading />
     if (error || !pageData)
@@ -147,6 +182,17 @@ const Stage5LandingPage: FC = () => {
     const { title: stageTitle } = pageData.stage_by_pk
     const { team_development_options: devOptions } = pageData.team_by_pk
     const shortlist = devOptions.filter((opt) => opt.shortlist)
+    const doc =
+        pageData.team_by_pk.stage_progresses[0]?.documents[0]?.doc_data || {}
+
+    const workStateLandCost = workState.landCost as LandCost
+    const docLandCost = doc.landCost
+
+    const completedPlans = Object.keys(doc).filter((opt) =>
+        devOptions
+            .map(({ development_option: { option } }) => option)
+            .includes(opt)
+    )
 
     return (
         <>
@@ -213,7 +259,10 @@ const Stage5LandingPage: FC = () => {
                                         <TickSheet />
                                     </span>
                                     <span className="sm-type-drum">
-                                        Task to complete:
+                                        Task{' '}
+                                        {docSubmitted
+                                            ? 'submitted'
+                                            : 'to complete:'}
                                     </span>
                                 </h3>
                                 <p className="sm-type-lead mb-2">
@@ -226,7 +275,7 @@ const Stage5LandingPage: FC = () => {
                                     <div className="col-lg-12">
                                         <div className="form-holder-border">
                                             <p className="sm-type-lead sm-type-lead--medium mb-2">
-                                                1. Cost of the Land
+                                                Part I - Cost of Land
                                             </p>
                                             <p className="sm-type-amp mb-2">
                                                 <span className="sm-type-amp--medium redorange-highlight">
@@ -257,19 +306,26 @@ const Stage5LandingPage: FC = () => {
                                                         className="form-control"
                                                         type="number"
                                                         value={
-                                                            workState.landCost
-                                                                ?.area || ''
+                                                            workStateLandCost?.area ||
+                                                            ''
                                                         }
                                                         onChange={({
                                                             target: { value },
-                                                        }) =>
+                                                        }) => {
+                                                            const area =
+                                                                value !== ''
+                                                                    ? parseInt(
+                                                                          value
+                                                                      )
+                                                                    : ''
+
                                                             workDispatch({
                                                                 type: ActionType.UpdateLandCost,
                                                                 payload: {
-                                                                    area: value,
+                                                                    area,
                                                                 },
                                                             })
-                                                        }
+                                                        }}
                                                     />
                                                 </div>
 
@@ -292,19 +348,26 @@ const Stage5LandingPage: FC = () => {
                                                         className="form-control"
                                                         type="number"
                                                         value={
-                                                            workState.landCost
-                                                                ?.price || ''
+                                                            workStateLandCost?.price ||
+                                                            ''
                                                         }
                                                         onChange={({
                                                             target: { value },
-                                                        }) =>
+                                                        }) => {
+                                                            const price =
+                                                                value !== ''
+                                                                    ? parseInt(
+                                                                          value
+                                                                      )
+                                                                    : ''
+
                                                             workDispatch({
                                                                 type: ActionType.UpdateLandCost,
                                                                 payload: {
-                                                                    price: value,
+                                                                    price,
                                                                 },
                                                             })
-                                                        }
+                                                        }}
                                                     />
                                                 </div>
                                             </div>
@@ -323,8 +386,8 @@ const Stage5LandingPage: FC = () => {
                                                     <input
                                                         className="form-control"
                                                         value={
-                                                            workState.landCost
-                                                                ?.funder || ''
+                                                            workStateLandCost?.funder ||
+                                                            ''
                                                         }
                                                         onChange={({
                                                             target: { value },
@@ -347,21 +410,26 @@ const Stage5LandingPage: FC = () => {
                                                         className="form-control"
                                                         type="number"
                                                         value={
-                                                            workState.landCost
-                                                                ?.amountOfFunding ||
+                                                            workStateLandCost?.amountOfFunding ||
                                                             ''
                                                         }
                                                         onChange={({
                                                             target: { value },
-                                                        }) =>
+                                                        }) => {
+                                                            const amountOfFunding =
+                                                                value !== ''
+                                                                    ? parseInt(
+                                                                          value
+                                                                      )
+                                                                    : ''
+
                                                             workDispatch({
                                                                 type: ActionType.UpdateLandCost,
                                                                 payload: {
-                                                                    amountOfFunding:
-                                                                        value,
+                                                                    amountOfFunding,
                                                                 },
                                                             })
-                                                        }
+                                                        }}
                                                     />
                                                 </div>
                                             </div>
@@ -382,35 +450,29 @@ const Stage5LandingPage: FC = () => {
                                     </div>
                                 </div>
 
-                                <div className="form-holder-border">
+                                <div
+                                    className={`form-holder-border ${
+                                        !docLandCost && 'not-available-holder'
+                                    }`}
+                                >
                                     <p className="sm-type-lead sm-type-lead--medium mb-2">
-                                        2. Complete your business plans.
+                                        Part II - Business Plans
                                     </p>
-                                    <ul>
-                                        {shortlist.map(
-                                            (
-                                                {
-                                                    id,
-                                                    development_option: {
-                                                        display_name,
-                                                    },
-                                                },
-                                                i
-                                            ) => (
-                                                <li
-                                                    key={i}
-                                                    className="sm-type-guitar"
-                                                >
-                                                    <Link
-                                                        to={`/student/stage-5/business-plan?num=${i}&id=${id}`}
-                                                    >
-                                                        {display_name}
-                                                    </Link>
-                                                </li>
-                                            )
-                                        )}
-                                    </ul>
+
+                                    <BusinessPlanLinks
+                                        shortlist={shortlist}
+                                        completedPlans={completedPlans}
+                                    />
                                 </div>
+
+                                <SaveSubmitSection
+                                    submitWorkObj={submitWorkObj}
+                                    disableSubmit={
+                                        completedPlans.length !== 3 ||
+                                        !docLandCost
+                                    }
+                                    docSubmitted={docSubmitted}
+                                />
                             </div>
                         </div>
                         <div className="col-lg-3">
@@ -429,6 +491,7 @@ const Stage5LandingPage: FC = () => {
                             />
                         </div>
                     </div>
+                    <Link to="/student/team-hub">Back to Team Hub</Link>
                 </section>
             </main>
         </>

@@ -90,9 +90,28 @@ export const useWorkState = <InputState, Action>(
     const [docSubmitted, setDocSubmitted] = useState(false)
     const [docFeedback, setDocFeedback] = useState<{ feedback: string }>() //? do we need to do this with useState?
 
-    const [saveWorkInitial, saveWorkInitialResponse] =
-        useAuthMutation(SAVE_WORK_INITIAL)
-    const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK)
+    //? save/submit operations, each with doc requery
+    const [saveWorkInitial, saveWorkInitialResponse] = useAuthMutation(
+        SAVE_WORK_INITIAL,
+        {
+            query: DOCUMENT_QUERY,
+            variables: {
+                stage_id: stageId,
+                includeDevOptions: !!includeDevOptions,
+            },
+            idRequired: 'teamId',
+        }
+    )
+
+    const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK, {
+        query: DOCUMENT_QUERY,
+        variables: {
+            stage_id: stageId,
+            includeDevOptions: !!includeDevOptions,
+        },
+        idRequired: 'teamId',
+    })
+
     const [submitWorkInitial, submitWorkInitialResponse] = useAuthMutation(
         SUBMIT_WORK_INITIAL,
         {
@@ -104,6 +123,7 @@ export const useWorkState = <InputState, Action>(
             idRequired: 'teamId',
         }
     )
+
     const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK, {
         query: DOCUMENT_QUERY,
         variables: {

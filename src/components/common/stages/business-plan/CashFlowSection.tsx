@@ -22,14 +22,14 @@ const getBalance = ({ income, costs }: CashFlow) => {
 }
 
 export const CashFlowSection: FC<SectionProps> = ({
-    id,
+    devOption: { option },
     workState,
     workDispatch,
 }) => {
     let optionState: BusinessPlan | undefined
 
-    if (workState[id]) {
-        optionState = workState[id] as BusinessPlan
+    if (workState[option]) {
+        optionState = workState[option] as BusinessPlan
     }
 
     const sectionState: CashFlow = optionState?.cashFlow || {
@@ -96,7 +96,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -120,7 +120,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -144,7 +144,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -168,7 +168,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -197,7 +197,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -221,7 +221,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -245,7 +245,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -269,7 +269,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -307,7 +307,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -336,7 +336,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -365,7 +365,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -394,7 +394,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                                 workDispatch({
                                     type: ActionType.UpdateBusinessPlan,
-                                    option: id,
+                                    option,
                                     planSection: 'cashFlow',
                                     payload: {
                                         ...sectionState,
@@ -408,10 +408,6 @@ export const CashFlowSection: FC<SectionProps> = ({
                         />
                     </div>
                 </div>
-            </div>
-
-            <div className="mb-2 mt-2">
-                <button className="btn-solid-lg mt-4">Submit Work</button>
             </div>
         </div>
     )

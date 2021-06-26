@@ -11,17 +11,20 @@ import { Error } from '../../../../components/common/Error'
 import { CapitalCostsSection } from '../../../../components/common/stages/business-plan/CapitalCostsSection'
 import { RunningCostsSection } from '../../../../components/common/stages/business-plan/RunningCostsSection'
 import { CashFlowSection } from '../../../../components/common/stages/business-plan/CashFlowSection'
+import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 
 import { stage5Reducer, WorkState, Action } from './stage-5-landing'
 
 import { useWorkState } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
-import SaveIcon from '../../../../assets/save-icon.svg'
 
 import '../../../../scss/index.scss'
 export interface SectionProps {
-    id: string
+    devOption: {
+        option: string
+        display_name: string
+    }
     workState: WorkState
     workDispatch: React.Dispatch<Action>
 }
@@ -45,7 +48,7 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
         workDispatch,
         saveWorkObj,
         docSubmitted,
-    } = useWorkState<WorkState, Action>(3, stage5Reducer, true)
+    } = useWorkState<WorkState, Action>(5, stage5Reducer, true)
 
     if (loading) return <Loading />
     if (error || !pageData)
@@ -136,7 +139,7 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <CapitalCostsSection
-                                {...{ id, workState, workDispatch }}
+                                {...{ devOption, workState, workDispatch }}
                             />
                         </div>
                     </div>
@@ -144,7 +147,7 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <RunningCostsSection
-                                {...{ id, workState, workDispatch }}
+                                {...{ devOption, workState, workDispatch }}
                             />
                         </div>
                     </div>
@@ -152,10 +155,16 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <CashFlowSection
-                                {...{ id, workState, workDispatch }}
+                                {...{ devOption, workState, workDispatch }}
                             />
                         </div>
                     </div>
+
+                    <SaveSubmitSection
+                        saveWorkObj={saveWorkObj}
+                        docSubmitted={docSubmitted}
+                    />
+                    <Link to="/student/stage-5">Back to Stage 5</Link>
                 </section>
             </main>
         </>

@@ -1,5 +1,5 @@
 import React, { Reducer, FC } from 'react'
-import { PageProps } from 'gatsby'
+import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import QueryString from 'query-string'
 import { ApolloError } from '@apollo/client'
@@ -97,7 +97,7 @@ const Stage3SwotPage: FC<PageProps> = ({ location: { search } }) => {
         (opt) => opt.id === id
     )?.development_option
 
-    // TODO: feedback split out by SWOT
+    // TODO: feedback split out by SWOT?
     return (
         <>
             <Helmet>
@@ -119,6 +119,7 @@ const Stage3SwotPage: FC<PageProps> = ({ location: { search } }) => {
                         saveWorkObj={saveWorkObj}
                         docSubmitted={docSubmitted}
                     />
+                    <Link to="/student/stage-3">Back to Stage 3</Link>
                 </section>
             </main>
         </>

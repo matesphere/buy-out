@@ -50,15 +50,13 @@ export const SWOT: FC<SWOTProps> = ({
                             <Link to="/student/stage-3">Stage 3</Link>
                             <span className="crumb-spacer">›</span>
                         </span>
-                        ) : (
+                    ) : (
                         <span className="leaf crumb-caps">
                             <Link to="/student/stage-3/complete">Stage 3</Link>
                             <span className="crumb-spacer">›</span>
                         </span>
-                        )}
-                    <span className="leaf crumb-caps">
-                        {swotTitle}
-                    </span>
+                    )}
+                    <span className="leaf crumb-caps">{swotTitle}</span>
                 </div>
                 {swotTitle && (
                     <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
@@ -110,11 +108,9 @@ export const SWOT: FC<SWOTProps> = ({
                         </p>
 
                         <p className="sm-type-amp">
-                            Read the {' '}
-                            <Link to="/information/about-swot">
-                                SWOT guide
-                            </Link>
-                            {' '}here
+                            Read the{' '}
+                            <Link to="/information/about-swot">SWOT guide</Link>{' '}
+                            here
                         </p>
                         <p className="sm-type-amp">
                             <strong>
@@ -242,7 +238,6 @@ export const SWOT: FC<SWOTProps> = ({
                     <p className="sm-type-guitar sm-type-guitar--medium mt-2 mb-2">
                         SWOT Saved!
                     </p>
-                    <Link to="/student/stage-3">Back to Stage 3</Link>
                 </div>
             </div>
         )}

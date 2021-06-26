@@ -8,14 +8,14 @@ import {
 import { SectionProps } from '../../../../pages/student/stages/stage-5/stage-5-business-plan'
 
 export const CapitalCostsSection: FC<SectionProps> = ({
-    id,
+    devOption: { option },
     workState,
     workDispatch,
 }) => {
     let optionState: BusinessPlan | undefined
 
-    if (workState[id]) {
-        optionState = workState[id] as BusinessPlan
+    if (workState[option]) {
+        optionState = workState[option] as BusinessPlan
     }
 
     const sectionState: CapitalCosts = optionState?.capitalCosts || {
@@ -61,7 +61,7 @@ export const CapitalCostsSection: FC<SectionProps> = ({
 
                                     workDispatch({
                                         type: ActionType.UpdateBusinessPlan,
-                                        option: id,
+                                        option,
                                         planSection: 'capitalCosts',
                                         payload: {
                                             ...sectionState,
@@ -97,7 +97,7 @@ export const CapitalCostsSection: FC<SectionProps> = ({
 
                                     workDispatch({
                                         type: ActionType.UpdateBusinessPlan,
-                                        option: id,
+                                        option,
                                         planSection: 'capitalCosts',
                                         payload: {
                                             ...sectionState,
@@ -153,7 +153,7 @@ export const CapitalCostsSection: FC<SectionProps> = ({
 
                                         workDispatch({
                                             type: ActionType.UpdateBusinessPlan,
-                                            option: id,
+                                            option,
                                             planSection: 'capitalCosts',
                                             payload: {
                                                 ...sectionState,
@@ -191,7 +191,7 @@ export const CapitalCostsSection: FC<SectionProps> = ({
 
                                         workDispatch({
                                             type: ActionType.UpdateBusinessPlan,
-                                            option: id,
+                                            option,
                                             planSection: 'capitalCosts',
                                             payload: {
                                                 ...sectionState,
