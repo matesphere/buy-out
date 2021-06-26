@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -39,7 +40,15 @@ const Stage1LandingPage = () => {
     )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { title: stageTitle } = pageData.stage_by_pk
 

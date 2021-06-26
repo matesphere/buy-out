@@ -1,6 +1,7 @@
 import React, { Reducer } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -22,7 +23,6 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
-import { ApolloError } from '@apollo/client'
 
 type WorkState = {
     [key: number]: string

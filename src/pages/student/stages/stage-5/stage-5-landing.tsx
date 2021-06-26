@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -17,10 +18,10 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 interface FourYearCosts {
-    year1: number
-    year2: number
-    year3: number
-    year4: number
+    year1: number | ''
+    year2: number | ''
+    year3: number | ''
+    year4: number | ''
 }
 
 interface LandCost {
@@ -30,14 +31,16 @@ interface LandCost {
     amountOfFunding: number
 }
 
-interface CapitalCosts {
-    costs: Array<{ details: string; cost: number }>
-    funding: Array<{ funderName: string; amount: number }>
+export interface CapitalCosts {
+    costs: Array<{ details: string; cost: number | '' }>
+    funding: Array<{ funderName: string; amount: number | '' }>
 }
 
-type RunningCosts = Array<{ details: string } & FourYearCosts>
+export interface RunningCosts {
+    costs: Array<{ details: string } & FourYearCosts>
+}
 
-interface CashFlow {
+export interface CashFlow {
     income: FourYearCosts
     costs: FourYearCosts
     balance: FourYearCosts
@@ -51,9 +54,9 @@ export interface BusinessPlan {
 export enum ActionType {
     Load,
     UpdateLandCost,
-    UpdateCapitalCosts,
-    UpdateRunningCosts,
-    UpdateCashFlow,
+    UpdateBusinessPlan,
+    // UpdateRunningCosts,
+    // UpdateCashFlow,
 }
 
 export interface WorkState {
@@ -63,23 +66,19 @@ export interface WorkState {
 export type Action =
     | {
           type: ActionType.Load
+          option: string
           payload: WorkState
       }
     | {
           type: ActionType.UpdateLandCost
+          option: string
           payload: LandCost
       }
     | {
-          type: ActionType.UpdateCapitalCosts
-          payload: CapitalCosts
-      }
-    | {
-          type: ActionType.UpdateRunningCosts
-          payload: RunningCosts
-      }
-    | {
-          type: ActionType.UpdateCashFlow
-          payload: CashFlow
+          type: ActionType.UpdateBusinessPlan
+          option: string
+          planSection: 'capitalCosts' | 'runningCosts' | 'cashFlow'
+          payload: CapitalCosts | RunningCosts | CashFlow
       }
 
 export const stage5Reducer: Reducer<WorkState, Action> = (
@@ -97,12 +96,14 @@ export const stage5Reducer: Reducer<WorkState, Action> = (
                     ...action.payload,
                 },
             }
-        case ActionType.UpdateCapitalCosts:
+        case ActionType.UpdateBusinessPlan:
             return {
                 ...state,
-                [action.payload.option]: {
-                    ...action.payload.option,
-                    ...action.payload,
+                [action.option]: {
+                    ...state[action.option],
+                    [action.planSection]: {
+                        ...action.payload,
+                    },
                 },
             }
         default:
@@ -129,13 +130,19 @@ const Stage5LandingPage: FC = () => {
         workDispatch,
         saveWorkObj,
         submitWorkObj,
+        docSubmitted,
     } = useWorkState<WorkState, Action>(3, stage5Reducer, true)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
-
-    if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { title: stageTitle } = pageData.stage_by_pk
     const { team_development_options: devOptions } = pageData.team_by_pk
@@ -367,11 +374,10 @@ const Stage5LandingPage: FC = () => {
                                                 then move onto step 2.
                                             </p>
 
-                                            <div className="mb-2 mt-2">
-                                                <button className="btn-solid-lg mt-4">
-                                                    Save costs
-                                                </button>
-                                            </div>
+                                            <SaveSubmitSection
+                                                saveWorkObj={saveWorkObj}
+                                                docSubmitted={docSubmitted}
+                                            />
                                         </div>
                                     </div>
                                 </div>

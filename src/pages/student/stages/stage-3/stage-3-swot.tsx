@@ -2,6 +2,7 @@ import React, { Reducer, FC } from 'react'
 import { PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import QueryString from 'query-string'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -65,7 +66,7 @@ const onChangeEditor =
             },
         })
 
-const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
+const Stage3SwotPage: FC<PageProps> = ({ location: { search } }) => {
     const {
         loading,
         error,
@@ -78,13 +79,21 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
     } = useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { id, num } = QueryString.parse(search, {
         parseNumbers: true,
     }) as { id: string; num: number }
 
-    const devOption = pageData.team_by_pk.team_development_options.find(
+    const devOption = pageData.team_by_pk?.team_development_options.find(
         (opt) => opt.id === id
     )?.development_option
 
@@ -116,4 +125,4 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
     )
 }
 
-export default Stage3Swot
+export default Stage3SwotPage

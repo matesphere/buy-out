@@ -8,11 +8,11 @@ interface SaveSubmitSectionProps {
         call: () => void
         response: MutationResult<any>
     }
-    submitWorkObj: {
+    submitWorkObj?: {
         call: () => void
         response: MutationResult<any>
     }
-    disableSubmit: boolean
+    disableSubmit?: boolean
     docSubmitted?: boolean
 }
 
@@ -26,7 +26,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
 
     return (
         <>
-            {!submitWorkObj.response.data && !docSubmitted && (
+            {!submitWorkObj?.response.data && !docSubmitted && (
                 <>
                     {!!saveWorkObj && (
                         <button
@@ -38,17 +38,19 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                         </button>
                     )}
 
-                    <button
-                        className="btn-solid-lg mt-4"
-                        disabled={disableSubmit}
-                        onClick={() => setShowModal(true)}
-                    >
-                        Submit
-                    </button>
+                    {!!submitWorkObj && (
+                        <button
+                            className="btn-solid-lg mt-4"
+                            disabled={disableSubmit}
+                            onClick={() => setShowModal(true)}
+                        >
+                            Submit
+                        </button>
+                    )}
                 </>
             )}
 
-            {showModal && (
+            {submitWorkObj && showModal && (
                 <div className="modal-window">
                     <div>
                         <button
