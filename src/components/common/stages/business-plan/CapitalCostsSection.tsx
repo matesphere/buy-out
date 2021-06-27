@@ -11,6 +11,7 @@ export const CapitalCostsSection: FC<SectionProps> = ({
     devOption: { option },
     workState,
     workDispatch,
+    docSubmitted,
 }) => {
     let optionState: BusinessPlan | undefined
 
@@ -26,18 +27,21 @@ export const CapitalCostsSection: FC<SectionProps> = ({
     return (
         <div className="form-holder-border">
             <p className="sm-type-lead sm-type-lead--medium mb-2">
-                2. Capital costs of Development Options
+                1. Capital costs of Development Options
             </p>
-            <p className="sm-type-amp mb-2">
-                <span className="sm-type-amp--medium redorange-highlight">
-                    NOTES:
-                </span>{' '}
-                In this section you should include all of the known capital
-                costs (the set-up costs) of this development option, which will
-                give you a total at the end. You must then show which funders
-                you are going to use to meet this total. The Amount of Funding
-                Total should equal the Capital Costs Total.
-            </p>
+
+            {!docSubmitted && (
+                <p className="sm-type-amp mb-2">
+                    <span className="sm-type-amp--medium redorange-highlight">
+                        NOTES:
+                    </span>
+                    In this section you should include all of the known capital
+                    costs (the set-up costs) of this development option, which
+                    will give you a total at the end. You must then show which
+                    funders you are going to use to meet this total. The Amount
+                    of Funding Total should equal the Capital Costs Total.
+                </p>
+            )}
 
             <div className="side-grey mb-2">
                 <div className="row mb-4">
@@ -50,28 +54,34 @@ export const CapitalCostsSection: FC<SectionProps> = ({
                                 key={i}
                                 className="form-control mb-2"
                                 value={details}
-                                onChange={({ target: { value } }) => {
-                                    const arrayToUpdate = [
-                                        ...sectionState.costs,
-                                    ]
-                                    arrayToUpdate.splice(i, 1, {
-                                        details: value,
-                                        cost,
-                                    })
+                                onChange={
+                                    workDispatch
+                                        ? ({ target: { value } }) => {
+                                              const arrayToUpdate = [
+                                                  ...sectionState.costs,
+                                              ]
+                                              arrayToUpdate.splice(i, 1, {
+                                                  details: value,
+                                                  cost,
+                                              })
 
-                                    workDispatch({
-                                        type: ActionType.UpdateBusinessPlan,
-                                        option,
-                                        planSection: 'capitalCosts',
-                                        payload: {
-                                            ...sectionState,
-                                            costs: arrayToUpdate,
-                                        },
-                                    })
-                                }}
+                                              workDispatch({
+                                                  type: ActionType.UpdateBusinessPlan,
+                                                  option,
+                                                  planSection: 'capitalCosts',
+                                                  payload: {
+                                                      ...sectionState,
+                                                      costs: arrayToUpdate,
+                                                  },
+                                              })
+                                          }
+                                        : () => {}
+                                }
+                                readOnly={docSubmitted}
                             />
                         ))}
                     </div>
+
                     <div className="col-lg-4">
                         <label className="form-label sm-type-amp">
                             Capital Costs (£)
@@ -82,29 +92,36 @@ export const CapitalCostsSection: FC<SectionProps> = ({
                                 className="form-control mb-2"
                                 type="number"
                                 value={cost}
-                                onChange={({ target: { value } }) => {
-                                    const arrayToUpdate = [
-                                        ...sectionState.costs,
-                                    ]
+                                onChange={
+                                    workDispatch
+                                        ? ({ target: { value } }) => {
+                                              const arrayToUpdate = [
+                                                  ...sectionState.costs,
+                                              ]
 
-                                    const cost =
-                                        value !== '' ? parseInt(value) : ''
+                                              const cost =
+                                                  value !== ''
+                                                      ? parseInt(value)
+                                                      : ''
 
-                                    arrayToUpdate.splice(i, 1, {
-                                        details,
-                                        cost,
-                                    })
+                                              arrayToUpdate.splice(i, 1, {
+                                                  details,
+                                                  cost,
+                                              })
 
-                                    workDispatch({
-                                        type: ActionType.UpdateBusinessPlan,
-                                        option,
-                                        planSection: 'capitalCosts',
-                                        payload: {
-                                            ...sectionState,
-                                            costs: arrayToUpdate,
-                                        },
-                                    })
-                                }}
+                                              workDispatch({
+                                                  type: ActionType.UpdateBusinessPlan,
+                                                  option,
+                                                  planSection: 'capitalCosts',
+                                                  payload: {
+                                                      ...sectionState,
+                                                      costs: arrayToUpdate,
+                                                  },
+                                              })
+                                          }
+                                        : () => {}
+                                }
+                                readOnly={docSubmitted}
                             />
                         ))}
                     </div>
@@ -132,6 +149,7 @@ export const CapitalCostsSection: FC<SectionProps> = ({
                             How will the capital costs be funded?
                         </p>
                     </div>
+
                     <div className="col-lg-8">
                         <label className="form-label sm-type-amp">
                             Name of Funder
@@ -142,29 +160,37 @@ export const CapitalCostsSection: FC<SectionProps> = ({
                                     key={i}
                                     className="form-control mb-2"
                                     value={funderName}
-                                    onChange={({ target: { value } }) => {
-                                        const arrayToUpdate = [
-                                            ...sectionState.funding,
-                                        ]
-                                        arrayToUpdate.splice(i, 1, {
-                                            funderName: value,
-                                            amount,
-                                        })
+                                    onChange={
+                                        workDispatch
+                                            ? ({ target: { value } }) => {
+                                                  const arrayToUpdate = [
+                                                      ...sectionState.funding,
+                                                  ]
+                                                  arrayToUpdate.splice(i, 1, {
+                                                      funderName: value,
+                                                      amount,
+                                                  })
 
-                                        workDispatch({
-                                            type: ActionType.UpdateBusinessPlan,
-                                            option,
-                                            planSection: 'capitalCosts',
-                                            payload: {
-                                                ...sectionState,
-                                                funding: arrayToUpdate,
-                                            },
-                                        })
-                                    }}
+                                                  workDispatch({
+                                                      type: ActionType.UpdateBusinessPlan,
+                                                      option,
+                                                      planSection:
+                                                          'capitalCosts',
+                                                      payload: {
+                                                          ...sectionState,
+                                                          funding:
+                                                              arrayToUpdate,
+                                                      },
+                                                  })
+                                              }
+                                            : () => {}
+                                    }
+                                    readOnly={docSubmitted}
                                 />
                             )
                         )}
                     </div>
+
                     <div className="col-lg-4">
                         <label className="form-label sm-type-amp">
                             Amount of Funding (£)
@@ -176,34 +202,44 @@ export const CapitalCostsSection: FC<SectionProps> = ({
                                     className="form-control mb-2"
                                     type="number"
                                     value={amount}
-                                    onChange={({ target: { value } }) => {
-                                        const arrayToUpdate = [
-                                            ...sectionState.funding,
-                                        ]
+                                    onChange={
+                                        workDispatch
+                                            ? ({ target: { value } }) => {
+                                                  const arrayToUpdate = [
+                                                      ...sectionState.funding,
+                                                  ]
 
-                                        const amount =
-                                            value !== '' ? parseInt(value) : ''
+                                                  const amount =
+                                                      value !== ''
+                                                          ? parseInt(value)
+                                                          : ''
 
-                                        arrayToUpdate.splice(i, 1, {
-                                            funderName,
-                                            amount,
-                                        })
+                                                  arrayToUpdate.splice(i, 1, {
+                                                      funderName,
+                                                      amount,
+                                                  })
 
-                                        workDispatch({
-                                            type: ActionType.UpdateBusinessPlan,
-                                            option,
-                                            planSection: 'capitalCosts',
-                                            payload: {
-                                                ...sectionState,
-                                                funding: arrayToUpdate,
-                                            },
-                                        })
-                                    }}
+                                                  workDispatch({
+                                                      type: ActionType.UpdateBusinessPlan,
+                                                      option,
+                                                      planSection:
+                                                          'capitalCosts',
+                                                      payload: {
+                                                          ...sectionState,
+                                                          funding:
+                                                              arrayToUpdate,
+                                                      },
+                                                  })
+                                              }
+                                            : () => {}
+                                    }
+                                    readOnly={docSubmitted}
                                 />
                             )
                         )}
                     </div>
                 </div>
+
                 <div className="row">
                     <div className="col-lg-3"></div>
                     <div className="col-lg-5"></div>

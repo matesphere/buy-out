@@ -3,8 +3,6 @@ import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
-import LoginHeader from './_header'
-import AccountFooter from './_footer'
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
 import {
@@ -164,7 +162,9 @@ const TeamInfoPanel = ({
             {teamName}
         </p>
         <div className="form-holder-border">
-            <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">Team members:</p>
+            <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
+                Team members:
+            </p>
             {students.map(({ position, user: { full_name } }, i) => (
                 <p key={i} className="sm-type-bigamp">
                     {full_name}
@@ -183,7 +183,12 @@ const TeamInfoPanel = ({
                         i
                     ) => (
                         <p key={i} className="sm-type-bigamp">
-                            {display_name} {shortlist && <span className="shortlist-tick"><Tick /></span>}
+                            {display_name}{' '}
+                            {shortlist && (
+                                <span className="shortlist-tick">
+                                    <Tick />
+                                </span>
+                            )}
                         </p>
                     )
                 )}
@@ -280,7 +285,6 @@ const TutorCurrentQuestPage = () => {
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="notes">
-                <LoginHeader headerText="Current Quests" />
                 <section className="container" id="currentquest">
                     <Tabs>
                         <TabList>
@@ -332,7 +336,6 @@ const TutorCurrentQuestPage = () => {
                         ))}
                     </Tabs>
                 </section>
-                <AccountFooter />
             </main>
         </>
     )

@@ -355,7 +355,6 @@ const TutorCreateTeamPage = () => {
             </Helmet>
 
             <main className="the-quest">
-                <LoginHeader headerText="New Quest" hideLinks={true} />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -435,8 +434,6 @@ const TutorCreateTeamPage = () => {
                         schoolId,
                     }}
                 />
-
-                <AccountFooter />
             </main>
         </>
     )

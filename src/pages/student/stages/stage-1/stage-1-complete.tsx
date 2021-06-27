@@ -1,11 +1,13 @@
 import React from 'react'
-import { Link } from 'gatsby'
+
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import { FeedbackDisplay } from '../../../../components/common/FeedbackDisplay'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -64,20 +66,20 @@ const Stage1CompletePage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Stage 1 Complete
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                ]}
+                                currentDisplayName="Stage 1"
+                            />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
+
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     image={
@@ -96,17 +98,9 @@ const Stage1CompletePage = () => {
                                         Task complete:
                                     </span>
                                 </h3>
-                                <div className="form-holder-border">
-                                    <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
-                                        Tutor feedback
-                                    </h4>
-                                    <p
-                                        className="sm-type-lead mb-3 italic"
-                                        dangerouslySetInnerHTML={{
-                                            __html: doc.feedback.feedback,
-                                        }}
-                                    />
-                                </div>
+
+                                <FeedbackDisplay feedback={doc.feedback} />
+
                                 <div className="form-holder-border">
                                     <h4 className="sm-type-drum sm-type-drum--medium">
                                         Questions

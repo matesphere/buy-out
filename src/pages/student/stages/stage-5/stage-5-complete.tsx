@@ -2,10 +2,15 @@ import React, { FC } from 'react'
 import { Link, PageProps, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import { FeedbackDisplay } from '../../../../components/common/FeedbackDisplay'
+
+import { CostOfLand } from '../../../../components/common/stages/business-plan/CostOfLand'
+import { BusinessPlanLinks } from './stage-5-landing'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -18,7 +23,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
-const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
+const Stage5CompletePage: FC<PageProps> = ({ location: { search } }) => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "congratulations.jpg" }) {
@@ -40,12 +45,27 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
     )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
-
-    const doc = pageData.team_by_pk.stage_progresses[0].documents[0]
-    const devOptions = pageData.team_by_pk.team_development_options
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { title: stageTitle } = pageData.stage_by_pk
+    const { team_development_options: devOptions } = pageData.team_by_pk
+
+    const shortlist = devOptions.filter((opt) => opt.shortlist)
+    const doc = pageData.team_by_pk?.stage_progresses[0]?.documents[0]
+
+    const completedPlans = Object.keys(doc?.doc_data || []).filter((opt) =>
+        devOptions
+            .map(({ development_option: { option } }) => option)
+            .includes(opt)
+    )
 
     return (
         <>
@@ -71,7 +91,7 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                 currentDisplayName="Stage 5"
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Consult
+                                Progress Your Plans II - Business Plan
                             </h2>
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
@@ -91,21 +111,26 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                         Task complete:
                                     </span>
                                 </h3>
+
+                                {doc?.feedback && (
+                                    <FeedbackDisplay feedback={doc.feedback} />
+                                )}
+
+                                <CostOfLand
+                                    workState={doc?.doc_data}
+                                    docSubmitted={true}
+                                />
+
                                 <div className="form-holder-border">
-                                    <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
-                                        Tutor feedback
-                                    </h4>
-                                    <p
-                                        className="sm-type-lead mb-3 italic"
-                                        dangerouslySetInnerHTML={{
-                                            __html: doc.feedback.feedback,
-                                        }}
+                                    <p className="sm-type-lead sm-type-lead--medium mb-2">
+                                        Part II - Business Plans
+                                    </p>
+
+                                    <BusinessPlanLinks
+                                        shortlist={shortlist}
+                                        completedPlans={completedPlans}
                                     />
                                 </div>
-
-                                {/* <div className="form-holder-border">
-                                    <SwotLinks devOptions={devOptions} />
-                                </div> */}
                             </div>
 
                             <p className="sm-type-amp">
@@ -121,4 +146,4 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
     )
 }
 
-export default Stage3CompletePage
+export default Stage5CompletePage

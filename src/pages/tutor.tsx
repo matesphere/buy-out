@@ -2,6 +2,8 @@ import React, { createContext, useState, useContext, FC } from 'react'
 import { Router, RouteComponentProps } from '@reach/router'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
+import Header from './tutor/_header'
+import Footer from './tutor/_footer'
 import Hub from './tutor/hub'
 import CurrentQuest from './tutor/current-quests'
 import AddStudents from './tutor/add-students'
@@ -9,6 +11,7 @@ import CreateTeam from './tutor/create-team'
 import Stage1Submitted from './tutor/stages/stage-1/tutor-stage-1-submitted'
 import Stage3Submitted from './tutor/stages/stage-3/tutor-stage-3-submitted'
 import Stage4Submitted from './tutor/stages/stage-4/tutor-stage-4-submitted'
+import Stage5Submitted from './tutor/stages/stage-5/tutor-stage-5-submitted'
 
 import { StudentType } from '../gql/types'
 
@@ -51,6 +54,7 @@ const Routes = () => {
 
     return (
         <NewQuestContext.Provider value={{ studentsToAdd, setStudentsToAdd }}>
+            <Header />
             <Router basepath="/tutor">
                 <LoggedInRoute path="/hub" component={Hub} />
                 <LoggedInRoute
@@ -74,7 +78,13 @@ const Routes = () => {
                     path="/stage-4/submitted"
                     component={Stage4Submitted}
                 />
+
+                <LoggedInRoute
+                    path="/stage-5/submitted"
+                    component={Stage5Submitted}
+                />
             </Router>
+            <Footer />
         </NewQuestContext.Provider>
     )
 }

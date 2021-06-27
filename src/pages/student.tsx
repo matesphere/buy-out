@@ -29,6 +29,7 @@ import Stage4Complete from './student/stages/stage-4/stage-4-complete'
 
 import Stage5Landing from './student/stages/stage-5/stage-5-landing'
 import Stage5BusinessPlan from './student/stages/stage-5/stage-5-business-plan'
+import Stage5Complete from './student/stages/stage-5/stage-5-complete'
 
 import Stage6Page from './student/stages/stage-6/stage-6'
 import Stage6TipsPage from './student/stages/stage-6/presentation-tips'
@@ -114,6 +115,10 @@ const Routes = () => {
                 <LoggedInRoute
                     path="/stage-5/business-plan"
                     component={Stage5BusinessPlan}
+                />
+                <LoggedInRoute
+                    path="/stage-5/complete"
+                    component={Stage5Complete}
                 />
 
                 <LoggedInRoute path="/stage-6" component={Stage6Page} />

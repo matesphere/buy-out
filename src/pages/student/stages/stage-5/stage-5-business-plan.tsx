@@ -27,7 +27,8 @@ export interface SectionProps {
         display_name: string
     }
     workState: WorkState
-    workDispatch: React.Dispatch<Action>
+    workDispatch?: React.Dispatch<Action>
+    docSubmitted: boolean
 }
 
 const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
@@ -141,7 +142,12 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <CapitalCostsSection
-                                {...{ devOption, workState, workDispatch }}
+                                {...{
+                                    devOption,
+                                    workState,
+                                    workDispatch,
+                                    docSubmitted,
+                                }}
                             />
                         </div>
                     </div>
@@ -149,7 +155,12 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <RunningCostsSection
-                                {...{ devOption, workState, workDispatch }}
+                                {...{
+                                    devOption,
+                                    workState,
+                                    workDispatch,
+                                    docSubmitted,
+                                }}
                             />
                         </div>
                     </div>
@@ -157,7 +168,12 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <CashFlowSection
-                                {...{ devOption, workState, workDispatch }}
+                                {...{
+                                    devOption,
+                                    workState,
+                                    workDispatch,
+                                    docSubmitted,
+                                }}
                             />
                         </div>
                     </div>

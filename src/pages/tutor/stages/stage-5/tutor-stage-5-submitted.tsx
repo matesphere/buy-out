@@ -7,14 +7,17 @@ import Footer from '../../_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 
-import { FeasibilityStudy } from '../../../../components/common/stages/FeasibilityStudy'
+import { CostOfLand } from '../../../../components/common/stages/business-plan/CostOfLand'
+import { CapitalCostsSection } from '../../../../components/common/stages/business-plan/CapitalCostsSection'
+import { RunningCostsSection } from '../../../../components/common/stages/business-plan/RunningCostsSection'
+import { CashFlowSection } from '../../../../components/common/stages/business-plan/CashFlowSection'
 import { SubmitFeedbackSection } from '../../../../components/tutor/SubmitFeedbackSection'
 
 import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
 
 import '../../../../scss/index.scss'
 
-const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
+const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     const {
         loading,
         error,
@@ -27,7 +30,7 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     if (loading) return <Loading />
     if (error) return <Error error={error} />
 
-    const devOptions =
+    const shortlist =
         pageData.stage_progress_by_pk.team.team_development_options.filter(
             (opt) => opt.shortlist
         )
@@ -41,18 +44,21 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                     content="width=device-width, initial-scale=1.0"
                 />
                 <title>
-                    Stage 4 - Progress Your Plans (Feasibility Study) -
-                    Submitted
+                    Stage 5 - Progress Your Plans (Business Plan) - Submitted
                 </title>
             </Helmet>
 
             <main className="the-quest">
                 <section className="container" id="main">
-                    <FeasibilityStudy
-                        devOptions={devOptions}
-                        workState={doc.doc_data}
-                        docSubmitted={true}
-                    />
+                    <CostOfLand workState={doc.doc_data} docSubmitted={true} />
+
+                    {shortlist.map((opt, i) => (
+                        <CapitalCostsSection
+                            devOption={opt.development_option}
+                            workState={doc.doc_data}
+                            docSubmitted={true}
+                        />
+                    ))}
 
                     <SubmitFeedbackSection
                         feedbackState={feedbackState}
@@ -80,4 +86,4 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     )
 }
 
-export default TutorStage4SubmittedPage
+export default TutorStage5SubmittedPage

@@ -7,6 +7,7 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { SwotLinks } from './stage-3-landing'
+import { FeedbackDisplay } from '../../../../components/common/FeedbackDisplay'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -92,17 +93,8 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                         Task complete:
                                     </span>
                                 </h3>
-                                <div className="form-holder-border">
-                                    <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
-                                        Tutor feedback
-                                    </h4>
-                                    <p
-                                        className="sm-type-lead mb-3 italic"
-                                        dangerouslySetInnerHTML={{
-                                            __html: doc.feedback.feedback,
-                                        }}
-                                    />
-                                </div>
+
+                                <FeedbackDisplay feedback={doc.feedback} />
 
                                 <div className="form-holder-border">
                                     <SwotLinks devOptions={devOptions} />

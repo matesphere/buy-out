@@ -3,8 +3,6 @@ import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
 import { gql } from '@apollo/client'
 
-import LoginHeader from './_header'
-import AccountFooter from './_footer'
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
 
@@ -54,7 +52,8 @@ const PreviousQuestDisplay = ({ quest }) => (
             {getDateFromTimestamp(quest.started_at)} -{' '}
             {getDateFromTimestamp(quest.completed_at)}, {quest.teams.length}{' '}
             teams{' '}
-        </span> - - <Link to="/login">View</Link>
+        </span>{' '}
+        - - <Link to="/login">View</Link>
     </>
 )
 
@@ -98,7 +97,6 @@ const TutorHub = () => {
             </Helmet>
 
             <main className="the-quest">
-                <LoginHeader headerText="Tutor Hub" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -116,23 +114,24 @@ const TutorHub = () => {
                                 </p>
                                 <ul>
                                     <li className="sm-type-bigamp">
-                                    {quests
-                                        .filter(
-                                            (quest) => quest.status === 'active'
-                                        )
-                                        .map((quest, i) => (
-                                            <span
-                                                key={i}
-                                            >
-                                                <CurrentQuestDisplay
-                                                    quest={quest}
-                                                />
-                                            </span>
-                                        ))}
-                                         - -  <Link to="/tutor/current-quests">View</Link>
+                                        {quests
+                                            .filter(
+                                                (quest) =>
+                                                    quest.status === 'active'
+                                            )
+                                            .map((quest, i) => (
+                                                <span key={i}>
+                                                    <CurrentQuestDisplay
+                                                        quest={quest}
+                                                    />
+                                                </span>
+                                            ))}
+                                        - -{' '}
+                                        <Link to="/tutor/current-quests">
+                                            View
+                                        </Link>
                                     </li>
                                 </ul>
-
                             </div>
                             <div className="side-grey mb-2">
                                 <p className="sm-type-lead sm-type-lead--medium">
@@ -145,10 +144,7 @@ const TutorHub = () => {
                                                 quest.status === 'complete'
                                         )
                                         .map((quest, i) => (
-                                            <li
-                                                key={i}
-                                                className="sm-type-amp"
-                                            >
+                                            <li key={i} className="sm-type-amp">
                                                 <PreviousQuestDisplay
                                                     quest={quest}
                                                 />
@@ -168,14 +164,16 @@ const TutorHub = () => {
                                 <p className="sm-type-lead sm-type-lead--medium">
                                     Start New Quest
                                 </p>
-                                <Link className="btn-solid-lg" to="/tutor/add-students">
+                                <Link
+                                    className="btn-solid-lg"
+                                    to="/tutor/add-students"
+                                >
                                     Start a new Quest
                                 </Link>
                             </div>
                         </div>
                     </div>
                 </section>
-                <AccountFooter />
             </main>
         </>
     )

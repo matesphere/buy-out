@@ -25,6 +25,7 @@ export const CashFlowSection: FC<SectionProps> = ({
     devOption: { option },
     workState,
     workDispatch,
+    docSubmitted,
 }) => {
     let optionState: BusinessPlan | undefined
 
@@ -58,7 +59,7 @@ export const CashFlowSection: FC<SectionProps> = ({
     return (
         <div className="form-holder-border">
             <p className="sm-type-lead sm-type-lead--medium mb-2">
-                4. Annual Cash Flow
+                3. Annual Cash Flow
             </p>
 
             <p className="sm-type-amp mb-2">
@@ -107,6 +108,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     },
                                 })
                             }}
+                            readOnly={docSubmitted}
                         />
                     </div>
                     <div className="col-lg-2">
@@ -131,6 +133,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     },
                                 })
                             }}
+                            readOnly={docSubmitted}
                         />
                     </div>
                     <div className="col-lg-2">
@@ -155,6 +158,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     },
                                 })
                             }}
+                            readOnly={docSubmitted}
                         />
                     </div>
                     <div className="col-lg-2">
@@ -179,6 +183,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     },
                                 })
                             }}
+                            readOnly={docSubmitted}
                         />
                     </div>
                 </div>
@@ -208,6 +213,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     },
                                 })
                             }}
+                            readOnly={docSubmitted}
                         />
                     </div>
                     <div className="col-lg-2">
@@ -232,6 +238,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     },
                                 })
                             }}
+                            readOnly={docSubmitted}
                         />
                     </div>
                     <div className="col-lg-2">
@@ -256,6 +263,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     },
                                 })
                             }}
+                            readOnly={docSubmitted}
                         />
                     </div>
                     <div className="col-lg-2">
@@ -280,6 +288,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     },
                                 })
                             }}
+                            readOnly={docSubmitted}
                         />
                     </div>
                 </div>
@@ -300,7 +309,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     ? getBalance(sectionState).year1
                                     : sectionState.balance.year1
                             }
-                            readOnly={autoBalance}
+                            readOnly={autoBalance || docSubmitted}
                             onChange={({ target: { value } }) => {
                                 const year1 =
                                     value !== '' ? parseInt(value) : ''
@@ -329,7 +338,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     ? getBalance(sectionState).year2
                                     : sectionState.balance.year2
                             }
-                            readOnly={autoBalance}
+                            readOnly={autoBalance || docSubmitted}
                             onChange={({ target: { value } }) => {
                                 const year2 =
                                     value !== '' ? parseInt(value) : ''
@@ -358,7 +367,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     ? getBalance(sectionState).year3
                                     : sectionState.balance.year3
                             }
-                            readOnly={autoBalance}
+                            readOnly={autoBalance || docSubmitted}
                             onChange={({ target: { value } }) => {
                                 const year3 =
                                     value !== '' ? parseInt(value) : ''
@@ -387,7 +396,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     ? getBalance(sectionState).year4
                                     : sectionState.balance.year4
                             }
-                            readOnly={autoBalance}
+                            readOnly={autoBalance || docSubmitted}
                             onChange={({ target: { value } }) => {
                                 const year4 =
                                     value !== '' ? parseInt(value) : ''

@@ -75,6 +75,7 @@ export const DOCUMENT_QUERY = gql`
     }
 `
 
+// TODO: remove 'submitted'
 export const DOCUMENT_COMPLETE_QUERY = gql`
     query DocumentCompleteQuery(
         $team_id: uuid!
@@ -88,7 +89,12 @@ export const DOCUMENT_COMPLETE_QUERY = gql`
                 stage_id
                 status
                 documents(
-                    where: { _or: [{ status: { _eq: marked_passed } }] }
+                    where: {
+                        _or: [
+                            { status: { _eq: submitted } }
+                            { status: { _eq: marked_passed } }
+                        ]
+                    }
                 ) {
                     id
                     doc_data

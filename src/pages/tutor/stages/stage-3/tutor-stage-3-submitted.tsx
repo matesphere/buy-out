@@ -42,7 +42,6 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Stage 3" />
                 <section className="container" id="main">
                     {devOptions.map((opt, i) => (
                         <SWOT
@@ -76,7 +75,6 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                         </Link>
                     </p>
                 </section>
-                <Footer />
             </main>
         </>
     )

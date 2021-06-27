@@ -10,6 +10,7 @@ import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { CheckList } from '../../../../components/common/Checklist'
 import { Helpful } from '../../../../components/common/Helpful'
+import { CostOfLand } from '../../../../components/common/stages/business-plan/CostOfLand'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 
 import { useWorkState } from '../../../../utils/input-utils'
@@ -27,7 +28,7 @@ interface FourYearCosts {
     year4: number | ''
 }
 
-interface LandCost {
+export interface LandCost {
     area: number | ''
     price: number | ''
     funder: string
@@ -91,7 +92,7 @@ interface BusinessPlanLinksProps {
     completedPlans: Array<string>
 }
 
-const BusinessPlanLinks: FC<BusinessPlanLinksProps> = ({
+export const BusinessPlanLinks: FC<BusinessPlanLinksProps> = ({
     shortlist,
     completedPlans,
 }) => (
@@ -184,7 +185,7 @@ const Stage5LandingPage: FC = () => {
     const doc =
         pageData.team_by_pk.stage_progresses[0]?.documents[0]?.doc_data || {}
 
-    const workStateLandCost = workState.landCost as LandCost
+    // const workStateLandCost = workState.landCost as LandCost
     const docLandCost = doc.landCost
 
     const completedPlans = Object.keys(doc).filter((opt) =>
@@ -272,180 +273,14 @@ const Stage5LandingPage: FC = () => {
 
                                 <div className="row">
                                     <div className="col-lg-12">
-                                        <div className="form-holder-border">
-                                            <p className="sm-type-lead sm-type-lead--medium mb-2">
-                                                Part I - Cost of Land
-                                            </p>
-                                            <p className="sm-type-amp mb-2">
-                                                <span className="sm-type-amp--medium redorange-highlight">
-                                                    NOTE:
-                                                </span>{' '}
-                                                In this section you will need to
-                                                refer to the{' '}
-                                                <Link to="/student/stage-2/plan-of-glenclas">
-                                                    map of Glenclas
-                                                </Link>{' '}
-                                                and using the scale, calculate
-                                                the Asking Price of the area of
-                                                land for sale. Then show how the
-                                                sale will be funded.
-                                            </p>
-
-                                            <div className="row side-grey mb-2">
-                                                <div className="col-lg-12">
-                                                    <p className="sm-type-lead sm-type-lead--medium mb-2 redorange-highlight">
-                                                        Costs
-                                                    </p>
-                                                </div>
-                                                <div className="col-lg-4">
-                                                    <label className="form-label sm-type-amp">
-                                                        Area of land (ha)
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        type="number"
-                                                        value={
-                                                            workStateLandCost?.area ||
-                                                            ''
-                                                        }
-                                                        onChange={({
-                                                            target: { value },
-                                                        }) => {
-                                                            const area =
-                                                                value !== ''
-                                                                    ? parseInt(
-                                                                          value
-                                                                      )
-                                                                    : ''
-
-                                                            workDispatch({
-                                                                type: ActionType.UpdateLandCost,
-                                                                payload: {
-                                                                    area,
-                                                                },
-                                                            })
-                                                        }}
-                                                    />
-                                                </div>
-
-                                                <div className="col-lg-4">
-                                                    <label className="form-label sm-type-amp">
-                                                        Price (£/ha)
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        defaultValue={5000}
-                                                        readOnly
-                                                    />
-                                                </div>
-
-                                                <div className="col-lg-4">
-                                                    <label className="form-label sm-type-amp">
-                                                        Total asking price (£)
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        type="number"
-                                                        value={
-                                                            workStateLandCost?.price ||
-                                                            ''
-                                                        }
-                                                        onChange={({
-                                                            target: { value },
-                                                        }) => {
-                                                            const price =
-                                                                value !== ''
-                                                                    ? parseInt(
-                                                                          value
-                                                                      )
-                                                                    : ''
-
-                                                            workDispatch({
-                                                                type: ActionType.UpdateLandCost,
-                                                                payload: {
-                                                                    price,
-                                                                },
-                                                            })
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <div className="row side-grey mb-2">
-                                                <div className="col-lg-12">
-                                                    <p className="sm-type-lead sm-type-lead--medium mb-2 redorange-highlight">
-                                                        How will the asking
-                                                        price be funded?
-                                                    </p>
-                                                </div>
-                                                <div className="col-lg-6">
-                                                    <label className="form-label sm-type-amp">
-                                                        Name of funder
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        value={
-                                                            workStateLandCost?.funder ||
-                                                            ''
-                                                        }
-                                                        onChange={({
-                                                            target: { value },
-                                                        }) =>
-                                                            workDispatch({
-                                                                type: ActionType.UpdateLandCost,
-                                                                payload: {
-                                                                    funder: value,
-                                                                },
-                                                            })
-                                                        }
-                                                    />
-                                                </div>
-
-                                                <div className="col-lg-6">
-                                                    <label className="form-label sm-type-amp">
-                                                        Amount of funding (£)
-                                                    </label>
-                                                    <input
-                                                        className="form-control"
-                                                        type="number"
-                                                        value={
-                                                            workStateLandCost?.amountOfFunding ||
-                                                            ''
-                                                        }
-                                                        onChange={({
-                                                            target: { value },
-                                                        }) => {
-                                                            const amountOfFunding =
-                                                                value !== ''
-                                                                    ? parseInt(
-                                                                          value
-                                                                      )
-                                                                    : ''
-
-                                                            workDispatch({
-                                                                type: ActionType.UpdateLandCost,
-                                                                payload: {
-                                                                    amountOfFunding,
-                                                                },
-                                                            })
-                                                        }}
-                                                    />
-                                                </div>
-                                            </div>
-
-                                            <p className="sm-type-amp sm-type-amp--medium mb-2">
-                                                <span className="sm-type-amp--medium redorange-highlight">
-                                                    NOTE:
-                                                </span>{' '}
-                                                Save your "Cost of the Land"
-                                                then move onto step 2.
-                                            </p>
-
-                                            <SaveSubmitSection
-                                                saveWorkObj={saveWorkObj}
-                                                docSubmitted={docSubmitted}
-                                            />
-                                        </div>
+                                        <CostOfLand
+                                            {...{
+                                                workState,
+                                                workDispatch,
+                                                saveWorkObj,
+                                                docSubmitted,
+                                            }}
+                                        />
                                     </div>
                                 </div>
 

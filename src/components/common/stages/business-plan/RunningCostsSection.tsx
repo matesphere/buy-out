@@ -11,6 +11,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
     devOption: { option },
     workState,
     workDispatch,
+    docSubmitted,
 }) => {
     let optionState: BusinessPlan | undefined
 
@@ -31,7 +32,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
     return (
         <div className="form-holder-border">
             <p className="sm-type-lead sm-type-lead--medium mb-2">
-                3. Running costs
+                2. Running costs
             </p>
             <p className="sm-type-amp mb-2">
                 <span className="sm-type-amp--medium redorange-highlight">
@@ -91,6 +92,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
                                         },
                                     })
                                 }}
+                                readOnly={docSubmitted}
                             />
                         </div>
                         <div className="col-lg-2">
@@ -120,6 +122,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
                                         },
                                     })
                                 }}
+                                readOnly={docSubmitted}
                             />
                         </div>
                         <div className="col-lg-2">
@@ -149,6 +152,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
                                         },
                                     })
                                 }}
+                                readOnly={docSubmitted}
                             />
                         </div>
                         <div className="col-lg-2">
@@ -178,6 +182,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
                                         },
                                     })
                                 }}
+                                readOnly={docSubmitted}
                             />
                         </div>
                         <div className="col-lg-2">
@@ -207,6 +212,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
                                         },
                                     })
                                 }}
+                                readOnly={docSubmitted}
                             />
                         </div>
                     </div>

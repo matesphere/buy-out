@@ -41,7 +41,6 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Stage 1" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-12">
@@ -111,7 +110,6 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                         </div>
                     </div>
                 </section>
-                <Footer />
             </main>
         </>
     )

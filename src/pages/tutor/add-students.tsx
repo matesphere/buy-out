@@ -154,7 +154,6 @@ const TutorAddStudentsPage: FC = () => {
             </Helmet>
 
             <main className="the-quest">
-                <LoginHeader headerText="New Quest" hideLinks={true} />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-12">
@@ -224,8 +223,6 @@ const TutorAddStudentsPage: FC = () => {
                 </section>
 
                 {showModal && <ConfirmModal {...{ students, setShowModal }} />}
-
-                <AccountFooter />
             </main>
         </>
     )

@@ -2,10 +2,13 @@ import React, { FC } from 'react'
 import { Link, PageProps, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import { FeedbackDisplay } from '../../../../components/common/FeedbackDisplay'
+import { FeasibilityStudy } from '../../../../components/common/stages/FeasibilityStudy'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -17,9 +20,8 @@ import {
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
-import { FeasibilityStudy } from '../../../../components/common/stages/FeasibilityStudy'
 
-const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
+const Stage4CompletePage: FC<PageProps> = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "congratulations.jpg" }) {
@@ -41,10 +43,18 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
     )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
-    const doc = pageData.team_by_pk.stage_progresses[0].documents[0]
-    const devOptions = pageData.team_by_pk.team_development_options
+    const doc = pageData.team_by_pk?.stage_progresses[0].documents[0]
+    const devOptions = pageData.team_by_pk?.team_development_options
 
     const { title: stageTitle } = pageData.stage_by_pk
 
@@ -94,33 +104,15 @@ const Stage4CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                     </span>
                                 </h3>
 
-                                <div className="form-holder-border">
-                                    <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
-                                        Tutor feedback
-                                    </h4>
-                                    <p
-                                        className="sm-type-lead mb-3 italic"
-                                        dangerouslySetInnerHTML={{
-                                            __html: doc.feedback.feedback,
-                                        }}
-                                    />
-                                </div>
+                                {doc?.feedback && (
+                                    <FeedbackDisplay feedback={doc.feedback} />
+                                )}
 
                                 <FeasibilityStudy
                                     devOptions={devOptions}
-                                    workState={doc.doc_data}
+                                    workState={doc?.doc_data}
                                     docSubmitted={true}
                                 />
-
-                                {/* {devOptions.map((opt) => (
-                                    <SWOT
-                                        devOption={opt.development_option}
-                                        swotState={
-                                            doc.doc_data[opt.development_option.option]
-                                        }
-                                        docSubmitted={true}
-                                    />
-                                ))} */}
                             </div>
 
                             <p className="sm-type-amp">
