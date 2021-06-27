@@ -91,23 +91,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                             className="form-control mb-2"
                             type="number"
                             value={sectionState.income.year1}
-                            onChange={({ target: { value } }) => {
-                                const year1 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year1 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        income: {
-                                            ...sectionState.income,
-                                            year1,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  income: {
+                                                      ...sectionState.income,
+                                                      year1,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                             readOnly={docSubmitted}
                         />
                     </div>
@@ -116,23 +122,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                             className="form-control mb-2"
                             type="number"
                             value={sectionState.income.year2}
-                            onChange={({ target: { value } }) => {
-                                const year2 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year2 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        income: {
-                                            ...sectionState.income,
-                                            year2,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  income: {
+                                                      ...sectionState.income,
+                                                      year2,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                             readOnly={docSubmitted}
                         />
                     </div>
@@ -141,23 +153,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                             className="form-control mb-2"
                             type="number"
                             value={sectionState.income.year3}
-                            onChange={({ target: { value } }) => {
-                                const year3 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year3 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        income: {
-                                            ...sectionState.income,
-                                            year3,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  income: {
+                                                      ...sectionState.income,
+                                                      year3,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                             readOnly={docSubmitted}
                         />
                     </div>
@@ -166,23 +184,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                             className="form-control mb-2"
                             type="number"
                             value={sectionState.income.year4}
-                            onChange={({ target: { value } }) => {
-                                const year4 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year4 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        income: {
-                                            ...sectionState.income,
-                                            year4,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  income: {
+                                                      ...sectionState.income,
+                                                      year4,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                             readOnly={docSubmitted}
                         />
                     </div>
@@ -196,23 +220,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                             className="form-control mb-2"
                             type="number"
                             value={sectionState.costs.year1}
-                            onChange={({ target: { value } }) => {
-                                const year1 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year1 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        costs: {
-                                            ...sectionState.costs,
-                                            year1,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  costs: {
+                                                      ...sectionState.costs,
+                                                      year1,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                             readOnly={docSubmitted}
                         />
                     </div>
@@ -221,23 +251,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                             className="form-control mb-2"
                             type="number"
                             value={sectionState.costs.year2}
-                            onChange={({ target: { value } }) => {
-                                const year2 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year2 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        costs: {
-                                            ...sectionState.costs,
-                                            year2,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  costs: {
+                                                      ...sectionState.costs,
+                                                      year2,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                             readOnly={docSubmitted}
                         />
                     </div>
@@ -246,23 +282,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                             className="form-control mb-2"
                             type="number"
                             value={sectionState.costs.year3}
-                            onChange={({ target: { value } }) => {
-                                const year3 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year3 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        costs: {
-                                            ...sectionState.costs,
-                                            year3,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  costs: {
+                                                      ...sectionState.costs,
+                                                      year3,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                             readOnly={docSubmitted}
                         />
                     </div>
@@ -271,23 +313,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                             className="form-control mb-2"
                             type="number"
                             value={sectionState.costs.year4}
-                            onChange={({ target: { value } }) => {
-                                const year4 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year4 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        costs: {
-                                            ...sectionState.costs,
-                                            year4,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  costs: {
+                                                      ...sectionState.costs,
+                                                      year4,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                             readOnly={docSubmitted}
                         />
                     </div>
@@ -310,23 +358,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     : sectionState.balance.year1
                             }
                             readOnly={autoBalance || docSubmitted}
-                            onChange={({ target: { value } }) => {
-                                const year1 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year1 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        balance: {
-                                            ...sectionState.balance,
-                                            year1,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  balance: {
+                                                      ...sectionState.balance,
+                                                      year1,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                         />
                     </div>
                     <div className="col-lg-2">
@@ -339,23 +393,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     : sectionState.balance.year2
                             }
                             readOnly={autoBalance || docSubmitted}
-                            onChange={({ target: { value } }) => {
-                                const year2 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year2 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        balance: {
-                                            ...sectionState.balance,
-                                            year2,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  balance: {
+                                                      ...sectionState.balance,
+                                                      year2,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                         />
                     </div>
                     <div className="col-lg-2">
@@ -368,23 +428,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     : sectionState.balance.year3
                             }
                             readOnly={autoBalance || docSubmitted}
-                            onChange={({ target: { value } }) => {
-                                const year3 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year3 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        balance: {
-                                            ...sectionState.balance,
-                                            year3,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  balance: {
+                                                      ...sectionState.balance,
+                                                      year3,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                         />
                     </div>
                     <div className="col-lg-2">
@@ -397,23 +463,29 @@ export const CashFlowSection: FC<SectionProps> = ({
                                     : sectionState.balance.year4
                             }
                             readOnly={autoBalance || docSubmitted}
-                            onChange={({ target: { value } }) => {
-                                const year4 =
-                                    value !== '' ? parseInt(value) : ''
+                            onChange={
+                                workDispatch
+                                    ? ({ target: { value } }) => {
+                                          const year4 =
+                                              value !== ''
+                                                  ? parseInt(value)
+                                                  : ''
 
-                                workDispatch({
-                                    type: ActionType.UpdateBusinessPlan,
-                                    option,
-                                    planSection: 'cashFlow',
-                                    payload: {
-                                        ...sectionState,
-                                        balance: {
-                                            ...sectionState.balance,
-                                            year4,
-                                        },
-                                    },
-                                })
-                            }}
+                                          workDispatch({
+                                              type: ActionType.UpdateBusinessPlan,
+                                              option,
+                                              planSection: 'cashFlow',
+                                              payload: {
+                                                  ...sectionState,
+                                                  balance: {
+                                                      ...sectionState.balance,
+                                                      year4,
+                                                  },
+                                              },
+                                          })
+                                      }
+                                    : () => {}
+                            }
                         />
                     </div>
                 </div>
