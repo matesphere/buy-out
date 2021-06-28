@@ -99,7 +99,9 @@ const Stage1CompletePage = () => {
                                     </span>
                                 </h3>
 
-                                <FeedbackDisplay feedback={doc.feedback} />
+                                {doc.feedback && (
+                                    <FeedbackDisplay feedback={doc.feedback} />
+                                )}
 
                                 <div className="form-holder-border">
                                     <h4 className="sm-type-drum sm-type-drum--medium">

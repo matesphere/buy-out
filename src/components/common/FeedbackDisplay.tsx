@@ -6,7 +6,9 @@ interface FeedbackDisplayProps {
     }
 }
 
-export const FeedbackDisplay: FC<FeedbackDisplayProps> = ({ feedback }) => (
+export const FeedbackDisplay: FC<FeedbackDisplayProps> = ({
+    feedback: { feedback },
+}) => (
     <div className="form-holder-border">
         <h4 className="sm-type-drum sm-type-drum--medium mb-2 green-highlight">
             Tutor feedback
