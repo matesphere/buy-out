@@ -8,11 +8,8 @@ const Footer = () => (
     <footer className="footer">
         <section className="container">
             <div className="row">
-                <div className="col-lg-12">
+                <div className="col-lg-8">
                     <ul>
-                        <li>
-                            <Link to="/">Home</Link>
-                        </li>
                         <li>
                             <Link to="/student/team-hub/">Team hub</Link>
                         </li>
@@ -21,7 +18,10 @@ const Footer = () => (
                         </li> */}
                     </ul>
 
-                    <p>Copyright 2021. All rights reserved.</p>
+                    <p>Copyright MateSphere 2021. All rights reserved.</p>
+                </div>
+                <div className="col-lg-4 mt-2">
+                    <p><Link to="/acknowledgements">Creators and Acknowledgements</Link></p>
                 </div>
             </div>
         </section>
