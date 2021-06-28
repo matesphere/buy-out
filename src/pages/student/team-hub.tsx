@@ -42,6 +42,9 @@ const TEAM_HUB_QUERY = gql`
                     stage_progresses {
                         stage_id
                         status
+                        documents {
+                            status
+                        }
                     }
                     students {
                         position
@@ -99,12 +102,11 @@ const TEAM_HUB_SUB = gql`
     }
 `
 
-const getStageClasses = (status) => {
-    switch (status) {
+const getStageClasses = (stageStatus, docStatus) => {
+    switch (stageStatus) {
         case 'unlocked':
-            return 'quest-step-unlocked quest-step-highlight'
-        case 'submitted':
-            return 'quest-step-submitted'
+            if (docStatus === 'submitted') return 'quest-step-submitted'
+            else return 'quest-step-unlocked quest-step-highlight'
         case 'completed':
             return 'quest-step-complete'
         default:
@@ -112,8 +114,8 @@ const getStageClasses = (status) => {
     }
 }
 
-const StageButton = ({ id, title, status }) => (
-    <div className={`quest-step ${getStageClasses(status)}`}>
+const StageButton = ({ id, title, stageStatus, docStatus }) => (
+    <div className={`quest-step ${getStageClasses(stageStatus, docStatus)}`}>
         <div className="quest-step-text">
             <Link
                 to={
@@ -123,30 +125,30 @@ const StageButton = ({ id, title, status }) => (
                 }
             >
                 <span className="quest-step-number">
-                    {status === 'locked' ? <Lock /> : id}
+                    {stageStatus === 'locked' ? <Lock /> : id}
                 </span>
                 <div>
                     {title.toUpperCase()}
-                    {status === 'completed' && (
+                    {stageStatus === 'completed' && (
                         <span className="greenlight-highlight sm-type-amp">
                             <br />
                             completed
                         </span>
                     )}
-                    {status === 'submitted' && (
+                    {stageStatus === 'unlocked' && docStatus === 'submitted' && (
                         <span className="greenlight-highlight sm-type-amp">
                             <br />
                             submitted
                         </span>
                     )}
-                    {status === 'unlocked' && (
+                    {stageStatus === 'unlocked' && docStatus !== 'submitted' && (
                         <span className="orange-highlight sm-type-amp">
                             <br />
                             unlocked
                         </span>
                     )}
                 </div>
-                {status === 'completed' && (
+                {stageStatus === 'completed' && (
                     <span className="medium-icon">
                         <Tick />
                     </span>
@@ -338,11 +340,13 @@ const TeamHub = () => {
     } = pageData.user_by_pk
 
     const stages = pageData.stage.map((stage) => {
-        const status =
-            stageProgresses.find((sp) => sp.stage_id === stage.id)?.status ||
-            'locked'
+        const stageProgress = stageProgresses.find(
+            (sp) => sp.stage_id === stage.id
+        )
+        const stageStatus = stageProgress?.status || 'locked'
+        const docStatus = stageProgress?.documents[0]?.status || ''
 
-        return <StageButton {...{ ...stage, status }} />
+        return <StageButton {...{ ...stage, stageStatus, docStatus }} />
     })
 
     return (
