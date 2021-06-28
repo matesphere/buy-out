@@ -17,6 +17,11 @@ const Stage7Page = () => {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
             }
+            image2: file(relativePath: { eq: "blue-3.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
         }
     `)
 
@@ -32,7 +37,7 @@ const Stage7Page = () => {
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
                                     <Link to="/student/team-hub/">
@@ -45,15 +50,24 @@ const Stage7Page = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Present findings
                             </h2>
-
-                            <p className="sm-type-lead mb-3">
-                                Now it's time for your team to present your
-                                findings to the community. Use the presentation
-                                you prepared in the previous stage and make sure
-                                you make it clear to your audience why you have
-                                made the choices you have!
-                            </p>
-
+                            <div className="blue-holder-border">
+                                <div className="small-image">
+                                    <GatsbyImage
+                                        alt=""
+                                        image={
+                                            data.image2.childImageSharp
+                                                .gatsbyImageData
+                                        }
+                                    />
+                                </div>
+                                <p className="sm-type-lead small-image-holder">
+                                    Now it's time for your team to present your
+                                    findings to the community. Use the presentation
+                                    you prepared in the previous stage and make sure
+                                    you make it clear to your audience why you have
+                                    made the choices you have!
+                                </p>
+                            </div>
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
                                     image={
@@ -81,7 +95,7 @@ const Stage7Page = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
                                     <HelpIcon />

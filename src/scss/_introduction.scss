@@ -224,6 +224,47 @@
   }
 }
 
+.table-tutor {
+  .roww {
+    .cell:first-child {
+      width: 50%;
+    }
+    .cell:nth-child(2) {
+      width: 50%;
+    }
+    p {
+      margin:0;
+    }
+  }
+  .rowwbg {
+    background-color: #eeeeee;
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
+.table-tutorassess  {
+  .roww {
+    .cell:first-child {
+      width: 45%;
+    }
+    .cell:nth-child(2) {
+      width: 10%;
+    }
+    .cell:nth-child(3) {
+      width: 45%;
+    }
+    p {
+      margin:0;
+    }
+  }
+  .rowwbg {
+    background-color: #eeeeee;
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
 .reddot, .greydot, .yellowdot, .tealdot, .purpledot, .blackdot {
   width: 12px;
   height: 12px;

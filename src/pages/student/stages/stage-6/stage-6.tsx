@@ -17,6 +17,11 @@ const Stage6Page = () => {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
             }
+            image2: file(relativePath: { eq: "blue-2.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
         }
     `)
 
@@ -32,7 +37,7 @@ const Stage6Page = () => {
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
                                     <Link to="/student/team-hub/">
@@ -45,15 +50,25 @@ const Stage6Page = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Prepare Findings
                             </h2>
-
-                            <p className="sm-type-lead mb-3">
-                                The teams will present their Feasibility
-                                Studies, including the reasons for their choice
-                                of options (the SWOT analyses will be
-                                important), and their Business Plan to their
-                                Community (in this case, to the rest of their
-                                class).
-                            </p>
+                            <div className="blue-holder-border">
+                                <div className="small-image">
+                                    <GatsbyImage
+                                        alt=""
+                                        image={
+                                            data.image2.childImageSharp
+                                                .gatsbyImageData
+                                        }
+                                    />
+                                </div>
+                                <p className="sm-type-lead small-image-holder">
+                                    Your team will present your Feasibility
+                                    Studies, including the reasons for your choice
+                                    of options (the SWOT analyses will be
+                                    important), and your Business Plan to the
+                                    Community (in this case, to the rest of your
+                                    class).
+                                </p>
+                            </div>
 
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
@@ -97,7 +112,7 @@ const Stage6Page = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-4">
+                        <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
                                     <HelpIcon />

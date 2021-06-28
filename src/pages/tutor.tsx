@@ -12,7 +12,8 @@ import Stage1Submitted from './tutor/stages/stage-1/tutor-stage-1-submitted'
 import Stage3Submitted from './tutor/stages/stage-3/tutor-stage-3-submitted'
 import Stage4Submitted from './tutor/stages/stage-4/tutor-stage-4-submitted'
 import Stage5Submitted from './tutor/stages/stage-5/tutor-stage-5-submitted'
-
+import TutorAssessment from './tutor/assessment'
+import TutorTeamAssessment from './tutor/team-assessment'
 import { StudentType } from '../gql/types'
 
 import { UserStateContext } from '../utils/user-state'
@@ -82,6 +83,15 @@ const Routes = () => {
                 <LoggedInRoute
                     path="/stage-5/submitted"
                     component={Stage5Submitted}
+                />
+
+                <LoggedInRoute
+                    path="/assessment"
+                    component={TutorAssessment}
+                />
+                <LoggedInRoute
+                    path="/team-assessment"
+                    component={TutorTeamAssessment}
                 />
             </Router>
             <Footer />
