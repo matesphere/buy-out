@@ -59,7 +59,7 @@ export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
                     {((!submitFeedbackObj.submitComplete &&
                         !submittedFeedback) ||
                         allowUpdate) && (
-                        <>
+                        <div className="row">
                             <button
                                 className="btn-solid-lg mt-4"
                                 disabled={disableSubmit}
@@ -67,13 +67,15 @@ export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
                             >
                                 Submit Feedback
                             </button>
-                            <button
-                                className="btn-outline-lg mt-4 btn-icon"
-                                onClick={() => setAllowUpdate(false)}
-                            >
-                                Cancel
-                            </button>
-                        </>
+                            {submittedFeedback && (
+                                <button
+                                    className="btn-outline-lg mt-4 btn-icon"
+                                    onClick={() => setAllowUpdate(false)}
+                                >
+                                    Cancel
+                                </button>
+                            )}
+                        </div>
                     )}
                 </div>
             </div>
