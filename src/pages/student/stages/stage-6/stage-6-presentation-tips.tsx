@@ -142,8 +142,8 @@ const Stage6TipsPage = () => {
                                     </ol>
                                 </li>
                                 <li className="mb-2">
-                                    You should aim for your presentation to last
-                                    about 10-15 minutes.
+                                    You should check with your teacher how long
+                                    your presentation should last.
                                 </li>
                             </ul>
                         </div>

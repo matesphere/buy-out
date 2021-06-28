@@ -1,13 +1,34 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { gql } from '@apollo/client'
+import { ApolloError } from '@apollo/client'
+
+import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+
+import { useAuthQuery } from '../../../../utils/auth-utils'
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
+
+const STAGE_6_QUERY = gql`
+    query Stage6Query($team_id: uuid!) {
+        team_by_pk(id: $team_id) {
+            team_development_options {
+                development_option {
+                    display_name
+                }
+                shortlist
+            }
+        }
+    }
+`
 
 const Stage6Page = () => {
     const data = useStaticQuery(graphql`
@@ -25,6 +46,23 @@ const Stage6Page = () => {
         }
     `)
 
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery(STAGE_6_QUERY, {}, 'teamId')
+
+    if (loading) return <Loading />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
+
     return (
         <>
             <Helmet>
@@ -38,15 +76,16 @@ const Stage6Page = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">Stage 6</span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                ]}
+                                currentDisplayName="Stage 5"
+                            />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Prepare Findings
                             </h2>
@@ -61,12 +100,11 @@ const Stage6Page = () => {
                                     />
                                 </div>
                                 <p className="sm-type-lead small-image-holder">
-                                    Your team will present your Feasibility
-                                    Studies, including the reasons for your choice
-                                    of options (the SWOT analyses will be
-                                    important), and your Business Plan to the
-                                    Community (in this case, to the rest of your
-                                    class).
+                                    Your team will present your shortlisted
+                                    development options, including the reasons
+                                    for your choices. To do this you will need
+                                    to include your SWOT, feasibility study and
+                                    business plan for each option.
                                 </p>
                             </div>
 
@@ -81,10 +119,12 @@ const Stage6Page = () => {
 
                             <p className="sm-type-lead mb-3">
                                 The aim of the presentation will be to seek the
-                                final go-ahead from the Community to follow
-                                through with the land buy-out. Their
-                                presentation will therefore need to be detailed
-                                and persuasive.
+                                final go-ahead from the community to follow
+                                through with the land buy-out, as well as
+                                convincing your proposed funders that your
+                                projects can be successful. Your presentation
+                                will therefore need to be detailed and
+                                persuasive.
                             </p>
 
                             <div className="side-grey">
@@ -97,21 +137,45 @@ const Stage6Page = () => {
                                     </span>
                                 </h4>
                                 <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-3">
-                                        Use the{' '}
-                                        <Link to="/student/stage-6/presentation-tips">
-                                            tips here
-                                        </Link>{' '}
-                                        to help you with your presentation.
+                                    <p className="sm-type-lead mb-2">
+                                        Part I - Presentation Tips
                                     </p>
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            Prepare your presentation.
+                                            Use the{' '}
+                                            <Link to="/student/stage-6/presentation-tips">
+                                                tips here
+                                            </Link>{' '}
+                                            to help you with your presentation.
                                         </li>
+                                    </ul>
+                                </div>
+                                <div className="form-holder-border">
+                                    <p className="sm-type-lead mb-2">
+                                        Part II - Your Work
+                                    </p>
+                                    <ul>
+                                        {pageData.team_by_pk.team_development_options
+                                            .filter((opt) => opt.shortlist)
+                                            .map(
+                                                (
+                                                    {
+                                                        development_option: {
+                                                            display_name,
+                                                        },
+                                                    },
+                                                    i
+                                                ) => (
+                                                    <li className="sm-type-guitar">
+                                                        {display_name}
+                                                    </li>
+                                                )
+                                            )}
                                     </ul>
                                 </div>
                             </div>
                         </div>
+
                         <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
