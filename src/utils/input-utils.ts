@@ -103,17 +103,22 @@ export const useWorkState = <InputState, Action>(
                 includeDevOptions: !!includeDevOptions,
             },
             idRequired: 'teamId',
-        }
+        },
+        () => setSaveComplete(true)
     )
 
-    const [saveWork, saveWorkResponse] = useAuthMutation(SAVE_WORK, {
-        query: DOCUMENT_QUERY,
-        variables: {
-            stage_id: stageId,
-            includeDevOptions: !!includeDevOptions,
+    const [saveWork, saveWorkResponse] = useAuthMutation(
+        SAVE_WORK,
+        {
+            query: DOCUMENT_QUERY,
+            variables: {
+                stage_id: stageId,
+                includeDevOptions: !!includeDevOptions,
+            },
+            idRequired: 'teamId',
         },
-        idRequired: 'teamId',
-    })
+        () => setSaveComplete(true)
+    )
 
     const [submitWorkInitial, submitWorkInitialResponse] = useAuthMutation(
         SUBMIT_WORK_INITIAL,
@@ -124,17 +129,22 @@ export const useWorkState = <InputState, Action>(
                 includeDevOptions: !!includeDevOptions,
             },
             idRequired: 'teamId',
-        }
+        },
+        () => setSubmitComplete(true)
     )
 
-    const [submitWork, submitWorkResponse] = useAuthMutation(SUBMIT_WORK, {
-        query: DOCUMENT_QUERY,
-        variables: {
-            stage_id: stageId,
-            includeDevOptions: !!includeDevOptions,
+    const [submitWork, submitWorkResponse] = useAuthMutation(
+        SUBMIT_WORK,
+        {
+            query: DOCUMENT_QUERY,
+            variables: {
+                stage_id: stageId,
+                includeDevOptions: !!includeDevOptions,
+            },
+            idRequired: 'teamId',
         },
-        idRequired: 'teamId',
-    })
+        () => setSubmitComplete(true)
+    )
 
     useEffect(() => {
         const { called, loading, data } = saveWorkInitialResponse
@@ -200,6 +210,8 @@ export const useWorkState = <InputState, Action>(
                       variables: { docId, docData: workState },
                   }),
               response: saveWorkResponse,
+              saveComplete,
+              setSaveComplete,
           }
         : {
               call: () =>
@@ -207,6 +219,8 @@ export const useWorkState = <InputState, Action>(
                       variables: { stageProgressId, docData: workState },
                   }),
               response: saveWorkInitialResponse,
+              saveComplete,
+              setSaveComplete,
           }
 
     const submitWorkObj = !!docId
@@ -218,6 +232,8 @@ export const useWorkState = <InputState, Action>(
                   })
               },
               response: submitWorkResponse,
+              submitComplete,
+              setSubmitComplete,
           }
         : {
               call: () => {
@@ -227,6 +243,8 @@ export const useWorkState = <InputState, Action>(
                   })
               },
               response: submitWorkInitialResponse,
+              submitComplete,
+              setSubmitComplete,
           }
 
     return {
@@ -284,6 +302,8 @@ export const useFeedbackState = (
         Reducer<FeedbackState, FeedbackAction>
     >(feedbackReducer, {} as FeedbackState)
 
+    const [submitComplete, setSubmitComplete] = useState(false)
+
     const [submitFeedback, submitFeedbackResponse] = useAuthMutation(
         SUBMIT_FEEDBACK,
         {
@@ -292,7 +312,8 @@ export const useFeedbackState = (
                 stage_progress_id: stageProgressId,
                 includeDevOptions: !!includeDevOptions,
             },
-        }
+        },
+        () => setSubmitComplete(true)
     )
 
     const {
@@ -336,6 +357,8 @@ export const useFeedbackState = (
             })
         },
         response: submitFeedbackResponse,
+        submitComplete,
+        setSubmitComplete,
     }
 
     return {

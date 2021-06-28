@@ -25,7 +25,7 @@ interface SWOTProps {
     }
     swotState: SwotType
     changeFunc?: (section: string) => (data: any) => void
-    saveWorkObj?: { call: any; response: any }
+    saveWorkObj?: { call: any; response: any; saveComplete: boolean }
     docSubmitted: boolean
 }
 
@@ -203,7 +203,10 @@ export const SWOT: FC<SWOTProps> = ({
             </div>
         </div>
 
-        <SaveSubmitSection saveWorkObj={saveWorkObj} />
+        <SaveSubmitSection
+            saveWorkObj={saveWorkObj}
+            docSubmitted={docSubmitted}
+        />
 
         {/* {saveWorkObj && !docSubmitted && (
             <div className="row">

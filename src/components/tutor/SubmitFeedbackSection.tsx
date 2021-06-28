@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { MutationResult } from '@apollo/client'
 
 import { TextEditor } from '../../components/common/TextEditor'
@@ -12,6 +12,8 @@ interface SubmitFeedbackSectionProps {
     submitFeedbackObj: {
         call: () => Promise<any>
         response: MutationResult<any>
+        submitComplete: boolean
+        setSubmitComplete: (value: boolean) => void
     }
     disableSubmit: boolean
 }
@@ -25,6 +27,14 @@ export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
 }) => {
     const [allowUpdate, setAllowUpdate] = useState(false)
     const [showModal, setShowModal] = useState(false)
+
+    useEffect(() => {
+        if (submitFeedbackObj?.submitComplete) {
+            setShowModal(true)
+        } else {
+            setShowModal(false)
+        }
+    }, [submitFeedbackObj?.submitComplete])
 
     return (
         <>
@@ -46,16 +56,24 @@ export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
                         />
                     </p>
 
-                    {((!submitFeedbackObj.response.data &&
+                    {((!submitFeedbackObj.submitComplete &&
                         !submittedFeedback) ||
                         allowUpdate) && (
-                        <button
-                            className="btn-solid-lg mt-4"
-                            disabled={disableSubmit}
-                            onClick={() => setShowModal(true)}
-                        >
-                            Submit Feedback
-                        </button>
+                        <>
+                            <button
+                                className="btn-solid-lg mt-4"
+                                disabled={disableSubmit}
+                                onClick={() => setShowModal(true)}
+                            >
+                                Submit Feedback
+                            </button>
+                            <button
+                                className="btn-outline-lg mt-4 btn-icon"
+                                onClick={() => setAllowUpdate(false)}
+                            >
+                                Cancel
+                            </button>
+                        </>
                     )}
                 </div>
             </div>
@@ -73,14 +91,17 @@ export const SubmitFeedbackSection: FC<SubmitFeedbackSectionProps> = ({
                 <div className="modal-window">
                     <div>
                         <button
-                            onClick={() => setShowModal(false)}
+                            onClick={() => {
+                                submitFeedbackObj.setSubmitComplete(false)
+                                setShowModal(false)
+                            }}
                             title="Close"
                             className="modal-close"
                         >
                             Close
                         </button>
 
-                        {submitFeedbackObj.response.data ? (
+                        {submitFeedbackObj.submitComplete ? (
                             <p className="sm-type-drum">Feedback submitted</p>
                         ) : (
                             <>

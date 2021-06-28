@@ -13,7 +13,6 @@ import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubm
 
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
-import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
@@ -82,6 +81,7 @@ const feasibilityComplete = ({ whyBuy, ...rest }: WorkState) => {
 
     return (
         !!whyBuy &&
+        Object.keys(studies).length === 3 &&
         Object.values(studies).every(
             ({ benefits, reasonsSucceed, reasonsFail }) =>
                 !!benefits && !!reasonsSucceed && reasonsFail
