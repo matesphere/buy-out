@@ -154,6 +154,11 @@ const Stage5LandingPage: FC = () => {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
             }
+            image2: file(relativePath: { eq: "blue-2.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
         }
     `)
 
@@ -220,13 +225,24 @@ const Stage5LandingPage: FC = () => {
                                 {stageTitle}
                             </h2>
 
-                            <p className="sm-type-lead mb-3">
-                                Your task for this stage is to complete a
-                                Business Plan that will show how much money is
-                                required to be raised to buy the land, as well
-                                as the capital costs to get each of your 3
-                                options off the ground.
-                            </p>
+                            <div className="blue-holder-border">
+                                <div className="small-image">
+                                    <GatsbyImage
+                                        alt=""
+                                        image={
+                                            data.image2.childImageSharp
+                                                .gatsbyImageData
+                                        }
+                                    />
+                                </div>
+                                <p className="sm-type-lead small-image-holder">
+                                    Your task for this stage is to complete a
+                                    Business Plan that will show how much money is
+                                    required to be raised to buy the land, as well
+                                    as the capital costs to get each of your 3
+                                    options off the ground.
+                                </p>
+                            </div>
                             <p className="sm-type-lead mb-3">
                                 You will also be required to include a list of
                                 funders who will provide funding.

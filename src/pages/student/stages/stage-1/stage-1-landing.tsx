@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
-import { Link } from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
-
+import { GatsbyImage } from 'gatsby-plugin-image'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { CheckList } from '../../../../components/common/Checklist'
@@ -28,6 +28,15 @@ import DogVideo from '../../../../assets/the-quest-intro.mp4'
 import '../../../../scss/index.scss'
 
 const Stage1LandingPage: FC = () => {
+    const data = useStaticQuery(graphql`
+        query {
+            image1: file(relativePath: { eq: "blue-1.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+        }
+    `)
     const {
         loading,
         error,
@@ -80,11 +89,23 @@ const Stage1LandingPage: FC = () => {
                                 {stageTitle}
                             </h2>
 
-                            {stage1DataSubTitleEng.map((text, i) => (
-                                <p key={i} className="sm-type-guitar mb-4">
-                                    {text}
-                                </p>
-                            ))}
+                            <div className="blue-holder-border">
+                                <div className="small-image">
+                                    <GatsbyImage
+                                        alt=""
+                                        image={
+                                            data.image1.childImageSharp
+                                                .gatsbyImageData
+                                        }
+                                    />
+                                </div>
+                                {stage1DataSubTitleEng.map((text, i) => (
+                                        <p key={i} className="sm-type-lead small-image-holder">
+                                            {text}
+                                        </p>
+
+                                ))}
+                            </div>
 
                             <div className="homepage-image mb-4">
                                 <video controls>

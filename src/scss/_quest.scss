@@ -304,3 +304,19 @@
     text-transform: capitalize;
   }
 }
+
+.small-image-holder {
+  position: relative;
+  @media (min-width: 768px) {
+    padding-left: 140px;
+  }
+}
+
+.small-image {
+  width: 120px;
+  margin: 0 auto;
+  @media (min-width: 768px) {
+    position: absolute;
+    left: 40px;
+  }
+}

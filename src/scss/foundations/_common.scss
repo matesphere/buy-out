@@ -469,6 +469,14 @@ p {
     background-color: white;
 }
 
+.blue-holder-border {
+    margin-bottom: $grid-unit * 2;
+    padding: $grid-unit * 3 $grid-unit * 4;
+    border-radius: ($grid-unit * 2);
+    border: 2px solid #28e6fa;
+    background-color: white;
+}
+
 .form-label {
     font-weight: 400;
     text-transform: none;

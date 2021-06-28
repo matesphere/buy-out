@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Link } from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import { Helmet } from 'react-helmet'
 // import scrollTo from 'gatsby-plugin-smoothscroll'
 
@@ -19,6 +19,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 interface SwotLinksProps {
     devOptions: Array<DocumentCompleteQuery_team_by_pk_team_development_options>
@@ -81,6 +82,15 @@ const ExampleSwotLinks: FC<{ exampleSwots: Array<string> }> = ({
 )
 
 const Stage3LandingPage: FC = () => {
+    const data = useStaticQuery(graphql`
+        query {
+            image1: file(relativePath: { eq: "blue-3.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+        }
+    `)
     const { loading, error, pageData, submitWorkObj, docSubmitted } =
         useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
@@ -131,6 +141,28 @@ const Stage3LandingPage: FC = () => {
                                 Lay The Foundations
                             </h2>
 
+                            <div className="blue-holder-border">
+                                <div className="small-image">
+                                    <GatsbyImage
+                                        alt=""
+                                        image={
+                                            data.image1.childImageSharp
+                                                .gatsbyImageData
+                                        }
+                                    />
+                                </div>
+                                <p className="sm-type-lead small-image-holder">
+                                    In this stage you will consult with a community
+                                    in order to better understand how it could
+                                    benefit from a land buy-out. If you conclude
+                                    that there is community appetite for such a
+                                    project, you will form the board of a community
+                                    group (known as the 'steering group') who will
+                                    lead the purchase of some land that has come up
+                                    for sale.
+
+                                </p>
+                            </div>
                             <p className="sm-type-lead mb-2">
                                 You will need to work together to discuss the
                                 available development options and decide on a

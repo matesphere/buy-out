@@ -20,11 +20,17 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
+import {stage1DataSubTitleEng} from "../stage-1/_stage1.data";
 
 const Stage4LandingPage = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "progress-plans.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image2: file(relativePath: { eq: "blue-1.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -77,12 +83,25 @@ const Stage4LandingPage = () => {
                                 {stageTitle}
                             </h2>
 
-                            <p className="sm-type-lead mb-3">
-                                Having carried out the SWOT Analysis on your
-                                long-list of 5 Development Options, you must now
-                                narrow down your choices to a short-list of 3
-                                and carry out a Feasibility Study on these.
-                            </p>
+                            <div className="blue-holder-border">
+                                <div className="small-image">
+                                    <GatsbyImage
+                                        alt=""
+                                        image={
+                                            data.image2.childImageSharp
+                                                .gatsbyImageData
+                                        }
+                                    />
+                                </div>
+                                <p className="sm-type-lead small-image-holder">
+                                    Having carried out the SWOT Analysis on your
+                                    long-list of 5 Development Options, you must now
+                                    narrow down your choices to a short-list of 3
+                                    and carry out a Feasibility Study on these.
+                                </p>
+                            </div>
+
+
                             <p className="sm-type-lead mb-3">
                                 In this study, you must consider and then
                                 explain what it would mean to the ‘community’ to

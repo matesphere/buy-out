@@ -29,6 +29,11 @@ const Stage2LandingPage: FC = () => {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
             }
+            image2: file(relativePath: { eq: "blue-2.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
         }
     `)
 
@@ -74,22 +79,28 @@ const Stage2LandingPage: FC = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
+                            <div className="blue-holder-border">
+                                <div className="small-image">
+                                    <GatsbyImage
+                                        alt=""
+                                        image={
+                                            data.image2.childImageSharp
+                                                .gatsbyImageData
+                                        }
+                                    />
+                                </div>
+                                <p className="sm-type-lead small-image-holder">
+                                    In this stage you will consult with a community
+                                    in order to better understand how it could
+                                    benefit from a land buy-out. If you conclude
+                                    that there is community appetite for such a
+                                    project, you will form the board of a community
+                                    group (known as the 'steering group') who will
+                                    lead the purchase of some land that has come up
+                                    for sale.
 
-                            <p className="sm-type-lead mb-3">
-                                In this stage you will consult with a community
-                                in order to better understand how it could
-                                benefit from a land buy-out. If you conclude
-                                that there is community appetite for such a
-                                project, you will form the board of a community
-                                group (known as the 'steering group') who will
-                                lead the purchase of some land that has come up
-                                for sale.
-                            </p>
-
-                            <p className="sm-type-lead mb-3">
-                                A plot of land has come up for sale next to the
-                                village of GLENCLAS.
-                            </p>
+                                </p>
+                            </div>
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
                                     image={
@@ -98,6 +109,10 @@ const Stage2LandingPage: FC = () => {
                                     }
                                 />
                             </div>
+                            <p className="sm-type-lead mb-3">
+                                A plot of land has come up for sale next to the
+                                village of GLENCLAS.
+                            </p>
                             <p className="sm-type-lead mb-3">
                                 In order to make the correct decisions for this
                                 community, you'll need to make sure you are

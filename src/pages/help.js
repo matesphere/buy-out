@@ -7,11 +7,13 @@ import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import TickSheet from '../assets/tick-sheet.svg'
 import HelpIcon from '../assets/help-icon.svg'
+import {GatsbyImage} from "gatsby-plugin-image";
+import {stage1DataSubTitleEng} from "./student/stages/stage-1/_stage1.data";
 
 const HelpPage = () => {
     const data = useStaticQuery(graphql`
         query {
-            file(relativePath: { eq: "cls-ppt3-no-text-crop-1024x322.jpg" }) {
+            image1: file(relativePath: { eq: "blue-1.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -49,10 +51,23 @@ const HelpPage = () => {
                             </p>
 
                             <ol>
-                                <li className="sm-type-lead mb-4">
-                                    You will be guided along the way to help you
-                                    achieve your goal.
+                                <li>
+                                    <div className="small-image">
+                                        <GatsbyImage
+                                            alt=""
+                                            image={
+                                                data.image1.childImageSharp
+                                                    .gatsbyImageData
+                                            }
+                                        />
+                                    </div>
+                                    <p className="sm-type-lead mb-4 small-image-holder">
+                                        You will see Mr Quest, this section sets out the aim of each stage.
+                                        You will be guided along the way to help you
+                                        achieve your goal.
+                                    </p>
                                 </li>
+
                                 <li className="sm-type-lead mb-4">
                                     Your help guide will always appear in the
                                     "Helpful information" boxes. <br />
