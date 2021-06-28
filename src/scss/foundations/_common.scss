@@ -519,6 +519,13 @@ button:focus {
     outline-offset: 0;
 }
 
+input.form-control:read-only {
+    border: 2px solid #F6A21E;
+    &:focus {
+        outline: none;
+    }
+}
+
 .form-textarea {
     font-weight: 400;
     box-sizing: border-box;
@@ -545,7 +552,7 @@ button:focus {
     width: 100%;
     min-height: 8em;
     margin-bottom: 20px;
-    border: 1px solid $brand-orange;
+    border: 2px solid $brand-orange;
     border-radius: 0;
     &:focus {
         border: 2px solid $brand-green;
