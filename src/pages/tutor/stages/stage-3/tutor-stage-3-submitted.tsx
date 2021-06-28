@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -23,8 +24,17 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     } = useFeedbackState(search, true)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
+    const teamName = pageData.stage_progress_by_pk?.team.name
     const devOptions =
         pageData.stage_progress_by_pk.team.team_development_options
     const doc = pageData.stage_progress_by_pk.documents[0]
@@ -52,19 +62,39 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                 url: '/tutor/current-quests',
                             },
                         ]}
-                        currentDisplayName={`${teamName}: Stage 1 Submission`}
+                        currentDisplayName={`${teamName}: Stage 3 Submission`}
                     />
 
-                    {devOptions.map((opt, i) => (
-                        <SWOT
-                            key={i}
-                            devOption={opt.development_option}
-                            swotState={
-                                doc.doc_data[opt.development_option.option]
-                            }
-                            docSubmitted={true}
-                        />
-                    ))}
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+                                Research
+                            </h2>
+
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet />
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task submitted
+                                    </span>
+                                </h3>
+                                {devOptions.map((opt, i) => (
+                                    <SWOT
+                                        key={i}
+                                        devOption={opt.development_option}
+                                        swotState={
+                                            doc.doc_data[
+                                                opt.development_option.option
+                                            ]
+                                        }
+                                        docSubmitted={true}
+                                    />
+                                ))}
+                            </div>
+                        </div>
+                    </div>
 
                     <SubmitFeedbackSection
                         feedbackState={feedbackState}

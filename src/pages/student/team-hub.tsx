@@ -1,11 +1,9 @@
-import React, { useContext } from 'react'
+import React, { FC } from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { gql } from '@apollo/client'
 
-import Header from '../../components/_header'
-import Footer from '../../components/_footer'
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
 

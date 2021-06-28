@@ -89,7 +89,8 @@ export const useAuthMutation = <TData, TVariables>(
         query: DocumentNode
         variables: any
         idRequired?: 'userId' | 'teamId'
-    }
+    },
+    onCompleteCallback?: () => void
     // options?: BaseMutationOptions<TData, TVariables>
 ) => {
     const {
@@ -126,7 +127,9 @@ export const useAuthMutation = <TData, TVariables>(
         }
     }
 
-    const [mutation, mutationResponse] = useMutation<TData, TVariables>(query)
+    const [mutation, mutationResponse] = useMutation<TData, TVariables>(query, {
+        onCompleted: onCompleteCallback,
+    })
 
     const callMutation = async (vars) => {
         console.log({ ...mutationOptions, ...vars })

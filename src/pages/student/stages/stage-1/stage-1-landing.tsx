@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import {graphql, Link, useStaticQuery} from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -23,7 +23,7 @@ import {
 } from './_stage1.data'
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
-import DogVideo from '../../../../assets/the-quest-intro.mp4'
+import Video from '../../../../assets/the-quest-intro.mp4'
 
 import '../../../../scss/index.scss'
 
@@ -100,16 +100,18 @@ const Stage1LandingPage: FC = () => {
                                     />
                                 </div>
                                 {stage1DataSubTitleEng.map((text, i) => (
-                                        <p key={i} className="sm-type-lead small-image-holder">
-                                            {text}
-                                        </p>
-
+                                    <p
+                                        key={i}
+                                        className="sm-type-lead small-image-holder"
+                                    >
+                                        {text}
+                                    </p>
                                 ))}
                             </div>
 
                             <div className="homepage-image mb-4">
                                 <video controls>
-                                    <source src={DogVideo} type="video/mp4" />
+                                    <source src={Video} type="video/mp4" />
                                 </video>
                             </div>
                             <div className="side-grey">

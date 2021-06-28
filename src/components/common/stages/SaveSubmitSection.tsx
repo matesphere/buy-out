@@ -2,6 +2,7 @@ import React, { useState, FC, useContext } from 'react'
 import { MutationResult } from '@apollo/client'
 
 import SaveIcon from '../../../assets/save-icon.svg'
+import { useEffect } from 'react'
 
 interface SaveSubmitSectionProps {
     saveWorkObj?: {
@@ -22,7 +23,14 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
     disableSubmit,
     docSubmitted,
 }) => {
-    const [showModal, setShowModal] = useState(false)
+    const [showSaveModal, setShowSaveModal] = useState(false)
+    const [showSubmitModal, setShowSubmitModal] = useState(false)
+
+    useEffect(() => {
+        if (saveWorkObj?.response.data) {
+            setShowSaveModal(true)
+        }
+    }, [saveWorkObj?.response, showSaveModal])
 
     return (
         <>
@@ -42,7 +50,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                         <button
                             className="btn-solid-lg mt-4"
                             disabled={disableSubmit}
-                            onClick={() => setShowModal(true)}
+                            onClick={() => setShowSubmitModal(true)}
                         >
                             Submit
                         </button>
@@ -50,11 +58,21 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                 </>
             )}
 
-            {submitWorkObj && showModal && (
+            {saveWorkObj?.response.data && (
+                <div className="modal-window">
+                    <div>
+                        <p className="sm-type-guitar sm-type-guitar--medium mt-2 mb-2">
+                            Work saved!
+                        </p>
+                    </div>
+                </div>
+            )}
+
+            {submitWorkObj && showSubmitModal && (
                 <div className="modal-window">
                     <div>
                         <button
-                            onClick={() => setShowModal(false)}
+                            onClick={() => setShowSubmitModal(false)}
                             title="Close"
                             className="modal-close"
                         >

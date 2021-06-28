@@ -2,6 +2,7 @@ import React, { FC } from 'react'
 import { Link } from 'gatsby'
 
 import { TextEditor } from '../TextEditor'
+import { SaveSubmitSection } from './SaveSubmitSection'
 
 import SaveIcon from '../../../assets/save-icon.svg'
 import HelpIcon from '../../../assets/help-icon.svg'
@@ -202,7 +203,9 @@ export const SWOT: FC<SWOTProps> = ({
             </div>
         </div>
 
-        {saveWorkObj && !docSubmitted && (
+        <SaveSubmitSection saveWorkObj={saveWorkObj} />
+
+        {/* {saveWorkObj && !docSubmitted && (
             <div className="row">
                 <button
                     className="btn-outline-lg mt-4 btn-icon"
@@ -222,6 +225,6 @@ export const SWOT: FC<SWOTProps> = ({
                     </p>
                 </div>
             </div>
-        )}
+        )} */}
     </>
 )

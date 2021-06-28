@@ -5,6 +5,7 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import {
     LockedStageStatus,
     UnlockedStageStatus,
@@ -286,6 +287,15 @@ const TutorCurrentQuestPage = () => {
             </Helmet>
             <main className="notes">
                 <section className="container" id="currentquest">
+                    <Breadcrumbs
+                        previous={[
+                            {
+                                displayName: 'Tutor Hub',
+                                url: '/tutor/hub',
+                            },
+                        ]}
+                        currentDisplayName="Current Quests"
+                    />
                     <Tabs>
                         <TabList>
                             {quests.map((_, i) => (
