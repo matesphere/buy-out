@@ -30,8 +30,8 @@ import {
 
 import Tick from '../../assets/tick.svg'
 
-import 'react-tabs/style/react-tabs.css'
 import '../../scss/index.scss'
+import 'react-tabs/style/react-tabs.css'
 
 const TUTOR_CURRENT_QUEST_SUB = gql`
     subscription TutorCurrentQuestSub($user_id: uuid!) {
