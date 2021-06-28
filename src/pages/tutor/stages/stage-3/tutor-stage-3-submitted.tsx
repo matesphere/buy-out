@@ -4,9 +4,7 @@ import { Helmet } from 'react-helmet'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-
-import Header from '../../_header'
-import Footer from '../../_footer'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { SWOT } from '../../../../components/common/stages/SWOT'
 import { SubmitFeedbackSection } from '../../../../components/tutor/SubmitFeedbackSection'
 
@@ -43,6 +41,20 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
 
             <main className="the-quest">
                 <section className="container" id="main">
+                    <Breadcrumbs
+                        previous={[
+                            {
+                                displayName: 'Tutor Hub',
+                                url: '/tutor/hub',
+                            },
+                            {
+                                displayName: 'Current Quests',
+                                url: '/tutor/current-quests',
+                            },
+                        ]}
+                        currentDisplayName={`${teamName}: Stage 1 Submission`}
+                    />
+
                     {devOptions.map((opt, i) => (
                         <SWOT
                             key={i}

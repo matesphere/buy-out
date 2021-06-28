@@ -2,10 +2,9 @@ import React, { FC } from 'react'
 import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import Header from '../../_header'
-import Footer from '../../_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { CostOfLand } from '../../../../components/common/stages/business-plan/CostOfLand'
 import { CapitalCostsSection } from '../../../../components/common/stages/business-plan/CapitalCostsSection'
@@ -14,6 +13,8 @@ import { CashFlowSection } from '../../../../components/common/stages/business-p
 import { SubmitFeedbackSection } from '../../../../components/tutor/SubmitFeedbackSection'
 
 import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
+
+import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
@@ -28,8 +29,9 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     } = useFeedbackState(search, true)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData) return <Error error={error} />
 
+    const teamName = pageData.stage_progress_by_pk?.team.name
     const shortlist =
         pageData.stage_progress_by_pk.team.team_development_options.filter(
             (opt) => opt.shortlist
@@ -50,36 +52,94 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
 
             <main className="the-quest">
                 <section className="container" id="main">
-                    <CostOfLand workState={doc.doc_data} docSubmitted={true} />
-
-                    {shortlist.map((opt, i) => (
-                        <CapitalCostsSection
-                            devOption={opt.development_option}
-                            workState={doc.doc_data}
-                            docSubmitted={true}
-                        />
-                    ))}
-
-                    <SubmitFeedbackSection
-                        feedbackState={feedbackState}
-                        changeFunc={(data) =>
-                            feedbackDispatch({
-                                type: ActionType.UpdateAction,
-                                payload: {
-                                    feedback: data,
-                                },
-                            })
-                        }
-                        submittedFeedback={doc.feedback}
-                        submitFeedbackObj={submitFeedbackObj}
-                        disableSubmit={feedbackState && !feedbackState.feedback}
+                    <Breadcrumbs
+                        previous={[
+                            {
+                                displayName: 'Team Hub',
+                                url: '/student/team-hub/',
+                            },
+                        ]}
+                        currentDisplayName={`${teamName}: Stage 5 Submission`}
                     />
+                    {/* TODO: bring in team name & logo? */}
 
-                    <p className="sm-type-amp">
-                        <Link to="/tutor/current-quests">
-                            Back to Current Quests
-                        </Link>
-                    </p>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+                                Progress Your Plans II - Business Plan
+                            </h2>
+
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet />
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task submitted
+                                    </span>
+                                </h3>
+
+                                <span className="sm-type-drum">
+                                    Cost of Land
+                                </span>
+                                <CostOfLand
+                                    workState={doc.doc_data}
+                                    docSubmitted={true}
+                                    isTutorPage={true}
+                                />
+
+                                {shortlist.map((opt, i) => (
+                                    <>
+                                        {/* TODO: make these collapsible */}
+                                        <span className="sm-type-drum">
+                                            {
+                                                opt.development_option
+                                                    .display_name
+                                            }
+                                        </span>
+                                        <CapitalCostsSection
+                                            devOption={opt.development_option}
+                                            workState={doc.doc_data}
+                                            docSubmitted={true}
+                                        />
+                                        <RunningCostsSection
+                                            devOption={opt.development_option}
+                                            workState={doc.doc_data}
+                                            docSubmitted={true}
+                                        />
+                                        <CashFlowSection
+                                            devOption={opt.development_option}
+                                            workState={doc.doc_data}
+                                            docSubmitted={true}
+                                        />
+                                    </>
+                                ))}
+
+                                <SubmitFeedbackSection
+                                    feedbackState={feedbackState}
+                                    changeFunc={(data) =>
+                                        feedbackDispatch({
+                                            type: ActionType.UpdateAction,
+                                            payload: {
+                                                feedback: data,
+                                            },
+                                        })
+                                    }
+                                    submittedFeedback={doc.feedback}
+                                    submitFeedbackObj={submitFeedbackObj}
+                                    disableSubmit={
+                                        feedbackState && !feedbackState.feedback
+                                    }
+                                />
+
+                                <p className="sm-type-amp">
+                                    <Link to="/tutor/current-quests">
+                                        Back to Current Quests
+                                    </Link>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </section>
             </main>
         </>

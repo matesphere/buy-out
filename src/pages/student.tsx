@@ -4,6 +4,7 @@ import { Router, RouteComponentProps } from '@reach/router'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import TeamHub from './student/team-hub'
+import Information from './student/information'
 
 import Header from '../components/_header'
 import Footer from '../components/_footer'
@@ -69,6 +70,7 @@ const Routes = () => {
             <Header />
             <Router basepath="/student">
                 <LoggedInRoute path="/team-hub" component={TeamHub} />
+                <LoggedInRoute path="/information" component={Information} />
 
                 <LoggedInRoute path="/stage-1" component={Stage1Landing} />
                 <LoggedInRoute path="/stage-1/task" component={Stage1Task} />

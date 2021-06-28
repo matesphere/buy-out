@@ -1,14 +1,96 @@
-import React, { useState } from 'react'
+import React, { useState, FC } from 'react'
 import { Link } from 'gatsby'
+import { gql } from '@apollo/client'
+
+import { useAuthQuery } from '../utils/auth-utils'
+
+import {
+    NavQuery,
+    NavQueryVariables,
+    NavQuery_team_by_pk_stage_progresses,
+} from '../gql/types/NavQuery'
 
 import '../scss/index.scss'
 
-const Nav = () => {
+const NAV_QUERY = gql`
+    query NavQuery($team_id: uuid!) {
+        team_by_pk(id: $team_id) {
+            id
+            stage_progresses(order_by: { stage_id: asc }) {
+                stage_id
+                status
+            }
+        }
+        stage(order_by: { id: asc }) {
+            id
+            title
+        }
+    }
+`
+
+const InformationLinks: FC<{ latestStageID: number }> = ({ latestStageID }) => (
+    <div className="dropdown-content">
+        <Link to="/information/community-buyouts">Community Buy-outs</Link>
+        {latestStageID >= 2 && (
+            <>
+                <Link to="/information/about-glenclas-area">
+                    About the Area
+                </Link>
+                <Link to="/information/community">Community</Link>
+                <Link to="/information/about-the-roles">Team Roles</Link>
+            </>
+        )}
+        {latestStageID >= 3 && (
+            <>
+                <Link to="/information/development-options">
+                    Development Options
+                </Link>
+                <Link to="/information/development-options">SWOT Analysis</Link>
+            </>
+        )}
+    </div>
+)
+
+const StageLinks: FC<{
+    stageProgresses: Array<NavQuery_team_by_pk_stage_progresses>
+}> = ({ stageProgresses }) => (
+    <div className="dropdown-content">
+        {stageProgresses.map(({ stage_id, status }, i) => (
+            <Link
+                key={i}
+                to={`/student/stage-${stage_id}${
+                    (status === 'completed' && '/complete') || ''
+                }`}
+            >
+                Stage {stage_id}
+            </Link>
+        ))}
+    </div>
+)
+
+const Nav: FC = () => {
     const [expanded, setExpanded] = useState(false)
+
+    const { data } = useAuthQuery<NavQuery, NavQueryVariables>(
+        NAV_QUERY,
+        { fetchPolicy: 'network-only' },
+        'teamId'
+    )
+
+    const latestStageID =
+        (data &&
+            Math.max(
+                ...(data.team_by_pk?.stage_progresses.map(
+                    (el) => el.stage_id
+                ) || [1])
+            )) ||
+        1
 
     return (
         <nav
-            className={`${expanded ? 'show ' : ''} navbar navbar-expand-md navbar-dark `}
+            className={`${
+                expanded ? 'show ' : ''
+            } navbar navbar-expand-md navbar-dark `}
         >
             <div className="navbar--inner">
                 <div className="beaner"></div>
@@ -35,41 +117,49 @@ const Nav = () => {
                     <nav className="nav">
                         <ul>
                             <li className="dropdown">
-                                <Link to="/student/team-hub/" className="dropbtn">
+                                <Link
+                                    to="/student/team-hub/"
+                                    className="dropbtn"
+                                >
                                     Team hub
                                 </Link>
                             </li>
+
                             <li className="dropdown">
-                                <Link to="/student/team-hub/" className="dropbtn">
-                                    Current stage
-                                    {/*<span className="nav-links-notification"></span>*/}
+                                <Link to="/help" className="dropbtn">
+                                    Help
                                 </Link>
-                                <div className="dropdown-content">
-                                    <Link to="/student/stage-1">
-                                        Stage 1
-                                    </Link>
-                                </div>
                             </li>
 
                             <li className="dropdown">
-                                <Link to="/information" className="dropbtn">Information</Link>
-                                <div className="dropdown-content">
-                                    <Link to="/information/about-glenclas-area">
-                                        About the area
-                                    </Link>
-                                    <Link to="/information/community">
-                                        Community
-                                    </Link>
-                                    <Link to="/information/about-the-roles">
-                                        Team roles
-                                    </Link>
-                                    <Link to="/information/development-options">
-                                        Development options
-                                    </Link>
-                                </div>
+                                <Link
+                                    to="/student/information"
+                                    className="dropbtn"
+                                >
+                                    Information
+                                </Link>
+                                {data && (
+                                    <InformationLinks
+                                        latestStageID={latestStageID}
+                                    />
+                                )}
                             </li>
+
                             <li className="dropdown">
-                                <Link to="/help" className="dropbtn">Help</Link>
+                                <Link
+                                    to="/student/team-hub/"
+                                    className="dropbtn"
+                                >
+                                    Stages
+                                    {/*<span className="nav-links-notification"></span>*/}
+                                </Link>
+                                {data && (
+                                    <StageLinks
+                                        stageProgresses={
+                                            data.team_by_pk?.stage_progresses
+                                        }
+                                    />
+                                )}
                             </li>
                         </ul>
                     </nav>

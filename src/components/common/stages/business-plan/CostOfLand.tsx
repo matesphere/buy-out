@@ -15,6 +15,7 @@ interface CostOfLandProps {
     workDispatch?: React.Dispatch<Action>
     saveWorkObj?: { call: () => {}; response: any }
     docSubmitted: boolean
+    isTutorPage?: boolean
 }
 
 export const CostOfLand: FC<CostOfLandProps> = ({
@@ -22,25 +23,31 @@ export const CostOfLand: FC<CostOfLandProps> = ({
     workDispatch,
     saveWorkObj,
     docSubmitted,
+    isTutorPage,
 }) => {
     const landCost = workState.landCost as LandCost
 
     return (
         <div className="form-holder-border">
-            <p className="sm-type-lead sm-type-lead--medium mb-2">
-                Part I - Cost of Land
-            </p>
-            <p className="sm-type-amp mb-2">
-                <span className="sm-type-amp--medium redorange-highlight">
-                    NOTE:
-                </span>{' '}
-                In this section you will need to refer to the{' '}
-                <Link to="/student/stage-2/plan-of-glenclas">
-                    map of Glenclas
-                </Link>{' '}
-                and using the scale, calculate the Asking Price of the area of
-                land for sale. Then show how the sale will be funded.
-            </p>
+            {!isTutorPage && (
+                <>
+                    <p className="sm-type-lead sm-type-lead--medium mb-2">
+                        Part I - Cost of Land
+                    </p>
+                    <p className="sm-type-amp mb-2">
+                        <span className="sm-type-amp--medium redorange-highlight">
+                            NOTE:
+                        </span>{' '}
+                        In this section you will need to refer to the{' '}
+                        <Link to="/student/stage-2/plan-of-glenclas">
+                            map of Glenclas
+                        </Link>{' '}
+                        and using the scale, calculate the Asking Price of the
+                        area of land for sale. Then show how the sale will be
+                        funded.
+                    </p>
+                </>
+            )}
 
             <div className="row side-grey mb-2">
                 <div className="col-lg-12">
@@ -170,12 +177,14 @@ export const CostOfLand: FC<CostOfLandProps> = ({
                 </div>
             </div>
 
-            <p className="sm-type-amp sm-type-amp--medium mb-2">
-                <span className="sm-type-amp--medium redorange-highlight">
-                    NOTE:
-                </span>{' '}
-                Save your "Cost of the Land" then move onto step 2.
-            </p>
+            {!isTutorPage && (
+                <p className="sm-type-amp sm-type-amp--medium mb-2">
+                    <span className="sm-type-amp--medium redorange-highlight">
+                        NOTE:
+                    </span>{' '}
+                    Save your "Cost of the Land" then move onto step 2.
+                </p>
+            )}
 
             <SaveSubmitSection
                 saveWorkObj={saveWorkObj}

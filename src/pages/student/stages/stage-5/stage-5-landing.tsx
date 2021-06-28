@@ -194,7 +194,7 @@ const Stage5LandingPage: FC = () => {
     const docLandCost = doc.landCost
 
     const completedPlans = Object.keys(doc).filter((opt) =>
-        devOptions
+        shortlist
             .map(({ development_option: { option } }) => option)
             .includes(opt)
     )
@@ -237,10 +237,10 @@ const Stage5LandingPage: FC = () => {
                                 </div>
                                 <p className="sm-type-lead small-image-holder">
                                     Your task for this stage is to complete a
-                                    Business Plan that will show how much money is
-                                    required to be raised to buy the land, as well
-                                    as the capital costs to get each of your 3
-                                    options off the ground.
+                                    Business Plan that will show how much money
+                                    is required to be raised to buy the land, as
+                                    well as the capital costs to get each of
+                                    your 3 options off the ground.
                                 </p>
                             </div>
                             <p className="sm-type-lead mb-3">

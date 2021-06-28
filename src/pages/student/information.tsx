@@ -2,12 +2,9 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import Header from '../components/_header'
-import Footer from '../components/_footer'
+import HelpIcon from '../../assets/help-icon.svg'
 
-import HelpIcon from '../assets/help-icon.svg'
-
-import '../scss/index.scss'
+import '../../scss/index.scss'
 
 const InformationPage = () => {
     return (
@@ -20,13 +17,14 @@ const InformationPage = () => {
                 <title>Information - Community</title>
             </Helmet>
             <main className="the-quest">
-                <Header headerText="Information" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="leaf crumb-caps">
@@ -113,8 +111,6 @@ const InformationPage = () => {
                         <div className="col-lg-12"></div>
                     </div>
                 </section>
-
-                <Footer />
             </main>
         </>
     )

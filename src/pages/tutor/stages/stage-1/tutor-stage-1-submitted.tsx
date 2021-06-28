@@ -2,10 +2,9 @@ import React, { FC } from 'react'
 import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import Header from '../../_header'
-import Footer from '../../_footer'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { SubmitFeedbackSection } from '../../../../components/tutor/SubmitFeedbackSection'
 
 import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
@@ -28,6 +27,7 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     if (loading) return <Loading />
     if (error) return <Error error={error} />
 
+    const teamName = pageData.stage_progress_by_pk?.team.name
     const doc = pageData.stage_progress_by_pk.documents[0]
 
     return (
@@ -42,6 +42,21 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
             </Helmet>
             <main className="the-quest">
                 <section className="container" id="main">
+                    <Breadcrumbs
+                        previous={[
+                            {
+                                displayName: 'Tutor Hub',
+                                url: '/tutor/hub',
+                            },
+                            {
+                                displayName: 'Current Quests',
+                                url: '/tutor/current-quests',
+                            },
+                        ]}
+                        currentDisplayName={`${teamName}: Stage 1 Submission`}
+                    />
+
+                    {/* TODO: bring in team name & logo? */}
                     <div className="row">
                         <div className="col-lg-12">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">

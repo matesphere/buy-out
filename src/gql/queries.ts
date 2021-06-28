@@ -221,6 +221,7 @@ export const TUTOR_DOCUMENT_QUERY = gql`
                 doc_data
             }
             team {
+                name
                 team_development_options @include(if: $includeDevOptions) {
                     id
                     team_choice_name
