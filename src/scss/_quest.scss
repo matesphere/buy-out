@@ -308,12 +308,12 @@
 .small-image-holder {
   position: relative;
   @media (min-width: 768px) {
-    padding-left: 140px;
+    padding-left: 160px;
   }
 }
 
 .small-image {
-  width: 120px;
+  width: 160px;
   margin: 0 auto;
   @media (min-width: 768px) {
     position: absolute;

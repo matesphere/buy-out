@@ -62,7 +62,7 @@ const HelpPage = () => {
                                         />
                                     </div>
                                     <p className="sm-type-lead mb-4 small-image-holder">
-                                        You will see Mr Quest, this section sets out the aim of each stage.
+                                        When you will see any of the "Questies", the section sets out the aim of each stage.
                                         You will be guided along the way to help you
                                         achieve your goal.
                                     </p>
