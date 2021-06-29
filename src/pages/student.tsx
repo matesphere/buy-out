@@ -34,6 +34,7 @@ import Stage5Complete from './student/stages/stage-5/stage-5-complete'
 
 import Stage6Landing from './student/stages/stage-6/stage-6-landing'
 import Stage6PresentationTips from './student/stages/stage-6/stage-6-presentation-tips'
+import Stage6CompletedWork from './student/stages/stage-6/stage-6-completed-work'
 
 import Stage7Page from './student/stages/stage-7/stage-7'
 import Stage7TipsPage from './student/stages/stage-7/presentation-tips'
@@ -127,6 +128,10 @@ const Routes = () => {
                 <LoggedInRoute
                     path="/stage-6/presentation-tips"
                     component={Stage6PresentationTips}
+                />
+                <LoggedInRoute
+                    path="/stage-6/completed-work"
+                    component={Stage6CompletedWork}
                 />
 
                 <LoggedInRoute path="/stage-7" component={Stage7Page} />

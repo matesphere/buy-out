@@ -10,6 +10,9 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
+import { Stage6Query } from '../../../../gql/types/Stage6Query'
+import { Stage6QueryVariables } from '../../../../gql/types/Stage6Query'
+
 import { useAuthQuery } from '../../../../utils/auth-utils'
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
@@ -21,6 +24,7 @@ const STAGE_6_QUERY = gql`
     query Stage6Query($team_id: uuid!) {
         team_by_pk(id: $team_id) {
             team_development_options {
+                id
                 development_option {
                     display_name
                 }
@@ -50,7 +54,11 @@ const Stage6Page = () => {
         loading,
         error,
         data: pageData,
-    } = useAuthQuery(STAGE_6_QUERY, {}, 'teamId')
+    } = useAuthQuery<Stage6Query, Stage6QueryVariables>(
+        STAGE_6_QUERY,
+        {},
+        'teamId'
+    )
 
     if (loading) return <Loading />
     if (error || !pageData)
@@ -156,19 +164,27 @@ const Stage6Page = () => {
                                         Part II - Your Work
                                     </p>
                                     <ul>
-                                        {pageData.team_by_pk.team_development_options
+                                        {pageData.team_by_pk?.team_development_options
                                             .filter((opt) => opt.shortlist)
                                             .map(
                                                 (
                                                     {
+                                                        id,
                                                         development_option: {
                                                             display_name,
                                                         },
                                                     },
                                                     i
                                                 ) => (
-                                                    <li className="sm-type-guitar">
-                                                        {display_name}
+                                                    <li
+                                                        key={i}
+                                                        className="sm-type-guitar"
+                                                    >
+                                                        <Link
+                                                            to={`/student/stage-5/business-plan?id=${id}`}
+                                                        >
+                                                            {display_name}
+                                                        </Link>
                                                     </li>
                                                 )
                                             )}

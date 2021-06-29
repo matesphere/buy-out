@@ -21,7 +21,8 @@ import { useWorkState } from '../../../../utils/input-utils'
 import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
-import AccordionItemButtonWrapper from "react-accessible-accordion/dist/types/components/AccordionItemButton";
+import AccordionItemButtonWrapper from 'react-accessible-accordion/dist/types/components/AccordionItemButton'
+
 export interface SectionProps {
     devOption: {
         option: string
@@ -38,6 +39,7 @@ import {
     AccordionItemButton,
     AccordionItemPanel,
 } from 'react-accessible-accordion'
+
 const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
     const data = useStaticQuery(graphql`
         query {
@@ -146,8 +148,7 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                         </div>
                     </div>
 
-
-                    <Accordion  allowMultipleExpanded allowZeroExpanded>
+                    <Accordion allowMultipleExpanded allowZeroExpanded>
                         <AccordionItem className="form-holder-border">
                             <AccordionItemHeading>
                                 <AccordionItemButton>
@@ -197,22 +198,21 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                                 </AccordionItemButton>
                             </AccordionItemHeading>
                             <AccordionItemPanel>
-                            <div className="row">
-                                <div className="col-lg-12">
-                                    <CashFlowSection
-                                        {...{
-                                            devOption,
-                                            workState,
-                                            workDispatch,
-                                            docSubmitted,
-                                        }}
-                                    />
+                                <div className="row">
+                                    <div className="col-lg-12">
+                                        <CashFlowSection
+                                            {...{
+                                                devOption,
+                                                workState,
+                                                workDispatch,
+                                                docSubmitted,
+                                            }}
+                                        />
+                                    </div>
                                 </div>
-                            </div>
                             </AccordionItemPanel>
                         </AccordionItem>
                     </Accordion>
-
 
                     <SaveSubmitSection
                         saveWorkObj={saveWorkObj}
