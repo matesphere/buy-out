@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
-
-import { gql } from '@apollo/client'
+import { gql, ApolloError } from '@apollo/client'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 import { Loading } from '../../../../components/common/Loading'
@@ -14,7 +13,7 @@ import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 
-import { SET_TEAM_POSITIONS } from '../../../../gql/mutations'
+import { SET_TEAM_LOGO, SET_TEAM_POSITIONS } from '../../../../gql/mutations'
 import {
     SetTeamPositions,
     SetTeamPositionsVariables,
@@ -39,8 +38,8 @@ import {
 } from './_stage2.data'
 
 const STAGE_2_TASK_QUERY = gql`
-    query Stage2TaskQuery($team_id: uuid!) {
-        team_by_pk(id: $team_id) {
+    query Stage2TaskQuery($teamId: uuid!) {
+        team_by_pk(id: $teamId) {
             id
             students {
                 id
@@ -63,23 +62,39 @@ const STAGE_2_TASK_QUERY = gql`
 
 const Stage2TaskPage = () => {
     const [showFilters, setShowFilters] = useState(false)
+    const [logo, setLogo] = useState('')
     const [positions, setPositions] = useState([])
+
+    const [submitLogo, submitLogoResponse] = useAuthMutation(SET_TEAM_LOGO)
     const [submitPositions, submitPositionResponse] =
         useAuthMutation<SetTeamPositions, SetTeamPositionsVariables>(
             SET_TEAM_POSITIONS
         )
 
-    const { loading, error, data } = useAuthQuery<
-        Stage2TaskQuery,
-        Stage2TaskQueryVariables
-    >(STAGE_2_TASK_QUERY, {}, 'teamId')
+    const {
+        loading,
+        error,
+        data: pageData,
+    } = useAuthQuery<Stage2TaskQuery, Stage2TaskQueryVariables>(
+        STAGE_2_TASK_QUERY,
+        {},
+        'teamId'
+    )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
-    const { id: stageProgressId } = data.team_by_pk.stage_progresses[0]
+    const { id: stageProgressId } = pageData.team_by_pk?.stage_progresses[0]
 
-    const data2 = useStaticQuery(graphql`
+    const imageData = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "team-logo-1.jpg" }) {
                 childImageSharp {
@@ -136,34 +151,44 @@ const Stage2TaskPage = () => {
 
     const stage2Logo = [
         {
-            logo: 'team-logo-1',
+            id: 'team-logo-1',
+            image: imageData.image1.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-2',
+            id: 'team-logo-2',
+            image: imageData.image2.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-3',
+            id: 'team-logo-3',
+            image: imageData.image3.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-4',
+            id: 'team-logo-4',
+            image: imageData.image4.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-5',
+            id: 'team-logo-5',
+            image: imageData.image5.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-6',
+            id: 'team-logo-6',
+            image: imageData.image6.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-7',
+            id: 'team-logo-7',
+            image: imageData.image7.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-8',
+            id: 'team-logo-8',
+            image: imageData.image8.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-9',
+            id: 'team-logo-9',
+            image: imageData.image9.childImageSharp.gatsbyImageData,
         },
         {
-            logo: 'team-logo-10',
+            id: 'team-logo-10',
+            image: imageData.image10.childImageSharp.gatsbyImageData,
         },
     ]
 
@@ -250,44 +275,65 @@ const Stage2TaskPage = () => {
                                                 Choose a logo for your team:
                                             </p>
                                             <div className="row">
-                                                {stage2Logo.map((check) => (
-                                                    <div
-                                                        className="col-lg-3 mb-2"
-                                                        key={check.logo}
-                                                    >
-                                                        <div className="multiple-choice">
-                                                            <input
-                                                                className="form-control"
-                                                                id={check.logo}
-                                                                value={
-                                                                    check.logo
-                                                                }
-                                                                type="radio"
-                                                                name="choose-logo"
-                                                            />
-                                                            <label
-                                                                className="form-label"
-                                                                htmlFor={
-                                                                    check.logo
-                                                                }
-                                                            >
-                                                                <GatsbyImage
-                                                                    alt="logo"
-                                                                    image={
-                                                                        data2
-                                                                            .image1
-                                                                            .childImageSharp
-                                                                            .gatsbyImageData
+                                                {stage2Logo.map(
+                                                    ({ id, image }) => (
+                                                        <div
+                                                            className="col-lg-3 mb-2"
+                                                            key={id}
+                                                        >
+                                                            <div className="multiple-choice">
+                                                                <input
+                                                                    className="form-control"
+                                                                    id={id}
+                                                                    value={id}
+                                                                    checked={
+                                                                        logo ===
+                                                                        id
                                                                     }
+                                                                    onChange={() =>
+                                                                        setLogo(
+                                                                            id
+                                                                        )
+                                                                    }
+                                                                    type="radio"
+                                                                    name="choose-logo"
                                                                 />
-                                                                <span className="visuallyhidden">
-                                                                    {check.logo}
-                                                                </span>
-                                                            </label>
+                                                                <label
+                                                                    className="form-label"
+                                                                    htmlFor={id}
+                                                                >
+                                                                    <GatsbyImage
+                                                                        alt="logo"
+                                                                        image={
+                                                                            image
+                                                                        }
+                                                                    />
+                                                                    <span className="visuallyhidden">
+                                                                        {id}
+                                                                    </span>
+                                                                </label>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                ))}
+                                                    )
+                                                )}
                                             </div>
+                                            <SaveSubmitSection
+                                                submitWorkObj={{
+                                                    call: () => {
+                                                        submitLogo({
+                                                            variables: {
+                                                                teamId: pageData
+                                                                    .team_by_pk
+                                                                    ?.id,
+                                                                logo,
+                                                            },
+                                                        })
+                                                    },
+                                                    response:
+                                                        submitLogoResponse,
+                                                }}
+                                                disableSubmit={false}
+                                            />
                                         </div>
                                     </div>
                                     <div className="form-holder-border">
@@ -318,7 +364,7 @@ const Stage2TaskPage = () => {
                                             </p>
                                             <div id="form-roles">
                                                 <ul>
-                                                    {data.team_by_pk.students.map(
+                                                    {pageData.team_by_pk.students.map(
                                                         (
                                                             {
                                                                 user: {

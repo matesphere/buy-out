@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -26,7 +27,15 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     } = useFeedbackState(search, true)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const teamName = pageData.stage_progress_by_pk?.team.name
     const devOptions =

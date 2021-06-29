@@ -56,6 +56,15 @@ export const SUBMIT_WORK = gql`
     }
 `
 
+export const SET_TEAM_LOGO = gql`
+    mutation SetTeamLogo($team_id: uuid!, $logo: string!) {
+        update_team_by_pk(pk_columns: { id: $team_id }, _set: { logo: $logo }) {
+            id
+            logo
+        }
+    }
+`
+
 export const SET_TEAM_POSITIONS = gql`
     mutation SetTeamPositions(
         $objects: [student_insert_input!]!
