@@ -1,14 +1,13 @@
-import React from "react";
-import { Helmet } from "react-helmet";
-import { graphql, useStaticQuery } from "gatsby";
+import React from 'react'
+import { Helmet } from 'react-helmet'
+import { graphql, useStaticQuery } from 'gatsby'
 
-import Header from "../components/_header";
-import Footer from "../components/_footer";
+import Header from '../components/_header'
+import Footer from '../components/_footer'
 
-import HelpIcon from "../assets/help-icon.svg";
-
-import "../scss/index.scss";
-import { GatsbyImage } from "gatsby-plugin-image";
+import { Link } from 'gatsby'
+import '../scss/index.scss'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const IntroductionPage = () => {
   const data = useStaticQuery(graphql`
@@ -91,6 +90,10 @@ const IntroductionPage = () => {
                   and you will have the opportunity to present your ideas to your
                   Community (the rest of your class).
                 </p>
+                <p className="sm-type-lead mb-2">
+                  Use the "help" <Link to="/help">section here</Link> and in the main navigation to help with your Quest.
+                </p>
+
                 <p className="sm-type-lead mb-2">
                   Good luck.
                 </p>
