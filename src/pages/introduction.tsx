@@ -5,7 +5,6 @@ import { Link, graphql, useStaticQuery } from 'gatsby'
 import Header from '../components/_header'
 import Footer from '../components/_footer'
 
-import { Link } from 'gatsby'
 import '../scss/index.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
@@ -30,8 +29,8 @@ const IntroductionPage = () => {
                 <title>Community Land Quest - Introduction</title>
             </Helmet>
 
-            <main className="the-quest">
-                <Header headerText="Community Land Quest" />
+            <main className="the-quest homepage">
+                <Header headerText="Community Land Quest - Introduction" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-1"></div>
