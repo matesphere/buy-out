@@ -91,7 +91,6 @@ export const useWorkState = <InputState, Action>(
     const [docFeedback, setDocFeedback] = useState<{ feedback: string }>() //? do we need to do this with useState?
     const [saveComplete, setSaveComplete] = useState(false)
     const [submitComplete, setSubmitComplete] = useState(false)
-    // TODO: set these using the mutation callbacks
 
     //? save/submit operations, each with doc requery
     const [saveWorkInitial, saveWorkInitialResponse] = useAuthMutation(
