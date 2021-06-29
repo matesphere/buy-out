@@ -32,7 +32,7 @@ const IntroductionPage = () => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Community Land Quest - Introduction" />
+                <Header headerText="Community Land Quest" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-1"></div>

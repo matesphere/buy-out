@@ -7,8 +7,8 @@ import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import TickSheet from '../assets/tick-sheet.svg'
 import HelpIcon from '../assets/help-icon.svg'
-import {GatsbyImage} from "gatsby-plugin-image";
-import {stage1DataSubTitleEng} from "./student/stages/stage-1/_stage1.data";
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { stage1DataSubTitleEng } from './student/stages/stage-1/_stage1.data'
 
 const HelpPage = () => {
     const data = useStaticQuery(graphql`
@@ -62,9 +62,10 @@ const HelpPage = () => {
                                         />
                                     </div>
                                     <p className="sm-type-lead mb-4 small-image-holder">
-                                        When you will see any of the "Questies", the section sets out the aim of each stage.
-                                        You will be guided along the way to help you
-                                        achieve your goal.
+                                        When you will see any of the "Questies",
+                                        the section sets out the aim of each
+                                        stage. You will be guided along the way
+                                        to help you achieve your goal.
                                     </p>
                                 </li>
 
@@ -87,7 +88,8 @@ const HelpPage = () => {
                                 </li>
 
                                 <li className="sm-type-lead mb-4">
-                                    You will find the task to complete at each stage. <br />
+                                    You will find the task to complete at each
+                                    stage. <br />
                                     Look out for this red icon{' '}
                                     <span className="side-icon side-icon-red">
                                         <TickSheet />
@@ -118,21 +120,28 @@ const HelpPage = () => {
                             <div className="side-grey">
                                 <div className="checklist">
                                     <div className="tick"></div>
-                                    <p className="sm-type-lead">Did you find the "Helpful information"
-                                        location?</p>
+                                    <p className="sm-type-lead">
+                                        Did you find the "Helpful information"
+                                        location?
+                                    </p>
                                 </div>
                                 <div className="checklist">
                                     <div className="tick"></div>
-                                    <p className="sm-type-lead">Did you find the "Your checklist"
-                                        location?</p>
+                                    <p className="sm-type-lead">
+                                        Did you find the "Your checklist"
+                                        location?
+                                    </p>
                                 </div>
                                 <div className="checklist">
                                     <div className="tick"></div>
-                                    <p className="sm-type-lead">Have you read all actions?</p>
+                                    <p className="sm-type-lead">
+                                        Have you read all actions?
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <Link to="/student/team-hub">Go to Team Hub</Link>
                 </section>
                 <Footer />
             </main>
