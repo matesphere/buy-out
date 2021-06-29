@@ -28,7 +28,6 @@ import Ticktb2 from '../../assets/tick-tp2.svg'
 import Ticktb3 from '../../assets/tick-tp3.svg'
 import Ticktb4 from '../../assets/tick-tp4.svg'
 import Tick from '../../assets/tick.svg'
-import HelpIcon from '../../assets/help-icon.svg'
 
 import '../../scss/index.scss'
 
