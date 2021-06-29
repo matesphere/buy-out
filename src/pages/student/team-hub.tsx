@@ -131,19 +131,19 @@ const StageButton = ({ id, title, stageStatus, docStatus }) => (
                     {stageStatus === 'completed' && (
                         <span className="greenlight-highlight sm-type-amp">
                             <br />
-                            completed
+                            Completed
                         </span>
                     )}
                     {stageStatus === 'unlocked' && docStatus === 'submitted' && (
-                        <span className="greenlight-highlight sm-type-amp">
+                        <span className="redorange-highlight sm-type-amp">
                             <br />
-                            submitted
+                            Submitted
                         </span>
                     )}
                     {stageStatus === 'unlocked' && docStatus !== 'submitted' && (
                         <span className="orange-highlight sm-type-amp">
                             <br />
-                            unlocked
+                            Unlocked
                         </span>
                     )}
                 </div>

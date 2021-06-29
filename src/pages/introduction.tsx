@@ -30,7 +30,8 @@ const IntroductionPage = () => {
         <Header headerText="The Quest" />
         <section className="container" id="main">
           <div className="row">
-            <div className="col-lg-9">
+              <div className="col-lg-1"></div>
+            <div className="col-lg-10">
               <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                 Introduction
               </h2>
@@ -95,20 +96,7 @@ const IntroductionPage = () => {
                 </p>
               </div>
             </div>
-            <div className="col-lg-3">
-              <p className="sm-type-guitar mb-2">
-                <span className="side-icon side-icon-orange">
-                  <HelpIcon />
-                </span>
-                Helpful information
-              </p>
-              <div className="side-grey">
-                <p className="sm-type-amp">
-                  Use the links to help you on your Quest.
-                </p>
-                <p><a href="http://www.communitylandscotland.org.uk/" target="_blank" rel="external">Community Land Scotland</a></p>
-              </div>
-            </div>
+            <div className="col-lg-1"></div>
           </div>
 
           <div className="row">

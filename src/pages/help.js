@@ -33,8 +33,8 @@ const HelpPage = () => {
                 {/*<meta name="image" content={image} />*/}
             </Helmet>
 
-            <main className="homepage">
-                <Header headerText="Community land quest" />
+            <main>
+                <Header headerText="Help" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
