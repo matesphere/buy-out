@@ -69,11 +69,11 @@
 
 .dropbtn {
   background-color: $brand-green;
-  color: white;
-  padding: 16px;
+  padding: 8px 16px;
   font-size: 16px;
   border: none;
   display: block;
+  margin-bottom: 8px;
 }
 
 .dropdown {
@@ -93,7 +93,7 @@
   min-width: 250px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  top: 50px;
+  top: 42px;
   @media (min-width: 768px) {
     display: none;
     position: absolute;
