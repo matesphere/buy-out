@@ -343,7 +343,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                 <div className="row">
                     <div className="col-lg-2"></div>
                     <div className="col-lg-2">
-                        <p className="sm-type-lead sm-type-lead--medium redorange-highlight">
+                        <p className="sm-type-lead sm-type-lead--medium">
                             Balance
                         </p>
                     </div>
