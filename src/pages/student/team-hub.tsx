@@ -118,7 +118,7 @@ const StageButton = ({ id, title, stageStatus, docStatus }) => (
         <div className="quest-step-text">
             <Link
                 to={
-                    status === 'completed'
+                    stageStatus === 'completed'
                         ? `/student/stage-${id}/complete`
                         : `/student/stage-${id}`
                 }
@@ -379,8 +379,8 @@ const TeamHub = () => {
                         <div className="col-lg-10">
                             <p className="sm-type-guitar mb-4">
                                 Your progress towards a community land buyout.
-                                Remember to work as a team - after all, the only
-                                thing that will redeem mankind is cooperation!
+                                Completing each stage will allow you to move
+                                onto the next. Remember to work as a team!
                             </p>
                         </div>
                         <div className="col-lg-1"></div>
