@@ -528,6 +528,10 @@ input.form-control:read-only {
         border: 2px solid $brand-red;
         color: $brand-red;
     }
+    &.green {
+        border: 2px solid $brand-midgreen;
+        color: $brand-midgreen;
+    }
 }
 
 .form-textarea {
