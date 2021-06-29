@@ -110,6 +110,7 @@ const Stage6Page = () => {
 
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image1.childImageSharp
                                             .gatsbyImageData

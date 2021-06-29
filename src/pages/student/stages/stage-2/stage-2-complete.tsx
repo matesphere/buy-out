@@ -76,6 +76,7 @@ const Stage2CompletePage = () => {
                             </h2>
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image2.childImageSharp
                                             .gatsbyImageData

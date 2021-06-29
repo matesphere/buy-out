@@ -19,7 +19,7 @@ const MapOptions = () => {
             <div className="image-map-holder">
                 <div>
                     <GatsbyImage
-                        alt={' '}
+                        alt=""
                         image={
                             data.image5.childImageSharp
                                 .gatsbyImageData

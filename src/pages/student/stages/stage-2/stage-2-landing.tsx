@@ -103,6 +103,7 @@ const Stage2LandingPage: FC = () => {
                             </div>
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image1.childImageSharp
                                             .gatsbyImageData

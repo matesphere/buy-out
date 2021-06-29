@@ -1,14 +1,13 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link, graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../components/_header'
 import Footer from '../components/_footer'
 
-import HelpIcon from '../assets/help-icon.svg'
-
+import { Link } from 'gatsby'
 import '../scss/index.scss'
+import { GatsbyImage } from 'gatsby-plugin-image'
 
 const IntroductionPage = () => {
     const data = useStaticQuery(graphql`
@@ -49,6 +48,7 @@ const IntroductionPage = () => {
                             </p>
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image1.childImageSharp
                                             .gatsbyImageData

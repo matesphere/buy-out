@@ -113,6 +113,7 @@ const TutorAssessment = () => {
 
               <div className="mt-4 mb-2 image-holder">
                 <GatsbyImage
+                    alt=""
                   image={data2.image1.childImageSharp.gatsbyImageData}
                 />
               </div>

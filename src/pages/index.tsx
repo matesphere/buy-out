@@ -60,6 +60,7 @@ const IndexPage = () => {
                 <section className="container" id="main">
                     <div className="indeximage">
                         <GatsbyImage
+                            alt=""
                             image={data.image2.childImageSharp.gatsbyImageData}
                         />
                     </div>

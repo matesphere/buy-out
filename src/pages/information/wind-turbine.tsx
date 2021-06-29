@@ -60,6 +60,7 @@ const InfoWindTurbine = () => {
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image1.childImageSharp
                                             .gatsbyImageData
@@ -358,6 +359,7 @@ const InfoWindTurbine = () => {
                                 href="/static/e546e23c9bfc64e4b2736e8cd188628a/f7607/micro-hydro-figures.webp"
                             >
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image2.childImageSharp
                                             .gatsbyImageData

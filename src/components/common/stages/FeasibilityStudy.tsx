@@ -1,7 +1,5 @@
 import React, { FC } from 'react'
-
 import { TextEditor } from '../TextEditor'
-
 import '../../../scss/index.scss'
 
 interface FeasibilityStudyType {

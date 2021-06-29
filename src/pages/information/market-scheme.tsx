@@ -57,6 +57,7 @@ const InfoMarketScheme = () => {
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image1.childImageSharp
                                             .gatsbyImageData

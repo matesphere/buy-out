@@ -61,6 +61,7 @@ const Stage8Page = () => {
                         <div className="col-lg-12">
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image1.childImageSharp
                                             .gatsbyImageData

@@ -56,6 +56,7 @@ const InfoShopPostOffice = () => {
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image5.childImageSharp
                                             .gatsbyImageData

@@ -128,6 +128,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image1
                                                                 .childImageSharp
@@ -231,6 +232,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image2
                                                                 .childImageSharp
@@ -341,6 +343,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image3
                                                                 .childImageSharp
@@ -470,6 +473,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image4
                                                                 .childImageSharp
@@ -599,6 +603,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image5
                                                                 .childImageSharp
@@ -727,6 +732,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image6
                                                                 .childImageSharp
@@ -881,6 +887,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image7
                                                                 .childImageSharp
@@ -995,6 +1002,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image8
                                                                 .childImageSharp
@@ -1128,6 +1136,7 @@ const InfoCommunityPage = () => {
                                             <div className="mt-4">
                                                 <div className="community-holder mb-2">
                                                     <GatsbyImage
+                                                        alt=""
                                                         image={
                                                             data.image9
                                                                 .childImageSharp

@@ -77,6 +77,7 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                             </h2>
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image1.childImageSharp
                                             .gatsbyImageData

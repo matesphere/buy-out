@@ -62,6 +62,7 @@ const InfoMicroHydro = () => {
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
+                                    alt=""
                                     image={
                                         data.image5.childImageSharp
                                             .gatsbyImageData
@@ -410,6 +411,7 @@ const InfoMicroHydro = () => {
                                     href="/static/e546e23c9bfc64e4b2736e8cd188628a/c580c/micro-hydro-figures.jpg"
                                 >
                                     <GatsbyImage
+                                        alt=""
                                         image={
                                             data.image1.childImageSharp
                                                 .gatsbyImageData

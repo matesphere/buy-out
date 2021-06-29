@@ -61,7 +61,7 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                 url: '/tutor/current-quests',
                             },
                         ]}
-                        currentDisplayName={`${teamName}: Stage 3 Submission`}
+                        currentDisplayName={`${teamName}: Stage 4 Submission`}
                     />
 
                     <div className="row">
