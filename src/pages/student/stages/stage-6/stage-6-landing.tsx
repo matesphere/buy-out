@@ -10,10 +10,12 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
-import { Stage6Query } from '../../../../gql/types/Stage6Query'
-import { Stage6QueryVariables } from '../../../../gql/types/Stage6Query'
-
 import { useAuthQuery } from '../../../../utils/auth-utils'
+
+import {
+    Stage6Query,
+    Stage6QueryVariables,
+} from '../../../../gql/types/Stage6Query'
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import HelpIcon from '../../../../assets/help-icon.svg'
@@ -91,7 +93,7 @@ const Stage6Page = () => {
                                         url: '/student/team-hub/',
                                     },
                                 ]}
-                                currentDisplayName="Stage 5"
+                                currentDisplayName="Stage 6"
                             />
 
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
@@ -181,7 +183,7 @@ const Stage6Page = () => {
                                                         className="sm-type-guitar"
                                                     >
                                                         <Link
-                                                            to={`/student/stage-5/business-plan?id=${id}`}
+                                                            to={`/student/stage-6/completed-work?id=${id}`}
                                                         >
                                                             {display_name}
                                                         </Link>

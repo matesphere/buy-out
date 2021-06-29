@@ -32,13 +32,6 @@ export interface SectionProps {
     workDispatch?: React.Dispatch<Action>
     docSubmitted: boolean
 }
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemHeading,
-    AccordionItemButton,
-    AccordionItemPanel,
-} from 'react-accessible-accordion'
 
 const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
     const data = useStaticQuery(graphql`
@@ -148,71 +141,44 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                         </div>
                     </div>
 
-                    <Accordion allowMultipleExpanded allowZeroExpanded>
-                        <AccordionItem className="form-holder-border">
-                            <AccordionItemHeading>
-                                <AccordionItemButton>
-                                    1. Capital costs of Development Options
-                                </AccordionItemButton>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <CapitalCostsSection
-                                            {...{
-                                                devOption,
-                                                workState,
-                                                workDispatch,
-                                                docSubmitted,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            </AccordionItemPanel>
-                        </AccordionItem>
-                        <AccordionItem className="form-holder-border">
-                            <AccordionItemHeading>
-                                <AccordionItemButton>
-                                    2. Running costs
-                                </AccordionItemButton>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <RunningCostsSection
-                                            {...{
-                                                devOption,
-                                                workState,
-                                                workDispatch,
-                                                docSubmitted,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            </AccordionItemPanel>
-                        </AccordionItem>
-                        <AccordionItem className="form-holder-border">
-                            <AccordionItemHeading>
-                                <AccordionItemButton>
-                                    3. Annual Cash Flow
-                                </AccordionItemButton>
-                            </AccordionItemHeading>
-                            <AccordionItemPanel>
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <CashFlowSection
-                                            {...{
-                                                devOption,
-                                                workState,
-                                                workDispatch,
-                                                docSubmitted,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-                            </AccordionItemPanel>
-                        </AccordionItem>
-                    </Accordion>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <CapitalCostsSection
+                                {...{
+                                    devOption,
+                                    workState,
+                                    workDispatch,
+                                    docSubmitted,
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <RunningCostsSection
+                                {...{
+                                    devOption,
+                                    workState,
+                                    workDispatch,
+                                    docSubmitted,
+                                }}
+                            />
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <CashFlowSection
+                                {...{
+                                    devOption,
+                                    workState,
+                                    workDispatch,
+                                    docSubmitted,
+                                }}
+                            />
+                        </div>
+                    </div>
 
                     <SaveSubmitSection
                         saveWorkObj={saveWorkObj}

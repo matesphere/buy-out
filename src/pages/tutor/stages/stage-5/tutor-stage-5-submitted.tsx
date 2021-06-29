@@ -22,8 +22,8 @@ import {
     AccordionItem,
     AccordionItemButton,
     AccordionItemHeading,
-    AccordionItemPanel
-} from "react-accessible-accordion";
+    AccordionItemPanel,
+} from 'react-accessible-accordion'
 
 const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     const {
@@ -62,6 +62,10 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                     <Breadcrumbs
                         previous={[
                             {
+                                displayName: 'Tutor Hub',
+                                url: '/tutor/hub',
+                            },
+                            {
                                 displayName: 'Team Hub',
                                 url: '/student/team-hub/',
                             },
@@ -94,28 +98,41 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                     docSubmitted={true}
                                     isTutorPage={true}
                                 />
-                                <Accordion allowZeroExpanded>
+                                <Accordion
+                                    allowMultipleExpanded
+                                    allowZeroExpanded
+                                >
                                     {shortlist.map((opt, i) => (
                                         <>
                                             <AccordionItem className="form-holder-border">
                                                 <AccordionItemHeading>
                                                     <AccordionItemButton>
-                                                        {opt.development_option.display_name}
+                                                        {
+                                                            opt
+                                                                .development_option
+                                                                .display_name
+                                                        }
                                                     </AccordionItemButton>
                                                 </AccordionItemHeading>
                                                 <AccordionItemPanel>
                                                     <CapitalCostsSection
-                                                        devOption={opt.development_option}
+                                                        devOption={
+                                                            opt.development_option
+                                                        }
                                                         workState={doc.doc_data}
                                                         docSubmitted={true}
                                                     />
                                                     <RunningCostsSection
-                                                        devOption={opt.development_option}
+                                                        devOption={
+                                                            opt.development_option
+                                                        }
                                                         workState={doc.doc_data}
                                                         docSubmitted={true}
                                                     />
                                                     <CashFlowSection
-                                                        devOption={opt.development_option}
+                                                        devOption={
+                                                            opt.development_option
+                                                        }
                                                         workState={doc.doc_data}
                                                         docSubmitted={true}
                                                     />

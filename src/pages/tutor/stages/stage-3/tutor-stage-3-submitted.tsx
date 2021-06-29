@@ -2,6 +2,13 @@ import React, { FC } from 'react'
 import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -80,18 +87,43 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                         Task submitted
                                     </span>
                                 </h3>
-                                {devOptions.map((opt, i) => (
-                                    <SWOT
-                                        key={i}
-                                        devOption={opt.development_option}
-                                        swotState={
-                                            doc.doc_data[
-                                                opt.development_option.option
-                                            ]
-                                        }
-                                        docSubmitted={true}
-                                    />
-                                ))}
+
+                                <Accordion
+                                    allowMultipleExpanded
+                                    allowZeroExpanded
+                                >
+                                    {devOptions.map((opt, i) => (
+                                        <AccordionItem
+                                            key={i}
+                                            className="form-holder-border"
+                                        >
+                                            <AccordionItemHeading>
+                                                <AccordionItemButton>
+                                                    {
+                                                        opt.development_option
+                                                            .display_name
+                                                    }
+                                                </AccordionItemButton>
+                                            </AccordionItemHeading>
+                                            <AccordionItemPanel>
+                                                <SWOT
+                                                    key={i}
+                                                    devOption={
+                                                        opt.development_option
+                                                    }
+                                                    swotState={
+                                                        doc.doc_data[
+                                                            opt
+                                                                .development_option
+                                                                .option
+                                                        ]
+                                                    }
+                                                    docSubmitted={true}
+                                                />
+                                            </AccordionItemPanel>
+                                        </AccordionItem>
+                                    ))}
+                                </Accordion>
                             </div>
                         </div>
                     </div>

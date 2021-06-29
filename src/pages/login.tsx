@@ -58,6 +58,7 @@ const ChooseRoute = () => {
     `)
 
     // TODO: can use 'welcome back' once we have 'last_seen_at'
+    // TODO also: redirect to intro or team hub properly, again once we have last_seen_at
     return (
         <>
             <Helmet>
@@ -70,7 +71,6 @@ const ChooseRoute = () => {
                 {/*<meta name="image" content={image} />*/}
             </Helmet>
             <section className="container top-section">
-
                 <Squiggle className="squiggle" />
                 <div className="row">
                     <div className="col-lg-8">
@@ -113,7 +113,7 @@ const ChooseRoute = () => {
                                     to={
                                         role === 'tutor'
                                             ? '/tutor/hub'
-                                            : '/student/team-hub'
+                                            : '/introduction'
                                     }
                                     className="btn-solid-reg"
                                 >
@@ -122,7 +122,6 @@ const ChooseRoute = () => {
                             </p>
                         </div>
                         <div className="col-lg-2"></div>
-
                     </div>
                 </section>
             </main>

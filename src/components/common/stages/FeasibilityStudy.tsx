@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import { TextEditor } from '../TextEditor'
-import '../../../scss/index.scss'
 import {
     Accordion,
     AccordionItem,
@@ -9,12 +8,75 @@ import {
     AccordionItemPanel,
 } from 'react-accessible-accordion'
 
+import '../../../scss/index.scss'
 
 interface FeasibilityStudyType {
     benefits: string
     reasonsSucceed: string
     reasonsFail: string
 }
+
+interface FeasibilityOptionSectionProps {
+    workState: { [key: string]: FeasibilityStudyType }
+    option: string
+    changeFunc?: (
+        option: string | null,
+        section: string | null
+    ) => (data: any) => void
+    docSubmitted: boolean
+}
+
+export const FeasibilityOptionSection: FC<FeasibilityOptionSectionProps> = ({
+    workState,
+    option,
+    changeFunc,
+    docSubmitted,
+}) => (
+    <>
+        <div id="more-detail-hint11">
+            <p className="sm-type-bigamp mb-1 redorange-highlight">
+                Benefits to the Community
+            </p>
+        </div>
+        <div className="ck-textarea">
+            <TextEditor
+                data={workState[option]?.['benefits'] || ''}
+                onChange={
+                    changeFunc ? changeFunc(option, 'benefits') : () => {}
+                }
+                docSubmitted={docSubmitted}
+            />
+        </div>
+        <div id="more-detail-hint22">
+            <p className="sm-type-bigamp mb-1 green-highlight">
+                Reasons the Scheme is likely to succeed
+            </p>
+        </div>
+        <div className="ck-textarea">
+            <TextEditor
+                data={workState[option]?.['reasonsSucceed'] || ''}
+                onChange={
+                    changeFunc ? changeFunc(option, 'reasonsSucceed') : () => {}
+                }
+                docSubmitted={docSubmitted}
+            />
+        </div>
+        <div id="more-detail-hin33">
+            <p className="sm-type-bigamp mb-1 red-highlight">
+                Risks that might cause the Scheme to fail
+            </p>
+        </div>
+        <div className="ck-textarea">
+            <TextEditor
+                data={workState[option]?.['reasonsFail'] || ''}
+                onChange={
+                    changeFunc ? changeFunc(option, 'reasonsFail') : () => {}
+                }
+                docSubmitted={docSubmitted}
+            />
+        </div>
+    </>
+)
 
 interface FeasibilityStudyProps {
     docFeedback?: any
@@ -70,70 +132,30 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
                 the community, the reasons that the scheme is likely to succeed
                 and the risks that might cause it to fail.
             </h2>
+
             <Accordion allowZeroExpanded>
-            {devOptions.map(
-                ({ development_option: { option, display_name } }, i) => (
+                {devOptions.map(
+                    ({ development_option: { option, display_name } }, i) => (
                         <AccordionItem key={i} className="form-holder-border">
                             <AccordionItemHeading>
-                                <AccordionItemButton>{display_name}</AccordionItemButton>
+                                <AccordionItemButton>
+                                    {display_name}
+                                </AccordionItemButton>
                             </AccordionItemHeading>
                             <AccordionItemPanel>
-                                    <div id="more-detail-hint11">
-                                        <p className="sm-type-bigamp mb-1 redorange-highlight">
-                                            Benefits to the Community
-                                        </p>
-                                    </div>
-                                    <div className="ck-textarea">
-                                        <TextEditor
-                                            data={workState[option]?.['benefits'] || ''}
-                                            onChange={
-                                                changeFunc
-                                                    ? changeFunc(option, 'benefits')
-                                                    : () => {}
-                                            }
-                                            docSubmitted={docSubmitted}
-                                        />
-                                    </div>
-                                    <div id="more-detail-hint22">
-                                        <p className="sm-type-bigamp mb-1 green-highlight">
-                                            Reasons the Scheme is likely to succeed
-                                        </p>
-                                    </div>
-                                    <div className="ck-textarea">
-                                        <TextEditor
-                                            data={
-                                                workState[option]?.['reasonsSucceed'] || ''
-                                            }
-                                            onChange={
-                                                changeFunc
-                                                    ? changeFunc(option, 'reasonsSucceed')
-                                                    : () => {}
-                                            }
-                                            docSubmitted={docSubmitted}
-                                        />
-                                    </div>
-                                    <div id="more-detail-hin33">
-                                        <p className="sm-type-bigamp mb-1 red-highlight">
-                                            Risks that might cause the Scheme to fail
-                                        </p>
-                                    </div>
-                                    <div className="ck-textarea">
-                                        <TextEditor
-                                            data={workState[option]?.['reasonsFail'] || ''}
-                                            onChange={
-                                                changeFunc
-                                                    ? changeFunc(option, 'reasonsFail')
-                                                    : () => {}
-                                            }
-                                            docSubmitted={docSubmitted}
-                                        />
-                                    </div>
+                                <FeasibilityOptionSection
+                                    {...{
+                                        workState,
+                                        option,
+                                        changeFunc,
+                                        docSubmitted,
+                                    }}
+                                />
                             </AccordionItemPanel>
                         </AccordionItem>
                     )
                 )}
             </Accordion>
-
         </li>
     </ol>
 )

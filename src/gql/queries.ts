@@ -39,6 +39,7 @@ export const DOCUMENT_QUERY = gql`
         $includeDevOptions: Boolean!
     ) {
         team_by_pk(id: $team_id) {
+            id
             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
                 id
                 stage_id

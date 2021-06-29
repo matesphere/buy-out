@@ -110,133 +110,102 @@ export const SWOT: FC<SWOTProps> = ({
                 </div>
             )}
         </div>
-        <h3 className="sm-type-drum sm-type-drum--medium mt-2 mb-2">Option: {devOption.display_name}</h3>
-        <Accordion allowZeroExpanded>
-        <AccordionItem className="form-holder-border">
-            <AccordionItemHeading>
-                <AccordionItemButton>
-                                Open {devOption.display_name} SWOT here
-                </AccordionItemButton>
-            </AccordionItemHeading>
-            <AccordionItemPanel>
-                <div className="row mt-4">
-                    <div className="col-lg-6">
-                        <div className="form-holder-border">
-                            <div id="more-detail-hint">
-                                <h4 className="sm-type-drum sm-type-drum--medium mb-1 red-highlight">
-                                    Strengths
-                                </h4>
-                                <p className="sm-type-amp mb-1">Areas of advantage</p>
-                            </div>
-                            <div className="ck-textarea">
-                                <TextEditor
-                                    data={swotState?.['strengths'] || ''}
-                                    onChange={
-                                        changeFunc ? changeFunc('strengths') : () => {}
-                                    }
-                                    docSubmitted={docSubmitted}
-                                />
-                            </div>
-                        </div>
+        <h3 className="sm-type-drum sm-type-drum--medium mt-2 mb-2">
+            {devOption.display_name}
+        </h3>
+        <div className="row mt-4">
+            <div className="col-lg-6">
+                <div className="form-holder-border">
+                    <div id="more-detail-hint">
+                        <h4 className="sm-type-drum sm-type-drum--medium mb-1 red-highlight">
+                            Strengths
+                        </h4>
+                        <p className="sm-type-amp mb-1">Areas of advantage</p>
                     </div>
-
-                    <div className="col-lg-6">
-                        <div className="form-holder-border">
-                            <div id="more-detail-hint">
-                                <h4 className="sm-type-drum sm-type-drum--medium mb-1 greendark-highlight">
-                                    Weaknesses
-                                </h4>
-                                <p className="sm-type-amp mb-1">Areas of challenge</p>
-                            </div>
-                            <div className="ck-textarea">
-                                <TextEditor
-                                    data={swotState?.['weaknesses'] || ''}
-                                    onChange={
-                                        changeFunc ? changeFunc('weaknesses') : () => {}
-                                    }
-                                    docSubmitted={docSubmitted}
-                                />
-                            </div>
-                        </div>
+                    <div className="ck-textarea">
+                        <TextEditor
+                            data={swotState?.['strengths'] || ''}
+                            onChange={
+                                changeFunc ? changeFunc('strengths') : () => {}
+                            }
+                            docSubmitted={docSubmitted}
+                        />
                     </div>
                 </div>
+            </div>
 
-                <div className="row mt-4">
-                    <div className="col-lg-6">
-                        <div className="form-holder-border">
-                            <div id="more-detail-hint">
-                                <h4 className="sm-type-drum sm-type-drum--medium mb-1 green-highlight">
-                                    Opportunities
-                                </h4>
-                                <p className="sm-type-amp mb-1">
-                                    Positive influences outside your control
-                                </p>
-                            </div>
-                            <div className="ck-textarea">
-                                <TextEditor
-                                    data={swotState?.['opportunities'] || ''}
-                                    onChange={
-                                        changeFunc
-                                            ? changeFunc('opportunities')
-                                            : () => {}
-                                    }
-                                    docSubmitted={docSubmitted}
-                                />
-                            </div>
-                        </div>
+            <div className="col-lg-6">
+                <div className="form-holder-border">
+                    <div id="more-detail-hint">
+                        <h4 className="sm-type-drum sm-type-drum--medium mb-1 greendark-highlight">
+                            Weaknesses
+                        </h4>
+                        <p className="sm-type-amp mb-1">Areas of challenge</p>
                     </div>
-
-                    <div className="col-lg-6">
-                        <div className="form-holder-border">
-                            <div id="more-detail-hint">
-                                <h4 className="sm-type-drum sm-type-drum--medium mb-1">
-                                    Threats
-                                </h4>
-                                <p className="sm-type-amp mb-1">
-                                    Negative influences outside your control
-                                </p>
-                            </div>
-                            <div className="ck-textarea">
-                                <TextEditor
-                                    data={swotState?.['threats'] || ''}
-                                    onChange={
-                                        changeFunc ? changeFunc('threats') : () => {}
-                                    }
-                                    docSubmitted={docSubmitted}
-                                />
-                            </div>
-                        </div>
+                    <div className="ck-textarea">
+                        <TextEditor
+                            data={swotState?.['weaknesses'] || ''}
+                            onChange={
+                                changeFunc ? changeFunc('weaknesses') : () => {}
+                            }
+                            docSubmitted={docSubmitted}
+                        />
                     </div>
                 </div>
-            </AccordionItemPanel>
-        </AccordionItem>
-        </Accordion>
+            </div>
+        </div>
+
+        <div className="row mt-4">
+            <div className="col-lg-6">
+                <div className="form-holder-border">
+                    <div id="more-detail-hint">
+                        <h4 className="sm-type-drum sm-type-drum--medium mb-1 green-highlight">
+                            Opportunities
+                        </h4>
+                        <p className="sm-type-amp mb-1">
+                            Positive influences outside your control
+                        </p>
+                    </div>
+                    <div className="ck-textarea">
+                        <TextEditor
+                            data={swotState?.['opportunities'] || ''}
+                            onChange={
+                                changeFunc
+                                    ? changeFunc('opportunities')
+                                    : () => {}
+                            }
+                            docSubmitted={docSubmitted}
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className="col-lg-6">
+                <div className="form-holder-border">
+                    <div id="more-detail-hint">
+                        <h4 className="sm-type-drum sm-type-drum--medium mb-1">
+                            Threats
+                        </h4>
+                        <p className="sm-type-amp mb-1">
+                            Negative influences outside your control
+                        </p>
+                    </div>
+                    <div className="ck-textarea">
+                        <TextEditor
+                            data={swotState?.['threats'] || ''}
+                            onChange={
+                                changeFunc ? changeFunc('threats') : () => {}
+                            }
+                            docSubmitted={docSubmitted}
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <SaveSubmitSection
             saveWorkObj={saveWorkObj}
             docSubmitted={docSubmitted}
         />
-
-        {/* {saveWorkObj && !docSubmitted && (
-            <div className="row">
-                <button
-                    className="btn-outline-lg mt-4 btn-icon"
-                    onClick={saveWorkObj.call}
-                >
-                    <SaveIcon />
-                    Save Work
-                </button>
-            </div>
-        )}
-
-        {saveWorkObj?.response.data && (
-            <div className="modal-window">
-                <div>
-                    <p className="sm-type-guitar sm-type-guitar--medium mt-2 mb-2">
-                        SWOT Saved!
-                    </p>
-                </div>
-            </div>
-        )} */}
     </>
 )

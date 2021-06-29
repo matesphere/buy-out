@@ -67,10 +67,8 @@ export const CashFlowSection: FC<SectionProps> = ({
                     NOTES:
                 </span>{' '}
                 In the Cash Flow section, you should add the expected income for
-                each year and subtract the costs you have just calculated, to
-                give a final balance for each of the four years. When entering
-                costs, you should include the capital cost in Year 1, to
-                represent the initial cost of the scheme.
+                each year and subtract the running costs you have just
+                calculated, to give a final balance for each of the four years.
             </p>
 
             <div className="side-grey mb-2">
@@ -213,7 +211,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                 <div className="row mb-4">
                     <div className="col-lg-2"></div>
-                    <div className="col-lg-2">Costs</div>
+                    <div className="col-lg-2">Running Costs</div>
                     <div className="col-lg-2">
                         <input
                             className="form-control mb-2"
@@ -349,7 +347,11 @@ export const CashFlowSection: FC<SectionProps> = ({
                     </div>
                     <div className="col-lg-2">
                         <input
-                            className={getBalance(sectionState).year1 < 0 ? 'form-control mb-2 red' : 'form-control mb-2'}
+                            className={
+                                getBalance(sectionState).year1 < 0
+                                    ? 'form-control mb-2 red'
+                                    : 'form-control mb-2 green'
+                            }
                             type="number"
                             value={
                                 autoBalance
@@ -384,7 +386,11 @@ export const CashFlowSection: FC<SectionProps> = ({
                     </div>
                     <div className="col-lg-2">
                         <input
-                            className={getBalance(sectionState).year2 < 0 ? 'form-control mb-2 red' : 'form-control mb-2 green'}
+                            className={
+                                getBalance(sectionState).year2 < 0
+                                    ? 'form-control mb-2 red'
+                                    : 'form-control mb-2 green'
+                            }
                             type="number"
                             value={
                                 autoBalance
@@ -419,7 +425,11 @@ export const CashFlowSection: FC<SectionProps> = ({
                     </div>
                     <div className="col-lg-2">
                         <input
-                            className={getBalance(sectionState).year3 < 0 ? 'form-control mb-2 red' : 'form-control mb-2 green'}
+                            className={
+                                getBalance(sectionState).year3 < 0
+                                    ? 'form-control mb-2 red'
+                                    : 'form-control mb-2 green'
+                            }
                             type="number"
                             value={
                                 autoBalance
@@ -454,7 +464,11 @@ export const CashFlowSection: FC<SectionProps> = ({
                     </div>
                     <div className="col-lg-2">
                         <input
-                            className={getBalance(sectionState).year4 < 0 ? 'form-control mb-2 red' : 'form-control mb-2 green'}
+                            className={
+                                getBalance(sectionState).year4 < 0
+                                    ? 'form-control mb-2 red'
+                                    : 'form-control mb-2 green'
+                            }
                             type="number"
                             value={
                                 autoBalance
