@@ -520,9 +520,13 @@ button:focus {
 }
 
 input.form-control:read-only {
-    border: 2px solid #F6A21E;
+    border: 2px solid $brand-orange;
     &:focus {
         outline: none;
+    }
+    &.red {
+        border: 2px solid $brand-red;
+        color: $brand-red;
     }
 }
 

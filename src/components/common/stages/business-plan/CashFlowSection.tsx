@@ -88,8 +88,8 @@ export const CashFlowSection: FC<SectionProps> = ({
                     <div className="col-lg-2">Income</div>
                     <div className="col-lg-2">
                         <input
-                            className="form-control mb-2"
                             type="number"
+                            className="form-control mb-2"
                             value={sectionState.income.year1}
                             onChange={
                                 workDispatch
@@ -98,7 +98,6 @@ export const CashFlowSection: FC<SectionProps> = ({
                                               value !== ''
                                                   ? parseInt(value)
                                                   : ''
-
                                           workDispatch({
                                               type: ActionType.UpdateBusinessPlan,
                                               option,
@@ -350,7 +349,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                     </div>
                     <div className="col-lg-2">
                         <input
-                            className="form-control mb-2"
+                            className={getBalance(sectionState).year1 < 0 ? 'form-control mb-2 red' : 'form-control mb-2'}
                             type="number"
                             value={
                                 autoBalance
@@ -385,7 +384,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                     </div>
                     <div className="col-lg-2">
                         <input
-                            className="form-control mb-2"
+                            className={getBalance(sectionState).year2 < 0 ? 'form-control mb-2 red' : 'form-control mb-2 green'}
                             type="number"
                             value={
                                 autoBalance
@@ -420,7 +419,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                     </div>
                     <div className="col-lg-2">
                         <input
-                            className="form-control mb-2"
+                            className={getBalance(sectionState).year3 < 0 ? 'form-control mb-2 red' : 'form-control mb-2 green'}
                             type="number"
                             value={
                                 autoBalance
@@ -455,7 +454,7 @@ export const CashFlowSection: FC<SectionProps> = ({
                     </div>
                     <div className="col-lg-2">
                         <input
-                            className="form-control mb-2"
+                            className={getBalance(sectionState).year4 < 0 ? 'form-control mb-2 red' : 'form-control mb-2 green'}
                             type="number"
                             value={
                                 autoBalance
