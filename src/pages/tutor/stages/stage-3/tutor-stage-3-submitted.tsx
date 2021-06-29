@@ -8,7 +8,7 @@ import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { SWOT } from '../../../../components/common/stages/SWOT'
 import { SubmitFeedbackSection } from '../../../../components/tutor/SubmitFeedbackSection'
-
+import TickSheet from '../../../../assets/tick-sheet.svg'
 import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
 
 import '../../../../scss/index.scss'

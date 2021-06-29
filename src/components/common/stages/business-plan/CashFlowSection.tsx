@@ -57,8 +57,8 @@ export const CashFlowSection: FC<SectionProps> = ({
     const autoBalance = true
 
     return (
-        <div className="form-holder-border">
-            <p className="sm-type-lead sm-type-lead--medium mb-2">
+        <div>
+            <p className="sm-type-guitar sm-type-guitar--medium mb-2">
                 3. Annual Cash Flow
             </p>
 

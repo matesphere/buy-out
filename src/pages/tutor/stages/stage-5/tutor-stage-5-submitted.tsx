@@ -17,6 +17,13 @@ import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemButton,
+    AccordionItemHeading,
+    AccordionItemPanel
+} from "react-accessible-accordion";
 
 const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
     const {
@@ -79,41 +86,44 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                     </span>
                                 </h3>
 
-                                <span className="sm-type-drum">
+                                <p className="sm-type-drum sm-type-drum--medium mb-2">
                                     Cost of Land
-                                </span>
+                                </p>
                                 <CostOfLand
                                     workState={doc.doc_data}
                                     docSubmitted={true}
                                     isTutorPage={true}
                                 />
-
-                                {shortlist.map((opt, i) => (
-                                    <>
-                                        {/* TODO: make these collapsible */}
-                                        <span className="sm-type-drum">
-                                            {
-                                                opt.development_option
-                                                    .display_name
-                                            }
-                                        </span>
-                                        <CapitalCostsSection
-                                            devOption={opt.development_option}
-                                            workState={doc.doc_data}
-                                            docSubmitted={true}
-                                        />
-                                        <RunningCostsSection
-                                            devOption={opt.development_option}
-                                            workState={doc.doc_data}
-                                            docSubmitted={true}
-                                        />
-                                        <CashFlowSection
-                                            devOption={opt.development_option}
-                                            workState={doc.doc_data}
-                                            docSubmitted={true}
-                                        />
-                                    </>
-                                ))}
+                                <Accordion allowZeroExpanded>
+                                    {shortlist.map((opt, i) => (
+                                        <>
+                                            <AccordionItem className="form-holder-border">
+                                                <AccordionItemHeading>
+                                                    <AccordionItemButton>
+                                                        {opt.development_option.display_name}
+                                                    </AccordionItemButton>
+                                                </AccordionItemHeading>
+                                                <AccordionItemPanel>
+                                                    <CapitalCostsSection
+                                                        devOption={opt.development_option}
+                                                        workState={doc.doc_data}
+                                                        docSubmitted={true}
+                                                    />
+                                                    <RunningCostsSection
+                                                        devOption={opt.development_option}
+                                                        workState={doc.doc_data}
+                                                        docSubmitted={true}
+                                                    />
+                                                    <CashFlowSection
+                                                        devOption={opt.development_option}
+                                                        workState={doc.doc_data}
+                                                        docSubmitted={true}
+                                                    />
+                                                </AccordionItemPanel>
+                                            </AccordionItem>
+                                        </>
+                                    ))}
+                                </Accordion>
 
                                 <SubmitFeedbackSection
                                     feedbackState={feedbackState}

@@ -25,8 +25,8 @@ export const CapitalCostsSection: FC<SectionProps> = ({
     }
 
     return (
-        <div className="form-holder-border">
-            <p className="sm-type-lead sm-type-lead--medium mb-2">
+        <div>
+            <p className="sm-type-guitar sm-type-guitar--medium mb-2">
                 1. Capital costs of Development Options
             </p>
 
