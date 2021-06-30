@@ -51,6 +51,7 @@ const TUTOR_CURRENT_QUEST_SUB = gql`
             username
             email
             tutor {
+                id
                 school {
                     name
                 }
@@ -186,7 +187,7 @@ const TeamInfoPanel = ({
         {devOptions.length > 0 && (
             <div className="form-holder-border">
                 <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
-                    Shortlisted options:
+                    Development options:
                 </p>
                 {devOptions.map(
                     (

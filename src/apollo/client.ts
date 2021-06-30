@@ -7,6 +7,7 @@ import {
     // from,
     split,
 } from '@apollo/client'
+import { fromPromise } from 'apollo-link'
 import { onError } from 'apollo-link-error'
 import { Auth } from 'aws-amplify'
 
@@ -56,8 +57,7 @@ const refreshTokenLink = onError(({ graphQLErrors, operation, forward }) => {
             ({ extensions }) => extensions?.code === 'invalid-jwt'
         )
     ) {
-        Auth.currentSession()
-        return forward(operation)
+        return fromPromise(Auth.currentSession().then(() => forward(operation)))
     }
 })
 

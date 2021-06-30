@@ -44,7 +44,7 @@ const STAGE_6_WORK_QUERY = gql`
                 order_by: { stage_id: asc }
             ) {
                 stage_id
-                documents(where: { status: { _eq: submitted } }) {
+                documents(where: { status: { _eq: marked_passed } }) {
                     doc_data
                 }
             }
