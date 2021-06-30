@@ -50,34 +50,36 @@ const Header: FC<{ headerText?: string }> = ({ headerText }) => {
                     <a href="#main" className="skip-link">
                         Skip to content
                     </a>
-                    <section className="container top-section">
+                    <div className="top-holder">
                         <Squiggle className="squiggle" />
-                        <div className="row">
-                            <Nav />
-                        </div>
-                        <div className="row">
-                            <div className="col-lg-8">
-                                <h1 className="main-header">
-                                    <PinLogo />
-                                    <span>
-                                        {headerText ||
-                                            getHeaderText(location.pathname)}
-                                    </span>
-                                </h1>
+                        <section className="container top-section">
+                            <div className="row">
+                                <Nav />
                             </div>
-                            <div className="col-lg-4">
-                                <div className="cls-logo">
-                                    <GatsbyImage
-                                        alt=""
-                                        image={
-                                            data.file.childImageSharp
-                                                .gatsbyImageData
-                                        }
-                                    />
+                            <div className="row">
+                                <div className="col-lg-8">
+                                    <h1 className="main-header">
+                                        <PinLogo />
+                                        <span>
+                                            {headerText ||
+                                                getHeaderText(location.pathname)}
+                                        </span>
+                                    </h1>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="cls-logo">
+                                        <GatsbyImage
+                                            alt=""
+                                            image={
+                                                data.file.childImageSharp
+                                                    .gatsbyImageData
+                                            }
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </>
             )}
         </Location>

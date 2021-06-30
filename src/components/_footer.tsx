@@ -3,9 +3,11 @@ import { AmplifySignOut } from '@aws-amplify/ui-react'
 import { Link } from 'gatsby'
 
 import '../scss/index.scss'
+import Squiggle from '../assets/squiggle.svg'
 
 const Footer = () => (
     <footer className="footer">
+        <Squiggle className="squiggle" />
         <section className="container">
             <div className="row">
                 <div className="col-lg-4 mt-1">

@@ -9,12 +9,25 @@
 
 .footer {
   display: block;
-  padding: ($grid-unit * 2) 0;
-  background-color: #e5ffb8;
+  padding: ($grid-unit * 6) 0 ($grid-unit * 2);
   margin-top: $grid-unit * 4;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(0deg, #81b030 0%, #81b030 80%, rgba(255, 255, 255, 0) 80%);
+  @media (min-width: 500px) {
+    background: linear-gradient(0deg, #81b030 0%, #81b030 50%, rgba(255, 255, 255, 0) 50%);
+  }
+
+  a {
+    color: $brand-body;
+  }
   .button {
     background-color: transparent !important;
     display: inline-block;
+  }
+  .squiggle {
+    top: 0;
+    transform: rotateX(180deg);
   }
 }
 

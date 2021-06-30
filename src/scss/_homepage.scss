@@ -49,6 +49,10 @@
   }
 }
 
+.top-holder {
+  position: relative;
+}
+
 .top-section {
   position: relative;
   background: linear-gradient(180deg, rgba(129, 176, 48, 1) 0%, rgba(129, 176, 48, 1) 90%, rgba(255, 255, 255, 0) 90%);
@@ -68,13 +72,13 @@
   @media (min-width: 768px) {
     background: linear-gradient(180deg, rgba(129, 176, 48, 1) 0%, rgba(129, 176, 48, 1) 20%, rgba(255,255,255,0) 20%);
   }
+}
 
-  .squiggle {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
-    width: 100%;
-  }
+.squiggle {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  width: 100%;
 }
 
 .top-section {
