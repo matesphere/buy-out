@@ -58,7 +58,7 @@ const Stage4LandingPage = () => {
     const shortlist = devOptions.filter((opt) => opt.shortlist)
     const task1Complete = devOptions.filter((opt) => opt.shortlist).length === 3
     const docFeedback =
-        pageData?.team_by_pk?.stage_progresses[0].documents[0].feedback
+        pageData?.team_by_pk?.stage_progresses[0].documents[0]?.feedback
 
     return (
         <>
