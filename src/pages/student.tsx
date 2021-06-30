@@ -9,6 +9,7 @@ import Information from './student/information'
 
 import Header from '../components/_header'
 import Footer from '../components/_footer'
+import { Loading } from '../components/common/Loading'
 
 import Stage1Landing from './student/stages/stage-1/stage-1-landing'
 import Stage1Task from './student/stages/stage-1/stage-1-task'
@@ -78,6 +79,7 @@ const Routes = () => {
         <>
             <Header />
             <Router basepath="/student">
+                <Loading default />
                 <LoggedInRoute path="/team-hub" component={TeamHub} />
                 <LoggedInRoute path="/information" component={Information} />
 

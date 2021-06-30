@@ -1,12 +1,11 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import {graphql, Link, useStaticQuery} from "gatsby";
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Helpful } from '../../components/common/Helpful'
-
 
 import '../../scss/index.scss'
 
@@ -36,7 +35,7 @@ const AboutSwotPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Information - About the roles</title>
+                <title>Information - About the Roles</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Information" />
@@ -45,7 +44,9 @@ const AboutSwotPage = () => {
                         <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="crumb">

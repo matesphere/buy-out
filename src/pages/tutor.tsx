@@ -4,6 +4,8 @@ import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
 import Header from './tutor/_header'
 import Footer from './tutor/_footer'
+import { Loading } from '../components/common/Loading'
+
 import Hub from './tutor/hub'
 import CurrentQuest from './tutor/current-quests'
 import AddStudents from './tutor/add-students'
@@ -70,6 +72,7 @@ const Routes = () => {
             <ExpandedContext.Provider value={{ expanded, setExpanded }}>
                 <Header />
                 <Router basepath="/tutor">
+                    <Loading default />
                     <LoggedInRoute path="/hub" component={Hub} />
                     <LoggedInRoute
                         path="/current-quests"
@@ -109,10 +112,7 @@ const Routes = () => {
                         path="/team-assessment"
                         component={TutorTeamAssessment}
                     />
-                    <LoggedInRoute
-                        path="/tutor-guide"
-                        component={TutorGuide}
-                    />
+                    <LoggedInRoute path="/tutor-guide" component={TutorGuide} />
                 </Router>
                 <Footer />
             </ExpandedContext.Provider>

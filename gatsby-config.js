@@ -48,6 +48,7 @@ module.exports = {
         'gatsby-plugin-react-helmet',
         'gatsby-transformer-remark',
         'gatsby-plugin-typescript',
+        'gatsby-plugin-netlify',
         {
             resolve: 'gatsby-source-filesystem',
             options: {
