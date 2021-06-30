@@ -12,7 +12,9 @@ import '../../scss/index.scss'
 
 const HEADER_TEXT: { [pathname: string]: string } = {
     '/tutor/hub': 'Tutor Hub',
+    '/tutor/hub/': 'Tutor Hub',
     '/tutor/current-quests': 'Current Quests',
+    '/tutor/current-quests/': 'Current Quests',
     '/tutor/add-students': 'Add Students',
     '/tutor/create-team': 'Create Teams',
     '/tutor/stage-1/submitted': 'Stage 1',
@@ -22,7 +24,7 @@ const HEADER_TEXT: { [pathname: string]: string } = {
     '/tutor/stage-5/submitted': 'Stage 5',
     '/tutor/assessment': 'Student Assessment',
     '/tutor/team-assessment': 'Team Assessment',
-    '/tutor/tutor-guide': 'Tutor guide',
+    '/tutor/tutor-guide': 'Tutor Guide',
 }
 
 const HIDE_LINKS: Array<string> = ['/tutor/add-students', '/tutor/create-team']
@@ -55,9 +57,9 @@ const TutorHeader = ({
                         <section className="container top-section">
                             <div className="row">
                                 <div className="col-lg-8">
-                                    {!HIDE_LINKS.includes(location.pathname) && (
-                                        <Nav />
-                                    )}
+                                    {!HIDE_LINKS.includes(
+                                        location.pathname
+                                    ) && <Nav />}
                                     <h1 className="main-header mt-4">
                                         <PinLogo />
                                         <span>

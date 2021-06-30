@@ -109,8 +109,11 @@ const Stage2CompletePage = () => {
                                         board.
                                     </h4>
 
-                                    {positions.map((pos) => (
-                                        <p className="sm-type-lead mb-3">
+                                    {positions.map((pos, i) => (
+                                        <p
+                                            key={i}
+                                            className="sm-type-lead mb-3"
+                                        >
                                             <span className="sm-type-lead--medium">
                                                 {pos.displayName}
                                             </span>{' '}

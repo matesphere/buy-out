@@ -21,6 +21,7 @@ const NAV_QUERY = gql`
             full_name
             username
             student {
+                id
                 position
                 team {
                     id

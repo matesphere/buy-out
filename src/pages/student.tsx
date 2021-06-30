@@ -2,6 +2,7 @@ import React, { useContext, FC } from 'react'
 import { PageProps } from 'gatsby'
 import { Router, RouteComponentProps } from '@reach/router'
 import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react'
+import { Auth } from 'aws-amplify'
 
 import TeamHub from './student/team-hub'
 import Information from './student/information'
@@ -56,6 +57,8 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
     const { isSignedIn, userInfo } = useContext(UserStateContext)
 
     if (isSignedIn) {
+        Auth.currentSession()
+
         if (userInfo.role === 'tutor') {
             navigate('/tutor/hub') //TODO: not working...why?? Something to do with client-only?
         }

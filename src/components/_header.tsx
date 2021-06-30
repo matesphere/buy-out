@@ -27,6 +27,8 @@ export const getHeaderText = (pathname: string) => {
 
     if (stage) {
         return HEADER_TEXT[parseInt(stage) - 1]
+    } else if (pathname === '/student/information') {
+        return 'Information'
     } else {
         return 'Team Hub'
     }
@@ -62,7 +64,9 @@ const Header: FC<{ headerText?: string }> = ({ headerText }) => {
                                         <PinLogo />
                                         <span>
                                             {headerText ||
-                                                getHeaderText(location.pathname)}
+                                                getHeaderText(
+                                                    location.pathname
+                                                )}
                                         </span>
                                     </h1>
                                 </div>

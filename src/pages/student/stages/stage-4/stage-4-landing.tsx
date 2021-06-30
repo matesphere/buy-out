@@ -20,7 +20,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
-import {stage1DataSubTitleEng} from "../stage-1/_stage1.data";
+import { stage1DataSubTitleEng } from '../stage-1/_stage1.data'
 
 const Stage4LandingPage = () => {
     const data = useStaticQuery(graphql`
@@ -57,6 +57,9 @@ const Stage4LandingPage = () => {
     const { team_development_options: devOptions } = pageData.team_by_pk
     const shortlist = devOptions.filter((opt) => opt.shortlist)
     const task1Complete = devOptions.filter((opt) => opt.shortlist).length === 3
+    const docFeedback =
+        pageData?.team_by_pk?.stage_progresses[0].documents[0].feedback
+
     return (
         <>
             <Helmet>
@@ -95,12 +98,12 @@ const Stage4LandingPage = () => {
                                 </div>
                                 <p className="sm-type-lead small-image-holder">
                                     Having carried out the SWOT Analysis on your
-                                    long-list of 5 Development Options, you must now
-                                    narrow down your choices to a short-list of 3
-                                    and carry out a Feasibility Study on these.
+                                    long-list of 5 Development Options, you must
+                                    now narrow down your choices to a short-list
+                                    of 3 and carry out a Feasibility Study on
+                                    these.
                                 </p>
                             </div>
-
 
                             <p className="sm-type-lead mb-3">
                                 In this study, you must consider and then
@@ -240,8 +243,31 @@ const Stage4LandingPage = () => {
                                         </li>
                                     </ul>
                                 </div>
+
+                                {docFeedback && (
+                                    <div className="side-grey">
+                                        <h3 className="task ticker mb-2">
+                                            <span className="ticker-sheet ticker-feedback">
+                                                <HelpIcon />
+                                            </span>
+                                            <span className="sm-type-drum green-highlight">
+                                                Tutor feedback:
+                                            </span>
+                                        </h3>
+                                        <div className="form-holder-border">
+                                            <p className="sm-type-lead">
+                                                <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: docFeedback.feedback,
+                                                    }}
+                                                />
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
+
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">

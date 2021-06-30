@@ -49,6 +49,7 @@ export const UserStateProvider = ({ children }) => {
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, data) => {
+            console.log('change')
             const authData = data as AuthDataType
             setAuthState(nextAuthState)
             // setUser(authData)

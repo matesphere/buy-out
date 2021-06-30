@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import {graphql, Link, useStaticQuery} from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 // import scrollTo from 'gatsby-plugin-smoothscroll'
 
@@ -91,8 +91,14 @@ const Stage3LandingPage: FC = () => {
             }
         }
     `)
-    const { loading, error, pageData, submitWorkObj, docSubmitted } =
-        useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
+    const {
+        loading,
+        error,
+        pageData,
+        submitWorkObj,
+        docFeedback,
+        docSubmitted,
+    } = useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />
@@ -152,15 +158,14 @@ const Stage3LandingPage: FC = () => {
                                     />
                                 </div>
                                 <p className="sm-type-lead small-image-holder">
-                                    In this stage you will consult with a community
-                                    in order to better understand how it could
-                                    benefit from a land buy-out. If you conclude
-                                    that there is community appetite for such a
-                                    project, you will form the board of a community
-                                    group (known as the 'steering group') who will
-                                    lead the purchase of some land that has come up
-                                    for sale.
-
+                                    In this stage you will consult with a
+                                    community in order to better understand how
+                                    it could benefit from a land buy-out. If you
+                                    conclude that there is community appetite
+                                    for such a project, you will form the board
+                                    of a community group (known as the 'steering
+                                    group') who will lead the purchase of some
+                                    land that has come up for sale.
                                 </p>
                             </div>
                             <p className="sm-type-lead mb-2">
@@ -205,7 +210,10 @@ const Stage3LandingPage: FC = () => {
                                         <TickSheet />
                                     </span>
                                     <span className="sm-type-drum">
-                                        Tasks to complete:
+                                        Tasks{' '}
+                                        {docSubmitted
+                                            ? 'submitted'
+                                            : 'to complete:'}
                                     </span>
                                 </h3>
 
@@ -265,6 +273,28 @@ const Stage3LandingPage: FC = () => {
                                         docSubmitted={docSubmitted}
                                     />
                                 </div>
+
+                                {docFeedback && (
+                                    <div className="side-grey">
+                                        <h3 className="task ticker mb-2">
+                                            <span className="ticker-sheet ticker-feedback">
+                                                <HelpIcon />
+                                            </span>
+                                            <span className="sm-type-drum green-highlight">
+                                                Tutor feedback:
+                                            </span>
+                                        </h3>
+                                        <div className="form-holder-border">
+                                            <p className="sm-type-lead">
+                                                <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: docFeedback.feedback,
+                                                    }}
+                                                />
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="col-lg-3">

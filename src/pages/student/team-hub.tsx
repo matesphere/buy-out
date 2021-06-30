@@ -39,9 +39,11 @@ const TEAM_HUB_QUERY = gql`
             student {
                 id
                 team {
+                    id
                     name
                     logo
                     stage_progresses {
+                        id
                         stage_id
                         status
                         documents {
@@ -49,6 +51,7 @@ const TEAM_HUB_QUERY = gql`
                         }
                     }
                     students {
+                        id
                         position
                         user {
                             full_name

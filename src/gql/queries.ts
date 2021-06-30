@@ -14,6 +14,10 @@ export const STAGE_QUERY = gql`
                 id
                 stage_id
                 status
+                documents {
+                    id
+                    feedback
+                }
             }
             team_development_options @include(if: $includeDevOptions) {
                 id

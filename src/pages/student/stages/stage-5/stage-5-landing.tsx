@@ -17,6 +17,7 @@ import { useWorkState } from '../../../../utils/input-utils'
 
 import { DocumentCompleteQuery_team_by_pk_team_development_options } from '../../../../gql/types/DocumentCompleteQuery'
 
+import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
@@ -170,6 +171,7 @@ const Stage5LandingPage: FC = () => {
         workDispatch,
         saveWorkObj,
         submitWorkObj,
+        docFeedback,
         docSubmitted,
     } = useWorkState<WorkState, Action>(5, stage5Reducer, true)
 
@@ -324,6 +326,28 @@ const Stage5LandingPage: FC = () => {
                                     }
                                     docSubmitted={docSubmitted}
                                 />
+
+                                {docFeedback && (
+                                    <div className="side-grey">
+                                        <h3 className="task ticker mb-2">
+                                            <span className="ticker-sheet ticker-feedback">
+                                                <HelpIcon />
+                                            </span>
+                                            <span className="sm-type-drum green-highlight">
+                                                Tutor feedback:
+                                            </span>
+                                        </h3>
+                                        <div className="form-holder-border">
+                                            <p className="sm-type-lead">
+                                                <div
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: docFeedback.feedback,
+                                                    }}
+                                                />
+                                            </p>
+                                        </div>
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="col-lg-3">
