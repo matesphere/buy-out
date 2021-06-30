@@ -265,6 +265,28 @@
   }
 }
 
+.table-guide  {
+  .roww {
+    .cell:first-child {
+      width: 10%;
+    }
+    .cell:nth-child(2) {
+      width: 60%;
+    }
+    .cell:nth-child(3) {
+      width: 30%;
+    }
+    p {
+      margin:0;
+    }
+  }
+  .rowwbg {
+    background-color: #eeeeee;
+    font-style: italic;
+    font-weight: bold;
+  }
+}
+
 .reddot, .greydot, .yellowdot, .tealdot, .purpledot, .blackdot {
   width: 12px;
   height: 12px;
