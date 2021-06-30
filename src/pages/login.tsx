@@ -71,35 +71,37 @@ const ChooseRoute = () => {
                 <meta name="description" content="The description" />
                 {/*<meta name="image" content={image} />*/}
             </Helmet>
-            <section className="container top-section">
+            <div className="top-holder">
+                <div className="indeximage">
+                    <GatsbyImage
+                        alt=""
+                        image={data1.image2.childImageSharp.gatsbyImageData}
+                    />
+                </div>
                 <Squiggle className="squiggle" />
-                <div className="row pt-4">
-                    <div className="col-lg-8">
-                        <h1 className="main-header">
-                            <PinLogo />
-                            <span>Community Land Quest</span>
-                        </h1>
-                    </div>
-                    <div className="col-lg-4">
-                        <div className="cls-logo">
-                            <GatsbyImage
-                                alt=""
-                                image={
-                                    data1.file.childImageSharp.gatsbyImageData
-                                }
-                            />
+                <section className="container top-section">
+                    <div className="row pt-4">
+                        <div className="col-lg-8">
+                            <h1 className="main-header">
+                                <PinLogo />
+                                <span>Community Land Quest</span>
+                            </h1>
+                        </div>
+                        <div className="col-lg-4">
+                            <div className="cls-logo">
+                                <GatsbyImage
+                                    alt=""
+                                    image={
+                                        data1.file.childImageSharp.gatsbyImageData
+                                    }
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </div>
             <main className="homepage">
                 <section className="container" id="main">
-                    <div className="indeximage">
-                        <GatsbyImage
-                            alt=" "
-                            image={data1.image2.childImageSharp.gatsbyImageData}
-                        />
-                    </div>
                     <div className="row mt-4">
                         <div className="col-lg-2"></div>
                         <div className="col-lg-8 index-holder">
