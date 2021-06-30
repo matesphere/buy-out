@@ -411,3 +411,17 @@
 .loading-height {
     min-height: 1000px;
 }
+
+.team-certificate {
+    position: relative;
+    &--inner {
+        position: absolute;
+        top: 55%;
+        margin-left: auto;
+        margin-right: auto;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 2;
+    }
+}

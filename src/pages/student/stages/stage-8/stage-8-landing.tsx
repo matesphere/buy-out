@@ -62,7 +62,12 @@ const Stage8Page = () => {
 
                     <div className="row">
                         <div className="col-lg-12">
-                            <div className="mt-4 mb-2 image-holder">
+                            <div className="mt-4 mb-2 image-holder team-certificate">
+                                    <div className="team-certificate--inner">
+                                    <h3 className="sm-type-drum mb-4">Congratulations TeamAdmin</h3>
+                                    <p className="sm-type-guitar mb-4">David Carter - Stuart Hull - Steve Carter</p>
+                                    <p className="sm-type-drum sm-type-drum--medium">You have completed the Quest</p>
+                                </div>
                                 <GatsbyImage
                                     alt=""
                                     image={
