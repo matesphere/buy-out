@@ -22,7 +22,6 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import SaveIcon from '../../../../assets/save-icon.svg'
 
 import '../../../../scss/index.scss'
-import AccordionItemButtonWrapper from 'react-accessible-accordion/dist/types/components/AccordionItemButton'
 
 export interface SectionProps {
     devOption: {
