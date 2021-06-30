@@ -795,8 +795,8 @@ input.form-control:read-only {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid $brand-green; /* Blue */
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     animation: spin 1s linear infinite;
     margin: $grid-unit * 8 auto;
 }

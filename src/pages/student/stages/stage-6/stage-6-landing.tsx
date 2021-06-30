@@ -95,7 +95,6 @@ const Stage6Page = () => {
                                 ]}
                                 currentDisplayName="Stage 6"
                             />
-
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Prepare Findings
                             </h2>
