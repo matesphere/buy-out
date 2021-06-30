@@ -1,34 +1,35 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
-import { gql } from '@apollo/client'
+import { Link, graphql, useStaticQuery } from 'gatsby'
+// import { gql } from '@apollo/client'
 
-import { Loading } from '../../components/common/Loading'
-import { Error } from '../../components/common/Error'
+// import { Loading } from '../../components/common/Loading'
+// import { Error } from '../../components/common/Error'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 
-import { useAuthQuery } from '../../utils/auth-utils'
+// import { useAuthQuery } from '../../utils/auth-utils'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-import {
-    AssessmentQuery,
-    AssessmentQueryVariables,
-} from '../../gql/types/AssessmentQuery'
+// import {
+//     AssessmentQuery,
+//     AssessmentQueryVariables,
+// } from '../../gql/types/AssessmentQuery'
 
 import '../../scss/index.scss'
 
-const ASSESSMENT_QUERY = gql`
-    query AssessmentQuery($user_id: uuid!) {
-        user_by_pk(id: $user_id) {
-            id
-            full_name
-            tutor {
-                school {
-                    name
-                }
-            }
-        }
-    }
-`
+// const ASSESSMENT_QUERY = gql`
+//     query AssessmentQuery($user_id: uuid!) {
+//         user_by_pk(id: $user_id) {
+//             id
+//             full_name
+//             tutor {
+//                 school {
+//                     name
+//                 }
+//             }
+//         }
+//     }
+// `
 
 const TutorAssessment = () => {
     const data2 = useStaticQuery(graphql`
@@ -40,22 +41,22 @@ const TutorAssessment = () => {
             }
         }
     `)
-    const { loading, error, data } = useAuthQuery<
-        AssessmentQuery,
-        AssessmentQueryVariables
-    >(ASSESSMENT_QUERY, {}, 'userId')
+    // const { loading, error, data } = useAuthQuery<
+    //     AssessmentQuery,
+    //     AssessmentQueryVariables
+    // >(ASSESSMENT_QUERY, {}, 'userId')
 
-    if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    // if (loading) return <Loading />
+    // if (error) return <Error error={error} />
 
-    const {
-        user_by_pk: {
-            full_name: fullName,
-            tutor: {
-                school: { name: schoolName },
-            },
-        },
-    } = data
+    // const {
+    //     user_by_pk: {
+    //         full_name: fullName,
+    //         tutor: {
+    //             school: { name: schoolName },
+    //         },
+    //     },
+    // } = data
 
     return (
         <>
@@ -64,25 +65,34 @@ const TutorAssessment = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Tutor Hub</title>
+                <title>Assessment</title>
                 <meta name="description" content="The description" />
             </Helmet>
 
             <main className="the-quest">
                 <section className="container" id="main">
+                    <Breadcrumbs
+                        previous={[
+                            {
+                                displayName: 'Tutor Hub',
+                                url: '/tutor/hub',
+                            },
+                        ]}
+                        currentDisplayName="Assessment"
+                    />
                     <div className="row">
                         <div className="col-lg-9">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4 mb-4">
-                                Assessment of the Community Land Buyout QUEST
+                                Assessment of the Community Land Quest
                             </h2>
 
                             <p className="sm-type-lead mb-4">
-                                The QUEST is an interdisciplinary learning
+                                The Quest is an interdisciplinary learning
                                 project that lends itself to assessment of the
                                 Four Capacities of Curriculum for Excellence.
                             </p>
                             <p className="sm-type-lead mb-4">
-                                Throughout the QUEST, the pupils work
+                                Throughout the Quest, the pupils work
                                 independently of the teacher and must work
                                 cooperatively with each other to successfully
                                 navigate each stage. This therefore provides an
@@ -117,13 +127,13 @@ const TutorAssessment = () => {
                                 />
                             </div>
                             <p className="sm-type-guitar sm-type-guitar--medium mt-4 mb-2">
-                                Assessment of the QUEST
+                                Assessment of the Students taking the Quest
                             </p>
                             <p className="sm-type-lead mb-4">
                                 The attributes and capabilities can be used as
                                 an assessment instrument and therefore can be
                                 used to assess a young person’s success within
-                                the QUEST. It is suggested that the following
+                                the Quest. It is suggested that the following
                                 grid could be used as a record of each
                                 individual’s achievements. A grade could be
                                 given, A-E for example, or a comment, or both,
@@ -434,15 +444,18 @@ const TutorAssessment = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-3">
+                        {/* <div className="col-lg-3">
                             <div className="side-grey">
                                 <p className="sm-type-guitar mb-2 mt-2">
                                     {fullName}'s Hub
                                 </p>
                                 <p className="sm-type-amp">{schoolName}</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
+                    <p className="sm-type-amp">
+                        <Link to="/tutor/hub">Back to Tutor Hub</Link>
+                    </p>
                 </section>
             </main>
         </>

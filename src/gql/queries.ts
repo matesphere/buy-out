@@ -152,7 +152,7 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                     name
                 }
                 quests(where: { status: { _eq: active } }) {
-                    teams {
+                    teams(order_by: { id: asc }) {
                         id
                         name
                         students {

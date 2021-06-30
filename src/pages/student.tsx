@@ -39,7 +39,7 @@ import Stage6CompletedWork from './student/stages/stage-6/stage-6-completed-work
 import Stage7Landing from './student/stages/stage-7/stage-7-landing'
 import Stage7PresentationTips from './student/stages/stage-7/stage-7-presentation-tips'
 
-import Stage8Page from './student/stages/stage-8/stage-8'
+import Stage8Landing from './student/stages/stage-8/stage-8-landing'
 
 import { UserStateContext } from '../utils/user-state'
 
@@ -144,7 +144,7 @@ const Routes = () => {
                     component={Stage7PresentationTips}
                 />
 
-                <LoggedInRoute path="/stage-8" component={Stage8Page} />
+                <LoggedInRoute path="/stage-8" component={Stage8Landing} />
             </Router>
             <Footer />
         </>

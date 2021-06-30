@@ -1,50 +1,52 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { gql } from '@apollo/client'
+import { Link } from 'gatsby'
+// import { gql } from '@apollo/client'
 
-import { Loading } from '../../components/common/Loading'
-import { Error } from '../../components/common/Error'
+// import { Loading } from '../../components/common/Loading'
+// import { Error } from '../../components/common/Error'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 
-import { useAuthQuery } from '../../utils/auth-utils'
+// import { useAuthQuery } from '../../utils/auth-utils'
 
-import {
-    TeamAssessmentQuery,
-    TeamAssessmentQueryVariables,
-} from '../../gql/types/TeamAssessmentQuery'
+// import {
+//     TeamAssessmentQuery,
+//     TeamAssessmentQueryVariables,
+// } from '../../gql/types/TeamAssessmentQuery'
 
 import '../../scss/index.scss'
 
-const TEAM_ASSESSMENT_QUERY = gql`
-    query TeamAssessmentQuery($user_id: uuid!) {
-        user_by_pk(id: $user_id) {
-            id
-            full_name
-            tutor {
-                school {
-                    name
-                }
-            }
-        }
-    }
-`
+// const TEAM_ASSESSMENT_QUERY = gql`
+//     query TeamAssessmentQuery($user_id: uuid!) {
+//         user_by_pk(id: $user_id) {
+//             id
+//             full_name
+//             tutor {
+//                 school {
+//                     name
+//                 }
+//             }
+//         }
+//     }
+// `
 
 const TutorTeamAssessment = () => {
-    const { loading, error, data } = useAuthQuery<
-        TeamAssessmentQuery,
-        TeamAssessmentQueryVariables
-    >(TEAM_ASSESSMENT_QUERY, {}, 'userId')
+    // const { loading, error, data } = useAuthQuery<
+    //     TeamAssessmentQuery,
+    //     TeamAssessmentQueryVariables
+    // >(TEAM_ASSESSMENT_QUERY, {}, 'userId')
 
-    if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    // if (loading) return <Loading />
+    // if (error) return <Error error={error} />
 
-    const {
-        user_by_pk: {
-            full_name: fullName,
-            tutor: {
-                school: { name: schoolName },
-            },
-        },
-    } = data
+    // const {
+    //     user_by_pk: {
+    //         full_name: fullName,
+    //         tutor: {
+    //             school: { name: schoolName },
+    //         },
+    //     },
+    // } = data
 
     return (
         <>
@@ -53,12 +55,21 @@ const TutorTeamAssessment = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Tutor Hub</title>
+                <title>Team Assessment</title>
                 <meta name="description" content="The description" />
             </Helmet>
 
             <main className="the-quest">
                 <section className="container" id="main">
+                    <Breadcrumbs
+                        previous={[
+                            {
+                                displayName: 'Tutor Hub',
+                                url: '/tutor/hub',
+                            },
+                        ]}
+                        currentDisplayName="Team Assessment"
+                    />
                     <div className="row">
                         <div className="col-lg-9">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4 mb-4">
@@ -176,15 +187,18 @@ const TutorTeamAssessment = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-3">
+                        {/* <div className="col-lg-3">
                             <div className="side-grey">
                                 <p className="sm-type-guitar mb-2 mt-2">
                                     {fullName}'s Hub
                                 </p>
                                 <p className="sm-type-amp">{schoolName}</p>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
+                    <p className="sm-type-amp">
+                        <Link to="/tutor/hub">Back to Tutor Hub</Link>
+                    </p>
                 </section>
             </main>
         </>

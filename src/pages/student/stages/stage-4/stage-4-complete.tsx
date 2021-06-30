@@ -82,7 +82,7 @@ const Stage4CompletePage: FC<PageProps> = () => {
                                 currentDisplayName="Stage 4"
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Progress Your Plans I
+                                {stageTitle}
                             </h2>
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage

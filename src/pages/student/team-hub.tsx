@@ -395,7 +395,7 @@ const TeamHub: FC = () => {
                                 teamName={teamName}
                                 students={students}
                                 devOptions={devOptions}
-                                image={teamLogo.node.gatsbyImageData}
+                                image={teamLogo?.node.gatsbyImageData || null}
                             />
                         </div>
                     </div>

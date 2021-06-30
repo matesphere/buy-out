@@ -125,14 +125,13 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                     feedbackState && !feedbackState.feedback
                                 }
                             />
-
-                            <p className="sm-type-amp">
-                                <Link to="/tutor/current-quests">
-                                    Back to Current Quests
-                                </Link>
-                            </p>
                         </div>
                     </div>
+                    <p className="sm-type-amp">
+                        <Link to="/tutor/current-quests">
+                            Back to Current Quests
+                        </Link>
+                    </p>
                 </section>
             </main>
         </>

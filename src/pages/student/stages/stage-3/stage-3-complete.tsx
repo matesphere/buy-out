@@ -73,7 +73,7 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                 currentDisplayName="Stage 3"
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Consult
+                                Lay The Foundations
                             </h2>
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
@@ -95,7 +95,9 @@ const Stage3CompletePage: FC<PageProps> = ({ location: { search } }) => {
                                     </span>
                                 </h3>
 
-                                <FeedbackDisplay feedback={doc.feedback} />
+                                {doc.feedback && (
+                                    <FeedbackDisplay feedback={doc.feedback} />
+                                )}
 
                                 <div className="form-holder-border">
                                     <SwotLinks devOptions={devOptions} />

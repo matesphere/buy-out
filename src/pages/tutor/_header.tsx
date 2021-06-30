@@ -20,6 +20,8 @@ const HEADER_TEXT: { [pathname: string]: string } = {
     '/tutor/stage-3/submitted': 'Stage 3',
     '/tutor/stage-4/submitted': 'Stage 4',
     '/tutor/stage-5/submitted': 'Stage 5',
+    '/tutor/assessment': 'Student Assessment',
+    '/tutor/team-assessment': 'Team Assessment',
 }
 
 const HIDE_LINKS: Array<string> = ['/tutor/add-students', '/tutor/create-team']

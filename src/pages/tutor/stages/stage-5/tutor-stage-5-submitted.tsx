@@ -75,8 +75,8 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                 url: '/tutor/hub',
                             },
                             {
-                                displayName: 'Team Hub',
-                                url: '/student/team-hub/',
+                                displayName: 'Current Quests',
+                                url: '/tutor/current-quests/',
                             },
                         ]}
                         currentDisplayName={`${teamName}: Stage 5 Submission`}
@@ -167,15 +167,14 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                         feedbackState && !feedbackState.feedback
                                     }
                                 />
-
-                                <p className="sm-type-amp">
-                                    <Link to="/tutor/current-quests">
-                                        Back to Current Quests
-                                    </Link>
-                                </p>
                             </div>
                         </div>
                     </div>
+                    <p className="sm-type-amp">
+                        <Link to="/tutor/current-quests">
+                            Back to Current Quests
+                        </Link>
+                    </p>
                 </section>
             </main>
         </>

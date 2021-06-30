@@ -115,6 +115,7 @@ const Stage7Page = () => {
                                 </div>
                             </div>
                         </div>
+
                         <div className="col-lg-3">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
@@ -124,7 +125,8 @@ const Stage7Page = () => {
                             </p>
                             <div className="side-grey">
                                 <p className="sm-type-amp">
-                                    Deliver your presentation.
+                                    Your teacher will let you know where and
+                                    when your presentation is to take place.
                                 </p>
                             </div>
                         </div>

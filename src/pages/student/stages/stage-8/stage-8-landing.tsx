@@ -27,21 +27,22 @@ const Stage8Page = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 8 - Celebrate</title>
+                <title>Stage 8 - Celebrate & Reflect</title>
             </Helmet>
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Celebrate
+                                Celebrate & Reflect
                             </h2>
 
                             <p className="sm-type-lead mb-3">
-                                Congratulations! You have successfully created
+                                Congratulations! You have successfully completed
                                 the Community Land Quest!
                             </p>
                         </div>
+
                         <div className="col-lg-4">
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-orange">
@@ -50,8 +51,10 @@ const Stage8Page = () => {
                                 Helpful information
                             </p>
                             <div className="side-grey">
+                                <p className="sm-type-amp">Well done!</p>
                                 <p className="sm-type-amp">
-                                    Check your feedback.
+                                    Your final task is to answer a few short
+                                    questions about your experience.
                                 </p>
                             </div>
                         </div>
@@ -68,6 +71,31 @@ const Stage8Page = () => {
                                     }
                                 />
                             </div>
+                        </div>
+                    </div>
+
+                    <div className="side-grey">
+                        <h4 className="task ticker mb-2">
+                            <span className="ticker-sheet">
+                                <TickSheet />
+                            </span>
+                            <span className="sm-type-drum">
+                                Task to complete:
+                            </span>
+                        </h4>
+                        <div className="form-holder-border">
+                            <p className="sm-type-lead mb-2">
+                                Community Land Quest - A Reflection
+                            </p>
+                            <ul>
+                                <li className="sm-type-guitar">
+                                    Use the{' '}
+                                    <Link to="/student/stage-7/presentation-tips">
+                                        tips here
+                                    </Link>{' '}
+                                    to help you with giving your presentation.
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </section>

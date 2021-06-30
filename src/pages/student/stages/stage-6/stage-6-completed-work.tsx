@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { PageProps } from 'gatsby'
+import { Link, PageProps } from 'gatsby'
 import { gql } from '@apollo/client'
 import { Helmet } from 'react-helmet'
 import QueryString from 'query-string'
@@ -116,7 +116,7 @@ const Stage6CompletedWorkPage: FC<PageProps> = ({ location: { search } }) => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {devOption?.development_option.display_name}
                             </h2>
-                            <Accordion allowZeroExpanded>
+                            <Accordion allowZeroExpanded allowMultipleExpanded>
                                 <AccordionItem className="form-holder-border">
                                     <AccordionItemHeading>
                                         <AccordionItemButton>
@@ -128,7 +128,8 @@ const Stage6CompletedWorkPage: FC<PageProps> = ({ location: { search } }) => {
                                             swotState={
                                                 stageProgresses[0]?.documents[0]
                                                     .doc_data[
-                                                    devOption?.development_option
+                                                    devOption
+                                                        ?.development_option
                                                         .option
                                                 ]
                                             }
@@ -150,7 +151,8 @@ const Stage6CompletedWorkPage: FC<PageProps> = ({ location: { search } }) => {
                                                     .doc_data
                                             }
                                             option={
-                                                devOption?.development_option.option
+                                                devOption?.development_option
+                                                    .option
                                             }
                                             docSubmitted={true}
                                         />
@@ -198,6 +200,7 @@ const Stage6CompletedWorkPage: FC<PageProps> = ({ location: { search } }) => {
                             </Accordion>
                         </div>
                     </div>
+                    <Link to="/student/stage-6">Back to Stage 6</Link>
                 </section>
             </main>
         </>
