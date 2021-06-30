@@ -1,7 +1,15 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion'
 
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
@@ -19,6 +27,7 @@ import {
 
 import { useAuthQuery } from '../../utils/auth-utils'
 import { POSITION_DISPLAY_NAME } from '../../utils/common-utils'
+import { ExpandedContext } from '../tutor'
 
 import { TUTOR_CURRENT_QUEST_QUERY } from '../../gql/queries'
 
@@ -33,13 +42,7 @@ import Tick from '../../assets/tick.svg'
 
 import '../../scss/index.scss'
 import 'react-tabs/style/react-tabs.css'
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemHeading,
-    AccordionItemButton,
-    AccordionItemPanel,
-} from 'react-accessible-accordion'
+
 const TUTOR_CURRENT_QUEST_SUB = gql`
     subscription TutorCurrentQuestSub($user_id: uuid!) {
         user_by_pk(id: $user_id) {
@@ -237,6 +240,8 @@ const TutorCurrentQuestPage = () => {
         'userId'
     )
 
+    const { expanded, setExpanded } = useContext(ExpandedContext)
+
     if (loading) return <Loading />
     if (error) return <Error error={error} />
 
@@ -322,24 +327,33 @@ const TutorCurrentQuestPage = () => {
                                         },
                                         i
                                     ) => (
-                                        <Accordion key={i} allowMultipleExpanded allowZeroExpanded>
-                                            <AccordionItem className="side-grey">
+                                        <Accordion
+                                            key={i}
+                                            allowMultipleExpanded
+                                            allowZeroExpanded
+                                            preExpanded={expanded}
+                                            onChange={(ids) => setExpanded(ids)}
+                                        >
+                                            <AccordionItem
+                                                className="side-grey"
+                                                uuid={id}
+                                            >
                                                 <AccordionItemHeading>
                                                     <AccordionItemButton>
                                                         {name}
                                                     </AccordionItemButton>
                                                 </AccordionItemHeading>
                                                 <AccordionItemPanel>
-                                                    <div
-                                                        className="row tutor"
-                                                    >
+                                                    <div className="row tutor">
                                                         <div className="col-lg-4">
                                                             <TeamInfoPanel
                                                                 teamName={name}
                                                                 devOptions={
                                                                     team_development_options
                                                                 }
-                                                                students={students}
+                                                                students={
+                                                                    students
+                                                                }
                                                             />
                                                         </div>
                                                         <div className="col-lg-8 mt-4">
@@ -348,7 +362,9 @@ const TutorCurrentQuestPage = () => {
                                                                 stageProgresses={
                                                                     stage_progresses
                                                                 }
-                                                                devOptions={devOptions}
+                                                                devOptions={
+                                                                    devOptions
+                                                                }
                                                                 teamId={id}
                                                             />
                                                         </div>

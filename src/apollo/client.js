@@ -7,6 +7,9 @@ import {
     // from,
     split,
 } from '@apollo/client'
+import { onError } from 'apollo-link-error'
+import { Auth } from 'aws-amplify'
+
 // import { WebSocketLink } from '@apollo/client/link/ws'
 // import { getMainDefinition } from '@apollo/client/utilities'
 // import ws from 'ws'
@@ -46,13 +49,19 @@ import {
 //     cache: new InMemoryCache(),
 // })
 
+const refreshTokenLink = onError(({ networkError }) => {
+    if (networkError && networkError.statusCode === 401) Auth.currentSession()
+})
+
 export const client = new ApolloClient({
-    link: new HttpLink({
-        uri: 'https://clq.beanmate.coffee/v1/graphql',
-        fetch,
-        fetchOptions: {
-            credentials: 'same-origin',
-        },
-    }),
+    link: refreshTokenLink.concat(
+        new HttpLink({
+            uri: 'https://clq.beanmate.coffee/v1/graphql',
+            fetch,
+            fetchOptions: {
+                credentials: 'same-origin',
+            },
+        })
+    ),
     cache: new InMemoryCache(),
 })

@@ -50,51 +50,67 @@ export const NewQuestContext = createContext<NewQuestContextType>({
     setStudentsToAdd: () => {},
 })
 
+export interface ExpandedContextType {
+    expanded: Array<string>
+    setExpanded: (expanded: Array<string>) => void
+}
+
+export const ExpandedContext = createContext<ExpandedContextType>({
+    expanded: [],
+    setExpanded: () => {},
+})
+
 const Routes = () => {
     const [studentsToAdd, setStudentsToAdd] = useState([])
+    const [expanded, setExpanded] = useState([])
 
     return (
         <NewQuestContext.Provider value={{ studentsToAdd, setStudentsToAdd }}>
-            <Header />
-            <Router basepath="/tutor">
-                <LoggedInRoute path="/hub" component={Hub} />
-                <LoggedInRoute
-                    path="/current-quests"
-                    component={CurrentQuest}
-                />
-                <LoggedInRoute path="/add-students" component={AddStudents} />
-                <LoggedInRoute path="/create-team" component={CreateTeam} />
+            <ExpandedContext.Provider value={{ expanded, setExpanded }}>
+                <Header />
+                <Router basepath="/tutor">
+                    <LoggedInRoute path="/hub" component={Hub} />
+                    <LoggedInRoute
+                        path="/current-quests"
+                        component={CurrentQuest}
+                    />
+                    <LoggedInRoute
+                        path="/add-students"
+                        component={AddStudents}
+                    />
+                    <LoggedInRoute path="/create-team" component={CreateTeam} />
 
-                <LoggedInRoute
-                    path="/stage-1/submitted"
-                    component={Stage1Submitted}
-                />
+                    <LoggedInRoute
+                        path="/stage-1/submitted"
+                        component={Stage1Submitted}
+                    />
 
-                <LoggedInRoute
-                    path="/stage-3/submitted"
-                    component={Stage3Submitted}
-                />
+                    <LoggedInRoute
+                        path="/stage-3/submitted"
+                        component={Stage3Submitted}
+                    />
 
-                <LoggedInRoute
-                    path="/stage-4/submitted"
-                    component={Stage4Submitted}
-                />
+                    <LoggedInRoute
+                        path="/stage-4/submitted"
+                        component={Stage4Submitted}
+                    />
 
-                <LoggedInRoute
-                    path="/stage-5/submitted"
-                    component={Stage5Submitted}
-                />
+                    <LoggedInRoute
+                        path="/stage-5/submitted"
+                        component={Stage5Submitted}
+                    />
 
-                <LoggedInRoute
-                    path="/assessment"
-                    component={TutorAssessment}
-                />
-                <LoggedInRoute
-                    path="/team-assessment"
-                    component={TutorTeamAssessment}
-                />
-            </Router>
-            <Footer />
+                    <LoggedInRoute
+                        path="/assessment"
+                        component={TutorAssessment}
+                    />
+                    <LoggedInRoute
+                        path="/team-assessment"
+                        component={TutorTeamAssessment}
+                    />
+                </Router>
+                <Footer />
+            </ExpandedContext.Provider>
         </NewQuestContext.Provider>
     )
 }
