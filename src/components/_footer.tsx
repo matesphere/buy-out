@@ -13,15 +13,19 @@ const Footer = () => (
                         <li>
                             <Link to="/student/team-hub/">Team hub</Link>
                         </li>
-                        {/* <li>
+                        <li>
                             <AmplifySignOut />
-                        </li> */}
+                        </li>
                     </ul>
 
                     <p>Copyright MateSphere 2021. All rights reserved.</p>
                 </div>
                 <div className="col-lg-4 mt-2">
-                    <p><Link to="/acknowledgements">Creators and Acknowledgements</Link></p>
+                    <p>
+                        <Link to="/acknowledgements">
+                            Creators and Acknowledgements
+                        </Link>
+                    </p>
                 </div>
             </div>
         </section>

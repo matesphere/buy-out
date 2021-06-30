@@ -38,6 +38,7 @@ const TEAM_HUB_QUERY = gql`
             student {
                 team {
                     name
+                    logo
                     stage_progresses {
                         stage_id
                         status

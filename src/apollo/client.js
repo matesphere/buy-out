@@ -49,9 +49,19 @@ import { Auth } from 'aws-amplify'
 //     cache: new InMemoryCache(),
 // })
 
-const refreshTokenLink = onError(({ networkError }) => {
-    if (networkError && networkError.statusCode === 401) Auth.currentSession()
-})
+const refreshTokenLink = onError(
+    async ({ graphQLErrors, operation, forward }) => {
+        if (
+            graphQLErrors &&
+            graphQLErrors.some(
+                ({ err }) => err?.extensions.code === 'invalid-jwt'
+            )
+        ) {
+            await Auth.currentSession()
+            return forward(operation)
+        }
+    }
+)
 
 export const client = new ApolloClient({
     link: refreshTokenLink.concat(

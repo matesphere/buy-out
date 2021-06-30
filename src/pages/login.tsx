@@ -37,7 +37,7 @@ const ChooseRoute = () => {
     const { loading, error, data } = useAuthQuery<
         LoggedInQuery,
         LoggedInQueryVariables
-    >(LOGGED_IN_QUERY, null, 'userId')
+    >(LOGGED_IN_QUERY, {}, 'userId')
 
     if (loading) return <Loading />
     if (error) return <Error error={error} />

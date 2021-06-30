@@ -2,6 +2,8 @@ import React, { useState, FC } from 'react'
 import { Link } from 'gatsby'
 import { gql } from '@apollo/client'
 
+import { POSITION_DISPLAY_NAME } from '../utils/common-utils'
+
 import { useAuthQuery } from '../utils/auth-utils'
 
 import {
@@ -13,12 +15,19 @@ import {
 import '../scss/index.scss'
 
 const NAV_QUERY = gql`
-    query NavQuery($team_id: uuid!) {
-        team_by_pk(id: $team_id) {
-            id
-            stage_progresses(order_by: { stage_id: asc }) {
-                stage_id
-                status
+    query NavQuery($user_id: uuid!) {
+        user_by_pk(id: $user_id) {
+            full_name
+            username
+            student {
+                position
+                team {
+                    id
+                    stage_progresses(order_by: { stage_id: asc }) {
+                        stage_id
+                        status
+                    }
+                }
             }
         }
         stage(order_by: { id: asc }) {
@@ -74,13 +83,15 @@ const Nav: FC = () => {
     const { data } = useAuthQuery<NavQuery, NavQueryVariables>(
         NAV_QUERY,
         { fetchPolicy: 'network-only' },
-        'teamId'
+        'userId'
     )
+
+    const { full_name, username, student } = data?.user_by_pk || {}
 
     const latestStageID =
         (data &&
             Math.max(
-                ...(data.team_by_pk?.stage_progresses.map(
+                ...(data.user_by_pk?.student?.team?.stage_progresses.map(
                     (el) => el.stage_id
                 ) || [1])
             )) ||
@@ -156,11 +167,25 @@ const Nav: FC = () => {
                                 {data && (
                                     <StageLinks
                                         stageProgresses={
-                                            data.team_by_pk?.stage_progresses
+                                            data.user_by_pk?.student?.team
+                                                .stage_progresses
                                         }
                                     />
                                 )}
                             </li>
+
+                            {data && (
+                                <li className="dropdown">
+                                    <span>
+                                        {full_name} ({username}) -{' '}
+                                        {
+                                            POSITION_DISPLAY_NAME[
+                                                student?.position
+                                            ]
+                                        }
+                                    </span>
+                                </li>
+                            )}
                         </ul>
                     </nav>
                 </div>

@@ -57,7 +57,7 @@ export const SUBMIT_WORK = gql`
 `
 
 export const SET_TEAM_LOGO = gql`
-    mutation SetTeamLogo($team_id: uuid!, $logo: string!) {
+    mutation SetTeamLogo($team_id: uuid!, $logo: String!) {
         update_team_by_pk(pk_columns: { id: $team_id }, _set: { logo: $logo }) {
             id
             logo
@@ -65,10 +65,12 @@ export const SET_TEAM_LOGO = gql`
     }
 `
 
-export const SET_TEAM_POSITIONS = gql`
+export const SET_TEAM_POSITIONS_AND_LOGO = gql`
     mutation SetTeamPositions(
         $objects: [student_insert_input!]!
         $stageProgressId: uuid!
+        $team_id: uuid!
+        $logo: String!
     ) {
         insert_student(
             objects: $objects
@@ -97,6 +99,10 @@ export const SET_TEAM_POSITIONS = gql`
                 status
                 team_id
             }
+        }
+        update_team_by_pk(pk_columns: { id: $team_id }, _set: { logo: $logo }) {
+            id
+            logo
         }
     }
 `

@@ -47,13 +47,13 @@ Amplify.configure({
         // clientMetadata: { myCustomKey: 'myCustomValue' },
 
         // OPTIONAL - Hosted UI configuration
-        oauth: {
-            domain: 'https://clq.auth.eu-west-1.amazoncognito.com',
-            scope: ['email', 'openid'],
-            redirectSignIn: 'http://localhost:8000/tutor/hub',
-            redirectSignOut: 'http://localhost:8000/',
-            responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
-        },
+        // oauth: {
+        //     domain: 'https://clq.auth.eu-west-1.amazoncognito.com',
+        //     scope: ['email', 'openid'],
+        //     redirectSignIn: 'http://localhost:8000/tutor/hub',
+        //     redirectSignOut: 'http://localhost:8000/',
+        //     responseType: 'code', // or 'token', note that REFRESH token will only be generated when the responseType is code
+        // },
     },
 })
 

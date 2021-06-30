@@ -13,7 +13,7 @@ import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 
-import { SET_TEAM_LOGO, SET_TEAM_POSITIONS } from '../../../../gql/mutations'
+import { SET_TEAM_POSITIONS_AND_LOGO } from '../../../../gql/mutations'
 import {
     SetTeamPositions,
     SetTeamPositionsVariables,
@@ -38,9 +38,10 @@ import {
 } from './_stage2.data'
 
 const STAGE_2_TASK_QUERY = gql`
-    query Stage2TaskQuery($teamId: uuid!) {
-        team_by_pk(id: $teamId) {
+    query Stage2TaskQuery($team_id: uuid!) {
+        team_by_pk(id: $team_id) {
             id
+            logo
             students {
                 id
                 user_id
@@ -61,15 +62,19 @@ const STAGE_2_TASK_QUERY = gql`
 `
 
 const Stage2TaskPage = () => {
-    const [showFilters, setShowFilters] = useState(false)
+    // const [showFilters, setShowFilters] = useState(false)
     const [logo, setLogo] = useState('')
     const [positions, setPositions] = useState([])
 
-    const [submitLogo, submitLogoResponse] = useAuthMutation(SET_TEAM_LOGO)
-    const [submitPositions, submitPositionResponse] =
-        useAuthMutation<SetTeamPositions, SetTeamPositionsVariables>(
-            SET_TEAM_POSITIONS
-        )
+    // const [submitLogo, submitLogoResponse] = useAuthMutation(SET_TEAM_LOGO)
+    const [submitPositions, submitPositionResponse] = useAuthMutation<
+        SetTeamPositions,
+        SetTeamPositionsVariables
+    >(SET_TEAM_POSITIONS_AND_LOGO, {
+        query: STAGE_2_TASK_QUERY,
+        variables: {},
+        idRequired: 'teamId',
+    })
 
     const {
         loading,
@@ -93,6 +98,7 @@ const Stage2TaskPage = () => {
         )
 
     const { id: stageProgressId } = pageData.team_by_pk?.stage_progresses[0]
+    const submitted = !!pageData.team_by_pk?.students[0].position
 
     const imageData = useStaticQuery(graphql`
         query {
@@ -201,6 +207,7 @@ const Stage2TaskPage = () => {
                 />
                 <title>Stage 2 - Consult - Task</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -252,252 +259,238 @@ const Stage2TaskPage = () => {
                                 </Link>
                             </p>
 
-                            <div
-                                className={`filters-container${
-                                    showFilters ? ' show' : ''
-                                }`}
-                            >
-                                <div className="side-grey">
-                                    <h3 className="task ticker mb-2">
-                                        <span className="ticker-sheet">
-                                            <TickSheet />
-                                        </span>
-                                        <span className="sm-type-drum">
-                                            Task to complete:
-                                        </span>
-                                    </h3>
-                                    <div className="form-holder-border">
-                                        <div className="form-holder">
-                                            <p className="sm-type-lead mb-2">
-                                                Part I - Team Logo
-                                            </p>
-                                            <p className="sm-type-lead mb-4">
-                                                Choose a logo for your team:
-                                            </p>
-                                            <div className="row">
-                                                {stage2Logo.map(
-                                                    ({ id, image }) => (
-                                                        <div
-                                                            className="col-lg-3 mb-2"
-                                                            key={id}
+                            <div className="side-grey">
+                                <h3 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet />
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task{' '}
+                                        {submitted
+                                            ? 'submitted'
+                                            : 'to complete:'}
+                                    </span>
+                                </h3>
+                                <div className="form-holder-border">
+                                    <div className="form-holder">
+                                        <p className="sm-type-lead mb-2">
+                                            Part I - Team Logo
+                                        </p>
+                                        <p className="sm-type-lead mb-4">
+                                            Choose a logo for your team:
+                                        </p>
+                                        <div className="row">
+                                            {stage2Logo.map(({ id, image }) => (
+                                                <div
+                                                    className="col-lg-3 mb-2"
+                                                    key={id}
+                                                >
+                                                    <div className="multiple-choice">
+                                                        <input
+                                                            className="form-control"
+                                                            id={id}
+                                                            value={id}
+                                                            checked={
+                                                                logo === id
+                                                            }
+                                                            onChange={() =>
+                                                                setLogo(id)
+                                                            }
+                                                            type="radio"
+                                                            name="choose-logo"
+                                                        />
+                                                        <label
+                                                            className="form-label"
+                                                            htmlFor={id}
                                                         >
-                                                            <div className="multiple-choice">
-                                                                <input
-                                                                    className="form-control"
-                                                                    id={id}
-                                                                    value={id}
-                                                                    checked={
-                                                                        logo ===
-                                                                        id
-                                                                    }
-                                                                    onChange={() =>
-                                                                        setLogo(
-                                                                            id
-                                                                        )
-                                                                    }
-                                                                    type="radio"
-                                                                    name="choose-logo"
-                                                                />
-                                                                <label
-                                                                    className="form-label"
-                                                                    htmlFor={id}
+                                                            <GatsbyImage
+                                                                alt="logo"
+                                                                image={image}
+                                                            />
+                                                            <span className="visuallyhidden">
+                                                                {id}
+                                                            </span>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        {/* <SaveSubmitSection
+                                            submitWorkObj={{
+                                                call: () => {
+                                                    submitLogo({
+                                                        variables: {
+                                                            teamId: pageData
+                                                                .team_by_pk?.id,
+                                                            logo,
+                                                        },
+                                                    })
+                                                },
+                                                response: submitLogoResponse,
+                                            }}
+                                            disableSubmit={false}
+                                        /> */}
+                                    </div>
+                                </div>
+                                <div className="form-holder-border">
+                                    <div className="form-holder">
+                                        <p className="sm-type-lead mb-2">
+                                            Part II - Team Roles
+                                        </p>
+                                        <p className="sm-type-lead mb-4">
+                                            Choose a role for each team member:
+                                        </p>
+                                        <p className="sm-type-amp mb-2">
+                                            Use the dropdowns below to select
+                                            which team member will perform which
+                                            role. Try and match the roles to the
+                                            strengths of each member!
+                                        </p>
+
+                                        <p className="sm-type-amp mb-2">
+                                            <b>
+                                                Your team must have at least one
+                                                of each role!
+                                            </b>{' '}
+                                            If you have more than 4 members in
+                                            your team you may double up on
+                                            roles.
+                                        </p>
+                                        <div id="form-roles">
+                                            <ul>
+                                                {pageData.team_by_pk.students.map(
+                                                    (
+                                                        {
+                                                            user: {
+                                                                username,
+                                                                full_name,
+                                                            },
+                                                            user_id,
+                                                            school_id,
+                                                        },
+                                                        i
+                                                    ) => (
+                                                        <li
+                                                            key={i}
+                                                            className="mb-2"
+                                                        >
+                                                            <label className="form-label sm-type-amp">
+                                                                {full_name}
+                                                            </label>
+                                                            <select
+                                                                className="form-control"
+                                                                value={
+                                                                    submitPositionResponse.data
+                                                                        ? submitPositionResponse.data.insert_student.returning.find(
+                                                                              (
+                                                                                  student
+                                                                              ) =>
+                                                                                  student
+                                                                                      .user
+                                                                                      .id ===
+                                                                                  user_id
+                                                                          )
+                                                                              ?.position
+                                                                        : positions[
+                                                                              username
+                                                                          ]
+                                                                }
+                                                                disabled={
+                                                                    !!submitPositionResponse.data
+                                                                }
+                                                                onChange={({
+                                                                    target: {
+                                                                        value,
+                                                                    },
+                                                                }) =>
+                                                                    setPositions(
+                                                                        (
+                                                                            positions
+                                                                        ) => [
+                                                                            ...positions.filter(
+                                                                                (
+                                                                                    pos
+                                                                                ) =>
+                                                                                    pos.user_id !==
+                                                                                    user_id
+                                                                            ),
+                                                                            {
+                                                                                user_id,
+                                                                                school_id,
+                                                                                position:
+                                                                                    value,
+                                                                            },
+                                                                        ]
+                                                                    )
+                                                                }
+                                                            >
+                                                                <option
+                                                                    value=""
+                                                                    defaultChecked
                                                                 >
-                                                                    <GatsbyImage
-                                                                        alt="logo"
-                                                                        image={
-                                                                            image
-                                                                        }
-                                                                    />
-                                                                    <span className="visuallyhidden">
-                                                                        {id}
-                                                                    </span>
-                                                                </label>
-                                                            </div>
-                                                        </div>
+                                                                    Select
+                                                                </option>
+                                                                <option value="chairperson">
+                                                                    Chair
+                                                                </option>
+                                                                <option value="vicechairperson">
+                                                                    Vice-chair
+                                                                </option>
+                                                                <option value="secretary">
+                                                                    Secretary
+                                                                </option>
+                                                                <option value="treasurer">
+                                                                    Treasurer
+                                                                </option>
+                                                            </select>
+                                                        </li>
                                                     )
                                                 )}
-                                            </div>
-                                            <SaveSubmitSection
-                                                submitWorkObj={{
-                                                    call: () => {
-                                                        submitLogo({
-                                                            variables: {
-                                                                teamId: pageData
-                                                                    .team_by_pk
-                                                                    ?.id,
-                                                                logo,
-                                                            },
-                                                        })
-                                                    },
-                                                    response:
-                                                        submitLogoResponse,
-                                                }}
-                                                disableSubmit={false}
-                                            />
-                                        </div>
-                                    </div>
-                                    <div className="form-holder-border">
-                                        <div className="form-holder">
-                                            <p className="sm-type-lead mb-2">
-                                                Part II - Team Roles
-                                            </p>
-                                            <p className="sm-type-lead mb-4">
-                                                Choose a role for each team
-                                                member:
-                                            </p>
-                                            <p className="sm-type-amp mb-2">
-                                                Use the dropdowns below to
-                                                select which team member will
-                                                perform which role. Try and
-                                                match the roles to the strengths
-                                                of each member!
-                                            </p>
-
-                                            <p className="sm-type-amp mb-2">
-                                                <b>
-                                                    Your team must have at least
-                                                    one of each role!
-                                                </b>{' '}
-                                                If you have more than 4 members
-                                                in your team you may double up
-                                                on roles.
-                                            </p>
-                                            <div id="form-roles">
-                                                <ul>
-                                                    {pageData.team_by_pk.students.map(
-                                                        (
-                                                            {
-                                                                user: {
-                                                                    username,
-                                                                    full_name,
-                                                                },
-                                                                user_id,
-                                                                school_id,
-                                                            },
-                                                            i
-                                                        ) => (
-                                                            <li
-                                                                key={i}
-                                                                className="mb-2"
-                                                            >
-                                                                <label className="form-label sm-type-amp">
-                                                                    {full_name}
-                                                                </label>
-                                                                <select
-                                                                    className="form-control"
-                                                                    value={
-                                                                        submitPositionResponse.data
-                                                                            ? submitPositionResponse.data.insert_student.returning.find(
-                                                                                  (
-                                                                                      student
-                                                                                  ) =>
-                                                                                      student
-                                                                                          .user
-                                                                                          .id ===
-                                                                                      user_id
-                                                                              )
-                                                                                  ?.position
-                                                                            : positions[
-                                                                                  username
-                                                                              ]
-                                                                    }
-                                                                    disabled={
-                                                                        !!submitPositionResponse.data
-                                                                    }
-                                                                    onChange={({
-                                                                        target: {
-                                                                            value,
-                                                                        },
-                                                                    }) =>
-                                                                        setPositions(
-                                                                            (
-                                                                                positions
-                                                                            ) => [
-                                                                                ...positions.filter(
-                                                                                    (
-                                                                                        pos
-                                                                                    ) =>
-                                                                                        pos.user_id !==
-                                                                                        user_id
-                                                                                ),
-                                                                                {
-                                                                                    user_id,
-                                                                                    school_id,
-                                                                                    position:
-                                                                                        value,
-                                                                                },
-                                                                            ]
-                                                                        )
-                                                                    }
-                                                                >
-                                                                    <option
-                                                                        value=""
-                                                                        defaultChecked
-                                                                    >
-                                                                        Select
-                                                                    </option>
-                                                                    <option value="chairperson">
-                                                                        Chair
-                                                                    </option>
-                                                                    <option value="vicechairperson">
-                                                                        Vice-chair
-                                                                    </option>
-                                                                    <option value="secretary">
-                                                                        Secretary
-                                                                    </option>
-                                                                    <option value="treasurer">
-                                                                        Treasurer
-                                                                    </option>
-                                                                </select>
-                                                            </li>
-                                                        )
-                                                    )}
-                                                </ul>
-                                            </div>
-
-                                            <SaveSubmitSection
-                                                submitWorkObj={{
-                                                    call: () => {
-                                                        submitPositions({
-                                                            variables: {
-                                                                objects:
-                                                                    Object.values(
-                                                                        positions
-                                                                    ),
-                                                                stageProgressId,
-                                                            },
-                                                        })
-                                                    },
-                                                    response:
-                                                        submitPositionResponse,
-                                                }}
-                                                disableSubmit={false}
-                                            />
+                                            </ul>
                                         </div>
 
-                                        <div
-                                            className="success-holder"
-                                            id="filter-container"
-                                        >
-                                            <h4 className="sm-type-bigdrum sm-type-bigdrum--medium">
-                                                <span className="side-icon">
-                                                    <Tick />
-                                                </span>{' '}
-                                                Success
-                                            </h4>
-                                            <p>
-                                                Your roles have been submitted.
-                                            </p>
-                                            <p>
-                                                <Link to="/student/your-notes-inprogress">
-                                                    You will see your feedback
-                                                    here
-                                                </Link>
-                                            </p>
-                                        </div>
+                                        <SaveSubmitSection
+                                            submitWorkObj={{
+                                                call: () => {
+                                                    submitPositions({
+                                                        variables: {
+                                                            objects:
+                                                                Object.values(
+                                                                    positions
+                                                                ),
+                                                            stageProgressId,
+                                                        },
+                                                    })
+                                                },
+                                                response:
+                                                    submitPositionResponse,
+                                            }}
+                                            disableSubmit={
+                                                !logo ||
+                                                positions.length !==
+                                                    pageData.team_by_pk
+                                                        ?.students.length
+                                            }
+                                            docSubmitted={submitted}
+                                        />
                                     </div>
                                 </div>
                             </div>
+                            {submitted && (
+                                <div
+                                    className="success-holder"
+                                    id="filter-container"
+                                >
+                                    <h4 className="sm-type-bigdrum sm-type-bigdrum--medium">
+                                        <span className="side-icon">
+                                            <Tick />
+                                        </span>{' '}
+                                        Success
+                                    </h4>
+                                    <p>Your roles have been submitted.</p>
+                                </div>
+                            )}
+                            <Link to="/student/team-hub">Back to Team Hub</Link>
                         </div>
                         <div className="col-lg-3">
                             <Helpful items={stage2HelpfulEng} />

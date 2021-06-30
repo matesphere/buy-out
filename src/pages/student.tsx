@@ -1,7 +1,7 @@
 import React, { useContext, FC } from 'react'
 import { PageProps } from 'gatsby'
 import { Router, RouteComponentProps } from '@reach/router'
-import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
+import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react'
 
 import TeamHub from './student/team-hub'
 import Information from './student/information'
@@ -62,7 +62,11 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
         return <Component {...rest} />
     }
 
-    return <AmplifyAuthenticator />
+    return (
+        <AmplifyAuthenticator>
+            <AmplifySignIn slot="sign-in" hideSignUp></AmplifySignIn>
+        </AmplifyAuthenticator>
+    )
 }
 
 const Routes = () => {

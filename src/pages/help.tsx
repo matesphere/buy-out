@@ -72,7 +72,7 @@ const HelpPage = () => {
                                 <li className="sm-type-lead mb-4">
                                     Your help guide will always appear in the
                                     "Helpful information" boxes. <br />
-                                    Look out for this orange icon{' '}
+                                    Look out for this orange icon:{' '}
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
@@ -81,7 +81,7 @@ const HelpPage = () => {
                                     Make sure you read all the information and
                                     check "Your checklist" to make sure you have
                                     completed the task. <br />
-                                    Look out for this green icon{' '}
+                                    Look out for this green icon:{' '}
                                     <span className="side-icon side-icon-green">
                                         <TickSheet />
                                     </span>
@@ -90,7 +90,7 @@ const HelpPage = () => {
                                 <li className="sm-type-lead mb-4">
                                     You will find the task to complete at each
                                     stage. <br />
-                                    Look out for this red icon{' '}
+                                    Look out for this red icon:{' '}
                                     <span className="side-icon side-icon-red">
                                         <TickSheet />
                                     </span>
@@ -102,12 +102,12 @@ const HelpPage = () => {
                                 <span className="side-icon side-icon-orange">
                                     <HelpIcon />
                                 </span>
-                                Helpful information
+                                Helpful Information
                             </p>
                             <div className="side-grey">
                                 <p className="sm-type-amp">
-                                    Read all of the steps. You will have to
-                                    follow them carefully.
+                                    This is an example of the Helpful
+                                    Information box! Pretty helpful, right?
                                 </p>
                             </div>
 
@@ -135,7 +135,7 @@ const HelpPage = () => {
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        Have you read all actions?
+                                        Are you ready to start?
                                     </p>
                                 </div>
                             </div>

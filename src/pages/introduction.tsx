@@ -90,15 +90,15 @@ const IntroductionPage = () => {
                                 <p className="sm-type-lead mb-2">
                                     Your Team is the Board of Directors and your
                                     task is to follow the 8-Stage process laid
-                                    out by Community Land Scotland (
+                                    out by{' '}
                                     <a
                                         href="http://www.communitylandscotland.org.uk/"
                                         target="_blank"
                                         rel="external"
                                     >
-                                        www.communitylandscotland.org.uk
+                                        Community Land Scotland
                                     </a>
-                                    ). You will carry out SWOT Analysis on each
+                                    . You will carry out SWOT Analysis on each
                                     of the Options which will help you to narrow
                                     down the Development Options to the 3 which
                                     your team consider to be best use for the
@@ -123,12 +123,14 @@ const IntroductionPage = () => {
                                     class).
                                 </p>
                                 <p className="sm-type-lead mb-2">
-                                    Use the "help"{' '}
-                                    <Link to="/help">section here</Link> and in
-                                    the main navigation to help with your Quest.
+                                    <Link to="/help">Click here</Link> for the
+                                    help section, where you'll find some handy
+                                    tips to assist with your Quest. This can be
+                                    accessed at any time from the main
+                                    navigation menu.
                                 </p>
 
-                                <p className="sm-type-lead mb-2">Good luck.</p>
+                                <p className="sm-type-lead mb-2">Good luck!</p>
                             </div>
                         </div>
                         <div className="col-lg-1"></div>
