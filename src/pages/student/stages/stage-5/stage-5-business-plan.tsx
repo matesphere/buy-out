@@ -19,6 +19,7 @@ import { stage5Reducer, WorkState, Action } from './stage-5-landing'
 import { useWorkState } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
+import SaveIcon from '../../../../assets/save-icon.svg'
 
 import '../../../../scss/index.scss'
 import AccordionItemButtonWrapper from 'react-accessible-accordion/dist/types/components/AccordionItemButton'
@@ -86,9 +87,9 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                 <title>Stage 5 - {stageTitle}</title>
             </Helmet>
             <main className="the-quest">
-                {/*<div className="save-icon">*/}
-                {/*    <SaveIcon /> Save progress*/}
-                {/*</div>*/}
+                <div className="save-icon">
+                    <SaveIcon /> Save progress
+                </div>
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
