@@ -435,10 +435,12 @@ const TutorAssessment = () => {
                             </div>
                         </div>
                         <div className="col-lg-3">
-                            <p className="sm-type-guitar mb-2 mt-4">
-                                {fullName}'s Hub
-                            </p>
-                            <p className="sm-type-amp">{schoolName}</p>
+                            <div className="side-grey">
+                                <p className="sm-type-guitar mb-2 mt-2">
+                                    {fullName}'s Hub
+                                </p>
+                                <p className="sm-type-amp">{schoolName}</p>
+                            </div>
                         </div>
                     </div>
                 </section>

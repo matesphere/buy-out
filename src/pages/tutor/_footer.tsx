@@ -3,12 +3,14 @@ import { Link } from 'gatsby'
 import { useMutation } from '@apollo/client'
 
 import { RESET_DB } from '../../gql/mutations'
+import Squiggle from '../../assets/squiggle.svg'
 
 const TutorFooter = () => {
     const [resetDB, resetDBResponse] = useMutation(RESET_DB)
 
     return (
         <footer className="footer">
+            <Squiggle className="squiggle" />
             <section className="container">
                 <div className="row">
                     <div className="col-lg-12">
@@ -24,7 +26,7 @@ const TutorFooter = () => {
                             {resetDBResponse.data && <span> DB reset!</span>}
                         </ul>
 
-                        <p>Copyright 2021. All rights reserved.</p>
+                        <p>&copy; Copyright MateSphere 2021. All rights reserved.</p>
                     </div>
                 </div>
             </section>

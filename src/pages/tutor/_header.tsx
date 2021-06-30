@@ -47,34 +47,36 @@ const TutorHeader = ({
                     <a href="#main" className="skip-link">
                         Skip to content
                     </a>
-                    <section className="container top-section">
+                    <div className="top-holder">
                         <Squiggle className="squiggle" />
-                        <div className="row">
-                            <div className="col-lg-8">
-                                {!HIDE_LINKS.includes(location.pathname) && (
-                                    <Nav />
-                                )}
-                                <h1 className="main-header mt-4">
-                                    <PinLogo />
-                                    <span>
-                                        {headerText ||
-                                            HEADER_TEXT[location.pathname]}
-                                    </span>
-                                </h1>
-                            </div>
-                            <div className="col-lg-4">
-                                <div className="cls-logo">
-                                    <GatsbyImage
-                                        alt=""
-                                        image={
-                                            data.file.childImageSharp
-                                                .gatsbyImageData
-                                        }
-                                    />
+                        <section className="container top-section">
+                            <div className="row">
+                                <div className="col-lg-8">
+                                    {!HIDE_LINKS.includes(location.pathname) && (
+                                        <Nav />
+                                    )}
+                                    <h1 className="main-header mt-4">
+                                        <PinLogo />
+                                        <span>
+                                            {headerText ||
+                                                HEADER_TEXT[location.pathname]}
+                                        </span>
+                                    </h1>
+                                </div>
+                                <div className="col-lg-4">
+                                    <div className="cls-logo">
+                                        <GatsbyImage
+                                            alt=""
+                                            image={
+                                                data.file.childImageSharp
+                                                    .gatsbyImageData
+                                            }
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </>
             )}
         </Location>
