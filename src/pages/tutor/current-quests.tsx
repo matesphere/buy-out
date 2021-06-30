@@ -33,7 +33,13 @@ import Tick from '../../assets/tick.svg'
 
 import '../../scss/index.scss'
 import 'react-tabs/style/react-tabs.css'
-
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion'
 const TUTOR_CURRENT_QUEST_SUB = gql`
     subscription TutorCurrentQuestSub($user_id: uuid!) {
         user_by_pk(id: $user_id) {
@@ -159,9 +165,9 @@ const TeamInfoPanel = ({
     students,
 }: TeamInfoPanelProps) => (
     <>
-        <p className="mb-2 sm-type-guitar sm-type-guitar--medium red-highlight mt-2">
-            {teamName}
-        </p>
+        {/*<p className="mb-2 sm-type-guitar sm-type-guitar--medium red-highlight mt-2">*/}
+        {/*    {teamName}*/}
+        {/*</p>*/}
         <div className="form-holder-border">
             <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
                 Team members:
@@ -316,30 +322,40 @@ const TutorCurrentQuestPage = () => {
                                         },
                                         i
                                     ) => (
-                                        <div
-                                            key={i}
-                                            className="row tutor mt-4 side-grey"
-                                        >
-                                            <div className="col-lg-4">
-                                                <TeamInfoPanel
-                                                    teamName={name}
-                                                    devOptions={
-                                                        team_development_options
-                                                    }
-                                                    students={students}
-                                                />
-                                            </div>
-                                            <div className="col-lg-8 mt-4">
-                                                <StageInfoPanel
-                                                    stages={stage}
-                                                    stageProgresses={
-                                                        stage_progresses
-                                                    }
-                                                    devOptions={devOptions}
-                                                    teamId={id}
-                                                />
-                                            </div>
-                                        </div>
+                                        <Accordion key={i} allowMultipleExpanded allowZeroExpanded>
+                                            <AccordionItem className="side-grey">
+                                                <AccordionItemHeading>
+                                                    <AccordionItemButton>
+                                                        {name}
+                                                    </AccordionItemButton>
+                                                </AccordionItemHeading>
+                                                <AccordionItemPanel>
+                                                    <div
+                                                        className="row tutor"
+                                                    >
+                                                        <div className="col-lg-4">
+                                                            <TeamInfoPanel
+                                                                teamName={name}
+                                                                devOptions={
+                                                                    team_development_options
+                                                                }
+                                                                students={students}
+                                                            />
+                                                        </div>
+                                                        <div className="col-lg-8 mt-4">
+                                                            <StageInfoPanel
+                                                                stages={stage}
+                                                                stageProgresses={
+                                                                    stage_progresses
+                                                                }
+                                                                devOptions={devOptions}
+                                                                teamId={id}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </AccordionItemPanel>
+                                            </AccordionItem>
+                                        </Accordion>
                                     )
                                 )}
                             </TabPanel>
