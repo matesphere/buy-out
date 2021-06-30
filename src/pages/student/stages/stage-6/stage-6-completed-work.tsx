@@ -99,7 +99,7 @@ const Stage6CompletedWorkPage: FC<PageProps> = ({ location: { search } }) => {
                 {/*</div>*/}
                 <section className="container" id="main">
                     <div className="row">
-                        <div className="col-lg-8">
+                        <div className="col-lg-12">
                             <Breadcrumbs
                                 previous={[
                                     {
@@ -113,92 +113,90 @@ const Stage6CompletedWorkPage: FC<PageProps> = ({ location: { search } }) => {
                                 ]}
                                 currentDisplayName={`Your work - ${devOption?.development_option.display_name}`}
                             />
-                        </div>
-
-                        <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                            {devOption?.development_option.display_name}
-                        </h2>
-
-                        <Accordion allowZeroExpanded>
-                            <AccordionItem className="form-holder-border">
-                                <AccordionItemHeading>
-                                    <AccordionItemButton>
-                                        SWOT Analysis
-                                    </AccordionItemButton>
-                                </AccordionItemHeading>
-                                <AccordionItemPanel>
-                                    <SWOT
-                                        swotState={
-                                            stageProgresses[0]?.documents[0]
-                                                .doc_data[
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+                                {devOption?.development_option.display_name}
+                            </h2>
+                            <Accordion allowZeroExpanded>
+                                <AccordionItem className="form-holder-border">
+                                    <AccordionItemHeading>
+                                        <AccordionItemButton>
+                                            SWOT Analysis
+                                        </AccordionItemButton>
+                                    </AccordionItemHeading>
+                                    <AccordionItemPanel>
+                                        <SWOT
+                                            swotState={
+                                                stageProgresses[0]?.documents[0]
+                                                    .doc_data[
+                                                    devOption?.development_option
+                                                        .option
+                                                ]
+                                            }
+                                            devOption={devOption}
+                                            docSubmitted={true}
+                                        />
+                                    </AccordionItemPanel>
+                                </AccordionItem>
+                                <AccordionItem className="form-holder-border">
+                                    <AccordionItemHeading>
+                                        <AccordionItemButton>
+                                            Feasibility Study
+                                        </AccordionItemButton>
+                                    </AccordionItemHeading>
+                                    <AccordionItemPanel>
+                                        <FeasibilityOptionSection
+                                            workState={
+                                                stageProgresses[1]?.documents[0]
+                                                    .doc_data
+                                            }
+                                            option={
+                                                devOption?.development_option.option
+                                            }
+                                            docSubmitted={true}
+                                        />
+                                    </AccordionItemPanel>
+                                </AccordionItem>
+                                <AccordionItem className="form-holder-border">
+                                    <AccordionItemHeading>
+                                        <AccordionItemButton>
+                                            Business Plan
+                                        </AccordionItemButton>
+                                    </AccordionItemHeading>
+                                    <AccordionItemPanel>
+                                        <CapitalCostsSection
+                                            workState={
+                                                stageProgresses[2]?.documents[0]
+                                                    .doc_data
+                                            }
+                                            devOption={
                                                 devOption?.development_option
-                                                    .option
-                                            ]
-                                        }
-                                        devOption={devOption}
-                                        docSubmitted={true}
-                                    />
-                                </AccordionItemPanel>
-                            </AccordionItem>
-                            <AccordionItem className="form-holder-border">
-                                <AccordionItemHeading>
-                                    <AccordionItemButton>
-                                        Feasibility Study
-                                    </AccordionItemButton>
-                                </AccordionItemHeading>
-                                <AccordionItemPanel>
-                                    <FeasibilityOptionSection
-                                        workState={
-                                            stageProgresses[1]?.documents[0]
-                                                .doc_data
-                                        }
-                                        option={
-                                            devOption?.development_option.option
-                                        }
-                                        docSubmitted={true}
-                                    />
-                                </AccordionItemPanel>
-                            </AccordionItem>
-                            <AccordionItem className="form-holder-border">
-                                <AccordionItemHeading>
-                                    <AccordionItemButton>
-                                        Business Plan
-                                    </AccordionItemButton>
-                                </AccordionItemHeading>
-                                <AccordionItemPanel>
-                                    <CapitalCostsSection
-                                        workState={
-                                            stageProgresses[2]?.documents[0]
-                                                .doc_data
-                                        }
-                                        devOption={
-                                            devOption?.development_option
-                                        }
-                                        docSubmitted={true}
-                                    />
-                                    <RunningCostsSection
-                                        workState={
-                                            stageProgresses[2]?.documents[0]
-                                                .doc_data
-                                        }
-                                        devOption={
-                                            devOption?.development_option
-                                        }
-                                        docSubmitted={true}
-                                    />
-                                    <CashFlowSection
-                                        workState={
-                                            stageProgresses[2]?.documents[0]
-                                                .doc_data
-                                        }
-                                        devOption={
-                                            devOption?.development_option
-                                        }
-                                        docSubmitted={true}
-                                    />
-                                </AccordionItemPanel>
-                            </AccordionItem>
-                        </Accordion>
+                                            }
+                                            docSubmitted={true}
+                                        />
+                                        <RunningCostsSection
+                                            workState={
+                                                stageProgresses[2]?.documents[0]
+                                                    .doc_data
+                                            }
+                                            devOption={
+                                                devOption?.development_option
+                                            }
+                                            docSubmitted={true}
+                                        />
+                                        <CashFlowSection
+                                            workState={
+                                                stageProgresses[2]?.documents[0]
+                                                    .doc_data
+                                            }
+                                            devOption={
+                                                devOption?.development_option
+                                            }
+                                            docSubmitted={true}
+                                        />
+                                    </AccordionItemPanel>
+                                </AccordionItem>
+                            </Accordion>
+                        </div>
                     </div>
                 </section>
             </main>
