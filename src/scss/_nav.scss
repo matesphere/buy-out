@@ -20,7 +20,7 @@
 
 .cls-logo {
   max-width: 250px;
-  margin :($grid-unit * 3) auto;
+  margin: $grid-unit auto ;
   display: flex;
   align-content: center;
   overflow: hidden;
@@ -161,7 +161,7 @@
     border-radius: 0.25rem;
     z-index: 100;
     position: absolute;
-    right: 8px;
+    right: 16px;
 
     @media (min-width: 768px) {
       display: none;
@@ -210,26 +210,31 @@
     }
   }
 
-  &:not(.show) .navbar-collapse {
-    background-color: #fff;
-    height: 100vh;
-    left: -320px;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    -webkit-transition: left 250ms ease;
-    transition: left 250ms ease;
-    width: 320px;
-    z-index: 20;
+  &:not(.show) {
+    .navbar-collapse {
+      background-color: #fff;
+      height: 100vh;
+      left: -320px;
+      overflow: hidden;
+      position: fixed;
+      top: 0;
+      -webkit-transition: left 250ms ease;
+      transition: left 250ms ease;
+      width: 320px;
+      z-index: 20;
 
-    @media (min-width: 768px) {
-      display: block;
-      height: auto;
-      background-color: transparent;
-      position: relative;
-      overflow: initial;
-      width: 100%;
-      left: 0;
+      @media (min-width: 768px) {
+        display: block;
+        height: auto;
+        background-color: transparent;
+        position: relative;
+        overflow: initial;
+        width: 100%;
+        left: 0;
+      }
+    }
+    .navbar-toggler {
+      right: 0px;
     }
   }
 
@@ -237,12 +242,12 @@
     background-color: #fff;
     height: 100vh;
     left: 0px;
-    overflow: hidden;
+    overflow: scroll;
     position: fixed;
     top: 0;
     transition: left 250ms ease;
     width: 100vw;
-    z-index: 20;
+    z-index: 2;
 
     @media (min-width: 768px) {
       display: block;

@@ -37,7 +37,7 @@ const IndexPage = () => {
             </Helmet>
             <section className="container top-section">
                 <Squiggle className="squiggle" />
-                <div className="row">
+                <div className="row pt-4">
                     <div className="col-lg-8">
                         <h1 className="main-header">
                             <PinLogo />

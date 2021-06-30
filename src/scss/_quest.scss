@@ -30,7 +30,7 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 2;
+    z-index: 0;
     color: $brand-white;
     display: flex;
     height: 100%;
@@ -376,4 +376,20 @@
   100% {
     opacity: 1;
   }
+}
+
+.header-name {
+  text-align: left;
+  @media (min-width: 768px) {
+    text-align: center;
+  }
+}
+
+
+.button {
+  background-color: transparent !important;
+  color: $brand-body !important;
+  width: auto !important;
+  text-align: left !important;
+  display: inline-block !important;
 }

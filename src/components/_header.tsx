@@ -53,8 +53,10 @@ const Header: FC<{ headerText?: string }> = ({ headerText }) => {
                     <section className="container top-section">
                         <Squiggle className="squiggle" />
                         <div className="row">
+                            <Nav />
+                        </div>
+                        <div className="row">
                             <div className="col-lg-8">
-                                <Nav />
                                 <h1 className="main-header">
                                     <PinLogo />
                                     <span>

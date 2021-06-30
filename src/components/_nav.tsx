@@ -99,102 +99,107 @@ const Nav: FC = () => {
         1
 
     return (
-        <nav
-            className={`${
-                expanded ? 'show ' : ''
-            } navbar navbar-expand-md navbar-dark `}
-        >
-            <div className="navbar--inner">
-                <div className="beaner"></div>
-
-                <button
-                    type="button"
-                    className="navbar-toggler"
-                    aria-label="Button for navigation menu"
-                    onClick={() => {
-                        setExpanded(!expanded)
-                    }}
+        <>
+            <div className="col-lg-8">
+                <nav
+                    className={`${
+                        expanded ? 'show ' : ''
+                    } navbar navbar-expand-md navbar-dark `}
                 >
-                    <div className="hamburger hamburger--spin js-hamburger ">
-                        <div className="hamburger-box">
-                            <div className="hamburger-inner"></div>
+                    <div className="navbar--inner">
+                        <div className="beaner"></div>
+
+                        <button
+                            type="button"
+                            className="navbar-toggler"
+                            aria-label="Button for navigation menu"
+                            onClick={() => {
+                                setExpanded(!expanded)
+                            }}
+                        >
+                            <div className="hamburger hamburger--spin js-hamburger ">
+                                <div className="hamburger-box">
+                                    <div className="hamburger-inner"></div>
+                                </div>
+                            </div>
+                        </button>
+
+                        <div
+                            className="collapse navbar-collapse"
+                            id="navbarsExampleDefault"
+                        >
+                            <nav className="nav">
+                                <ul>
+                                    <li className="dropdown">
+                                        <Link
+                                            to="/student/team-hub/"
+                                            className="dropbtn"
+                                        >
+                                            Team hub
+                                        </Link>
+                                    </li>
+
+                                    <li className="dropdown">
+                                        <Link to="/help" className="dropbtn">
+                                            Help
+                                        </Link>
+                                    </li>
+
+                                    <li className="dropdown">
+                                        <Link
+                                            to="/student/information"
+                                            className="dropbtn"
+                                        >
+                                            Information
+                                        </Link>
+                                        {data && (
+                                            <InformationLinks
+                                                latestStageID={latestStageID}
+                                            />
+                                        )}
+                                    </li>
+
+                                    <li className="dropdown">
+                                        <Link
+                                            to="/student/team-hub/"
+                                            className="dropbtn"
+                                        >
+                                            Stages
+                                            {/*<span className="nav-links-notification"></span>*/}
+                                        </Link>
+                                        {data && (
+                                            <StageLinks
+                                                stageProgresses={
+                                                    data.user_by_pk?.student?.team
+                                                        .stage_progresses
+                                                }
+                                            />
+                                        )}
+                                    </li>
+                                </ul>
+                            </nav>
                         </div>
                     </div>
-                </button>
-
-                <div
-                    className="collapse navbar-collapse"
-                    id="navbarsExampleDefault"
-                >
-                    <nav className="nav">
-                        <ul>
-                            <li className="dropdown">
-                                <Link
-                                    to="/student/team-hub/"
-                                    className="dropbtn"
-                                >
-                                    Team hub
-                                </Link>
-                            </li>
-
-                            <li className="dropdown">
-                                <Link to="/help" className="dropbtn">
-                                    Help
-                                </Link>
-                            </li>
-
-                            <li className="dropdown">
-                                <Link
-                                    to="/student/information"
-                                    className="dropbtn"
-                                >
-                                    Information
-                                </Link>
-                                {data && (
-                                    <InformationLinks
-                                        latestStageID={latestStageID}
-                                    />
-                                )}
-                            </li>
-
-                            <li className="dropdown">
-                                <Link
-                                    to="/student/team-hub/"
-                                    className="dropbtn"
-                                >
-                                    Stages
-                                    {/*<span className="nav-links-notification"></span>*/}
-                                </Link>
-                                {data && (
-                                    <StageLinks
-                                        stageProgresses={
-                                            data.user_by_pk?.student?.team
-                                                .stage_progresses
-                                        }
-                                    />
-                                )}
-                            </li>
-
-                            {data && (
-                                <li className="dropdown">
-                                    <span>
-                                        {`${full_name} (${username})${
-                                            student?.position
-                                                ? ` - ${
-                                                      POSITION_DISPLAY_NAME[
-                                                          student?.position
-                                                      ]
-                                                  }`
-                                                : ''
-                                        }`}
-                                    </span>
-                                </li>
-                            )}
-                        </ul>
-                    </nav>
-                </div>
+                </nav>
             </div>
-        </nav>
+            <div className="col-lg-4">
+                {data && (
+                    <p className="sm-type-bigamp mt-4 header-name">
+                        <span>
+                           {`${full_name} (${username})${
+                               student?.position
+                                   ? ` - ${
+                                       POSITION_DISPLAY_NAME[
+                                           student?.position
+                                           ]
+                                   }`
+                                   : ''
+                           }`}
+                        </span>
+                    </p>
+                )}
+            </div>
+        </>
     )
 }
 
