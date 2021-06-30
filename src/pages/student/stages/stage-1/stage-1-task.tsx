@@ -192,7 +192,9 @@ const Stage1TaskPage = () => {
                                         saveWorkObj={saveWorkObj}
                                         submitWorkObj={submitWorkObj}
                                         disableSubmit={
-                                            Object.keys(workState).length < 12
+                                            Object.values(workState).filter(
+                                                Boolean
+                                            ).length < 12
                                         }
                                         docSubmitted={docSubmitted}
                                     />

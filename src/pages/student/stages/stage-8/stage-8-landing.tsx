@@ -89,11 +89,12 @@ const Stage8Page = () => {
                             </p>
                             <ul>
                                 <li className="sm-type-guitar">
-                                    Use the{' '}
-                                    <Link to="/student/stage-7/presentation-tips">
-                                        tips here
+                                    Follow{' '}
+                                    <Link to="/student/stage-8/task">
+                                        this link
                                     </Link>{' '}
-                                    to help you with giving your presentation.
+                                    to reflect on the process and complete the
+                                    Quest.
                                 </li>
                             </ul>
                         </div>

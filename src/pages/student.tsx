@@ -40,6 +40,7 @@ import Stage7Landing from './student/stages/stage-7/stage-7-landing'
 import Stage7PresentationTips from './student/stages/stage-7/stage-7-presentation-tips'
 
 import Stage8Landing from './student/stages/stage-8/stage-8-landing'
+import Stage8Task from './student/stages/stage-8/stage-8-task'
 
 import { UserStateContext } from '../utils/user-state'
 
@@ -145,6 +146,7 @@ const Routes = () => {
                 />
 
                 <LoggedInRoute path="/stage-8" component={Stage8Landing} />
+                <LoggedInRoute path="/stage-8/task" component={Stage8Task} />
             </Router>
             <Footer />
         </>

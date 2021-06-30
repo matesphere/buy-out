@@ -68,6 +68,9 @@ const StageLinks: FC<{
         {stageProgresses.map(({ stage_id, status }, i) => (
             <Link
                 key={i}
+                className={`${
+                    i + 1 === stageProgresses.length ? 'latest' : ''
+                }`}
                 to={`/student/stage-${stage_id}${
                     (status === 'completed' && '/complete') || ''
                 }`}
@@ -170,8 +173,8 @@ const Nav: FC = () => {
                                         {data && (
                                             <StageLinks
                                                 stageProgresses={
-                                                    data.user_by_pk?.student?.team
-                                                        .stage_progresses
+                                                    data.user_by_pk?.student
+                                                        ?.team.stage_progresses
                                                 }
                                             />
                                         )}
@@ -186,15 +189,15 @@ const Nav: FC = () => {
                 {data && (
                     <p className="sm-type-bigamp mt-4 header-name">
                         <span>
-                           {`${full_name} (${username})${
-                               student?.position
-                                   ? ` - ${
-                                       POSITION_DISPLAY_NAME[
-                                           student?.position
-                                           ]
-                                   }`
-                                   : ''
-                           }`}
+                            {`${full_name} (${username})${
+                                student?.position
+                                    ? ` - ${
+                                          POSITION_DISPLAY_NAME[
+                                              student?.position
+                                          ]
+                                      }`
+                                    : ''
+                            }`}
                         </span>
                     </p>
                 )}

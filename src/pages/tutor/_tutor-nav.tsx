@@ -49,7 +49,7 @@ const Nav = () => {
                                 </Link>
                             </li>
                             <li className="dropdown">
-                                <p className="dropbtn">Assessment Help</p>
+                                <p className="dropbtn">Help</p>
                                 <div className="dropdown-content">
                                     <Link to="/tutor/tutor-guide">
                                         Tutor guide
@@ -60,7 +60,6 @@ const Nav = () => {
                                     <Link to="/tutor/team-assessment">
                                         Team Assessment
                                     </Link>
-
                                 </div>
                             </li>
                         </ul>
