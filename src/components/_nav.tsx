@@ -17,6 +17,7 @@ import '../scss/index.scss'
 const NAV_QUERY = gql`
     query NavQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             full_name
             username
             student {
@@ -177,12 +178,15 @@ const Nav: FC = () => {
                             {data && (
                                 <li className="dropdown">
                                     <span>
-                                        {full_name} ({username}) -{' '}
-                                        {
-                                            POSITION_DISPLAY_NAME[
-                                                student?.position
-                                            ]
-                                        }
+                                        {`${full_name} (${username})${
+                                            student?.position
+                                                ? ` - ${
+                                                      POSITION_DISPLAY_NAME[
+                                                          student?.position
+                                                      ]
+                                                  }`
+                                                : ''
+                                        }`}
                                     </span>
                                 </li>
                             )}

@@ -316,6 +316,7 @@ const ConfirmModal = ({
 const CREATE_TEAM_QUERY = gql`
     query CreateTeamQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             tutor {
                 id
             }

@@ -143,6 +143,7 @@ export const TEAM_QUERY = gql`
 export const TUTOR_CURRENT_QUEST_QUERY = gql`
     query TutorCurrentQuestQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             full_name
             username
             email

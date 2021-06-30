@@ -45,11 +45,11 @@ const Stage6TipsPage = () => {
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="leaf crumb-caps">
-                                    Presentation Hints
+                                    Preparing
                                 </span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Presentation Hints
+                                Preparing Your Presentation
                             </h2>
 
                             <p className="sm-type-lead mb-3">
@@ -162,6 +162,7 @@ const Stage6TipsPage = () => {
                             </div>
                         </div>
                     </div>
+                    <Link to="/student/stage-6">Back to Stage 6</Link>
                 </section>
             </main>
         </>

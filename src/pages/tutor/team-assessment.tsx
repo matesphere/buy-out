@@ -17,6 +17,7 @@ import '../../scss/index.scss'
 const TEAM_ASSESSMENT_QUERY = gql`
     query TeamAssessmentQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             full_name
             tutor {
                 school {

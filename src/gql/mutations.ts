@@ -69,7 +69,7 @@ export const SET_TEAM_POSITIONS_AND_LOGO = gql`
     mutation SetTeamPositions(
         $objects: [student_insert_input!]!
         $stageProgressId: uuid!
-        $team_id: uuid!
+        $teamId: uuid!
         $logo: String!
     ) {
         insert_student(
@@ -100,7 +100,7 @@ export const SET_TEAM_POSITIONS_AND_LOGO = gql`
                 team_id
             }
         }
-        update_team_by_pk(pk_columns: { id: $team_id }, _set: { logo: $logo }) {
+        update_team_by_pk(pk_columns: { id: $teamId }, _set: { logo: $logo }) {
             id
             logo
         }

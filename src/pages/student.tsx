@@ -36,8 +36,8 @@ import Stage6Landing from './student/stages/stage-6/stage-6-landing'
 import Stage6PresentationTips from './student/stages/stage-6/stage-6-presentation-tips'
 import Stage6CompletedWork from './student/stages/stage-6/stage-6-completed-work'
 
-import Stage7Page from './student/stages/stage-7/stage-7'
-import Stage7TipsPage from './student/stages/stage-7/presentation-tips'
+import Stage7Landing from './student/stages/stage-7/stage-7-landing'
+import Stage7PresentationTips from './student/stages/stage-7/stage-7-presentation-tips'
 
 import Stage8Page from './student/stages/stage-8/stage-8'
 
@@ -138,10 +138,10 @@ const Routes = () => {
                     component={Stage6CompletedWork}
                 />
 
-                <LoggedInRoute path="/stage-7" component={Stage7Page} />
+                <LoggedInRoute path="/stage-7" component={Stage7Landing} />
                 <LoggedInRoute
                     path="/stage-7/presentation-tips"
-                    component={Stage7TipsPage}
+                    component={Stage7PresentationTips}
                 />
 
                 <LoggedInRoute path="/stage-8" component={Stage8Page} />

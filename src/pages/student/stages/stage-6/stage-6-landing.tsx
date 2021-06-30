@@ -149,7 +149,7 @@ const Stage6Page = () => {
                                 </h4>
                                 <div className="form-holder-border">
                                     <p className="sm-type-lead mb-2">
-                                        Part I - Presentation Tips
+                                        Part I - Presentation Preparation Tips
                                     </p>
                                     <ul>
                                         <li className="sm-type-guitar">
@@ -157,7 +157,8 @@ const Stage6Page = () => {
                                             <Link to="/student/stage-6/presentation-tips">
                                                 tips here
                                             </Link>{' '}
-                                            to help you with your presentation.
+                                            to help you with preparing your
+                                            presentation.
                                         </li>
                                     </ul>
                                 </div>
@@ -210,6 +211,7 @@ const Stage6Page = () => {
                             </div>
                         </div>
                     </div>
+                    <Link to="/student/team-hub">Back to Team Hub</Link>
                 </section>
             </main>
         </>

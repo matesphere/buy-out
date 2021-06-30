@@ -7,7 +7,9 @@ const Nav = () => {
     const [expanded, setExpanded] = useState(false)
     return (
         <nav
-            className={`${expanded ? 'show ' : ''} navbar navbar-expand-md navbar-dark `}
+            className={`${
+                expanded ? 'show ' : ''
+            } navbar navbar-expand-md navbar-dark `}
         >
             <div className="navbar--inner">
                 <div className="beaner"></div>
@@ -34,17 +36,27 @@ const Nav = () => {
                     <nav className="nav">
                         <ul>
                             <li className="dropdown">
-                                <Link to="/tutor/hub" className="dropbtn">Tutor hub</Link>
+                                <Link to="/tutor/hub" className="dropbtn">
+                                    Tutor hub
+                                </Link>
                             </li>
                             <li className="dropdown">
-                                <Link to="/tutor/current-quests/" className="dropbtn">Current Quests</Link>
+                                <Link
+                                    to="/tutor/current-quests"
+                                    className="dropbtn"
+                                >
+                                    Current Quests
+                                </Link>
                             </li>
                             <li className="dropdown">
                                 <p className="dropbtn">Assessment Help</p>
                                 <div className="dropdown-content">
-                                    <Link to="/tutor/assessment/">Assessment</Link>
-                                    <Link to="/tutor/team-assessment/">Team Assessment</Link>
-
+                                    <Link to="/tutor/assessment">
+                                        Assessment
+                                    </Link>
+                                    <Link to="/tutor/team-assessment">
+                                        Team Assessment
+                                    </Link>
                                 </div>
                             </li>
                         </ul>

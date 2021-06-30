@@ -65,16 +65,21 @@ const Stage2TaskPage = () => {
     // const [showFilters, setShowFilters] = useState(false)
     const [logo, setLogo] = useState('')
     const [positions, setPositions] = useState([])
+    const [submitComplete, setSubmitComplete] = useState(false)
 
     // const [submitLogo, submitLogoResponse] = useAuthMutation(SET_TEAM_LOGO)
     const [submitPositions, submitPositionResponse] = useAuthMutation<
         SetTeamPositions,
         SetTeamPositionsVariables
-    >(SET_TEAM_POSITIONS_AND_LOGO, {
-        query: STAGE_2_TASK_QUERY,
-        variables: {},
-        idRequired: 'teamId',
-    })
+    >(
+        SET_TEAM_POSITIONS_AND_LOGO,
+        {
+            query: STAGE_2_TASK_QUERY,
+            variables: {},
+            idRequired: 'teamId',
+        },
+        () => setSubmitComplete(true)
+    )
 
     const {
         loading,
@@ -97,106 +102,27 @@ const Stage2TaskPage = () => {
             />
         )
 
+    const { id: teamId } = pageData.team_by_pk
     const { id: stageProgressId } = pageData.team_by_pk?.stage_progresses[0]
-    const submitted = !!pageData.team_by_pk?.students[0].position
+    const submitted = !!pageData.team_by_pk?.logo
 
     const imageData = useStaticQuery(graphql`
         query {
-            image1: file(relativePath: { eq: "team-logo-1.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image2: file(relativePath: { eq: "team-logo-2.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image3: file(relativePath: { eq: "team-logo-3.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image4: file(relativePath: { eq: "team-logo-4.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image5: file(relativePath: { eq: "team-logo-5.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image6: file(relativePath: { eq: "team-logo-6.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image7: file(relativePath: { eq: "team-logo-7.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image8: file(relativePath: { eq: "team-logo-8.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image9: file(relativePath: { eq: "team-logo-9.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image10: file(relativePath: { eq: "team-logo-10.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
+            allImageSharp(
+                filter: { fixed: { originalName: { regex: "/team-logo-/" } } }
+            ) {
+                edges {
+                    node {
+                        id
+                        fixed {
+                            originalName
+                        }
+                        gatsbyImageData
+                    }
                 }
             }
         }
     `)
-
-    const stage2Logo = [
-        {
-            id: 'team-logo-1',
-            image: imageData.image1.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-2',
-            image: imageData.image2.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-3',
-            image: imageData.image3.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-4',
-            image: imageData.image4.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-5',
-            image: imageData.image5.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-6',
-            image: imageData.image6.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-7',
-            image: imageData.image7.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-8',
-            image: imageData.image8.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-9',
-            image: imageData.image9.childImageSharp.gatsbyImageData,
-        },
-        {
-            id: 'team-logo-10',
-            image: imageData.image10.childImageSharp.gatsbyImageData,
-        },
-    ]
 
     return (
         <>
@@ -280,58 +206,60 @@ const Stage2TaskPage = () => {
                                             Choose a logo for your team:
                                         </p>
                                         <div className="row">
-                                            {stage2Logo.map(({ id, image }) => (
-                                                <div
-                                                    className="col-lg-3 mb-2"
-                                                    key={id}
-                                                >
-                                                    <div className="multiple-choice">
-                                                        <input
-                                                            className="form-control"
-                                                            id={id}
-                                                            value={id}
-                                                            checked={
-                                                                logo === id
-                                                            }
-                                                            onChange={() =>
-                                                                setLogo(id)
-                                                            }
-                                                            type="radio"
-                                                            name="choose-logo"
-                                                        />
-                                                        <label
-                                                            className="form-label"
-                                                            htmlFor={id}
-                                                        >
-                                                            <GatsbyImage
-                                                                alt="logo"
-                                                                image={image}
-                                                            />
-                                                            <span className="visuallyhidden">
-                                                                {id}
-                                                            </span>
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                        {/* <SaveSubmitSection
-                                            submitWorkObj={{
-                                                call: () => {
-                                                    submitLogo({
-                                                        variables: {
-                                                            teamId: pageData
-                                                                .team_by_pk?.id,
-                                                            logo,
+                                            {imageData.allImageSharp.edges.map(
+                                                ({
+                                                    node: {
+                                                        fixed: {
+                                                            originalName: id,
                                                         },
-                                                    })
-                                                },
-                                                response: submitLogoResponse,
-                                            }}
-                                            disableSubmit={false}
-                                        /> */}
+                                                        gatsbyImageData,
+                                                    },
+                                                }) => (
+                                                    <div
+                                                        className="col-lg-3 mb-2"
+                                                        key={id}
+                                                    >
+                                                        <div className="multiple-choice">
+                                                            <input
+                                                                className="form-control"
+                                                                id={id}
+                                                                value={id}
+                                                                checked={
+                                                                    logo === id
+                                                                }
+                                                                onChange={
+                                                                    submitted
+                                                                        ? () => {}
+                                                                        : () =>
+                                                                              setLogo(
+                                                                                  id
+                                                                              )
+                                                                }
+                                                                type="radio"
+                                                                name="choose-logo"
+                                                            />
+                                                            <label
+                                                                className="form-label"
+                                                                htmlFor={id}
+                                                            >
+                                                                <GatsbyImage
+                                                                    alt="logo"
+                                                                    image={
+                                                                        gatsbyImageData
+                                                                    }
+                                                                />
+                                                                <span className="visuallyhidden">
+                                                                    {id}
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                )
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
+
                                 <div className="form-holder-border">
                                     <div className="form-holder">
                                         <p className="sm-type-lead mb-2">
@@ -459,11 +387,15 @@ const Stage2TaskPage = () => {
                                                                     positions
                                                                 ),
                                                             stageProgressId,
+                                                            teamId,
+                                                            logo,
                                                         },
                                                     })
                                                 },
                                                 response:
                                                     submitPositionResponse,
+                                                submitComplete,
+                                                setSubmitComplete,
                                             }}
                                             disableSubmit={
                                                 !logo ||

@@ -48,7 +48,7 @@ const Stage7Page = () => {
                                 <span className="leaf crumb-caps">Stage 7</span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Present findings
+                                Present Findings
                             </h2>
                             <div className="blue-holder-border">
                                 <div className="small-image">
@@ -62,10 +62,11 @@ const Stage7Page = () => {
                                 </div>
                                 <p className="sm-type-lead small-image-holder">
                                     Now it's time for your team to present your
-                                    findings to the community. Use the presentation
-                                    you prepared in the previous stage and make sure
-                                    you make it clear to your audience why you have
-                                    made the choices you have!
+                                    findings to the community. Use the
+                                    presentation you prepared in the previous
+                                    stage and make sure you make it clear to
+                                    your audience why you have made the choices
+                                    you have!
                                 </p>
                             </div>
                             <div className="mt-4 mb-2 image-holder">
@@ -88,9 +89,27 @@ const Stage7Page = () => {
                                     </span>
                                 </h4>
                                 <div className="form-holder-border">
+                                    <p className="sm-type-lead mb-2">
+                                        Part I - Presentation Tips
+                                    </p>
                                     <ul>
                                         <li className="sm-type-guitar">
-                                            Present your findings.
+                                            Use the{' '}
+                                            <Link to="/student/stage-7/presentation-tips">
+                                                tips here
+                                            </Link>{' '}
+                                            to help you with giving your
+                                            presentation.
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="form-holder-border">
+                                    <p className="sm-type-lead mb-2">
+                                        Part II - Go For It
+                                    </p>
+                                    <ul>
+                                        <li className="sm-type-guitar">
+                                            Deliver your presentation!
                                         </li>
                                     </ul>
                                 </div>
@@ -105,11 +124,12 @@ const Stage7Page = () => {
                             </p>
                             <div className="side-grey">
                                 <p className="sm-type-amp">
-                                    Delivery your presentation.
+                                    Deliver your presentation.
                                 </p>
                             </div>
                         </div>
                     </div>
+                    <Link to="/student/team-hub">Back to Team Hub</Link>
                 </section>
             </main>
         </>

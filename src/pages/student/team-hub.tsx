@@ -34,8 +34,10 @@ import '../../scss/index.scss'
 const TEAM_HUB_QUERY = gql`
     query TeamHubQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             full_name
             student {
+                id
                 team {
                     name
                     logo
@@ -75,6 +77,7 @@ const TEAM_HUB_QUERY = gql`
 const TEAM_HUB_SUB = gql`
     subscription TeamHubSub($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             full_name
             student {
                 team {
@@ -107,6 +110,8 @@ const getStageClasses = (stageStatus, docStatus) => {
         case 'unlocked':
             if (docStatus === 'submitted') return 'quest-step-submitted'
             else return 'quest-step-unlocked quest-step-highlight'
+        case 'submitted':
+            return 'quest-step-submitted'
         case 'completed':
             return 'quest-step-complete'
         default:
@@ -135,7 +140,9 @@ const StageButton = ({ id, title, stageStatus, docStatus }) => (
                             Completed
                         </span>
                     )}
-                    {stageStatus === 'unlocked' && docStatus === 'submitted' && (
+                    {((stageStatus === 'unlocked' &&
+                        docStatus === 'submitted') ||
+                        stageStatus === 'submitted') && (
                         <span className="redorange-highlight sm-type-amp">
                             <br />
                             Submitted
@@ -193,15 +200,6 @@ const TeamInfoSection = ({
             {/*</div>*/}
 
             <div className="row">
-                <div className="col-lg-3">
-                    <div className="form-holder-border">
-                        <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
-                            Team logo:
-                        </p>
-                        <GatsbyImage alt="" image={image} />
-                    </div>
-                </div>
-
                 <div className="col-lg-4">
                     <div className="form-holder-border">
                         <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
@@ -229,6 +227,17 @@ const TeamInfoSection = ({
                         </ul>
                     </div>
                 </div>
+
+                {image && (
+                    <div className="col-lg-3">
+                        <div className="form-holder-border">
+                            <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
+                                Team logo:
+                            </p>
+                            <GatsbyImage alt="" image={image} />
+                        </div>
+                    </div>
+                )}
 
                 {devOptions.length > 0 && (
                     <div className="col-lg-5">
@@ -269,12 +278,20 @@ const TeamInfoSection = ({
     </>
 )
 
-const TeamHub = () => {
-    const data = useStaticQuery(graphql`
+const TeamHub: FC = () => {
+    const imageData = useStaticQuery(graphql`
         query {
-            image1: file(relativePath: { eq: "team-logo.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
+            allImageSharp(
+                filter: { fixed: { originalName: { regex: "/team-logo-/" } } }
+            ) {
+                edges {
+                    node {
+                        id
+                        fixed {
+                            originalName
+                        }
+                        gatsbyImageData
+                    }
                 }
             }
         }
@@ -331,6 +348,7 @@ const TeamHub = () => {
         full_name: fullName,
         student: {
             team: {
+                logo,
                 name: teamName,
                 stage_progresses: stageProgresses,
                 students,
@@ -348,6 +366,14 @@ const TeamHub = () => {
 
         return <StageButton {...{ ...stage, stageStatus, docStatus }} />
     })
+
+    const teamLogo = imageData.allImageSharp.edges.find(
+        ({
+            node: {
+                fixed: { originalName },
+            },
+        }) => originalName === logo
+    )
 
     return (
         <>
@@ -369,9 +395,7 @@ const TeamHub = () => {
                                 teamName={teamName}
                                 students={students}
                                 devOptions={devOptions}
-                                image={
-                                    data.image1.childImageSharp.gatsbyImageData
-                                }
+                                image={teamLogo.node.gatsbyImageData}
                             />
                         </div>
                     </div>

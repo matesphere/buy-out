@@ -46,6 +46,7 @@ import 'react-tabs/style/react-tabs.css'
 const TUTOR_CURRENT_QUEST_SUB = gql`
     subscription TutorCurrentQuestSub($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             full_name
             username
             email

@@ -19,6 +19,7 @@ import '../../scss/index.scss'
 const ASSESSMENT_QUERY = gql`
     query AssessmentQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             full_name
             tutor {
                 school {

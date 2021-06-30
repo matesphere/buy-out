@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+
 import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import TickSheet from '../../../../assets/tick-sheet.svg'
 
 const Stage7TipsPage = () => {
     const data = useStaticQuery(graphql`
@@ -33,8 +33,22 @@ const Stage7TipsPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Stage 7',
+                                        url: '/student/stage-7/',
+                                    },
+                                ]}
+                                currentDisplayName="Presentation Tips"
+                            />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Presentation Hints
+                                Presentation Tips
                             </h2>
 
                             <p className="sm-type-lead mb-3">
@@ -154,6 +168,7 @@ const Stage7TipsPage = () => {
                             </div>
                         </div>
                     </div>
+                    <Link to="/student/stage-7">Back to Stage 7</Link>
                 </section>
             </main>
         </>

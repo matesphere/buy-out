@@ -19,6 +19,7 @@ import '../../scss/index.scss'
 const TUTOR_HUB_QUERY = gql`
     query TutorHubQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             full_name
             username
             email

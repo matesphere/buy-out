@@ -14,7 +14,7 @@ const HEADER_TEXT: { [pathname: string]: string } = {
     '/tutor/hub': 'Tutor Hub',
     '/tutor/current-quests': 'Current Quests',
     '/tutor/add-students': 'Add Students',
-    '/tutor/add-students': 'Create Teams',
+    '/tutor/create-team': 'Create Teams',
     '/tutor/stage-1/submitted': 'Stage 1',
     '/tutor/stage-2/submitted': 'Stage 2',
     '/tutor/stage-3/submitted': 'Stage 3',
@@ -22,11 +22,10 @@ const HEADER_TEXT: { [pathname: string]: string } = {
     '/tutor/stage-5/submitted': 'Stage 5',
 }
 
-const HIDE_LINKS: Array<string> = ['/tutor/add-students', '/tutor/add-students']
+const HIDE_LINKS: Array<string> = ['/tutor/add-students', '/tutor/create-team']
 
 const TutorHeader = ({
     headerText,
-    hideLinks,
 }: {
     headerText?: string
     hideLinks?: boolean

@@ -24,6 +24,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 const LOGGED_IN_QUERY = gql`
     query LoggedInQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
+            id
             first_name
         }
     }
