@@ -315,69 +315,70 @@ const TutorCurrentQuestPage = () => {
                                 <Tab key={i}>Current Quest {i + 1}</Tab>
                             ))}
                         </TabList>
-
-                        {quests.map((quest, i) => (
-                            <TabPanel key={i}>
-                                {quest.teams.map(
-                                    (
-                                        {
-                                            id,
-                                            name,
-                                            students,
-                                            team_development_options,
-                                            stage_progresses,
-                                        },
-                                        i
-                                    ) => (
-                                        <Accordion
-                                            key={i}
-                                            allowMultipleExpanded
-                                            allowZeroExpanded
-                                            preExpanded={expanded}
-                                            onChange={(ids) => setExpanded(ids)}
-                                        >
-                                            <AccordionItem
-                                                className="side-grey"
-                                                uuid={id}
+                        <section className="mt-2">
+                            {quests.map((quest, i) => (
+                                <TabPanel key={i}>
+                                    {quest.teams.map(
+                                        (
+                                            {
+                                                id,
+                                                name,
+                                                students,
+                                                team_development_options,
+                                                stage_progresses,
+                                            },
+                                            i
+                                        ) => (
+                                            <Accordion
+                                                key={i}
+                                                allowMultipleExpanded
+                                                allowZeroExpanded
+                                                preExpanded={expanded}
+                                                onChange={(ids) => setExpanded(ids)}
                                             >
-                                                <AccordionItemHeading>
-                                                    <AccordionItemButton>
-                                                        {name}
-                                                    </AccordionItemButton>
-                                                </AccordionItemHeading>
-                                                <AccordionItemPanel>
-                                                    <div className="row tutor">
-                                                        <div className="col-lg-4">
-                                                            <TeamInfoPanel
-                                                                teamName={name}
-                                                                devOptions={
-                                                                    team_development_options
-                                                                }
-                                                                students={
-                                                                    students
-                                                                }
-                                                            />
+                                                <AccordionItem
+                                                    className="side-grey"
+                                                    uuid={id}
+                                                >
+                                                    <AccordionItemHeading>
+                                                        <AccordionItemButton>
+                                                            {name}
+                                                        </AccordionItemButton>
+                                                    </AccordionItemHeading>
+                                                    <AccordionItemPanel>
+                                                        <div className="row tutor">
+                                                            <div className="col-lg-4">
+                                                                <TeamInfoPanel
+                                                                    teamName={name}
+                                                                    devOptions={
+                                                                        team_development_options
+                                                                    }
+                                                                    students={
+                                                                        students
+                                                                    }
+                                                                />
+                                                            </div>
+                                                            <div className="col-lg-8 mt-4">
+                                                                <StageInfoPanel
+                                                                    stages={stage}
+                                                                    stageProgresses={
+                                                                        stage_progresses
+                                                                    }
+                                                                    devOptions={
+                                                                        devOptions
+                                                                    }
+                                                                    teamId={id}
+                                                                />
+                                                            </div>
                                                         </div>
-                                                        <div className="col-lg-8 mt-4">
-                                                            <StageInfoPanel
-                                                                stages={stage}
-                                                                stageProgresses={
-                                                                    stage_progresses
-                                                                }
-                                                                devOptions={
-                                                                    devOptions
-                                                                }
-                                                                teamId={id}
-                                                            />
-                                                        </div>
-                                                    </div>
-                                                </AccordionItemPanel>
-                                            </AccordionItem>
-                                        </Accordion>
-                                    )
-                                )}
-                            </TabPanel>
-                        ))}
+                                                    </AccordionItemPanel>
+                                                </AccordionItem>
+                                            </Accordion>
+                                        )
+                                    )}
+                                </TabPanel>
+                            ))}
+                        </section>
                     </Tabs>
                 </section>
             </main>
