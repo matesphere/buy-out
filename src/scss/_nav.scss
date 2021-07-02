@@ -111,6 +111,13 @@
     display: none;
     position: absolute;
   }
+  .latest {
+    background-color: $brand-green;
+    color: white;
+    &:hover {
+      background-color: $brand-midgreen;
+    }
+  }
 }
 
 .dropdown-content a {
