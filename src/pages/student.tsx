@@ -78,81 +78,98 @@ const Routes = () => {
     return (
         <>
             <Header />
-            <Router basepath="/student">
-                <Loading default />
-                <LoggedInRoute path="/team-hub" component={TeamHub} />
-                <LoggedInRoute path="/information" component={Information} />
+            <div style={{ minHeight: '1000px' }}>
+                <Router basepath="/student">
+                    <Loading default />
+                    <LoggedInRoute path="/team-hub" component={TeamHub} />
+                    <LoggedInRoute
+                        path="/information"
+                        component={Information}
+                    />
 
-                <LoggedInRoute path="/stage-1" component={Stage1Landing} />
-                <LoggedInRoute path="/stage-1/task" component={Stage1Task} />
-                <LoggedInRoute
-                    path="/stage-1/complete"
-                    component={Stage1Complete}
-                />
+                    <LoggedInRoute path="/stage-1" component={Stage1Landing} />
+                    <LoggedInRoute
+                        path="/stage-1/task"
+                        component={Stage1Task}
+                    />
+                    <LoggedInRoute
+                        path="/stage-1/complete"
+                        component={Stage1Complete}
+                    />
 
-                <LoggedInRoute path="/stage-2" component={Stage2Landing} />
-                <LoggedInRoute path="/stage-2/task" component={Stage2Task} />
-                <LoggedInRoute
-                    path="/stage-2/complete"
-                    component={Stage2PageComplete}
-                />
-                <LoggedInRoute path="/stage-3" component={Stage3Landing} />
-                <LoggedInRoute
-                    path="/stage-3/options"
-                    component={Stage3ChooseOptions}
-                />
-                <LoggedInRoute path="/stage-3/swot" component={Stage3Swot} />
-                <LoggedInRoute
-                    path="/stage-3/swot/example"
-                    component={Stage3SwotExample}
-                />
-                <LoggedInRoute
-                    path="/stage-3/complete"
-                    component={Stage3Complete}
-                />
+                    <LoggedInRoute path="/stage-2" component={Stage2Landing} />
+                    <LoggedInRoute
+                        path="/stage-2/task"
+                        component={Stage2Task}
+                    />
+                    <LoggedInRoute
+                        path="/stage-2/complete"
+                        component={Stage2PageComplete}
+                    />
+                    <LoggedInRoute path="/stage-3" component={Stage3Landing} />
+                    <LoggedInRoute
+                        path="/stage-3/options"
+                        component={Stage3ChooseOptions}
+                    />
+                    <LoggedInRoute
+                        path="/stage-3/swot"
+                        component={Stage3Swot}
+                    />
+                    <LoggedInRoute
+                        path="/stage-3/swot/example"
+                        component={Stage3SwotExample}
+                    />
+                    <LoggedInRoute
+                        path="/stage-3/complete"
+                        component={Stage3Complete}
+                    />
 
-                <LoggedInRoute path="/stage-4" component={Stage4Landing} />
-                <LoggedInRoute
-                    path="/stage-4/options"
-                    component={Stage4ChooseOptions}
-                />
-                <LoggedInRoute
-                    path="/stage-4/feasibility"
-                    component={Stage4Feasibility}
-                />
-                <LoggedInRoute
-                    path="/stage-4/complete"
-                    component={Stage4Complete}
-                />
-                <LoggedInRoute path="/stage-5" component={Stage5Landing} />
-                <LoggedInRoute
-                    path="/stage-5/business-plan"
-                    component={Stage5BusinessPlan}
-                />
-                <LoggedInRoute
-                    path="/stage-5/complete"
-                    component={Stage5Complete}
-                />
+                    <LoggedInRoute path="/stage-4" component={Stage4Landing} />
+                    <LoggedInRoute
+                        path="/stage-4/options"
+                        component={Stage4ChooseOptions}
+                    />
+                    <LoggedInRoute
+                        path="/stage-4/feasibility"
+                        component={Stage4Feasibility}
+                    />
+                    <LoggedInRoute
+                        path="/stage-4/complete"
+                        component={Stage4Complete}
+                    />
+                    <LoggedInRoute path="/stage-5" component={Stage5Landing} />
+                    <LoggedInRoute
+                        path="/stage-5/business-plan"
+                        component={Stage5BusinessPlan}
+                    />
+                    <LoggedInRoute
+                        path="/stage-5/complete"
+                        component={Stage5Complete}
+                    />
 
-                <LoggedInRoute path="/stage-6" component={Stage6Landing} />
-                <LoggedInRoute
-                    path="/stage-6/presentation-tips"
-                    component={Stage6PresentationTips}
-                />
-                <LoggedInRoute
-                    path="/stage-6/completed-work"
-                    component={Stage6CompletedWork}
-                />
+                    <LoggedInRoute path="/stage-6" component={Stage6Landing} />
+                    <LoggedInRoute
+                        path="/stage-6/presentation-tips"
+                        component={Stage6PresentationTips}
+                    />
+                    <LoggedInRoute
+                        path="/stage-6/completed-work"
+                        component={Stage6CompletedWork}
+                    />
 
-                <LoggedInRoute path="/stage-7" component={Stage7Landing} />
-                <LoggedInRoute
-                    path="/stage-7/presentation-tips"
-                    component={Stage7PresentationTips}
-                />
+                    <LoggedInRoute path="/stage-7" component={Stage7Landing} />
+                    <LoggedInRoute
+                        path="/stage-7/presentation-tips"
+                        component={Stage7PresentationTips}
+                    />
 
-                <LoggedInRoute path="/stage-8" component={Stage8Landing} />
-                <LoggedInRoute path="/stage-8/task" component={Stage8Task} />
-            </Router>
+                    <LoggedInRoute path="/stage-8" component={Stage8Landing} />
+                    <LoggedInRoute
+                        path="/stage-8/task"
+                        component={Stage8Task}
+                    />
+                </Router>
+            </div>
             <Footer />
         </>
     )
