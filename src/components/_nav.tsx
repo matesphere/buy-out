@@ -25,6 +25,7 @@ const NAV_QUERY = gql`
                 position
                 team {
                     id
+                    name
                     stage_progresses(order_by: { stage_id: asc }) {
                         stage_id
                         status
@@ -188,8 +189,8 @@ const Nav: FC = () => {
             </div>
             <div className="col-lg-4">
                 {data && (
-                    <p className="sm-type-bigamp mt-4 header-name">
-                        <span>
+                    <>
+                        <p className="sm-type-bigamp mt-4 header-name">
                             {`${full_name} (${username})${
                                 student?.position
                                     ? ` - ${
@@ -199,8 +200,10 @@ const Nav: FC = () => {
                                       }`
                                     : ''
                             }`}
-                        </span>
-                    </p>
+                            <br />
+                            <span className="sm-type-bigamp--medium">{student.team.name}</span>
+                        </p>
+                    </>
                 )}
             </div>
         </>

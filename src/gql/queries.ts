@@ -10,6 +10,7 @@ export const STAGE_QUERY = gql`
     ) {
         team_by_pk(id: $team_id) {
             id
+            name
             stage_progresses(where: { stage_id: { _eq: $stage_id } }) {
                 id
                 stage_id
