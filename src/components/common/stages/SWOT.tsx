@@ -113,8 +113,8 @@ export const SWOT: FC<SWOTProps> = ({
         <h3 className="sm-type-drum sm-type-drum--medium mt-2 mb-2">
             {devOption.display_name}
         </h3>
-        <div className="row mt-4">
-            <div className="col-lg-6">
+        <div className="rowgrid mt-4">
+            <div className="col-grid">
                 <div className="form-holder-border">
                     <div id="more-detail-hint">
                         <h4 className="sm-type-drum sm-type-drum--medium mb-1 red-highlight">
@@ -134,7 +134,7 @@ export const SWOT: FC<SWOTProps> = ({
                 </div>
             </div>
 
-            <div className="col-lg-6">
+            <div className="col-grid">
                 <div className="form-holder-border">
                     <div id="more-detail-hint">
                         <h4 className="sm-type-drum sm-type-drum--medium mb-1 greendark-highlight">
@@ -153,10 +153,7 @@ export const SWOT: FC<SWOTProps> = ({
                     </div>
                 </div>
             </div>
-        </div>
-
-        <div className="row mt-4">
-            <div className="col-lg-6">
+            <div className="col-grid">
                 <div className="form-holder-border">
                     <div id="more-detail-hint">
                         <h4 className="sm-type-drum sm-type-drum--medium mb-1 green-highlight">
@@ -180,7 +177,7 @@ export const SWOT: FC<SWOTProps> = ({
                 </div>
             </div>
 
-            <div className="col-lg-6">
+            <div className="col-grid">
                 <div className="form-holder-border">
                     <div id="more-detail-hint">
                         <h4 className="sm-type-drum sm-type-drum--medium mb-1">
