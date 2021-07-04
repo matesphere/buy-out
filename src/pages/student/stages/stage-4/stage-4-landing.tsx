@@ -2,6 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -51,7 +52,15 @@ const Stage4LandingPage = () => {
     )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !data)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { title: stageTitle } = pageData.stage_by_pk
     const { team_development_options: devOptions } = pageData.team_by_pk

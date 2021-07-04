@@ -139,6 +139,9 @@ const IntroductionPage = () => {
                     <div className="row">
                         <div className="col-lg-12"></div>
                     </div>
+                    <Link to="/student/team-hub" className="btn-solid-reg">
+                        Go to Team Hub
+                    </Link>
                 </section>
 
                 <Footer />

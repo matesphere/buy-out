@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react'
 import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
+import { navigate } from '@reach/router'
 
 const signedOutUserInfo = {
     username: '',
@@ -65,6 +66,10 @@ export const UserStateProvider = ({ children }) => {
                       }
                     : signedOutUserInfo
             )
+
+            if (nextAuthState !== AuthState.SignedIn) {
+                navigate('/login')
+            }
         })
     }, [])
 

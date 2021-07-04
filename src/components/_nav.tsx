@@ -148,6 +148,12 @@ const Nav: FC = () => {
                                         <Link to="/help" className="dropbtn">
                                             Help
                                         </Link>
+                                        <div className="dropdown-content">
+                                            <Link to="/help">Quest Help</Link>
+                                            <Link to="/introduction">
+                                                Introduction
+                                            </Link>
+                                        </div>
                                     </li>
 
                                     <li className="dropdown">
@@ -201,7 +207,9 @@ const Nav: FC = () => {
                                     : ''
                             }`}
                             <br />
-                            <span className="sm-type-bigamp--medium">{student.team.name}</span>
+                            <span className="sm-type-bigamp--medium">
+                                {student.team.name}
+                            </span>
                         </p>
                     </>
                 )}

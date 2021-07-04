@@ -54,12 +54,14 @@ const TEAM_HUB_QUERY = gql`
                         id
                         position
                         user {
+                            id
                             full_name
                         }
                     }
                     team_development_options(
                         order_by: { development_option: { id: asc } }
                     ) {
+                        id
                         shortlist
                         development_option {
                             id

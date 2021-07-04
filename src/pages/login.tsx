@@ -3,6 +3,7 @@ import { graphql, Link, useStaticQuery } from 'gatsby'
 import { gql } from '@apollo/client'
 import { withAuthenticator } from '@aws-amplify/ui-react'
 import { Helmet } from 'react-helmet'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../components/common/Loading'
 import { Error } from '../components/common/Error'
@@ -26,11 +27,54 @@ const LOGGED_IN_QUERY = gql`
         user_by_pk(id: $user_id) {
             id
             first_name
+            student {
+                id
+                team {
+                    id
+                    students {
+                        id
+                        user {
+                            id
+                            times_logged_in
+                        }
+                    }
+                }
+            }
         }
     }
 `
 
-const ChooseRoute = () => {
+const TutorLink = () => (
+    <Link to="/tutor/hub" className="btn-solid-reg">
+        Go to Tutor Hub
+    </Link>
+)
+
+const StudentLink = () => (
+    <Link to="/student/team-hub" className="btn-solid-reg">
+        Go to Team Hub
+    </Link>
+)
+
+const NewStudentLink = () => (
+    <Link to="/introduction" className="btn-solid-reg">
+        Begin the Quest
+    </Link>
+)
+
+const getLink = (role: string, teamHasLoggedIn: boolean) => {
+    if (role === 'tutor') {
+        return <TutorLink />
+    }
+
+    if (!teamHasLoggedIn) {
+        return <NewStudentLink />
+    }
+
+    return <StudentLink />
+}
+
+const Login = () => {
     const {
         userInfo: { role },
     } = useContext(UserStateContext)
@@ -38,10 +82,18 @@ const ChooseRoute = () => {
     const { loading, error, data } = useAuthQuery<
         LoggedInQuery,
         LoggedInQueryVariables
-    >(LOGGED_IN_QUERY, {}, 'userId')
+    >(LOGGED_IN_QUERY, { fetchPolicy: 'network-only' }, 'userId')
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !data)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const data1 = useStaticQuery(graphql`
         query {
@@ -58,8 +110,12 @@ const ChooseRoute = () => {
         }
     `)
 
-    // TODO: can use 'welcome back' once we have 'last_seen_at'
-    // TODO also: redirect to intro or team hub properly, again once we have last_seen_at
+    const { first_name } = data.user_by_pk
+
+    const teamHasLoggedIn = data.user_by_pk.student.team.students.some(
+        (student) => student.user.times_logged_in > 1
+    )
+
     return (
         <>
             <Helmet>
@@ -92,7 +148,8 @@ const ChooseRoute = () => {
                                 <GatsbyImage
                                     alt=""
                                     image={
-                                        data1.file.childImageSharp.gatsbyImageData
+                                        data1.file.childImageSharp
+                                            .gatsbyImageData
                                     }
                                 />
                             </div>
@@ -106,22 +163,17 @@ const ChooseRoute = () => {
                         <div className="col-lg-2"></div>
                         <div className="col-lg-8 index-holder">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 text-align-center">
-                                Hello, {data.user_by_pk.first_name}!
+                                Hello, {first_name}!
                             </h2>
-                            <p className="sm-type-drum text-align-center">
-                                Let's get started shall we?
-                            </p>
+                            {role !== 'tutor' && (
+                                <p className="sm-type-drum text-align-center">
+                                    {`Welcome ${
+                                        teamHasLoggedIn ? 'back' : ''
+                                    } to the Community Land Quest`}
+                                </p>
+                            )}
                             <p className="text-align-center mb-4">
-                                <Link
-                                    to={
-                                        role === 'tutor'
-                                            ? '/tutor/hub'
-                                            : '/introduction'
-                                    }
-                                    className="btn-solid-reg"
-                                >
-                                    Enter The Quest
-                                </Link>
+                                {getLink(role, teamHasLoggedIn)}
                             </p>
                         </div>
                         <div className="col-lg-2"></div>
@@ -132,4 +184,4 @@ const ChooseRoute = () => {
     )
 }
 
-export default withAuthenticator(ChooseRoute)
+export default withAuthenticator(Login)
