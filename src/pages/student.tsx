@@ -48,20 +48,27 @@ import { UserStateContext } from '../utils/user-state'
 
 type LoggedInRouteProps = RouteComponentProps & {
     component: FC<PageProps>
+    stageNum?: number
 }
 
 const LoggedInRoute: FC<LoggedInRouteProps> = ({
     component: Component,
     navigate,
+    stageNum,
     ...rest
 }) => {
-    const { isSignedIn, userInfo } = useContext(UserStateContext)
+    const { isSignedIn, userInfo, latestStageUnlocked } =
+        useContext(UserStateContext)
 
     if (isSignedIn) {
-        Auth.currentSession()
+        Auth.currentAuthenticatedUser({ bypassCache: true })
 
         if (userInfo.role === 'tutor') {
             navigate('/tutor/hub') //TODO: not working...why?? Something to do with client-only?
+        }
+
+        if (stageNum && stageNum > latestStageUnlocked) {
+            navigate('/student/team-hub')
         }
 
         return <Component {...rest} />
@@ -87,86 +94,137 @@ const Routes = () => {
                         component={Information}
                     />
 
-                    <LoggedInRoute path="/stage-1" component={Stage1Landing} />
+                    <LoggedInRoute
+                        path="/stage-1"
+                        component={Stage1Landing}
+                        stageNum={1}
+                    />
                     <LoggedInRoute
                         path="/stage-1/task"
                         component={Stage1Task}
+                        stageNum={1}
                     />
                     <LoggedInRoute
                         path="/stage-1/complete"
                         component={Stage1Complete}
+                        stageNum={1}
                     />
 
-                    <LoggedInRoute path="/stage-2" component={Stage2Landing} />
+                    <LoggedInRoute
+                        path="/stage-2"
+                        component={Stage2Landing}
+                        stageNum={2}
+                    />
                     <LoggedInRoute
                         path="/stage-2/task"
                         component={Stage2Task}
+                        stageNum={2}
                     />
                     <LoggedInRoute
                         path="/stage-2/complete"
                         component={Stage2PageComplete}
+                        stageNum={2}
                     />
-                    <LoggedInRoute path="/stage-3" component={Stage3Landing} />
+
+                    <LoggedInRoute
+                        path="/stage-3"
+                        component={Stage3Landing}
+                        stageNum={3}
+                    />
                     <LoggedInRoute
                         path="/stage-3/options"
                         component={Stage3ChooseOptions}
+                        stageNum={3}
                     />
                     <LoggedInRoute
                         path="/stage-3/swot"
                         component={Stage3Swot}
+                        stageNum={3}
                     />
                     <LoggedInRoute
                         path="/stage-3/swot/example"
                         component={Stage3SwotExample}
+                        stageNum={3}
                     />
                     <LoggedInRoute
                         path="/stage-3/complete"
                         component={Stage3Complete}
+                        stageNum={3}
                     />
 
-                    <LoggedInRoute path="/stage-4" component={Stage4Landing} />
+                    <LoggedInRoute
+                        path="/stage-4"
+                        component={Stage4Landing}
+                        stageNum={4}
+                    />
                     <LoggedInRoute
                         path="/stage-4/options"
                         component={Stage4ChooseOptions}
+                        stageNum={4}
                     />
                     <LoggedInRoute
                         path="/stage-4/feasibility"
                         component={Stage4Feasibility}
+                        stageNum={4}
                     />
                     <LoggedInRoute
                         path="/stage-4/complete"
                         component={Stage4Complete}
+                        stageNum={4}
                     />
-                    <LoggedInRoute path="/stage-5" component={Stage5Landing} />
+
+                    <LoggedInRoute
+                        path="/stage-5"
+                        component={Stage5Landing}
+                        stageNum={5}
+                    />
                     <LoggedInRoute
                         path="/stage-5/business-plan"
                         component={Stage5BusinessPlan}
+                        stageNum={5}
                     />
                     <LoggedInRoute
                         path="/stage-5/complete"
                         component={Stage5Complete}
+                        stageNum={5}
                     />
 
-                    <LoggedInRoute path="/stage-6" component={Stage6Landing} />
+                    <LoggedInRoute
+                        path="/stage-6"
+                        component={Stage6Landing}
+                        stageNum={6}
+                    />
                     <LoggedInRoute
                         path="/stage-6/presentation-tips"
                         component={Stage6PresentationTips}
+                        stageNum={6}
                     />
                     <LoggedInRoute
                         path="/stage-6/completed-work"
                         component={Stage6CompletedWork}
+                        stageNum={6}
                     />
 
-                    <LoggedInRoute path="/stage-7" component={Stage7Landing} />
+                    <LoggedInRoute
+                        path="/stage-7"
+                        component={Stage7Landing}
+                        stageNum={7}
+                    />
                     <LoggedInRoute
                         path="/stage-7/presentation-tips"
                         component={Stage7PresentationTips}
+                        stageNum={7}
                     />
 
-                    <LoggedInRoute path="/stage-8" component={Stage8Landing} />
+                    <LoggedInRoute
+                        path="/stage-8"
+                        component={Stage8Landing}
+                        stageNum={8}
+                    />
                     <LoggedInRoute
                         path="/stage-8/task"
                         component={Stage8Task}
+                        stageNum={8}
                     />
                 </Router>
             </div>

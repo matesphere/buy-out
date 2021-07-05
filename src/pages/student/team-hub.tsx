@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useContext, useEffect } from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
@@ -10,6 +10,7 @@ import { Error } from '../../components/common/Error'
 
 import { useAuthQuery } from '../../utils/auth-utils'
 import { POSITION_DISPLAY_NAME } from '../../utils/common-utils'
+import { UserStateContext } from '../../utils/user-state'
 
 import {
     TeamHubQuery,
@@ -43,7 +44,7 @@ const TEAM_HUB_QUERY = gql`
                     id
                     name
                     logo
-                    stage_progresses {
+                    stage_progresses(order_by: { stage_id: asc }) {
                         id
                         stage_id
                         status
@@ -303,7 +304,9 @@ const TeamHub: FC = () => {
         }
     `)
 
-    // TODO: use authQuery once subscription is fixed
+    const { latestStageUnlocked, setLatestStageUnlocked } =
+        useContext(UserStateContext)
+
     const {
         loading,
         error,
@@ -314,6 +317,15 @@ const TeamHub: FC = () => {
         { fetchPolicy: 'network-only', pollInterval: 2000 },
         'userId'
     )
+
+    useEffect(() => {
+        const stageProgresses =
+            pageData?.user_by_pk?.student?.team?.stage_progresses
+
+        if (stageProgresses && stageProgresses.length !== latestStageUnlocked) {
+            setLatestStageUnlocked(stageProgresses.length)
+        }
+    }, [pageData])
 
     // TODO: sort out passing dynamic auth token to subscription: https://github.com/apollographql/apollo-server/issues/1505 https://github.com/apollographql/apollo-link/issues/197
     // subscribeToMore({

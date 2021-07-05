@@ -21,11 +21,15 @@ interface UserStateContextType {
         role: string
         token: string
     }
+    latestStageUnlocked: number
+    setLatestStageUnlocked: (value: number) => void
 }
 
 export const UserStateContext = createContext<UserStateContextType>({
     isSignedIn: false,
     userInfo: signedOutUserInfo,
+    latestStageUnlocked: 1,
+    setLatestStageUnlocked: () => {},
 })
 
 interface AuthDataType {
@@ -47,6 +51,7 @@ export const UserStateProvider = ({ children }) => {
     const [authState, setAuthState] = useState({})
     // const [user, setUser] = useState({})
     const [userInfo, setUserInfo] = useState(signedOutUserInfo)
+    const [latestStageUnlocked, setLatestStageUnlocked] = useState(1)
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, data) => {
@@ -76,7 +81,14 @@ export const UserStateProvider = ({ children }) => {
     const isSignedIn = authState === AuthState.SignedIn && !!userInfo
 
     return (
-        <UserStateContext.Provider value={{ isSignedIn, userInfo }}>
+        <UserStateContext.Provider
+            value={{
+                isSignedIn,
+                userInfo,
+                latestStageUnlocked,
+                setLatestStageUnlocked,
+            }}
+        >
             {children}
         </UserStateContext.Provider>
     )
