@@ -75,7 +75,6 @@ export const UserStateProvider = ({ children }) => {
 
     const isSignedIn = authState === AuthState.SignedIn && !!userInfo
 
-    // TODO: remove user object from here, useful for now as shows all methods etc
     return (
         <UserStateContext.Provider value={{ isSignedIn, userInfo }}>
             {children}
