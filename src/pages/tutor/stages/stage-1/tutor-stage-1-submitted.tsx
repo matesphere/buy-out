@@ -65,7 +65,6 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                         currentDisplayName={`${teamName}: Stage 1 Submission`}
                     />
 
-                    {/* TODO: bring in team name & logo? */}
                     <div className="row">
                         <div className="col-lg-12">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">

@@ -2,17 +2,11 @@ import React, { useState, useContext, FC, Dispatch } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import LoginHeader from './_header'
-import AccountFooter from './_footer'
-
 import { NewQuestContext } from '../tutor'
 
 import { StudentType } from '../../gql/types'
 
-import HelpIcon from '../../assets/help-icon.svg'
 import '../../scss/index.scss'
-
-const SCHOOL_ID = 'e89e1d0c-4be6-4716-a597-a7c1f6d0ee6f' // TODO: retrieve & store school ID somewhere
 
 // TODO: validation to check for any missing fields on students - show error in modal?
 const EMPTY_STUDENT: StudentType = {
@@ -21,14 +15,15 @@ const EMPTY_STUDENT: StudentType = {
     email: '',
 }
 
-interface StudentInputType {
+interface StudentInputProps {
     num: number
-    name: string
+    firstName: string
+    lastName: string
     email: string
-    setStudents: Dispatch<Array<StudentType>>
+    setStudents: Dispatch<(students: Array<StudentType>) => Array<StudentType>>
 }
 
-const updateField = (studentNum: number, field: string, value: string) => (students) => {
+const updateField = (studentNum: number, field: string, value: string) => (students: Array<StudentType>) => {
     const studentsToUpdate = [...students]
     const updatedStudent = { ...students[studentNum], [field]: value }
     studentsToUpdate[studentNum] = updatedStudent
@@ -36,7 +31,15 @@ const updateField = (studentNum: number, field: string, value: string) => (stude
     return studentsToUpdate
 }
 
-const StudentInput: FC<StudentInputType> = ({ num, name, email, setStudents }) => (
+const removeStudentInput = (studentNum: number) => (students: Array<StudentType>) => {
+    const studentsToUpdate = [...students]
+
+    studentsToUpdate.splice(studentNum, 1)
+
+    return studentsToUpdate
+}
+
+const StudentInput: FC<StudentInputProps> = ({ num, firstName, lastName, email, setStudents }) => (
     <div className="side-grey row mb-4">
         <div className="col-lg-12">
             <p className="sm-type-amp sm-type-amp--medium">Student {num + 1}</p>
@@ -45,8 +48,9 @@ const StudentInput: FC<StudentInputType> = ({ num, name, email, setStudents }) =
             <label className="form-label">First Name</label>
             <input
                 type="name"
+                required
                 className="form-control"
-                value={name}
+                value={firstName}
                 onChange={({ target: { value } }) =>
                     setStudents(updateField(num, 'firstName', value))
                 }
@@ -56,8 +60,9 @@ const StudentInput: FC<StudentInputType> = ({ num, name, email, setStudents }) =
             <label className="form-label">Last Name</label>
             <input
                 type="name"
+                required
                 className="form-control"
-                value={name}
+                value={lastName}
                 onChange={({ target: { value } }) =>
                     setStudents(updateField(num, 'lastName', value))
                 }
@@ -67,6 +72,7 @@ const StudentInput: FC<StudentInputType> = ({ num, name, email, setStudents }) =
             <label className="form-label">Email</label>
             <input
                 type="email"
+                required
                 className="form-control"
                 value={email}
                 onChange={({ target: { value } }) =>
@@ -74,6 +80,7 @@ const StudentInput: FC<StudentInputType> = ({ num, name, email, setStudents }) =
                 }
             />
         </div>
+        <button type="button" onClick={() => setStudents(removeStudentInput(num))}>x</button>
     </div>
 )
 
@@ -95,7 +102,12 @@ const StudentInput: FC<StudentInputType> = ({ num, name, email, setStudents }) =
 //     return delayedRender(() => <div className="loader"></div>)
 // }
 
-const ConfirmModal = ({ students, setShowModal }) => {
+interface ConfirmModalProps {
+    students: Array<StudentType>
+    setShowModal: Dispatch<boolean>
+}
+
+const ConfirmModal = ({ students, setShowModal }: ConfirmModalProps) => {
     const { studentsToAdd, setStudentsToAdd } = useContext(NewQuestContext)
 
     return (
