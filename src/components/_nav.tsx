@@ -33,10 +33,6 @@ const NAV_QUERY = gql`
                 }
             }
         }
-        stage(order_by: { id: asc }) {
-            id
-            title
-        }
     }
 `
 
@@ -193,6 +189,7 @@ const Nav: FC = () => {
                     </div>
                 </nav>
             </div>
+
             <div className="col-lg-4">
                 {data && (
                     <>
