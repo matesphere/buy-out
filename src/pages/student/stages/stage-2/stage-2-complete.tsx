@@ -2,6 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -45,7 +46,15 @@ const Stage2CompletePage = () => {
     } = useAuthQuery<TeamQuery, TeamQueryVariables>(TEAM_QUERY, {}, 'teamId')
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { students } = pageData.team_by_pk
 

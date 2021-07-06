@@ -1,6 +1,8 @@
 import React, { FC } from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { ApolloError } from '@apollo/client'
 // import scrollTo from 'gatsby-plugin-smoothscroll'
 
 import { Loading } from '../../../../components/common/Loading'
@@ -19,7 +21,6 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
-import { GatsbyImage } from 'gatsby-plugin-image'
 
 interface SwotLinksProps {
     devOptions: Array<DocumentCompleteQuery_team_by_pk_team_development_options>
@@ -101,7 +102,15 @@ const Stage3LandingPage: FC = () => {
     } = useWorkState<WorkState, Action>(3, stage3SwotReducer, true)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { team_development_options: devOptions } = pageData.team_by_pk
     const doc =

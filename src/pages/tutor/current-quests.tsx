@@ -1,7 +1,8 @@
-import React, { useState, useContext } from 'react'
+import React, { useContext } from 'react'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
+import { ApolloError } from '@apollo/client'
 
 import {
     Accordion,
@@ -245,7 +246,15 @@ const TutorCurrentQuestPage = () => {
     const { expanded, setExpanded } = useContext(ExpandedContext)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !data)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     // subscribeToMore({
     //     document: TUTOR_CURRENT_QUEST_SUB,
@@ -334,7 +343,9 @@ const TutorCurrentQuestPage = () => {
                                                 allowMultipleExpanded
                                                 allowZeroExpanded
                                                 preExpanded={expanded}
-                                                onChange={(ids) => setExpanded(ids)}
+                                                onChange={(ids) =>
+                                                    setExpanded(ids)
+                                                }
                                             >
                                                 <AccordionItem
                                                     className="side-grey"
@@ -349,7 +360,9 @@ const TutorCurrentQuestPage = () => {
                                                         <div className="row tutor">
                                                             <div className="col-lg-4">
                                                                 <TeamInfoPanel
-                                                                    teamName={name}
+                                                                    teamName={
+                                                                        name
+                                                                    }
                                                                     devOptions={
                                                                         team_development_options
                                                                     }
@@ -360,7 +373,9 @@ const TutorCurrentQuestPage = () => {
                                                             </div>
                                                             <div className="col-lg-8 mt-4">
                                                                 <StageInfoPanel
-                                                                    stages={stage}
+                                                                    stages={
+                                                                        stage
+                                                                    }
                                                                     stageProgresses={
                                                                         stage_progresses
                                                                     }

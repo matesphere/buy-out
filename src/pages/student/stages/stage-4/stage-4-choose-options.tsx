@@ -1,13 +1,13 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
-import { UserStateContext } from '../../../../utils/user-state'
 import { useCheckboxState } from '../../../../utils/input-utils'
 import { useAuthQuery, useAuthMutation } from '../../../../utils/auth-utils'
 import { CHOOSE_SHORTLIST_OPTIONS } from '../../../../gql/mutations'
@@ -78,10 +78,6 @@ const ChooseOptionsCheckboxes = ({
 
 // TODO: move this out to components
 const Stage4Task = () => {
-    const {
-        userInfo: { teamId },
-    } = useContext(UserStateContext)
-
     const [selectedOptions, toggleValue, allowedNumberSelected] =
         useCheckboxState<number>([], 3)
 
@@ -105,7 +101,15 @@ const Stage4Task = () => {
     )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { team_development_options: devOptions } = pageData.team_by_pk
     const taskComplete = devOptions.filter((opt) => opt.shortlist).length === 3

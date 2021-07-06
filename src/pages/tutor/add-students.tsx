@@ -33,9 +33,8 @@ const updateField = (studentNum: number, field: string, value: string) => (stude
 
 const removeStudentInput = (studentNum: number) => (students: Array<StudentType>) => {
     const studentsToUpdate = [...students]
-
     studentsToUpdate.splice(studentNum, 1)
-
+    
     return studentsToUpdate
 }
 

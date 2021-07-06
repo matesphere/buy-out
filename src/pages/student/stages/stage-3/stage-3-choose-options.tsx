@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -128,7 +129,15 @@ const Stage3Task = () => {
     )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { team_development_options: devOptions } = pageData.team_by_pk
     const taskComplete = devOptions.length === 5

@@ -16,7 +16,7 @@ import Stage4Submitted from './tutor/stages/stage-4/tutor-stage-4-submitted'
 import Stage5Submitted from './tutor/stages/stage-5/tutor-stage-5-submitted'
 import TutorAssessment from './tutor/assessment'
 import TutorTeamAssessment from './tutor/team-assessment'
-import TutorGuide from './tutor/tutor-guide'
+import TutorGuide from './information/tutor-guide'
 import { StudentType } from '../gql/types'
 
 import { UserStateContext } from '../utils/user-state'

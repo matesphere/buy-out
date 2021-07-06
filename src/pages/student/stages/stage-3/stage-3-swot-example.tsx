@@ -3,6 +3,7 @@ import { Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import QueryString from 'query-string'
 import { gql } from '@apollo/client'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -56,7 +57,15 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
     >(SWOT_EXAMPLE_QUERY, {}, 'teamId')
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !data)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { option } = QueryString.parse(search)
 

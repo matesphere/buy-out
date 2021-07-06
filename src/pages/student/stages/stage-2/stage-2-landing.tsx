@@ -3,6 +3,7 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -50,7 +51,15 @@ const Stage2LandingPage: FC = () => {
     )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { title: stageTitle } = pageData.stage_by_pk
 
@@ -90,15 +99,14 @@ const Stage2LandingPage: FC = () => {
                                     />
                                 </div>
                                 <p className="sm-type-lead small-image-holder">
-                                    In this stage you will consult with a community
-                                    in order to better understand how it could
-                                    benefit from a land buy-out. If you conclude
-                                    that there is community appetite for such a
-                                    project, you will form the board of a community
-                                    group (known as the 'steering group') who will
-                                    lead the purchase of some land that has come up
-                                    for sale.
-
+                                    In this stage you will consult with a
+                                    community in order to better understand how
+                                    it could benefit from a land buy-out. If you
+                                    conclude that there is community appetite
+                                    for such a project, you will form the board
+                                    of a community group (known as the 'steering
+                                    group') who will lead the purchase of some
+                                    land that has come up for sale.
                                 </p>
                             </div>
                             <div className="mt-4 mb-2 image-holder">

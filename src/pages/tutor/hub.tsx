@@ -2,6 +2,7 @@ import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link } from 'gatsby'
 import { gql } from '@apollo/client'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
@@ -71,10 +72,18 @@ const TutorHub = () => {
     const { loading, error, data } = useAuthQuery<
         TutorHubQuery,
         TutorHubQueryVariables
-    >(TUTOR_HUB_QUERY, null, 'userId')
+    >(TUTOR_HUB_QUERY, {}, 'userId')
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !data)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const {
         user_by_pk: {

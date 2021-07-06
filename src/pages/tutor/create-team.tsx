@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
@@ -9,8 +10,6 @@ import { Error } from '../../components/common/Error'
 import { useAuthQuery, useAuthMutation } from '../../utils/auth-utils'
 import { CREATE_QUEST_WITH_TEAMS, START_QUEST } from '../../gql/mutations'
 
-import LoginHeader from './_header'
-import AccountFooter from './_footer'
 import { LoadingSpinner } from '../../components/common/LoadingSpinner'
 
 import {
@@ -330,7 +329,7 @@ const TutorCreateTeamPage = () => {
 
     const { studentsToAdd, setStudentsToAdd } = useContext(NewQuestContext)
     const {
-        userInfo: { schoolId, userId },
+        userInfo: { schoolId },
     } = useContext(UserStateContext)
 
     const { loading, error, data } = useAuthQuery(
@@ -340,7 +339,15 @@ const TutorCreateTeamPage = () => {
     )
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !data)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const { id: tutorId } = data.user_by_pk.tutor
 

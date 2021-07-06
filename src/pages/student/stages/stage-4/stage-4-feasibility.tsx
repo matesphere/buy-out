@@ -1,6 +1,7 @@
 import React, { Reducer, FC } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
@@ -104,7 +105,15 @@ const Stage4FeasibilityPage: FC = () => {
     } = useWorkState<WorkState, Action>(4, stage4Reducer, true)
 
     if (loading) return <Loading />
-    if (error) return <Error error={error} />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
 
     const devOptions = pageData.team_by_pk.team_development_options.filter(
         (opt) => opt.shortlist
