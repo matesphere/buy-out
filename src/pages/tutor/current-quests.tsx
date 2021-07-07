@@ -376,16 +376,16 @@ const TutorCurrentQuestPage = () => {
                         </button>
 
                         <>
-                            <h4 className="sm-type-guitar">Reflection – Tutor</h4>
+                          <h4 className="sm-type-guitar">Reflection – Tutor</h4>
                           <p className="sm-type-lead">
                             Having just guided your class through the Community
-                            Land Buyout QUEST, it would be really helpful to us,
-                            the Developers of the QUEST, if you could give us
+                            Land Buyout Quest, it would be really helpful to us,
+                            the Developers of the Quest, if you could give us
                             some feedback about your experience.
                           </p>
                           <p className="sm-type-amp text-align-left">
-                            1. From your point of view, what was the most challenging
-                            part of running the QUEST?
+                            1. From your point of view, what was the most
+                            challenging part of running the Quest?
                           </p>
 
                           <div className="ck-textarea">
@@ -393,8 +393,8 @@ const TutorCurrentQuestPage = () => {
                           </div>
 
                           <p className="sm-type-amp text-align-left">
-                            2. How well do you think that your class engaged with the
-                            Quest?
+                            2. How well do you think that your class engaged
+                            with the Quest?
                           </p>
 
                           <div className="ck-textarea">
@@ -402,8 +402,8 @@ const TutorCurrentQuestPage = () => {
                           </div>
 
                           <p className="sm-type-amp text-align-left">
-                            3. What do you think that the pupils have learnt about
-                            community land buyouts?
+                            3. What do you think that the pupils have learnt
+                            about community land buyouts?
                           </p>
 
                           <div className="ck-textarea">
@@ -411,8 +411,8 @@ const TutorCurrentQuestPage = () => {
                           </div>
 
                           <p className="sm-type-amp text-align-left">
-                            4. What else have the pupils learnt from taking part in
-                            the QUEST?
+                            4. What else have the pupils learnt from taking part
+                            in the Quest?
                           </p>
 
                           <div className="ck-textarea">
@@ -420,8 +420,8 @@ const TutorCurrentQuestPage = () => {
                           </div>
 
                           <p className="sm-type-amp text-align-left">
-                            5. Did you come across any technical issues while working
-                            with the QUEST?
+                            5. Did you come across any technical issues while
+                            working with the Quest?
                           </p>
 
                           <div className="ck-textarea">
@@ -429,8 +429,8 @@ const TutorCurrentQuestPage = () => {
                           </div>
 
                           <p className="sm-type-amp text-align-left">
-                            6. How did you get on with controlling the QUEST using
-                            the Teacher Hub?
+                            6. How did you get on with controlling the Quest
+                            using the Teacher Hub?
                           </p>
 
                           <div className="ck-textarea">
@@ -439,12 +439,19 @@ const TutorCurrentQuestPage = () => {
 
                           <p className="sm-type-amp text-align-left">
                             7. Please give us any other feedback about your
-                            experience of working with the QUEST.
+                            experience of working with the Quest.
                           </p>
 
                           <div className="ck-textarea mb-4">
                             <TextEditor />
                           </div>
+
+                          <p className="sm-type-lead">
+                            Thank you very much for your time and thank you for<br />
+                            all your work in running the Community Land Buyout
+                            Quest.
+                          </p>
+
                           <button
                             className="btn-solid-lg mt-4"
                             // disabled={disableSubmit}
@@ -458,7 +465,7 @@ const TutorCurrentQuestPage = () => {
                               });
                             }}
                           >
-                            Yes, submit feeback
+                            Submit feeback
                           </button>
                         </>
                       </div>
