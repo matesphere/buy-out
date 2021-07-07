@@ -265,6 +265,18 @@ export const COMPLETE_STAGE = gql`
     }
 `
 
+export const COMPLETE_QUEST = gql`
+    mutation CompleteQuest($questId: uuid!, $now: timestamptz!) {
+        update_quest_by_pk(
+            pk_columns: { id: $questId }
+            _set: { status: complete, completed_at: $now }
+        ) {
+            id
+            status
+        }
+    }
+`
+
 // TODO remove this from prod!!!!!
 export const RESET_DB = gql`
     mutation ResetDB {

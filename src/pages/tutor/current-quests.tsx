@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
@@ -26,11 +26,12 @@ import {
     CompletedStageStatus,
 } from '../../components/tutor/CurrentQuest'
 
-import { useAuthQuery } from '../../utils/auth-utils'
+import { useAuthQuery, useAuthMutation } from '../../utils/auth-utils'
 import { POSITION_DISPLAY_NAME } from '../../utils/common-utils'
 import { ExpandedContext } from '../tutor'
 
 import { TUTOR_CURRENT_QUEST_QUERY } from '../../gql/queries'
+import { COMPLETE_QUEST } from '../../gql/mutations'
 
 import {
     TutorCurrentQuestQuery,
@@ -57,6 +58,7 @@ const TUTOR_CURRENT_QUEST_SUB = gql`
                     name
                 }
                 quests(where: { status: { _eq: active } }) {
+                    id
                     teams {
                         id
                         name
@@ -160,20 +162,12 @@ const getStageStatusDisplay = (
 }
 
 interface TeamInfoPanelProps {
-    teamName: string
     devOptions: Array<TutorCurrentQuestQuery_user_by_pk_tutor_quests_teams_team_development_options>
     students: Array<TutorCurrentQuestQuery_user_by_pk_tutor_quests_teams_students>
 }
 
-const TeamInfoPanel = ({
-    teamName,
-    devOptions,
-    students,
-}: TeamInfoPanelProps) => (
+const TeamInfoPanel = ({ devOptions, students }: TeamInfoPanelProps) => (
     <>
-        {/*<p className="mb-2 sm-type-guitar sm-type-guitar--medium red-highlight mt-2">*/}
-        {/*    {teamName}*/}
-        {/*</p>*/}
         <div className="form-holder-border">
             <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
                 Team members:
@@ -230,7 +224,18 @@ const StageInfoPanel = ({ stages, stageProgresses, devOptions, teamId }) => (
     </ul>
 )
 
+const getCurrentTimestamp = () => new Date().toISOString()
+
 const TutorCurrentQuestPage = () => {
+    const { expanded, setExpanded } = useContext(ExpandedContext)
+    const [showReflectionModal, setShowReflectionModal] = useState(false)
+
+    const [completeQuest, completeQuestResponse] = useAuthMutation(
+        COMPLETE_QUEST,
+        undefined,
+        () => setShowReflectionModal(true)
+    )
+
     const { loading, error, data } = useAuthQuery<
         TutorCurrentQuestQuery,
         TutorCurrentQuestQueryVariables
@@ -242,8 +247,6 @@ const TutorCurrentQuestPage = () => {
         },
         'userId'
     )
-
-    const { expanded, setExpanded } = useContext(ExpandedContext)
 
     if (loading) return <Loading />
     if (error || !data)
@@ -325,9 +328,9 @@ const TutorCurrentQuestPage = () => {
                             ))}
                         </TabList>
                         <section className="mt-2">
-                            {quests.map((quest, i) => (
+                            {quests.map(({ id, teams }, i) => (
                                 <TabPanel key={i}>
-                                    {quest.teams.map(
+                                    {teams.map(
                                         (
                                             {
                                                 id,
@@ -360,9 +363,6 @@ const TutorCurrentQuestPage = () => {
                                                         <div className="row tutor">
                                                             <div className="col-lg-4">
                                                                 <TeamInfoPanel
-                                                                    teamName={
-                                                                        name
-                                                                    }
                                                                     devOptions={
                                                                         team_development_options
                                                                     }
@@ -390,6 +390,53 @@ const TutorCurrentQuestPage = () => {
                                                 </AccordionItem>
                                             </Accordion>
                                         )
+                                    )}
+
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            setShowReflectionModal(true)
+                                        }
+                                    >
+                                        Complete Quest
+                                    </button>
+
+                                    {showReflectionModal && (
+                                        <div className="modal-window">
+                                            <div>
+                                                <button
+                                                    onClick={() => {
+                                                        setShowReflectionModal(
+                                                            false
+                                                        )
+                                                    }}
+                                                    title="Close"
+                                                    className="modal-close"
+                                                >
+                                                    Close
+                                                </button>
+
+                                                <>
+                                                    <p>Submit Quest feedback</p>
+                                                    <button
+                                                        className="btn-solid-lg mt-4"
+                                                        // disabled={disableSubmit}
+                                                        onClick={() => {
+                                                            const now =
+                                                                getCurrentTimestamp()
+                                                            completeQuest({
+                                                                variables: {
+                                                                    questId: id,
+                                                                    now,
+                                                                },
+                                                            })
+                                                        }}
+                                                    >
+                                                        Yes, submit Work
+                                                    </button>
+                                                </>
+                                            </div>
+                                        </div>
                                     )}
                                 </TabPanel>
                             ))}
