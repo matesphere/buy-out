@@ -151,6 +151,7 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                     name
                 }
                 quests(where: { status: { _eq: active } }) {
+                    id
                     teams(order_by: { id: asc }) {
                         id
                         name
@@ -159,6 +160,8 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                             position
                             user {
                                 full_name
+                                username
+                                password
                             }
                         }
                         stage_progresses {

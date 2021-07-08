@@ -13,6 +13,7 @@ export const Error: FC<{ error: ApolloError }> = ({ error }) => {
             }
         }
     `)
+
     return (
         <div className="blue-holder-border">
             <div className="small-image">
@@ -21,7 +22,7 @@ export const Error: FC<{ error: ApolloError }> = ({ error }) => {
                     image={data.image1.childImageSharp.gatsbyImageData}
                 />
             </div>
-            <p className="small-image-holder">Error! ${error.message}</p>
+            <p className="small-image-holder">Error! {error.message}</p>
         </div>
     )
 }

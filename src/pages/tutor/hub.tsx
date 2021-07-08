@@ -123,24 +123,23 @@ const TutorHub = () => {
                                     Current Quests
                                 </p>
                                 <ul>
-                                    <li className="sm-type-bigamp">
-                                        {quests
-                                            .filter(
-                                                (quest) =>
-                                                    quest.status === 'active'
-                                            )
-                                            .map((quest, i) => (
-                                                <span key={i}>
-                                                    <CurrentQuestDisplay
-                                                        quest={quest}
-                                                    />
-                                                </span>
-                                            ))}
-                                        - -{' '}
-                                        <Link to="/tutor/current-quests">
-                                            View
-                                        </Link>
-                                    </li>
+                                    {quests
+                                        .filter(
+                                            (quest) => quest.status === 'active'
+                                        )
+                                        .map((quest, i) => (
+                                            <li
+                                                className="sm-type-bigamp"
+                                                key={i}
+                                            >
+                                                <CurrentQuestDisplay
+                                                    quest={quest}
+                                                />
+                                            </li>
+                                        ))}
+                                    <Link to="/tutor/current-quests">
+                                        View current Quests
+                                    </Link>
                                 </ul>
                             </div>
                             <div className="side-grey mb-2">

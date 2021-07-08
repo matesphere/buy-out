@@ -266,10 +266,18 @@ export const COMPLETE_STAGE = gql`
 `
 
 export const COMPLETE_QUEST = gql`
-    mutation CompleteQuest($questId: uuid!, $now: timestamptz!) {
+    mutation CompleteQuest(
+        $questId: uuid!
+        $now: timestamptz!
+        $feedback: jsonb
+    ) {
         update_quest_by_pk(
             pk_columns: { id: $questId }
-            _set: { status: complete, completed_at: $now }
+            _set: {
+                status: complete
+                completed_at: $now
+                tutor_feedback: $feedback
+            }
         ) {
             id
             status
