@@ -110,7 +110,7 @@ const TutorHub = () => {
             </Helmet>
 
             <main className="the-quest">
-                <section className="container" id="main">
+                <section className="container min-height" id="main">
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">

@@ -16,6 +16,10 @@ p {
     margin-bottom: $grid-unit;
 }
 
+.min-height {
+    min-height: 1000px;
+}
+
 .clearfix:after {
     visibility: hidden;
     display: block;

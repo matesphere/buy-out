@@ -314,9 +314,8 @@ const TutorCurrentQuestPage = () => {
                 </Helmet>
                 <main className="notes">
                     <section
-                        className="container"
+                        className="container min-height"
                         id="currentquest"
-                        style={{ minHeight: '1000px' }}
                     >
                         <Breadcrumbs
                             previous={[
