@@ -430,6 +430,7 @@ const TutorCurrentQuestPage = () => {
 
                                     <button
                                         type="button"
+                                        className="btn-solid-lg"
                                         onClick={() =>
                                             setShowReflectionModal(true)
                                         }
