@@ -72,7 +72,6 @@ const TutorGuide = () => {
             </Helmet>
 
             <main className="the-quest">
-                <Header headerText="Tutor Guide" />
                 <section className="container" id="main">
                     <Breadcrumbs
                         previous={[
@@ -643,7 +642,6 @@ const TutorGuide = () => {
                         </div> */}
                     </div>
                 </section>
-                <Footer />
             </main>
         </>
     )

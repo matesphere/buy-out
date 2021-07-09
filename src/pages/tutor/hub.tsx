@@ -126,7 +126,7 @@ const TutorHub = () => {
                                     Current Quests
                                 </p>
 
-                                {currentQuests.length > 1 ? (
+                                {currentQuests.length > 0 ? (
                                     <ul>
                                         {currentQuests.map((quest, i) => (
                                             <li
@@ -150,23 +150,15 @@ const TutorHub = () => {
                                 <p className="sm-type-lead sm-type-lead--medium">
                                     Previous Quests
                                 </p>
-                                {prevQuests.length > 1 ? (
+                                {prevQuests.length > 0 ? (
                                     <ul>
-                                        {quests
-                                            .filter(
-                                                (quest) =>
-                                                    quest.status === 'complete'
-                                            )
-                                            .map((quest, i) => (
-                                                <li
-                                                    key={i}
-                                                    className="sm-type-amp"
-                                                >
-                                                    <PreviousQuestDisplay
-                                                        quest={quest}
-                                                    />
-                                                </li>
-                                            ))}
+                                        {quests.map((quest, i) => (
+                                            <li key={i} className="sm-type-amp">
+                                                <PreviousQuestDisplay
+                                                    quest={quest}
+                                                />
+                                            </li>
+                                        ))}
                                     </ul>
                                 ) : (
                                     <span>No previous Quests</span>
