@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react'
+import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
@@ -291,6 +292,42 @@ const TutorCurrentQuestPage = () => {
         development_option: devOptions,
         stage,
     } = data
+
+    if (quests.length === 0) {
+        return (
+            <>
+                <Helmet>
+                    <meta
+                        name="viewport"
+                        content="width=device-width, initial-scale=1.0"
+                    />
+                    <title>Current Quests</title>
+                    <meta name="description" content="The description" />
+                </Helmet>
+                <main className="notes">
+                    <section
+                        className="container"
+                        id="currentquest"
+                        style={{ minHeight: '1000px' }}
+                    >
+                        <Breadcrumbs
+                            previous={[
+                                {
+                                    displayName: 'Tutor Hub',
+                                    url: '/tutor/hub',
+                                },
+                            ]}
+                            currentDisplayName="Current Quests"
+                        />
+                        <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
+                            No current Quests at present! Start one from your{' '}
+                            <Link to="/tutor/hub">hub</Link>
+                        </p>
+                    </section>
+                </main>
+            </>
+        )
+    }
 
     return (
         <>

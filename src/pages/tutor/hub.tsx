@@ -95,6 +95,9 @@ const TutorHub = () => {
         },
     } = data
 
+    const prevQuests = quests.filter((quest) => quest.status === 'complete')
+    const currentQuests = quests.filter((quest) => quest.status === 'active')
+
     return (
         <>
             <Helmet>
@@ -122,12 +125,10 @@ const TutorHub = () => {
                                 <p className="sm-type-lead sm-type-lead--medium">
                                     Current Quests
                                 </p>
-                                <ul>
-                                    {quests
-                                        .filter(
-                                            (quest) => quest.status === 'active'
-                                        )
-                                        .map((quest, i) => (
+
+                                {currentQuests.length > 1 ? (
+                                    <ul>
+                                        {currentQuests.map((quest, i) => (
                                             <li
                                                 className="sm-type-bigamp"
                                                 key={i}
@@ -137,29 +138,39 @@ const TutorHub = () => {
                                                 />
                                             </li>
                                         ))}
-                                    <Link to="/tutor/current-quests">
-                                        View current Quests
-                                    </Link>
-                                </ul>
+                                        <Link to="/tutor/current-quests">
+                                            View current Quests
+                                        </Link>
+                                    </ul>
+                                ) : (
+                                    <span>No current Quests</span>
+                                )}
                             </div>
                             <div className="side-grey mb-2">
                                 <p className="sm-type-lead sm-type-lead--medium">
                                     Previous Quests
                                 </p>
-                                <ul>
-                                    {quests
-                                        .filter(
-                                            (quest) =>
-                                                quest.status === 'complete'
-                                        )
-                                        .map((quest, i) => (
-                                            <li key={i} className="sm-type-amp">
-                                                <PreviousQuestDisplay
-                                                    quest={quest}
-                                                />
-                                            </li>
-                                        ))}
-                                </ul>
+                                {prevQuests.length > 1 ? (
+                                    <ul>
+                                        {quests
+                                            .filter(
+                                                (quest) =>
+                                                    quest.status === 'complete'
+                                            )
+                                            .map((quest, i) => (
+                                                <li
+                                                    key={i}
+                                                    className="sm-type-amp"
+                                                >
+                                                    <PreviousQuestDisplay
+                                                        quest={quest}
+                                                    />
+                                                </li>
+                                            ))}
+                                    </ul>
+                                ) : (
+                                    <span>No previous Quests</span>
+                                )}
                             </div>
                         </div>
                         <div className="col-lg-4">

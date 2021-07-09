@@ -112,8 +112,8 @@ const Login = () => {
 
     const { first_name } = data.user_by_pk
 
-    const teamHasLoggedIn = data.user_by_pk.student.team.students.some(
-        (student) => student.user.times_logged_in > 1
+    const teamHasLoggedIn = data.user_by_pk?.student?.team.students.some(
+        (student) => student.user.times_logged_in > 1 || null
     )
 
     return (
