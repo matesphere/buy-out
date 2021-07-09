@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet'
 
 import Header from '../tutor/_header'
 import Footer from '../tutor/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 // import { gql } from '@apollo/client'
 // import { ApolloError } from '@apollo/client'
 
