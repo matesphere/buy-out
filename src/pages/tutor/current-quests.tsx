@@ -19,6 +19,7 @@ import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import {
     LockedStageStatus,
     UnlockedStageStatus,
+    DocumentlessUnlockedStageStatus,
     UnlockedStage3Status,
     UnlockedStage3NoDocStatus,
     SubmittedStageStatus,
@@ -147,7 +148,14 @@ const getStageStatusDisplay = (
                         stageProgressId={stageProgress.id}
                     />
                 )
+            } else if (stageId === 6 || stageId === 7 || stageId === 8) {
+                return (
+                    <DocumentlessUnlockedStageStatus
+                        stageProgressId={stageProgress.id}
+                    />
+                )
             }
+
             return stageId === 3 ? (
                 <UnlockedStage3NoDocStatus
                     stageProgressId={stageProgress.id}

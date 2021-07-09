@@ -66,6 +66,35 @@ export const UnlockedStageStatus = () => (
     </div>
 )
 
+export const DocumentlessUnlockedStageStatus = ({ stageProgressId }) => {
+    const [completeStage] = useAuthMutation(COMPLETE_STAGE, {
+        query: TUTOR_CURRENT_QUEST_QUERY,
+        variables: {},
+        idRequired: 'userId',
+    })
+    return (
+        <div className="progress">
+            <Progress />
+            <span>Unlocked</span>
+            <span>
+                <a
+                    className="green-link text-underline"
+                    onClick={(e) => {
+                        e.preventDefault()
+                        completeStage({
+                            variables: {
+                                stageProgressId,
+                            },
+                        })
+                    }}
+                >
+                    Complete stage
+                </a>
+            </span>
+        </div>
+    )
+}
+
 //? Pulls out display names of SWOTs which were provided as model answers
 const getDocProvidedAnswers = (doc, devOptions) =>
     Object.entries(doc.doc_data)
@@ -93,10 +122,17 @@ export const UnlockedStage3Status = ({ devOptions, doc }) => {
             <Progress />
             <span>Unlocked</span>
 
-            <p className="sm-type-lead sm-type-lead--medium mt-4">Provide Model Answers: </p>
+            <p className="sm-type-lead sm-type-lead--medium mt-4">
+                Provide Model Answers:{' '}
+            </p>
 
             {providedAnswers.length > 0 && (
-                <p className="sm-type-amp">Provided: <span className="redorange-highlight">{providedAnswers.join(', ')}</span></p>
+                <p className="sm-type-amp">
+                    Provided:{' '}
+                    <span className="redorange-highlight">
+                        {providedAnswers.join(', ')}
+                    </span>
+                </p>
             )}
             <div className="model-answers">
                 <select
@@ -157,7 +193,9 @@ export const UnlockedStage3NoDocStatus = ({ stageProgressId, devOptions }) => {
             <Progress />
             <span>Unlocked</span>
 
-            <p className="sm-type-lead sm-type-lead--medium mt-4">Provide Model Answers: </p>
+            <p className="sm-type-lead sm-type-lead--medium mt-4">
+                Provide Model Answers:{' '}
+            </p>
             <div className="model-answers">
                 <select
                     className="form-control"
@@ -330,12 +368,14 @@ export const CompletedStageStatus = ({ stageId, stageProgressId }) => (
     <div>
         <Tick />
         <span>Completed</span>
-        <span>
-            <Link
-                to={`/tutor/stage-${stageId}/submitted?id=${stageProgressId}`}
-            >
-                View completed work
-            </Link>
-        </span>
+        {(stageId === 1 || stageId === 3 || stageId === 4 || stageId === 5) && (
+            <span>
+                <Link
+                    to={`/tutor/stage-${stageId}/submitted?id=${stageProgressId}`}
+                >
+                    View completed work
+                </Link>
+            </span>
+        )}
     </div>
 )
