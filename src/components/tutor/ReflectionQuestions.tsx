@@ -1,4 +1,4 @@
-import React, { FC, useReducer, Reducer } from 'react'
+import React, { FC, useState, useReducer, Reducer } from 'react'
 
 import { TextEditor } from '../../components/common/TextEditor'
 
@@ -205,22 +205,23 @@ export const ReflectionQuestions: FC<ReflectionQuestionsProps> = ({
                 all your work in running the Community Land Quest.
             </p>
 
-            <button
-                className="btn-solid-lg mt-4"
-                // disabled={disableSubmit}
-                onClick={() => {
-                    const now = getCurrentTimestamp()
-                    completeQuest({
-                        variables: {
-                            questId,
-                            now,
-                            feedback: feedbackState,
-                        },
-                    })
-                }}
-            >
-                Submit feedback and complete Quest
-            </button>
+            {!completeQuestResponse.data && (
+                <button
+                    className="btn-solid-lg mt-4"
+                    onClick={() => {
+                        const now = getCurrentTimestamp()
+                        completeQuest({
+                            variables: {
+                                questId,
+                                now,
+                                feedback: feedbackState,
+                            },
+                        })
+                    }}
+                >
+                    Submit feedback and complete Quest
+                </button>
+            )}
         </>
     )
 }

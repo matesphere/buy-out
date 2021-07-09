@@ -14,7 +14,7 @@ export const stage8DataTaskEng = [
 
 export const stage8DataTaskInstructionsEng = [
     'Having just completed the Community Land Quest, it would be really helpful to us (the developers of the Quest) if you could answer a few questions about your experience.',
-    'This should be completed individually, i.e. by each member of the team. Your answers will be anonymous.',
+    'This should be completed individually, so each member of the team will need to log in separately. Your answers will be anonymous.',
 ]
 
 export const stage8Questions = [

@@ -1,16 +1,16 @@
-import React, { Reducer } from 'react'
+import React, { useState, useContext, useReducer, Reducer } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { ApolloError } from '@apollo/client'
 
-import { Loading } from '../../../../components/common/Loading'
-import { Error } from '../../../../components/common/Error'
 import { TextEditor } from '../../../../components/common/TextEditor'
-import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import { CheckList } from '../../../../components/common/Checklist'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
-import { useWorkState, ActionType } from '../../../../utils/input-utils'
+import { UserStateContext } from '../../../../utils/user-state'
+import { ActionType } from '../../../../utils/input-utils'
+import { useAuthMutation } from '../../../../utils/auth-utils'
+
+import { SUBMIT_REFLECTION } from '../../../../gql/mutations'
 
 import {
     stage8CheckListEng,
@@ -28,20 +28,13 @@ type WorkState = {
     [key: number]: string
 }
 
-type Action =
-    | {
-          type: ActionType.LoadAction
-          payload: WorkState
-      }
-    | {
-          type: ActionType.UpdateAction
-          payload: { question: number; answer: string }
-      }
+type Action = {
+    type: ActionType.UpdateAction
+    payload: { question: number; answer: string }
+}
 
 const stage8QuestionReducer: Reducer<WorkState, Action> = (state, action) => {
     switch (action.type) {
-        case ActionType.LoadAction:
-            return action.payload
         case ActionType.UpdateAction:
             return {
                 ...state,
@@ -54,28 +47,31 @@ const stage8QuestionReducer: Reducer<WorkState, Action> = (state, action) => {
 
 const Stage8TaskPage = () => {
     const {
-        loading,
-        error,
-        pageData,
-        workState,
-        workDispatch,
-        submitWorkObj,
-        docSubmitted,
-        stageComplete,
-    } = useWorkState<WorkState, Action>(8, stage8QuestionReducer)
+        userInfo: { schoolId },
+    } = useContext(UserStateContext)
 
-    if (loading) return <Loading />
-    if (error || !pageData)
-        return (
-            <Error
-                error={
-                    error ||
-                    new ApolloError({ errorMessage: 'No data returned!' })
-                }
-            />
-        )
+    const [showSubmitModal, setShowSubmitModal] = useState(false)
 
-    const { title: stageTitle } = pageData.stage_by_pk
+    const [workState, workDispatch] = useReducer<Reducer<WorkState, Action>>(
+        stage8QuestionReducer,
+        {}
+    )
+
+    const [submitReflection, submitReflectionResponse] =
+        useAuthMutation(SUBMIT_REFLECTION)
+
+    // if (loading) return <Loading />
+    // if (error || !pageData)
+    //     return (
+    //         <Error
+    //             error={
+    //                 error ||
+    //                 new ApolloError({ errorMessage: 'No data returned!' })
+    //             }
+    //         />
+    //     )
+
+    // const { title: stageTitle } = pageData.stage_by_pk
 
     return (
         <>
@@ -84,7 +80,7 @@ const Stage8TaskPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 8 - {stageTitle} - Task</title>
+                <title>Stage 8 - Reflection - Task</title>
                 <meta name="description" content="The description" />
             </Helmet>
             <main className="the-quest">
@@ -122,7 +118,7 @@ const Stage8TaskPage = () => {
                                     </span>
                                     <span className="sm-type-drum">
                                         Task{' '}
-                                        {docSubmitted
+                                        {submitReflectionResponse.data
                                             ? 'submitted'
                                             : 'to complete:'}
                                     </span>
@@ -159,9 +155,7 @@ const Stage8TaskPage = () => {
                                                                     },
                                                                 })
                                                             }
-                                                            docSubmitted={
-                                                                docSubmitted
-                                                            }
+                                                            docSubmitted={false}
                                                         />
                                                     </div>
                                                 </li>
@@ -169,22 +163,77 @@ const Stage8TaskPage = () => {
                                         )}
                                     </ol>
 
-                                    <SaveSubmitSection
-                                        submitWorkObj={submitWorkObj}
-                                        disableSubmit={
-                                            Object.values(workState).filter(
-                                                Boolean
-                                            ).length < 8
-                                        }
-                                        docSubmitted={docSubmitted}
-                                    />
+                                    {!submitReflectionResponse.data && (
+                                        <button
+                                            className="btn-solid-lg mt-4"
+                                            disabled={
+                                                Object.values(workState).filter(
+                                                    Boolean
+                                                ).length < 8
+                                            }
+                                            onClick={() =>
+                                                setShowSubmitModal(true)
+                                            }
+                                        >
+                                            Submit
+                                        </button>
+                                    )}
+
+                                    {showSubmitModal && (
+                                        <div className="modal-window">
+                                            <div>
+                                                <button
+                                                    onClick={() =>
+                                                        setShowSubmitModal(
+                                                            false
+                                                        )
+                                                    }
+                                                    title="Close"
+                                                    className="modal-close"
+                                                >
+                                                    Close
+                                                </button>
+
+                                                {submitReflectionResponse.data ? (
+                                                    <p className="sm-type-drum">
+                                                        Thanks for submitting
+                                                        your feedback.
+                                                    </p>
+                                                ) : (
+                                                    <>
+                                                        <p>Are you sure?</p>
+                                                        <button
+                                                            className="btn-solid-lg mt-4"
+                                                            onClick={() =>
+                                                                submitReflection(
+                                                                    {
+                                                                        variables:
+                                                                            {
+                                                                                schoolId,
+                                                                                docData:
+                                                                                    workState,
+                                                                            },
+                                                                    }
+                                                                )
+                                                            }
+                                                        >
+                                                            Yes, submit feedback
+                                                        </button>
+                                                    </>
+                                                )}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
-                            <p className="sm-type-guitar mb-4">
-                                Thank you very much for your time and
-                                congratulations again on completing the
-                                Community Land Quest!
-                            </p>
+
+                            {submitReflectionResponse.data && (
+                                <p className="sm-type-guitar mb-4">
+                                    Thank you very much for your time and
+                                    congratulations again on completing the
+                                    Community Land Quest!
+                                </p>
+                            )}
                             <Link to="/student/stage-8">Back to Stage 8</Link>
                         </div>
 

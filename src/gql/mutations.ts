@@ -135,6 +135,16 @@ export const CHOOSE_SHORTLIST_OPTIONS = gql`
     }
 `
 
+export const SUBMIT_REFLECTION = gql`
+    mutation SubmitReflection($schoolId: uuid!, $docData: jsonb!) {
+        insert_student_feedback_one(
+            object: { school_id: $schoolId, feedback: $docData }
+        ) {
+            id
+        }
+    }
+`
+
 // tutor
 
 export const CREATE_QUEST_WITH_TEAMS = gql`

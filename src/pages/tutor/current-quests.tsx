@@ -27,12 +27,11 @@ import {
 } from '../../components/tutor/CurrentQuest'
 import { ReflectionQuestions } from '../../components/tutor/ReflectionQuestions'
 
-import { useAuthQuery, useAuthMutation } from '../../utils/auth-utils'
+import { useAuthQuery } from '../../utils/auth-utils'
 import { POSITION_DISPLAY_NAME } from '../../utils/common-utils'
 import { ExpandedContext } from '../tutor'
 
 import { TUTOR_CURRENT_QUEST_QUERY } from '../../gql/queries'
-import { COMPLETE_QUEST } from '../../gql/mutations'
 
 import {
     TutorCurrentQuestQuery,
