@@ -52,7 +52,7 @@ const Stage4LandingPage = () => {
     )
 
     if (loading) return <Loading />
-    if (error || !data)
+    if (error || !pageData)
         return (
             <Error
                 error={
