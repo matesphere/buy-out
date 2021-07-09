@@ -2,14 +2,11 @@ import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
-
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
-
 import HelpIcon from '../../assets/help-icon.svg'
-import InfoPick from '../../assets/info-pick.svg'
+import InfoHouse from '../../assets/info-house.svg'
 import TickSheet from '../../assets/tick-sheet.svg'
-
 import '../../scss/index.scss'
 
 const InfoHousingPage = () => {
@@ -38,7 +35,10 @@ const InfoHousingPage = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Affordable Housing Scheme
+                                <span className="page-icon">
+                                    <InfoHouse />
+                                </span>
+                                Affordable Housing scheme
                             </h2>
 
                             <p className="sm-type-bigamp mb-4">

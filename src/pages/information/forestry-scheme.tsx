@@ -7,11 +7,10 @@ import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 
 import HelpIcon from '../../assets/help-icon.svg'
-import Ticklr from '../../assets/tick-lr.svg'
-import Ticklr2 from '../../assets/tick-lr2.svg'
 import TickSheet from '../../assets/tick-sheet.svg'
 
 import '../../scss/index.scss'
+import InfoForest from "../../assets/info-forest.svg";
 
 const InfoForestryScheme = () => {
     const data = useStaticQuery(graphql`
@@ -52,6 +51,9 @@ const InfoForestryScheme = () => {
                                 </span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
+                                <span className="page-icon">
+                                    <InfoForest />
+                                </span>
                                 Forestry Scheme
                             </h2>
 

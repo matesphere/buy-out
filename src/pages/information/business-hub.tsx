@@ -2,15 +2,11 @@ import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
-
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
-
 import HelpIcon from '../../assets/help-icon.svg'
-import Ticklr from '../../assets/tick-lr.svg'
-import Ticklr2 from '../../assets/tick-lr2.svg'
+import InfoBusiness from "../../assets/info-business.svg";
 import TickSheet from '../../assets/tick-sheet.svg'
-
 import '../../scss/index.scss'
 
 const InfoBusinessHub = () => {
@@ -52,7 +48,11 @@ const InfoBusinessHub = () => {
                                 </span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Business hub Scheme
+                                <span className="page-icon">
+                                    <InfoBusiness />
+                                </span>
+                                Business hub scheme
+
                             </h2>
 
                             <div className="mt-4 mb-4 image-holder">

@@ -7,10 +7,11 @@ import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 
 import HelpIcon from '../../assets/help-icon.svg'
-import InfoPick from '../../assets/info-pick.svg'
 import TickSheet from '../../assets/tick-sheet.svg'
+import InfoSkate from "../../assets/info-skate.svg";
 
 import '../../scss/index.scss'
+import InfoShop from "../../assets/info-shop.svg";
 
 const InfoPlaySkate = () => {
     const data = useStaticQuery(graphql`
@@ -51,6 +52,9 @@ const InfoPlaySkate = () => {
                                 </span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
+                                <span className="page-icon">
+                                    <InfoSkate />
+                                </span>
                                 Playpark / Skatepark
                             </h2>
 

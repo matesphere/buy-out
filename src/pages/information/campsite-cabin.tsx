@@ -10,6 +10,7 @@ import HelpIcon from '../../assets/help-icon.svg'
 import TickSheet from '../../assets/tick-sheet.svg'
 
 import '../../scss/index.scss'
+import InfoCamp from "../../assets/info-camp.svg";
 
 const InfoCampsiteCabin = () => {
     const data = useStaticQuery(graphql`
@@ -50,7 +51,10 @@ const InfoCampsiteCabin = () => {
                                 </span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Campsite and Cabins Scheme
+                                <span className="page-icon">
+                                    <InfoCamp />
+                                </span>
+                                Campsite and Cabins scheme
                             </h2>
 
                             <div className="mt-4 mb-4 image-holder">

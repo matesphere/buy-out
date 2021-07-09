@@ -8,7 +8,6 @@
 
 .image-map {
   position: relative;
-  max-width: 500px;
   margin: 0 auto ($grid-unit * 3);
 
   .outer-grid {
@@ -28,7 +27,7 @@
     display: flex;
     flex-wrap: wrap;
     z-index: 2;
-    padding: 20% 0 25% 33%;
+    padding: 11%;
   }
 
   .inner-grid {
@@ -40,56 +39,72 @@
     &-1 {
       .info-icon {
         position: absolute;
-        right: 20%;
-        bottom: 0%;
+        left: 31%;
+        top: 27%;
       }
     }
 
     &-2 {
       .info-icon {
         position: absolute;
-        left: 30%;
-        top: 13%;
+        left: 0%;
+        top: 70%;
       }
     }
 
     &-3 {
       .info-icon {
         position: absolute;
-        left: 40%;
-        bottom: 20%;
+        left: 0%;
+        top: 55%;
       }
     }
 
     &-4 {
       .info-icon {
         position: absolute;
-        right: 0%;
-        bottom: 5%;
+        left: 10%;
+        top: 10%;
       }
     }
 
     &-5 {
       .info-icon {
         position: absolute;
-        right: 40%;
-        top: 0%;
+        left: 70%;
+        top: 2%;
       }
     }
 
     &-6 {
       .info-icon {
         position: absolute;
-        left: 5%;
-        top: 30%;
+        left: 55%;
+        top: 70%;
+      }
+    }
+
+    &-7 {
+      .info-icon {
+        position: absolute;
+        left: 50%;
+        top: 20%;
       }
     }
 
     &-8 {
       .info-icon {
         position: absolute;
-        left: 5%;
-        bottom: 40%;
+        left: 60%;
+        top: 0%;
+      }
+    }
+
+    &-9 {
+      .info-icon {
+        position: absolute;
+        left: 55%;
+        top: 20%;
       }
     }
 
@@ -101,6 +116,10 @@
     svg {
       width: 30px;
       height: 30px;
+      @media only screen and (min-width: 768px) {
+        width: 40px;
+        height: 40px;
+      }
     }
 
     &-show {
@@ -348,4 +367,11 @@ amplify-authenticator {
   background: $brand-green;
   padding: 5px;
   width: 100%;
+}
+
+.page-icon svg {
+  width: 46px;
+  height: 46px;
+  margin-right: 16px;
+  margin-top: -8px;
 }

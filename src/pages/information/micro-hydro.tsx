@@ -12,6 +12,7 @@ import Ticklr2 from '../../assets/tick-lr2.svg'
 import TickSheet from '../../assets/tick-sheet.svg'
 
 import '../../scss/index.scss'
+import InfoHydro from "../../assets/info-hydro.svg";
 
 const InfoMicroHydro = () => {
     const data = useStaticQuery(graphql`
@@ -57,7 +58,11 @@ const InfoMicroHydro = () => {
                                 </span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Micro-hydro Scheme
+                                <span className="page-icon">
+                                    <InfoHydro />
+                                </span>
+
+                                Micro-hydro scheme
                             </h2>
 
                             <div className="mt-4 mb-4 image-holder">

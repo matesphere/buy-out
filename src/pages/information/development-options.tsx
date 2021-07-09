@@ -6,7 +6,6 @@ import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 
 import HelpIcon from '../../assets/help-icon.svg'
-import TickSheet from '../../assets/tick-sheet.svg'
 
 import MapOptions from './_map'
 
@@ -62,6 +61,31 @@ const InfoDevOptions = () => {
                                 what each option entails. Think about how each
                                 might benefit the community!
                             </p>
+                        </div>
+                        <div className="col-lg-3">
+                            <p className="sm-type-guitar mb-2">
+                                <span className="side-icon side-icon-orange">
+                                    <HelpIcon />
+                                </span>
+                                Helpful information
+                            </p>
+                            <div className="side-grey">
+                                <p className="sm-type-amp">
+                                    Read all about Glenclas and find out what
+                                    you need to move on to the next quest.
+                                </p>
+                                <p className="sm-type-amp">
+                                    Make notes of the amenities and the
+                                    opportunities.
+                                </p>
+                                <p className="sm-type-amp">
+                                    Look at Funding Options on each Option.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col-lg-12">
 
                             <MapOptions />
 
@@ -78,8 +102,7 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="greydot"></span> 1.
-                                            Affordable Housing Scheme
+                                            1. Affordable Housing Scheme
                                         </p>
                                     </div>
                                     <div className="cell">
@@ -100,7 +123,6 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="yellowdot"></span>{' '}
                                             2. Play Park and/or Skate Park
                                             Scheme
                                         </p>
@@ -123,8 +145,7 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="reddot"></span> 3.
-                                            Shop and PO
+                                            3. Shop and PO
                                         </p>
                                     </div>
                                     <div className="cell">
@@ -145,7 +166,6 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="yellowdot"></span>{' '}
                                             4. Micro-hydro Scheme
                                         </p>
                                     </div>
@@ -168,7 +188,6 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="yellowdot"></span>{' '}
                                             5. Wind turbine Scheme
                                         </p>
                                     </div>
@@ -190,7 +209,6 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="yellowdot"></span>{' '}
                                             6. Business hub Scheme
                                         </p>
                                     </div>
@@ -212,8 +230,7 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="tealdot"></span> 7.
-                                            Forestry Scheme
+                                            7. Forestry Scheme
                                         </p>
                                     </div>
                                     <div className="cell">
@@ -237,7 +254,6 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="purpledot"></span>{' '}
                                             8. Campsite and Cabins Scheme
                                         </p>
                                     </div>
@@ -262,7 +278,6 @@ const InfoDevOptions = () => {
                                 <div className="roww">
                                     <div className="cell">
                                         <p>
-                                            <span className="purpledot"></span>{' '}
                                             9. Market Garden Scheme
                                         </p>
                                     </div>
@@ -297,53 +312,6 @@ const InfoDevOptions = () => {
                                             would come from.
                                         </p>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        {/* TODO: this can also be a common component*/}
-                        <div className="col-lg-3">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Read all about Glenclas and find out what
-                                    you need to move on to the next quest.
-                                </p>
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    Look at Funding Options on each Option.
-                                </p>
-                            </div>
-
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        Check the map and read through the
-                                        detailed information on each option.
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        Based on what you've read, choose 5 of
-                                        the options to investigate further.
-                                    </p>
                                 </div>
                             </div>
                         </div>

@@ -10,6 +10,7 @@ import HelpIcon from '../../assets/help-icon.svg'
 import TickSheet from '../../assets/tick-sheet.svg'
 
 import '../../scss/index.scss'
+import InfoWind from "../../assets/info-wind.svg";
 
 const InfoWindTurbine = () => {
     const data = useStaticQuery(graphql`
@@ -55,7 +56,10 @@ const InfoWindTurbine = () => {
                                 </span>
                             </div>
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Wind turbine Scheme
+                                <span className="page-icon">
+                                    <InfoWind />
+                                </span>
+                                Wind turbine scheme
                             </h2>
 
                             <div className="mt-4 mb-4 image-holder">

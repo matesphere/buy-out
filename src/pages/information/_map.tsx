@@ -1,7 +1,15 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
+import {graphql, Link, useStaticQuery} from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import InfoPick from '../../assets/info-pick.svg'
+import InfoShop from '../../assets/info-shop.svg'
+import InfoHouse from '../../assets/info-house.svg'
+import InfoHydro from "../../assets/info-hydro.svg";
+import InfoWind from "../../assets/info-wind.svg";
+import InfoForest from "../../assets/info-forest.svg";
+import InfoBusiness from "../../assets/info-business.svg";
+import InfoCamp from "../../assets/info-camp.svg";
+import InfoGarden from "../../assets/info-garden.svg";
+import InfoSkate from "../../assets/info-skate.svg";
 
 const MapOptions = () => {
     const data = useStaticQuery(graphql`
@@ -35,94 +43,147 @@ const MapOptions = () => {
                 <div className="outer-grid">
                     <div className="outer-square">
                         <div className="inner-grid inner-grid-1">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="reddot"></span>{' '}
-                                                            Shop and Post Office
-                                                        </p>
-                                                    </div>
-                                                </span>
+                            <span className="info-icon">
+                                <InfoShop />
+                                <div className="info-icon-show info-icon-show-c">
+                                    <div className="sm-type-amp">
+                                        <strong>Shop and Post Office</strong><br />Could be situated just of the ‘High Street’
+                                        <br />
+                                        <Link to="/information/shop-and-post-office">
+                                            Read more
+                                        </Link>
+                                    </div>
+                                </div>
+                            </span>
                         </div>
                         <div className="inner-grid inner-grid-2">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="greydot"></span>{' '}
-                                                            Affordable Housing
-                                                            area
-                                                        </p>
-                                                    </div>
-                                                </span>
+                            <span className="info-icon">
+                                <InfoSkate />
+                                <div className="info-icon-show info-icon-show-c">
+                                    <p className="sm-type-amp">
+                                        <strong>Play park / Skate park</strong><br />
+                                        Could be located behind the school
+                                            and provide a facility for the
+                                            primary school
+                                        <br />
+                                        <Link to="/information/playpark-skatepark">
+                                                Read more
+                                            </Link>
+                                    </p>
+                                </div>
+                            </span>
+
                         </div>
                         <div className="inner-grid inner-grid-3">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-r">
-                                                        <p className="sm-type-amp">
-                                                            <span className="purpledot"></span>{' '}
-                                                            Campsite / Cabins
-                                                        </p>
-                                                        <p className="sm-type-amp">
-                                                            <span className="purpledot"></span>{' '}
-                                                            Market gardening
-                                                        </p>
-                                                    </div>
-                                                </span>
+                            <span className="info-icon">
+                                <InfoHouse />
+                                <div className="info-icon-show info-icon-show-c">
+                                    <div className="sm-type-amp">
+                                        <strong>Affordable Housing
+                                            area</strong><br />
+                                        Space for 3 pairs of semi-detached
+                                        houses behind a row of existing
+                                        houses.<br />
+                                        <Link to="/information/affordable-housing-scheme">
+                                            Read more
+                                        </Link>
+                                    </div>
+                                </div>
+                            </span>
                         </div>
                         <div className="inner-grid inner-grid-4">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="yellowdot"></span>{' '}
-                                                            Play park / Skate
-                                                            park
-                                                        </p>
-                                                        <p className="sm-type-amp">
-                                                            <span className="yellowdot"></span>{' '}
-                                                            Wind turbine
-                                                        </p>
-                                                    </div>
-                                                </span>
+                            <span className="info-icon">
+                                <InfoHydro />
+                                <div className="info-icon-show info-icon-show-c">
+                                    <div className="sm-type-amp">
+                                        <strong>Micro Hydro</strong><br />
+                                        Making use of the stream coming off the hill behind the village.
+                                        <br />
+                                        <Link to="/information/micro-hydro">
+                                            Read more
+                                        </Link>
+                                    </div>
+                                </div>
+                            </span>
                         </div>
                         <div className="inner-grid inner-grid-5">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="yellowdot"></span>{' '}
-                                                            Business hub
-                                                        </p>
-                                                    </div>
-                                                </span>
+                            <span className="info-icon">
+                                <InfoBusiness />
+                                <div className="info-icon-show info-icon-show-c">
+                                    <div className="sm-type-amp">
+                                        <strong>Business hub</strong><br />
+                                        Situated off the main thoroughfare,
+                                        a new build that could be divided
+                                        into units for offices and/or
+                                        workshops.<br />
+                                        <Link to="/information/business-hub">
+                                            Read more
+                                        </Link>
+                                    </div>
+                                </div>
+                            </span>
                         </div>
                         <div className="inner-grid inner-grid-6">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-r">
-                                                        <p className="sm-type-amp">
-                                                            <span className="tealdot"></span>{' '}
-                                                            Forest area
-                                                        </p>
-                                                    </div>
-                                                </span>
+                            <span className="info-icon">
+                                <InfoGarden />
+                                <div className="info-icon-show info-icon-show-r">
+                                    <div className="sm-type-amp">
+                                        <strong>Market gardening</strong><br />
+                                        A commercial operation to grow
+                                            year-round fruit and vegetables for
+                                            the local community<br />
+                                            <Link to="/information/market-scheme">
+                                                Read more
+                                            </Link>
+                                    </div>
+                                </div>
+                            </span>
                         </div>
-                        <div className="inner-grid inner-grid-7"></div>
+                        <div className="inner-grid inner-grid-7">
+                            <span className="info-icon">
+                                <InfoWind />
+                                <div className="info-icon-show info-icon-show-c">
+                                    <div className="sm-type-amp">
+                                        <strong>Wind turbine</strong><br />
+                                        Situated on the hill behind the
+                                            village.<br />
+                                        <Link to="/information/wind-turbine">
+                                            Read more
+                                        </Link>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
                         <div className="inner-grid inner-grid-8">
-                                                <span className="info-icon">
-                                                    <InfoPick />
-                                                    <div className="info-icon-show info-icon-show-c">
-                                                        <p className="sm-type-amp">
-                                                            <span className="yellowdot"></span>{' '}
-                                                            Micro Hydro
-                                                        </p>
-                                                    </div>
-                                                </span>
+                            <span className="info-icon">
+                                <InfoForest />
+                                <div className="info-icon-show info-icon-show-c">
+                                    <div className="sm-type-amp">
+                                        <strong>Forestry Scheme</strong><br />
+                                        On the extensive hill behind the village, an area of some 15 acres to be planted as mixed woodland.<br />
+                                        <Link to="/information/forestry-scheme">
+                                            Read more
+                                        </Link>
+                                    </div>
+                                </div>
+                            </span>
                         </div>
-                        <div className="inner-grid inner-grid-9"></div>
+                        <div className="inner-grid inner-grid-9">
+                            <span className="info-icon">
+                                <InfoCamp />
+                                <div className="info-icon-show info-icon-show-r">
+                                    <div className="sm-type-amp">
+                                        <strong>Campsite / Cabins</strong><br />
+                                        Potential for a community owned
+                                        campsite and areas for caravans,
+                                        campervans and Cabins.<br />
+                                        <Link to="/information/campsite-cabin">
+                                            Read more
+                                        </Link>
+                                    </div>
+                                </div>
+                            </span>
+                        </div>
                     </div>
                 </div>
             </div>
