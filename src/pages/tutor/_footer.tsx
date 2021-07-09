@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'gatsby'
+import { AmplifySignOut } from '@aws-amplify/ui-react'
 // import { useMutation } from '@apollo/client'
 
 // import { RESET_DB } from '../../gql/mutations'
@@ -25,6 +26,9 @@ const TutorFooter = () => {
                             </li> */}
                             {/* {resetDBResponse.data && <span> DB reset!</span>} */}
                         </ul>
+                        <div className="col-lg-4">
+                            <AmplifySignOut />
+                        </div>
 
                         <p>
                             &copy; Copyright MateSphere 2021. All rights

@@ -78,6 +78,7 @@ export const useAuthQuery = <TData, TVariables>(
                 Authorization: `Bearer ${token}`,
             },
         },
+        skip: !token,
     })
 
     return { ...queryProps }
