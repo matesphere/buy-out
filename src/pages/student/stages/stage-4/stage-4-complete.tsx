@@ -54,7 +54,9 @@ const Stage4CompletePage: FC<PageProps> = () => {
         )
 
     const doc = pageData.team_by_pk?.stage_progresses[0].documents[0]
-    const devOptions = pageData.team_by_pk?.team_development_options
+    const shortlist = pageData.team_by_pk?.team_development_options.filter(
+        (opt) => opt.shortlist
+    )
 
     const { title: stageTitle } = pageData.stage_by_pk
 
@@ -109,7 +111,7 @@ const Stage4CompletePage: FC<PageProps> = () => {
                                 )}
 
                                 <FeasibilityStudy
-                                    devOptions={devOptions}
+                                    devOptions={shortlist}
                                     workState={doc?.doc_data}
                                     docSubmitted={true}
                                 />

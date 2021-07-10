@@ -116,11 +116,10 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                             <AccordionItem className="form-holder-border">
                                                 <AccordionItemHeading>
                                                     <AccordionItemButton>
-                                                        {
+                                                        {opt.team_choice_name ||
                                                             opt
                                                                 .development_option
-                                                                .display_name
-                                                        }
+                                                                .display_name}
                                                     </AccordionItemButton>
                                                 </AccordionItemHeading>
                                                 <AccordionItemPanel>

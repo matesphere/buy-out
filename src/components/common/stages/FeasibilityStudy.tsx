@@ -135,11 +135,17 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
 
             <Accordion allowZeroExpanded>
                 {devOptions.map(
-                    ({ development_option: { option, display_name } }, i) => (
+                    (
+                        {
+                            team_choice_name,
+                            development_option: { option, display_name },
+                        },
+                        i
+                    ) => (
                         <AccordionItem key={i} className="form-holder-border">
                             <AccordionItemHeading>
                                 <AccordionItemButton>
-                                    {display_name}
+                                    {team_choice_name || display_name}
                                 </AccordionItemButton>
                             </AccordionItemHeading>
                             <AccordionItemPanel>

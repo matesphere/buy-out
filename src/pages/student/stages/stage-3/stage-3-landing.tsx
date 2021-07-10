@@ -117,10 +117,11 @@ const Stage3LandingPage: FC = () => {
         pageData.team_by_pk.stage_progresses[0]?.documents[0]?.doc_data || {}
 
     // TODO: can use reduce to combine these 2 expressions, i.e. divide array
-    const completedSwots = Object.keys(doc).filter((opt) =>
-        devOptions
-            .map(({ development_option: { option } }) => option)
-            .includes(opt)
+    const completedSwots = Object.keys(doc).filter(
+        (opt) =>
+            devOptions
+                .map(({ development_option: { option } }) => option)
+                .includes(opt) && Object.keys(doc[opt]).length === 4
     )
 
     const exampleSwotOptions = Object.keys(doc).filter(

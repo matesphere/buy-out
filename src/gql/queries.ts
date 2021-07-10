@@ -179,6 +179,7 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                         team_development_options(
                             order_by: { development_option: { id: asc } }
                         ) {
+                            team_choice_name
                             shortlist
                             development_option {
                                 id

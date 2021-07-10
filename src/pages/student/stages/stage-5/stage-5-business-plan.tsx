@@ -72,9 +72,11 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
 
     const { title: stageTitle } = pageData.stage_by_pk
 
-    const devOption = pageData.team_by_pk?.team_development_options.find(
+    const teamDevOption = pageData.team_by_pk?.team_development_options.find(
         (opt) => opt.id === id
-    )?.development_option
+    )
+
+    const devOption = teamDevOption?.development_option
 
     return (
         <>
@@ -116,7 +118,7 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                                 business plan.
                             </p>
                             <h3 className="sm-type-drum sm-type-drum--medium mb-2 redorange-highlight">
-                                {devOption?.display_name}
+                                {teamDevOption?.team_choice_name}
                             </h3>
                         </div>
                         <div className="col-lg-4">

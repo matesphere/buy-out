@@ -65,7 +65,7 @@ const Stage4LandingPage = () => {
     const { title: stageTitle } = pageData.stage_by_pk
     const { team_development_options: devOptions } = pageData.team_by_pk
     const shortlist = devOptions.filter((opt) => opt.shortlist)
-    const task1Complete = devOptions.filter((opt) => opt.shortlist).length === 3
+    const task1Complete = shortlist.length === 3
     const docFeedback =
         pageData?.team_by_pk?.stage_progresses[0].documents[0]?.feedback
 
@@ -173,6 +173,7 @@ const Stage4LandingPage = () => {
                                                 (
                                                     {
                                                         id,
+                                                        team_choice_name,
                                                         development_option: {
                                                             display_name,
                                                         },
@@ -181,9 +182,10 @@ const Stage4LandingPage = () => {
                                                 ) => (
                                                     <li key={i}>
                                                         <Link
-                                                            to={`/student/stage-3/swot?num=${i}&id=${id}`}
+                                                            to={`/student/stage-3/swot?num=${i}&id=${id}&from=stage-4`}
                                                         >
-                                                            {display_name}
+                                                            {team_choice_name ||
+                                                                display_name}
                                                         </Link>
                                                     </li>
                                                 )

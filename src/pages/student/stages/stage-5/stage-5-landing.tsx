@@ -99,12 +99,19 @@ export const BusinessPlanLinks: FC<BusinessPlanLinksProps> = ({
 }) => (
     <ol>
         {shortlist.map(
-            ({ id, development_option: { option, display_name } }, i) => (
+            (
+                {
+                    id,
+                    team_choice_name,
+                    development_option: { option, display_name },
+                },
+                i
+            ) => (
                 <li key={i} className="sm-type-guitar">
                     <Link
                         to={`/student/stage-5/business-plan?num=${i}&id=${id}`}
                     >
-                        {display_name}
+                        {team_choice_name || display_name}
                     </Link>
                     {completedPlans.includes(option) && (
                         <span className="ml-2 side-icon">
@@ -267,9 +274,12 @@ const Stage5LandingPage: FC = () => {
                             </p>
                             <p className="sm-type-lead mb-3">
                                 You should be able to find most of the figures
-                                required in the development option information,
-                                but in some cases you may need to make your own
-                                ‘best estimates’ of either costs or income!
+                                required in the{' '}
+                                <Link to="/information/development-options">
+                                    development option information
+                                </Link>
+                                , but in some cases you may need to make your
+                                own ‘best estimates’ of either costs or income!
                             </p>
 
                             <div className="side-grey">

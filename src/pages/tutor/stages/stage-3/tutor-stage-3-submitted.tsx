@@ -99,18 +99,15 @@ const TutorStage3SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                         >
                                             <AccordionItemHeading>
                                                 <AccordionItemButton>
-                                                    {
+                                                    {opt.team_choice_name ||
                                                         opt.development_option
-                                                            .display_name
-                                                    }
+                                                            .display_name}
                                                 </AccordionItemButton>
                                             </AccordionItemHeading>
                                             <AccordionItemPanel>
                                                 <SWOT
                                                     key={i}
-                                                    devOption={
-                                                        opt.development_option
-                                                    }
+                                                    teamDevOption={opt}
                                                     swotState={
                                                         doc.doc_data[
                                                             opt

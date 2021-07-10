@@ -91,13 +91,15 @@ const Stage3SwotPage: FC<PageProps> = ({ location: { search } }) => {
             />
         )
 
-    const { id, num } = QueryString.parse(search, {
+    const { id, num, from } = QueryString.parse(search, {
         parseNumbers: true,
-    }) as { id: string; num: number }
+    }) as { id: string; num: number; from: string }
 
-    const devOption = pageData.team_by_pk?.team_development_options.find(
+    const teamDevOption = pageData.team_by_pk?.team_development_options.find(
         (opt) => opt.id === id
-    )?.development_option
+    )
+
+    const devOption = teamDevOption?.development_option
 
     // TODO: feedback split out by SWOT?
     return (
@@ -130,21 +132,25 @@ const Stage3SwotPage: FC<PageProps> = ({ location: { search } }) => {
                     <SWOT
                         swotTitle={`SWOT Analysis ${num + 1}`}
                         // docFeedback={docFeedback}
-                        devOption={devOption}
+                        teamDevOption={teamDevOption}
                         swotState={workState[devOption.option]}
                         changeFunc={onChangeEditor(workDispatch, devOption)}
                         saveWorkObj={saveWorkObj}
                         docSubmitted={docSubmitted}
                     />
-                    <Link
-                        to={
-                            stageComplete
-                                ? '/student/stage-3/complete'
-                                : '/student/stage-3'
-                        }
-                    >
-                        Back to Stage 3
-                    </Link>
+                    {!!from ? (
+                        <Link to={`/student/${from}`}>Go back</Link>
+                    ) : (
+                        <Link
+                            to={
+                                stageComplete
+                                    ? '/student/stage-3/complete'
+                                    : '/student/stage-3'
+                            }
+                        >
+                            Back to Stage 3
+                        </Link>
+                    )}
                 </section>
             </main>
         </>

@@ -5,13 +5,7 @@ import { TextEditor } from '../TextEditor'
 import { SaveSubmitSection } from './SaveSubmitSection'
 
 import HelpIcon from '../../../assets/help-icon.svg'
-import {
-    Accordion,
-    AccordionItem,
-    AccordionItemHeading,
-    AccordionItemButton,
-    AccordionItemPanel,
-} from 'react-accessible-accordion'
+
 import '../../../scss/index.scss'
 
 interface SwotType {
@@ -24,9 +18,12 @@ interface SwotType {
 interface SWOTProps {
     swotTitle?: string
     docFeedback?: any
-    devOption: {
-        option: string
-        display_name: string
+    teamDevOption: {
+        team_choice_name: string
+        development_option: {
+            option: string
+            display_name: string
+        }
     }
     swotState: SwotType
     changeFunc?: (section: string) => (data: any) => void
@@ -37,7 +34,10 @@ interface SWOTProps {
 export const SWOT: FC<SWOTProps> = ({
     swotTitle,
     docFeedback,
-    devOption,
+    teamDevOption: {
+        team_choice_name,
+        development_option: { display_name },
+    },
     swotState,
     changeFunc,
     saveWorkObj,
@@ -111,7 +111,7 @@ export const SWOT: FC<SWOTProps> = ({
             )}
         </div>
         <h3 className="sm-type-drum sm-type-drum--medium mt-2 mb-2">
-            {devOption.display_name}
+            {team_choice_name || display_name}
         </h3>
         <div className="rowgrid mt-4">
             <div className="col-grid">

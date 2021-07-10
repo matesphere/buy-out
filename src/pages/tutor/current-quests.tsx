@@ -195,11 +195,17 @@ const TeamInfoPanel = ({ devOptions, students }: TeamInfoPanelProps) => (
                 </p>
                 {devOptions.map(
                     (
-                        { shortlist, development_option: { display_name } },
+                        {
+                            team_choice_name,
+                            shortlist,
+                            development_option: { display_name },
+                        },
                         i
                     ) => (
                         <p key={i} className="sm-type-bigamp">
-                            {display_name}{' '}
+                            {team_choice_name
+                                ? `${team_choice_name} (Team Choice)`
+                                : display_name}{' '}
                             {shortlist && (
                                 <span className="shortlist-tick">
                                     <Tick />
@@ -313,10 +319,7 @@ const TutorCurrentQuestPage = () => {
                     <meta name="description" content="The description" />
                 </Helmet>
                 <main className="notes">
-                    <section
-                        className="container min-height"
-                        id="currentquest"
-                    >
+                    <section className="container min-height" id="currentquest">
                         <Breadcrumbs
                             previous={[
                                 {
