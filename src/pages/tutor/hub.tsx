@@ -14,7 +14,6 @@ import {
     TutorHubQueryVariables,
 } from '../../gql/types/TutorHubQuery'
 
-import HelpIcon from '../../assets/help-icon.svg'
 import '../../scss/index.scss'
 
 const TUTOR_HUB_QUERY = gql`
@@ -152,7 +151,7 @@ const TutorHub = () => {
                                 </p>
                                 {prevQuests.length > 0 ? (
                                     <ul>
-                                        {quests.map((quest, i) => (
+                                        {prevQuests.map((quest, i) => (
                                             <li key={i} className="sm-type-amp">
                                                 <PreviousQuestDisplay
                                                     quest={quest}
@@ -166,12 +165,6 @@ const TutorHub = () => {
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
                             <div className="side-grey mb-2">
                                 <p className="sm-type-lead sm-type-lead--medium">
                                     Start New Quest

@@ -7,6 +7,7 @@ import {
     BaseMutationOptions,
 } from '@apollo/client'
 import axios from 'axios'
+import gen from 'generate-password'
 
 import { UserStateContext } from './user-state'
 
@@ -15,7 +16,14 @@ export const genUsername = (firstName: string, lastName: string) =>
         .join('')
         .concat(Math.floor(Math.random() * 99).toString())
 
-export const genPassword = () => 'abcdefg123' // TODO: password generator
+export const genPassword = () =>
+    gen.generate({
+        length: 8,
+        lowercase: true,
+        uppercase: false,
+        numbers: true,
+        excludeSimilarCharacters: true,
+    })
 
 interface TeamType {
     name: string
