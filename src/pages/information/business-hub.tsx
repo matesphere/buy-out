@@ -2,11 +2,16 @@ import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
+
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../components/common/ReadQuesty'
+import { DevOptionsChecklist } from './development-options'
+
 import HelpIcon from '../../assets/help-icon.svg'
-import InfoBusiness from "../../assets/info-business.svg";
-import TickSheet from '../../assets/tick-sheet.svg'
+import InfoBusiness from '../../assets/info-business.svg'
+
 import '../../scss/index.scss'
 
 const InfoBusinessHub = () => {
@@ -34,26 +39,34 @@ const InfoBusinessHub = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Business Hub
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                    {
+                                        displayName: 'Development Options',
+                                        url: '/information/development-options',
+                                    },
+                                ]}
+                                currentDisplayName="Business Hub Scheme"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
                                     <InfoBusiness />
                                 </span>
-                                Business hub scheme
-
+                                Business Hub Scheme
                             </h2>
+                            <ReadQuesty
+                                text="Situated off the main thoroughfare, a new build
+                                that could be divided into units for offices
+                                and/or workshops."
+                            />
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
@@ -183,12 +196,7 @@ const InfoBusinessHub = () => {
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
-                                    Funding Options
-                                </p>
-                                <p className="sm-type-bigamp">
-                                    Siutated off the main thoroughfare, a new
-                                    build that could be divided into units for
-                                    offices and / or workshops
+                                    Funding Option links
                                 </p>
                                 <ul>
                                     <li>
@@ -229,52 +237,12 @@ const InfoBusinessHub = () => {
 
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
-                                    Back to the map
+                                    Back to the options
                                 </Link>
                             </p>
                         </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/information/development-options">
-                                        Back to the map
-                                    </Link>
-                                </p>
-                            </div>
 
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have read the information for
-                                        Business hub Scheme.
-                                    </p>
-                                </div>
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have seen the funding options for
-                                        Business hub Scheme.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <DevOptionsChecklist optionName="Business Hub Scheme" />
                     </div>
                 </section>
 

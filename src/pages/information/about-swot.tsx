@@ -1,10 +1,11 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import { graphql, Link, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { Helpful } from '../../components/common/Helpful'
 
 import '../../scss/index.scss'
@@ -42,21 +43,19 @@ const AboutSwotPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    About SWOT
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                ]}
+                                currentDisplayName="About SWOT"
+                            />
                             {stage2DataTitleEng.map((text, i) => (
                                 <h2
                                     key={i}

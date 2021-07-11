@@ -1,10 +1,11 @@
-import React, { useState, FC } from 'react'
+import React, { useState, useContext, FC } from 'react'
 import { Link } from 'gatsby'
 import { gql } from '@apollo/client'
 
 import { POSITION_DISPLAY_NAME } from '../utils/common-utils'
 
 import { useAuthQuery } from '../utils/auth-utils'
+import { UserStateContext } from '../utils/user-state'
 
 import {
     NavQuery,
@@ -38,7 +39,7 @@ const NAV_QUERY = gql`
 
 const InformationLinks: FC<{ latestStageID: number }> = ({ latestStageID }) => (
     <div className="dropdown-content">
-        <Link to="/information/community-buyouts">Community Buy-outs</Link>
+        <Link to="/information/background-info">Background Info</Link>
         {latestStageID >= 2 && (
             <>
                 <Link to="/information/about-glenclas-area">
@@ -53,7 +54,7 @@ const InformationLinks: FC<{ latestStageID: number }> = ({ latestStageID }) => (
                 <Link to="/information/development-options">
                     Development Options
                 </Link>
-                <Link to="/information/development-options">SWOT Analysis</Link>
+                <Link to="/information/about-swot">SWOT Analysis</Link>
             </>
         )}
     </div>
@@ -80,6 +81,7 @@ const StageLinks: FC<{
 )
 
 const Nav: FC = () => {
+    const { latestStageUnlocked } = useContext(UserStateContext)
     const [expanded, setExpanded] = useState(false)
 
     const { data } = useAuthQuery<NavQuery, NavQueryVariables>(
@@ -89,15 +91,6 @@ const Nav: FC = () => {
     )
 
     const { full_name, username, student } = data?.user_by_pk || {}
-
-    const latestStageID =
-        (data &&
-            Math.max(
-                ...(data.user_by_pk?.student?.team?.stage_progresses.map(
-                    (el) => el.stage_id
-                ) || [1])
-            )) ||
-        1
 
     return (
         <>
@@ -161,7 +154,9 @@ const Nav: FC = () => {
                                         </Link>
                                         {data && (
                                             <InformationLinks
-                                                latestStageID={latestStageID}
+                                                latestStageID={
+                                                    latestStageUnlocked
+                                                }
                                             />
                                         )}
                                     </li>

@@ -67,7 +67,8 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
             navigate('/tutor/hub') //TODO: not working...why?? Something to do with client-only?
         }
 
-        if (stageNum && stageNum > latestStageUnlocked) {
+        console.log(latestStageUnlocked)
+        if (stageNum && latestStageUnlocked && stageNum > latestStageUnlocked) {
             navigate('/student/team-hub')
         }
 

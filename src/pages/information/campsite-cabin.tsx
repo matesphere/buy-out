@@ -5,12 +5,14 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../components/common/ReadQuesty'
+import { DevOptionsChecklist } from './development-options'
 
 import HelpIcon from '../../assets/help-icon.svg'
-import TickSheet from '../../assets/tick-sheet.svg'
+import InfoCamp from '../../assets/info-camp.svg'
 
 import '../../scss/index.scss'
-import InfoCamp from "../../assets/info-camp.svg";
 
 const InfoCampsiteCabin = () => {
     const data = useStaticQuery(graphql`
@@ -37,25 +39,36 @@ const InfoCampsiteCabin = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Campsite and Cabins
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                    {
+                                        displayName: 'Development Options',
+                                        url: '/information/development-options',
+                                    },
+                                ]}
+                                currentDisplayName="Campsite and Cabins Scheme"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
                                     <InfoCamp />
                                 </span>
-                                Campsite and Cabins scheme
+                                Campsite and Cabins Scheme
                             </h2>
+                            <ReadQuesty
+                                text="A community owned campsite and
+                                    area for cabins or wigwams. The shower
+                                    toilet block could be made available to
+                                    public use (for a fee) to allow campervan
+                                    and other tourists to use the facilities."
+                            />
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
@@ -316,15 +329,9 @@ const InfoCampsiteCabin = () => {
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
-                                    Funding Options
+                                    Funding Options links
                                 </p>
-                                <p className="sm-type-bigamp">
-                                    Potential for a community owned campsite and
-                                    area for cabins or wigwams. The shower
-                                    toilet block could be made available to
-                                    public use (for a fee) to allow campervan
-                                    and other tourists to use the facilities
-                                </p>
+
                                 <ul>
                                     <li>
                                         <p className="sm-type-bigamp">
@@ -354,52 +361,11 @@ const InfoCampsiteCabin = () => {
 
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
-                                    Back to the map
+                                    Back to the options
                                 </Link>
                             </p>
                         </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/information/development-options">
-                                        Back to the map
-                                    </Link>
-                                </p>
-                            </div>
-
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have read the information for
-                                        Campsite and Cabins Scheme.
-                                    </p>
-                                </div>
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have seen the funding options for
-                                        Campsite and Cabins Scheme.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <DevOptionsChecklist optionName="Campsite and Cabins Scheme" />
                     </div>
                 </section>
 

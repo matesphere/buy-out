@@ -2,12 +2,17 @@ import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
+
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../components/common/ReadQuesty'
+import { DevOptionsChecklist } from './development-options'
+
 import HelpIcon from '../../assets/help-icon.svg'
-import TickSheet from '../../assets/tick-sheet.svg'
+import InfoMarket from '../../assets/info-garden.svg'
+
 import '../../scss/index.scss'
-import InfoMarket from "../../assets/info-garden.svg";
 
 const InfoMarketScheme = () => {
     const data = useStaticQuery(graphql`
@@ -27,32 +32,42 @@ const InfoMarketScheme = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Market Scheme</title>
+                <title>Market Garden Scheme</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Information" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Market Scheme
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                    {
+                                        displayName: 'Development Options',
+                                        url: '/information/development-options',
+                                    },
+                                ]}
+                                currentDisplayName="Market Garden Scheme"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
                                     <InfoMarket />
                                 </span>
-                                Market scheme
+                                Market Garden Scheme
                             </h2>
+                            <ReadQuesty
+                                text="A commercial operation to grow year-round
+                                    fruit and vegetables for the local community
+                                    and for local businesses such as the Glencas
+                                    Hotel and Lodge."
+                            />
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
@@ -258,13 +273,7 @@ const InfoMarketScheme = () => {
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
-                                    Funding Options
-                                </p>
-                                <p className="sm-type-bigamp">
-                                    A commercial operation to grow year-round
-                                    fruit and vegetables for the local community
-                                    and for local businesses such as the Glancas
-                                    Hotel and Lodge
+                                    Funding Options links
                                 </p>
                                 <ul>
                                     <li>
@@ -306,52 +315,11 @@ const InfoMarketScheme = () => {
 
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
-                                    Back to the map
+                                    Back to the options
                                 </Link>
                             </p>
                         </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/information/development-options">
-                                        Back to the map
-                                    </Link>
-                                </p>
-                            </div>
-
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have read the information for Market
-                                        Garden Scheme.
-                                    </p>
-                                </div>
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have seen the funding options for
-                                        Market Garden Scheme.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <DevOptionsChecklist optionName="Market Garden Scheme" />
                     </div>
                 </section>
 

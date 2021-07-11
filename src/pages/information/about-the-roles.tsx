@@ -4,6 +4,7 @@ import Slider from 'react-slick'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { CheckList } from '../../components/common/Checklist'
 import { Helpful } from '../../components/common/Helpful'
 
@@ -18,7 +19,6 @@ import {
     stage2DataSubTitleEng,
     stage2DataTextEng,
 } from './_roles.data'
-import {Link} from "gatsby";
 
 const Stage2TaskPage = () => {
     return (
@@ -35,19 +35,19 @@ const Stage2TaskPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    About The Roles
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                ]}
+                                currentDisplayName="About the Roles"
+                            />
 
                             {stage2DataTitleEng.map((text, i) => (
                                 <h2

@@ -28,7 +28,7 @@ interface UserStateContextType {
 export const UserStateContext = createContext<UserStateContextType>({
     isSignedIn: false,
     userInfo: signedOutUserInfo,
-    latestStageUnlocked: 1,
+    latestStageUnlocked: 0,
     setLatestStageUnlocked: () => {},
 })
 
@@ -51,7 +51,7 @@ export const UserStateProvider = ({ children }) => {
     const [authState, setAuthState] = useState({})
     // const [user, setUser] = useState({})
     const [userInfo, setUserInfo] = useState(signedOutUserInfo)
-    const [latestStageUnlocked, setLatestStageUnlocked] = useState(1)
+    const [latestStageUnlocked, setLatestStageUnlocked] = useState(0)
 
     useEffect(() => {
         return onAuthUIStateChange((nextAuthState, data) => {

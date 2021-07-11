@@ -8,7 +8,7 @@ export const stage2HelpfulEng = [
     'Chair, Vice-chair, Secretary, Treasurer',
 ]
 
-export const stage2DataTitleEng = ['About the roles']
+export const stage2DataTitleEng = ['About the Roles']
 
 export const stage2DataSubTitleEng = [
     'You are going to work as the board of a community group who will lead the purchase of some land that has come up for sale.',

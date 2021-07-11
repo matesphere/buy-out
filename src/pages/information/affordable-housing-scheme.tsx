@@ -2,17 +2,27 @@ import React from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
+
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../components/common/ReadQuesty'
+import { DevOptionsChecklist } from './development-options'
+
 import HelpIcon from '../../assets/help-icon.svg'
 import InfoHouse from '../../assets/info-house.svg'
-import TickSheet from '../../assets/tick-sheet.svg'
+
 import '../../scss/index.scss'
 
 const InfoHousingPage = () => {
     const data = useStaticQuery(graphql`
         query {
-            image5: file(relativePath: { eq: "modular-house.jpg" }) {
+            image1: file(relativePath: { eq: "blue-2.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image2: file(relativePath: { eq: "modular-house.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -27,35 +37,50 @@ const InfoHousingPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Affordable Housing</title>
+                <title>Affordable Housing Scheme</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Information" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                    {
+                                        displayName: 'Development Options',
+                                        url: '/information/development-options',
+                                    },
+                                ]}
+                                currentDisplayName="Affordable Housing Scheme"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
                                     <InfoHouse />
                                 </span>
-                                Affordable Housing scheme
+                                Affordable Housing Scheme
                             </h2>
-
-                            <p className="sm-type-bigamp mb-4">
-                                A site is available for the construction of 3
-                                pairs of semi-detached houses behind an existing
-                                row of houses.
-                            </p>
+                            <ReadQuesty
+                                text="A site is available for the construction of
+                                    3 pairs of semi-detached houses behind an
+                                    existing row of houses."
+                            />
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     alt=""
                                     image={
-                                        data.image5.childImageSharp
+                                        data.image2.childImageSharp
                                             .gatsbyImageData
                                     }
                                 />
                             </div>
-
                             <p className="sm-type-bigamp mb-4">
                                 The Wee Housing Company
                                 (www.theweehousecompany.co.uk), constructs
@@ -77,7 +102,6 @@ const InfoHousingPage = () => {
                                 move in within 3 weeks of being delivered to
                                 site.
                             </p>
-
                             <p className="sm-type-bigamp mb-4">
                                 The Wee House Company, working with Mull and
                                 Iona Community Trust (MICT), and Ulva School
@@ -90,7 +114,6 @@ const InfoHousingPage = () => {
                                 electrics. The housing is a mix of two- and
                                 three-bedroom houses.
                             </p>
-
                             <p className="sm-type-bigamp mb-4">
                                 Delivering affordable long-term rental homes
                                 will have a real positive impact for the local
@@ -99,7 +122,6 @@ const InfoHousingPage = () => {
                                 working age adults to work locally which will
                                 boost the fragile local economy.
                             </p>
-
                             <p className="sm-type-bigamp mb-4">
                                 For the tenants, after years of moving from one
                                 private let to another, they now have a secure
@@ -109,24 +131,20 @@ const InfoHousingPage = () => {
                                 social rent levels, ensures the homes are truly
                                 affordable to live in.
                             </p>
-
                             <p className="sm-type-bigamp mb-4">
                                 MICT Convenor, Sandy Brunton, added, “affordable
                                 housing is consistently a priority issue across
                                 Mull and Iona and this project is a really good
                                 example of community powered regeneration”.
                             </p>
-
                             <p className="sm-type-bigamp mb-4">
                                 The projected cost of the development in
                                 Glenclas would be £1,080,000 for 6
                                 semi-detached, 3-bedroom houses.
                             </p>
-
                             <p className="sm-type-lead sm-type-lead--medium mb-2">
                                 Grants would be available from:
                             </p>
-
                             <div className="table table-proposal-two">
                                 <div className="roww">
                                     <div className="cell">
@@ -161,29 +179,22 @@ const InfoHousingPage = () => {
                                     </div>
                                 </div>
                             </div>
-
                             <p className="sm-type-bigamp mb-4">
                                 Leaving a remaining £80,000 to be obtained via a
                                 bank mortgage, this would result in monthly
                                 repayments of £380 per month over 25 years, at
                                 an interest rate of 3%.
                             </p>
-
                             <p className="sm-type-bigamp mb-4">
                                 The tenants would pay a rent of £500 each per
                                 month, giving a total of £3000 per month.
                             </p>
-
                             <div className="side-grey">
                                 <p className="sm-type-guitar sm-type-guitar--medium">
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
-                                    Funding Options
-                                </p>
-                                <p className="sm-type-bigamp">
-                                    Space for three pairs of semi-detached
-                                    houses behind a row of existing houses
+                                    Funding Options links
                                 </p>
                                 <ul>
                                     <li>
@@ -210,55 +221,13 @@ const InfoHousingPage = () => {
                                     </li>
                                 </ul>
                             </div>
-
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
-                                    Back to the map
+                                    Back to the the options
                                 </Link>
                             </p>
                         </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/information/development-options">
-                                        Back to the map
-                                    </Link>
-                                </p>
-                            </div>
-
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have read the information for
-                                        Affordable Housing.
-                                    </p>
-                                </div>
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have seen the funding options for
-                                        Affordable Housing.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <DevOptionsChecklist optionName="Affordable Housing Scheme" />
                     </div>
                 </section>
 

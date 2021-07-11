@@ -5,9 +5,11 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../components/common/ReadQuesty'
+import { DevOptionsChecklist } from './development-options'
 
 import HelpIcon from '../../assets/help-icon.svg'
-import TickSheet from '../../assets/tick-sheet.svg'
 import InfoShop from '../../assets/info-shop.svg'
 
 import '../../scss/index.scss'
@@ -15,7 +17,7 @@ import '../../scss/index.scss'
 const InfoShopPostOffice = () => {
     const data = useStaticQuery(graphql`
         query {
-            image5: file(relativePath: { eq: "shop-post-office.jpg" }) {
+            image1: file(relativePath: { eq: "shop-post-office.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -30,26 +32,30 @@ const InfoShopPostOffice = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Community Shop and Post Office</title>
+                <title>Shop and Post Office</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Information" />
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Shop and Post Office
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                    {
+                                        displayName: 'Development Options',
+                                        url: '/information/development-options',
+                                    },
+                                ]}
+                                currentDisplayName="Shop & Post Office"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
                                     <InfoShop />
@@ -57,11 +63,18 @@ const InfoShopPostOffice = () => {
                                 Shop and Post Office
                             </h2>
 
+                            <ReadQuesty
+                                text="A purpose-built mini-supermarket and shop,
+                                    to service the local community and visitors.
+                                    Could be situated just off the 'High
+                                    Street'."
+                            />
+
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     alt=""
                                     image={
-                                        data.image5.childImageSharp
+                                        data.image1.childImageSharp
                                             .gatsbyImageData
                                     }
                                 />
@@ -359,13 +372,9 @@ const InfoShopPostOffice = () => {
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
-                                    Funding Options
+                                    Funding Options links
                                 </p>
-                                <p className="sm-type-bigamp">
-                                    Could be situated just off the 'High Street'
-                                    a purpose-built mini-supermarket and shop,
-                                    to service the local community and visitors
-                                </p>
+
                                 <ul>
                                     <li>
                                         <p className="sm-type-bigamp">
@@ -405,52 +414,11 @@ const InfoShopPostOffice = () => {
 
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
-                                    Back to the map
+                                    Back to the options
                                 </Link>
                             </p>
                         </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/information/development-options">
-                                        Back to the map
-                                    </Link>
-                                </p>
-                            </div>
-
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have read the information for Shop
-                                        and Post Office.
-                                    </p>
-                                </div>
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have seen the funding options for
-                                        Shop and Post Office.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <DevOptionsChecklist optionName="Shop and Post Office" />
                     </div>
                 </section>
 

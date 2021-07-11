@@ -1,10 +1,11 @@
 import React from 'react'
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import Slider from 'react-slick'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import { slickSettings } from '../../utils/slicksettings'
@@ -51,21 +52,19 @@ const AboutGlenclasAreaPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    About Glenclas
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                ]}
+                                currentDisplayName="About Glenclas"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 About the area Glenclas
                             </h2>

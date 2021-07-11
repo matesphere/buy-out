@@ -5,18 +5,20 @@ import { Helmet } from 'react-helmet'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../components/common/ReadQuesty'
+import { DevOptionsChecklist } from './development-options'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import TickSheet from '../../assets/tick-sheet.svg'
-import InfoSkate from "../../assets/info-skate.svg";
+import InfoSkate from '../../assets/info-skate.svg'
 
 import '../../scss/index.scss'
-import InfoShop from "../../assets/info-shop.svg";
 
 const InfoPlaySkate = () => {
     const data = useStaticQuery(graphql`
         query {
-            image5: file(relativePath: { eq: "skate-park.jpg" }) {
+            image1: file(relativePath: { eq: "skate-park.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -38,19 +40,23 @@ const InfoPlaySkate = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Playpark / Skatepark
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                    {
+                                        displayName: 'Development Options',
+                                        url: '/information/development-options',
+                                    },
+                                ]}
+                                currentDisplayName="Play Park/Skate Park"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
                                     <InfoSkate />
@@ -58,11 +64,17 @@ const InfoPlaySkate = () => {
                                 Playpark / Skatepark
                             </h2>
 
+                            <ReadQuesty
+                                text="Could be located behind the school and
+                                    provide a facility for the primary school
+                                    children as well as for older children."
+                            />
+
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     alt=""
                                     image={
-                                        data.image5.childImageSharp
+                                        data.image1.childImageSharp
                                             .gatsbyImageData
                                     }
                                 />
@@ -207,12 +219,7 @@ const InfoPlaySkate = () => {
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
-                                    Funding Options
-                                </p>
-                                <p className="sm-type-bigamp">
-                                    Could be located behind the school and
-                                    provide a facility for the primary school
-                                    children as well as for older children
+                                    Funding Option links
                                 </p>
                                 <ul>
                                     <li>
@@ -242,52 +249,11 @@ const InfoPlaySkate = () => {
 
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
-                                    Back to the map
+                                    Back to the options
                                 </Link>
                             </p>
                         </div>
-                        <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/information/development-options">
-                                        Back to the map
-                                    </Link>
-                                </p>
-                            </div>
-
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have read the information for Play
-                                        park / Skate park.
-                                    </p>
-                                </div>
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        You have seen the funding options for
-                                        Play park / Skate park.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
+                        <DevOptionsChecklist optionName="Play park/Skate park" />
                     </div>
                 </section>
 

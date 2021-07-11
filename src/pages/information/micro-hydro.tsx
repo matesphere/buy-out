@@ -5,6 +5,8 @@ import { Helmet } from 'react-helmet'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../components/common/ReadQuesty'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import Ticklr from '../../assets/tick-lr.svg'
@@ -12,17 +14,17 @@ import Ticklr2 from '../../assets/tick-lr2.svg'
 import TickSheet from '../../assets/tick-sheet.svg'
 
 import '../../scss/index.scss'
-import InfoHydro from "../../assets/info-hydro.svg";
+import InfoHydro from '../../assets/info-hydro.svg'
 
 const InfoMicroHydro = () => {
     const data = useStaticQuery(graphql`
         query {
-            image5: file(relativePath: { eq: "micro-hydro.jpg" }) {
+            image1: file(relativePath: { eq: "micro-hydro.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
             }
-            image1: file(relativePath: { eq: "micro-hydro-figures.jpg" }) {
+            image2: file(relativePath: { eq: "micro-hydro-figures.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -44,32 +46,42 @@ const InfoMicroHydro = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Micro-hydro
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                    {
+                                        displayName: 'Development Options',
+                                        url: '/information/development-options',
+                                    },
+                                ]}
+                                currentDisplayName="Micro Hydro Scheme"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
                                     <InfoHydro />
                                 </span>
-
                                 Micro-hydro scheme
                             </h2>
+
+                            <ReadQuesty
+                                text="A scheme which can provide power for the
+                                community and an income from electricity
+                                sold on to the grid. It would make use of the
+                                stream coming off the hill behind the village."
+                            />
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     alt=""
                                     image={
-                                        data.image5.childImageSharp
+                                        data.image1.childImageSharp
                                             .gatsbyImageData
                                     }
                                 />
@@ -418,7 +430,7 @@ const InfoMicroHydro = () => {
                                     <GatsbyImage
                                         alt=""
                                         image={
-                                            data.image1.childImageSharp
+                                            data.image2.childImageSharp
                                                 .gatsbyImageData
                                         }
                                     />
@@ -467,13 +479,7 @@ const InfoMicroHydro = () => {
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
-                                    Funding Options
-                                </p>
-                                <p className="sm-type-bigamp">
-                                    Making use of the stream coming off the hill
-                                    behind the village. Providing both power for
-                                    the community and an income from electricty
-                                    sold onto the grid
+                                    Funding Options links
                                 </p>
                                 <ul>
                                     <li>
@@ -515,29 +521,11 @@ const InfoMicroHydro = () => {
 
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
-                                    Back to the map
+                                    Back to the options
                                 </Link>
                             </p>
                         </div>
                         <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
-                                </p>
-                                <p className="sm-type-amp">
-                                    <Link to="/information/development-options">
-                                        Back to the map
-                                    </Link>
-                                </p>
-                            </div>
-
                             <p className="sm-type-guitar mb-2">
                                 <span className="side-icon side-icon-green">
                                     <TickSheet />
@@ -548,15 +536,15 @@ const InfoMicroHydro = () => {
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        You have read the information for
-                                        Micro-hydro Scheme.
+                                        Read the information for the Micro-hydro
+                                        Scheme.
                                     </p>
                                 </div>
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        You have seen the funding options for
-                                        Micro-hydro Scheme.
+                                        Make a note of the Funding Options,
+                                        following the links if necessary.
                                     </p>
                                 </div>
                             </div>

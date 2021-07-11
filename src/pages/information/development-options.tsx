@@ -1,17 +1,46 @@
-import React from 'react'
+import React, { FC } from 'react'
 import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
+import MapOptions from './_map'
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 
 import HelpIcon from '../../assets/help-icon.svg'
-
-import MapOptions from './_map'
+import TickSheet from '../../assets/tick-sheet.svg'
 
 import '../../scss/index.scss'
 
-const InfoDevOptions = () => {
+export const DevOptionsChecklist: FC<{ optionName: string }> = ({
+    optionName,
+}) => (
+    <div className="col-lg-4">
+        <p className="sm-type-guitar mb-2">
+            <span className="side-icon side-icon-green">
+                <TickSheet />
+            </span>
+            Your checklist
+        </p>
+        <div className="side-grey">
+            <div className="checklist">
+                <div className="tick"></div>
+                <p className="sm-type-lead">
+                    Read the information for the {optionName}.
+                </p>
+            </div>
+            <div className="checklist">
+                <div className="tick"></div>
+                <p className="sm-type-lead">
+                    Make a note of the funding options, following the links if
+                    necessary.
+                </p>
+            </div>
+        </div>
+    </div>
+)
+
+const InfoDevOptions: FC = () => {
     const data = useStaticQuery(graphql`
         query {
             image5: file(relativePath: { eq: "map-zoom.jpg" }) {
@@ -36,21 +65,21 @@ const InfoDevOptions = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-9">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="crumb">
-                                    <Link to="/information">Information</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Glenclas Map
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                ]}
+                                currentDisplayName="Development Options"
+                            />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Map of options in Glenclas
+                                Development Options
                             </h2>
                             <p className="sm-type-lead mb-3">
                                 Shown below is a map of Glenclas, with the
@@ -71,22 +100,23 @@ const InfoDevOptions = () => {
                             </p>
                             <div className="side-grey">
                                 <p className="sm-type-amp">
-                                    Read all about Glenclas and find out what
-                                    you need to move on to the next quest.
+                                    Each development option is presented here in
+                                    detail.
                                 </p>
                                 <p className="sm-type-amp">
-                                    Make notes of the amenities and the
-                                    opportunities.
+                                    Remember you'll need to pick five options at
+                                    this stage, so try to compare and contrast
+                                    them.
                                 </p>
                                 <p className="sm-type-amp">
-                                    Look at Funding Options on each Option.
+                                    Make sure you look at the funding
+                                    information for each option.
                                 </p>
                             </div>
                         </div>
                     </div>
                     <div className="row">
                         <div className="col-lg-12">
-
                             <MapOptions />
 
                             <div className="table table-proposal">
@@ -101,9 +131,7 @@ const InfoDevOptions = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            1. Affordable Housing Scheme
-                                        </p>
+                                        <p>1. Affordable Housing Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
@@ -129,10 +157,10 @@ const InfoDevOptions = () => {
                                     </div>
                                     <div className="cell">
                                         <p>
-                                            Could be located behind the school
-                                            and provide a facility for the
-                                            primary school children as well as
-                                            for older children.
+                                            A new purpose-built facility with
+                                            distinct areas which could be used
+                                            by both primary school age and older
+                                            children.
                                         </p>
                                         <p>
                                             <Link to="/information/playpark-skatepark">
@@ -144,16 +172,13 @@ const InfoDevOptions = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            3. Shop and PO
-                                        </p>
+                                        <p>3. Shop and Post Office</p>
                                     </div>
                                     <div className="cell">
                                         <p>
-                                            Could be situated just of the ‘High
-                                            Street’ a purpose-built mini
-                                            supermarket and shop, to service the
-                                            local community and visitors.
+                                            A purpose-built mini supermarket and
+                                            shop, to service the local community
+                                            and visitors.
                                         </p>
                                         <p>
                                             <Link to="/information/shop-and-post-office">
@@ -165,17 +190,14 @@ const InfoDevOptions = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            4. Micro-hydro Scheme
-                                        </p>
+                                        <p>4. Micro-hydro Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
-                                            Making use of the stream coming off
-                                            the hill behind the village.
-                                            Providing both power for the
+                                            A small water-driven power plant
+                                            providing both power for the
                                             community and an income from
-                                            electricity sold onto the grid.
+                                            electricity sold on to the grid.
                                         </p>
                                         <p>
                                             <Link to="/information/micro-hydro">
@@ -187,16 +209,13 @@ const InfoDevOptions = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            5. Wind turbine Scheme
-                                        </p>
+                                        <p>5. Wind turbine Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
-                                            Situated on the hill behind the
-                                            village. Providing both power for
+                                            A turbine providing both power for
                                             the community and an income from
-                                            electricity sold onto the grid.
+                                            electricity sold on to the grid.
                                         </p>
                                         <p>
                                             <Link to="/information/wind-turbine">
@@ -208,16 +227,13 @@ const InfoDevOptions = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            6. Business hub Scheme
-                                        </p>
+                                        <p>6. Business hub Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
-                                            Situated off the main thoroughfare,
-                                            a new build that could be divided
-                                            into units for offices and/or
-                                            workshops.
+                                            A new build business centre that
+                                            could be divided into units for
+                                            offices and/or workshops.
                                         </p>
                                         <p>
                                             <Link to="/information/business-hub">
@@ -229,19 +245,13 @@ const InfoDevOptions = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            7. Forestry Scheme
-                                        </p>
+                                        <p>7. Forestry Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
                                             On the extensive hill behind the
                                             village, an area of some 15 acres to
                                             be planted as mixed woodland.
-                                            Potential for income from the
-                                            softwood, amenity value (woodland
-                                            walks) and habitat creation as well
-                                            as climate mitigation
                                         </p>
                                         <p>
                                             <Link to="/information/forestry-scheme">
@@ -253,9 +263,7 @@ const InfoDevOptions = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            8. Campsite and Cabins Scheme
-                                        </p>
+                                        <p>8. Campsite and Cabins Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
@@ -263,7 +271,7 @@ const InfoDevOptions = () => {
                                             campsite and areas for caravans,
                                             campervans and Cabins. The shower
                                             toilet block could be made available
-                                            to public use (for a fee) to allow
+                                            to public use (for a fee), allowing
                                             campervan and other tourists to use
                                             the facilities.
                                         </p>
@@ -277,9 +285,7 @@ const InfoDevOptions = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            9. Market Garden Scheme
-                                        </p>
+                                        <p>9. Market Garden Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
