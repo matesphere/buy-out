@@ -31,7 +31,7 @@ import { ReflectionQuestions } from '../../components/tutor/ReflectionQuestions'
 
 import { useAuthQuery } from '../../utils/auth-utils'
 import { POSITION_DISPLAY_NAME } from '../../utils/common-utils'
-import { ExpandedContext } from '../tutor'
+import { CurrentQuestContext } from '../tutor'
 
 import { TUTOR_CURRENT_QUEST_QUERY } from '../../gql/queries'
 
@@ -240,7 +240,8 @@ const StageInfoPanel = ({ stages, stageProgresses, devOptions, teamId }) => (
 )
 
 const TutorCurrentQuestPage = () => {
-    const { expanded, setExpanded } = useContext(ExpandedContext)
+    const { expanded, setExpanded, selectedTab, setSelectedTab } =
+        useContext(CurrentQuestContext)
     const [showReflectionModal, setShowReflectionModal] = useState(false)
 
     const { loading, error, data } = useAuthQuery<
@@ -360,7 +361,10 @@ const TutorCurrentQuestPage = () => {
                         ]}
                         currentDisplayName="Current Quests"
                     />
-                    <Tabs>
+                    <Tabs
+                        selectedIndex={selectedTab}
+                        onSelect={(index) => setSelectedTab(index)}
+                    >
                         <TabList>
                             {quests.map((_, i) => (
                                 <Tab key={i}>Current Quest {i + 1}</Tab>

@@ -53,69 +53,84 @@ export const NewQuestContext = createContext<NewQuestContextType>({
     setStudentsToAdd: () => {},
 })
 
-export interface ExpandedContextType {
+export interface CurrentQuestContextType {
     expanded: Array<string>
     setExpanded: (expanded: Array<string>) => void
+    selectedTab: number
+    setSelectedTab: (selected: number) => void
 }
 
-export const ExpandedContext = createContext<ExpandedContextType>({
+export const CurrentQuestContext = createContext<CurrentQuestContextType>({
     expanded: [],
     setExpanded: () => {},
+    selectedTab: 0,
+    setSelectedTab: () => {},
 })
 
 const Routes = () => {
-    const [studentsToAdd, setStudentsToAdd] = useState([])
-    const [expanded, setExpanded] = useState([])
+    const [studentsToAdd, setStudentsToAdd] = useState<Array<StudentType>>([])
+    const [expanded, setExpanded] = useState<Array<string>>([])
+    const [selectedTab, setSelectedTab] = useState<number>(0)
 
     return (
         <NewQuestContext.Provider value={{ studentsToAdd, setStudentsToAdd }}>
-            <ExpandedContext.Provider value={{ expanded, setExpanded }}>
+            <CurrentQuestContext.Provider
+                value={{ expanded, setExpanded, selectedTab, setSelectedTab }}
+            >
                 <Header />
-                <Router basepath="/tutor">
-                    <Loading default />
-                    <LoggedInRoute path="/hub" component={Hub} />
-                    <LoggedInRoute
-                        path="/current-quests"
-                        component={CurrentQuest}
-                    />
-                    <LoggedInRoute
-                        path="/add-students"
-                        component={AddStudents}
-                    />
-                    <LoggedInRoute path="/create-team" component={CreateTeam} />
+                <div style={{ minHeight: '1000px' }}>
+                    <Router basepath="/tutor">
+                        <Loading default />
+                        <LoggedInRoute path="/hub" component={Hub} />
+                        <LoggedInRoute
+                            path="/current-quests"
+                            component={CurrentQuest}
+                        />
+                        <LoggedInRoute
+                            path="/add-students"
+                            component={AddStudents}
+                        />
+                        <LoggedInRoute
+                            path="/create-team"
+                            component={CreateTeam}
+                        />
 
-                    <LoggedInRoute
-                        path="/stage-1/submitted"
-                        component={Stage1Submitted}
-                    />
+                        <LoggedInRoute
+                            path="/stage-1/submitted"
+                            component={Stage1Submitted}
+                        />
 
-                    <LoggedInRoute
-                        path="/stage-3/submitted"
-                        component={Stage3Submitted}
-                    />
+                        <LoggedInRoute
+                            path="/stage-3/submitted"
+                            component={Stage3Submitted}
+                        />
 
-                    <LoggedInRoute
-                        path="/stage-4/submitted"
-                        component={Stage4Submitted}
-                    />
+                        <LoggedInRoute
+                            path="/stage-4/submitted"
+                            component={Stage4Submitted}
+                        />
 
-                    <LoggedInRoute
-                        path="/stage-5/submitted"
-                        component={Stage5Submitted}
-                    />
+                        <LoggedInRoute
+                            path="/stage-5/submitted"
+                            component={Stage5Submitted}
+                        />
 
-                    <LoggedInRoute
-                        path="/assessment"
-                        component={TutorAssessment}
-                    />
-                    <LoggedInRoute
-                        path="/team-assessment"
-                        component={TutorTeamAssessment}
-                    />
-                    <LoggedInRoute path="/tutor-guide" component={TutorGuide} />
-                </Router>
+                        <LoggedInRoute
+                            path="/assessment"
+                            component={TutorAssessment}
+                        />
+                        <LoggedInRoute
+                            path="/team-assessment"
+                            component={TutorTeamAssessment}
+                        />
+                        <LoggedInRoute
+                            path="/tutor-guide"
+                            component={TutorGuide}
+                        />
+                    </Router>
+                </div>
                 <Footer />
-            </ExpandedContext.Provider>
+            </CurrentQuestContext.Provider>
         </NewQuestContext.Provider>
     )
 }

@@ -53,7 +53,9 @@ const AboutGlenclasAreaPage = () => {
                         <div className="col-lg-9">
                             <div className="breadcrumb-list-container">
                                 <span className="crumb">
-                                    <Link to="/student/team-hub/">Team Hub</Link>
+                                    <Link to="/student/team-hub/">
+                                        Team Hub
+                                    </Link>
                                     <span className="crumb-spacer">›</span>
                                 </span>
                                 <span className="crumb">
@@ -200,9 +202,10 @@ const AboutGlenclasAreaPage = () => {
                                     </p>
 
                                     <p className="sm-type-bigamp mb-3">
-                                        Glenelg attracts tourists to the remains
-                                        of two of the best-preserved brochs on
-                                        mainland Scotland, located in Glen Beag.
+                                        Glenclas attracts tourists to the
+                                        remains of two of the best-preserved
+                                        brochs on mainland Scotland, located in
+                                        Glen Beag.
                                     </p>
 
                                     <p className="sm-type-bigamp mb-3">
@@ -232,7 +235,7 @@ const AboutGlenclasAreaPage = () => {
                                         shop and Post Office.
                                     </p>
                                     <p className="sm-type-bigamp mb-3">
-                                        There is a seasonal cafe in the Glenelg
+                                        There is a seasonal cafe in the Glenclas
                                         Village Hall.
                                     </p>
                                     <p className="sm-type-bigamp mb-3">
@@ -296,68 +299,6 @@ const AboutGlenclasAreaPage = () => {
                                         The 19 Secondary pupils travel 26 miles
                                         each day, by bus, to the nearest High
                                         School.
-                                    </p>
-                                </div>
-
-                                <div className="side-grey">
-                                    <h3 className="sm-type-drum sm-type-drum--medium">
-                                        The Quest
-                                    </h3>
-
-                                    <p className="sm-type-bigamp mb-3">
-                                        The local Estate Landowner has put up
-                                        the piece of land for sale and the
-                                        Community has come together and decided
-                                        that this is too good an opportunity to
-                                        miss. At a Community meeting in the
-                                        Village Hall, it was decided that a
-                                        Community Group should be formally
-                                        constituted and a Board of Directors
-                                        appointed to take the project through.
-                                        The community also carried out a
-                                        ‘brain-storming’ exercise and came up
-                                        with 9 possible uses (Development
-                                        Options) for the land. (One of these is
-                                        the purchase of the shop and Post Office
-                                        in the village before it becomes leased
-                                        as a residential property).
-                                    </p>
-                                    <p className="sm-type-bigamp mb-3">
-                                        Your Team is the Board of Directors and
-                                        your task is to follow the 8-Stage
-                                        process laid out by Community Land
-                                        Scotland (
-                                        <a
-                                            href="http://www.communitylandscotland.org.uk/"
-                                            rel="external"
-                                            target="_blank"
-                                        >
-                                            www.communitylandscotland.org.uk
-                                        </a>
-                                        ). You will carry out SWOT Analysis on
-                                        each of the Options which will help you
-                                        to narrow down the Development Options
-                                        to the 3 which your team consider to be
-                                        best use for the land. You will conduct
-                                        a Feasibility Study to clarify the
-                                        benefits to the Community, to highlight
-                                        the reasons for likely success and to
-                                        identify risks that could cause the
-                                        Development Schemes to fail. You will
-                                        then produce a Business plan, which will
-                                        summarize the Capital and Running Costs,
-                                        show where the funding will be found and
-                                        act as a balance sheet to display the
-                                        financial situation over the first 4
-                                        years of the venture.
-                                    </p>
-                                    <p className="sm-type-bigamp mb-3">
-                                        During this process you must work
-                                        together to agree which 3 projects would
-                                        provide the greatest benefit to your
-                                        community and you will have the
-                                        opportunity to present your ideas to
-                                        your Community (the rest of your class).
                                     </p>
                                 </div>
                             </Slider>
