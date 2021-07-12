@@ -5,7 +5,7 @@ import {
     InMemoryCache,
     HttpLink,
     // from,
-    split,
+    // split,
 } from '@apollo/client'
 import { fromPromise } from 'apollo-link'
 import { onError } from 'apollo-link-error'

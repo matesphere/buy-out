@@ -9,7 +9,6 @@ import Information from './student/information'
 
 import Header from '../components/_header'
 import Footer from '../components/_footer'
-import { Loading } from '../components/common/Loading'
 
 import Stage1Landing from './student/stages/stage-1/stage-1-landing'
 import Stage1Task from './student/stages/stage-1/stage-1-task'
@@ -67,7 +66,6 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
             navigate('/tutor/hub') //TODO: not working...why?? Something to do with client-only?
         }
 
-        console.log(latestStageUnlocked)
         if (stageNum && latestStageUnlocked && stageNum > latestStageUnlocked) {
             navigate('/student/team-hub')
         }
@@ -86,9 +84,8 @@ const Routes = () => {
     return (
         <>
             <Header />
-            <div style={{ minHeight: '1000px' }}>
+            <div className="min-height">
                 <Router basepath="/student">
-                    <Loading default />
                     <LoggedInRoute path="/team-hub" component={TeamHub} />
                     <LoggedInRoute
                         path="/information"

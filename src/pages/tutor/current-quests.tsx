@@ -320,7 +320,7 @@ const TutorCurrentQuestPage = () => {
                     <meta name="description" content="The description" />
                 </Helmet>
                 <main className="notes">
-                    <section className="container min-height" id="currentquest">
+                    <section className="container" id="currentquest">
                         <Breadcrumbs
                             previous={[
                                 {

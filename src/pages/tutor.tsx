@@ -78,8 +78,8 @@ const Routes = () => {
                 value={{ expanded, setExpanded, selectedTab, setSelectedTab }}
             >
                 <Header />
+                <div className="min-height">
                     <Router basepath="/tutor">
-                        <Loading default />
                         <LoggedInRoute path="/hub" component={Hub} />
                         <LoggedInRoute
                             path="/current-quests"
@@ -127,6 +127,7 @@ const Routes = () => {
                             component={TutorGuide}
                         />
                     </Router>
+                </div>
                 <Footer />
             </CurrentQuestContext.Provider>
         </NewQuestContext.Provider>
