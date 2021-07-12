@@ -187,42 +187,42 @@ p {
 }
 
 .cert-type-one {
-    font-sie: 12px;
+    font-size: 1rem;
+    line-height: 1.2em;
+    margin-bottom: 8px;
+    padding: 0 32px;
     @media only screen and (min-width: 480px) {
-        font-size: 24px;
+        font-size: 1.8rem;
     }
     @media only screen and (min-width: 768px) {
-        font-size: 32px;
+        font-size: 1.4rem;
+        margin-bottom: 16px;
     }
     @media only screen and (min-width: 1024px) {
-        font-size: 40px;
+        font-size: 2rem;
     }
 }
-
-.cert-type-two {
-    font-sie: 10px;
-    @media only screen and (min-width: 480px) {
-        font-size: 18px;
-    }
+.cert-name {
+    position: relative;
+    display: inline-block;
+    padding-right: 16px;
     @media only screen and (min-width: 768px) {
-        font-size: 24px;
+        padding-right: 32px;
     }
-    @media only screen and (min-width: 1024px) {
-        font-size: 40px;
+    &:after {
+        content: " - ";
+        position: absolute;
+        right: 5px;
+        top: 0px;
+        @media only screen and (min-width: 768px) {
+            right: 10px;
+        }
     }
-}
-
-.cert-type-three {
-    font-sie: 10px;
-    font-weight: bold;
-    @media only screen and (min-width: 480px) {
-        font-size: 18px;
-    }
-    @media only screen and (min-width: 768px) {
-        font-size: 24px;
-    }
-    @media only screen and (min-width: 1024px) {
-        font-size: 40px;
+    &:last-of-type {
+        padding-right: 0px;
+        &:after {
+            content: "";
+        }
     }
 }
 /* END OF TYPE */

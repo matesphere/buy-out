@@ -2,12 +2,49 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
-
 import HelpIcon from '../../../../assets/help-icon.svg'
-
 import '../../../../scss/index.scss'
+import '../../../../scss/print.scss'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import TickSheet from '../../../../assets/tick-sheet.svg'
+import {gql} from '@apollo/client/core'
+import { ApolloError } from '@apollo/client'
+import {useAuthQuery} from '../../../../utils/auth-utils'
+import {
+    TeamHubQuery,
+    TeamHubQueryVariables,
+} from '../../gql/types/TeamHubQuery'
+import {Loading} from "../../../../components/common/Loading";
+import {Error} from "../../../../components/common/Error";
+const TEAM_HUB_QUERY = gql`
+    query TeamHubQuery($user_id: uuid!) {
+        user_by_pk(id: $user_id) {
+            student {
+                id
+                team {
+                    name
+                    students {
+                        user {
+                            full_name
+                        }
+                    }
+                }
+            }
+        }
+    }
+`
+
+const TeamSection = ({ students, teamName }) => (
+    <>
+        <h3 className="cert-type-one">{teamName}</h3>
+        <p className="cert-type-one">
+            {students.map((student, i) => (
+                <span className="cert-name" key={i}>{student.user.full_name}</span>
+            ))}
+        </p>
+    </>
+)
+
 
 const Stage8Page = () => {
     const data = useStaticQuery(graphql`
@@ -20,6 +57,37 @@ const Stage8Page = () => {
         }
     `)
 
+    const {
+        loading,
+        error,
+        data: pageData,
+        // subscribeToMore,
+    } = useAuthQuery<TeamHubQuery, TeamHubQueryVariables>(
+        TEAM_HUB_QUERY,
+        { fetchPolicy: 'network-only', pollInterval: 2000 },
+        'userId'
+    )
+
+    if (loading) return <Loading />
+    if (error || !pageData)
+        return (
+            <Error
+                error={
+                    error ||
+                    new ApolloError({ errorMessage: 'No data returned!' })
+                }
+            />
+        )
+
+    const {
+        student: {
+            team: {
+                name: teamName,
+                students,
+            },
+        },
+    } = pageData.user_by_pk
+
     return (
         <>
             <Helmet>
@@ -31,7 +99,7 @@ const Stage8Page = () => {
             </Helmet>
             <main className="the-quest">
                 <section className="container" id="main">
-                    <div className="row">
+                    <div className="row none-print">
                         <div className="col-lg-8">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 Celebrate & Reflect
@@ -61,12 +129,11 @@ const Stage8Page = () => {
                     </div>
 
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-3"></div>
+                        <div className="col-lg-6">
                             <div className="mt-4 mb-2 image-holder team-certificate">
-                                    <div className="team-certificate--inner">
-                                    <h3 className="cert-type-one mb-4">Congratulations TeamAdmin</h3>
-                                    <p className="cert-type-two mb-4">David Carter - Stuart Hull - Steve Carter</p>
-                                    <p className="cert-type-three">You have completed the Quest</p>
+                                <div className="team-certificate--inner">
+                                    <TeamSection students={students} teamName={teamName} />
                                 </div>
                                 <GatsbyImage
                                     alt=""
@@ -77,31 +144,35 @@ const Stage8Page = () => {
                                 />
                             </div>
                         </div>
+                        <div className="col-lg-3"></div>
                     </div>
-
-                    <div className="side-grey">
-                        <h4 className="task ticker mb-2">
-                            <span className="ticker-sheet">
-                                <TickSheet />
-                            </span>
-                            <span className="sm-type-drum">
-                                Task to complete:
-                            </span>
-                        </h4>
-                        <div className="form-holder-border">
-                            <p className="sm-type-lead mb-2">
-                                Community Land Quest - A Reflection
-                            </p>
-                            <ul>
-                                <li className="sm-type-guitar">
-                                    Follow{' '}
-                                    <Link to="/student/stage-8/task">
-                                        this link
-                                    </Link>{' '}
-                                    to reflect on the process and complete the
-                                    Quest.
-                                </li>
-                            </ul>
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="side-grey none-print">
+                                <h4 className="task ticker mb-2">
+                                    <span className="ticker-sheet">
+                                        <TickSheet />
+                                    </span>
+                                    <span className="sm-type-drum">
+                                        Task to complete:
+                                    </span>
+                                </h4>
+                                <div className="form-holder-border">
+                                    <p className="sm-type-lead mb-2">
+                                        Community Land Quest - A Reflection
+                                    </p>
+                                    <ul>
+                                        <li className="sm-type-guitar">
+                                            Follow{' '}
+                                            <Link to="/student/stage-8/task">
+                                                this link
+                                            </Link>{' '}
+                                            to reflect on the process and complete the
+                                            Quest.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </section>
