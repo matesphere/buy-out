@@ -197,7 +197,12 @@
   border-width: thin;
   padding: $grid-unit * 2;
 }
-
+.cellnotop {
+  border-top: none;
+}
+.cellnobottom {
+  border-bottom: none;
+}
 .table-proposal .cell {
   display: table-cell;
   border: solid;

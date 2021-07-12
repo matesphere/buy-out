@@ -203,7 +203,7 @@ const InfoMicroHydro = () => {
                                         <p>Total Annual Rainfall (m)</p>
                                     </div>
                                     <div className="cell">
-                                        <p>Average Annual Rainfall</p>
+                                        <p>Average Annual Rainfall (2016-2020) (m)</p>
                                     </div>
                                 </div>
                                 <div className="roww">
@@ -213,8 +213,8 @@ const InfoMicroHydro = () => {
                                     <div className="cell">
                                         <p>2.0752</p>
                                     </div>
-                                    <div className="cell">
-                                        <p>?</p>
+                                    <div className="cell cellnobottom">
+                                        <p className="sm-type-bigdrum ">2.21</p>
                                     </div>
                                 </div>
                                 <div className="roww">
@@ -224,8 +224,8 @@ const InfoMicroHydro = () => {
                                     <div className="cell">
                                         <p>2.2250</p>
                                     </div>
-                                    <div className="cell">
-                                        <p>?</p>
+                                    <div className="cell cellnotop cellnobottom">
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div className="roww">
@@ -235,8 +235,8 @@ const InfoMicroHydro = () => {
                                     <div className="cell">
                                         <p>1.9418</p>
                                     </div>
-                                    <div className="cell">
-                                        <p>?</p>
+                                    <div className="cell cellnotop cellnobottom">
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div className="roww">
@@ -246,8 +246,8 @@ const InfoMicroHydro = () => {
                                     <div className="cell">
                                         <p>2.1436</p>
                                     </div>
-                                    <div className="cell">
-                                        <p>?</p>
+                                    <div className="cell cellnotop cellnobottom">
+                                        <p></p>
                                     </div>
                                 </div>
                                 <div className="roww">
@@ -257,32 +257,16 @@ const InfoMicroHydro = () => {
                                     <div className="cell">
                                         <p>2.6550</p>
                                     </div>
-                                    <div className="cell">
-                                        <p>?</p>
+                                    <div className="cell cellnotop">
+                                        <p></p>
                                     </div>
                                 </div>
                             </div>
-                            <h3 className="task ticker mb-2">
-                                <span className="ticker-sheet">
-                                    <TickSheet />
-                                </span>
-                                <span className="sm-type-lead">
-                                    Task to complete:
-                                </span>
-                            </h3>
-                            <p className="sm-type-guitar sm-type-guitar--medium mb-2">
-                                Calculate the Average Annual Rainfall (m):
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                Calculate the Average Annual Volume of rain
-                                falling on the catchment area of Loch na Lochain
-                                (m3):
-                            </p>
+                            <p className="sm-type-bigamp mb-4">Average Annual Rainfall (2016-2020) = 2.21m</p>
+                                <p className="sm-type-bigamp mb-4">So the Average Annual Volume of rain falling on the catchment area of Loch na Lochain (m3)</p>
 
-                            <p className="sm-type-bigamp mb-4">
-                                (Catchment area (m2) x 5 Year Annual Rainfall
-                                (m))
-                            </p>
+                                    <p className="sm-type-bigamp mb-4">(Catchment area (m2) x 5 Year Average Annual Rainfall (m)) = 7,507,608m3</p>
+
 
                             <p className="sm-type-bigamp mb-4">
                                 Some water will be lost by evaporation and
@@ -293,30 +277,29 @@ const InfoMicroHydro = () => {
                             </p>
 
                             <p className="sm-type-bigamp sm-type-bigamp--medium mb-4">
-                                Now calculate the flow rate (Q) through our
-                                turbine (m3/s) – to do this you need to work out
-                                how many seconds there are in a year and divide
-                                that number into your average annual volume of
-                                rain:
+                                We can now calculate the flow rate (Q) through our turbine (m3/s) – to do this we need to work out how many seconds there are in a year and divide that number into your average annual volume of rain:
                             </p>
                             <p className="sm-type-bigamp mb-4">
-                                Seconds in a year: 365 days x 24 hours x 60
-                                minutes x 60 seconds =
+                                Seconds in a year: 365 days x 24 hours x 60 minutes x 60 seconds = 31,536,000s
                             </p>
 
                             <p className="sm-type-bigamp mb-4">
-                                You now have enough information to calculate the
-                                size of turbine (Power) and would be suitable
-                                for this site:
+                                Q = 7,507,608/31,536,000 = 0.238m3/s
+                            </p>
+
+                            <p className="sm-type-bigamp mb-4">We now have enough information to calculate the size of turbine (Power) and would be suitable for this site:</p>
+
+                            <p className="sm-type-lead mb-4">
+                                <span className="sm-type-amp--medium">P</span> (kW) = 7 x <span className="sm-type-amp--medium">Q</span> (m3/s) x <span className="sm-type-amp--medium">H</span> (m)
+
                             </p>
 
                             <p className="sm-type-lead mb-4">
-                                <span className="sm-type-amp--medium">P</span>{' '}
-                                (kW) = 7 x{' '}
-                                <span className="sm-type-amp--medium">Q</span>{' '}
-                                (m3/s) x{' '}
-                                <span className="sm-type-amp--medium">H</span>{' '}
-                                (m)
+                                <span className="sm-type-amp--medium">P</span> = 7 x 0.238 x 150
+                            </p>
+
+                            <p className="sm-type-lead mb-4">
+                                <span className="sm-type-amp--medium">P</span> = 249.9kW
                             </p>
 
                             <p className="sm-type-bigamp mb-4">
