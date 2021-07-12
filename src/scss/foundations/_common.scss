@@ -185,6 +185,46 @@ p {
         font-size: 14px;
     }
 }
+
+.cert-type-one {
+    font-sie: 12px;
+    @media only screen and (min-width: 480px) {
+        font-size: 24px;
+    }
+    @media only screen and (min-width: 768px) {
+        font-size: 32px;
+    }
+    @media only screen and (min-width: 1024px) {
+        font-size: 40px;
+    }
+}
+
+.cert-type-two {
+    font-sie: 10px;
+    @media only screen and (min-width: 480px) {
+        font-size: 18px;
+    }
+    @media only screen and (min-width: 768px) {
+        font-size: 24px;
+    }
+    @media only screen and (min-width: 1024px) {
+        font-size: 40px;
+    }
+}
+
+.cert-type-three {
+    font-sie: 10px;
+    font-weight: bold;
+    @media only screen and (min-width: 480px) {
+        font-size: 18px;
+    }
+    @media only screen and (min-width: 768px) {
+        font-size: 24px;
+    }
+    @media only screen and (min-width: 1024px) {
+        font-size: 40px;
+    }
+}
 /* END OF TYPE */
 
 /*** NEW STUFF ***/

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -64,9 +64,9 @@ const Stage8Page = () => {
                         <div className="col-lg-12">
                             <div className="mt-4 mb-2 image-holder team-certificate">
                                     <div className="team-certificate--inner">
-                                    <h3 className="sm-type-drum mb-4">Congratulations TeamAdmin</h3>
-                                    <p className="sm-type-guitar mb-4">David Carter - Stuart Hull - Steve Carter</p>
-                                    <p className="sm-type-drum sm-type-drum--medium">You have completed the Quest</p>
+                                    <h3 className="cert-type-one mb-4">Congratulations TeamAdmin</h3>
+                                    <p className="cert-type-two mb-4">David Carter - Stuart Hull - Steve Carter</p>
+                                    <p className="cert-type-three">You have completed the Quest</p>
                                 </div>
                                 <GatsbyImage
                                     alt=""

@@ -14,7 +14,7 @@ const TutorFooter = () => {
             <Squiggle className="squiggle" />
             <section className="container">
                 <div className="row">
-                    <div className="col-lg-12">
+                    <div className="col-lg-4 mt-1">
                         <ul>
                             <li>
                                 <Link to="/tutor/hub/">Tutor Hub</Link>
@@ -26,14 +26,16 @@ const TutorFooter = () => {
                             </li> */}
                             {/* {resetDBResponse.data && <span> DB reset!</span>} */}
                         </ul>
-                        <div className="col-lg-4">
-                            <AmplifySignOut />
-                        </div>
-
-                        <p>
-                            &copy; Copyright MateSphere 2021. All rights
-                            reserved.
-                        </p>
+                    </div>
+                    <div className="col-lg-4 mt-1">
+                    </div>
+                    <div className="col-lg-4 mt-1">
+                        <AmplifySignOut />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col-lg-12 text-align-center mt-2">
+                        <p>&copy; Copyright MateSphere 2021. All rights reserved.</p>
                     </div>
                 </div>
             </section>
