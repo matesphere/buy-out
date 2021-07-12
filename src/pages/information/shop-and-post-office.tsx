@@ -64,7 +64,7 @@ const InfoShopPostOffice = () => {
                             </h2>
 
                             <ReadQuesty
-                                text="A purpose-built mini-supermarket and shop,
+                                text="A purpose-built mini-supermarket and post office,
                                     to service the local community and visitors.
                                     Could be situated just off the 'High
                                     Street'."

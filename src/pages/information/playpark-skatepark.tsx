@@ -61,7 +61,7 @@ const InfoPlaySkate = () => {
                                 <span className="page-icon">
                                     <InfoSkate />
                                 </span>
-                                Playpark / Skatepark
+                                Play park / Skate park
                             </h2>
 
                             <ReadQuesty

@@ -150,10 +150,7 @@ const InfoDevOptions: FC = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>
-                                            2. Play Park and/or Skate Park
-                                            Scheme
-                                        </p>
+                                        <p>2. Play Park / Skate Park</p>
                                     </div>
                                     <div className="cell">
                                         <p>
@@ -176,9 +173,9 @@ const InfoDevOptions: FC = () => {
                                     </div>
                                     <div className="cell">
                                         <p>
-                                            A purpose-built mini supermarket and
-                                            shop, to service the local community
-                                            and visitors.
+                                            A mini supermarket and post office,
+                                            to service the local community and
+                                            visitors.
                                         </p>
                                         <p>
                                             <Link to="/information/shop-and-post-office">
@@ -209,7 +206,7 @@ const InfoDevOptions: FC = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>5. Wind turbine Scheme</p>
+                                        <p>5. Wind Turbine Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
@@ -227,7 +224,7 @@ const InfoDevOptions: FC = () => {
 
                                 <div className="roww">
                                     <div className="cell">
-                                        <p>6. Business hub Scheme</p>
+                                        <p>6. Business Hub Scheme</p>
                                     </div>
                                     <div className="cell">
                                         <p>
