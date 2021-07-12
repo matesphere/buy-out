@@ -14,14 +14,14 @@ export const ReadQuesty: FC<{ text: string }> = ({ text }) => {
     `)
 
     return (
-        <div className="blue-holder-border">
-            <div className="small-image">
+        <div className="blue-holder-border questies-holder">
+            <div className="small-questies">
                 <GatsbyImage
                     alt=""
                     image={data.image1.childImageSharp.gatsbyImageData}
                 />
             </div>
-            <p className="sm-type-lead small-image-holder">{text}</p>
+            <p className="sm-type-lead small-questies-holder">{text}</p>
         </div>
     )
 }

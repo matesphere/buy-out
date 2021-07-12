@@ -425,3 +425,18 @@
         z-index: 2;
     }
 }
+
+.questies-holder {
+  display: flex;
+    .small-questies {
+        flex: 0 0 140px;
+
+        img {
+            width: 100%;
+        }
+    }
+    .small-questies-holder {
+        flex: 1;
+        padding-left: 24px;
+    }
+}
