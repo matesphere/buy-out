@@ -16,7 +16,7 @@ export const Error: FC<{ error: ApolloError }> = ({ error }) => {
 
     return (
         <>
-            <div className="questies-holder">
+            <div className="blue-holder-border questies-holder">
                 <div className="small-questies">
                     <GatsbyImage
                         alt=""
