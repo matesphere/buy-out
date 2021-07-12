@@ -76,12 +76,14 @@ const TutorHub = () => {
     if (loading) return <Loading />
     if (error || !data)
         return (
-            <Error
-                error={
-                    error ||
-                    new ApolloError({ errorMessage: 'No data returned!' })
-                }
-            />
+            <>
+                <Error
+                    error={
+                        error ||
+                        new ApolloError({ errorMessage: 'No data returned!' })
+                    }
+                />
+            </>
         )
 
     const {
