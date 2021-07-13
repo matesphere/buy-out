@@ -28,7 +28,7 @@
     display: flex;
     flex-wrap: wrap;
     z-index: 2;
-    padding: 11%;
+    padding: 16% 11% 15%;
   }
 
   .inner-grid {
@@ -41,7 +41,7 @@
       .info-icon {
         position: absolute;
         left: 31%;
-        top: 27%;
+        top: 10%;
       }
     }
 
@@ -49,7 +49,7 @@
       .info-icon {
         position: absolute;
         left: 0%;
-        top: 80%;
+        top: 60%;
       }
     }
 
@@ -57,7 +57,7 @@
       .info-icon {
         position: absolute;
         left: 0%;
-        top: 55%;
+        top: 20%;
       }
     }
 
@@ -81,7 +81,7 @@
       .info-icon {
         position: absolute;
         left: 55%;
-        top: 70%;
+        top: 60%;
       }
     }
 
