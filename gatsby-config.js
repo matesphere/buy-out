@@ -18,8 +18,8 @@ module.exports = {
         {
             resolve: 'gatsby-plugin-manifest',
             options: {
-                icon: 'src/images/favicon-16x16.png'
-            }
+                icon: 'src/images/favicon-16x16.png',
+            },
         },
         {
             resolve: 'gatsby-plugin-react-svg',

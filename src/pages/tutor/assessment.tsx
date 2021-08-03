@@ -1,35 +1,9 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
 import { Link, graphql, useStaticQuery } from 'gatsby'
-// import { gql } from '@apollo/client'
-
-// import { Loading } from '../../components/common/Loading'
-// import { Error } from '../../components/common/Error'
-import { Breadcrumbs } from '../../components/common/Breadcrumbs'
-
-// import { useAuthQuery } from '../../utils/auth-utils'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-// import {
-//     AssessmentQuery,
-//     AssessmentQueryVariables,
-// } from '../../gql/types/AssessmentQuery'
-
-import '../../scss/index.scss'
-
-// const ASSESSMENT_QUERY = gql`
-//     query AssessmentQuery($user_id: uuid!) {
-//         user_by_pk(id: $user_id) {
-//             id
-//             full_name
-//             tutor {
-//                 school {
-//                     name
-//                 }
-//             }
-//         }
-//     }
-// `
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 
 const TutorAssessment = () => {
     const data2 = useStaticQuery(graphql`
@@ -41,22 +15,6 @@ const TutorAssessment = () => {
             }
         }
     `)
-    // const { loading, error, data } = useAuthQuery<
-    //     AssessmentQuery,
-    //     AssessmentQueryVariables
-    // >(ASSESSMENT_QUERY, {}, 'userId')
-
-    // if (loading) return <Loading />
-    // if (error) return <Error error={error} />
-
-    // const {
-    //     user_by_pk: {
-    //         full_name: fullName,
-    //         tutor: {
-    //             school: { name: schoolName },
-    //         },
-    //     },
-    // } = data
 
     return (
         <>
@@ -66,7 +24,7 @@ const TutorAssessment = () => {
                     content="width=device-width, initial-scale=1.0"
                 />
                 <title>Assessment</title>
-                <meta name="description" content="The description" />
+                <meta name="description" content="Assessment" />
             </Helmet>
 
             <main className="the-quest">
@@ -444,14 +402,6 @@ const TutorAssessment = () => {
                                 </div>
                             </div>
                         </div>
-                        {/* <div className="col-lg-3">
-                            <div className="side-grey">
-                                <p className="sm-type-guitar mb-2 mt-2">
-                                    {fullName}'s Hub
-                                </p>
-                                <p className="sm-type-amp">{schoolName}</p>
-                            </div>
-                        </div> */}
                     </div>
                     <p className="sm-type-amp">
                         <Link to="/tutor/hub">Back to Tutor Hub</Link>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Location } from '@reach/router'
@@ -24,7 +24,8 @@ const HEADER_TEXT: { [pathname: string]: string } = {
     '/tutor/stage-5/submitted': 'Stage 5',
     '/tutor/assessment': 'Student Assessment',
     '/tutor/team-assessment': 'Team Assessment',
-    // '/tutor/tutor-guide': 'Tutor Guide',
+    '/tutor/tutor-guide': 'Tutor Guide',
+    '/tutor/technical-guide': 'Technical Guide',
 }
 
 const HIDE_LINKS: Array<string> = ['/tutor/add-students', '/tutor/create-team']

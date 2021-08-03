@@ -2,9 +2,8 @@ import React, { createContext, useState, useContext, FC } from 'react'
 import { Router, RouteComponentProps } from '@reach/router'
 import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
 
-import Header from './tutor/_header'
-import Footer from './tutor/_footer'
-import { Loading } from '../components/common/Loading'
+import Header from '../components/tutor/_header'
+import Footer from '../components/tutor/_footer'
 
 import Hub from './tutor/hub'
 import CurrentQuest from './tutor/current-quests'
@@ -16,7 +15,8 @@ import Stage4Submitted from './tutor/stages/stage-4/tutor-stage-4-submitted'
 import Stage5Submitted from './tutor/stages/stage-5/tutor-stage-5-submitted'
 import TutorAssessment from './tutor/assessment'
 import TutorTeamAssessment from './tutor/team-assessment'
-import TutorGuide from './information/tutor-guide'
+import TutorGuide from './tutor/tutor-guide'
+import TechnicalGuide from './tutor/technical-guide'
 import { StudentType } from '../gql/types'
 
 import { UserStateContext } from '../utils/user-state'
@@ -125,6 +125,10 @@ const Routes = () => {
                         <LoggedInRoute
                             path="/tutor-guide"
                             component={TutorGuide}
+                        />
+                        <LoggedInRoute
+                            path="/technical-guide"
+                            component={TechnicalGuide}
                         />
                     </Router>
                 </div>

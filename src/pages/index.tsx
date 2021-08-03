@@ -44,7 +44,6 @@ const IndexPage = () => {
                 </div>
                 <Squiggle className="squiggle" />
                 <section className="container top-section">
-
                     <div className="row pt-4">
                         <div className="col-lg-8">
                             <h1 className="main-header">
@@ -57,7 +56,8 @@ const IndexPage = () => {
                                 <GatsbyImage
                                     alt=""
                                     image={
-                                        data.image1.childImageSharp.gatsbyImageData
+                                        data.image1.childImageSharp
+                                            .gatsbyImageData
                                     }
                                 />
                             </div>
@@ -67,7 +67,6 @@ const IndexPage = () => {
             </div>
             <main className="homepage">
                 <section className="container" id="main">
-
                     <div className="row mt-4">
                         <div className="col-lg-2"></div>
                         <div className="col-lg-8 index-holder">
@@ -79,7 +78,7 @@ const IndexPage = () => {
                                 className="btn-solid-lg mt-2 mb-4"
                                 to="/login"
                             >
-                                Login
+                                SIGN IN
                             </Link>
                         </div>
                         <div className="col-lg-2"></div>

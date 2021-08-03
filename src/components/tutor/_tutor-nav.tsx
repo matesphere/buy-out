@@ -54,6 +54,9 @@ const Nav = () => {
                                     <Link to="/tutor/tutor-guide">
                                         Tutor guide
                                     </Link>
+                                    <Link to="/tutor/technical-guide">
+                                        Technical guide
+                                    </Link>
                                     <Link to="/tutor/assessment">
                                         Assessment
                                     </Link>
