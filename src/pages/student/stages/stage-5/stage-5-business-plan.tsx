@@ -88,9 +88,9 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                 <title>Stage 5 - {stageTitle}</title>
             </Helmet>
             <main className="the-quest">
-                <div className="save-icon">
-                    <SaveIcon /> Save progress
-                </div>
+                {/*<div className="save-icon">*/}
+                {/*    <SaveIcon /> Save progress*/}
+                {/*</div>*/}
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
