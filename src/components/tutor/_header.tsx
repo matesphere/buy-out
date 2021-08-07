@@ -28,7 +28,10 @@ const HEADER_TEXT: { [pathname: string]: string } = {
     '/tutor/technical-guide': 'Technical Guide',
 }
 
-const HIDE_LINKS: Array<string> = ['/tutor/add-students', '/tutor/create-team']
+const HUB_LINK_ONLY: Array<string> = [
+    '/tutor/add-students',
+    '/tutor/create-team',
+]
 
 const TutorHeader = ({
     headerText,
@@ -58,9 +61,11 @@ const TutorHeader = ({
                         <section className="container top-section">
                             <div className="row">
                                 <div className="col-lg-8">
-                                    {!HIDE_LINKS.includes(
-                                        location.pathname
-                                    ) && <Nav />}
+                                    <Nav
+                                        hubLinkOnly={HUB_LINK_ONLY.includes(
+                                            location.pathname
+                                        )}
+                                    />
                                     <h1 className="main-header mt-4">
                                         <PinLogo />
                                         <span>

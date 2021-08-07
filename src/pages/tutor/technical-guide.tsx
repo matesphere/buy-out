@@ -1,10 +1,17 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
+import {
+    Accordion,
+    AccordionItem,
+    AccordionItemHeading,
+    AccordionItemButton,
+    AccordionItemPanel,
+} from 'react-accessible-accordion'
 
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 
-import loginGIF from '../../gif/tutor-login.gif'
-import logoutGIF from '../../gif/tutor-logout.gif'
+import signinGIF from '../../gif/tutor-signin.gif'
+import signoutGIF from '../../gif/tutor-signout.gif'
 
 const TechnicalGuide = () => (
     <>
@@ -38,432 +45,430 @@ const TechnicalGuide = () => (
                             The following serves as a reference for tutor use of
                             the Community Land Quest. It covers all potential
                             actions required to be taken during normal
-                            completion of a Quest.
-                        </p>
-
-                        <h3>Sign In</h3>
-
-                        <p className="sm-type-lead mb-4">
-                            Upon initially accessing the quest you'll be
-                            presented with a splash screen. Click the 'SIGN IN'
-                            button and enter your login details (these should
-                            have been provided to you). Then click 'SIGN IN'
-                            again.
+                            completion of a Quest (n.b. the term 'Quest' used
+                            here refers to a number of teams, consisting of 4 or
+                            more students, contemporaneously starting, working
+                            through and completing all tasks).
                         </p>
 
                         <p className="sm-type-lead mb-4">
-                            Once this is done you will be able to navigate to
-                            the 'Tutor Hub' as shown.
+                            For certain tasks, such as the student onboarding
+                            (new Quest), it may be helpful to have this guide
+                            open in a separate browser tab, which you can do by
+                            clicking{' '}
+                            <a
+                                href="https://www.community-land.quest/tutor/technical-guide"
+                                target="_blank"
+                                rel="external"
+                            >
+                                here
+                            </a>
+                            .
                         </p>
 
-                        <img className="mb-4" src={loginGIF} />
+                        <Accordion allowZeroExpanded>
+                            <AccordionItem className="side-grey">
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Sign In
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <p className="sm-type-lead mb-4">
+                                        Upon initially accessing the quest
+                                        you'll be presented with a splash
+                                        screen. Click the 'SIGN IN' button and
+                                        enter your login details (these should
+                                        have been provided to you). Then click
+                                        'SIGN IN' again.
+                                    </p>
 
-                        <h3>Sign Out</h3>
+                                    <p className="sm-type-lead mb-4">
+                                        Once this is done you will be able to
+                                        navigate to the 'Tutor Hub' as shown.
+                                    </p>
 
-                        <p className="sm-type-lead mb-4">
-                            If you are using a shared computer or will be
-                            leaving your machine unattended for any length of
-                            time, you may wish to sign out to prevent
-                            unwarranted access to your area of the system.
-                        </p>
+                                    <img className="mb-4" src={signinGIF} />
+                                </AccordionItemPanel>
+                            </AccordionItem>
 
-                        <p className="sm-type-lead mb-4">
-                            To do this, simply hit the 'SIGN OUT' button, which
-                            can be found in the footer of any page.
-                        </p>
+                            <AccordionItem className="side-grey">
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Sign Out
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <p className="sm-type-lead mb-4">
+                                        If you are using a shared computer or
+                                        will be leaving your machine unattended
+                                        for any length of time, you may wish to
+                                        sign out to prevent unwarranted access
+                                        to your area of the system.{' '}
+                                        <b>
+                                            Simply closing your browser will not
+                                            achieve this!
+                                        </b>
+                                    </p>
 
-                        <img className="mb-4" src={logoutGIF} />
+                                    <p className="sm-type-lead mb-4">
+                                        To do this, simply hit the 'SIGN OUT'
+                                        button, which can be found in the footer
+                                        of any page.
+                                    </p>
 
-                        <div className="table table-guide">
-                            <div className="roww">
-                                <div className="cell">1</div>
-                                <div className="cell">
-                                    <b>Research</b>
-                                    <br />
-                                    Task: To complete 12 background questions
-                                    about land ownership and the concept of
-                                    Community.{' '}
-                                </div>
-                                <div className="cell">1 session</div>
-                            </div>
+                                    <img className="mb-4" src={signoutGIF} />
+                                </AccordionItemPanel>
+                            </AccordionItem>
 
-                            <div className="roww">
-                                <div className="cell">2</div>
-                                <div className="cell">
-                                    <b>Consult</b>
-                                    <br />
-                                    Written opinions are provided by members of
-                                    the community and experts about 9
-                                    Development Options for how the land could
-                                    be used and an introduction to the community
-                                    of Glenclas. Task: To decide on roles within
-                                    the Steering Group, come up with a name and
-                                    design a logo.
-                                </div>
-                                <div className="cell">1 session</div>
-                            </div>
+                            <AccordionItem className="side-grey">
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Starting a New Quest (Student
+                                        Onboarding)
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <p className="sm-type-lead mb-4">
+                                        To begin a new Quest, click the 'Start a
+                                        new Quest' button. This will then take
+                                        you to the 'Add Students' page.
+                                    </p>
 
-                            <div className="roww">
-                                <div className="cell">3</div>
-                                <div className="cell">
-                                    <b>Lay the foundations</b>
-                                    <br />
-                                    Task 1: To consider the 9 Development
-                                    Options and long-list them to 5 preferred
-                                    choices.
-                                    <br />
-                                    Task 2: To carry out SWOT Analysis on each
-                                    of the 5 long-listed options.{' '}
-                                </div>
-                                <div className="cell">2 sessions</div>
-                            </div>
+                                    <p className="sm-type-lead mb-4">
+                                        <b>Add Students</b>
+                                        <br />
+                                        Here you should fill out the first name,
+                                        last name and email for each student who
+                                        will be taking part in this Quest. This
+                                        can be achieved by clicking 'Add more
+                                        names' until the number of rows visible
+                                        matches the number of students.
+                                    </p>
 
-                            <div className="roww">
-                                <div className="cell">4</div>
-                                <div className="cell">
-                                    <b>Progress Your Plans 1</b>
-                                    <br />
-                                    Task: To use the SWOT Analysis to short-list
-                                    3 Options and complete a Feasibility Study
-                                    on each of these Options.
-                                </div>
-                                <div className="cell">1 session</div>
-                            </div>
+                                    <p className="sm-type-lead mb-4">
+                                        Click the 'X' button if you accidentally
+                                        add any additional rows.
+                                    </p>
 
-                            <div className="roww">
-                                <div className="cell">5</div>
-                                <div className="cell">
-                                    <b>Progress Your Plans 2</b>
-                                    <br />
-                                    Task: To produce a Business Plan for each
-                                    short-listed Option, using the information
-                                    provided in stage 3.
-                                </div>
-                                <div className="cell">1 session</div>
-                            </div>
+                                    <p className="sm-type-lead mb-4">
+                                        When done, click 'Submit names', check
+                                        that the number of students in the
+                                        prompt is correct, then click 'Cancel'
+                                        if not to go back and correct this, or
+                                        click 'Yes, add students' to continue.
+                                    </p>
 
-                            <div className="roww">
-                                <div className="cell">6</div>
-                                <div className="cell">
-                                    <b>Prepare findings</b>
-                                    <br />
-                                    Task: To prepare a presentation for the
-                                    community.{' '}
-                                </div>
-                                <div className="cell">1 session</div>
-                            </div>
+                                    <p>*** GIF HERE ***</p>
 
-                            <div className="roww">
-                                <div className="cell">7</div>
-                                <div className="cell">
-                                    <b>Present finding</b>
-                                    <br />
-                                    Task: To present to the community in order
-                                    to obtain backing to go ahead with the land
-                                    buy-out.
-                                </div>
-                                <div className="cell">1 session</div>
-                            </div>
+                                    <p className="sm-type-lead mb-4">
+                                        <b>Create Teams</b>
+                                        <br />
+                                        You are now able to create the teams and
+                                        assign students to them. It will help if
+                                        you have already decided the team
+                                        allocations previously, as you will need
+                                        to know the number of teams required
+                                        before performing this step.{' '}
+                                        <b>
+                                            Remember that each team must
+                                            comprise at least 4 individuals!
+                                        </b>
+                                    </p>
 
-                            <div className="roww">
-                                <div className="cell">8</div>
-                                <div className="cell">
-                                    <b>Celebrate and Reflect</b>
-                                    <br />
-                                    Receive certificates.
-                                    <br />
-                                    Task: To complete a feedback and reflection
-                                    form.
-                                </div>
-                                <div className="cell">1 session</div>
-                            </div>
-                        </div>
+                                    <p className="sm-type-lead mb-4">
+                                        Add a team by typing the team name into
+                                        the box labelled 'Name' (in the section
+                                        labelled 'STEP 1'), and clicking 'Add
+                                        team'. You should see the newly created
+                                        team appear in the 'Teams' panel on the
+                                        right. Repeat this process until you
+                                        have the required number of teams.
+                                    </p>
 
-                        <h3>The 8 Stages</h3>
+                                    <p className="sm-type-lead mb-4">
+                                        Next, in the section labelled 'STEP 2'
+                                        you should see all of the students you
+                                        added in the previous step. Assign each
+                                        of these to their team by using the
+                                        drop-down next to each name (where you
+                                        should see a list of all team names you
+                                        have created).
+                                    </p>
 
-                        <ol>
-                            <li className="mb-4">
-                                <b>Research</b>
-                                <br />
-                                The purpose of asking the pupils to answer a
-                                series of questions is to challenge their
-                                understanding of ‘Community’, to get them to do
-                                a little research into land ownership in
-                                Scotland and to encourage them to find out about
-                                any community landowners in their area.
-                                <br />
-                                <br />
-                                The pupils should work in their groups right
-                                from the outset and this is their first
-                                opportunity to work cooperatively, as the
-                                answers they give must be agreed upon by all the
-                                members of the group.
-                            </li>
-                            <li className="mb-4">
-                                <b>Consult</b>
-                                <br />
-                                The pupils start to get a feel for the community
-                                of Glenclas, by reading a guide to the village
-                                and its surrounding area. The community have
-                                come up with 9 Development Options for how the
-                                land that is up for sale might be used. Some
-                                members of the community and a few ‘experts’
-                                have answered some questions about these
-                                options. These submissions will give the pupils
-                                a first impression of the proposed Development
-                                Options and they should be encouraged to start
-                                forming their opinions about which might be the
-                                most likely to succeed and which will be of
-                                greatest benefit to the Community.
-                                <br />
-                                <br />
-                                The pupils have to decide who is going to take
-                                on which roles within the Community Group that
-                                has been formed to manage the community buy-out
-                                and they will act as the Steering Group. They
-                                will need to come up with a name for their group
-                                and also design their own logo.
-                            </li>
-                            <li className="mb-4">
-                                <b>Lay the Foundations</b>
-                                <br />
-                                In Part 1, the Teams must consider all the
-                                Development Options and then choose a long-list
-                                of 5 Options which they will consider in more
-                                detail.
-                                <br />
-                                <br />
-                                They may wish to make one of their Options an
-                                idea that they have which doesn’t appear on the
-                                list – the ‘Team Choice’. There may be an
-                                activity, a characteristic, an opportunity that
-                                is unique to their community, or a particular
-                                strength of their community that they would like
-                                to see reflected here. So they can, in effect
-                                build this into the Glenclas Community and
-                                therefore follow their own interest. An example
-                                might be a community that is particularly strong
-                                in Traditional Music and an idea might be to
-                                build a recording studio to provide local people
-                                with the opportunity to become part of the
-                                flourishing Traditional Music scene.
-                                <br />
-                                <br />
-                                In Part 2, the Teams complete a SWOT analysis on
-                                the 5 choices that they have made. SWOT analysis
-                                is a strategic planning technique that is often
-                                used to identify strengths, weaknesses,
-                                opportunities and threats involved in a project
-                                or organisation. In our case, it will help the
-                                pupils look at each of their options in
-                                considerable detail, considering both their
-                                positive and negative aspects and facilitate
-                                their decision making about whether to take a
-                                particular Option forward, or not.
-                                <br />
-                                <br />
-                                There is an explanation provided for how to
-                                carry out a SWOT analysis and the pupils will
-                                need some help and guidance to complete this
-                                task. To this end, the facility to reveal
-                                ‘model’ answers for each Option is provided for
-                                the Teacher. It will also be possible for the
-                                Teacher to reveal a completed analysis for one
-                                of the options that each group has not chosen,
-                                in order to give them an example of what is
-                                required. It would then be worth going through
-                                this with them.
-                            </li>
-                            <li className="mb-4">
-                                <b>Progress Your Plans 1 – Feasibility Study</b>
-                                <br />
-                                The SWOT analysis from the previous stage should
-                                now allow the pupils to do the final cut and
-                                decide on a short-list of 3 Development Options.
-                                These will be the ones that they will take to
-                                the Community when they seek approval to go
-                                ahead with the land buy-out.
-                                <br />
-                                <br />
-                                When they go to the Community they will be
-                                making a formal presentation, when they will
-                                justifying their choice of Options in terms of
-                                their benefit to the Community and likelihood to
-                                succeed. In order to focus their thinking, they
-                                are required to complete a Feasibility Study at
-                                this stage. This is done using a form, which
-                                first asks them to consider, without reference
-                                to the specific Options, what it would mean for
-                                the Community to own the land. The kind of
-                                things that they need to think about are:
-                                empowerment, giving people the opportunity to
-                                direct their own destiny, creating job
-                                opportunities for local people, making it a more
-                                attractive place for young people of the
-                                Community to remain and for new people to set up
-                                homes, encourage more visitors and therefore
-                                more income for the Community, allow the
-                                Community to take control of its energy use and
-                                contribute to reduction in carbon emissions.
-                                <br />
-                                <br />
-                                The pupils will then use their SWOT analyses and
-                                the information on their chosen options (or
-                                information that they will have worked on for
-                                the Team Choice, if they have gone down that
-                                route) to complete 3 sections for each
-                                Development Option/Scheme. They will need to
-                                think about how each Scheme benefits the
-                                Community, the reasons why they consider that
-                                the Scheme is likely to succeed and what the
-                                risk are that might cause the Scheme to fail.
-                            </li>
-                            <li className="mb-4">
-                                <b>Progress Your Plans 2 – Business Plan</b>
-                                <br />
-                                It is not within the scope of this project to
-                                ask pupils to come up with a full-blown Business
-                                Plan, however it is important for them to
-                                understand that there are very important
-                                financial considerations to be satisfied in
-                                order to take something like this forward. The
-                                function of the Business Plan here is to act as
-                                something of a reality check to make the pupils
-                                realise that each of their Schemes could only
-                                work if they make financial sense.
-                                <br />
-                                <br />
-                                In reality, the funding issue is a massive part
-                                of what a Community Group would have to come to
-                                terms with to make a community buyout a reality.
-                                A great deal depends on the success, or
-                                otherwise, of funding applications and it would
-                                be worth the Teacher explaining this to the
-                                pupils at this point. Here, we have identified
-                                potential funders in the early stages of the
-                                Quest and the pupils are simply required to list
-                                those funders within the Business plan.
-                                <br />
-                                <br />
-                                The first task involves a basic numeracy task to
-                                calculate the asking price for the land, based
-                                on a stated price per hectare. The pupils have
-                                to work out the area of land for sale by
-                                referring to the map and using the scale
-                                provided and then calculating the asking price.
-                                <br />
-                                <br />
-                                The second task involves completing a form for
-                                each Option, detailing Capital and Running
-                                Costs, as well as Funders. Most of the figures
-                                required are to be found in the information
-                                provided about each of the Development Options
-                                and it is just a matter of transferring those
-                                figures. The final section of the form is an
-                                Annual Cash Flow over the first 4 years of each
-                                Scheme. Again, most of the figures are provided
-                                within the Option information, but the pupils
-                                may have to ‘create’ some of the figures
-                                themselves. There is no ‘right’ answer and the
-                                pupils should aim to show a ‘Project Balance’,
-                                along the bottom line, which is either becoming
-                                less negative or more positive in each
-                                successive year.
-                                <br />
-                                <br />
-                                Please note that in sections 2 and 3 not all the
-                                rows need to be filled, however the ‘Total’
-                                boxes at the bottom of each section do need to
-                                be completed.
-                            </li>
-                            <li className="mb-4">
-                                <b>Prepare Findings</b>
-                                <br />
-                                The Steering Groups now have to prepare their
-                                presentations to their Community which is when
-                                they will seek approval to go ahead with the
-                                buy-out of the land and the implementation of
-                                the 3 Schemes. ‘Presentation Hints’ are provided
-                                to help the pupils prepare their presentations
-                                and it is suggested that they use PowerPoint as
-                                they probably have experience with this program.
-                                <br />
-                                <br />
-                                The management of this ‘event’ will be down to
-                                the circumstances of individual schools. It
-                                would be possible to use an ordinary lesson and
-                                have each group present to the rest of the
-                                class, however, the disadvantage of this is that
-                                different groups will have options in common and
-                                so there will be some repetition. This may not
-                                matter, as long as groups stick to the content
-                                of their presentation no matter what other
-                                groups say. Another possibility would be to have
-                                an invited audience, which could be staff from
-                                within the school, or possibly members of a
-                                local community group who have experience of
-                                this issue or maybe are aspiring to follow this
-                                route. In this case, perhaps the class could be
-                                supervised and the groups could be called in to
-                                present in turn.
-                                <br />
-                                <br />
-                                The length of time that the groups are given to
-                                present will depend on how much time can be
-                                given to the whole event, but it would seem
-                                sensible to give each group at least 10 minutes.
-                            </li>
-                            <li className="mb-4">
-                                <b>Present Findings</b>
-                                <br />
-                                The ‘Presentation Hints’ also cover suggestions
-                                to help the pupils with the actual presentation.
-                                <br />
-                                <br />
-                                One of the roles of the Chair of the group is to
-                                lead the presentation. It is recommended that
-                                the Chair and at least one other pupil is
-                                involved in actually presenting, but all members
-                                of the groups must be involved in the
-                                presentation in some way. Once again, it is a
-                                matter of the group making the best use of the
-                                skills that they have available to them.
-                            </li>
-                            <li className="mb-4">
-                                <b>Celebrate and Reflect</b>
-                                <br />
-                                This process has not been a competition and
-                                there is therefore not a winner to be announced.
-                                On the contrary, we all hope that everyone is a
-                                winner!
-                                <br />
-                                <br />
-                                The Quest will probably be quite different to
-                                anything the pupils have done before and
-                                therefore it will be a significant achievement
-                                for them to have reached the end successfully.
-                                All the pupils will therefore be able to
-                                celebrate with their team mates and receive
-                                their certificates.
-                                <br />
-                                <br />
-                                We would ask that some time is given to allow
-                                the pupils to reflect on the experience. This
-                                will allow for consolidation of their learning
-                                experiences both of community land buy-outs and
-                                also of working throughout as part of a group.
-                                While the questions provided will help in that
-                                consolidation, the teacher will have an
-                                important part to play in getting the pupils to
-                                talk about their experience eliciting their
-                                responses.
-                                <br />
-                                <br />
-                                It is also important that we can listen to what
-                                the pupils have to say so that we can build on
-                                their experience.
-                            </li>
-                        </ol>
+                                    <p className="sm-type-lead mb-4">
+                                        Once done, click 'Create teams', check
+                                        the number of teams is correct, then
+                                        cancel or continue as appropriate. Click
+                                        through the prompts to start the Quest!
+                                    </p>
+
+                                    <p>*** GIF HERE ***</p>
+
+                                    <p className="sm-type-lead mb-4">
+                                        You are free to create as many Quests to
+                                        run simultaneously as are required.
+                                        <br />
+                                        <b>
+                                            n.b. if at any point during these
+                                            steps you would prefer to cancel new
+                                            Quest creation altogether, just
+                                            click the 'Tutor Hub' link in the
+                                            header and you will be returned to
+                                            the Hub.
+                                        </b>
+                                    </p>
+                                </AccordionItemPanel>
+                            </AccordionItem>
+
+                            <AccordionItem className="side-grey">
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Current Quests
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <p className="sm-type-lead mb-4">
+                                        Once you have one or more active Quests
+                                        in play, you will be able to access the
+                                        'Current Quests' area. This is where you
+                                        will control the progression of the
+                                        teams looking to complete a Quest.
+                                    </p>
+
+                                    <p className="sm-type-lead mb-4">
+                                        If you have more than one active Quest
+                                        at any one point, you will be able to
+                                        switch between them using the tabs near
+                                        the top of the page. Each tab will show
+                                        a list of the teams for that Quest.
+                                        Click on a team name to expand or
+                                        collapse that team's display area.
+                                    </p>
+
+                                    <p>*** GIF HERE ***</p>
+
+                                    <h3>Team Display</h3>
+                                    <p className="sm-type-lead mb-4">
+                                        <b>Team members panel</b>
+                                        <br />
+                                        This panel displays the students who are
+                                        part of this team. Once the team
+                                        completes Stage 2, this panel will
+                                        update to show the 'steering group'
+                                        positions the team has selected for each
+                                        student.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        You are also able to display the
+                                        username and passwords for each of the
+                                        team members, to allow you to provide
+                                        these to any students who lose track of
+                                        their credentials.
+                                    </p>
+
+                                    <p>*** GIF HERE ***</p>
+
+                                    <p className="sm-type-lead mb-4">
+                                        <b>Development options panel</b>
+                                        <br />
+                                        This panel displays the development
+                                        option longlist selected by the team
+                                        during Stage 3, and indeed only becomes
+                                        visible at this point. It will update
+                                        during Stage 4 to show a green tick icon
+                                        next to the options selected for the
+                                        team's shortlist.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        <b>Quest stages</b>
+                                        <br />
+                                        Each Quest stage is shown, along with
+                                        the current status of the stage.
+                                        Additionally it is from here that you
+                                        will be able to perform the actions
+                                        required to assess the team's
+                                        performance in each stage and allow them
+                                        to progress. See the 'stage actions'
+                                        section for help with this.
+                                    </p>
+                                </AccordionItemPanel>
+                            </AccordionItem>
+
+                            <AccordionItem className="side-grey">
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Stage Actions
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <p className="sm-type-lead mb-4">
+                                        The actions available to you for a stage
+                                        are dependent on the status of that
+                                        stage.
+                                    </p>
+
+                                    <p className="sm-type-lead mb-4">
+                                        <b>Unlock stage</b>
+                                        <br />
+                                        Your first step for each stage is to
+                                        unlock it, which will allow the team to
+                                        access it from the Team Hub. You can do
+                                        this by clicking 'Unlock stage'.{' '}
+                                    </p>
+
+                                    <p className="sm-type-lead mb-4">
+                                        It is possible to unlock any stage at
+                                        any point, but we would suggest for the
+                                        optimal Quest experience you allow a
+                                        stage to be completed before unlocking
+                                        the next.
+                                    </p>
+
+                                    <p>*** GIF HERE ***</p>
+
+                                    <p className="sm-type-lead mb-4">
+                                        <b>View submitted work</b>
+                                        <br />
+                                        Available once work has been submitted
+                                        by the team, clicking this link allows
+                                        you to view this work and provied
+                                        feedback. See the 'view work and provide
+                                        feedback' section for more information.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        There are a few stages where this option
+                                        is not available, which indicates that
+                                        completion of the task will not result
+                                        in any submittable work.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        <b>Re-enable submission</b>
+                                        <br />
+                                        Upon initial submission of work for a
+                                        stage, further submissions are disabled
+                                        for the team. If, upon inspecting the
+                                        work, you feel it requires changes
+                                        before the team can progress, clicking
+                                        this link will allow the team to make
+                                        further changes and resubmit.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        The team will be able to see any
+                                        feedback you have provided while they
+                                        are making changes and resubmitting.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        <b>Complete stage</b>
+                                        <br />
+                                        Clicking this link will update the stage
+                                        to 'completed' status, signifying that
+                                        you are satisfied with the team's work
+                                        for this stage. This is then made
+                                        visible to the team from the 'Team Hub',
+                                        along with your feedback. You should do
+                                        this before unlocking the next stage.
+                                    </p>
+                                </AccordionItemPanel>
+                            </AccordionItem>
+
+                            <AccordionItem className="side-grey">
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        View Work and Provide Feedback
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <p className="sm-type-lead mb-4">
+                                        After clicking 'View submitted work',
+                                        you will be taken to a page displaying
+                                        the team's submitted work for that
+                                        stage.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        Each stage's work will necessarily be
+                                        displayed differently, due to the
+                                        differing tasks, but each should be
+                                        fairly self-explanatory and will reflect
+                                        what the team saw when attempting it.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        After reviewing the work, you are able
+                                        to provide feedback in the 'Your
+                                        feedback' section located below it. ***
+                                        DO THIS BIT ***
+                                    </p>
+
+                                    <p>*** GIF HERE ***</p>
+
+                                    <p className="sm-type-lead mb-4">
+                                        You are also able to update any feedback
+                                        provided, by clicking 'Update Feedback'
+                                        and repeating the above step. This
+                                        should be useful when assessing
+                                        resubmitted work.
+                                    </p>
+
+                                    <p>*** GIF HERE ***</p>
+                                </AccordionItemPanel>
+                            </AccordionItem>
+
+                            <AccordionItem className="side-grey">
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Complete Quest
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <p className="sm-type-lead mb-4">
+                                        Once you are satisfied that all teams
+                                        have completed the Quest to an
+                                        acceptable level, click 'Complete
+                                        Quest'.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        You will be shown a number of 'tutor
+                                        reflection' questions; it would be
+                                        extremely helpful to us (the developers)
+                                        if you could provide as much detail as
+                                        possible.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        Once done, click 'Submit feedback and
+                                        complete Quest' to update this Quest's
+                                        status to 'complete'. This will cause it
+                                        to move from 'Current Quests' to
+                                        'Previous Quests' in your 'Tutor Hub'.
+                                    </p>
+
+                                    <p>*** GIF HERE ***</p>
+                                </AccordionItemPanel>
+                            </AccordionItem>
+
+                            <AccordionItem className="side-grey">
+                                <AccordionItemHeading>
+                                    <AccordionItemButton>
+                                        Previous Quests
+                                    </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                    <p className="sm-type-lead mb-4">
+                                        It is possible to review previous Quests
+                                        by clicking 'View' next to the
+                                        appropriate Quest in the 'Tutor Hub'.
+                                    </p>
+                                    <p className="sm-type-lead mb-4">
+                                        This will take you to a view very
+                                        similar to that of 'Current Quests',
+                                        where you will be able to access any
+                                        work completed by teams that took part
+                                        in the selected Quest.
+                                    </p>
+
+                                    <p>*** GIF HERE ***</p>
+                                </AccordionItemPanel>
+                            </AccordionItem>
+                        </Accordion>
                     </div>
                 </div>
             </section>

@@ -438,9 +438,10 @@ const TutorCurrentQuestPage = () => {
                                     <button
                                         type="button"
                                         className="btn-solid-lg"
-                                        onClick={() =>
+                                        onClick={() => {
+                                            window.scrollTo(0, 0)
                                             setShowReflectionModal(true)
-                                        }
+                                        }}
                                     >
                                         Complete Quest
                                     </button>

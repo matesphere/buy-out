@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 
 import '../../scss/index.scss'
 
-const Nav = () => {
+const Nav = ({ hubLinkOnly }: { hubLinkOnly?: boolean }) => {
     const [expanded, setExpanded] = useState(false)
     return (
         <nav
@@ -40,31 +40,35 @@ const Nav = () => {
                                     Tutor hub
                                 </Link>
                             </li>
-                            <li className="dropdown">
-                                <Link
-                                    to="/tutor/current-quests"
-                                    className="dropbtn"
-                                >
-                                    Current Quests
-                                </Link>
-                            </li>
-                            <li className="dropdown">
-                                <p className="dropbtn">Help</p>
-                                <div className="dropdown-content">
-                                    <Link to="/tutor/tutor-guide">
-                                        Tutor guide
-                                    </Link>
-                                    <Link to="/tutor/technical-guide">
-                                        Technical guide
-                                    </Link>
-                                    <Link to="/tutor/assessment">
-                                        Assessment
-                                    </Link>
-                                    <Link to="/tutor/team-assessment">
-                                        Team Assessment
-                                    </Link>
-                                </div>
-                            </li>
+                            {!hubLinkOnly && (
+                                <>
+                                    <li className="dropdown">
+                                        <Link
+                                            to="/tutor/current-quests"
+                                            className="dropbtn"
+                                        >
+                                            Current Quests
+                                        </Link>
+                                    </li>
+                                    <li className="dropdown">
+                                        <p className="dropbtn">Help</p>
+                                        <div className="dropdown-content">
+                                            <Link to="/tutor/tutor-guide">
+                                                Tutor guide
+                                            </Link>
+                                            <Link to="/tutor/technical-guide">
+                                                Technical guide
+                                            </Link>
+                                            <Link to="/tutor/assessment">
+                                                Assessment
+                                            </Link>
+                                            <Link to="/tutor/team-assessment">
+                                                Team Assessment
+                                            </Link>
+                                        </div>
+                                    </li>
+                                </>
+                            )}
                         </ul>
                     </nav>
                 </div>
