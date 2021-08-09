@@ -40,8 +40,11 @@ const removeStudentInput = (studentNum: number) => (students: Array<StudentType>
 
 const StudentInput: FC<StudentInputProps> = ({ num, firstName, lastName, email, setStudents }) => (
     <div className="side-grey row mb-4">
-        <div className="col-lg-12">
-            <p className="sm-type-amp sm-type-amp--medium">Student {num + 1}</p>
+        <div className="col-lg-8">
+            <p className="sm-type-lead">Student {num + 1}</p>
+        </div>
+        <div className="col-lg-4 text-align-right">
+            <button className="btn-outline-sm" type="button" onClick={() => setStudents(removeStudentInput(num))}><strong>X</strong> Remove</button>
         </div>
         <div className="col-lg-4 mb-2">
             <label className="form-label">First Name</label>
@@ -79,7 +82,7 @@ const StudentInput: FC<StudentInputProps> = ({ num, firstName, lastName, email, 
                 }
             />
         </div>
-        <button type="button" onClick={() => setStudents(removeStudentInput(num))}>x</button>
+
     </div>
 )
 
