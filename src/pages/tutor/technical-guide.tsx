@@ -10,8 +10,8 @@ import {
 
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 
-import signinGIF from '../../gif/tutor-signin.gif'
-import signoutGIF from '../../gif/tutor-signout.gif'
+// import signinGIF from '../../gif/tutor-signin.gif'
+// import signoutGIF from '../../gif/tutor-signout.gif'
 
 const TechnicalGuide = () => (
     <>
@@ -88,7 +88,7 @@ const TechnicalGuide = () => (
                                         navigate to the 'Tutor Hub' as shown.
                                     </p>
 
-                                    <img className="mb-4" src={signinGIF} />
+                                    {/* <img className="mb-4" src={signinGIF} /> */}
                                 </AccordionItemPanel>
                             </AccordionItem>
 
@@ -117,7 +117,7 @@ const TechnicalGuide = () => (
                                         of any page.
                                     </p>
 
-                                    <img className="mb-4" src={signoutGIF} />
+                                    {/* <img className="mb-4" src={signoutGIF} /> */}
                                 </AccordionItemPanel>
                             </AccordionItem>
 
@@ -159,7 +159,7 @@ const TechnicalGuide = () => (
                                         click 'Yes, add students' to continue.
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
 
                                     <p className="sm-type-lead mb-4">
                                         <b>Create Teams</b>
@@ -203,7 +203,7 @@ const TechnicalGuide = () => (
                                         through the prompts to start the Quest!
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
 
                                     <p className="sm-type-lead mb-4">
                                         You are free to create as many Quests to
@@ -246,7 +246,7 @@ const TechnicalGuide = () => (
                                         collapse that team's display area.
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
 
                                     <h3>Team Display</h3>
                                     <p className="sm-type-lead mb-4">
@@ -267,7 +267,7 @@ const TechnicalGuide = () => (
                                         their credentials.
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
 
                                     <p className="sm-type-lead mb-4">
                                         <b>Development options panel</b>
@@ -399,7 +399,7 @@ const TechnicalGuide = () => (
                                         DO THIS BIT ***
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
 
                                     <p className="sm-type-lead mb-4">
                                         You are also able to update any feedback
@@ -409,7 +409,7 @@ const TechnicalGuide = () => (
                                         resubmitted work.
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
                                 </AccordionItemPanel>
                             </AccordionItem>
 
@@ -441,7 +441,7 @@ const TechnicalGuide = () => (
                                         'Previous Quests' in your 'Tutor Hub'.
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
                                 </AccordionItemPanel>
                             </AccordionItem>
 
@@ -465,7 +465,7 @@ const TechnicalGuide = () => (
                                         in the selected Quest.
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
                                 </AccordionItemPanel>
                             </AccordionItem>
                         </Accordion>
