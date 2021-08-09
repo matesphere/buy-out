@@ -325,7 +325,7 @@ const TechnicalGuide = () => (
                                         the next.
                                     </p>
 
-                                    <p>*** GIF HERE ***</p>
+                                    {/* <p>*** GIF HERE ***</p> */}
 
                                     <p className="sm-type-lead mb-4">
                                         <b>View submitted work</b>
@@ -465,7 +465,7 @@ const TechnicalGuide = () => (
                                         in the selected Quest.
                                     </p>
 
-                                    {/* <p>*** GIF HERE ***</p> */}
+                                    {/* <p>*** GIF HERE ***</p>1 */}
                                 </AccordionItemPanel>
                             </AccordionItem>
                         </Accordion>
