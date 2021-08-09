@@ -7,8 +7,8 @@ import { NewQuestContext } from '../tutor'
 import { StudentType } from '../../gql/types'
 
 import '../../scss/index.scss'
+import { useEffect } from 'react'
 
-// TODO: validation to check for any missing fields on students - show error in modal?
 const EMPTY_STUDENT: StudentType = {
     firstName: '',
     lastName: '',
@@ -17,92 +17,93 @@ const EMPTY_STUDENT: StudentType = {
 
 interface StudentInputProps {
     num: number
-    firstName: string
-    lastName: string
-    email: string
+    student: {
+        firstName: string
+        lastName: string
+        email: string
+    }
     setStudents: Dispatch<(students: Array<StudentType>) => Array<StudentType>>
 }
 
-const updateField = (studentNum: number, field: string, value: string) => (students: Array<StudentType>) => {
-    const studentsToUpdate = [...students]
-    const updatedStudent = { ...students[studentNum], [field]: value }
-    studentsToUpdate[studentNum] = updatedStudent
+const updateField =
+    (studentNum: number, field: string, value: string) =>
+    (students: Array<StudentType>) => {
+        const studentsToUpdate = [...students]
+        const updatedStudent = { ...students[studentNum], [field]: value }
+        studentsToUpdate[studentNum] = updatedStudent
 
-    return studentsToUpdate
+        return studentsToUpdate
+    }
+
+const removeStudentInput =
+    (studentNum: number) => (students: Array<StudentType>) => {
+        const studentsToUpdate = [...students]
+        studentsToUpdate.splice(studentNum, 1)
+
+        return studentsToUpdate
+    }
+
+const StudentInput: FC<StudentInputProps> = ({
+    num,
+    student: { firstName, lastName, email },
+    setStudents,
+}) => {
+    return (
+        <div className="side-grey row mb-4">
+            <div className="col-lg-8">
+                <p className="sm-type-lead">Student {num + 1}</p>
+            </div>
+            <div className="col-lg-4 text-align-right">
+                <button
+                    className="btn-outline-sm"
+                    type="button"
+                    onClick={() => setStudents(removeStudentInput(num))}
+                >
+                    <strong>X</strong> Remove
+                </button>
+            </div>
+            <div className="col-lg-4 mb-2">
+                <label className="form-label">First Name</label>
+                <input
+                    type="name"
+                    required
+                    className="form-control"
+                    value={firstName}
+                    onChange={({ target: { value } }) =>
+                        setStudents(updateField(num, 'firstName', value))
+                    }
+                />
+            </div>
+            <div className="col-lg-4 mb-2">
+                <label className="form-label">Last Name</label>
+                <input
+                    type="name"
+                    required
+                    className="form-control"
+                    value={lastName}
+                    onChange={({ target: { value } }) =>
+                        setStudents(updateField(num, 'lastName', value))
+                    }
+                />
+            </div>
+            <div className="col-lg-4 mb-2">
+                <label className="form-label">Email</label>
+                <input
+                    type="email"
+                    required
+                    className="form-control"
+                    value={email}
+                    onChange={({ target: { value } }) =>
+                        setStudents(updateField(num, 'email', value))
+                    }
+                />
+            </div>
+        </div>
+    )
 }
 
-const removeStudentInput = (studentNum: number) => (students: Array<StudentType>) => {
-    const studentsToUpdate = [...students]
-    studentsToUpdate.splice(studentNum, 1)
-    
-    return studentsToUpdate
-}
-
-const StudentInput: FC<StudentInputProps> = ({ num, firstName, lastName, email, setStudents }) => (
-    <div className="side-grey row mb-4">
-        <div className="col-lg-8">
-            <p className="sm-type-lead">Student {num + 1}</p>
-        </div>
-        <div className="col-lg-4 text-align-right">
-            <button className="btn-outline-sm" type="button" onClick={() => setStudents(removeStudentInput(num))}><strong>X</strong> Remove</button>
-        </div>
-        <div className="col-lg-4 mb-2">
-            <label className="form-label">First Name</label>
-            <input
-                type="name"
-                required
-                className="form-control"
-                value={firstName}
-                onChange={({ target: { value } }) =>
-                    setStudents(updateField(num, 'firstName', value))
-                }
-            />
-        </div>
-        <div className="col-lg-4 mb-2">
-            <label className="form-label">Last Name</label>
-            <input
-                type="name"
-                required
-                className="form-control"
-                value={lastName}
-                onChange={({ target: { value } }) =>
-                    setStudents(updateField(num, 'lastName', value))
-                }
-            />
-        </div>
-        <div className="col-lg-4 mb-2">
-            <label className="form-label">Email</label>
-            <input
-                type="email"
-                required
-                className="form-control"
-                value={email}
-                onChange={({ target: { value } }) =>
-                    setStudents(updateField(num, 'email', value))
-                }
-            />
-        </div>
-
-    </div>
-)
-
-// const useDelayedRender = (delay) => {
-//     const [delayed, setDelayed] = useState(true)
-
-//     useEffect(() => {
-//         const timeout = setTimeout(() => setDelayed(false), delay)
-//         return () => clearTimeout(timeout)
-//     }, [])
-
-//     console.log(delayed)
-//     return (fn) => !delayed && fn()
-// }
-
-// const LoadingSpinner = ({ delay }) => {
-//     const delayedRender = useDelayedRender(delay)
-
-//     return delayedRender(() => <div className="loader"></div>)
-// }
+const arraysAreEqual = (arr1: Array<any>, arr2: Array<any>) =>
+    JSON.stringify(arr1) === JSON.stringify(arr2)
 
 interface ConfirmModalProps {
     students: Array<StudentType>
@@ -123,7 +124,7 @@ const ConfirmModal = ({ students, setShowModal }: ConfirmModalProps) => {
                     Cancel
                 </button>
 
-                {studentsToAdd.length === 0 && (
+                {!arraysAreEqual(students, studentsToAdd) && (
                     <>
                         <p className="sm-type-guitar sm-type-guitar--medium mt-4">
                             {`You are about to add ${students.length} students! Is this correct?`}{' '}
@@ -142,10 +143,12 @@ const ConfirmModal = ({ students, setShowModal }: ConfirmModalProps) => {
 
                 {/* {loading && <LoadingSpinner delay={200} />} */}
 
-                {studentsToAdd.length > 0 && (
+                {arraysAreEqual(students, studentsToAdd) && (
                     <p className="sm-type-guitar sm-type-guitar--medium mt-4">
                         Done!{' '}
-                        <Link to="/tutor/create-team">Go to create teams ></Link>
+                        <Link to="/tutor/create-team">
+                            Go to create teams {'>'}
+                        </Link>
                     </p>
                 )}
             </div>
@@ -154,8 +157,18 @@ const ConfirmModal = ({ students, setShowModal }: ConfirmModalProps) => {
 }
 
 const TutorAddStudentsPage: FC = () => {
-    const [students, setStudents] = useState<Array<StudentType>>([EMPTY_STUDENT, EMPTY_STUDENT])
+    const [students, setStudents] = useState<Array<StudentType>>([
+        EMPTY_STUDENT,
+        EMPTY_STUDENT,
+    ])
     const [showModal, setShowModal] = useState(false)
+    const { studentsToAdd } = useContext(NewQuestContext)
+
+    useEffect(() => {
+        if (studentsToAdd.length > 0) {
+            setStudents(studentsToAdd)
+        }
+    }, [])
 
     return (
         <>
@@ -178,17 +191,6 @@ const TutorAddStudentsPage: FC = () => {
                             <p className="sm-type-lead">
                                 Add all students who will be taking The Quest.
                             </p>
-                            {/* <div className="side-grey row mb-4">
-                                <div className="col-lg-12">
-                                    <p className="sm-type-lead sm-type-lead--medium">
-                                        03.05.2020 - Class 4B 2020
-                                    </p>
-                                </div>
-                            </div>
-
-                            <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                Student details
-                            </h2> */}
 
                             <form
                                 className="mb-4 container"
@@ -198,14 +200,16 @@ const TutorAddStudentsPage: FC = () => {
                                     setShowModal(true)
                                 }}
                             >
-                                {students.map((student, i) => (
-                                    <StudentInput
-                                        key={i}
-                                        num={i}
-                                        setStudents={setStudents}
-                                        {...{ student }}
-                                    />
-                                ))}
+                                {students.map((student, i) => {
+                                    return (
+                                        <StudentInput
+                                            key={i}
+                                            num={i}
+                                            setStudents={setStudents}
+                                            student={student}
+                                        />
+                                    )
+                                })}
 
                                 <button
                                     className="btn-outline-reg mb-4"

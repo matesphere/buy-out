@@ -171,8 +171,10 @@ const TechnicalGuide = () => (
                                         to know the number of teams required
                                         before performing this step.{' '}
                                         <b>
-                                            Remember that each team must
-                                            comprise at least 4 individuals!
+                                            If at any point you realise you have
+                                            made an error in the 'add students'
+                                            step, use the link below the header
+                                            to go back and rectify this.
                                         </b>
                                     </p>
 
@@ -193,7 +195,11 @@ const TechnicalGuide = () => (
                                         of these to their team by using the
                                         drop-down next to each name (where you
                                         should see a list of all team names you
-                                        have created).
+                                        have created).{' '}
+                                        <b>
+                                            Remember that each team must
+                                            comprise at least 4 individuals!
+                                        </b>
                                     </p>
 
                                     <p className="sm-type-lead mb-4">

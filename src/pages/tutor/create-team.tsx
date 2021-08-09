@@ -6,13 +6,12 @@ import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../components/common/Loading'
 import { Error } from '../../components/common/Error'
-
-import { useAuthQuery, useAuthMutation } from '../../utils/auth-utils'
-import { CREATE_QUEST_WITH_TEAMS, START_QUEST } from '../../gql/mutations'
-
 import { LoadingSpinner } from '../../components/common/LoadingSpinner'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 
 import {
+    useAuthQuery,
+    useAuthMutation,
     addStudentToTeam,
     mergeIdsIntoStudents,
     createStudentsInCognito,
@@ -21,12 +20,25 @@ import {
 import { UserStateContext } from '../../utils/user-state'
 import { NewQuestContext } from '../tutor'
 
+import { CREATE_QUEST_WITH_TEAMS, START_QUEST } from '../../gql/mutations'
+import { StudentType } from '../../gql/types'
+import { InsertTeam, InsertTeamVariables } from '../../gql/types/InsertTeam'
+import {
+    CreateTeamQuery,
+    CreateTeamQueryVariables,
+} from '../../gql/types/CreateTeamQuery'
+
 import HelpIcon from '../../assets/help-icon.svg'
 import Cross from '../../assets/cross.svg'
 
 import '../../scss/index.scss'
 
 // TODO: sort out 'team/teams' pluralisation in modals
+
+interface TeamType {
+    name: string
+    students: Array<StudentType>
+}
 
 const TeamInput = ({ setTeams }) => {
     const [teamName, setTeamName] = useState('')
@@ -175,6 +187,18 @@ const CreateStudentsSection = ({
     )
 }
 
+const getInvalidTeams = (teams: Array<TeamType>) =>
+    teams.filter((team) => team.students.length < 4)
+
+interface ConfirmModalProps {
+    teams: Array<TeamType>
+    showModal: boolean
+    setShowModal: (value: boolean) => void
+    setStudentsToAdd: (value: Array<StudentType>) => void
+    tutorId: string
+    schoolId: string
+}
+
 const ConfirmModal = ({
     teams,
     showModal,
@@ -182,14 +206,17 @@ const ConfirmModal = ({
     setStudentsToAdd,
     tutorId,
     schoolId,
-}) => {
+}: ConfirmModalProps) => {
     const [createQuestWithTeams, createQuestWithTeamsResponse] =
-        useAuthMutation(CREATE_QUEST_WITH_TEAMS)
+        useAuthMutation<InsertTeam, InsertTeamVariables>(
+            CREATE_QUEST_WITH_TEAMS
+        )
     const [startQuest, startQuestResponse] = useAuthMutation(START_QUEST)
 
     const [cognitoResponse, setCognitoResponse] = useState([])
 
-    console.log(createQuestWithTeamsResponse)
+    const invalidTeams = getInvalidTeams(teams)
+    // console.log(createQuestWithTeamsResponse)
 
     return (
         <>
@@ -204,36 +231,52 @@ const ConfirmModal = ({
                             Cancel
                         </button>
 
-                        {!createQuestWithTeamsResponse.data && (
-                            <>
-                                <p className="sm-type-guitar sm-type-guitar--medium mt-4">
-                                    {`You are about to create ${teams.length} teams! Is this correct?`}{' '}
-                                </p>
+                        {!createQuestWithTeamsResponse.data &&
+                            invalidTeams.length !== 0 && (
+                                <>
+                                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                        {`The following teams do not have the minimum required number of students (4): ${invalidTeams
+                                            .map((team) => team.name)
+                                            .join(', ')}`}
+                                    </p>
+                                    <p>
+                                        Click cancel to go back and rectify
+                                        this.
+                                    </p>
+                                </>
+                            )}
 
-                                <button
-                                    className="btn-solid-lg mt-4"
-                                    onClick={() => {
-                                        createQuestWithTeams({
-                                            variables: {
-                                                objects: teams.map(
-                                                    ({ name }) => ({
-                                                        name,
-                                                        quest: {
-                                                            data: {
-                                                                tutor_id:
-                                                                    tutorId,
+                        {!createQuestWithTeamsResponse.data &&
+                            invalidTeams.length === 0 && (
+                                <>
+                                    <p className="sm-type-guitar sm-type-guitar--medium mt-4">
+                                        {`You are about to create ${teams.length} teams! Is this correct?`}{' '}
+                                    </p>
+
+                                    <button
+                                        className="btn-solid-lg mt-4"
+                                        onClick={() => {
+                                            createQuestWithTeams({
+                                                variables: {
+                                                    objects: teams.map(
+                                                        ({ name }) => ({
+                                                            name,
+                                                            quest: {
+                                                                data: {
+                                                                    tutor_id:
+                                                                        tutorId,
+                                                                },
                                                             },
-                                                        },
-                                                    })
-                                                ),
-                                            },
-                                        })
-                                    }}
-                                >
-                                    Yes, create teams
-                                </button>
-                            </>
-                        )}
+                                                        })
+                                                    ),
+                                                },
+                                            })
+                                        }}
+                                    >
+                                        Yes, create teams
+                                    </button>
+                                </>
+                            )}
 
                         {createQuestWithTeamsResponse.loading && (
                             <LoadingSpinner delay={200} />
@@ -242,14 +285,14 @@ const ConfirmModal = ({
                         {createQuestWithTeamsResponse.data && (
                             <div>
                                 <p className="sm-type-guitar sm-type-guitar--medium">
-                                    {`Created ${createQuestWithTeamsResponse.data.insert_team.returning[0].quest.teams.length} teams!`}{' '}
+                                    {`Created ${createQuestWithTeamsResponse.data.insert_team?.returning[0].quest.teams.length} teams!`}{' '}
                                 </p>
 
                                 <CreateStudentsSection
                                     teamsWithStudents={teams}
                                     teamsFromResponse={
                                         createQuestWithTeamsResponse.data
-                                            .insert_team.returning[0].quest
+                                            .insert_team?.returning[0].quest
                                             .teams
                                     }
                                     cognitoResponse={cognitoResponse}
@@ -332,11 +375,10 @@ const TutorCreateTeamPage = () => {
         userInfo: { schoolId },
     } = useContext(UserStateContext)
 
-    const { loading, error, data } = useAuthQuery(
-        CREATE_TEAM_QUERY,
-        {},
-        'userId'
-    )
+    const { loading, error, data } = useAuthQuery<
+        CreateTeamQuery,
+        CreateTeamQueryVariables
+    >(CREATE_TEAM_QUERY, {}, 'userId')
 
     if (loading) return <Loading />
     if (error || !data)
@@ -349,7 +391,7 @@ const TutorCreateTeamPage = () => {
             />
         )
 
-    const { id: tutorId } = data.user_by_pk.tutor
+    const { id: tutorId } = data.user_by_pk?.tutor
 
     return (
         <>
@@ -366,6 +408,15 @@ const TutorCreateTeamPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Add students',
+                                        url: '/tutor/add-students',
+                                    },
+                                ]}
+                                currentDisplayName="Create teams"
+                            />
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
                                 STEP 1: Create Teams
                             </h2>
