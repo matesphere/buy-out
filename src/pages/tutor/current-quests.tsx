@@ -175,6 +175,7 @@ interface TeamInfoPanelProps {
     students: Array<TutorCurrentQuestQuery_user_by_pk_tutor_quests_teams_students>
 }
 
+
 const TeamInfoPanel = ({ devOptions, students }: TeamInfoPanelProps) => (
     <>
         <div className="form-holder-border">
@@ -219,6 +220,27 @@ const TeamInfoPanel = ({ devOptions, students }: TeamInfoPanelProps) => (
     </>
 )
 
+const TeamUserPassPanel = ({ students }: TeamInfoPanelProps) => (
+    <>
+        <div className="form-holder-border">
+            <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
+                Team members:
+            </p>
+            {students.map(({ user: { full_name, username, password } }, i) => (
+                <div key={i} className="sm-type-bigamp text-align-left">
+                    <p className="sm-type-guitar green-highlight">{full_name}</p>
+                    <p className="sm-type-guitar sm-type-guitar--medium">
+                        Username: <strong>{username}</strong>
+                        &nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp;
+                        Password: <strong>{password}</strong>
+                    </p>
+                    <hr />
+                </div>
+            ))}
+        </div>
+    </>
+)
+
 const StageInfoPanel = ({ stages, stageProgresses, devOptions, teamId }) => (
     <ul className="steps">
         {stages.map(({ id, title }, i) => (
@@ -240,6 +262,7 @@ const StageInfoPanel = ({ stages, stageProgresses, devOptions, teamId }) => (
 )
 
 const TutorCurrentQuestPage = () => {
+    const [showUserPassModal, setShowUserPassModal] = useState(false)
     const { expanded, setExpanded, selectedTab, setSelectedTab } =
         useContext(CurrentQuestContext)
     const [showReflectionModal, setShowReflectionModal] = useState(false)
@@ -384,54 +407,91 @@ const TutorCurrentQuestPage = () => {
                                             },
                                             i
                                         ) => (
-                                            <Accordion
-                                                key={i}
-                                                allowMultipleExpanded
-                                                allowZeroExpanded
-                                                preExpanded={expanded}
-                                                onChange={(ids) =>
-                                                    setExpanded(ids)
-                                                }
-                                            >
-                                                <AccordionItem
-                                                    className="side-grey"
-                                                    uuid={id}
+                                            <>
+                                                <Accordion
+                                                    key={i}
+                                                    allowMultipleExpanded
+                                                    allowZeroExpanded
+                                                    preExpanded={expanded}
+                                                    onChange={(ids) =>
+                                                        setExpanded(ids)
+                                                    }
                                                 >
-                                                    <AccordionItemHeading>
-                                                        <AccordionItemButton>
-                                                            {name}
-                                                        </AccordionItemButton>
-                                                    </AccordionItemHeading>
-                                                    <AccordionItemPanel>
-                                                        <div className="row tutor">
-                                                            <div className="col-lg-4">
-                                                                <TeamInfoPanel
-                                                                    devOptions={
-                                                                        team_development_options
-                                                                    }
-                                                                    students={
-                                                                        students
-                                                                    }
-                                                                />
+                                                    <AccordionItem
+                                                        className="side-grey"
+                                                        uuid={id}
+                                                    >
+                                                        <AccordionItemHeading>
+                                                            <AccordionItemButton>
+                                                                {name}
+                                                            </AccordionItemButton>
+                                                        </AccordionItemHeading>
+                                                        <AccordionItemPanel>
+                                                            <div className="row tutor">
+                                                                <div className="col-lg-4">
+                                                                    <TeamInfoPanel
+                                                                        devOptions={
+                                                                            team_development_options
+                                                                        }
+                                                                        students={
+                                                                            students
+                                                                        }
+                                                                    />
+                                                                    <button
+                                                                        type="button"
+                                                                        className="btn-solid-lg"
+                                                                        onClick={() => {
+                                                                            window.scrollTo(0, 0)
+                                                                            setShowUserPassModal(true)
+                                                                        }}
+                                                                    >
+                                                                        Show Usernames and Passwords
+                                                                    </button>
+                                                                </div>
+                                                                <div className="col-lg-8 mt-4">
+                                                                    <StageInfoPanel
+                                                                        stages={
+                                                                            stage
+                                                                        }
+                                                                        stageProgresses={
+                                                                            stage_progresses
+                                                                        }
+                                                                        devOptions={
+                                                                            devOptions
+                                                                        }
+                                                                        teamId={id}
+                                                                    />
+                                                                </div>
                                                             </div>
-                                                            <div className="col-lg-8 mt-4">
-                                                                <StageInfoPanel
-                                                                    stages={
-                                                                        stage
-                                                                    }
-                                                                    stageProgresses={
-                                                                        stage_progresses
-                                                                    }
-                                                                    devOptions={
-                                                                        devOptions
-                                                                    }
-                                                                    teamId={id}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    </AccordionItemPanel>
-                                                </AccordionItem>
-                                            </Accordion>
+                                                            {showUserPassModal && (
+                                                                <div className="modal-window-large">
+                                                                    <div>
+                                                                        <button
+                                                                            onClick={() => {
+                                                                                setShowUserPassModal(
+                                                                                    false
+                                                                                )
+                                                                            }}
+                                                                            title="Close"
+                                                                            className="modal-close"
+                                                                        >
+                                                                            Close
+                                                                        </button>
+                                                                        <TeamUserPassPanel
+                                                                            devOptions={
+                                                                                team_development_options
+                                                                            }
+                                                                            students={
+                                                                                students
+                                                                            }
+                                                                        />
+                                                                    </div>
+                                                                </div>
+                                                            )}
+                                                        </AccordionItemPanel>
+                                                    </AccordionItem>
+                                                </Accordion>
+                                            </>
                                         )
                                     )}
 

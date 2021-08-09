@@ -19,7 +19,6 @@ import { stage5Reducer, WorkState, Action } from './stage-5-landing'
 import { useWorkState } from '../../../../utils/input-utils'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
-import SaveIcon from '../../../../assets/save-icon.svg'
 
 import '../../../../scss/index.scss'
 
