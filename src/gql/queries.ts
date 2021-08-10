@@ -143,13 +143,7 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
     query TutorCurrentQuestQuery($user_id: uuid!) {
         user_by_pk(id: $user_id) {
             id
-            full_name
-            username
-            email
             tutor {
-                school {
-                    name
-                }
                 quests(where: { status: { _eq: active } }) {
                     id
                     teams(order_by: { id: asc }) {
@@ -187,6 +181,61 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                                 option
                             }
                         }
+                    }
+                }
+            }
+        }
+        development_option {
+            option
+            display_name
+            model_swot
+        }
+        stage(order_by: { id: asc }) {
+            id
+            title
+        }
+    }
+`
+
+export const TUTOR_PREVIOUS_QUEST_QUERY = gql`
+    query TutorPreviousQuestQuery($quest_id: uuid!) {
+        quest_by_pk(id: $quest_id) {
+            id
+            started_at
+            completed_at
+            teams(order_by: { id: asc }) {
+                id
+                name
+                students {
+                    id
+                    position
+                    user {
+                        full_name
+                        username
+                        password
+                    }
+                }
+                stage_progresses {
+                    id
+                    team_id
+                    stage_id
+                    status
+                    documents {
+                        id
+                        status
+                        doc_data
+                        feedback
+                    }
+                }
+                team_development_options(
+                    order_by: { development_option: { id: asc } }
+                ) {
+                    team_choice_name
+                    shortlist
+                    development_option {
+                        id
+                        display_name
+                        option
                     }
                 }
             }

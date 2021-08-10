@@ -175,7 +175,6 @@ interface TeamInfoPanelProps {
     students: Array<TutorCurrentQuestQuery_user_by_pk_tutor_quests_teams_students>
 }
 
-
 const TeamInfoPanel = ({ devOptions, students }: TeamInfoPanelProps) => (
     <>
         <div className="form-holder-border">
@@ -228,11 +227,13 @@ const TeamUserPassPanel = ({ students }: TeamInfoPanelProps) => (
             </p>
             {students.map(({ user: { full_name, username, password } }, i) => (
                 <div key={i} className="sm-type-bigamp text-align-left">
-                    <p className="sm-type-guitar green-highlight">{full_name}</p>
+                    <p className="sm-type-guitar green-highlight">
+                        {full_name}
+                    </p>
                     <p className="sm-type-guitar sm-type-guitar--medium">
                         Username: <strong>{username}</strong>
-                        &nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp;
-                        Password: <strong>{password}</strong>
+                        &nbsp;&nbsp;&nbsp;---&nbsp;&nbsp;&nbsp; Password:{' '}
+                        <strong>{password}</strong>
                     </p>
                     <hr />
                 </div>
@@ -441,11 +442,19 @@ const TutorCurrentQuestPage = () => {
                                                                         type="button"
                                                                         className="btn-solid-lg"
                                                                         onClick={() => {
-                                                                            window.scrollTo(0, 0)
-                                                                            setShowUserPassModal(true)
+                                                                            window.scrollTo(
+                                                                                0,
+                                                                                0
+                                                                            )
+                                                                            setShowUserPassModal(
+                                                                                true
+                                                                            )
                                                                         }}
                                                                     >
-                                                                        Show Usernames and Passwords
+                                                                        Show
+                                                                        Usernames
+                                                                        and
+                                                                        Passwords
                                                                     </button>
                                                                 </div>
                                                                 <div className="col-lg-8 mt-4">
@@ -459,7 +468,9 @@ const TutorCurrentQuestPage = () => {
                                                                         devOptions={
                                                                             devOptions
                                                                         }
-                                                                        teamId={id}
+                                                                        teamId={
+                                                                            id
+                                                                        }
                                                                     />
                                                                 </div>
                                                             </div>

@@ -54,7 +54,7 @@ const PreviousQuestDisplay = ({ quest }) => (
             {getDateFromTimestamp(quest.completed_at)}, {quest.teams.length}{' '}
             teams{' '}
         </span>{' '}
-        - - <Link to="/login">View</Link>
+        - - <Link to={`/tutor/previous-quest?id=${quest.id}`}>View</Link>
     </>
 )
 

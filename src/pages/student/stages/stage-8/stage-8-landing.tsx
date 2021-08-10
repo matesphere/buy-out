@@ -1,23 +1,25 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import { Link, graphql, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { graphql, useStaticQuery } from 'gatsby'
+import { GatsbyImage } from 'gatsby-plugin-image'
+import { gql } from '@apollo/client/core'
+import { ApolloError } from '@apollo/client'
+
+import { Loading } from '../../../../components/common/Loading'
+import { Error } from '../../../../components/common/Error'
+
+import { useAuthQuery } from '../../../../utils/auth-utils'
+
+import { Stage8Query, Stage8QueryVariables } from '../../gql/types/TeamHubQuery'
+
 import HelpIcon from '../../../../assets/help-icon.svg'
+import TickSheet from '../../../../assets/tick-sheet.svg'
+
 import '../../../../scss/index.scss'
 import '../../../../scss/print.scss'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import TickSheet from '../../../../assets/tick-sheet.svg'
-import {gql} from '@apollo/client/core'
-import { ApolloError } from '@apollo/client'
-import {useAuthQuery} from '../../../../utils/auth-utils'
-import {
-    TeamHubQuery,
-    TeamHubQueryVariables,
-} from '../../gql/types/TeamHubQuery'
-import {Loading} from "../../../../components/common/Loading";
-import {Error} from "../../../../components/common/Error";
-const TEAM_HUB_QUERY = gql`
-    query TeamHubQuery($user_id: uuid!) {
+
+const STAGE_8_QUERY = gql`
+    query Stage8Query($user_id: uuid!) {
         user_by_pk(id: $user_id) {
             student {
                 id
@@ -39,12 +41,13 @@ const TeamSection = ({ students, teamName }) => (
         <h3 className="cert-type-one">{teamName}</h3>
         <p className="cert-type-one">
             {students.map((student, i) => (
-                <span className="cert-name" key={i}>{student.user.full_name}</span>
+                <span className="cert-name" key={i}>
+                    {student.user.full_name}
+                </span>
             ))}
         </p>
     </>
 )
-
 
 const Stage8Page = () => {
     const data = useStaticQuery(graphql`
@@ -61,10 +64,9 @@ const Stage8Page = () => {
         loading,
         error,
         data: pageData,
-        // subscribeToMore,
-    } = useAuthQuery<TeamHubQuery, TeamHubQueryVariables>(
-        TEAM_HUB_QUERY,
-        { fetchPolicy: 'network-only', pollInterval: 2000 },
+    } = useAuthQuery<Stage8Query, Stage8QueryVariables>(
+        STAGE_8_QUERY,
+        {},
         'userId'
     )
 
@@ -81,10 +83,7 @@ const Stage8Page = () => {
 
     const {
         student: {
-            team: {
-                name: teamName,
-                students,
-            },
+            team: { name: teamName, students },
         },
     } = pageData.user_by_pk
 
@@ -133,7 +132,10 @@ const Stage8Page = () => {
                         <div className="col-lg-6">
                             <div className="mt-4 mb-2 image-holder team-certificate">
                                 <div className="team-certificate--inner">
-                                    <TeamSection students={students} teamName={teamName} />
+                                    <TeamSection
+                                        students={students}
+                                        teamName={teamName}
+                                    />
                                 </div>
                                 <GatsbyImage
                                     alt=""
@@ -167,8 +169,8 @@ const Stage8Page = () => {
                                             <Link to="/student/stage-8/task">
                                                 this link
                                             </Link>{' '}
-                                            to reflect on the process and complete the
-                                            Quest.
+                                            to reflect on the process and
+                                            complete the Quest.
                                         </li>
                                     </ul>
                                 </div>

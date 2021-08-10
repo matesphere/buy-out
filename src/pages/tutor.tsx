@@ -7,6 +7,7 @@ import Footer from '../components/tutor/_footer'
 
 import Hub from './tutor/hub'
 import CurrentQuest from './tutor/current-quests'
+import PreviousQuest from './tutor/previous-quest'
 import AddStudents from './tutor/add-students'
 import CreateTeam from './tutor/create-team'
 import Stage1Submitted from './tutor/stages/stage-1/tutor-stage-1-submitted'
@@ -84,6 +85,10 @@ const Routes = () => {
                         <LoggedInRoute
                             path="/current-quests"
                             component={CurrentQuest}
+                        />
+                        <LoggedInRoute
+                            path="/previous-quest"
+                            component={PreviousQuest}
                         />
                         <LoggedInRoute
                             path="/add-students"
