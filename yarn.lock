@@ -3014,6 +3014,21 @@
     querystring "^0.2.0"
     strip-ansi "^6.0.0"
 
+"@graphcms/rich-text-react-renderer@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@graphcms/rich-text-react-renderer/-/rich-text-react-renderer-0.2.0.tgz#17a5be763f6c217ac5f2456f5c85214a89f87967"
+  integrity sha512-RsyUJr5B8a/9c6kEiazdQQWGvjg0+ZPR5H7TfEOd0iH3bK7F6yyML0XFIPQeuVUZFlQXpKc2e9RoPV2WaCGaJA==
+  dependencies:
+    "@graphcms/rich-text-types" "^0.2.0"
+    escape-html "^1.0.3"
+
+"@graphcms/rich-text-types@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@graphcms/rich-text-types/-/rich-text-types-0.2.0.tgz#6bbabcdd1239cf6cb2f63c7229b01e53c9cd4e0a"
+  integrity sha512-aP7QbEP+oK8hyE2eKk4D5tm1wBrKIvc9MfdWft56PJ1izzz0dRCJR6u1V3Qtgs4UVFQezDC2XLQT/qMdX13ecg==
+  dependencies:
+    tslib "^2.0.0"
+
 "@graphql-tools/batch-execute@^7.1.2":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@graphql-tools/batch-execute/-/batch-execute-7.1.2.tgz#35ba09a1e0f80f34f1ce111d23c40f039d4403a0"
@@ -8288,7 +8303,7 @@ escape-goat@^2.0.0:
   resolved "https://registry.yarnpkg.com/escape-goat/-/escape-goat-2.1.1.tgz#1b2dc77003676c457ec760b2dc68edb648188675"
   integrity sha512-8/uIhbG12Csjy2JEW7D9pHbreaVaS/OpN3ycnyvElTdwM5n6GY6W6e2IPemfvGZeUMqZ9A/3GqIZMgKnBhAw/Q==
 
-escape-html@~1.0.3:
+escape-html@^1.0.3, escape-html@~1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/escape-html/-/escape-html-1.0.3.tgz#0258eae4d3d0c0974de1c169188ef0051d1d1988"
   integrity sha1-Aljq5NPQwJdN4cFpGI7wBR0dGYg=

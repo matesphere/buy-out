@@ -17,7 +17,6 @@ import {
     DocumentCompleteQueryVariables,
 } from '../../../../gql/types/DocumentCompleteQuery'
 
-import HelpIcon from '../../../../assets/help-icon.svg'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import { eng } from '../../../_index.data'

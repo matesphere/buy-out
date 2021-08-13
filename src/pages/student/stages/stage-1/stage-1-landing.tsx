@@ -16,12 +16,6 @@ import {
     StageQueryVariables,
 } from '../../../../gql/types/StageQuery'
 
-import {
-    stage1CheckListEng,
-    stage1DataSubTitleEng,
-    stage1DataTaskEng,
-} from './_stage1.data'
-
 import TickSheet from '../../../../assets/tick-sheet.svg'
 import Video from '../../../../assets/the-quest-intro.mp4'
 
@@ -60,7 +54,9 @@ const Stage1LandingPage: FC = () => {
             />
         )
 
-    const { title: stageTitle } = pageData.stage_by_pk
+    // const { title: stageTitle } = pageData.stage_by_pk
+    const { stageTitle, stageIntro, taskInfo, taskLinks, checklist } =
+        pageData.content.stageLandings[0]
 
     return (
         <>
@@ -99,14 +95,9 @@ const Stage1LandingPage: FC = () => {
                                         }
                                     />
                                 </div>
-                                {stage1DataSubTitleEng.map((text, i) => (
-                                    <p
-                                        key={i}
-                                        className="sm-type-lead small-image-holder"
-                                    >
-                                        {text}
-                                    </p>
-                                ))}
+                                <p className="sm-type-lead small-image-holder">
+                                    {stageIntro}
+                                </p>
                             </div>
 
                             <div className="homepage-image mb-4">
@@ -124,11 +115,9 @@ const Stage1LandingPage: FC = () => {
                                     </span>
                                 </h4>
 
-                                {stage1DataTaskEng.map((text, i) => (
-                                    <p key={i} className="sm-type-bigamp mb-2">
-                                        {text}
-                                    </p>
-                                ))}
+                                <p className="sm-type-bigamp mb-2">
+                                    {taskInfo}
+                                </p>
 
                                 <div className="form-holder-border">
                                     <ul>
@@ -143,7 +132,7 @@ const Stage1LandingPage: FC = () => {
                             </div>
                         </div>
                         <div className="col-lg-3">
-                            <CheckList items={stage1CheckListEng} />
+                            <CheckList items={checklist} />
                         </div>
                     </div>
                     <Link to="/student/team-hub">Back to Team Hub</Link>
