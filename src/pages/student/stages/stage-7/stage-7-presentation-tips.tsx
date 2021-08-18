@@ -59,8 +59,8 @@ const Stage7TipsPage = () => {
                                     Decide who is going to actually deliver the
                                     presentation – although the Chair is
                                     ultimately responsible for the Presentation
-                                    (s)he must not be the only person doing the
-                                    delivery.
+                                    he or she must not be the only person doing
+                                    the delivery.
                                 </li>
                                 <li className="mb-2">
                                     You may decide that each member of the team
