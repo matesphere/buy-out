@@ -162,8 +162,15 @@ const Stage6Page = () => {
                                     </ul>
                                 </div>
                                 <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-2">
+                                    <p className="sm-type-lead mb-3">
                                         Part II - Your Work
+                                    </p>
+                                    <p className="sm-type-lead mb-2">
+                                        Use the links below to access your
+                                        completed work from previous stages for
+                                        each development option. You should try
+                                        to use these while creating your
+                                        presentation.
                                     </p>
                                     <ul>
                                         {pageData.team_by_pk?.team_development_options

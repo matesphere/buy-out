@@ -27,7 +27,7 @@ const Stage7TipsPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 7 - Presentation Hints</title>
+                <title>Stage 7 - Presentation Tips</title>
             </Helmet>
             <main className="the-quest">
                 <section className="container" id="main">
@@ -44,39 +44,12 @@ const Stage7TipsPage = () => {
                                         url: '/student/stage-7/',
                                     },
                                 ]}
-                                currentDisplayName="Presentation Tips"
+                                currentDisplayName="Presentation Tips - Delivery"
                             />
 
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Presentation Tips
+                                Presentation Tips - Delivery
                             </h2>
-
-                            <p className="sm-type-lead mb-3">
-                                The presentation is your final task before you
-                                complete the Quest. While it is the
-                                responsibility of the Chair, each member of the
-                                Team must be involved in its preparation.
-                            </p>
-                            <p className="sm-type-lead mb-3">
-                                The Presentation is your chance to use all the
-                                documents that you have already prepared to make
-                                a persuasive case for each of your three
-                                Options. Your imaginary audience will be members
-                                of the Community and also potential Funders for
-                                each of the Options (although your real audience
-                                is likely to be the rest of your class and/or
-                                invited quests).
-                            </p>
-                            <p className="sm-type-lead mb-3">
-                                You will use this Presentation to persuade your
-                                community to give [Group name] the final
-                                go-ahead to purchase the land and to proceed
-                                with your three chosen options. You will also
-                                use it to persuade your various funders to
-                                provide the necessary financial support to allow
-                                the land purchase to proceed and to make the
-                                Options a reality.
-                            </p>
 
                             <p className="sm-type-lead sm-type-lead--medium mb-3">
                                 Delivering the Presentation

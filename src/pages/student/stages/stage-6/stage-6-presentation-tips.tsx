@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
+import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+
 import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
@@ -13,6 +14,11 @@ const Stage6TipsPage = () => {
     const data = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "present-findings.jpg" }) {
+                childImageSharp {
+                    gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            image2: file(relativePath: { eq: "blue-2.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
@@ -33,50 +39,62 @@ const Stage6TipsPage = () => {
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
-                            <div className="breadcrumb-list-container">
-                                <span className="crumb">
-                                    <Link to="/student/team-hub/">
-                                        Team Hub
-                                    </Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    <Link to="/student/stage-6">Stage 6</Link>
-                                    <span className="crumb-spacer">›</span>
-                                </span>
-                                <span className="leaf crumb-caps">
-                                    Preparing
-                                </span>
-                            </div>
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Stage 6',
+                                        url: '/student/stage-6/',
+                                    },
+                                ]}
+                                currentDisplayName="Presentation Tips - Preparation"
+                            />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Preparing Your Presentation
+                                Presentation Tips - Preparation
                             </h2>
 
+                            <div className="blue-holder-border">
+                                <div className="small-image">
+                                    <GatsbyImage
+                                        alt=""
+                                        image={
+                                            data.image2.childImageSharp
+                                                .gatsbyImageData
+                                        }
+                                    />
+                                </div>
+                                <p className="sm-type-lead small-image-holder">
+                                    The presentation is your final task before
+                                    you complete the Quest. While it is the
+                                    responsibility of the Chair, each member of
+                                    the Team must be involved in its
+                                    preparation.
+                                </p>
+                            </div>
+
                             <p className="sm-type-lead mb-3">
-                                The presentation is your final task before you
-                                complete the Quest. While it is the
-                                responsibility of the Chair, each member of the
-                                Team must be involved in its preparation.
-                            </p>
-                            <p className="sm-type-lead mb-3">
-                                The Presentation is your chance to use all the
+                                The presentation is your chance to use all the
                                 documents that you have already prepared to make
                                 a persuasive case for each of your three
                                 Options. Your imaginary audience will be members
                                 of the Community and also potential Funders for
                                 each of the Options (although your real audience
                                 is likely to be the rest of your class and/or
-                                invited quests).
+                                invited guests).
                             </p>
                             <p className="sm-type-lead mb-3">
-                                You will use this Presentation to persuade your
-                                community to give [Group name] the final
-                                go-ahead to purchase the land and to proceed
-                                with your three chosen options. You will also
-                                use it to persuade your various funders to
-                                provide the necessary financial support to allow
-                                the land purchase to proceed and to make the
-                                Options a reality.
+                                You will use this presentation to persuade your
+                                Community to give your group the final go-ahead
+                                to purchase the land and to proceed with your
+                                three chosen options. You will also use it to
+                                persuade your various Funders to provide the
+                                necessary financial support to allow the land
+                                purchase to proceed and to make the Options a
+                                reality.
                             </p>
 
                             <p className="sm-type-lead">
