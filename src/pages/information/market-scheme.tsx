@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
-import { ReadQuesty } from '../../components/common/ReadQuesty'
+import { ReadQuesty } from '../../components/student/ReadQuesty'
 import { DevOptionsChecklist } from './development-options'
 
 import HelpIcon from '../../assets/help-icon.svg'

@@ -3029,6 +3029,13 @@
   dependencies:
     tslib "^2.0.0"
 
+"@graphcms/rich-text-types@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@graphcms/rich-text-types/-/rich-text-types-0.2.1.tgz#dae191d7ed27e16e36d6e86a6d51371ca5cdafef"
+  integrity sha512-OgzaqsXAUBduNGnMsnLl5Vt7aN3sNgmwK7iGecp6NFhuro4babPEuUyLICKNBHEiYkguKCiGl0nzuLjZon4bNg==
+  dependencies:
+    tslib "^2.0.0"
+
 "@graphql-tools/batch-execute@^7.1.2":
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/@graphql-tools/batch-execute/-/batch-execute-7.1.2.tgz#35ba09a1e0f80f34f1ce111d23c40f039d4403a0"

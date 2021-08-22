@@ -5,8 +5,8 @@ import Slider from 'react-slick'
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
-import { CheckList } from '../../components/common/Checklist'
-import { Helpful } from '../../components/common/Helpful'
+import { CheckList } from '../../components/student/Checklist'
+import { Helpful } from '../../components/student/Helpful'
 
 import { slickSettings } from '../../utils/slicksettings'
 

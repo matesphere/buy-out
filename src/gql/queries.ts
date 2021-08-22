@@ -3,17 +3,26 @@ import { gql } from '@apollo/client'
 // student
 
 const STAGE_LANDING_CONTENT_FRAG = gql`
-    fragment StageLandingContent on StageLanding {
+    fragment StageLandingContent on StageLandingPage {
         stageTitle
         stageIntro
         stageInfo {
             raw
         }
-        taskInfo
-        taskLinks
-        checklist
+        tasksToComplete {
+            title
+            taskInfo {
+                raw
+            }
+            taskLinkText
+        }
+        checklist {
+            item
+        }
         helpfulInfo {
-            raw
+            info {
+                raw
+            }
         }
     }
 `
@@ -52,7 +61,7 @@ export const STAGE_QUERY = gql`
             title
         }
         content {
-            stageLandings(where: { stageNumber: $stage_id }) {
+            stageLandingPages(where: { stageNumber: $stage_id }) {
                 ...StageLandingContent
             }
         }

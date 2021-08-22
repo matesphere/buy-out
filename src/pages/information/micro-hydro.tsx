@@ -6,7 +6,7 @@ import { Helmet } from 'react-helmet'
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
-import { ReadQuesty } from '../../components/common/ReadQuesty'
+import { ReadQuesty } from '../../components/student/ReadQuesty'
 
 import HelpIcon from '../../assets/help-icon.svg'
 import Ticklr from '../../assets/tick-lr.svg'
@@ -203,7 +203,10 @@ const InfoMicroHydro = () => {
                                         <p>Total Annual Rainfall (m)</p>
                                     </div>
                                     <div className="cell">
-                                        <p>Average Annual Rainfall (2016-2020) (m)</p>
+                                        <p>
+                                            Average Annual Rainfall (2016-2020)
+                                            (m)
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="roww">
@@ -262,11 +265,18 @@ const InfoMicroHydro = () => {
                                     </div>
                                 </div>
                             </div>
-                            <p className="sm-type-bigamp mb-4">Average Annual Rainfall (2016-2020) = 2.21m</p>
-                                <p className="sm-type-bigamp mb-4">So the Average Annual Volume of rain falling on the catchment area of Loch na Lochain (m3)</p>
+                            <p className="sm-type-bigamp mb-4">
+                                Average Annual Rainfall (2016-2020) = 2.21m
+                            </p>
+                            <p className="sm-type-bigamp mb-4">
+                                So the Average Annual Volume of rain falling on
+                                the catchment area of Loch na Lochain (m3)
+                            </p>
 
-                                    <p className="sm-type-bigamp mb-4">(Catchment area (m2) x 5 Year Average Annual Rainfall (m)) = 7,507,608m3</p>
-
+                            <p className="sm-type-bigamp mb-4">
+                                (Catchment area (m2) x 5 Year Average Annual
+                                Rainfall (m)) = 7,507,608m3
+                            </p>
 
                             <p className="sm-type-bigamp mb-4">
                                 Some water will be lost by evaporation and
@@ -277,29 +287,44 @@ const InfoMicroHydro = () => {
                             </p>
 
                             <p className="sm-type-bigamp sm-type-bigamp--medium mb-4">
-                                We can now calculate the flow rate (Q) through our turbine (m3/s) – to do this we need to work out how many seconds there are in a year and divide that number into your average annual volume of rain:
+                                We can now calculate the flow rate (Q) through
+                                our turbine (m3/s) – to do this we need to work
+                                out how many seconds there are in a year and
+                                divide that number into your average annual
+                                volume of rain:
                             </p>
                             <p className="sm-type-bigamp mb-4">
-                                Seconds in a year: 365 days x 24 hours x 60 minutes x 60 seconds = 31,536,000s
+                                Seconds in a year: 365 days x 24 hours x 60
+                                minutes x 60 seconds = 31,536,000s
                             </p>
 
                             <p className="sm-type-bigamp mb-4">
                                 Q = 7,507,608/31,536,000 = 0.238m3/s
                             </p>
 
-                            <p className="sm-type-bigamp mb-4">We now have enough information to calculate the size of turbine (Power) and would be suitable for this site:</p>
-
-                            <p className="sm-type-lead mb-4">
-                                <span className="sm-type-amp--medium">P</span> (kW) = 7 x <span className="sm-type-amp--medium">Q</span> (m3/s) x <span className="sm-type-amp--medium">H</span> (m)
-
+                            <p className="sm-type-bigamp mb-4">
+                                We now have enough information to calculate the
+                                size of turbine (Power) and would be suitable
+                                for this site:
                             </p>
 
                             <p className="sm-type-lead mb-4">
-                                <span className="sm-type-amp--medium">P</span> = 7 x 0.238 x 150
+                                <span className="sm-type-amp--medium">P</span>{' '}
+                                (kW) = 7 x{' '}
+                                <span className="sm-type-amp--medium">Q</span>{' '}
+                                (m3/s) x{' '}
+                                <span className="sm-type-amp--medium">H</span>{' '}
+                                (m)
                             </p>
 
                             <p className="sm-type-lead mb-4">
-                                <span className="sm-type-amp--medium">P</span> = 249.9kW
+                                <span className="sm-type-amp--medium">P</span> =
+                                7 x 0.238 x 150
+                            </p>
+
+                            <p className="sm-type-lead mb-4">
+                                <span className="sm-type-amp--medium">P</span> =
+                                249.9kW
                             </p>
 
                             <p className="sm-type-bigamp mb-4">

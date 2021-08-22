@@ -5,8 +5,12 @@ import { ApolloError } from '@apollo/client'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-import { CheckList } from '../../../../components/common/Checklist'
+import { CheckList } from '../../../../components/student/Checklist'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import {
+    TaskPanel,
+    TaskContainer,
+} from '../../../../components/common/stages/TaskPanel'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 
@@ -16,7 +20,6 @@ import {
     StageQueryVariables,
 } from '../../../../gql/types/StageQuery'
 
-import TickSheet from '../../../../assets/tick-sheet.svg'
 import Video from '../../../../assets/the-quest-intro.mp4'
 
 import '../../../../scss/index.scss'
@@ -54,9 +57,8 @@ const Stage1LandingPage: FC = () => {
             />
         )
 
-    // const { title: stageTitle } = pageData.stage_by_pk
-    const { stageTitle, stageIntro, taskInfo, taskLinks, checklist } =
-        pageData.content.stageLandings[0]
+    const { stageTitle, stageIntro, tasksToComplete, checklist } =
+        pageData.content.stageLandingPages[0]
 
     return (
         <>
@@ -105,34 +107,17 @@ const Stage1LandingPage: FC = () => {
                                     <source src={Video} type="video/mp4" />
                                 </video>
                             </div>
-                            <div className="side-grey">
-                                <h4 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h4>
 
-                                <p className="sm-type-bigamp mb-2">
-                                    {taskInfo}
-                                </p>
-
-                                <div className="form-holder-border">
-                                    <ul>
-                                        <li className="sm-type-guitar">
-                                            <Link to="/student/stage-1/task">
-                                                Click here to answer a series of
-                                                questions
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <TaskPanel>
+                                <TaskContainer
+                                    taskToComplete={tasksToComplete[0]}
+                                    taskLinkUrl="/student/stage-1/task"
+                                />
+                            </TaskPanel>
                         </div>
+
                         <div className="col-lg-3">
-                            <CheckList items={checklist} />
+                            <CheckList items={checklist.item} />
                         </div>
                     </div>
                     <Link to="/student/team-hub">Back to Team Hub</Link>

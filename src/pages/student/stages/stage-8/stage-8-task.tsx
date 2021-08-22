@@ -3,7 +3,7 @@ import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
 import { TextEditor } from '../../../../components/common/TextEditor'
-import { CheckList } from '../../../../components/common/Checklist'
+import { CheckList } from '../../../../components/student/Checklist'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { UserStateContext } from '../../../../utils/user-state'

@@ -7,7 +7,7 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { TextEditor } from '../../../../components/common/TextEditor'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
-import { CheckList } from '../../../../components/common/Checklist'
+import { CheckList } from '../../../../components/student/Checklist'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 
 import { useWorkState, ActionType } from '../../../../utils/input-utils'

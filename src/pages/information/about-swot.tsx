@@ -6,7 +6,7 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
-import { Helpful } from '../../components/common/Helpful'
+import { Helpful } from '../../components/student/Helpful'
 
 import '../../scss/index.scss'
 

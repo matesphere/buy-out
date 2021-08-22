@@ -36,6 +36,9 @@ export const Error: FC<{ error: ApolloError }> = ({ error }) => {
                 <p className="sm-type-lead small-questies-holder">
                     Error! {error.message}
                 </p>
+                <p className="sm-type-lead small-questies-holder">
+                    Try refreshing the page...
+                </p>
             </div>
         </>
     )
