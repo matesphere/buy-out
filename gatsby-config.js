@@ -71,17 +71,14 @@ module.exports = {
             },
             __key: 'pages',
         },
-        // {
-        //     resolve: 'gatsby-source-graphql',
-        //     options: {
-        //         typeName: 'clq',
-        //         fieldName: 'data',
-        //         url: 'https://clq.beanmate.coffee/v1/graphql',
-        //         headers: {
-        //             'x-hasura-access-key': 'thisisalongrandomstring',
-        //         },
-        //     },
-        // },
+        {
+            resolve: 'gatsby-source-graphql',
+            options: {
+                typeName: 'Content',
+                fieldName: 'content',
+                url: 'https://api-eu-central-1.graphcms.com/v2/cks8zc6ay19mx01xq2yz20dgl/master',
+            },
+        },
         {
             resolve: 'gatsby-plugin-create-client-paths',
             options: {

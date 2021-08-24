@@ -14,16 +14,18 @@ import InfoShop from '../../assets/info-shop.svg'
 
 import '../../scss/index.scss'
 
-const InfoShopPostOffice = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            image1: file(relativePath: { eq: "shop-post-office.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-        }
-    `)
+const InfoShopPostOffice = ({ data }) => {
+    // const data = useStaticQuery(graphql`
+    //     query {
+    //         image1: file(relativePath: { eq: "shop-post-office.jpg" }) {
+    //             childImageSharp {
+    //                 gatsbyImageData(layout: CONSTRAINED)
+    //             }
+    //         }
+    //     }
+    // `)
+
+    console.log(data)
 
     return (
         <>
@@ -429,3 +431,22 @@ const InfoShopPostOffice = () => {
 }
 
 export default InfoShopPostOffice
+
+export const query = graphql`
+    query ShopAndPostOfficeQuery {
+        image1: file(relativePath: { eq: "shop-post-office.jpg" }) {
+            childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+            }
+        }
+        content {
+            developmentOption(where: { slug: "shop-and-post-office" }) {
+                title
+                intro
+                mainText {
+                    raw
+                }
+            }
+        }
+    }
+`
