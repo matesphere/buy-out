@@ -46,7 +46,7 @@ const InfoPlaySkate = ({ data }) => {
                                         url: '/information/development-options',
                                     },
                                 ]}
-                                currentDisplayName="Play Park/Skate Park"
+                                currentDisplayName={data.content.developmentOption.title}
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">

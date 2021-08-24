@@ -46,7 +46,7 @@ const InfoShopPostOffice = ({ data }) => {
                                         url: '/information/development-options',
                                     },
                                 ]}
-                                currentDisplayName="Shop & Post Office"
+                                currentDisplayName={data.content.developmentOption.title}
                             />
 
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">

@@ -42,7 +42,7 @@ const InfoMicroHydro = ({ data }) => {
                                         url: '/information/development-options',
                                     },
                                 ]}
-                                currentDisplayName="Micro Hydro Scheme"
+                                currentDisplayName={data.content.developmentOption.title}
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">

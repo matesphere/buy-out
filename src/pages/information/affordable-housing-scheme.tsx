@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
@@ -9,7 +9,6 @@ import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { ReadQuesty } from '../../components/student/ReadQuesty'
 import { DevOptionsChecklist } from './development-options'
 
-import HelpIcon from '../../assets/help-icon.svg'
 import InfoHouse from '../../assets/info-house.svg'
 
 import '../../scss/index.scss'
@@ -46,7 +45,7 @@ const InfoHousingPage = ({ data }) => {
                                         url: '/information/development-options',
                                     },
                                 ]}
-                                currentDisplayName="Affordable Housing Scheme"
+                                currentDisplayName={data.content.developmentOption.title}
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
