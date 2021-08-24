@@ -64,11 +64,35 @@ export const TaskInfoRenderer = ({ content }: RichTextProps) => (
     />
 )
 
+export const DevOpsRenderer = ({ content }: RichTextProps) => (
+    <RichText
+        content={content}
+        renderers={{
+            p: ({ children }) => (
+                <p className="sm-type-lead mb-2">{children}</p>
+            ),
+            h3: ({ children }) => (
+                <h3 className="sm-type-drum mt-4">{children}</h3>
+            ),
+            a: renderGatsbyLinks,
+        }}
+    />
+)
+
 export const HelpfulInfoRenderer = ({ content }: RichTextProps) => (
     <RichText
         content={content}
         renderers={{
             p: ({ children }) => <p className="sm-type-amp">{children}</p>,
+            a: renderGatsbyLinks,
+        }}
+    />
+)
+
+export const FundingOptionsRenderer = ({ content }: RichTextProps) => (
+    <RichText
+        content={content}
+        renderers={{
             a: renderGatsbyLinks,
         }}
     />

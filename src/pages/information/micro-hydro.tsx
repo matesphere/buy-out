@@ -1,37 +1,18 @@
 import React from 'react'
-import { Link, graphql, useStaticQuery } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
-
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { ReadQuesty } from '../../components/student/ReadQuesty'
-
-import HelpIcon from '../../assets/help-icon.svg'
-import Ticklr from '../../assets/tick-lr.svg'
-import Ticklr2 from '../../assets/tick-lr2.svg'
-import TickSheet from '../../assets/tick-sheet.svg'
-
 import '../../scss/index.scss'
 import InfoHydro from '../../assets/info-hydro.svg'
+import {CheckList} from "../../components/student/Checklist";
+import {DevOpsRenderer} from "../../components/student/RichTextRenderers";
+import {FundingOptions} from "../../components/student/FundingOptions";
 
-const InfoMicroHydro = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            image1: file(relativePath: { eq: "micro-hydro.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-            image2: file(relativePath: { eq: "micro-hydro-figures.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
-            }
-        }
-    `)
-
+const InfoMicroHydro = ({ data }) => {
     return (
         <>
             <Helmet>
@@ -67,16 +48,11 @@ const InfoMicroHydro = () => {
                                 <span className="page-icon">
                                     <InfoHydro />
                                 </span>
-                                Micro-hydro scheme
+                                {data.content.developmentOption.title}
                             </h2>
-
                             <ReadQuesty
-                                text="A scheme which can provide power for the
-                                community and an income from electricity
-                                sold on to the grid. It would make use of the
-                                stream coming off the hill behind the village."
+                                text={data.content.developmentOption.intro}
                             />
-
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     alt=""
@@ -86,447 +62,8 @@ const InfoMicroHydro = () => {
                                     }
                                 />
                             </div>
-
-                            <p className="sm-type-bigamp mb-4">
-                                At 150m above the village of Glenclas is a loch
-                                which is a reserve of water from an area of
-                                approximately 3 km2.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                The outflow from this loch, Loch na Lochain,
-                                comes down the hill behind the village of
-                                Glenclas, to the south, and the water passes
-                                under the road before it spills into the sea.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                A small weir and intake would be built at the
-                                outflow from Loch na Lochain and water can then
-                                be channelled to a ‘forebay’ tank by a small
-                                canal or ’leat’. The forebay acts as a settling
-                                tank, in which the water is slowed sufficiently
-                                for suspended particles to settle out. The
-                                forebay is protected by a rack of metal bars (a
-                                ’trash rack’) which filters out water-borne
-                                debris. A pressure pipe, or ‘penstock’, carries
-                                the water from the forebay directly down to the
-                                turbine, which is enclosed in the powerhouse
-                                together with the generator and control
-                                equipment. After leaving the turbine, the water
-                                is discharged into a ‘tailrace’ canal back into
-                                the watercourse.
-                            </p>
-                            <p className="sm-type-lead sm-type-lead--medium mb-2">
-                                The system therefore requires:
-                            </p>
-
-                            <p className="sm-type-bigamp mb-4">
-                                Weir
-                                <span className="ticktrbl hydro-tick">
-                                    <Ticklr />
-                                </span>
-                                Leat
-                                <span className="ticktrbl hydro-tick">
-                                    <Ticklr2 />
-                                </span>
-                                Forebay
-                                <span className="ticktrbl hydro-tick">
-                                    <Ticklr />
-                                </span>
-                                Penstock
-                                <span className="ticktrbl hydro-tick">
-                                    <Ticklr2 />
-                                </span>
-                                Powerhouse
-                                <span className="ticktrbl hydro-tick">
-                                    <Ticklr />
-                                </span>
-                                Tailrace
-                            </p>
-
-                            <p className="sm-type-bigamp sm-type-bigamp--medium mb-2">
-                                The Power of the turbine (P) depends on a number
-                                of factors:
-                            </p>
-                            <ul className="mb-4">
-                                <li className="mb-2">
-                                    The Head H (m) – the vertical fall of the
-                                    water (the higher the better), in this case
-                                    150m
-                                </li>
-                                <li className="mb-2">
-                                    The Flow Rate Q (m3/s) – the volume of water
-                                    passing through the turbine per second
-                                </li>
-                                <li className="mb-2">
-                                    The ‘water-to-wire’ efficiency – small hydro
-                                    system tend to have an efficiency of about
-                                    70%
-                                </li>
-                            </ul>
-
-                            <p className="sm-type-bigamp sm-type-bigamp--medium mb-2">
-                                These factors can be expressed in the formula:
-                            </p>
-                            <p className="sm-type-lead mb-4">
-                                <span className="sm-type-amp--medium">P</span>{' '}
-                                (kW) = 7 x{' '}
-                                <span className="sm-type-amp--medium">Q</span>{' '}
-                                (m3/s) x{' '}
-                                <span className="sm-type-amp--medium">H</span>{' '}
-                                (m)
-                            </p>
-
-                            <p className="sm-type-bigamp mb-4">
-                                We know the Head (150m) and the efficiency of a
-                                small system (70%) but we must calculate the
-                                expected flow rate. This is dependent on the
-                                volume of water passing through the system each
-                                second.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                By studying a map it is possible to estimate
-                                that the catchment area (the area of land that
-                                drains water into Loch na Lochain) is
-                                approximately 3.4km2 or 3,400,000m2. Studying
-                                the SEPA rainfall data for the nearest weather
-                                station (Killilan), gives us the following
-                                figures for annual rainfall figures over the
-                                past 5 years:
-                            </p>
-
-                            <div className="table table-pricing">
-                                <div className="heading">
-                                    <div className="cell">
-                                        <p>Year</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>Total Annual Rainfall (m)</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>
-                                            Average Annual Rainfall (2016-2020)
-                                            (m)
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>2016</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>2.0752</p>
-                                    </div>
-                                    <div className="cell cellnobottom">
-                                        <p className="sm-type-bigdrum ">2.21</p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>2017</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>2.2250</p>
-                                    </div>
-                                    <div className="cell cellnotop cellnobottom">
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>2018</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>1.9418</p>
-                                    </div>
-                                    <div className="cell cellnotop cellnobottom">
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>2019</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>2.1436</p>
-                                    </div>
-                                    <div className="cell cellnotop cellnobottom">
-                                        <p></p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>2020</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>2.6550</p>
-                                    </div>
-                                    <div className="cell cellnotop">
-                                        <p></p>
-                                    </div>
-                                </div>
-                            </div>
-                            <p className="sm-type-bigamp mb-4">
-                                Average Annual Rainfall (2016-2020) = 2.21m
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                So the Average Annual Volume of rain falling on
-                                the catchment area of Loch na Lochain (m3)
-                            </p>
-
-                            <p className="sm-type-bigamp mb-4">
-                                (Catchment area (m2) x 5 Year Average Annual
-                                Rainfall (m)) = 7,507,608m3
-                            </p>
-
-                            <p className="sm-type-bigamp mb-4">
-                                Some water will be lost by evaporation and
-                                transpiration (evaporation through plants,
-                                however, we will assume that 100% of this water
-                                flows into the loch and then through our
-                                turbine.
-                            </p>
-
-                            <p className="sm-type-bigamp sm-type-bigamp--medium mb-4">
-                                We can now calculate the flow rate (Q) through
-                                our turbine (m3/s) – to do this we need to work
-                                out how many seconds there are in a year and
-                                divide that number into your average annual
-                                volume of rain:
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                Seconds in a year: 365 days x 24 hours x 60
-                                minutes x 60 seconds = 31,536,000s
-                            </p>
-
-                            <p className="sm-type-bigamp mb-4">
-                                Q = 7,507,608/31,536,000 = 0.238m3/s
-                            </p>
-
-                            <p className="sm-type-bigamp mb-4">
-                                We now have enough information to calculate the
-                                size of turbine (Power) and would be suitable
-                                for this site:
-                            </p>
-
-                            <p className="sm-type-lead mb-4">
-                                <span className="sm-type-amp--medium">P</span>{' '}
-                                (kW) = 7 x{' '}
-                                <span className="sm-type-amp--medium">Q</span>{' '}
-                                (m3/s) x{' '}
-                                <span className="sm-type-amp--medium">H</span>{' '}
-                                (m)
-                            </p>
-
-                            <p className="sm-type-lead mb-4">
-                                <span className="sm-type-amp--medium">P</span> =
-                                7 x 0.238 x 150
-                            </p>
-
-                            <p className="sm-type-lead mb-4">
-                                <span className="sm-type-amp--medium">P</span> =
-                                249.9kW
-                            </p>
-
-                            <p className="sm-type-bigamp mb-4">
-                                It is estimated that turbines of different sizes
-                                at this site would cost the following:
-                            </p>
-
-                            <div className="table table-proposal">
-                                <div className="heading">
-                                    <div className="cell">
-                                        <p>Turbine size (kW)</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>Cost (£m)</p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>150</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>0.75</p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>200</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>0.85</p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>250</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>1.0</p>
-                                    </div>
-                                </div>
-                                <div className="roww">
-                                    <div className="cell">
-                                        <p>400</p>
-                                    </div>
-                                    <div className="cell">
-                                        <p>2.0</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <p className="sm-type-lead sm-type-lead--medium mb-4">
-                                Estimated cost for a micro-hydro scheme at
-                                Glenclas:
-                            </p>
-
-                            <p className="sm-type-bigamp mb-4">
-                                The cost of insurance for a scheme like this,
-                                which includes public liability and mechanical
-                                breakdown, would cost £10,000/year.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                The maintenance costs for a system like this are
-                                very low and would be about £1000/year.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                The average house in the UK uses about
-                                5000kWh/year (that is equivalent to 5000 hours
-                                of 1kW of electricity, or 2500 hours of 2kW of
-                                electricity).
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                Our micro-hydro scheme will produce 250kW of
-                                energy for every hour of a year. There are 24 x
-                                365 = 2,190,000kWh, however, this is reduced by
-                                about 50% through efficiency losses, hence a
-                                figure of 1,095,000kWh is to be expected.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                The number of houses that could be powered by
-                                the system = 1095000/5000 = 219 houses.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                However, the power produced will be very
-                                consistent and will not be able to take account
-                                of high demand times (morning) or low demand
-                                times (night) and so the houses will still be
-                                connected to the Grid and will take some power
-                                from there, during high demand. Also, the scheme
-                                will sell to the grid at low demand times.
-                                Unfortunately, the Grid buys electricity at a
-                                much lower level than it sells it.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                It can be assumed that the whole village would
-                                be powered by the scheme, even though, they
-                                would have to buy from the Grid at high demand
-                                times. The villagers would pay for their
-                                electricity from the scheme but could be charged
-                                only 5p per unit rather than 17.5p per unit from
-                                one of the large energy companies from the grid.
-                                These payments would cover the running costs of
-                                the hydro scheme, as well as repayments to the
-                                bank.
-                            </p>
-
-                            <div className="mt-4 mb-2 image-holder">
-                                <a
-                                    target="_blank"
-                                    href="/static/e546e23c9bfc64e4b2736e8cd188628a/c580c/micro-hydro-figures.jpg"
-                                >
-                                    <GatsbyImage
-                                        alt=""
-                                        image={
-                                            data.image2.childImageSharp
-                                                .gatsbyImageData
-                                        }
-                                    />
-                                </a>
-                            </div>
-
-                            <p className="sm-type-bigamp mb-4">
-                                <a
-                                    target="_blank"
-                                    href="/static/e546e23c9bfc64e4b2736e8cd188628a/c580c/micro-hydro-figures.jpg"
-                                >
-                                    View larger figures image.
-                                </a>
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                If, however, the electricity purchased from the
-                                scheme by the homeowners was charged at 10p per
-                                unit (still at 57% the cost of electricity
-                                purchased from the Grid), then the Running
-                                Balance falls much more quickly and there would
-                                be funds available for Community projects.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                Another option would be to raise funds for the
-                                construction of the scheme through a Community
-                                Share Option, inviting all those who would
-                                benefit from cheaper electricity to purchase
-                                share in the scheme. This could reduce the bank
-                                loan by 25% to 50%, depending on the success of
-                                the Share Option.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                Yet another option would be to find funding from
-                                other sources to reduce the bank loan further.
-                            </p>
-                            <p className="sm-type-bigamp mb-4">
-                                There is a row in both tables for Community
-                                Projects – this has been left blank as there
-                                will only be money for these projects once the
-                                Running Balance is positive (it would then be
-                                shown in green).
-                            </p>
-
-                            <div className="side-grey">
-                                <p className="sm-type-guitar sm-type-guitar--medium">
-                                    <span className="side-icon side-icon-orange">
-                                        <HelpIcon />
-                                    </span>
-                                    Funding Options links
-                                </p>
-                                <ul>
-                                    <li>
-                                        <p className="sm-type-bigamp">
-                                            <a
-                                                href="https://www.communityenergyscotland.org.uk/community-support/"
-                                                target="_blank"
-                                                rel="external"
-                                            >
-                                                Community Energy Scotland
-                                            </a>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p className="sm-type-bigamp">
-                                            <a
-                                                href="https://www.localenergy.scot/funding/"
-                                                target="_blank"
-                                                rel="external"
-                                            >
-                                                Community and Renewable Energy
-                                                Scheme (CARES)
-                                            </a>
-                                        </p>
-                                    </li>
-                                    <li>
-                                        <p className="sm-type-bigamp">
-                                            <a
-                                                href="https://www.keepscotlandbeautiful.org/ccaf"
-                                                target="_blank"
-                                                rel="external"
-                                            >
-                                                Community Climate Asset Fund
-                                            </a>
-                                        </p>
-                                    </li>
-                                </ul>
-                            </div>
-
+                            <DevOpsRenderer content={data.content.developmentOption.mainText.raw} />
+                            <FundingOptions content={data.content.developmentOption.fundingOptions.raw} />
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
                                     Back to the options
@@ -534,28 +71,9 @@ const InfoMicroHydro = () => {
                             </p>
                         </div>
                         <div className="col-lg-4">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-green">
-                                    <TickSheet />
-                                </span>
-                                Your checklist
-                            </p>
-                            <div className="side-grey">
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        Read the information for the Micro-hydro
-                                        Scheme.
-                                    </p>
-                                </div>
-                                <div className="checklist">
-                                    <div className="tick"></div>
-                                    <p className="sm-type-lead">
-                                        Make a note of the Funding Options,
-                                        following the links if necessary.
-                                    </p>
-                                </div>
-                            </div>
+                            {data.content.developmentOption.checklist &&
+                            <CheckList items={data.content.developmentOption.checklist.item} />
+                            }
                         </div>
                     </div>
                 </section>
@@ -567,3 +85,28 @@ const InfoMicroHydro = () => {
 }
 
 export default InfoMicroHydro
+
+export const query = graphql`
+    query MicroHydroQuery {
+        image1: file(relativePath: { eq: "micro-hydro.jpg" }) {
+            childImageSharp {
+                gatsbyImageData(layout: CONSTRAINED)
+            }
+        }
+        content {
+            developmentOption(where: { slug: "micro-hydro" }) {
+                title
+                intro
+                mainText {
+                    raw
+                }
+                checklist {
+                    item
+                }
+                fundingOptions {
+                  raw
+                }
+            }
+        }
+    }
+`
