@@ -1,26 +1,16 @@
 import React from 'react'
 import { Helmet } from 'react-helmet'
-import Slider from 'react-slick'
-
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
-import { CheckList } from '../../components/student/Checklist'
-import { Helpful } from '../../components/student/Helpful'
-
-import { slickSettings } from '../../utils/slicksettings'
-
 import '../../scss/index.scss'
+import { graphql } from 'gatsby'
+import { Helpful } from '../../components/student/Helpful'
+import { CheckList } from '../../components/student/Checklist'
+import { SliderM} from '../../components/student/Slider'
+import { IntroInfo } from '../../components/student/IntroInfo'
 
-import {
-    stage2CheckListEng,
-    stage2HelpfulEng,
-    stage2DataTitleEng,
-    stage2DataSubTitleEng,
-    stage2DataTextEng,
-} from './_roles.data'
-
-const Stage2TaskPage = () => {
+const Stage2TaskPage = ({ data }) => {
     return (
         <>
             <Helmet>
@@ -28,7 +18,7 @@ const Stage2TaskPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Information - About the roles</title>
+                <title>Information - {data.content.info.title}</title>
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Information" />
@@ -48,120 +38,15 @@ const Stage2TaskPage = () => {
                                 ]}
                                 currentDisplayName="About the Roles"
                             />
-
-                            {stage2DataTitleEng.map((text, i) => (
-                                <h2
-                                    key={i}
-                                    className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4"
-                                >
-                                    {text}
-                                </h2>
-                            ))}
-
-                            {stage2DataSubTitleEng.map((text, i) => (
-                                <p key={i} className="sm-type-guitar mb-4">
-                                    {text}
-                                </p>
-                            ))}
-
-                            {stage2DataTextEng.map((text, i) => (
-                                <p key={i} className="sm-type-lead mb-4">
-                                    {text}
-                                </p>
-                            ))}
-
-                            <Slider {...slickSettings}>
-                                <div className="side-grey">
-                                    <div className="react-tabs--information--inner">
-                                        <h2 className="sm-type-guitar mb-2">
-                                            Chair
-                                        </h2>
-                                        <p className="sm-type-lead mb-2">
-                                            To chair the Board meetings, keep
-                                            the members ‘on track’, ensuring
-                                            that all members are involved in the
-                                            tasks and in the decision making.
-                                        </p>
-                                        <p className="sm-type-lead mb-2">
-                                            To have the ’casting vote’ over any
-                                            decisions.
-                                        </p>
-                                        <p className="sm-type-lead mb-2">
-                                            To lead the long- and short-listing
-                                            of the Development Options.
-                                        </p>
-                                        <p className="sm-type-lead mb-2">
-                                            To lead the feedback presentation to
-                                            the Community.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="side-grey">
-                                    <div className="react-tabs--information--inner">
-                                        <h2 className="sm-type-guitar mb-2">
-                                            Vice-chair
-                                        </h2>
-                                        <p className="sm-type-lead mb-2">
-                                            To deputise for the Chair, as
-                                            necessary.
-                                        </p>
-                                        <p className="sm-type-lead mb-2">
-                                            To oversee the choice of the Group
-                                            name and the design of the logo.
-                                        </p>
-                                        <p className="sm-type-lead mb-2">
-                                            To lead the SWOT analysis.
-                                        </p>
-                                        <p className="sm-type-lead mb-24">
-                                            To assist the Chair in the
-                                            presentation to the Community.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="side-grey">
-                                    <div className="react-tabs--information--inner">
-                                        <h2 className="sm-type-guitar mb-2">
-                                            Secretary
-                                        </h2>
-                                        <p className="sm-type-lead mb-2">
-                                            To enter the text and data into the
-                                            Quest forms.
-                                        </p>
-                                        <p className="sm-type-lead mb-2">
-                                            To record decisions made at
-                                            ‘meetings’.
-                                        </p>
-                                        <p className="sm-type-lead mb-2">
-                                            To lead the writing of the
-                                            Feasibility Study which will be
-                                            presented to the Community, together
-                                            with the Business Plan.
-                                        </p>
-                                    </div>
-                                </div>
-                                <div className="side-grey">
-                                    <div className="react-tabs--information--inner">
-                                        <h2 className="sm-type-guitar mb-2">
-                                            Treasurer
-                                        </h2>
-                                        <p className="sm-type-lead mb-2">
-                                            To oversee any calculations that
-                                            need to be competed.
-                                        </p>
-                                        <p className="sm-type-lead mb-2">
-                                            To build the Business Plan which
-                                            will detail costs, income and
-                                            funding streams for the purchase of
-                                            the land and for setting up and
-                                            running the Development Schemes.
-                                        </p>
-                                    </div>
-                                </div>
-                            </Slider>
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
+                                {data.content.info.title}
+                            </h2>
+                            <IntroInfo items={data.content.info.intro} />
+                            <SliderM items={data.content.info.slider} />
                         </div>
                         <div className="col-lg-3">
-                            <Helpful items={stage2HelpfulEng} />
-                            <CheckList items={stage2CheckListEng} />
+                            <Helpful content={data.content.info.helpfulInfo.info.raw} />
+                            <CheckList items={data.content.info.checklist.item} />
                         </div>
                     </div>
                 </section>
@@ -173,3 +58,27 @@ const Stage2TaskPage = () => {
 }
 
 export default Stage2TaskPage
+
+export const query = graphql`
+    query AboutRolesQuery {
+        content {
+        info(where: { slug: "about-the-roles" }) {
+          title
+          intro {
+            raw
+          }
+          slider {
+            raw
+          }
+          checklist {
+              item
+          }
+          helpfulInfo {
+            info {
+                raw
+            }
+          }
+        }
+      }
+    }
+`
