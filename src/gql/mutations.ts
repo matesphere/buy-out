@@ -148,16 +148,12 @@ export const SUBMIT_REFLECTION = gql`
 // tutor
 
 export const CREATE_QUEST_WITH_TEAMS = gql`
-    mutation InsertTeam($objects: [team_insert_input!]!) {
-        insert_team(objects: $objects) {
-            returning {
-                quest {
-                    id
-                    teams {
-                        id
-                        name
-                    }
-                }
+    mutation CreateQuestWithTeams($object: quest_insert_input!) {
+        insert_quest_one(object: $object) {
+            id
+            teams {
+                id
+                name
             }
         }
     }

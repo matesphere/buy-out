@@ -22,7 +22,10 @@ import { NewQuestContext } from '../tutor'
 
 import { CREATE_QUEST_WITH_TEAMS, START_QUEST } from '../../gql/mutations'
 import { StudentType } from '../../gql/types'
-import { InsertTeam, InsertTeamVariables } from '../../gql/types/InsertTeam'
+import {
+    CreateQuestWithTeams,
+    CreateQuestWithTeamsVariables,
+} from '../../gql/types/CreateQuestWithTeams'
 import {
     CreateTeamQuery,
     CreateTeamQueryVariables,
@@ -208,7 +211,7 @@ const ConfirmModal = ({
     schoolId,
 }: ConfirmModalProps) => {
     const [createQuestWithTeams, createQuestWithTeamsResponse] =
-        useAuthMutation<InsertTeam, InsertTeamVariables>(
+        useAuthMutation<CreateQuestWithTeams, CreateQuestWithTeamsVariables>(
             CREATE_QUEST_WITH_TEAMS
         )
     const [startQuest, startQuestResponse] = useAuthMutation(START_QUEST)
@@ -258,17 +261,16 @@ const ConfirmModal = ({
                                         onClick={() => {
                                             createQuestWithTeams({
                                                 variables: {
-                                                    objects: teams.map(
-                                                        ({ name }) => ({
-                                                            name,
-                                                            quest: {
-                                                                data: {
-                                                                    tutor_id:
-                                                                        tutorId,
-                                                                },
-                                                            },
-                                                        })
-                                                    ),
+                                                    object: {
+                                                        tutor_id: tutorId,
+                                                        teams: {
+                                                            data: teams.map(
+                                                                ({ name }) => ({
+                                                                    name,
+                                                                })
+                                                            ),
+                                                        },
+                                                    },
                                                 },
                                             })
                                         }}
@@ -285,15 +287,14 @@ const ConfirmModal = ({
                         {createQuestWithTeamsResponse.data && (
                             <div>
                                 <p className="sm-type-guitar sm-type-guitar--medium">
-                                    {`Created ${createQuestWithTeamsResponse.data.insert_team?.returning[0].quest.teams.length} teams!`}{' '}
+                                    {`Created ${createQuestWithTeamsResponse.data.insert_quest_one.teams.length} teams!`}{' '}
                                 </p>
 
                                 <CreateStudentsSection
                                     teamsWithStudents={teams}
                                     teamsFromResponse={
                                         createQuestWithTeamsResponse.data
-                                            .insert_team?.returning[0].quest
-                                            .teams
+                                            .insert_quest_one.teams
                                     }
                                     cognitoResponse={cognitoResponse}
                                     setCognitoResponse={setCognitoResponse}
@@ -313,9 +314,8 @@ const ConfirmModal = ({
                                                         quest_id:
                                                             createQuestWithTeamsResponse
                                                                 .data
-                                                                .insert_team
-                                                                .returning[0]
-                                                                .quest.id,
+                                                                .insert_quest_one
+                                                                .id,
                                                     },
                                                 })
                                                 setShowModal(false)
