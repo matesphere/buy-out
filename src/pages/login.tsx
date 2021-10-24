@@ -44,6 +44,17 @@ const LOGGED_IN_QUERY = gql`
     }
 `
 
+const AdminLinks = () => (
+    <>
+        <Link to="/tutor/hub" className="btn-solid-reg">
+            Go to your Tutor Hub
+        </Link>
+        <Link to="/student/team-hub" className="btn-solid-reg">
+            View Quest as student
+        </Link>
+    </>
+)
+
 const TutorLink = () => (
     <Link to="/tutor/hub" className="btn-solid-reg">
         Go to Tutor Hub
@@ -63,6 +74,10 @@ const NewStudentLink = () => (
 )
 
 const getLink = (role: string, teamHasLoggedIn: boolean) => {
+    if (role === 'admin') {
+        return <AdminLinks />
+    }
+
     if (role === 'tutor') {
         return <TutorLink />
     }
