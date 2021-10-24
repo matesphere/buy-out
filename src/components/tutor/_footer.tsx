@@ -10,17 +10,13 @@ const TutorFooter = () => (
         <section className="container">
             <div className="row">
                 <div className="col-lg-4 mt-1">
-                    <ul>
-                        <li>
-                            <Link to="/tutor/hub/">Tutor Hub</Link>
-                        </li>
-                        {/* <li>
-                                <button onClick={() => resetDB()}>
-                                    Reset DB
-                                </button>
-                            </li> */}
-                        {/* {resetDBResponse.data && <span> DB reset!</span>} */}
-                    </ul>
+                    <p>
+                        <Link to="/tutor/hub/">Tutor Hub</Link>
+                        <br />
+                        <Link to="/student/team-hub/">
+                            View Quest as student
+                        </Link>
+                    </p>
                 </div>
                 <div className="col-lg-4 mt-1"></div>
                 <div className="col-lg-4 mt-1">
