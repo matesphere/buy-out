@@ -102,7 +102,7 @@ const Stage3Swot: FC<PageProps> = ({ location: { search } }) => {
                     />
                     <SWOT
                         swotTitle="Example SWOT Analysis"
-                        devOption={devOption}
+                        teamDevOption={{ development_option: devOption }}
                         swotState={swotState}
                         docSubmitted={true}
                     />
