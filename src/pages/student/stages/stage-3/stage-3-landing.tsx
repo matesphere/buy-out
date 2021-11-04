@@ -121,7 +121,9 @@ const Stage3LandingPage: FC = () => {
         (opt) =>
             devOptions
                 .map(({ development_option: { option } }) => option)
-                .includes(opt) && Object.keys(doc[opt]).length === 4
+                .includes(opt) &&
+            Object.keys(doc[opt]).filter((key) => key !== 'provided').length ===
+                4
     )
 
     const exampleSwotOptions = Object.keys(doc).filter(
