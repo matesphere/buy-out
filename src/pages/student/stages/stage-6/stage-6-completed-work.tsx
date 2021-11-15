@@ -133,7 +133,7 @@ const Stage6CompletedWorkPage: FC<PageProps> = ({ location: { search } }) => {
                                                         .option
                                                 ]
                                             }
-                                            devOption={devOption}
+                                            teamDevOption={devOption}
                                             docSubmitted={true}
                                         />
                                     </AccordionItemPanel>

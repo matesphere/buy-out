@@ -117,7 +117,8 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                                 business plan.
                             </p>
                             <h3 className="sm-type-drum sm-type-drum--medium mb-2 redorange-highlight">
-                                {teamDevOption?.team_choice_name}
+                                {teamDevOption?.team_choice_name ||
+                                    devOption?.display_name}
                             </h3>
                         </div>
                         <div className="col-lg-4">
