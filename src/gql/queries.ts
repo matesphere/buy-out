@@ -15,7 +15,7 @@ export const STAGE_QUERY = gql`
                 id
                 stage_id
                 status
-                documents {
+                documents(order_by: { id: asc }) {
                     id
                     feedback
                 }
@@ -57,6 +57,7 @@ export const DOCUMENT_QUERY = gql`
                             { status: { _eq: marked_passed } }
                         ]
                     }
+                    order_by: { id: asc }
                 ) {
                     id
                     status
@@ -95,6 +96,7 @@ export const DOCUMENT_COMPLETE_QUERY = gql`
                 status
                 documents(
                     where: { _or: [{ status: { _eq: marked_passed } }] }
+                    order_by: { id: asc }
                 ) {
                     id
                     doc_data
@@ -163,7 +165,7 @@ export const TUTOR_CURRENT_QUEST_QUERY = gql`
                             team_id
                             stage_id
                             status
-                            documents {
+                            documents(order_by: { id: asc }) {
                                 id
                                 status
                                 doc_data
@@ -220,7 +222,7 @@ export const TUTOR_PREVIOUS_QUEST_QUERY = gql`
                     team_id
                     stage_id
                     status
-                    documents {
+                    documents(order_by: { id: asc }) {
                         id
                         status
                         doc_data
@@ -268,6 +270,7 @@ export const TUTOR_DOCUMENT_QUERY = gql`
                         { status: { _eq: marked_passed } }
                     ]
                 }
+                order_by: { id: asc }
             ) {
                 id
                 status

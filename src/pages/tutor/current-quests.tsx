@@ -75,7 +75,7 @@ const TUTOR_CURRENT_QUEST_SUB = gql`
                             team_id
                             stage_id
                             status
-                            documents {
+                            documents(order_by: { id: asc }) {
                                 id
                                 status
                                 feedback

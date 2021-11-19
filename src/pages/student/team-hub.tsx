@@ -48,7 +48,7 @@ const TEAM_HUB_QUERY = gql`
                         id
                         stage_id
                         status
-                        documents {
+                        documents(order_by: { id: asc }) {
                             status
                         }
                     }
