@@ -13,9 +13,9 @@ import { slickSettings } from '../../utils/slicksettings'
 import HelpIcon from '../../assets/help-icon.svg'
 
 import '../../scss/index.scss'
-import {IntroInfo} from "../../components/student/IntroInfo";
-import {SliderM} from "../../components/student/Slider";
-import {Helpful} from "../../components/student/Helpful";
+import { InfoBlock } from '../../components/student/InfoBlock'
+import { SliderM } from '../../components/student/Slider'
+import { Helpful } from '../../components/student/Helpful'
 
 const InfoCommunityPage = ({ data }) => {
     return (
@@ -48,11 +48,13 @@ const InfoCommunityPage = ({ data }) => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {data.content.info.title}
                             </h2>
-                            <IntroInfo items={data.content.info.intro} />
+                            <InfoBlock items={data.content.info.infoBlock} />
                             <SliderM items={data.content.info.slider} />
                         </div>
                         <div className="col-lg-3">
-                            <Helpful content={data.content.info.helpfulInfo.info.raw} />
+                            <Helpful
+                                content={data.content.info.helpfulInfo.info.raw}
+                            />
                         </div>
                     </div>
                 </section>
@@ -68,20 +70,20 @@ export default InfoCommunityPage
 export const query = graphql`
     query AboutCommunityQuery {
         content {
-        info(where: { slug: "community" }) {
-          title
-          intro {
-            raw
-          }
-          slider {
-            raw
-          }
-          helpfulInfo {
-            info {
-                raw
+            info(where: { slug: "community" }) {
+                title
+                infoBlock {
+                    raw
+                }
+                slider {
+                    raw
+                }
+                helpfulInfo {
+                    info {
+                        raw
+                    }
+                }
             }
-          }
         }
-      }
     }
 `

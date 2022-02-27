@@ -5,7 +5,7 @@ import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import '../../scss/index.scss'
-import { IntroInfo } from '../../components/student/IntroInfo'
+import { InfoBlock } from '../../components/student/InfoBlock'
 import { SliderM } from '../../components/student/Slider'
 import { Helpful } from '../../components/student/Helpful'
 import { CheckList } from '../../components/student/Checklist'
@@ -41,11 +41,13 @@ const AboutGlenclasAreaPage = ({ data }) => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {data.content.info.title}
                             </h2>
-                            <IntroInfo items={data.content.info.intro} />
+                            <InfoBlock items={data.content.info.infoBlock} />
                             <SliderM items={data.content.info.slider} />
                         </div>
                         <div className="col-lg-3">
-                            <Helpful content={data.content.info.helpfulInfo.info.raw} />
+                            <Helpful
+                                content={data.content.info.helpfulInfo.info.raw}
+                            />
                         </div>
                     </div>
                 </section>
@@ -61,20 +63,20 @@ export default AboutGlenclasAreaPage
 export const query = graphql`
     query AboutAreaQuery {
         content {
-        info(where: { slug: "about-glenclas-area" }) {
-          title
-          intro {
-            raw
-          }
-          slider {
-            raw
-          }
-          helpfulInfo {
-            info {
-                raw
+            info(where: { slug: "about-glenclas-area" }) {
+                title
+                infoBlock {
+                    raw
+                }
+                slider {
+                    raw
+                }
+                helpfulInfo {
+                    info {
+                        raw
+                    }
+                }
             }
-          }
         }
-      }
     }
 `

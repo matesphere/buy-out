@@ -1,11 +1,11 @@
 import React from 'react'
-import { DevOpsRenderer } from '../../components/student/RichTextRenderers'
+import { DevOpsRenderer } from './RichTextRenderers'
 
 interface SliderProps {
     items: Array<string>
 }
 
-export const IntroInfo = ({ items }: SliderProps) => (
+export const InfoBlock = ({ items }: SliderProps) => (
     <>
         {items.map((item, i) => (
             <p className="sm-type-guitar mb-4" key={i}>

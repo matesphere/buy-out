@@ -7,8 +7,8 @@ import '../../scss/index.scss'
 import { graphql } from 'gatsby'
 import { Helpful } from '../../components/student/Helpful'
 import { CheckList } from '../../components/student/Checklist'
-import { SliderM} from '../../components/student/Slider'
-import { IntroInfo } from '../../components/student/IntroInfo'
+import { SliderM } from '../../components/student/Slider'
+import { InfoBlock } from '../../components/student/InfoBlock'
 
 const Stage2TaskPage = ({ data }) => {
     return (
@@ -41,12 +41,16 @@ const Stage2TaskPage = ({ data }) => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {data.content.info.title}
                             </h2>
-                            <IntroInfo items={data.content.info.intro} />
+                            <InfoBlock items={data.content.info.infoBlock} />
                             <SliderM items={data.content.info.slider} />
                         </div>
                         <div className="col-lg-3">
-                            <Helpful content={data.content.info.helpfulInfo.info.raw} />
-                            <CheckList items={data.content.info.checklist.item} />
+                            <Helpful
+                                content={data.content.info.helpfulInfo.info.raw}
+                            />
+                            <CheckList
+                                items={data.content.info.checklist.item}
+                            />
                         </div>
                     </div>
                 </section>
@@ -62,23 +66,23 @@ export default Stage2TaskPage
 export const query = graphql`
     query AboutRolesQuery {
         content {
-        info(where: { slug: "about-the-roles" }) {
-          title
-          intro {
-            raw
-          }
-          slider {
-            raw
-          }
-          checklist {
-              item
-          }
-          helpfulInfo {
-            info {
-                raw
+            info(where: { slug: "about-the-roles" }) {
+                title
+                infoBlock {
+                    raw
+                }
+                slider {
+                    raw
+                }
+                checklist {
+                    item
+                }
+                helpfulInfo {
+                    info {
+                        raw
+                    }
+                }
             }
-          }
         }
-      }
     }
 `
