@@ -5,9 +5,9 @@ import { GatsbyImage } from 'gatsby-plugin-image'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
+import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { Intro } from '../../components/student/Intro'
 import { InfoBlock } from '../../components/student/InfoBlock'
-import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { Helpful } from '../../components/student/Helpful'
 
 // import { AboutSWOTQuery } from '../../gql/types/'

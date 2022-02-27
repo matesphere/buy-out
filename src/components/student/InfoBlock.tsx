@@ -17,6 +17,9 @@ export const InfoBlock = ({ items }: SliderProps) => (
                     p: ({ children }) => (
                         <p className="sm-type-lead mb-4">{children}</p>
                     ),
+                    h3: ({ children }) => (
+                        <h3 className="sm-type-drum mt-4">{children}</h3>
+                    ),
                 }}
             />
         ))}
