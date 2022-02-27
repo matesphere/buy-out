@@ -5,7 +5,7 @@ import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import '../../scss/index.scss'
-import { InfoBlock } from '../../components/student/InfoBlock'
+import { Intro } from '../../components/student/Intro'
 import { SliderM } from '../../components/student/Slider'
 import { Helpful } from '../../components/student/Helpful'
 import { CheckList } from '../../components/student/Checklist'
@@ -41,7 +41,7 @@ const AboutGlenclasAreaPage = ({ data }) => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {data.content.info.title}
                             </h2>
-                            <InfoBlock items={data.content.info.infoBlock} />
+                            <Intro item={data.content.info.intro} />
                             <SliderM items={data.content.info.slider} />
                         </div>
                         <div className="col-lg-3">
@@ -65,7 +65,7 @@ export const query = graphql`
         content {
             info(where: { slug: "about-glenclas-area" }) {
                 title
-                infoBlock {
+                intro {
                     raw
                 }
                 slider {

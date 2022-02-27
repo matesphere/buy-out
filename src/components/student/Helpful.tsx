@@ -6,7 +6,7 @@ import { RichTextContent } from '@graphcms/rich-text-react-renderer/node_modules
 import HelpIcon from '../../assets/help-icon.svg'
 
 interface HelpfulProps {
-    content: RichTextContent
+    content: { raw: RichTextContent }
 }
 
 export const Helpful = ({ content }: HelpfulProps) => (
@@ -18,7 +18,7 @@ export const Helpful = ({ content }: HelpfulProps) => (
             Helpful information
         </p>
         <div className="side-grey">
-            <HelpfulInfoRenderer content={content} />
+            <HelpfulInfoRenderer content={content.raw} />
         </div>
     </>
 )
