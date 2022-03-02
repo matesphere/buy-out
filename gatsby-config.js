@@ -80,6 +80,15 @@ module.exports = {
             },
         },
         {
+            resolve: 'gatsby-source-graphcms',
+            options: {
+                endpoint:
+                    'https://api-eu-central-1.graphcms.com/v2/cks8zc6ay19mx01xq2yz20dgl/master',
+                locales: ['en', 'gd'],
+                fragmentsPath: 'src/gql/graphcms-fragments',
+            },
+        },
+        {
             resolve: 'gatsby-plugin-create-client-paths',
             options: {
                 prefixes: ['/student/*', '/tutor/*'],
