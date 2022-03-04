@@ -15,7 +15,7 @@ export const Helpful = ({ content }: HelpfulProps) => (
             <span className="side-icon side-icon-orange">
                 <HelpIcon />
             </span>
-            Helpful information
+            Helpful Information
         </p>
         <div className="side-grey">
             <HelpfulInfoRenderer content={content.raw} />

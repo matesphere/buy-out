@@ -12,7 +12,7 @@ export const CheckList = ({ items }: ChecklistProps) => (
             <span className="side-icon side-icon-green">
                 <TickSheet />
             </span>
-            Your checklist
+            Your Checklist
         </p>
         <div className="side-grey">
             {items.map((item, i) => (
