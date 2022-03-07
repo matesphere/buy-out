@@ -12,14 +12,14 @@ import { DevOptionsChecklist } from './development-options'
 import HelpIcon from '../../assets/help-icon.svg'
 import InfoBusiness from '../../assets/info-business.svg'
 
+import InfoHydro from '../../assets/info-hydro.svg'
+import { DevOpsRenderer } from '../../components/student/RichTextRenderers'
+import { FundingOptions } from '../../components/student/FundingOptions'
+import { CheckList } from '../../components/student/Checklist'
+
 import '../../scss/index.scss'
-import InfoHydro from "../../assets/info-hydro.svg";
-import {DevOpsRenderer} from "../../components/student/RichTextRenderers";
-import {FundingOptions} from "../../components/student/FundingOptions";
-import {CheckList} from "../../components/student/Checklist";
 
 const InfoBusinessHub = ({ data }) => {
-
     return (
         <>
             <Helmet>
@@ -49,7 +49,9 @@ const InfoBusinessHub = ({ data }) => {
                                         url: '/information/development-options',
                                     },
                                 ]}
-                                currentDisplayName={data.content.developmentOption.title}
+                                currentDisplayName={
+                                    data.content.developmentOption.title
+                                }
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
@@ -69,8 +71,17 @@ const InfoBusinessHub = ({ data }) => {
                                     }
                                 />
                             </div>
-                            <DevOpsRenderer content={data.content.developmentOption.mainText.raw} />
-                            <FundingOptions content={data.content.developmentOption.fundingOptions.raw} />
+                            <DevOpsRenderer
+                                content={
+                                    data.content.developmentOption.mainText.raw
+                                }
+                            />
+                            <FundingOptions
+                                content={
+                                    data.content.developmentOption
+                                        .fundingOptions.raw
+                                }
+                            />
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
                                     Back to the options
@@ -79,9 +90,14 @@ const InfoBusinessHub = ({ data }) => {
                         </div>
 
                         <div className="col-lg-4">
-                            {data.content.developmentOption.checklist &&
-                            <CheckList items={data.content.developmentOption.checklist.item} />
-                            }
+                            {data.content.developmentOption.checklist && (
+                                <CheckList
+                                    items={
+                                        data.content.developmentOption.checklist
+                                            .item
+                                    }
+                                />
+                            )}
                         </div>
                     </div>
                 </section>
@@ -112,7 +128,7 @@ export const query = graphql`
                     item
                 }
                 fundingOptions {
-                  raw
+                    raw
                 }
             }
         }

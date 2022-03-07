@@ -26,78 +26,76 @@ const InfoHousingPage = ({
             informationMainImage,
         },
     },
-}) => {
-    return (
-        <>
-            <Helmet>
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                />
-                <title>Affordable Housing Scheme</title>
-            </Helmet>
-            <main className="the-quest">
-                <Header headerText="Information" />
+}) => (
+    <>
+        <Helmet>
+            <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
+            />
+            <title>Affordable Housing Scheme</title>
+        </Helmet>
+        <main className="the-quest">
+            <Header headerText="Development Options" />
 
-                <section className="container" id="main">
-                    <div className="row">
-                        <div className="col-lg-8">
-                            <Breadcrumbs
-                                previous={[
-                                    {
-                                        displayName: 'Team Hub',
-                                        url: '/student/team-hub/',
-                                    },
-                                    {
-                                        displayName: 'Info Hub',
-                                        url: '/student/information',
-                                    },
-                                    {
-                                        displayName: 'Development Options',
-                                        url: '/information/development-options',
-                                    },
-                                ]}
-                                currentDisplayName={title}
+            <section className="container" id="main">
+                <div className="row">
+                    <div className="col-lg-8">
+                        <Breadcrumbs
+                            previous={[
+                                {
+                                    displayName: 'Team Hub',
+                                    url: '/student/team-hub/',
+                                },
+                                {
+                                    displayName: 'Info Hub',
+                                    url: '/student/information',
+                                },
+                                {
+                                    displayName: 'Development Options',
+                                    url: '/information/development-options',
+                                },
+                            ]}
+                            currentDisplayName={title}
+                        />
+
+                        <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
+                            <span className="page-icon">
+                                <InfoHouse />
+                            </span>
+                            {title}
+                        </h2>
+
+                        <ReadQuesty text={intro} />
+
+                        <div className="mt-4 mb-4 image-holder">
+                            <GatsbyImage
+                                alt=""
+                                image={informationMainImage.gatsbyImageData}
                             />
-
-                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                <span className="page-icon">
-                                    <InfoHouse />
-                                </span>
-                                {title}
-                            </h2>
-
-                            <ReadQuesty text={intro} />
-
-                            <div className="mt-4 mb-4 image-holder">
-                                <GatsbyImage
-                                    alt=""
-                                    image={informationMainImage.gatsbyImageData}
-                                />
-                            </div>
-
-                            <DevOpsRenderer content={mainText.raw} />
-
-                            {fundingOptions && (
-                                <FundingOptions content={fundingOptions.raw} />
-                            )}
-
-                            <p className="sm-type-bigamp mb-4">
-                                <Link to="/information/development-options">
-                                    Back to the the options
-                                </Link>
-                            </p>
                         </div>
 
-                        <DevOptionsChecklist optionName="Affordable Housing Scheme" />
-                    </div>
-                </section>
+                        <DevOpsRenderer content={mainText.raw} />
 
-                <Footer />
-            </main>
-        </>
-    )
-}
+                        {fundingOptions && (
+                            <FundingOptions content={fundingOptions.raw} />
+                        )}
+
+                        <p className="sm-type-bigamp mb-4">
+                            <Link to="/information/development-options">
+                                Back to the the options
+                            </Link>
+                        </p>
+                    </div>
+
+                    <DevOptionsChecklist optionName="Affordable Housing Scheme" />
+                </div>
+            </section>
+
+            <Footer />
+        </main>
+    </>
+)
 
 export default InfoHousingPage
 
