@@ -9,13 +9,24 @@ import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { ReadQuesty } from '../../components/student/ReadQuesty'
 import { DevOptionsChecklist } from './development-options'
 
+import { DevOpsRenderer } from '../../components/student/RichTextRenderers'
+import { FundingOptions } from '../../components/student/FundingOptions'
+
 import InfoHouse from '../../assets/info-house.svg'
-
 import '../../scss/index.scss'
-import {DevOpsRenderer} from "../../components/student/RichTextRenderers";
-import {FundingOptions} from "../../components/student/FundingOptions";
 
-const InfoHousingPage = ({ data }) => {
+const InfoHousingPage = ({
+    data: {
+        graphCmsDevelopmentOption: {
+            title,
+            intro,
+            mainText,
+            checklist,
+            fundingOptions,
+            informationMainImage,
+        },
+    },
+}) => {
     return (
         <>
             <Helmet>
@@ -27,6 +38,7 @@ const InfoHousingPage = ({ data }) => {
             </Helmet>
             <main className="the-quest">
                 <Header headerText="Information" />
+
                 <section className="container" id="main">
                     <div className="row">
                         <div className="col-lg-8">
@@ -45,30 +57,30 @@ const InfoHousingPage = ({ data }) => {
                                         url: '/information/development-options',
                                     },
                                 ]}
-                                currentDisplayName={data.content.developmentOption.title}
+                                currentDisplayName={title}
                             />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 <span className="page-icon">
                                     <InfoHouse />
                                 </span>
-                                {data.content.developmentOption.title}
+                                {title}
                             </h2>
-                            <ReadQuesty
-                                text={data.content.developmentOption.intro}
-                            />
+
+                            <ReadQuesty text={intro} />
+
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     alt=""
-                                    image={
-                                        data.image1.childImageSharp
-                                            .gatsbyImageData
-                                    }
+                                    image={informationMainImage.gatsbyImageData}
                                 />
                             </div>
-                            <DevOpsRenderer content={data.content.developmentOption.mainText.raw} />
-                            {data.content.developmentOption.fundingOptions &&
-                                <FundingOptions content={data.content.developmentOption.fundingOptions.raw}/>
-                            }
+
+                            <DevOpsRenderer content={mainText.raw} />
+
+                            {fundingOptions && (
+                                <FundingOptions content={fundingOptions.raw} />
+                            )}
 
                             <p className="sm-type-bigamp mb-4">
                                 <Link to="/information/development-options">
@@ -76,6 +88,7 @@ const InfoHousingPage = ({ data }) => {
                                 </Link>
                             </p>
                         </div>
+
                         <DevOptionsChecklist optionName="Affordable Housing Scheme" />
                     </div>
                 </section>
@@ -90,26 +103,21 @@ export default InfoHousingPage
 
 export const query = graphql`
     query AffordableHousingQuery {
-        image1: file(relativePath: { eq: "modular-house.jpg" }) {
-            childImageSharp {
-                gatsbyImageData(layout: CONSTRAINED)
+        graphCmsDevelopmentOption(slug: { eq: "affordable-housing-scheme" }) {
+            title
+            intro
+            mainText {
+                raw
             }
-        }
-        content {
-            developmentOption(where: { slug: "affordable-housing-scheme" }) {
-                title
-                intro
-                mainText {
-                    raw
-                }
-                checklist {
-                    item
-                }
-                fundingOptions {
-                  raw
-                }
+            checklist {
+                item
+            }
+            fundingOptions {
+                raw
+            }
+            informationMainImage {
+                gatsbyImageData
             }
         }
     }
 `
-

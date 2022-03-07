@@ -10,15 +10,14 @@ interface FundingProps {
 }
 
 export const FundingOptions = ({ content }: FundingProps) => (
-    <>
+    <div className="side-grey">
         <p className="sm-type-guitar mb-2">
             <span className="side-icon side-icon-orange">
                 <HelpIcon />
             </span>
             Funding Options links
         </p>
-        <div className="side-grey">
-            <FundingOptionsRenderer content={content} />
-        </div>
-    </>
+
+        <FundingOptionsRenderer content={content} />
+    </div>
 )
