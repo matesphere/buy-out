@@ -1,23 +1,21 @@
 import React from 'react'
-import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import Slider from 'react-slick'
+import { graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
-
-import { slickSettings } from '../../utils/slicksettings'
-
-import HelpIcon from '../../assets/help-icon.svg'
-
-import '../../scss/index.scss'
-import { InfoBlock } from '../../components/student/InfoBlock'
+import { Intro } from '../../components/student/Intro'
 import { SliderM } from '../../components/student/Slider'
 import { Helpful } from '../../components/student/Helpful'
 
-const InfoCommunityPage = ({ data }) => {
+import '../../scss/index.scss'
+
+const InfoCommunityPage = ({
+    data: {
+        graphCmsInfo: { title, intro, slider, helpfulInfo },
+    },
+}) => {
     return (
         <>
             <Helmet>
@@ -25,8 +23,9 @@ const InfoCommunityPage = ({ data }) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Information - {data.content.info.title}</title>
+                <title>Information - {title}</title>
             </Helmet>
+
             <main className="the-quest">
                 <Header headerText="Information" />
                 <section className="container" id="main">
@@ -43,18 +42,20 @@ const InfoCommunityPage = ({ data }) => {
                                         url: '/student/information',
                                     },
                                 ]}
-                                currentDisplayName="Community & Experts"
+                                currentDisplayName={title}
                             />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                {data.content.info.title}
+                                {title}
                             </h2>
-                            <InfoBlock items={data.content.info.infoBlock} />
-                            <SliderM items={data.content.info.slider} />
+
+                            <Intro item={intro} />
+
+                            <SliderM items={slider} />
                         </div>
+
                         <div className="col-lg-3">
-                            <Helpful
-                                content={data.content.info.helpfulInfo.info.raw}
-                            />
+                            <Helpful content={helpfulInfo.info} />
                         </div>
                     </div>
                 </section>
@@ -69,19 +70,17 @@ export default InfoCommunityPage
 
 export const query = graphql`
     query AboutCommunityQuery {
-        content {
-            info(where: { slug: "community" }) {
-                title
-                infoBlock {
+        graphCmsInfo(slug: { eq: "community" }) {
+            title
+            intro {
+                raw
+            }
+            slider {
+                raw
+            }
+            helpfulInfo {
+                info {
                     raw
-                }
-                slider {
-                    raw
-                }
-                helpfulInfo {
-                    info {
-                        raw
-                    }
                 }
             }
         }

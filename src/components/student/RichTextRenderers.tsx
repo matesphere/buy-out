@@ -74,6 +74,11 @@ export const DevOpsRenderer = ({ content }: RichTextProps) => (
             h3: ({ children }) => (
                 <h3 className="sm-type-drum mt-4">{children}</h3>
             ),
+            h4: ({ children }) => (
+                <p className="sm-type-lead sm-type-lead-medium green-highlight mb-2">
+                    {children}
+                </p>
+            ),
             a: renderGatsbyLinks,
         }}
     />
