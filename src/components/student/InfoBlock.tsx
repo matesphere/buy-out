@@ -1,5 +1,6 @@
 import React from 'react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
+import { renderGatsbyLinks } from '../../components/student/RichTextRenderers'
 
 import { RichTextContent } from '@graphcms/rich-text-react-renderer/node_modules/@graphcms/rich-text-types'
 
@@ -17,9 +18,15 @@ export const InfoBlock = ({ items }: SliderProps) => (
                     p: ({ children }) => (
                         <p className="sm-type-lead mb-4">{children}</p>
                     ),
+                    h2: ({ children }) => (
+                        <h2 className="sm-type-drum sm-type-drum--medium mt-4 mb-4">
+                            {children}
+                        </h2>
+                    ),
                     h3: ({ children }) => (
                         <h3 className="sm-type-drum mt-4">{children}</h3>
                     ),
+                    a: renderGatsbyLinks,
                 }}
             />
         ))}

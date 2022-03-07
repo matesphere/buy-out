@@ -7,7 +7,7 @@ import {
     LinkRendererProps,
 } from '@graphcms/rich-text-react-renderer/node_modules/@graphcms/rich-text-types'
 
-const renderGatsbyLinks = ({
+export const renderGatsbyLinks = ({
     children,
     openInNewTab,
     href = '#',

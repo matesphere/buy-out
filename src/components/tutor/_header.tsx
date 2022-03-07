@@ -12,9 +12,7 @@ import '../../scss/index.scss'
 
 const HEADER_TEXT: { [pathname: string]: string } = {
     '/tutor/hub': 'Tutor Hub',
-    '/tutor/hub/': 'Tutor Hub',
     '/tutor/current-quests': 'Current Quests',
-    '/tutor/current-quests/': 'Current Quests',
     '/tutor/previous-quest': 'Previous Quest',
     '/tutor/add-students': 'Add Students',
     '/tutor/create-team': 'Create Teams',
@@ -71,7 +69,12 @@ const TutorHeader = ({
                                         <PinLogo />
                                         <span>
                                             {headerText ||
-                                                HEADER_TEXT[location.pathname]}
+                                                HEADER_TEXT[
+                                                    location.pathname.replace(
+                                                        /\/+$/,
+                                                        ''
+                                                    )
+                                                ]}
                                         </span>
                                     </h1>
                                 </div>
