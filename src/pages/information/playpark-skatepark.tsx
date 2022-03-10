@@ -21,8 +21,8 @@ const InfoPlaySkate = ({
             title,
             intro,
             mainText,
-            checklist,
             fundingOptions,
+            checklist,
             informationMainImage,
         },
     },
@@ -33,8 +33,9 @@ const InfoPlaySkate = ({
                 name="viewport"
                 content="width=device-width, initial-scale=1.0"
             />
-            <title>Play park / Skate park</title>
+            <title>{title}</title>
         </Helmet>
+
         <main className="the-quest">
             <Header headerText="Development Options" />
 
@@ -104,11 +105,11 @@ export const query = graphql`
             mainText {
                 raw
             }
-            checklist {
-                item
-            }
             fundingOptions {
                 raw
+            }
+            checklist {
+                item
             }
             informationMainImage {
                 gatsbyImageData

@@ -7,10 +7,9 @@ import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { ReadQuesty } from '../../components/student/ReadQuesty'
-import { DevOptionsChecklist } from './development-options'
-
-import { DevOpsRenderer } from '../../components/student/RichTextRenderers'
+import { CheckList } from '../../components/student/Checklist'
 import { FundingOptions } from '../../components/student/FundingOptions'
+import { DevOpsRenderer } from '../../components/student/RichTextRenderers'
 
 import InfoHouse from '../../assets/info-house.svg'
 import '../../scss/index.scss'
@@ -88,7 +87,9 @@ const InfoHousingPage = ({
                         </p>
                     </div>
 
-                    <DevOptionsChecklist optionName="Affordable Housing Scheme" />
+                    <div className="col-lg-4">
+                        {checklist && <CheckList items={checklist.item} />}
+                    </div>
                 </div>
             </section>
 

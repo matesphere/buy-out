@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Link } from 'gatsby'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 
@@ -80,6 +80,32 @@ export const DevOpsRenderer = ({ content }: RichTextProps) => (
                 </p>
             ),
             a: renderGatsbyLinks,
+            table_head: ({ children }) => (
+                <thead>
+                    <tr
+                        style={{
+                            paddingTop: '12px',
+                            paddingBottom: '12px',
+                            textAlign: 'left',
+                            backgroundColor: '#5b7e20',
+                            color: 'white',
+                        }}
+                    >
+                        {children?.props.content[0].children.map(
+                            (tableHeaderCell, i) => {
+                                return (
+                                    <th key={i}>
+                                        {
+                                            tableHeaderCell.children[0]
+                                                .children[0].text
+                                        }
+                                    </th>
+                                )
+                            }
+                        )}
+                    </tr>
+                </thead>
+            ),
         }}
     />
 )
