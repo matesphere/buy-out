@@ -139,8 +139,10 @@ const Stage4LandingPage = () => {
                             </p>
                             <TaskPanel>
                                 {task1Complete ? (
-                                    <div className="form-holder-border"><p className="sm-type-lead mb-2">Part I -
-                                        Shortlist</p><p className="sm-type-lead mb-2">Use the links above to help you
+                                    <div className="form-holder-border">
+                                        <p className="sm-type-lead mb-2">Part I - Shortlist
+                                        </p>
+                                        <p className="sm-type-lead mb-2">Use the links above to help you
                                         decide which of your development options you will progress to your
                                         shortlist.</p>
                                         <ul>

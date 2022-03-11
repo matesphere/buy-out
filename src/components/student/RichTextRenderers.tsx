@@ -64,6 +64,18 @@ export const TaskInfoRenderer = ({ content }: RichTextProps) => (
     />
 )
 
+export const TaskTipsRenderer = ({ content }: RichTextProps) => (
+    <RichText
+        content={content}
+        renderers={{
+            li: ({ children }) => (
+                <li className="mb-2">{children}</li>
+            ),
+            a: renderGatsbyLinks,
+        }}
+    />
+)
+
 export const DevOpsRenderer = ({ content }: RichTextProps) => (
     <RichText
         content={content}
