@@ -2,7 +2,6 @@ import React from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
 import { gql } from '@apollo/client'
 import { ApolloError } from '@apollo/client'
 
@@ -17,10 +16,10 @@ import {
     Stage6QueryVariables,
 } from '../../../../gql/types/Stage6Query'
 
-import TickSheet from '../../../../assets/tick-sheet.svg'
-import HelpIcon from '../../../../assets/help-icon.svg'
-
 import '../../../../scss/index.scss'
+import {Intro} from "../../../../components/student/Intro";
+import {TaskContainer, TaskPanel} from "../../../../components/common/stages/TaskPanel";
+import {Helpful} from "../../../../components/student/Helpful";
 
 const STAGE_6_QUERY = gql`
     query Stage6Query($team_id: uuid!) {
@@ -37,21 +36,26 @@ const STAGE_6_QUERY = gql`
 `
 
 const Stage6Page = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            image1: file(relativePath: { eq: "present-findings.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
+    const {graphCmsStageLandingPage: {stageTitle, stageIntro, helpfulInfo, tasksToComplete}} = useStaticQuery(graphql`
+        query Stage6PageQuery {
+            graphCmsStageLandingPage(stageNumber: { eq: 6 }) {
+                stageTitle 
+                stageIntro
+                tasksToComplete {
+                  taskInfo {
+                    raw
+                  }
+                  taskLinkText
+                  title
                 }
-            }
-            image2: file(relativePath: { eq: "blue-2.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
+                helpfulInfo {
+                  info {
+                    raw
+                  }
                 }
             }
         }
     `)
-
     const {
         loading,
         error,
@@ -96,82 +100,24 @@ const Stage6Page = () => {
                                 currentDisplayName="Stage 6"
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Prepare Findings
+                                {stageTitle}
                             </h2>
-                            <div className="blue-holder-border">
-                                <div className="small-image">
-                                    <GatsbyImage
-                                        alt=""
-                                        image={
-                                            data.image2.childImageSharp
-                                                .gatsbyImageData
-                                        }
-                                    />
-                                </div>
-                                <p className="sm-type-lead small-image-holder">
-                                    Your team will present your shortlisted
-                                    development options, including the reasons
-                                    for your choices. To do this you will need
-                                    to include your SWOT, feasibility study and
-                                    business plan for each option.
-                                </p>
-                            </div>
 
-                            <div className="mt-4 mb-2 image-holder">
-                                <GatsbyImage
-                                    alt=""
-                                    image={
-                                        data.image1.childImageSharp
-                                            .gatsbyImageData
-                                    }
+                            <p>{stageIntro}</p>
+                            <Intro item={stageIntro} />
+
+                            <TaskPanel>
+                                <TaskContainer
+                                    taskToComplete={tasksToComplete[0]}
+                                    taskLinkUrl="/student/stage-7/presentation-tips"
                                 />
-                            </div>
+                                <TaskContainer
+                                    taskToComplete={tasksToComplete[1]}
+                                    taskLinkUrl="/student/stage-7/presentation-tips"
+                                />
 
-                            <p className="sm-type-lead mb-3">
-                                The aim of the presentation will be to seek the
-                                final go-ahead from the community to follow
-                                through with the land buy-out, as well as
-                                convincing your proposed funders that your
-                                projects can be successful. Your presentation
-                                will therefore need to be detailed and
-                                persuasive.
-                            </p>
-
-                            <div className="side-grey">
-                                <h4 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h4>
                                 <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-2">
-                                        Part I - Presentation Preparation Tips
-                                    </p>
-                                    <ul>
-                                        <li className="sm-type-guitar">
-                                            Use the{' '}
-                                            <Link to="/student/stage-6/presentation-tips">
-                                                tips here
-                                            </Link>{' '}
-                                            to help you with preparing your
-                                            presentation.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-3">
-                                        Part II - Your Work
-                                    </p>
-                                    <p className="sm-type-lead mb-2">
-                                        Use the links below to access your
-                                        completed work from previous stages for
-                                        each development option. You should try
-                                        to use these while creating your
-                                        presentation.
-                                    </p>
+                                    <p>Your Development Options</p>
                                     <ul>
                                         {pageData.team_by_pk?.team_development_options
                                             .filter((opt) => opt.shortlist)
@@ -199,22 +145,12 @@ const Stage6Page = () => {
                                             )}
                                     </ul>
                                 </div>
-                            </div>
+                            </TaskPanel>
+
                         </div>
 
                         <div className="col-lg-3">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Prepare your presentation using your
-                                    Feasibility Studies and SWOT analyses.
-                                </p>
-                            </div>
+                            <Helpful content={helpfulInfo.info} />
                         </div>
                     </div>
                     <Link to="/student/team-hub">Back to Team Hub</Link>
