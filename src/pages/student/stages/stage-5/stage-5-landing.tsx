@@ -2,7 +2,6 @@ import React, { Reducer, FC } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
-import { GatsbyImage } from 'gatsby-plugin-image'
 import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
@@ -12,6 +11,8 @@ import { CheckList } from '../../../../components/student/Checklist'
 import { Helpful } from '../../../../components/student/Helpful'
 import { CostOfLand } from '../../../../components/common/stages/business-plan/CostOfLand'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
+import { TaskContainer, TaskPanel } from '../../../../components/common/stages/TaskPanel'
+import { Intro } from '../../../../components/student/Intro'
 
 import { useWorkState } from '../../../../utils/input-utils'
 
@@ -155,21 +156,32 @@ export const stage5Reducer: Reducer<WorkState, Action> = (
 }
 
 const Stage5LandingPage: FC = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            image1: file(relativePath: { eq: "business-plans.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
+    const {graphCmsStageLandingPage: {stageTitle, stageIntro, helpfulInfo, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
+        query Stage5PageQuery {
+            graphCmsStageLandingPage(stageNumber: { eq: 5 }) {
+                stageTitle 
+                stageIntro
+                stageInfo {
+                    raw
                 }
-            }
-            image2: file(relativePath: { eq: "blue-2.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
+                tasksToComplete {
+                  taskInfo {
+                    raw
+                  }
+                  taskLinkText
+                  title
+                }
+                helpfulInfo {
+                  info {
+                    raw
+                  }
+                }
+                checklist {
+                    item
                 }
             }
         }
     `)
-
     const {
         loading,
         error,
@@ -193,7 +205,6 @@ const Stage5LandingPage: FC = () => {
             />
         )
 
-    const { title: stageTitle } = pageData.stage_by_pk
     const { team_development_options: devOptions } = pageData.team_by_pk
     const shortlist = devOptions.filter((opt) => opt.shortlist)
     const doc =
@@ -234,53 +245,10 @@ const Stage5LandingPage: FC = () => {
                                 {stageTitle}
                             </h2>
 
-                            <div className="blue-holder-border">
-                                <div className="small-image">
-                                    <GatsbyImage
-                                        alt=""
-                                        image={
-                                            data.image2.childImageSharp
-                                                .gatsbyImageData
-                                        }
-                                    />
-                                </div>
-                                <p className="sm-type-lead small-image-holder">
-                                    Your task for this stage is to complete a
-                                    Business Plan that will show how much money
-                                    is required to be raised to buy the land, as
-                                    well as the capital costs to get each of
-                                    your 3 options off the ground.
-                                </p>
-                            </div>
-                            <p className="sm-type-lead mb-3">
-                                You will also be required to include a list of
-                                funders who will provide funding.
-                            </p>
 
-                            <div className="mt-4 mb-2 image-holder">
-                                <GatsbyImage
-                                    alt=""
-                                    image={
-                                        data.image1.childImageSharp
-                                            .gatsbyImageData
-                                    }
-                                />
-                            </div>
-
-                            <p className="sm-type-lead mb-3">
-                                The Business Plan will also require you to show
-                                estimates of the costs and income expected over
-                                the first 4 years of operations.
-                            </p>
-                            <p className="sm-type-lead mb-3">
-                                You should be able to find most of the figures
-                                required in the{' '}
-                                <Link to="/information/development-options">
-                                    development option information
-                                </Link>
-                                , but in some cases you may need to make your
-                                own ‘best estimates’ of either costs or income!
-                            </p>
+                            <p>{stageIntro}</p>
+                            <Intro item={stageIntro} />
+                            <Intro item={stageInfo} />
 
                             <div className="side-grey">
                                 <h3 className="task ticker mb-2">
@@ -337,6 +305,21 @@ const Stage5LandingPage: FC = () => {
                                     docSubmitted={docSubmitted}
                                 />
 
+                                {!completedPlans && (
+                                    <>
+                                        <TaskPanel>
+                                            <TaskContainer
+                                                taskToComplete={tasksToComplete[0]}
+                                                taskLinkUrl="/todo"
+                                            />
+                                            <TaskContainer
+                                                taskToComplete={tasksToComplete[1]}
+                                                taskLinkUrl="/todo"
+                                            />
+                                        </TaskPanel>
+                                    </>
+                                )}
+
                                 {docFeedback && (
                                     <div className="side-grey">
                                         <h3 className="task ticker mb-2">
@@ -361,22 +344,12 @@ const Stage5LandingPage: FC = () => {
                             </div>
                         </div>
                         <div className="col-lg-3">
-                            <Helpful
-                                items={[
-                                    'Complete a Business Plan that will show how much money is required.',
-                                    'Show estimates of the costs and income expected over the first 4 years of operations.',
-                                ]}
-                            />
+                            <Helpful content={helpfulInfo.info} />
+                            <CheckList items={checklist.item} />
 
-                            <CheckList
-                                items={[
-                                    'You have calculated the Cost of Land.',
-                                    'You have completed the Business Plans that will show how much money is required.',
-                                ]}
-                            />
                         </div>
+                        <Link to="/student/team-hub">Back to Team Hub</Link>
                     </div>
-                    <Link to="/student/team-hub">Back to Team Hub</Link>
                 </section>
             </main>
         </>

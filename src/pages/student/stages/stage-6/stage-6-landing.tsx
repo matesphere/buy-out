@@ -17,9 +17,9 @@ import {
 } from '../../../../gql/types/Stage6Query'
 
 import '../../../../scss/index.scss'
-import {Intro} from "../../../../components/student/Intro";
-import {TaskContainer, TaskPanel} from "../../../../components/common/stages/TaskPanel";
-import {Helpful} from "../../../../components/student/Helpful";
+import { Intro } from "../../../../components/student/Intro";
+import { TaskContainer, TaskPanel } from "../../../../components/common/stages/TaskPanel";
+import { Helpful } from "../../../../components/student/Helpful";
 
 const STAGE_6_QUERY = gql`
     query Stage6Query($team_id: uuid!) {
