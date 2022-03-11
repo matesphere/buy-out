@@ -48,6 +48,14 @@ fragment Asset on Asset {
       stage
     }
   }
+  iconDevelopmentOption {
+    ... on DevelopmentOption {
+      remoteTypeName: __typename
+      remoteId: id
+      locale
+      stage
+    }
+  }
   scheduledIn {
     ... on ScheduledOperation {
       remoteTypeName: __typename

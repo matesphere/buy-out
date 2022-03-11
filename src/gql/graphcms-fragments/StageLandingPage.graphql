@@ -16,6 +16,15 @@ fragment StageLandingPage on StageLandingPage {
       text
     }
   }
+  slug
+  stageIntroRich {
+    ... on RichText {
+      raw
+      html
+      markdown
+      text
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename

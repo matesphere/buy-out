@@ -2,6 +2,7 @@ import React from 'react'
 import { Link, graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
+import SVG from 'react-inlinesvg'
 
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
@@ -9,10 +10,8 @@ import { Breadcrumbs } from '../../components/common/Breadcrumbs'
 import { ReadQuesty } from '../../components/student/ReadQuesty'
 import { FundingOptions } from '../../components/student/FundingOptions'
 import { CheckList } from '../../components/student/Checklist'
-
 import { DevOpsRenderer } from '../../components/student/RichTextRenderers'
 
-import InfoSkate from '../../assets/info-skate.svg'
 import '../../scss/index.scss'
 
 const InfoPlaySkate = ({
@@ -24,6 +23,7 @@ const InfoPlaySkate = ({
             fundingOptions,
             checklist,
             informationMainImage,
+            icon,
         },
     },
 }) => (
@@ -62,7 +62,11 @@ const InfoPlaySkate = ({
 
                         <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                             <span className="page-icon">
-                                <InfoSkate />
+                                <SVG
+                                    src={icon.url}
+                                    width={46}
+                                    title={`title-${icon}`}
+                                />
                             </span>
                             {title}
                         </h2>
@@ -77,13 +81,18 @@ const InfoPlaySkate = ({
                         </div>
 
                         <DevOpsRenderer content={mainText.raw} />
-                        <FundingOptions content={fundingOptions.raw} />
+
+                        {fundingOptions && (
+                            <FundingOptions content={fundingOptions.raw} />
+                        )}
+
                         <p className="sm-type-bigamp mb-4">
                             <Link to="/information/development-options">
                                 Back to the options
                             </Link>
                         </p>
                     </div>
+
                     <div className="col-lg-4">
                         {checklist && <CheckList items={checklist.item} />}
                     </div>
@@ -98,8 +107,8 @@ const InfoPlaySkate = ({
 export default InfoPlaySkate
 
 export const query = graphql`
-    query PlayParkSkateParkQuery {
-        graphCmsDevelopmentOption(slug: { eq: "playpark-skatepark" }) {
+    query DevelopmentOptionQuery($slug: String) {
+        graphCmsDevelopmentOption(slug: { eq: $slug }) {
             title
             intro
             mainText {
@@ -113,6 +122,9 @@ export const query = graphql`
             }
             informationMainImage {
                 gatsbyImageData
+            }
+            icon {
+                url
             }
         }
     }
