@@ -23,7 +23,9 @@ export const TaskContainer: FC<TaskContainerProps> = ({
 }) => (
     <div className="form-holder-border">
         {title && <p className="sm-type-lead mb-2">{title}</p>}
-        <TaskInfoRenderer content={taskInfo.raw} />
+        <ul>
+            <li><TaskInfoRenderer content={taskInfo.raw} /></li>
+        </ul>
         {taskLinkUrl && (
             <p className="sm-type-guitar">
                 <Link to={taskLinkUrl}>{taskLinkText}</Link>

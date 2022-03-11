@@ -57,7 +57,7 @@ export const TaskInfoRenderer = ({ content }: RichTextProps) => (
         content={content}
         renderers={{
             p: ({ children }) => (
-                <p className="sm-type-lead mb-2">{children}</p>
+                <p className="sm-type-guitar mb-2">{children}</p>
             ),
             a: renderGatsbyLinks,
         }}

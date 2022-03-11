@@ -1,32 +1,39 @@
-import React from 'react'
+import React, {FC} from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
 
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
-
-import HelpIcon from '../../../../assets/help-icon.svg'
-
+import {
+    TaskPanel,
+    TaskContainer,
+} from '../../../../components/common/stages/TaskPanel'
 import '../../../../scss/index.scss'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import TickSheet from '../../../../assets/tick-sheet.svg'
 
-const Stage7Page = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            image1: file(relativePath: { eq: "community-feedback.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
+import { Intro } from '../../../../components/student/Intro'
+import { Helpful } from '../../../../components/student/Helpful'
+
+const Stage7Page: FC = () => {
+    const {graphCmsStageLandingPage: {stageTitle, stageIntro, helpfulInfo, tasksToComplete}} = useStaticQuery(graphql`
+        query Stage7PageQuery {
+            graphCmsStageLandingPage(stageNumber: { eq: 7 }) {
+                stageTitle 
+                stageIntro
+                tasksToComplete {
+                  taskInfo {
+                    raw
+                  }
+                  taskLinkText
+                  title
                 }
-            }
-            image2: file(relativePath: { eq: "blue-3.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
+                helpfulInfo {
+                  info {
+                    raw
+                  }
                 }
             }
         }
     `)
-
     return (
         <>
             <Helmet>
@@ -49,88 +56,29 @@ const Stage7Page = () => {
                                 ]}
                                 currentDisplayName="Stage 7"
                             />
-                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Present Findings
-                            </h2>
-                            <div className="blue-holder-border">
-                                <div className="small-image">
-                                    <GatsbyImage
-                                        alt=""
-                                        image={
-                                            data.image2.childImageSharp
-                                                .gatsbyImageData
-                                        }
-                                    />
-                                </div>
-                                <p className="sm-type-lead small-image-holder">
-                                    Now it's time for your team to present your
-                                    findings to the community. Use the
-                                    presentation you prepared in the previous
-                                    stage and make sure you make it clear to
-                                    your audience why you have made the choices
-                                    you have!
-                                </p>
-                            </div>
-                            <div className="mt-4 mb-2 image-holder">
-                                <GatsbyImage
-                                    alt=""
-                                    image={
-                                        data.image1.childImageSharp
-                                            .gatsbyImageData
-                                    }
-                                />
-                            </div>
 
-                            <div className="side-grey">
-                                <h4 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h4>
-                                <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-2">
-                                        Part I - Presentation Tips
-                                    </p>
-                                    <ul>
-                                        <li className="sm-type-guitar">
-                                            Use the{' '}
-                                            <Link to="/student/stage-7/presentation-tips">
-                                                tips here
-                                            </Link>{' '}
-                                            to help you with giving your
-                                            presentation.
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div className="form-holder-border">
-                                    <p className="sm-type-lead mb-2">
-                                        Part II - Go For It
-                                    </p>
-                                    <ul>
-                                        <li className="sm-type-guitar">
-                                            Deliver your presentation!
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+                                {stageTitle}
+                            </h2>
+
+                            <p>{stageIntro}</p>
+                            <Intro item={stageIntro} />
+
+                            <TaskPanel>
+                                <TaskContainer
+                                    taskToComplete={tasksToComplete[0]}
+                                    taskLinkUrl="/student/stage-7/presentation-tips"
+                                />
+
+                                <TaskContainer
+                                    taskToComplete={tasksToComplete[1]}
+                                />
+                            </TaskPanel>
+
                         </div>
 
                         <div className="col-lg-3">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">
-                                    Your teacher will let you know where and
-                                    when your presentation is to take place.
-                                </p>
-                            </div>
+                            <Helpful content={helpfulInfo.info} />
                         </div>
                     </div>
                     <Link to="/student/team-hub">Back to Team Hub</Link>
