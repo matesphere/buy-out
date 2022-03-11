@@ -25,13 +25,17 @@ import {Intro} from "../../../../components/student/Intro";
 import {Helpful} from "../../../../components/student/Helpful";
 import {CheckList} from "../../../../components/student/Checklist";
 import {TaskContainer, TaskPanel} from "../../../../components/common/stages/TaskPanel";
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
 
 const Stage4LandingPage = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, helpfulInfo, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
+    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, helpfulInfo, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
         query Stage4PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 4 }) {
                 stageTitle 
                 stageIntro
+                stageIntroRich {
+                  raw
+                }
                 stageInfo {
                     raw
                 }
@@ -108,8 +112,7 @@ const Stage4LandingPage = () => {
                                 {stageTitle}
                             </h2>
 
-                            <p>{stageIntro}</p>
-                            <Intro item={stageIntro} />
+                            <ReadQuesty text={stageIntro} />
                             <Intro item={stageInfo} />
                             <p className="mb-2">
                                 Your SWOT analyses:

@@ -17,9 +17,9 @@ import {
 } from '../../../../gql/types/Stage6Query'
 
 import '../../../../scss/index.scss'
-import { Intro } from "../../../../components/student/Intro";
 import { TaskContainer, TaskPanel } from "../../../../components/common/stages/TaskPanel";
 import { Helpful } from "../../../../components/student/Helpful";
+import {ReadQuesty} from "../../../../components/student/ReadQuesty";
 
 const STAGE_6_QUERY = gql`
     query Stage6Query($team_id: uuid!) {
@@ -36,11 +36,14 @@ const STAGE_6_QUERY = gql`
 `
 
 const Stage6Page = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, helpfulInfo, tasksToComplete}} = useStaticQuery(graphql`
+    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, helpfulInfo, tasksToComplete}} = useStaticQuery(graphql`
         query Stage6PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 6 }) {
                 stageTitle 
                 stageIntro
+                stageIntroRich {
+                  raw
+                }
                 tasksToComplete {
                   taskInfo {
                     raw
@@ -103,8 +106,7 @@ const Stage6Page = () => {
                                 {stageTitle}
                             </h2>
 
-                            <p>{stageIntro}</p>
-                            <Intro item={stageIntro} />
+                            <ReadQuesty text={stageIntro} />
 
                             <TaskPanel>
                                 <TaskContainer

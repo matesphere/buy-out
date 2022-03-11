@@ -7,7 +7,7 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
-import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
+// import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import MapOptions from '../../../../pages/information/_map'
 
 import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
@@ -19,9 +19,10 @@ import HelpIcon from '../../../../assets/help-icon.svg'
 import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
-import {Intro} from '../../../../components/student/Intro'
+import { Intro } from '../../../../components/student/Intro'
 import {TaskContainer, TaskPanel} from '../../../../components/common/stages/TaskPanel'
 import { CheckList } from '../../../../components/student/Checklist'
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
 
 interface SwotLinksProps {
     devOptions: Array<DocumentCompleteQuery_team_by_pk_team_development_options>
@@ -84,11 +85,14 @@ const ExampleSwotLinks: FC<{ exampleSwots: Array<string> }> = ({
 )
 
 const Stage3LandingPage: FC = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
+    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
         query Stage3PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 3 }) {
                 stageTitle 
                 stageIntro
+                stageIntroRich {
+                  raw
+                }
                 stageInfo {
                     raw
                 }
@@ -176,9 +180,19 @@ const Stage3LandingPage: FC = () => {
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
                             </h2>
-                            <p>{stageIntro}</p>
-                            <Intro item={stageIntro} />
+                            <ReadQuesty text={stageIntro} />
                             <Intro item={stageInfo} />
+                            <p className="sm-type-guitar mb-4">
+                                <span className="side-icon side-icon-orange shake">
+                                    <HelpIcon />
+                                </span>
+                                Read the{' '}
+                                <Link to="/information/about-swot">
+                                    SWOT guide
+                                </Link>{' '}
+                                here.
+                            </p>
+
                             <MapOptions />
 
                             <TaskPanel>

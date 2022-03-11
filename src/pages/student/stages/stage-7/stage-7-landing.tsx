@@ -10,15 +10,18 @@ import {
 } from '../../../../components/common/stages/TaskPanel'
 import '../../../../scss/index.scss'
 
-import { Intro } from '../../../../components/student/Intro'
 import { Helpful } from '../../../../components/student/Helpful'
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
 
 const Stage7Page: FC = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, helpfulInfo, tasksToComplete}} = useStaticQuery(graphql`
+    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, helpfulInfo, tasksToComplete}} = useStaticQuery(graphql`
         query Stage7PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 7 }) {
                 stageTitle 
                 stageIntro
+                stageIntroRich {
+                  raw
+                }
                 tasksToComplete {
                   taskInfo {
                     raw
@@ -61,8 +64,7 @@ const Stage7Page: FC = () => {
                                 {stageTitle}
                             </h2>
 
-                            <p>{stageIntro}</p>
-                            <Intro item={stageIntro} />
+                            <ReadQuesty text={stageIntro} />
 
                             <TaskPanel>
                                 <TaskContainer

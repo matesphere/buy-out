@@ -23,6 +23,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
+import {ReadQuesty} from "../../../../components/student/ReadQuesty";
 interface FourYearCosts {
     year1: number | ''
     year2: number | ''
@@ -156,11 +157,14 @@ export const stage5Reducer: Reducer<WorkState, Action> = (
 }
 
 const Stage5LandingPage: FC = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, helpfulInfo, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
+    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, helpfulInfo, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
         query Stage5PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 5 }) {
                 stageTitle 
                 stageIntro
+                stageIntroRich {
+                  raw
+                }
                 stageInfo {
                     raw
                 }
@@ -245,9 +249,7 @@ const Stage5LandingPage: FC = () => {
                                 {stageTitle}
                             </h2>
 
-
-                            <p>{stageIntro}</p>
-                            <Intro item={stageIntro} />
+                            <ReadQuesty text={stageIntro} />
                             <Intro item={stageInfo} />
 
                             <div className="side-grey">
