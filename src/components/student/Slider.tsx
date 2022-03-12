@@ -1,8 +1,8 @@
 import React from 'react'
-
-import {slickSettings} from '../../utils/slicksettings'
 import Slider from 'react-slick'
+
 import { DevOpsRenderer } from '../../components/student/RichTextRenderers'
+import { slickSettings } from '../../utils/slicksettings'
 
 interface SliderProps {
     items: Array<string>

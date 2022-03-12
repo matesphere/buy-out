@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react'
+import React from 'react'
 import { Link } from 'gatsby'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 
@@ -68,9 +68,7 @@ export const TaskTipsRenderer = ({ content }: RichTextProps) => (
     <RichText
         content={content}
         renderers={{
-            li: ({ children }) => (
-                <li className="mb-2">{children}</li>
-            ),
+            li: ({ children }) => <li className="mb-2">{children}</li>,
             a: renderGatsbyLinks,
         }}
     />
