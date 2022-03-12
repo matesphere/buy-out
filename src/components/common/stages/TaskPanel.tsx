@@ -13,19 +13,19 @@ interface TaskContainerProps {
         taskLinkText?: string
     }
     taskLinkUrl?: string
+    disabled?: boolean
     children?: any
 }
 
 export const TaskContainer: FC<TaskContainerProps> = ({
     taskToComplete: { title, taskInfo, taskLinkText },
     taskLinkUrl,
+    disabled,
     children,
 }) => (
-    <div className="form-holder-border">
+    <div className={`form-holder-border ${disabled && 'not-available-holder'}`}>
         {title && <p className="sm-type-lead mb-2">{title}</p>}
-        <ul>
-            <li><TaskInfoRenderer content={taskInfo.raw} /></li>
-        </ul>
+        <TaskInfoRenderer content={taskInfo.raw} />
         {taskLinkUrl && (
             <p className="sm-type-guitar">
                 <Link to={taskLinkUrl}>{taskLinkText}</Link>
@@ -35,7 +35,13 @@ export const TaskContainer: FC<TaskContainerProps> = ({
     </div>
 )
 
-export const FeedbackContainer = ({ docFeedback }) => (
+interface FeedbackContainerProps {
+    docFeedback: {
+        feedback: string
+    }
+}
+
+export const FeedbackContainer = ({ docFeedback }: FeedbackContainerProps) => (
     <div className="side-grey">
         <h3 className="task ticker mb-2">
             <span className="ticker-sheet ticker-feedback">
@@ -60,7 +66,9 @@ export const FeedbackContainer = ({ docFeedback }) => (
 interface TaskPanelProps {
     children: any
     docSubmitted?: boolean
-    docFeedback?: string
+    docFeedback?: {
+        feedback: string
+    }
 }
 
 export const TaskPanel: FC<TaskPanelProps> = ({

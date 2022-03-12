@@ -25,6 +25,14 @@ fragment StageLandingPage on StageLandingPage {
       text
     }
   }
+  infoLink {
+    ... on RichText {
+      raw
+      html
+      markdown
+      text
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename

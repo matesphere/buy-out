@@ -7,22 +7,27 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
-// import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
+import { Intro } from '../../../../components/student/Intro'
 import MapOptions from '../../../../pages/information/_map'
+import { InfoLink } from '../../../../components/student/InfoLink'
+import {
+    TaskContainer,
+    TaskPanel,
+} from '../../../../components/common/stages/TaskPanel'
+import { CheckList } from '../../../../components/student/Checklist'
+import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 
 import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
 import { useWorkState } from '../../../../utils/input-utils'
 
 import { DocumentCompleteQuery_team_by_pk_team_development_options } from '../../../../gql/types/DocumentCompleteQuery'
 
-import HelpIcon from '../../../../assets/help-icon.svg'
 import Tick from '../../../../assets/tick.svg'
+import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
-import { Intro } from '../../../../components/student/Intro'
-import {TaskContainer, TaskPanel} from '../../../../components/common/stages/TaskPanel'
-import { CheckList } from '../../../../components/student/Checklist'
-import { ReadQuesty } from '../../../../components/student/ReadQuesty'
+import { Helpful } from '../../../../components/student/Helpful'
 
 interface SwotLinksProps {
     devOptions: Array<DocumentCompleteQuery_team_by_pk_team_development_options>
@@ -85,31 +90,50 @@ const ExampleSwotLinks: FC<{ exampleSwots: Array<string> }> = ({
 )
 
 const Stage3LandingPage: FC = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
+    const {
+        graphCmsStageLandingPage: {
+            stageTitle,
+            stageIntro,
+            stageInfo,
+            infoLink,
+            tasksToComplete,
+            helpfulInfo,
+            checklist,
+        },
+        graphCmsInfo: { slider },
+    } = useStaticQuery(graphql`
         query Stage3PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 3 }) {
-                stageTitle 
+                stageTitle
                 stageIntro
                 stageIntroRich {
-                  raw
+                    raw
                 }
                 stageInfo {
                     raw
                 }
-                tasksToComplete {
-                  taskInfo {
+                infoLink {
                     raw
-                  }
-                  taskLinkText
-                  title
+                }
+                tasksToComplete {
+                    taskInfo {
+                        raw
+                    }
+                    taskLinkText
+                    title
                 }
                 helpfulInfo {
-                  info {
-                    raw
-                  }
+                    info {
+                        raw
+                    }
                 }
                 checklist {
                     item
+                }
+            }
+            graphCmsInfo(slug: { eq: "development-options" }) {
+                slider {
+                    raw
                 }
             }
         }
@@ -162,8 +186,9 @@ const Stage3LandingPage: FC = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 3 - Lay The Foundations</title>
+                <title>Stage 3 - {stageTitle}</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -182,123 +207,44 @@ const Stage3LandingPage: FC = () => {
                             </h2>
                             <ReadQuesty text={stageIntro} />
                             <Intro item={stageInfo} />
-                            <p className="sm-type-guitar mb-4">
-                                <span className="side-icon side-icon-orange shake">
-                                    <HelpIcon />
-                                </span>
-                                Read the{' '}
-                                <Link to="/information/about-swot">
-                                    SWOT guide
-                                </Link>{' '}
-                                here.
-                            </p>
+                            <MapOptions iconInfoList={slider} />
+                            <InfoLink link={infoLink[0]} />
 
-                            <MapOptions />
-
-                            <TaskPanel>
+                            <TaskPanel
+                                docSubmitted={docSubmitted}
+                                docFeedback={docFeedback}
+                            >
                                 <TaskContainer
                                     taskToComplete={tasksToComplete[0]}
-                                    taskLinkUrl="/todo"
+                                    taskLinkUrl="/student/stage-3/options"
                                 />
                                 <TaskContainer
                                     taskToComplete={tasksToComplete[1]}
-                                    taskLinkUrl="/todo"
-                                />
+                                    disabled={devOptions.length === 0}
+                                >
+                                    <SwotLinks
+                                        devOptions={devOptions}
+                                        completedSwots={completedSwots}
+                                    />
+
+                                    {exampleSwotOptions.length > 0 && (
+                                        <ExampleSwotLinks
+                                            exampleSwots={exampleSwotOptions}
+                                        />
+                                    )}
+
+                                    <SaveSubmitSection
+                                        submitWorkObj={submitWorkObj}
+                                        disableSubmit={
+                                            completedSwots.length !== 5
+                                        }
+                                        docSubmitted={docSubmitted}
+                                    />
+                                </TaskContainer>
                             </TaskPanel>
-                            {/*<div className="side-grey">*/}
-                            {/*    <h3 className="task ticker mb-2">*/}
-                            {/*        <span className="ticker-sheet">*/}
-                            {/*            <TickSheet />*/}
-                            {/*        </span>*/}
-                            {/*        <span className="sm-type-drum">*/}
-                            {/*            Tasks{' '}*/}
-                            {/*            {docSubmitted*/}
-                            {/*                ? 'submitted'*/}
-                            {/*                : 'to complete:'}*/}
-                            {/*        </span>*/}
-                            {/*    </h3>*/}
-
-                            {/*    <div className="form-holder-border">*/}
-                            {/*        <p className="sm-type-lead mb-2">*/}
-                            {/*            Part I - Longlist*/}
-                            {/*        </p>*/}
-                            {/*        <p className="sm-type-lead mb-2">*/}
-                            {/*            Use the link below to find detailed*/}
-                            {/*            information for each option, and then*/}
-                            {/*            submit the 5 options your team will be*/}
-                            {/*            taking forward.*/}
-                            {/*        </p>*/}
-                            {/*        <p className="sm-type-guitar">*/}
-                            {/*            <Link to="/student/stage-3/options">*/}
-                            {/*                Read about the development options*/}
-                            {/*                and choose your 'longlist'*/}
-                            {/*            </Link>*/}
-                            {/*        </p>*/}
-                            {/*    </div>*/}
-
-                            {/*    <div*/}
-                            {/*        className={`form-holder-border ${*/}
-                            {/*            devOptions.length === 0 &&*/}
-                            {/*            'not-available-holder'*/}
-                            {/*        }`}*/}
-                            {/*    >*/}
-                            {/*        <p className="sm-type-lead mb-2">*/}
-                            {/*            Part II - SWOT*/}
-                            {/*        </p>*/}
-                            {/*        <p className="sm-type-lead mb-2">*/}
-                            {/*            Complete a SWOT analysis for each of the*/}
-                            {/*            development options you chose in Part I.*/}
-                            {/*        </p>*/}
-                            {/*        <p className="sm-type-lead mb-2">*/}
-                            {/*            Use the SWOT templates to help you*/}
-                            {/*            confirm your choices. Make sure to hit*/}
-                            {/*            'save' before returning to this screen!*/}
-                            {/*        </p>*/}
-
-                            {/*        <SwotLinks*/}
-                            {/*            devOptions={devOptions}*/}
-                            {/*            completedSwots={completedSwots}*/}
-                            {/*        />*/}
-
-                            {/*        {exampleSwotOptions.length > 0 && (*/}
-                            {/*            <ExampleSwotLinks*/}
-                            {/*                exampleSwots={exampleSwotOptions}*/}
-                            {/*            />*/}
-                            {/*        )}*/}
-
-                            {/*        <SaveSubmitSection*/}
-                            {/*            submitWorkObj={submitWorkObj}*/}
-                            {/*            disableSubmit={*/}
-                            {/*                completedSwots.length !== 5*/}
-                            {/*            }*/}
-                            {/*            docSubmitted={docSubmitted}*/}
-                            {/*        />*/}
-                            {/*    </div>*/}
-
-                            {/*    {docFeedback && (*/}
-                            {/*        <div className="side-grey">*/}
-                            {/*            <h3 className="task ticker mb-2">*/}
-                            {/*                <span className="ticker-sheet ticker-feedback">*/}
-                            {/*                    <HelpIcon />*/}
-                            {/*                </span>*/}
-                            {/*                <span className="sm-type-drum green-highlight">*/}
-                            {/*                    Tutor feedback:*/}
-                            {/*                </span>*/}
-                            {/*            </h3>*/}
-                            {/*            <div className="form-holder-border">*/}
-                            {/*                <p className="sm-type-lead">*/}
-                            {/*                    <div*/}
-                            {/*                        dangerouslySetInnerHTML={{*/}
-                            {/*                            __html: docFeedback.feedback,*/}
-                            {/*                        }}*/}
-                            {/*                    />*/}
-                            {/*                </p>*/}
-                            {/*            </div>*/}
-                            {/*        </div>*/}
-                            {/*    )}*/}
-                            {/*</div>*/}
                         </div>
                         <div className="col-lg-3">
+                            <Helpful content={helpfulInfo.info} />
                             <CheckList items={checklist.item} />
                         </div>
                     </div>

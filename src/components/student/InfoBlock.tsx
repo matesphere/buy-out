@@ -1,8 +1,8 @@
 import React from 'react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
-import { renderGatsbyLinks } from '../../components/student/RichTextRenderers'
-
 import { RichTextContent } from '@graphcms/rich-text-react-renderer/node_modules/@graphcms/rich-text-types'
+
+import { renderGatsbyLinks } from '../../components/student/RichTextRenderers'
 
 interface SliderProps {
     items: Array<{ raw: RichTextContent }>

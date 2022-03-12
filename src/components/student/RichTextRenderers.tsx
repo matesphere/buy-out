@@ -14,7 +14,8 @@ export const renderGatsbyLinks = ({
     rel,
     ...rest
 }: LinkRendererProps) => {
-    if (href.match(/^https?:\/\/|^\/\//i)) {
+    // TODO: on upgrade to Gatsby@4, check whether we can just stick target="_blank" on the <Link> component for new tabs
+    if (href.match(/^https?:\/\/|^\/\//i) || openInNewTab) {
         return (
             <a
                 href={href}
@@ -57,7 +58,7 @@ export const TaskInfoRenderer = ({ content }: RichTextProps) => (
         content={content}
         renderers={{
             p: ({ children }) => (
-                <p className="sm-type-guitar mb-2">{children}</p>
+                <p className="sm-type-lead mb-2">{children}</p>
             ),
             a: renderGatsbyLinks,
         }}
