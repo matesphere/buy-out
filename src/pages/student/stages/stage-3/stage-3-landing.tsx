@@ -16,6 +16,7 @@ import {
     TaskPanel,
 } from '../../../../components/common/stages/TaskPanel'
 import { CheckList } from '../../../../components/student/Checklist'
+import { Helpful } from '../../../../components/student/Helpful'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 
 import { stage3SwotReducer, WorkState, Action } from './stage-3-swot'
@@ -27,7 +28,6 @@ import Tick from '../../../../assets/tick.svg'
 import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
-import { Helpful } from '../../../../components/student/Helpful'
 
 interface SwotLinksProps {
     devOptions: Array<DocumentCompleteQuery_team_by_pk_team_development_options>
@@ -104,32 +104,7 @@ const Stage3LandingPage: FC = () => {
     } = useStaticQuery(graphql`
         query Stage3PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 3 }) {
-                stageTitle
-                stageIntro
-                stageIntroRich {
-                    raw
-                }
-                stageInfo {
-                    raw
-                }
-                infoLink {
-                    raw
-                }
-                tasksToComplete {
-                    taskInfo {
-                        raw
-                    }
-                    taskLinkText
-                    title
-                }
-                helpfulInfo {
-                    info {
-                        raw
-                    }
-                }
-                checklist {
-                    item
-                }
+                ...StageLandingContent
             }
             graphCmsInfo(slug: { eq: "development-options" }) {
                 slider {

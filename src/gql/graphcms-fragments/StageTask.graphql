@@ -16,6 +16,14 @@ fragment StageTask on StageTask {
       text
     }
   }
+  intro {
+    ... on RichText {
+      raw
+      html
+      markdown
+      text
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename

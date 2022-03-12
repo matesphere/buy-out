@@ -1,12 +1,19 @@
 import { gql } from '@apollo/client'
+import { graphql } from 'gatsby'
 
 // student
 
-const STAGE_LANDING_CONTENT_FRAG = gql`
-    fragment StageLandingContent on StageLandingPage {
+export const STAGE_LANDING_CONTENT_FRAG = graphql`
+    fragment StageLandingContent on GraphCMS_StageLandingPage {
         stageTitle
         stageIntro
+        stageIntroRich {
+            raw
+        }
         stageInfo {
+            raw
+        }
+        infoLink {
             raw
         }
         tasksToComplete {
@@ -16,19 +23,18 @@ const STAGE_LANDING_CONTENT_FRAG = gql`
             }
             taskLinkText
         }
-        checklist {
-            item
-        }
         helpfulInfo {
             info {
                 raw
             }
         }
+        checklist {
+            item
+        }
     }
 `
 
 export const STAGE_QUERY = gql`
-    ${STAGE_LANDING_CONTENT_FRAG}
     query StageQuery(
         $team_id: uuid!
         $stage_id: Int!
@@ -59,11 +65,6 @@ export const STAGE_QUERY = gql`
         }
         stage_by_pk(id: $stage_id) {
             title
-        }
-        content {
-            stageLandingPages(where: { stageNumber: $stage_id }) {
-                ...StageLandingContent
-            }
         }
     }
 `

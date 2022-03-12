@@ -26,6 +26,9 @@ export const InfoBlock = ({ items }: SliderProps) => (
                     h3: ({ children }) => (
                         <h3 className="sm-type-drum mt-4">{children}</h3>
                     ),
+                    h4: ({ children }) => (
+                        <p className="sm-type-guitar">{children}</p>
+                    ),
                     a: renderGatsbyLinks,
                 }}
             />

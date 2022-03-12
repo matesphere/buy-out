@@ -1,29 +1,27 @@
 import React, { Reducer } from 'react'
-import { Link } from 'gatsby'
+import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
 
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
-import { TextEditor } from '../../../../components/common/TextEditor'
-import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
-import { CheckList } from '../../../../components/student/Checklist'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import { Intro } from '../../../../components/student/Intro'
+import { TextEditor } from '../../../../components/common/TextEditor'
+import {
+    TaskPanel,
+    TaskContainer,
+} from '../../../../components/common/stages/TaskPanel'
+import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
+import { Helpful } from '../../../../components/student/Helpful'
+import { CheckList } from '../../../../components/student/Checklist'
 
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
-import { eng } from '../../../_index.data'
-
-import {
-    stage1CheckListEng,
-    stage1DataSubTitleEng,
-    stage1DataTaskInstructionsEng,
-} from './_stage1.data'
-
 import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
+import { InfoBlock } from '../../../../components/student/InfoBlock'
 
 type WorkState = {
     [key: number]: string
@@ -55,9 +53,32 @@ const stage1QuestionReducer: Reducer<WorkState, Action> = (state, action) => {
 
 const Stage1TaskPage = () => {
     const {
+        graphCmsStageTask: { title, intro, questions, helpfulInfo, checklist },
+    } = useStaticQuery(graphql`
+        query {
+            graphCmsStageTask(stageNumber: { eq: 1 }) {
+                title
+                intro {
+                    raw
+                }
+                questions {
+                    raw
+                }
+                helpfulInfo {
+                    info {
+                        raw
+                    }
+                }
+                checklist {
+                    item
+                }
+            }
+        }
+    `)
+
+    const {
         loading,
         error,
-        pageData,
         workState,
         workDispatch,
         saveWorkObj,
@@ -68,7 +89,7 @@ const Stage1TaskPage = () => {
     } = useWorkState<WorkState, Action>(1, stage1QuestionReducer)
 
     if (loading) return <Loading />
-    if (error || !pageData)
+    if (error || !workState)
         return (
             <Error
                 error={
@@ -78,8 +99,6 @@ const Stage1TaskPage = () => {
             />
         )
 
-    const { title: stageTitle } = pageData.stage_by_pk
-
     return (
         <>
             <Helmet>
@@ -87,9 +106,9 @@ const Stage1TaskPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 1 - {stageTitle} - Task</title>
-                <meta name="description" content="The description" />
+                <title>Stage 1 - {title} - Task</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -111,13 +130,10 @@ const Stage1TaskPage = () => {
                             />
 
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                {stageTitle}
+                                {title}
                             </h2>
-                            {stage1DataTaskInstructionsEng.map((text, i) => (
-                                <p key={i} className="sm-type-guitar mb-4">
-                                    {text}
-                                </p>
-                            ))}
+
+                            <Intro item={intro} />
 
                             {docFeedback && (
                                 <div className="side-grey">
@@ -140,31 +156,20 @@ const Stage1TaskPage = () => {
                                     </div>
                                 </div>
                             )}
-                            <div className="side-grey">
-                                <h3 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task{' '}
-                                        {docSubmitted
-                                            ? 'submitted'
-                                            : 'to complete:'}
-                                    </span>
-                                </h3>
-                                <div className="form-holder-border">
+
+                            <TaskPanel docSubmitted={docSubmitted}>
+                                <TaskContainer
+                                    taskToComplete={{
+                                        taskInfo: '',
+                                    }}
+                                >
                                     <h4 className="sm-type-drum sm-type-drum--medium">
                                         Questions
                                     </h4>
                                     <ol>
-                                        {eng.map((eng, i) => (
-                                            <li key={eng.text}>
-                                                <p className="sm-type-guitar">
-                                                    {eng.text}
-                                                </p>
-                                                <p className="sm-type-amp mb-4">
-                                                    {eng.description}
-                                                </p>
+                                        {questions.map((question, i) => (
+                                            <li key={i}>
+                                                <InfoBlock items={[question]} />
                                                 <div className="ck-textarea">
                                                     <TextEditor
                                                         data={
@@ -198,8 +203,8 @@ const Stage1TaskPage = () => {
                                         }
                                         docSubmitted={docSubmitted}
                                     />
-                                </div>
-                            </div>
+                                </TaskContainer>
+                            </TaskPanel>
                             <Link
                                 to={
                                     stageComplete
@@ -212,54 +217,8 @@ const Stage1TaskPage = () => {
                         </div>
 
                         <div className="col-lg-3">
-                            <p className="sm-type-guitar mb-2">
-                                <span className="side-icon side-icon-orange">
-                                    <HelpIcon />
-                                </span>
-                                Helpful information
-                            </p>
-                            <div className="side-grey">
-                                <p className="sm-type-amp">Useful links</p>
-                                <ul>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Civil_parishes_in_Scotland"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Civil parish
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Loch_Alsh"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Lochalsh
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Highland_council_area"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Highland
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a
-                                            href="https://en.wikipedia.org/wiki/Inverness-shire"
-                                            target="_blank"
-                                            rel="external"
-                                        >
-                                            Inverness-shire
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <CheckList items={stage1CheckListEng} />
+                            <Helpful content={helpfulInfo.info} />
+                            <CheckList items={checklist.item} />
                         </div>
                     </div>
                 </section>
