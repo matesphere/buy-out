@@ -6,6 +6,14 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import { Intro } from '../../../../components/student/Intro'
+import { Helpful } from '../../../../components/student/Helpful'
+import { CheckList } from '../../../../components/student/Checklist'
+import {
+    TaskContainer,
+    TaskPanel,
+} from '../../../../components/common/stages/TaskPanel'
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 
@@ -16,44 +24,23 @@ import {
 } from '../../../../gql/types/StageQuery'
 
 import HelpIcon from '../../../../assets/help-icon.svg'
-// import TickSheet from '../../../../assets/tick-sheet.svg'
-import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
-// import { stage1DataSubTitleEng } from '../stage-1/_stage1.data'
-import {Intro} from "../../../../components/student/Intro";
-import {Helpful} from "../../../../components/student/Helpful";
-import {CheckList} from "../../../../components/student/Checklist";
-import {TaskContainer, TaskPanel} from "../../../../components/common/stages/TaskPanel";
-import { ReadQuesty } from '../../../../components/student/ReadQuesty'
 
 const Stage4LandingPage = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, helpfulInfo, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
+    const {
+        graphCmsStageLandingPage: {
+            stageTitle,
+            stageIntro,
+            helpfulInfo,
+            tasksToComplete,
+            stageInfo,
+            checklist,
+        },
+    } = useStaticQuery(graphql`
         query Stage4PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 4 }) {
-                stageTitle 
-                stageIntro
-                stageIntroRich {
-                  raw
-                }
-                stageInfo {
-                    raw
-                }
-                tasksToComplete {
-                  taskInfo {
-                    raw
-                  }
-                  taskLinkText
-                  title
-                }
-                helpfulInfo {
-                  info {
-                    raw
-                  }
-                }
-                checklist {
-                    item
-                }
+                ...StageLandingContent
             }
         }
     `)
@@ -95,6 +82,7 @@ const Stage4LandingPage = () => {
                 />
                 <title>Stage 4 - {stageTitle}</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -108,98 +96,53 @@ const Stage4LandingPage = () => {
                                 ]}
                                 currentDisplayName="Stage 4"
                             />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
                             </h2>
 
                             <ReadQuesty text={stageIntro} />
                             <Intro item={stageInfo} />
-                            <p className="mb-2">
-                                Your SWOT analyses:
-                                <ol>
-                                    {devOptions.map(
-                                        (
-                                            {
-                                                id,
-                                                team_choice_name,
-                                                development_option: {
-                                                    display_name,
-                                                },
-                                            },
-                                            i
-                                        ) => (
-                                            <li key={i}>
-                                                <Link
-                                                    to={`/student/stage-3/swot?num=${i}&id=${id}&from=stage-4`}
-                                                >
-                                                    {team_choice_name ||
-                                                        display_name}
-                                                </Link>
-                                            </li>
-                                        )
-                                    )}
-                                </ol>
-                            </p>
+
                             <TaskPanel>
-                                {task1Complete ? (
-                                    <div className="form-holder-border">
-                                        <p className="sm-type-lead mb-2">Part I - Shortlist
-                                        </p>
-                                        <p className="sm-type-lead mb-2">Use the links above to help you
-                                        decide which of your development options you will progress to your
-                                        shortlist.</p>
-                                        <ul>
-                                            <li className="sm-type-guitar">
-                                                Shortlist submitted{' '}
-                                                <span className="shortlist-tick">
-                                                    <Tick />
-                                                </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                ) : (
-                                    <TaskContainer
-                                        taskToComplete={tasksToComplete[0]}
-                                        taskLinkUrl="/student/stage-4/options"
-                                    />
-                                )}
+                                <TaskContainer
+                                    taskToComplete={tasksToComplete[0]}
+                                    taskLinkUrl="/student/stage-4/options"
+                                >
+                                    <p className="mb-2">
+                                        <ol>
+                                            {devOptions.map(
+                                                (
+                                                    {
+                                                        id,
+                                                        team_choice_name,
+                                                        development_option: {
+                                                            display_name,
+                                                        },
+                                                    },
+                                                    i
+                                                ) => (
+                                                    <li key={i}>
+                                                        <Link
+                                                            target="_blank"
+                                                            to={`/student/stage-3/swot?num=${i}&id=${id}&from=stage-4`}
+                                                        >
+                                                            {team_choice_name ||
+                                                                display_name}
+                                                        </Link>
+                                                    </li>
+                                                )
+                                            )}
+                                        </ol>
+                                    </p>
+                                </TaskContainer>
 
                                 <TaskContainer
+                                    disabled={!task1Complete}
                                     taskToComplete={tasksToComplete[1]}
                                     taskLinkUrl="/student/stage-4/feasibility"
                                 />
                             </TaskPanel>
-
-                            {/*<div*/}
-                            {/*    className={`form-holder-border ${*/}
-                            {/*        shortlist.length !== 3 &&*/}
-                            {/*        'not-available-holder'*/}
-                            {/*    }`}*/}
-                            {/*>*/}
-                            {/*    <p className="sm-type-lead mb-2">*/}
-                            {/*        Part II - Feasibility Studies*/}
-                            {/*    </p>*/}
-                            {/*    <p className="sm-type-lead mb-2">*/}
-                            {/*        Complete a Feasibility Study for each of*/}
-                            {/*        your 3 shortlisted development options.*/}
-                            {/*    </p>*/}
-                            {/*    <p className="sm-type-lead mb-2">*/}
-                            {/*        These Feasibility Studies will form the*/}
-                            {/*        basis of the presentation that you will*/}
-                            {/*        make to the ‘community’ when you seek*/}
-                            {/*        their approval to purchase the land and*/}
-                            {/*        adopt your Development Options.*/}
-                            {/*    </p>*/}
-
-                            {/*    <ul>*/}
-                            {/*        <li className="sm-type-guitar">*/}
-                            {/*            <Link to="/student/stage-4/feasibility">*/}
-                            {/*                Complete your Feasibility*/}
-                            {/*                Studies*/}
-                            {/*            </Link>*/}
-                            {/*        </li>*/}
-                            {/*    </ul>*/}
-                            {/*</div>*/}
 
                             {docFeedback && (
                                 <div className="side-grey">

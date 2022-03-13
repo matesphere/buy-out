@@ -104,15 +104,6 @@ const Stage2CompletePage = () => {
                                 </h3>
 
                                 <div className="form-holder-border">
-                                    {/* <h4 className="sm-type-guitar mb-2 green-highlight">
-                                        Tutor feedback.
-                                    </h4>
-                                    <p className="sm-type-lead mb-3 italic">
-                                        This looks like a great choice, dont
-                                        forget to work together to achieve your
-                                        goals. You cannot do this without
-                                        everyone doing their bit.
-                                    </p> */}
                                     <h4 className="sm-type-guitar mb-2">
                                         You have chosen the following for your
                                         board.

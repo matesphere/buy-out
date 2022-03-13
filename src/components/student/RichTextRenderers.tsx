@@ -1,11 +1,38 @@
-import React from 'react'
+import React, { Fragment } from 'react'
 import { Link } from 'gatsby'
 import { RichText } from '@graphcms/rich-text-react-renderer'
+
+import { ElementNode, isElement, isText, Text } from '@graphcms/rich-text-types'
 
 import {
     RichTextProps,
     LinkRendererProps,
 } from '@graphcms/rich-text-react-renderer/node_modules/@graphcms/rich-text-types'
+
+const elementIsEmpty = ({ content }: { content: (ElementNode | Text)[] }) => {
+    // Checks if the children array has more than one element.
+    // It may have a link inside, that's why we need to check this condition.
+    if (content.length > 1) {
+        const filterFunc = (child: ElementNode | Text): boolean | number => {
+            if (isText(child) && child.text !== '') {
+                return true
+            }
+
+            if (isElement(child)) {
+                return (child.children = child.children.filter(filterFunc))
+                    .length
+            }
+
+            return false
+        }
+
+        const hasText = content.filter(filterFunc)
+
+        return hasText.length > 0 ? false : true
+    } else if (content[0].text === '') return true
+
+    return false
+}
 
 export const renderGatsbyLinks = ({
     children,
@@ -57,9 +84,12 @@ export const TaskInfoRenderer = ({ content }: RichTextProps) => (
     <RichText
         content={content}
         renderers={{
-            p: ({ children }) => (
-                <p className="sm-type-lead mb-2">{children}</p>
-            ),
+            p: ({ children }) =>
+                elementIsEmpty(children.props) ? (
+                    <Fragment />
+                ) : (
+                    <p className="sm-type-lead mb-2">{children}</p>
+                ),
             h6: ({ children }) => (
                 <p className="sm-type-amp mb-2">{children}</p>
             ),

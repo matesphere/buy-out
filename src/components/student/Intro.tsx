@@ -3,11 +3,11 @@ import { RichText } from '@graphcms/rich-text-react-renderer'
 
 import { RichTextContent } from '@graphcms/rich-text-react-renderer/node_modules/@graphcms/rich-text-types'
 
-interface SliderProps {
+interface IntroProps {
     item: { raw: RichTextContent }
 }
 
-export const Intro = ({ item }: SliderProps) => (
+export const Intro = ({ item }: IntroProps) => (
     <RichText
         content={item.raw}
         renderers={{
