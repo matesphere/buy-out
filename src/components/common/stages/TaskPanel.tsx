@@ -1,25 +1,31 @@
 import React, { FC } from 'react'
 import { Link } from 'gatsby'
 
+import { Submitted } from '../../student/Submitted'
 import { TaskInfoRenderer } from '../../student/RichTextRenderers'
 
 import TickSheet from '../../../assets/tick-sheet.svg'
 import HelpIcon from '../../../assets/help-icon.svg'
+
+import { RichTextContent } from '@graphcms/rich-text-types'
 
 interface TaskContainerProps {
     taskToComplete: {
         title?: string
         taskInfo?: any
         taskLinkText?: string
+        submittedText?: { raw: RichTextContent }
     }
     taskLinkUrl?: string
+    taskComplete?: boolean
     disabled?: boolean
     children?: any
 }
 
 export const TaskContainer: FC<TaskContainerProps> = ({
-    taskToComplete: { title, taskInfo, taskLinkText },
+    taskToComplete: { title, taskInfo, taskLinkText, submittedText },
     taskLinkUrl,
+    taskComplete,
     disabled,
     children,
 }) => (
@@ -27,11 +33,12 @@ export const TaskContainer: FC<TaskContainerProps> = ({
         {title && <p className="sm-type-lead mb-2">{title}</p>}
         {taskInfo && <TaskInfoRenderer content={taskInfo.raw} />}
         {children}
-        {taskLinkUrl && (
+        {taskLinkUrl && !taskComplete && (
             <p className="sm-type-guitar">
                 <Link to={taskLinkUrl}>{taskLinkText}</Link>
             </p>
         )}
+        {taskComplete && submittedText && <Submitted content={submittedText} />}
     </div>
 )
 

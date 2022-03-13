@@ -21,7 +21,37 @@ export const STAGE_LANDING_CONTENT_FRAG = graphql`
             taskInfo {
                 raw
             }
+            submittedText {
+                raw
+            }
             taskLinkText
+        }
+        helpfulInfo {
+            info {
+                raw
+            }
+        }
+        checklist {
+            item
+        }
+    }
+`
+
+export const STAGE_TASK_PAGE_CONTENT_FRAG = graphql`
+    fragment StageTaskContent on GraphCMS_StageTaskPage {
+        title
+        taskInfo {
+            raw
+        }
+        tasksToComplete {
+            title
+            taskInfo {
+                raw
+            }
+            taskLinkText
+            submittedText {
+                raw
+            }
         }
         helpfulInfo {
             info {

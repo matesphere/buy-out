@@ -9,6 +9,8 @@ import {
 } from 'react-accessible-accordion'
 
 import '../../../scss/index.scss'
+import { RichTextContent } from '@graphcms/rich-text-types'
+import { InfoBlock } from '../../student/InfoBlock'
 
 interface FeasibilityStudyType {
     benefits: string
@@ -61,7 +63,7 @@ export const FeasibilityOptionSection: FC<FeasibilityOptionSectionProps> = ({
                 docSubmitted={docSubmitted}
             />
         </div>
-        <div id="more-detail-hin33">
+        <div id="more-detail-hint33">
             <p className="sm-type-bigamp mb-1 red-highlight">
                 Risks that might cause the Scheme to fail
             </p>
@@ -93,6 +95,7 @@ interface FeasibilityStudyProps {
     ) => (data: any) => void
     saveWorkObj?: { call: any; response: any }
     docSubmitted: boolean
+    questions: Array<{ raw: RichTextContent }>
 }
 
 export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
@@ -100,20 +103,12 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
     workState,
     changeFunc,
     docSubmitted,
+    questions,
 }) => (
     <ol>
         <li className="mb-4">
-            <div id="more-detail-hint">
-                <h2 className="sm-type-bigamp mb-1">
-                    Why does the Community want to buy this land? (You should
-                    not refer to specific schemes but rather explain what it
-                    would mean to the community to own this land.)
-                </h2>
-            </div>
+            <InfoBlock items={[questions[0]]} />
             <div className="form-holder-border">
-                <p className="sm-type-amp mb-1">
-                    Enter your finding on the text box below.
-                </p>
                 <div className="ck-textarea">
                     <TextEditor
                         data={workState.whyBuy || ''}
@@ -127,11 +122,7 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
         </li>
 
         <li className="mb-4">
-            <h2 className="sm-type-bigamp mb-2">
-                For each Development Option, describe the expected benefits to
-                the community, the reasons that the scheme is likely to succeed
-                and the risks that might cause it to fail.
-            </h2>
+            <InfoBlock items={[questions[1]]} />
 
             <Accordion allowZeroExpanded>
                 {devOptions.map(

@@ -11,7 +11,10 @@ import { CheckList } from '../../../../components/student/Checklist'
 import { Helpful } from '../../../../components/student/Helpful'
 import { CostOfLand } from '../../../../components/common/stages/business-plan/CostOfLand'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
-import { TaskContainer, TaskPanel } from '../../../../components/common/stages/TaskPanel'
+import {
+    TaskContainer,
+    TaskPanel,
+} from '../../../../components/common/stages/TaskPanel'
 import { Intro } from '../../../../components/student/Intro'
 
 import { useWorkState } from '../../../../utils/input-utils'
@@ -23,7 +26,7 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
-import {ReadQuesty} from "../../../../components/student/ReadQuesty";
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
 interface FourYearCosts {
     year1: number | ''
     year2: number | ''
@@ -157,32 +160,20 @@ export const stage5Reducer: Reducer<WorkState, Action> = (
 }
 
 const Stage5LandingPage: FC = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, helpfulInfo, tasksToComplete, stageInfo, checklist}} = useStaticQuery(graphql`
+    const {
+        graphCmsStageLandingPage: {
+            stageTitle,
+            stageIntro,
+            stageIntroRich,
+            helpfulInfo,
+            tasksToComplete,
+            stageInfo,
+            checklist,
+        },
+    } = useStaticQuery(graphql`
         query Stage5PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 5 }) {
-                stageTitle 
-                stageIntro
-                stageIntroRich {
-                  raw
-                }
-                stageInfo {
-                    raw
-                }
-                tasksToComplete {
-                  taskInfo {
-                    raw
-                  }
-                  taskLinkText
-                  title
-                }
-                helpfulInfo {
-                  info {
-                    raw
-                  }
-                }
-                checklist {
-                    item
-                }
+                ...StageLandingContent
             }
         }
     `)
@@ -311,11 +302,15 @@ const Stage5LandingPage: FC = () => {
                                     <>
                                         <TaskPanel>
                                             <TaskContainer
-                                                taskToComplete={tasksToComplete[0]}
+                                                taskToComplete={
+                                                    tasksToComplete[0]
+                                                }
                                                 taskLinkUrl="/todo"
                                             />
                                             <TaskContainer
-                                                taskToComplete={tasksToComplete[1]}
+                                                taskToComplete={
+                                                    tasksToComplete[1]
+                                                }
                                                 taskLinkUrl="/todo"
                                             />
                                         </TaskPanel>
@@ -348,7 +343,6 @@ const Stage5LandingPage: FC = () => {
                         <div className="col-lg-3">
                             <Helpful content={helpfulInfo.info} />
                             <CheckList items={checklist.item} />
-
                         </div>
                         <Link to="/student/team-hub">Back to Team Hub</Link>
                     </div>

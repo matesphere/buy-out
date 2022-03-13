@@ -1,5 +1,5 @@
 import React, { Reducer, FC } from 'react'
-import { Link } from 'gatsby'
+import { Link, useStaticQuery, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
 
@@ -14,9 +14,8 @@ import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubm
 
 import { useWorkState, ActionType } from '../../../../utils/input-utils'
 
-import TickSheet from '../../../../assets/tick-sheet.svg'
-
 import '../../../../scss/index.scss'
+import { TaskPanel } from '../../../../components/common/stages/TaskPanel'
 
 interface FeasibilityStudyType {
     benefits: string
@@ -92,6 +91,27 @@ const feasibilityComplete = ({ whyBuy, ...rest }: WorkState) => {
 
 const Stage4FeasibilityPage: FC = () => {
     const {
+        graphCmsStageTask: { title, questions, helpfulInfo, checklist },
+    } = useStaticQuery(graphql`
+        query {
+            graphCmsStageTask(stageNumber: { eq: 4 }) {
+                title
+                questions {
+                    raw
+                }
+                helpfulInfo {
+                    info {
+                        raw
+                    }
+                }
+                checklist {
+                    item
+                }
+            }
+        }
+    `)
+
+    const {
         loading,
         error,
         pageData,
@@ -126,7 +146,7 @@ const Stage4FeasibilityPage: FC = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 4 - Feasibility Study</title>
+                <title>Stage 4 - {title}</title>
             </Helmet>
 
             <main className="the-quest">
@@ -146,26 +166,19 @@ const Stage4FeasibilityPage: FC = () => {
                                             : '/student/stage-4',
                                     },
                                 ]}
-                                currentDisplayName="Feasibility Studies"
+                                currentDisplayName={title}
                             />
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
-                                Feasibility Studies
+                                {title}
                             </h2>
-                            <div className="side-grey">
-                                <h4 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h4>
 
+                            <TaskPanel>
                                 <FeasibilityStudy
                                     devOptions={devOptions}
                                     workState={workState}
                                     changeFunc={changeFunc(workDispatch)}
                                     docSubmitted={docSubmitted}
+                                    questions={questions}
                                 />
 
                                 <SaveSubmitSection
@@ -176,22 +189,12 @@ const Stage4FeasibilityPage: FC = () => {
                                     }
                                     docSubmitted={docSubmitted}
                                 />
-                            </div>
+                            </TaskPanel>
                         </div>
 
                         <div className="col-lg-3">
-                            <Helpful
-                                items={[
-                                    'You may find it helpful to refer back to the available information on the development options you have chosen.',
-                                ]}
-                            />
-
-                            <CheckList
-                                items={[
-                                    'Describe why you think the community wants to buy this land',
-                                    'Complete the feasibility studies on 3 options',
-                                ]}
-                            />
+                            <Helpful content={helpfulInfo.info} />
+                            <CheckList items={checklist.item} />
                         </div>
                     </div>
                     <Link

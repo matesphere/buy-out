@@ -38,12 +38,13 @@ const Stage4LandingPage = () => {
             checklist,
         },
     } = useStaticQuery(graphql`
-        query Stage4PageQuery {
+        query {
             graphCmsStageLandingPage(stageNumber: { eq: 4 }) {
                 ...StageLandingContent
             }
         }
     `)
+
     const {
         loading,
         error,
@@ -107,6 +108,7 @@ const Stage4LandingPage = () => {
                             <TaskPanel>
                                 <TaskContainer
                                     taskToComplete={tasksToComplete[0]}
+                                    taskComplete={task1Complete}
                                     taskLinkUrl="/student/stage-4/options"
                                 >
                                     <p className="mb-2">

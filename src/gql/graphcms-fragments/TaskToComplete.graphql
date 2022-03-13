@@ -16,6 +16,14 @@ fragment TaskToComplete on TaskToComplete {
     }
   }
   taskLinkText
+  submittedText {
+    ... on RichText {
+      raw
+      html
+      markdown
+      text
+    }
+  }
   createdBy {
     ... on User {
       remoteTypeName: __typename
