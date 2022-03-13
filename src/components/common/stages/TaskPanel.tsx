@@ -9,7 +9,7 @@ import HelpIcon from '../../../assets/help-icon.svg'
 interface TaskContainerProps {
     taskToComplete: {
         title?: string
-        taskInfo: any
+        taskInfo?: any
         taskLinkText?: string
     }
     taskLinkUrl?: string
@@ -25,7 +25,7 @@ export const TaskContainer: FC<TaskContainerProps> = ({
 }) => (
     <div className={`form-holder-border ${disabled && 'not-available-holder'}`}>
         {title && <p className="sm-type-lead mb-2">{title}</p>}
-        <TaskInfoRenderer content={taskInfo.raw} />
+        {taskInfo && <TaskInfoRenderer content={taskInfo.raw} />}
         {taskLinkUrl && (
             <p className="sm-type-guitar">
                 <Link to={taskLinkUrl}>{taskLinkText}</Link>

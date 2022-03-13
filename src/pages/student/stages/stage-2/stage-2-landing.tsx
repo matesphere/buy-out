@@ -8,6 +8,7 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
 import { CheckList } from '../../../../components/student/Checklist'
 import { Helpful } from '../../../../components/student/Helpful'
 import {
@@ -24,23 +25,28 @@ import {
     StageQueryVariables,
 } from '../../../../gql/types/StageQuery'
 
-import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
-
 import '../../../../scss/index.scss'
 
 const Stage2LandingPage: FC = () => {
-    const data = useStaticQuery(graphql`
+    const {
+        image1: { childImageSharp },
+        graphCmsStageLandingPage: {
+            stageTitle,
+            stageIntro,
+            stageInfo,
+            tasksToComplete,
+            checklist,
+            helpfulInfo,
+        },
+    } = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "glenclas.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
                 }
             }
-            image2: file(relativePath: { eq: "blue-2.jpg" }) {
-                childImageSharp {
-                    gatsbyImageData(layout: CONSTRAINED)
-                }
+            graphCmsStageLandingPage(stageNumber: { eq: 2 }) {
+                ...StageLandingContent
             }
         }
     `)
@@ -68,15 +74,6 @@ const Stage2LandingPage: FC = () => {
             />
         )
 
-    const {
-        stageTitle,
-        stageIntro,
-        stageInfo,
-        tasksToComplete,
-        checklist,
-        helpfulInfo,
-    } = pageData.content.stageLandingPages[0]
-
     return (
         <>
             <Helmet>
@@ -86,6 +83,7 @@ const Stage2LandingPage: FC = () => {
                 />
                 <title>Stage 2 - {stageTitle}</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -99,30 +97,17 @@ const Stage2LandingPage: FC = () => {
                                 ]}
                                 currentDisplayName="Stage 2"
                             />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
                                 {stageTitle}
                             </h2>
-                            <div className="blue-holder-border">
-                                <div className="small-image">
-                                    <GatsbyImage
-                                        alt=""
-                                        image={
-                                            data.image2.childImageSharp
-                                                .gatsbyImageData
-                                        }
-                                    />
-                                </div>
-                                <p className="sm-type-lead small-image-holder">
-                                    {stageIntro}
-                                </p>
-                            </div>
+
+                            <ReadQuesty text={stageIntro} />
+
                             <div className="mt-4 mb-2 image-holder">
                                 <GatsbyImage
                                     alt=""
-                                    image={
-                                        data.image1.childImageSharp
-                                            .gatsbyImageData
-                                    }
+                                    image={childImageSharp.gatsbyImageData}
                                 />
                             </div>
 
@@ -136,37 +121,10 @@ const Stage2LandingPage: FC = () => {
                                     taskLinkUrl="/student/stage-2/task"
                                 />
                             </TaskPanel>
-
-                            {/* <div className="side-grey">
-                                <h3 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task to complete:
-                                    </span>
-                                </h3>
-
-                                {taskInfo.map((text: string) => (
-                                    <p className="sm-type-bigamp mb-3">
-                                        {text}
-                                    </p>
-                                ))}
-
-                                <div className="form-holder-border">
-                                    <ul>
-                                        <li className="sm-type-guitar">
-                                            <Link to="/student/stage-2/task">
-                                                {taskLinks}
-                                            </Link>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div> */}
                         </div>
 
                         <div className="col-lg-3">
-                            <Helpful content={helpfulInfo?.info.raw} />
+                            <Helpful content={helpfulInfo?.info} />
                             <CheckList items={checklist.item} />
                         </div>
                     </div>

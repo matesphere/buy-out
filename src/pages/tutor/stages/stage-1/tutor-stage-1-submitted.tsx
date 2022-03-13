@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Link, PageProps } from 'gatsby'
+import { useStaticQuery, graphql, Link, PageProps } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
 
@@ -13,9 +13,22 @@ import { useFeedbackState, ActionType } from '../../../../utils/input-utils'
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
-import { eng } from '../../../_index.data'
+import { InfoBlock } from '../../../../components/student/InfoBlock'
 
 const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
+    const {
+        graphCmsStageTask: { title, questions },
+    } = useStaticQuery(graphql`
+        query {
+            graphCmsStageTask(stageNumber: { eq: 1 }) {
+                title
+                questions {
+                    raw
+                }
+            }
+        }
+    `)
+
     const {
         loading,
         error,
@@ -46,9 +59,10 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 1 - Research - Submitted</title>
+                <title>Stage 1 - {title} - Submitted</title>
                 <meta name="description" content="The description" />
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <Breadcrumbs
@@ -68,7 +82,7 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                     <div className="row">
                         <div className="col-lg-12">
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                Research
+                                {title}
                             </h2>
 
                             <div className="side-grey">
@@ -85,14 +99,9 @@ const TutorStage1SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                         Questions
                                     </h4>
                                     <ol>
-                                        {eng.map((eng, i) => (
-                                            <li key={eng.text}>
-                                                <p className="sm-type-guitar">
-                                                    {eng.text}
-                                                </p>
-                                                <p className="sm-type-amp mb-4">
-                                                    {eng.description}
-                                                </p>
+                                        {questions.map((question, i) => (
+                                            <li key={i}>
+                                                <InfoBlock items={[question]} />
                                                 <div className="ck-textarea">
                                                     <div
                                                         className="submitted-holder"

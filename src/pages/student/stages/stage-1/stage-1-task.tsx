@@ -7,6 +7,7 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { Intro } from '../../../../components/student/Intro'
+import { InfoBlock } from '../../../../components/student/InfoBlock'
 import { TextEditor } from '../../../../components/common/TextEditor'
 import {
     TaskPanel,
@@ -21,7 +22,6 @@ import { useWorkState, ActionType } from '../../../../utils/input-utils'
 import HelpIcon from '../../../../assets/help-icon.svg'
 
 import '../../../../scss/index.scss'
-import { InfoBlock } from '../../../../components/student/InfoBlock'
 
 type WorkState = {
     [key: number]: string
@@ -158,11 +158,7 @@ const Stage1TaskPage = () => {
                             )}
 
                             <TaskPanel docSubmitted={docSubmitted}>
-                                <TaskContainer
-                                    taskToComplete={{
-                                        taskInfo: '',
-                                    }}
-                                >
+                                <TaskContainer taskToComplete={{}}>
                                     <h4 className="sm-type-drum sm-type-drum--medium">
                                         Questions
                                     </h4>

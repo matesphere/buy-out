@@ -9,6 +9,7 @@ import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
 import { FeedbackDisplay } from '../../../../components/common/FeedbackDisplay'
+import { InfoBlock } from '../../../../components/student/InfoBlock'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 import { DOCUMENT_COMPLETE_QUERY } from '../../../../gql/queries'
@@ -19,16 +20,23 @@ import {
 
 import TickSheet from '../../../../assets/tick-sheet.svg'
 
-import { eng } from '../../../_index.data'
-
 import '../../../../scss/index.scss'
 
 const Stage1CompletePage = () => {
-    const data = useStaticQuery(graphql`
+    const {
+        image1: { childImageSharp },
+        graphCmsStageTask: { title, questions },
+    } = useStaticQuery(graphql`
         query {
             image1: file(relativePath: { eq: "congratulations.jpg" }) {
                 childImageSharp {
                     gatsbyImageData(layout: CONSTRAINED)
+                }
+            }
+            graphCmsStageTask(stageNumber: { eq: 1 }) {
+                title
+                questions {
+                    raw
                 }
             }
         }
@@ -57,8 +65,6 @@ const Stage1CompletePage = () => {
 
     const doc = pageData.team_by_pk.stage_progresses[0].documents[0]
 
-    const { title: stageTitle } = pageData.stage_by_pk
-
     return (
         <>
             <Helmet>
@@ -66,7 +72,7 @@ const Stage1CompletePage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 1 - {stageTitle} - Complete</title>
+                <title>Stage 1 - {title} - Complete</title>
                 <meta name="description" content="The description" />
             </Helmet>
 
@@ -85,16 +91,13 @@ const Stage1CompletePage = () => {
                             />
 
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                                {stageTitle}
+                                {title}
                             </h2>
 
                             <div className="mt-4 mb-4 image-holder">
                                 <GatsbyImage
                                     alt=""
-                                    image={
-                                        data.image1.childImageSharp
-                                            .gatsbyImageData
-                                    }
+                                    image={childImageSharp.gatsbyImageData}
                                 />
                             </div>
 
@@ -117,11 +120,9 @@ const Stage1CompletePage = () => {
                                         Questions
                                     </h4>
                                     <ol>
-                                        {eng.map((eng, i) => (
-                                            <li key={eng.text}>
-                                                <p className="sm-type-guitar">
-                                                    {eng.text}
-                                                </p>
+                                        {questions.map((question, i) => (
+                                            <li key={i}>
+                                                <InfoBlock items={[question]} />
                                                 <p
                                                     className="sm-type-amp mb-4"
                                                     dangerouslySetInnerHTML={{
