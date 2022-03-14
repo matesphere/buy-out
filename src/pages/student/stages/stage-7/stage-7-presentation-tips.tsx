@@ -8,20 +8,24 @@ import { Helpful } from '../../../../components/student/Helpful'
 import { TaskTipsRenderer } from '../../../../components/student/RichTextRenderers'
 
 import '../../../../scss/index.scss'
-
+import { InfoBlock } from '../../../../components/student/InfoBlock'
 
 const Stage7TipsPage = () => {
-    const {graphCmsPresentationTipsPage: { title, tips, helpfulInfo }} = useStaticQuery(graphql`
+    const {
+        graphCmsPresentationTipsPage: { title, tips, helpfulInfo },
+    } = useStaticQuery(graphql`
         query Stage7TipsPageQuery {
-            graphCmsPresentationTipsPage(title: { eq: "Presentation Tips - Delivery" }) {
-                title 
+            graphCmsPresentationTipsPage(
+                title: { eq: "Presentation Tips - Delivery" }
+            ) {
+                title
                 tips {
-                  raw
+                    raw
                 }
                 helpfulInfo {
-                  info {
-                    raw
-                  }
+                    info {
+                        raw
+                    }
                 }
             }
         }
@@ -36,6 +40,7 @@ const Stage7TipsPage = () => {
                 />
                 <title>Stage 7 - Presentation Tips</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -51,7 +56,7 @@ const Stage7TipsPage = () => {
                                         url: '/student/stage-7/',
                                     },
                                 ]}
-                                currentDisplayName="Presentation Tips - Delivery"
+                                currentDisplayName={title}
                             />
 
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">

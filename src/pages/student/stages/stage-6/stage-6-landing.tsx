@@ -23,6 +23,7 @@ import {
     TaskContainer,
     TaskPanel,
 } from '../../../../components/common/stages/TaskPanel'
+import { InfoBlock } from '../../../../components/student/InfoBlock'
 
 const STAGE_6_QUERY = gql`
     query Stage6Query($team_id: uuid!) {
@@ -43,7 +44,7 @@ const Stage6Page = () => {
         graphCmsStageLandingPage: {
             stageTitle,
             stageIntro,
-            stageIntroRich,
+            stageInfo,
             helpfulInfo,
             tasksToComplete,
         },
@@ -83,8 +84,9 @@ const Stage6Page = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 6 - Prepare Findings</title>
+                <title>Stage 6 - {stageTitle}</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -98,24 +100,23 @@ const Stage6Page = () => {
                                 ]}
                                 currentDisplayName="Stage 6"
                             />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
                             </h2>
 
                             <ReadQuesty text={stageIntro} />
+                            <InfoBlock items={[stageInfo]} />
 
                             <TaskPanel>
                                 <TaskContainer
                                     taskToComplete={tasksToComplete[0]}
-                                    taskLinkUrl="/student/stage-7/presentation-tips"
+                                    taskLinkUrl="/student/stage-6/presentation-tips"
                                 />
                                 <TaskContainer
                                     taskToComplete={tasksToComplete[1]}
-                                    taskLinkUrl="/student/stage-7/presentation-tips"
-                                />
-
-                                <div className="form-holder-border">
-                                    <p>Your Development Options</p>
+                                    taskLinkUrl="/student/stage-6/presentation-tips"
+                                >
                                     <ul>
                                         {pageData.team_by_pk?.team_development_options
                                             .filter((opt) => opt.shortlist)
@@ -142,7 +143,7 @@ const Stage6Page = () => {
                                                 )
                                             )}
                                     </ul>
-                                </div>
+                                </TaskContainer>
                             </TaskPanel>
                         </div>
 

@@ -1,4 +1,4 @@
-import React, {FC} from 'react'
+import React, { FC } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { graphql, useStaticQuery } from 'gatsby'
@@ -12,28 +12,21 @@ import '../../../../scss/index.scss'
 
 import { Helpful } from '../../../../components/student/Helpful'
 import { ReadQuesty } from '../../../../components/student/ReadQuesty'
+import { InfoBlock } from '../../../../components/student/InfoBlock'
 
 const Stage7Page: FC = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, helpfulInfo, tasksToComplete}} = useStaticQuery(graphql`
+    const {
+        graphCmsStageLandingPage: {
+            stageTitle,
+            stageIntro,
+            stageInfo,
+            helpfulInfo,
+            tasksToComplete,
+        },
+    } = useStaticQuery(graphql`
         query Stage7PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 7 }) {
-                stageTitle 
-                stageIntro
-                stageIntroRich {
-                  raw
-                }
-                tasksToComplete {
-                  taskInfo {
-                    raw
-                  }
-                  taskLinkText
-                  title
-                }
-                helpfulInfo {
-                  info {
-                    raw
-                  }
-                }
+                ...StageLandingPageContent
             }
         }
     `)
@@ -44,8 +37,9 @@ const Stage7Page: FC = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Stage 7 - Present findings</title>
+                <title>Stage 7 - {stageTitle}</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -66,6 +60,8 @@ const Stage7Page: FC = () => {
 
                             <ReadQuesty text={stageIntro} />
 
+                            <InfoBlock items={[stageInfo]} />
+
                             <TaskPanel>
                                 <TaskContainer
                                     taskToComplete={tasksToComplete[0]}
@@ -76,7 +72,6 @@ const Stage7Page: FC = () => {
                                     taskToComplete={tasksToComplete[1]}
                                 />
                             </TaskPanel>
-
                         </div>
 
                         <div className="col-lg-3">

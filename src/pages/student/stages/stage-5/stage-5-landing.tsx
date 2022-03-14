@@ -222,6 +222,7 @@ const Stage5LandingPage: FC = () => {
                 />
                 <title>Stage 5 - {stageTitle}</title>
             </Helmet>
+
             <main className="the-quest">
                 <section className="container" id="main">
                     <div className="row">
@@ -235,6 +236,7 @@ const Stage5LandingPage: FC = () => {
                                 ]}
                                 currentDisplayName="Stage 5"
                             />
+
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                                 {stageTitle}
                             </h2>
