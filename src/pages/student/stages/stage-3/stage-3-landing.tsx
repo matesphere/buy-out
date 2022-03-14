@@ -104,7 +104,7 @@ const Stage3LandingPage: FC = () => {
     } = useStaticQuery(graphql`
         query Stage3PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 3 }) {
-                ...StageLandingContent
+                ...StageLandingPageContent
             }
             graphCmsInfo(slug: { eq: "development-options" }) {
                 slider {

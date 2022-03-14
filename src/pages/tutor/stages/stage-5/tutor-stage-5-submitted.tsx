@@ -105,7 +105,6 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                 <CostOfLand
                                     workState={doc.doc_data}
                                     docSubmitted={true}
-                                    isTutorPage={true}
                                 />
                                 <Accordion
                                     allowMultipleExpanded

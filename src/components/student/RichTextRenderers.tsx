@@ -2,12 +2,14 @@ import React, { Fragment } from 'react'
 import { Link } from 'gatsby'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 
-import { ElementNode, isElement, isText, Text } from '@graphcms/rich-text-types'
-
 import {
     RichTextProps,
     LinkRendererProps,
-} from '@graphcms/rich-text-react-renderer/node_modules/@graphcms/rich-text-types'
+    ElementNode,
+    isElement,
+    isText,
+    Text,
+} from '@graphcms/rich-text-types'
 
 const elementIsEmpty = ({ content }: { content: (ElementNode | Text)[] }) => {
     // Checks if the children array has more than one element.
@@ -85,7 +87,7 @@ export const TaskInfoRenderer = ({ content }: RichTextProps) => (
         content={content}
         renderers={{
             p: ({ children }) =>
-                elementIsEmpty(children.props) ? (
+                elementIsEmpty(children?.props) ? (
                     <Fragment />
                 ) : (
                     <p className="sm-type-lead mb-2">{children}</p>

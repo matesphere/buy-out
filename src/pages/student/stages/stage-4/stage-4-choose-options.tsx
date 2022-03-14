@@ -165,7 +165,7 @@ const Stage4ChooseOptionsPage = () => {
     } = useStaticQuery(graphql`
         query {
             graphCmsStageTaskPage(stageNumber: { eq: 4 }) {
-                ...StageTaskContent
+                ...StageTaskPageContent
             }
         }
     `)

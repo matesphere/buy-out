@@ -4,7 +4,7 @@ import { graphql } from 'gatsby'
 // student
 
 export const STAGE_LANDING_CONTENT_FRAG = graphql`
-    fragment StageLandingContent on GraphCMS_StageLandingPage {
+    fragment StageLandingPageContent on GraphCMS_StageLandingPage {
         stageTitle
         stageIntro
         stageIntroRich {
@@ -38,7 +38,7 @@ export const STAGE_LANDING_CONTENT_FRAG = graphql`
 `
 
 export const STAGE_TASK_PAGE_CONTENT_FRAG = graphql`
-    fragment StageTaskContent on GraphCMS_StageTaskPage {
+    fragment StageTaskPageContent on GraphCMS_StageTaskPage {
         title
         taskInfo {
             raw
@@ -52,6 +52,27 @@ export const STAGE_TASK_PAGE_CONTENT_FRAG = graphql`
             submittedText {
                 raw
             }
+        }
+        helpfulInfo {
+            info {
+                raw
+            }
+        }
+        checklist {
+            item
+        }
+    }
+`
+
+export const STAGE_TASK_CONTENT_FRAG = graphql`
+    fragment StageTaskContent on GraphCMS_StageTask {
+        title
+        intro {
+            raw
+        }
+        taskInfo
+        questions {
+            raw
         }
         helpfulInfo {
             info {

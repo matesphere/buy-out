@@ -5,6 +5,8 @@ import {
     BusinessPlan,
     RunningCosts,
 } from '../../../../pages/student/stages/stage-5/stage-5-landing'
+import { InfoBlock } from '../../../student/InfoBlock'
+
 import { SectionProps } from '../../../../pages/student/stages/stage-5/stage-5-business-plan'
 
 export const RunningCostsSection: FC<SectionProps> = ({
@@ -12,6 +14,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
     workState,
     workDispatch,
     docSubmitted,
+    questionText,
 }) => {
     let optionState: BusinessPlan | undefined
 
@@ -31,16 +34,8 @@ export const RunningCostsSection: FC<SectionProps> = ({
 
     return (
         <div>
-            <p className="sm-type-guitar sm-type-guitar--medium mb-2">
-                2. Running costs
-            </p>
-            <p className="sm-type-amp mb-2">
-                <span className="sm-type-amp--medium redorange-highlight">
-                    NOTES:
-                </span>{' '}
-                In this section you should detail the annual running costs for
-                each option, for four years, giving a total for each year.
-            </p>
+            <InfoBlock items={[questionText]} />
+
             <div className="side-grey mb-2">
                 <div className="row">
                     <div className="col-lg-4">

@@ -56,8 +56,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                         <button
                             className="btn-solid-lg mt-4"
                             disabled={
-                                disableSubmit ||
-                                !submitWorkObj?.response.loading
+                                disableSubmit || submitWorkObj?.response.loading
                             }
                             onClick={() => setShowSubmitModal(true)}
                         >
@@ -107,7 +106,10 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                                 <p>Are you sure?</p>
                                 <button
                                     className="btn-solid-lg mt-4"
-                                    disabled={disableSubmit}
+                                    disabled={
+                                        disableSubmit ||
+                                        submitWorkObj?.response.loading
+                                    }
                                     onClick={submitWorkObj.call}
                                 >
                                     Yes, submit Work

@@ -30,7 +30,9 @@ export const TaskContainer: FC<TaskContainerProps> = ({
     children,
 }) => (
     <div className={`form-holder-border ${disabled && 'not-available-holder'}`}>
-        {title && <p className="sm-type-lead mb-2">{title}</p>}
+        {title && (
+            <p className="sm-type-lead sm-type-lead--medium mb-2">{title}</p>
+        )}
         {taskInfo && <TaskInfoRenderer content={taskInfo.raw} />}
         {children}
         {taskLinkUrl && !taskComplete && (

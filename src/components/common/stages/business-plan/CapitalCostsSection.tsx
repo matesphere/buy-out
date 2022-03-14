@@ -6,12 +6,14 @@ import {
     CapitalCosts,
 } from '../../../../pages/student/stages/stage-5/stage-5-landing'
 import { SectionProps } from '../../../../pages/student/stages/stage-5/stage-5-business-plan'
+import { InfoBlock } from '../../../student/InfoBlock'
 
 export const CapitalCostsSection: FC<SectionProps> = ({
     devOption: { option },
     workState,
     workDispatch,
     docSubmitted,
+    questionText,
 }) => {
     let optionState: BusinessPlan | undefined
 
@@ -26,22 +28,7 @@ export const CapitalCostsSection: FC<SectionProps> = ({
 
     return (
         <div>
-            <p className="sm-type-guitar sm-type-guitar--medium mb-2">
-                1. Capital costs of Development Options
-            </p>
-
-            {!docSubmitted && (
-                <p className="sm-type-amp mb-2">
-                    <span className="sm-type-amp--medium redorange-highlight">
-                        NOTES:
-                    </span>
-                    In this section you should include all of the known capital
-                    costs (the set-up costs) of this development option, which
-                    will give you a total at the end. You must then show which
-                    funders you are going to use to meet this total. The Amount
-                    of Funding Total should equal the Capital Costs Total.
-                </p>
-            )}
+            <InfoBlock items={[questionText]} />
 
             <div className="side-grey mb-2">
                 <div className="row mb-4">

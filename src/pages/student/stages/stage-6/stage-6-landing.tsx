@@ -8,6 +8,8 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
+import { Helpful } from '../../../../components/student/Helpful'
 
 import { useAuthQuery } from '../../../../utils/auth-utils'
 
@@ -17,9 +19,10 @@ import {
 } from '../../../../gql/types/Stage6Query'
 
 import '../../../../scss/index.scss'
-import { TaskContainer, TaskPanel } from "../../../../components/common/stages/TaskPanel";
-import { Helpful } from "../../../../components/student/Helpful";
-import {ReadQuesty} from "../../../../components/student/ReadQuesty";
+import {
+    TaskContainer,
+    TaskPanel,
+} from '../../../../components/common/stages/TaskPanel'
 
 const STAGE_6_QUERY = gql`
     query Stage6Query($team_id: uuid!) {
@@ -36,29 +39,22 @@ const STAGE_6_QUERY = gql`
 `
 
 const Stage6Page = () => {
-    const {graphCmsStageLandingPage: {stageTitle, stageIntro, stageIntroRich, helpfulInfo, tasksToComplete}} = useStaticQuery(graphql`
+    const {
+        graphCmsStageLandingPage: {
+            stageTitle,
+            stageIntro,
+            stageIntroRich,
+            helpfulInfo,
+            tasksToComplete,
+        },
+    } = useStaticQuery(graphql`
         query Stage6PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 6 }) {
-                stageTitle 
-                stageIntro
-                stageIntroRich {
-                  raw
-                }
-                tasksToComplete {
-                  taskInfo {
-                    raw
-                  }
-                  taskLinkText
-                  title
-                }
-                helpfulInfo {
-                  info {
-                    raw
-                  }
-                }
+                ...StageLandingPageContent
             }
         }
     `)
+
     const {
         loading,
         error,
@@ -148,7 +144,6 @@ const Stage6Page = () => {
                                     </ul>
                                 </div>
                             </TaskPanel>
-
                         </div>
 
                         <div className="col-lg-3">

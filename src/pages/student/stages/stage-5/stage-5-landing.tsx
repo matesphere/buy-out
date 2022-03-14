@@ -7,26 +7,25 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
-import { CheckList } from '../../../../components/student/Checklist'
+import { InfoBlock } from '../../../../components/student/InfoBlock'
+import { ReadQuesty } from '../../../../components/student/ReadQuesty'
 import { Helpful } from '../../../../components/student/Helpful'
+import { CheckList } from '../../../../components/student/Checklist'
 import { CostOfLand } from '../../../../components/common/stages/business-plan/CostOfLand'
 import { SaveSubmitSection } from '../../../../components/common/stages/SaveSubmitSection'
 import {
     TaskContainer,
     TaskPanel,
 } from '../../../../components/common/stages/TaskPanel'
-import { Intro } from '../../../../components/student/Intro'
 
 import { useWorkState } from '../../../../utils/input-utils'
 
 import { DocumentCompleteQuery_team_by_pk_team_development_options } from '../../../../gql/types/DocumentCompleteQuery'
 
-import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
 import Tick from '../../../../assets/tick.svg'
 
 import '../../../../scss/index.scss'
-import { ReadQuesty } from '../../../../components/student/ReadQuesty'
+
 interface FourYearCosts {
     year1: number | ''
     year2: number | ''
@@ -164,7 +163,6 @@ const Stage5LandingPage: FC = () => {
         graphCmsStageLandingPage: {
             stageTitle,
             stageIntro,
-            stageIntroRich,
             helpfulInfo,
             tasksToComplete,
             stageInfo,
@@ -173,10 +171,11 @@ const Stage5LandingPage: FC = () => {
     } = useStaticQuery(graphql`
         query Stage5PageQuery {
             graphCmsStageLandingPage(stageNumber: { eq: 5 }) {
-                ...StageLandingContent
+                ...StageLandingPageContent
             }
         }
     `)
+
     const {
         loading,
         error,
@@ -241,104 +240,49 @@ const Stage5LandingPage: FC = () => {
                             </h2>
 
                             <ReadQuesty text={stageIntro} />
-                            <Intro item={stageInfo} />
+                            <InfoBlock items={[stageInfo]} />
 
-                            <div className="side-grey">
-                                <h3 className="task ticker mb-2">
-                                    <span className="ticker-sheet">
-                                        <TickSheet />
-                                    </span>
-                                    <span className="sm-type-drum">
-                                        Task{' '}
-                                        {docSubmitted
-                                            ? 'submitted'
-                                            : 'to complete:'}
-                                    </span>
-                                </h3>
-                                <p className="sm-type-lead mb-2">
-                                    Complete the first section below, then move
-                                    onto your business plan for each of your
-                                    options.
-                                </p>
-
-                                <div className="row">
-                                    <div className="col-lg-12">
-                                        <CostOfLand
-                                            {...{
-                                                workState,
-                                                workDispatch,
-                                                saveWorkObj,
-                                                docSubmitted,
-                                            }}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div
-                                    className={`form-holder-border ${
-                                        !docLandCost && 'not-available-holder'
-                                    }`}
+                            <TaskPanel
+                                docSubmitted={docSubmitted}
+                                docFeedback={docFeedback}
+                            >
+                                <TaskContainer
+                                    key={0}
+                                    taskToComplete={tasksToComplete[0]}
+                                    taskComplete={!!docLandCost}
                                 >
-                                    <p className="sm-type-lead sm-type-lead--medium mb-2">
-                                        Part II - Business Plans
-                                    </p>
-
+                                    <div className="row">
+                                        <div className="col-lg-12">
+                                            <CostOfLand
+                                                {...{
+                                                    workState,
+                                                    workDispatch,
+                                                    saveWorkObj,
+                                                    docSubmitted,
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </TaskContainer>
+                                <TaskContainer
+                                    key={1}
+                                    taskToComplete={tasksToComplete[1]}
+                                    disabled={!docLandCost}
+                                >
                                     <BusinessPlanLinks
                                         shortlist={shortlist}
                                         completedPlans={completedPlans}
                                     />
-                                </div>
+                                </TaskContainer>
+                            </TaskPanel>
 
-                                <SaveSubmitSection
-                                    submitWorkObj={submitWorkObj}
-                                    disableSubmit={
-                                        completedPlans.length !== 3 ||
-                                        !docLandCost
-                                    }
-                                    docSubmitted={docSubmitted}
-                                />
-
-                                {!completedPlans && (
-                                    <>
-                                        <TaskPanel>
-                                            <TaskContainer
-                                                taskToComplete={
-                                                    tasksToComplete[0]
-                                                }
-                                                taskLinkUrl="/todo"
-                                            />
-                                            <TaskContainer
-                                                taskToComplete={
-                                                    tasksToComplete[1]
-                                                }
-                                                taskLinkUrl="/todo"
-                                            />
-                                        </TaskPanel>
-                                    </>
-                                )}
-
-                                {docFeedback && (
-                                    <div className="side-grey">
-                                        <h3 className="task ticker mb-2">
-                                            <span className="ticker-sheet ticker-feedback">
-                                                <HelpIcon />
-                                            </span>
-                                            <span className="sm-type-drum green-highlight">
-                                                Tutor feedback:
-                                            </span>
-                                        </h3>
-                                        <div className="form-holder-border">
-                                            <p className="sm-type-lead">
-                                                <div
-                                                    dangerouslySetInnerHTML={{
-                                                        __html: docFeedback.feedback,
-                                                    }}
-                                                />
-                                            </p>
-                                        </div>
-                                    </div>
-                                )}
-                            </div>
+                            <SaveSubmitSection
+                                submitWorkObj={submitWorkObj}
+                                disableSubmit={
+                                    completedPlans.length !== 3 || !docLandCost
+                                }
+                                docSubmitted={docSubmitted}
+                            />
                         </div>
                         <div className="col-lg-3">
                             <Helpful content={helpfulInfo.info} />

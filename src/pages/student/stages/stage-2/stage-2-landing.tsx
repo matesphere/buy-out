@@ -46,7 +46,7 @@ const Stage2LandingPage: FC = () => {
                 }
             }
             graphCmsStageLandingPage(stageNumber: { eq: 2 }) {
-                ...StageLandingContent
+                ...StageLandingPageContent
             }
         }
     `)

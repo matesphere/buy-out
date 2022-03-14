@@ -40,7 +40,7 @@ const Stage4LandingPage = () => {
     } = useStaticQuery(graphql`
         query {
             graphCmsStageLandingPage(stageNumber: { eq: 4 }) {
-                ...StageLandingContent
+                ...StageLandingPageContent
             }
         }
     `)
