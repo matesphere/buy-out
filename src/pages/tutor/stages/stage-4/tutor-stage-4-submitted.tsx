@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Link, PageProps } from 'gatsby'
+import { Link, PageProps, useStaticQuery, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
 
@@ -17,6 +17,16 @@ import TickSheet from '../../../../assets/tick-sheet.svg'
 import '../../../../scss/index.scss'
 
 const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
+    const {
+        graphCmsStageTask: { questions },
+    } = useStaticQuery(graphql`
+        query {
+            graphCmsStageTask(stageNumber: { eq: 4 }) {
+                ...StageTaskContent
+            }
+        }
+    `)
+
     const {
         loading,
         error,
@@ -92,6 +102,7 @@ const TutorStage4SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                     devOptions={devOptions}
                                     workState={doc.doc_data}
                                     docSubmitted={true}
+                                    questions={questions}
                                 />
                             </div>
                         </div>

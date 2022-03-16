@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Link, PageProps } from 'gatsby'
+import { Link, PageProps, useStaticQuery, graphql } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { ApolloError } from '@apollo/client'
 
@@ -27,6 +27,16 @@ import {
 } from 'react-accessible-accordion'
 
 const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
+    const {
+        graphCmsStageTask: { questions },
+    } = useStaticQuery(graphql`
+        query {
+            graphCmsStageTask(stageNumber: { eq: 5 }) {
+                ...StageTaskContent
+            }
+        }
+    `)
+
     const {
         loading,
         error,
@@ -128,6 +138,9 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                                         }
                                                         workState={doc.doc_data}
                                                         docSubmitted={true}
+                                                        questionText={
+                                                            questions[0]
+                                                        }
                                                     />
                                                     <RunningCostsSection
                                                         devOption={
@@ -135,6 +148,9 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                                         }
                                                         workState={doc.doc_data}
                                                         docSubmitted={true}
+                                                        questionText={
+                                                            questions[1]
+                                                        }
                                                     />
                                                     <CashFlowSection
                                                         devOption={
@@ -142,6 +158,9 @@ const TutorStage5SubmittedPage: FC<PageProps> = ({ location: { search } }) => {
                                                         }
                                                         workState={doc.doc_data}
                                                         docSubmitted={true}
+                                                        questionText={
+                                                            questions[2]
+                                                        }
                                                     />
                                                 </AccordionItemPanel>
                                             </AccordionItem>
