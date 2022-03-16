@@ -1,8 +1,8 @@
-import React, { FC } from 'react'
+import React, { FC, ReactNode } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 
-export const ReadQuesty: FC<{ text: string }> = ({ text }) => {
+export const ReadQuesty: FC<{ text: string | ReactNode }> = ({ text }) => {
     const {
         allGraphCmsAsset: { edges },
     } = useStaticQuery(graphql`

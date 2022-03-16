@@ -95,7 +95,7 @@ interface FeasibilityStudyProps {
     ) => (data: any) => void
     saveWorkObj?: { call: any; response: any }
     docSubmitted: boolean
-    questions: Array<{ raw: RichTextContent }>
+    questions?: Array<{ raw: RichTextContent }>
 }
 
 export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
@@ -107,7 +107,7 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
 }) => (
     <ol>
         <li className="mb-4">
-            <InfoBlock items={[questions[0]]} />
+            {questions && <InfoBlock items={[questions[0]]} />}
             <div className="form-holder-border">
                 <div className="ck-textarea">
                     <TextEditor
@@ -122,7 +122,7 @@ export const FeasibilityStudy: FC<FeasibilityStudyProps> = ({
         </li>
 
         <li className="mb-4">
-            <InfoBlock items={[questions[1]]} />
+            {questions && <InfoBlock items={[questions[1]]} />}
 
             <Accordion allowZeroExpanded>
                 {devOptions.map(

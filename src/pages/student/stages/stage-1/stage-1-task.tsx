@@ -126,7 +126,7 @@ const Stage1TaskPage = () => {
                                             : '/student/stage-1',
                                     },
                                 ]}
-                                currentDisplayName="Research Task"
+                                currentDisplayName={title}
                             />
 
                             <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">

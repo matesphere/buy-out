@@ -95,18 +95,7 @@ const Stage4FeasibilityPage: FC = () => {
     } = useStaticQuery(graphql`
         query {
             graphCmsStageTask(stageNumber: { eq: 4 }) {
-                title
-                questions {
-                    raw
-                }
-                helpfulInfo {
-                    info {
-                        raw
-                    }
-                }
-                checklist {
-                    item
-                }
+                ...StageTaskContent
             }
         }
     `)
@@ -120,7 +109,6 @@ const Stage4FeasibilityPage: FC = () => {
         saveWorkObj,
         submitWorkObj,
         docSubmitted,
-        docFeedback,
         stageComplete,
     } = useWorkState<WorkState, Action>(4, stage4Reducer, true)
 

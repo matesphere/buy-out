@@ -343,6 +343,7 @@ const TutorCurrentQuestPage = () => {
                     <title>Current Quests</title>
                     <meta name="description" content="The description" />
                 </Helmet>
+
                 <main className="notes">
                     <section className="container" id="currentquest">
                         <Breadcrumbs
@@ -372,8 +373,8 @@ const TutorCurrentQuestPage = () => {
                     content="width=device-width, initial-scale=1.0"
                 />
                 <title>Current Quests</title>
-                <meta name="description" content="The description" />
             </Helmet>
+
             <main className="notes">
                 <section className="container" id="currentquest">
                     <Breadcrumbs
@@ -385,6 +386,7 @@ const TutorCurrentQuestPage = () => {
                         ]}
                         currentDisplayName="Current Quests"
                     />
+
                     <Tabs
                         selectedIndex={selectedTab}
                         onSelect={(index) => setSelectedTab(index)}

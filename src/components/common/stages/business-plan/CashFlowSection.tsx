@@ -60,7 +60,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
     return (
         <div>
-            <InfoBlock items={[questionText]} />
+            {questionText && <InfoBlock items={[questionText]} />}
 
             <div className="side-grey mb-2">
                 <div className="row mb-2">

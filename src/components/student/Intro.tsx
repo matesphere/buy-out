@@ -1,7 +1,9 @@
 import React from 'react'
 import { RichText } from '@graphcms/rich-text-react-renderer'
 
-import { RichTextContent } from '@graphcms/rich-text-react-renderer/node_modules/@graphcms/rich-text-types'
+import { ReadQuesty } from './ReadQuesty'
+
+import { RichTextContent } from '@graphcms/rich-text-types'
 
 interface IntroProps {
     item: { raw: RichTextContent }
@@ -11,6 +13,7 @@ export const Intro = ({ item }: IntroProps) => (
     <RichText
         content={item.raw}
         renderers={{
+            blockquote: ({ children }) => <ReadQuesty text={children} />,
             p: ({ children }) => (
                 <p className="sm-type-guitar mb-4">{children}</p>
             ),

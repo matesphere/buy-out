@@ -70,7 +70,6 @@ export const STAGE_TASK_CONTENT_FRAG = graphql`
         intro {
             raw
         }
-        taskInfo
         questions {
             raw
         }
@@ -81,6 +80,9 @@ export const STAGE_TASK_CONTENT_FRAG = graphql`
         }
         checklist {
             item
+        }
+        submittedText {
+            raw
         }
     }
 `

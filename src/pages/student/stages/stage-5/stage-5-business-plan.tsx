@@ -22,6 +22,7 @@ import { useWorkState } from '../../../../utils/input-utils'
 import { RichTextContent } from '@graphcms/rich-text-types'
 
 import '../../../../scss/index.scss'
+import { Intro } from '../../../../components/student/Intro'
 
 export interface SectionProps {
     devOption: {
@@ -31,12 +32,12 @@ export interface SectionProps {
     workState: WorkState
     workDispatch?: React.Dispatch<Action>
     docSubmitted: boolean
-    questionText: { raw: RichTextContent }
+    questionText?: { raw: RichTextContent }
 }
 
 const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
     const {
-        graphCmsStageTask: { title, taskInfo, questions, helpfulInfo },
+        graphCmsStageTask: { title, intro, questions, helpfulInfo },
     } = useStaticQuery(graphql`
         query {
             graphCmsStageTask(stageNumber: { eq: 5 }) {
@@ -111,7 +112,8 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                                 Business Plan {num + 1}
                             </h2>
 
-                            <p className="sm-type-lead mb-2">{taskInfo}</p>
+                            <Intro item={intro} />
+
                             <h3 className="sm-type-drum sm-type-drum--medium mb-2 redorange-highlight">
                                 {teamDevOption?.team_choice_name ||
                                     devOption?.display_name}
