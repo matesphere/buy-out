@@ -305,16 +305,25 @@
 }
 
 .breadcrumb-list-container {
-    margin: $grid-unit 0;
-    font-size: 14px;
-
+    margin: 16px 0;
+    padding: 16px;
+    border-radius: 16px;
+    font-size: 18px;
+    background-color: $brand-redorange;
+    color: black;
     a {
-        color: $brand-red;
+        color: $brand-white;
+    }
+
+    .breadtitle {
+        margin: 0px;
+        color: black;
+        font-size: 18px;
     }
 
     .crumb-spacer {
-        margin-left: 4px;
-        margin-right: 4px;
+        margin-left: $grid-unit;
+        margin-right: $grid-unit;
     }
 
     .crumb-caps {

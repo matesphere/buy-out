@@ -11,6 +11,7 @@ export const Breadcrumbs: FC<BreadcrumbsProps> = ({
     previous,
 }) => (
     <div className="breadcrumb-list-container">
+        <p className="breadtitle">Quick Navigation:</p>
         {previous.map(({ displayName, url }, i) => (
             <span key={i} className="crumb">
                 <Link to={url}>{displayName}</Link>

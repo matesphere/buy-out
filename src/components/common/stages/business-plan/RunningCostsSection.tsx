@@ -39,7 +39,7 @@ export const RunningCostsSection: FC<SectionProps> = ({
             <div className="side-grey mb-2">
                 <div className="row">
                     <div className="col-lg-4">
-                        <p className="sm-type-amp mb-2">
+                        <p className="form-label sm-type-amp mb-2">
                             Details of annual running costs
                         </p>
                     </div>

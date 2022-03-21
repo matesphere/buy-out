@@ -74,7 +74,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                 <div className="row">
                     <div className="col-lg-2"></div>
-                    <div className="col-lg-2">Income</div>
+                    <div className="col-lg-2 form-label">Income</div>
                     <div className="col-lg-2">
                         <input
                             type="number"
@@ -202,7 +202,7 @@ export const CashFlowSection: FC<SectionProps> = ({
 
                 <div className="row mb-4">
                     <div className="col-lg-2"></div>
-                    <div className="col-lg-2">Running Costs</div>
+                    <div className="col-lg-2 form-label">Running Costs</div>
                     <div className="col-lg-2">
                         <input
                             className="form-control mb-2"
