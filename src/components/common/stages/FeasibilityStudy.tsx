@@ -35,6 +35,15 @@ export const FeasibilityOptionSection: FC<FeasibilityOptionSectionProps> = ({
     docSubmitted,
 }) => (
     <>
+        {option !== 'team-choice' && (
+            <a
+                href={`/information/${option}`}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Development Option information
+            </a>
+        )}
         <div id="more-detail-hint11">
             <p className="sm-type-bigamp mb-1 redorange-highlight">
                 Benefits to the Community

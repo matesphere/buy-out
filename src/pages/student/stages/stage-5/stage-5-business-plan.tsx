@@ -118,10 +118,36 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                                 {teamDevOption?.team_choice_name ||
                                     devOption?.display_name}
                             </h3>
+
+                            {!teamDevOption?.team_choice_name && (
+                                <a
+                                    href={`/information/${devOption?.option}`}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Development Option information
+                                </a>
+                            )}
                         </div>
 
                         <div className="col-lg-4">
-                            <Helpful content={helpfulInfo.info} />
+                            <Helpful content={helpfulInfo.info}>
+                                <>
+                                    {!teamDevOption?.team_choice_name && (
+                                        <p className="sm-type-amp">
+                                            Figures are provided in the{' '}
+                                            <a
+                                                href={`/information/${devOption?.option}`}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                Development Option information
+                                            </a>
+                                            .
+                                        </p>
+                                    )}
+                                </>
+                            </Helpful>
                         </div>
                     </div>
 

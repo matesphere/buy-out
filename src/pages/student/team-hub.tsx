@@ -65,6 +65,7 @@ const TEAM_HUB_QUERY = gql`
                     ) {
                         id
                         shortlist
+                        team_choice_name
                         development_option {
                             id
                             display_name
@@ -250,13 +251,14 @@ const TeamInfoSection = ({
                     <div className="col-lg-5">
                         <div className="form-holder-border">
                             <p className="sm-type-lead sm-type-lead--medium greendark-highlight mb-2">
-                                Development options:
+                                Development Options:
                             </p>
                             <ol>
                                 {devOptions.map(
                                     (
                                         {
                                             shortlist,
+                                            team_choice_name,
                                             development_option: {
                                                 display_name,
                                             },
@@ -267,7 +269,9 @@ const TeamInfoSection = ({
                                             key={i}
                                             className="sm-type-bigamp mb-2"
                                         >
-                                            {display_name}{' '}
+                                            {team_choice_name
+                                                ? `Team Choice - ${team_choice_name}`
+                                                : display_name}{' '}
                                             {shortlist && (
                                                 <span className="shortlist-tick">
                                                     <Tick />

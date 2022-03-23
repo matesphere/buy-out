@@ -74,6 +74,7 @@ const Stage4LandingPage = () => {
     const docFeedback =
         pageData?.team_by_pk?.stage_progresses[0].documents[0]?.feedback
 
+    console.log(devOptions)
     return (
         <>
             <Helmet>
@@ -112,30 +113,87 @@ const Stage4LandingPage = () => {
                                     taskLinkUrl="/student/stage-4/options"
                                 >
                                     <p className="mb-2">
-                                        <ol>
-                                            {devOptions.map(
-                                                (
-                                                    {
-                                                        id,
-                                                        team_choice_name,
-                                                        development_option: {
-                                                            display_name,
-                                                        },
-                                                    },
-                                                    i
-                                                ) => (
-                                                    <li key={i}>
-                                                        <Link
-                                                            target="_blank"
-                                                            to={`/student/stage-3/swot?num=${i}&id=${id}&from=stage-4`}
-                                                        >
-                                                            {team_choice_name ||
-                                                                display_name}
-                                                        </Link>
-                                                    </li>
-                                                )
-                                            )}
-                                        </ol>
+                                        <ul>
+                                            <li key="1">
+                                                <p>
+                                                    The{' '}
+                                                    <a
+                                                        href="/information/community?newTab=true"
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        statements made by
+                                                        members of the community
+                                                        and experts
+                                                    </a>{' '}
+                                                    in Stage 2;
+                                                </p>
+                                            </li>
+                                            <li key="2">
+                                                The detailed notes about each
+                                                development option:
+                                                <ol>
+                                                    {devOptions
+                                                        .filter(
+                                                            (option) =>
+                                                                !option.team_choice_name
+                                                        )
+                                                        .map(
+                                                            (
+                                                                {
+                                                                    development_option:
+                                                                        {
+                                                                            option,
+                                                                            display_name,
+                                                                        },
+                                                                },
+                                                                i
+                                                            ) => (
+                                                                <li key={i}>
+                                                                    <a
+                                                                        target="_blank"
+                                                                        rel="noopener noreferrer"
+                                                                        href={`/information/${option}?newTab=true`}
+                                                                    >
+                                                                        {
+                                                                            display_name
+                                                                        }
+                                                                    </a>
+                                                                </li>
+                                                            )
+                                                        )}
+                                                </ol>
+                                            </li>
+                                            <li key="3">
+                                                Your SWOT analyses:
+                                                <ol>
+                                                    {devOptions.map(
+                                                        (
+                                                            {
+                                                                id,
+                                                                team_choice_name,
+                                                                development_option:
+                                                                    {
+                                                                        display_name,
+                                                                    },
+                                                            },
+                                                            i
+                                                        ) => (
+                                                            <li key={i}>
+                                                                <a
+                                                                    target="_blank"
+                                                                    rel="noopener noreferrer"
+                                                                    href={`/student/stage-3/swot?num=${i}&id=${id}&newTab=true`}
+                                                                >
+                                                                    {team_choice_name ||
+                                                                        display_name}
+                                                                </a>
+                                                            </li>
+                                                        )
+                                                    )}
+                                                </ol>
+                                            </li>
+                                        </ul>
                                     </p>
                                 </TaskContainer>
 

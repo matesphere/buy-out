@@ -181,7 +181,33 @@ const Stage4FeasibilityPage: FC = () => {
                         </div>
 
                         <div className="col-lg-3">
-                            <Helpful content={helpfulInfo.info} />
+                            <Helpful content={helpfulInfo.info}>
+                                <ol>
+                                    {devOptions
+                                        .filter(
+                                            ({ team_choice_name }) =>
+                                                !team_choice_name
+                                        )
+                                        .map(
+                                            ({
+                                                development_option: {
+                                                    option,
+                                                    display_name,
+                                                },
+                                            }) => (
+                                                <li>
+                                                    <a
+                                                        href={`/information/${option}`}
+                                                        target="_blank"
+                                                        rel="noopener noreferrer"
+                                                    >
+                                                        {display_name}
+                                                    </a>
+                                                </li>
+                                            )
+                                        )}
+                                </ol>
+                            </Helpful>
                             <CheckList items={checklist.item} />
                         </div>
                     </div>

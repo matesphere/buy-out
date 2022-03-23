@@ -1,15 +1,16 @@
 import React from 'react'
 import { HelpfulInfoRenderer } from '../../components/student/RichTextRenderers'
 
-import { RichTextContent } from '@graphcms/rich-text-react-renderer/node_modules/@graphcms/rich-text-types'
+import { RichTextContent } from '@graphcms/rich-text-types'
 
 import HelpIcon from '../../assets/help-icon.svg'
 
 interface HelpfulProps {
     content: { raw: RichTextContent }
+    children?: JSX.Element
 }
 
-export const Helpful = ({ content }: HelpfulProps) => (
+export const Helpful = ({ content, children }: HelpfulProps) => (
     <>
         <p className="sm-type-guitar mb-2">
             <span className="side-icon side-icon-orange">
@@ -19,6 +20,7 @@ export const Helpful = ({ content }: HelpfulProps) => (
         </p>
         <div className="side-grey">
             <HelpfulInfoRenderer content={content.raw} />
+            {children}
         </div>
     </>
 )
