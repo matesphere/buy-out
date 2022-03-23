@@ -1,9 +1,9 @@
 import React from 'react'
-import { Link, graphql } from 'gatsby'
+import { graphql } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Helmet } from 'react-helmet'
 import SVG from 'react-inlinesvg'
-
+import SmallHeader from '../../components/_small-header'
 import Header from '../../components/_header'
 import Footer from '../../components/_footer'
 import { Breadcrumbs } from '../../components/common/Breadcrumbs'
@@ -11,6 +11,7 @@ import { ReadQuesty } from '../../components/student/ReadQuesty'
 import { FundingOptions } from '../../components/student/FundingOptions'
 import { CheckList } from '../../components/student/Checklist'
 import { DevOpsRenderer } from '../../components/student/RichTextRenderers'
+import { useQueryParam, getSearchParams } from 'gatsby-query-params'
 
 import '../../scss/index.scss'
 
@@ -26,7 +27,10 @@ const InfoPlaySkate = ({
             icon,
         },
     },
-}) => (
+}) => {
+    const newTab = useQueryParam("newTab")
+    console.log(newTab); // log query param
+    return (
     <>
         <Helmet>
             <meta
@@ -37,29 +41,33 @@ const InfoPlaySkate = ({
         </Helmet>
 
         <main className="the-quest">
-            <Header headerText="Development Options" />
-
+            {newTab ?
+                <SmallHeader headerText="Development help page"/>
+                :
+                <Header headerText="Information"/>
+            }
             <section className="container" id="main">
                 <div className="row">
                     <div className="col-lg-8">
-                        <Breadcrumbs
-                            previous={[
-                                {
-                                    displayName: 'Team Hub',
-                                    url: '/student/team-hub/',
-                                },
-                                {
-                                    displayName: 'Info Hub',
-                                    url: '/student/information',
-                                },
-                                {
-                                    displayName: 'Development Options',
-                                    url: '/information/development-options',
-                                },
-                            ]}
-                            currentDisplayName={title}
-                        />
-
+                        {!newTab &&
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Info Hub',
+                                        url: '/student/information',
+                                    },
+                                    {
+                                        displayName: 'Development Options',
+                                        url: '/information/development-options',
+                                    },
+                                ]}
+                                currentDisplayName={title}
+                            />
+                        }
                         <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4 mb-4">
                             <span className="page-icon">
                                 <SVG
@@ -70,7 +78,6 @@ const InfoPlaySkate = ({
                             </span>
                             {title}
                         </h2>
-
                         <ReadQuesty text={intro} />
 
                         <div className="mt-4 mb-4 image-holder">
@@ -86,11 +93,11 @@ const InfoPlaySkate = ({
                             <FundingOptions content={fundingOptions.raw} />
                         )}
 
-                        <p className="sm-type-bigamp mb-4">
-                            <Link to="/information/development-options">
-                                Back to the options
-                            </Link>
-                        </p>
+                        {/*<p className="sm-type-bigamp mb-4">*/}
+                        {/*    <Link to="/information/development-options">*/}
+                        {/*        Back to the options*/}
+                        {/*    </Link>*/}
+                        {/*</p>*/}
                     </div>
 
                     <div className="col-lg-4">
@@ -98,11 +105,15 @@ const InfoPlaySkate = ({
                     </div>
                 </div>
             </section>
-
-            <Footer />
+            {newTab ?
+                <SmallHeader headerText="Development help page"/>
+                :
+                <Footer />
+            }
         </main>
     </>
-)
+    )
+}
 
 export default InfoPlaySkate
 

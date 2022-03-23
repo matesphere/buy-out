@@ -853,6 +853,18 @@ input.form-control:read-only {
     z-index: 10;
 }
 
+.small-top-section {
+    background-color: $brand-darkgreen;
+    h1 {
+        padding: 8px 16px 0;
+        color: white;
+    }
+    p {
+        margin: 0 16px 16px;
+        color: white;
+    }
+}
+
 .loader {
     border: 16px solid #f3f3f3; /* Light grey */
     border-top: 16px solid $brand-green; /* Blue */
