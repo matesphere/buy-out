@@ -61,8 +61,8 @@ const SmallHeader: FC<{ headerText?: string }> = ({ headerText }) => {
                                             getHeaderText(location.pathname)}
                                     </h1>
                                     <p>
-                                        PLEASE NOTE: Close this browser tab (or
-                                        click{' '}
+                                        PLEASE NOTE: this is a new browser tab.
+                                        You can close it (or click{' '}
                                         <a
                                             href="#"
                                             onClick={() => window.close()}
