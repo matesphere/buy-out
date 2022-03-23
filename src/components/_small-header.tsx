@@ -58,11 +58,19 @@ const SmallHeader: FC<{ headerText?: string }> = ({ headerText }) => {
                                 <div className="col-lg-8">
                                     <h1 className="main-header">
                                         {headerText ||
-                                            getHeaderText(
-                                                location.pathname
-                                            )}
+                                            getHeaderText(location.pathname)}
                                     </h1>
-                                    <p>PLEASE NOTE: Close this browser tab to go back to the quest</p>
+                                    <p>
+                                        PLEASE NOTE: Close this browser tab (or
+                                        click{' '}
+                                        <a
+                                            href="#"
+                                            onClick={() => window.close()}
+                                        >
+                                            here
+                                        </a>
+                                        ) to go back to the Quest
+                                    </p>
                                 </div>
                                 <div className="col-lg-4">
                                     <div className="cls-logo">

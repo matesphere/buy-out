@@ -118,7 +118,7 @@ const Stage4LandingPage = () => {
                                                 <p>
                                                     The{' '}
                                                     <a
-                                                        href="/information/community?newTab=true"
+                                                        href="/information/community-alt"
                                                         target="_blank"
                                                         rel="noopener noreferrer"
                                                     >
@@ -153,7 +153,7 @@ const Stage4LandingPage = () => {
                                                                     <a
                                                                         target="_blank"
                                                                         rel="noopener noreferrer"
-                                                                        href={`/information/${option}?newTab=true`}
+                                                                        href={`/information/${option}-alt`}
                                                                     >
                                                                         {
                                                                             display_name

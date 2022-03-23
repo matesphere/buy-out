@@ -37,7 +37,7 @@ export const FeasibilityOptionSection: FC<FeasibilityOptionSectionProps> = ({
     <>
         {option !== 'team-choice' && (
             <a
-                href={`/information/${option}`}
+                href={`/information/${option}-alt`}
                 target="_blank"
                 rel="noopener noreferrer"
             >

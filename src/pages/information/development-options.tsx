@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
 import MapOptions from './_map'
@@ -62,6 +62,12 @@ const InfoDevOptions: FC = ({
                         <MapOptions iconInfoList={slider} />
 
                         <InfoBlock items={infoBlock} />
+
+                        <p className="sm-type-bigamp mb-4">
+                            <Link to="/student/information">
+                                Back to Info hub
+                            </Link>
+                        </p>
                     </div>
                 </div>
             </section>

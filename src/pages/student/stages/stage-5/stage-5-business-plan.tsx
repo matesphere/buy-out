@@ -121,7 +121,7 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
 
                             {!teamDevOption?.team_choice_name && (
                                 <a
-                                    href={`/information/${devOption?.option}`}
+                                    href={`/information/${devOption?.option}-alt`}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                 >
@@ -137,7 +137,7 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                                         <p className="sm-type-amp">
                                             Figures are provided in the{' '}
                                             <a
-                                                href={`/information/${devOption?.option}`}
+                                                href={`/information/${devOption?.option}-alt`}
                                                 target="_blank"
                                                 rel="noopener noreferrer"
                                             >
