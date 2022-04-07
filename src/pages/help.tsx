@@ -36,7 +36,7 @@ const HelpPage = ({
 
         <main>
             <Header headerText={title} />
-            <section className="container" id="main">
+            <section className="container helppage" id="main">
                 <div className="row">
                     <div className="col-lg-8">
                         <Intro item={intro} />
