@@ -306,19 +306,18 @@
 
 .breadcrumb-list-container {
     margin: 16px 0;
-    padding: 16px;
-    border-radius: 16px;
-    font-size: 18px;
-    background-color: $brand-redorange;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #ffe9de;
     color: black;
-    a {
-        color: $brand-white;
-    }
+    max-width: 500px;
 
     .breadtitle {
         margin: 0px;
         color: black;
-        font-size: 18px;
+        font-size: 14px;
+        font-weight: 800;
     }
 
     .crumb-spacer {
