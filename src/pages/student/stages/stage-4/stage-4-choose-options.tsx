@@ -145,7 +145,7 @@ const Stage4Task = ({ taskToComplete }) => {
                             })
                         }}
                     >
-                        Submit options
+                        {chooseDevOptionsResponse?.loading && <span className="spinner"></span>} Submit options
                     </button>
                 </TaskContainer>
             )}

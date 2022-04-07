@@ -181,7 +181,7 @@ const Stage3Task = () => {
                             disabled={
                                 !allowedNumberSelected ||
                                 (selectedOptions.includes(10) &&
-                                    !teamChoiceName)
+                                    !teamChoiceName) || chooseDevOptionsResponse?.loading
                             }
                             onClick={() => {
                                 const objects = selectedOptions.map((id) => {
@@ -206,8 +206,10 @@ const Stage3Task = () => {
                                 })
                             }}
                         >
-                            Submit options
+                            {chooseDevOptionsResponse?.loading && <span className="spinner"></span>} Submit options
                         </button>
+
+
 
                         {/* TODO: replace with proper 'submitted' notification component...if needed? */}
                         {/* {chooseDevOptionsResponse.data && (

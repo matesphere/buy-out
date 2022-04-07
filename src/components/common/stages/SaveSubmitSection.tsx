@@ -60,7 +60,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                             }
                             onClick={() => setShowSubmitModal(true)}
                         >
-                            Submit
+                            {submitWorkObj?.response.loading && <span className="spinner"></span>} Submit
                         </button>
                     )}
                 </>
@@ -112,6 +112,7 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                                     }
                                     onClick={submitWorkObj.call}
                                 >
+                                    {submitWorkObj?.response.loading && <span className="spinner"></span>} Submit options
                                     Yes, submit Work
                                 </button>
                             </>
