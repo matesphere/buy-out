@@ -7,9 +7,19 @@ import {
     BaseMutationOptions,
 } from '@apollo/client'
 import axios from 'axios'
+import axiosRetry from 'axios-retry'
 import gen from 'generate-password'
 
 import { UserStateContext } from './user-state'
+
+axiosRetry(axios, {
+    retries: 3, // number of retries
+    retryDelay: (retryCount) => {
+        console.log(`retry attempt: ${retryCount}`)
+        return 1000 // time interval between retries
+    },
+    retryCondition: (error) => error.response.status !== 200,
+})
 
 export const genUsername = (firstName: string, lastName: string) =>
     [firstName.toLowerCase()[0], lastName.toLowerCase()]
@@ -23,6 +33,7 @@ export const genPassword = () =>
         uppercase: false,
         numbers: true,
         excludeSimilarCharacters: true,
+        strict: true,
     })
 
 interface TeamType {

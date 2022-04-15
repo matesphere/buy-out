@@ -2,10 +2,6 @@ import React, { FC } from 'react'
 import { graphql, useStaticQuery } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { Location } from '@reach/router'
-import Nav from './_nav'
-
-import Squiggle from '../assets/squiggle.svg'
-import PinLogo from '../assets/pin-logo.svg'
 
 import '../scss/index.scss'
 
