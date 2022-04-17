@@ -39,7 +39,7 @@ const InfoDevOptions: FC = ({
                                     url: '/student/team-hub/',
                                 },
                                 {
-                                    displayName: 'Info Hub',
+                                    displayName: 'Information',
                                     url: '/student/information',
                                 },
                             ]}
@@ -65,7 +65,7 @@ const InfoDevOptions: FC = ({
 
                         <p className="sm-type-bigamp mb-4">
                             <Link to="/student/information">
-                                Back to Info hub
+                                Back to Information
                             </Link>
                         </p>
                     </div>

@@ -65,7 +65,7 @@ const SmallHeader: FC<{ headerText?: string }> = ({ headerText }) => {
                                         >
                                             here
                                         </a>
-                                        ) to go back to the Quest
+                                        ) to go back
                                     </p>
                                 </div>
                                 <div className="col-lg-4">

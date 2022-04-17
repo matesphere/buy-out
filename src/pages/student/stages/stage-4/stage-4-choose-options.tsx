@@ -12,6 +12,7 @@ import {
     TaskContainer,
     TaskPanel,
 } from '../../../../components/common/stages/TaskPanel'
+import { Submitted } from '../../../../components/student/Submitted'
 import { Helpful } from '../../../../components/student/Helpful'
 import { CheckList } from '../../../../components/student/Checklist'
 
@@ -25,7 +26,6 @@ import {
 } from '../../../../gql/types/Stage4TaskQuery'
 
 import '../../../../scss/index.scss'
-import { Submitted } from '../../../../components/student/Submitted'
 
 const STAGE_4_TASK_QUERY = gql`
     query Stage4TaskQuery($team_id: uuid!) {
@@ -120,7 +120,7 @@ const Stage4Task = ({ taskToComplete }) => {
     const taskComplete = devOptions.filter((opt) => opt.shortlist).length === 3
 
     return (
-        <TaskPanel>
+        <TaskPanel docSubmitted={taskComplete}>
             {taskComplete || chooseDevOptionsResponse.data ? (
                 <Submitted content={taskToComplete.submittedText} />
             ) : (
@@ -145,7 +145,10 @@ const Stage4Task = ({ taskToComplete }) => {
                             })
                         }}
                     >
-                        {chooseDevOptionsResponse?.loading && <span className="spinner"></span>} Submit options
+                        {chooseDevOptionsResponse?.loading && (
+                            <span className="spinner"></span>
+                        )}{' '}
+                        Submit options
                     </button>
                 </TaskContainer>
             )}

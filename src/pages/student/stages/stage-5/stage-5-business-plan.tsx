@@ -128,6 +128,8 @@ const Stage5BusinessPlanPage: FC<PageProps> = ({ location: { search } }) => {
                                     Development Option information
                                 </a>
                             )}
+                            <br />
+                            <br />
                         </div>
 
                         <div className="col-lg-4">

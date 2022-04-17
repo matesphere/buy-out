@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import { Link } from 'gatsby'
+import { graphql, useStaticQuery, Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 import { gql } from '@apollo/client'
 import { ApolloError } from '@apollo/client'
@@ -7,6 +7,14 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../../../../components/common/Loading'
 import { Error } from '../../../../components/common/Error'
 import { Breadcrumbs } from '../../../../components/common/Breadcrumbs'
+import { Intro } from '../../../../components/student/Intro'
+import {
+    TaskContainer,
+    TaskPanel,
+} from '../../../../components/common/stages/TaskPanel'
+import { Submitted } from '../../../../components/student/Submitted'
+import { Helpful } from '../../../../components/student/Helpful'
+import { CheckList } from '../../../../components/student/Checklist'
 
 import { UserStateContext } from '../../../../utils/user-state'
 import { useCheckboxState } from '../../../../utils/input-utils'
@@ -17,9 +25,6 @@ import {
     Stage3TaskQuery,
     Stage3TaskQueryVariables,
 } from '../../../../gql/types/Stage3TaskQuery'
-
-import HelpIcon from '../../../../assets/help-icon.svg'
-import TickSheet from '../../../../assets/tick-sheet.svg'
 
 import '../../../../scss/index.scss'
 
@@ -99,7 +104,7 @@ const ChooseOptionsCheckboxes = ({
 )
 
 // TODO: move this out to components
-const Stage3Task = () => {
+const Stage3Task = ({ taskToComplete }) => {
     const {
         userInfo: { teamId },
     } = useContext(UserStateContext)
@@ -143,190 +148,143 @@ const Stage3Task = () => {
     const taskComplete = devOptions.length === 5
 
     return (
-        <div className="side-grey">
-            <h3 className="task ticker mb-2">
-                <span className="ticker-sheet">
-                    <TickSheet />
-                </span>
-                <span className="sm-type-drum">
-                    Task {taskComplete ? 'complete' : 'to complete:'}
-                </span>
-            </h3>
-
-            {taskComplete ? (
-                <p className="sm-type-lead mb-2">
-                    Development option list submitted!
-                </p>
+        <TaskPanel docSubmitted={taskComplete}>
+            {taskComplete || chooseDevOptionsResponse.data ? (
+                <Submitted content={taskToComplete.submittedText} />
             ) : (
-                <>
-                    <p className="sm-type-lead mb-2">
-                        Choose your 5 options to take forward to the next stage.{' '}
-                        <b>
-                            Ensure you are fully informed on the development
-                            options via the link above before deciding this!
-                        </b>
-                    </p>
+                <TaskContainer taskToComplete={taskToComplete}>
+                    <ChooseOptionsCheckboxes
+                        devOptions={pageData.development_option}
+                        selectedOptions={selectedOptions}
+                        toggleValue={toggleValue}
+                        teamChoiceName={teamChoiceName}
+                        setTeamChoiceName={setTeamChoiceName}
+                    />
 
-                    <div className="form-holder-border">
-                        <ChooseOptionsCheckboxes
-                            devOptions={pageData.development_option}
-                            selectedOptions={selectedOptions}
-                            toggleValue={toggleValue}
-                            teamChoiceName={teamChoiceName}
-                            setTeamChoiceName={setTeamChoiceName}
-                        />
-
-                        <button
-                            className="btn-solid-lg mt-4"
-                            disabled={
-                                !allowedNumberSelected ||
-                                (selectedOptions.includes(10) &&
-                                    !teamChoiceName) || chooseDevOptionsResponse?.loading
-                            }
-                            onClick={() => {
-                                const objects = selectedOptions.map((id) => {
-                                    if (id === 10) {
-                                        return {
-                                            team_id: teamId,
-                                            development_option_id: id,
-                                            team_choice_name: teamChoiceName,
-                                        }
-                                    }
-
+                    <button
+                        className="btn-solid-lg mt-4"
+                        disabled={
+                            !allowedNumberSelected ||
+                            (selectedOptions.includes(10) && !teamChoiceName) ||
+                            chooseDevOptionsResponse?.loading
+                        }
+                        onClick={() => {
+                            const objects = selectedOptions.map((id) => {
+                                if (id === 10) {
                                     return {
                                         team_id: teamId,
                                         development_option_id: id,
+                                        team_choice_name: teamChoiceName,
                                     }
-                                })
+                                }
 
-                                chooseDevOptions({
-                                    variables: {
-                                        objects,
-                                    },
-                                })
-                            }}
-                        >
-                            {chooseDevOptionsResponse?.loading && <span className="spinner"></span>} Submit options
-                        </button>
+                                return {
+                                    team_id: teamId,
+                                    development_option_id: id,
+                                }
+                            })
 
+                            chooseDevOptions({
+                                variables: {
+                                    objects,
+                                },
+                            })
+                        }}
+                    >
+                        {chooseDevOptionsResponse?.loading && (
+                            <span className="spinner"></span>
+                        )}{' '}
+                        Submit options
+                    </button>
 
-
-                        {/* TODO: replace with proper 'submitted' notification component...if needed? */}
-                        {/* {chooseDevOptionsResponse.data && (
+                    {/* TODO: replace with proper 'submitted' notification component...if needed? */}
+                    {/* {chooseDevOptionsResponse.data && (
                             <p className="sm-type-amp">Submitted!</p>
                         )} */}
-                    </div>
-                </>
+                </TaskContainer>
             )}
-        </div>
+        </TaskPanel>
     )
 }
 
-const Stage3ChooseOptionsPage = () => (
-    <>
-        <Helmet>
-            <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-            />
-            <title>Stage 3 - Lay The Foundations - Choose Longlist</title>
-        </Helmet>
+const Stage3ChooseOptionsPage = () => {
+    // TODO: brittle to use the title in order to find this model - don't think we're even using the SWOT one so could delete?
+    const {
+        graphCmsStageTaskPage: {
+            title,
+            taskInfo,
+            tasksToComplete,
+            helpfulInfo,
+            checklist,
+        },
+    } = useStaticQuery(graphql`
+        query {
+            graphCmsStageTaskPage(
+                stageNumber: { eq: 3 }
+                title: { eq: "Choose Your Longlist" }
+            ) {
+                ...StageTaskPageContent
+            }
+        }
+    `)
 
-        <main className="the-quest">
-            <section className="container" id="main">
-                <div className="row">
-                    <div className="col-lg-9">
-                        <Breadcrumbs
-                            previous={[
-                                {
-                                    displayName: 'Team Hub',
-                                    url: '/student/team-hub/',
-                                },
-                                {
-                                    displayName: 'Stage 3',
-                                    url: '/student/stage-3/',
-                                },
-                            ]}
-                            currentDisplayName="Choose Your Longlist"
-                        />
-                        <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
-                            Choose Your Longlist
-                        </h2>
-                        <p className="sm-type-lead mb-3">
-                            You will need to work together to discuss the
-                            available development options and decide on five
-                            which you think offer the best chance of providing
-                            benefits to the community - whether these be
-                            financial, social or otherwise.
-                        </p>
-                        <p className="sm-type-lead mb-3">
-                            All information required about each of the options
-                            is provided and can be accessed here:
-                        </p>
+    return (
+        <>
+            <Helmet>
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0"
+                />
+                <title>Stage 3 - Lay The Foundations - {title}</title>
+            </Helmet>
 
-                        <p className="sm-type-guitar mb-4">
-                            <span className="side-icon side-icon-orange shake">
-                                <HelpIcon />
-                            </span>
-                            <Link to="/information/development-options">
-                                View the development options
-                            </Link>
-                        </p>
+            <main className="the-quest">
+                <section className="container" id="main">
+                    <div className="row">
+                        <div className="col-lg-9">
+                            <Breadcrumbs
+                                previous={[
+                                    {
+                                        displayName: 'Team Hub',
+                                        url: '/student/team-hub/',
+                                    },
+                                    {
+                                        displayName: 'Stage 3',
+                                        url: '/student/stage-3/',
+                                    },
+                                ]}
+                                currentDisplayName={title}
+                            />
 
-                        <Stage3Task />
-                    </div>
-                    <div className="col-lg-3">
-                        <p className="sm-type-guitar mb-2">
-                            <span className="side-icon side-icon-orange">
-                                <HelpIcon />
-                            </span>
-                            Helpful information
-                        </p>
-                        <div className="side-grey">
-                            <p className="sm-type-amp">
-                                Read all about Glenclas and find out what you
-                                need to move on to the next quest.
-                            </p>
-                            <p className="sm-type-amp">
-                                Make notes of the amenities and the
-                                opportunities.
-                            </p>
-                            <p className="sm-type-amp">
-                                Look at Funding Options on each Option.
-                            </p>
+                            <h2 className="sm-type-biggerdrum sm-type-biggerdrum--medium mt-4">
+                                {title}
+                            </h2>
+
+                            <Intro item={taskInfo} />
+
+                            {/* TODO: get the shaky help icon back! */}
+                            {/* <p className="sm-type-guitar mb-4">
+                                <span className="side-icon side-icon-orange shake">
+                                    <HelpIcon />
+                                </span>
+                                <Link to="/information/development-options">
+                                    View the development options
+                                </Link>
+                            </p> */}
+
+                            <Stage3Task taskToComplete={tasksToComplete[0]} />
                         </div>
-
-                        <p className="sm-type-guitar mb-2">
-                            <span className="side-icon side-icon-green">
-                                <TickSheet />
-                            </span>
-                            Your checklist
-                        </p>
-                        <div className="side-grey">
-                            <div className="checklist">
-                                <div className="tick"></div>
-                                <p className="sm-type-lead">
-                                    Check the map and read through the detailed
-                                    information on each option.
-                                </p>
-                            </div>
-                        </div>
-                        <div className="side-grey">
-                            <div className="checklist">
-                                <div className="tick"></div>
-                                <p className="sm-type-lead">
-                                    Based on what you've read, choose 5 of the
-                                    options to investigate further.
-                                </p>
-                            </div>
+                        <div className="col-lg-3">
+                            <Helpful content={helpfulInfo.info} />
+                            <CheckList items={checklist.item} />
                         </div>
                     </div>
-                </div>
 
-                <Link to="/student/stage-3">Back to Stage 3</Link>
-            </section>
-        </main>
-    </>
-)
+                    <Link to="/student/stage-3">Back to Stage 3</Link>
+                </section>
+            </main>
+        </>
+    )
+}
 
 export default Stage3ChooseOptionsPage

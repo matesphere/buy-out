@@ -21,7 +21,10 @@ export const ReadQuesty: FC<{ text: string | ReactNode }> = ({ text }) => {
         }
     `)
 
-    const random1to3 = Math.floor(Math.random() * 3)
+    // TODO: recalculates random every time due to remounting, which must be the rich text renderer's fault
+    // const random1to3 = Math.floor(Math.random() * 3)
+
+    const random1to3 = text?.props?.content.length % 3 || 0
     const imageChoice = edges[random1to3].node.gatsbyImageData
 
     return (

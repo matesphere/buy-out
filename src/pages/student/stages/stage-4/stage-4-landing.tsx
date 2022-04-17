@@ -74,7 +74,7 @@ const Stage4LandingPage = () => {
     const docFeedback =
         pageData?.team_by_pk?.stage_progresses[0].documents[0]?.feedback
 
-    console.log(devOptions)
+    // console.log(devOptions)
     return (
         <>
             <Helmet>

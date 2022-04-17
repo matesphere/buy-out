@@ -44,6 +44,8 @@ export const FeasibilityOptionSection: FC<FeasibilityOptionSectionProps> = ({
                 Development Option information
             </a>
         )}
+        <br />
+        <br />
         <div id="more-detail-hint11">
             <p className="sm-type-bigamp mb-1 redorange-highlight">
                 Benefits to the Community

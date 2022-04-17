@@ -48,7 +48,7 @@ const InfoPlaySkate = ({
                                     url: '/student/team-hub/',
                                 },
                                 {
-                                    displayName: 'Info Hub',
+                                    displayName: 'Information',
                                     url: '/student/information',
                                 },
                                 {
