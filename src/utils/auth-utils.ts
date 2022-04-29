@@ -11,6 +11,7 @@ import axiosRetry from 'axios-retry'
 import gen from 'generate-password'
 
 import { UserStateContext } from './user-state'
+import { useLogging } from '../utils/common-utils'
 
 axiosRetry(axios, {
     retries: 3, // number of retries
@@ -117,6 +118,8 @@ export const useAuthMutation = <TData, TVariables>(
         userInfo: { token, userId, teamId },
     } = useContext(UserStateContext)
 
+    const { log } = useLogging('auth-mutation')
+
     let mutationOptions: BaseMutationOptions<TData, TVariables> = {
         // ...options,
         context: { headers: { Authorization: `Bearer ${token}` } },
@@ -149,6 +152,20 @@ export const useAuthMutation = <TData, TVariables>(
 
     const [mutation, mutationResponse] = useMutation<TData, TVariables>(query, {
         onCompleted: onCompleteCallback,
+        onError: ({ name, networkError, graphQLErrors, extraInfo }) =>
+            log({
+                loglevel: 'ERROR',
+                action: query.definitions[0]?.name?.value,
+                attributes: {
+                    error: {
+                        name,
+                        networkError,
+                        graphQLErrors,
+                        extraInfo,
+                    },
+                    query: JSON.stringify(query),
+                },
+            }),
     })
 
     const callMutation = async (vars) => {

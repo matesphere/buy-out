@@ -31,6 +31,7 @@ export const UserStateContext = createContext<UserStateContextType>({
     latestStageUnlocked: 0,
     setLatestStageUnlocked: () => {},
 })
+UserStateContext.displayName = 'UserState'
 
 interface AuthDataType {
     username: string

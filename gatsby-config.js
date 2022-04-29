@@ -94,5 +94,20 @@ module.exports = {
                 prefixes: ['/student/*', '/tutor/*'],
             },
         },
+        {
+            resolve: 'gatsby-plugin-newrelic',
+            options: {
+                config: {
+                    instrumentationType: 'proAndSPA',
+                    accountId: '3484956',
+                    trustKey: '3484956',
+                    agentID: '368004654',
+                    licenseKey: 'NRJS-7b61aa977ec45da7b58',
+                    applicationID: '368004654',
+                    beacon: 'bam.eu01.nr-data.net',
+                    errorBeacon: 'bam.eu01.nr-data.net',
+                },
+            },
+        },
     ],
 }
