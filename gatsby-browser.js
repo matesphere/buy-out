@@ -2,6 +2,8 @@ import React from 'react'
 import { ApolloProvider } from '@apollo/client'
 import { client } from './src/apollo/client'
 
+import { LocationProvider } from '@reach/router'
+import { Authenticator, View } from '@aws-amplify/ui-react'
 import { UserStateProvider } from './src/utils/user-state'
 
 import Amplify from 'aws-amplify'
@@ -59,6 +61,12 @@ Amplify.configure({
 
 export const wrapRootElement = ({ element }) => (
     <ApolloProvider client={client}>
-        <UserStateProvider>{element}</UserStateProvider>
+        <LocationProvider>
+            <Authenticator.Provider>
+                <View>
+                    <UserStateProvider>{element}</UserStateProvider>
+                </View>
+            </Authenticator.Provider>
+        </LocationProvider>
     </ApolloProvider>
 )

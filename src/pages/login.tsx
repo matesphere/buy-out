@@ -8,7 +8,7 @@ import { ApolloError } from '@apollo/client'
 import { Loading } from '../components/common/Loading'
 import { Error } from '../components/common/Error'
 
-import { useAuthQuery } from '../utils/auth-utils'
+import { useAuthQuery, authComponents } from '../utils/auth-utils'
 import { UserStateContext } from '../utils/user-state'
 
 import Squiggle from '../assets/squiggle.svg'
@@ -199,4 +199,7 @@ const Login = () => {
     )
 }
 
-export default withAuthenticator(Login)
+export default withAuthenticator(Login, {
+    hideSignUp: true,
+    components: authComponents,
+})

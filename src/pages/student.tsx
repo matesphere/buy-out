@@ -1,7 +1,7 @@
 import React, { useContext, FC } from 'react'
 import { PageProps } from 'gatsby'
 import { Router, RouteComponentProps } from '@reach/router'
-import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react'
+import { Authenticator } from '@aws-amplify/ui-react'
 import { Auth } from 'aws-amplify'
 
 import TeamHub from './student/team-hub'
@@ -44,6 +44,9 @@ import Stage8Landing from './student/stages/stage-8/stage-8-landing'
 import Stage8Task from './student/stages/stage-8/stage-8-task'
 
 import { UserStateContext } from '../utils/user-state'
+import { authComponents } from '../utils/auth-utils'
+
+import '@aws-amplify/ui-react/styles.css'
 
 type LoggedInRouteProps = RouteComponentProps & {
     component: FC<PageProps>
@@ -59,9 +62,9 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
     const { isSignedIn, userInfo, latestStageUnlocked } =
         useContext(UserStateContext)
 
-    if (isSignedIn) {
-        Auth.currentAuthenticatedUser({ bypassCache: true })
+    Auth.currentAuthenticatedUser({ bypassCache: true })
 
+    if (isSignedIn) {
         if (userInfo.role === 'tutor') {
             navigate('/tutor/hub') //TODO: not working...why?? Something to do with client-only?
         }
@@ -69,15 +72,20 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
         if (stageNum && latestStageUnlocked && stageNum > latestStageUnlocked) {
             navigate('/student/team-hub')
         }
-
-        return <Component {...rest} />
     }
 
     return (
-        <AmplifyAuthenticator>
-            <AmplifySignIn slot="sign-in" hideSignUp></AmplifySignIn>
-        </AmplifyAuthenticator>
+        <Authenticator hideSignUp components={authComponents}>
+            <Component {...rest} />
+        </Authenticator>
     )
+
+    // return (
+    //     <Authenticator hideSignUp>
+    //         {({}) => {}}
+    //         <AmplifySignIn slot="sign-in" hideSignUp></AmplifySignIn>
+    //     </Authenticator>
+    // )
 }
 
 const Routes = () => {

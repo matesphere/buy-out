@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'gatsby'
-import { AmplifySignOut } from '@aws-amplify/ui-react'
+import { Button } from '@aws-amplify/ui-react'
+import { Auth } from 'aws-amplify'
 
 import Squiggle from '../../assets/squiggle.svg'
 
@@ -20,7 +21,17 @@ const TutorFooter = () => (
                 </div>
                 <div className="col-lg-4 mt-1"></div>
                 <div className="col-lg-4 mt-1">
-                    <AmplifySignOut />
+                    <Button
+                        onClick={async () => {
+                            try {
+                                await Auth.signOut()
+                            } catch (error) {
+                                console.log('error signing out: ', error)
+                            }
+                        }}
+                    >
+                        SIGN OUT
+                    </Button>
                 </div>
             </div>
             <div className="row">

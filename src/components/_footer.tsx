@@ -1,5 +1,6 @@
 import React from 'react'
-import { AmplifySignOut } from '@aws-amplify/ui-react'
+import { Button } from '@aws-amplify/ui-react'
+import { Auth } from 'aws-amplify'
 import { Link } from 'gatsby'
 
 import '../scss/index.scss'
@@ -19,16 +20,26 @@ const Footer = () => (
                         </Link>
                     </p>
                 </div>
-                <div className="col-lg-4 mt-1">
-
-                </div>
+                <div className="col-lg-4 mt-1"></div>
                 <div className="col-lg-4">
-                    <AmplifySignOut />
+                    <Button
+                        onClick={async () => {
+                            try {
+                                await Auth.signOut()
+                            } catch (error) {
+                                console.log('error signing out: ', error)
+                            }
+                        }}
+                    >
+                        SIGN OUT
+                    </Button>
                 </div>
             </div>
             <div className="row">
                 <div className="col-lg-12 text-align-center mt-2">
-                    <p>&copy; Copyright MateSphere 2021. All rights reserved.</p>
+                    <p>
+                        &copy; Copyright MateSphere 2021. All rights reserved.
+                    </p>
                 </div>
             </div>
         </section>

@@ -356,7 +356,8 @@ const Stage2TaskPage = () => {
                                 disableSubmit={
                                     !logo ||
                                     positions.length !==
-                                        pageData.team_by_pk?.students.length || submitPositionResponse.loading
+                                        pageData.team_by_pk?.students.length ||
+                                    submitPositionResponse.loading
                                 }
                                 docSubmitted={submitted}
                             />

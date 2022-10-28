@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import {
     useQuery,
     useMutation,
@@ -11,7 +11,7 @@ import axiosRetry from 'axios-retry'
 import gen from 'generate-password'
 
 import { UserStateContext } from './user-state'
-import { useLogging } from '../utils/common-utils'
+import { useLogging } from './common-utils'
 
 axiosRetry(axios, {
     retries: 3, // number of retries
@@ -253,4 +253,12 @@ export const createStudentsInCognito = async (students) => {
     })
 
     return Promise.allSettled(cognitoPromises)
+}
+
+export const authComponents = {
+    SignIn: {
+        Footer() {
+            return <div />
+        },
+    },
 }

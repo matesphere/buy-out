@@ -1,28 +1,36 @@
 import React, { createContext, useState, useEffect } from 'react'
-import { AuthState, onAuthUIStateChange } from '@aws-amplify/ui-components'
-import { navigate } from '@reach/router'
+import { useAuthenticator } from '@aws-amplify/ui-react'
+import { Auth } from 'aws-amplify'
+import { navigate, useLocation } from '@reach/router'
 
-const signedOutUserInfo = {
+enum AuthState {
+    SignedIn = 'authenticated',
+    SignedOut = 'unauthenticated',
+}
+
+interface UserInfo {
+    username: string
+    userId: string
+    teamId: string
+    schoolId: string
+    role: string
+    token: string
+}
+
+interface UserStateContextType {
+    isSignedIn: boolean
+    userInfo: UserInfo
+    latestStageUnlocked: number
+    setLatestStageUnlocked: (value: number) => void
+}
+
+const signedOutUserInfo: UserInfo = {
     username: '',
     role: '',
     userId: '',
     schoolId: '',
     teamId: '',
     token: '',
-}
-
-interface UserStateContextType {
-    isSignedIn: boolean
-    userInfo: {
-        username: string
-        userId: string
-        teamId: string
-        schoolId: string
-        role: string
-        token: string
-    }
-    latestStageUnlocked: number
-    setLatestStageUnlocked: (value: number) => void
 }
 
 export const UserStateContext = createContext<UserStateContextType>({
@@ -33,52 +41,62 @@ export const UserStateContext = createContext<UserStateContextType>({
 })
 UserStateContext.displayName = 'UserState'
 
-interface AuthDataType {
-    username: string
-    attributes: {
-        sub: string
-        'custom:role': string
-        'custom:school_id': string
-        'custom:team_id': string
-    }
-    signInUserSession: {
-        idToken: {
-            jwtToken: string
-        }
-    }
+const isDefined = <T extends unknown>(val: T | undefined | null): val is T => {
+    return val !== undefined && val !== null
 }
 
 export const UserStateProvider = ({ children }) => {
     const [authState, setAuthState] = useState({})
-    // const [user, setUser] = useState({})
-    const [userInfo, setUserInfo] = useState(signedOutUserInfo)
+    const [userInfo, setUserInfo] = useState<UserInfo>(signedOutUserInfo)
     const [latestStageUnlocked, setLatestStageUnlocked] = useState(0)
 
+    const { user, authStatus } = useAuthenticator((context) => [
+        context.user,
+        context.authStatus,
+    ])
+
+    const { pathname } = useLocation()
+
     useEffect(() => {
-        return onAuthUIStateChange((nextAuthState, data) => {
-            const authData = data as AuthDataType
-            setAuthState(nextAuthState)
-            // setUser(authData)
-            setUserInfo(
-                nextAuthState === AuthState.SignedIn
-                    ? {
-                          username: authData.username,
-                          role: authData.attributes['custom:role'],
-                          userId: authData.attributes.sub,
-                          schoolId: authData.attributes['custom:school_id'],
-                          teamId: authData.attributes['custom:team_id'],
-                          token: authData.signInUserSession.idToken.jwtToken,
-                      }
-                    : signedOutUserInfo
-            )
+        setAuthState(authStatus)
 
-            if (nextAuthState !== AuthState.SignedIn) {
-                navigate('/login')
+        //? moving all these isDefined things into a separate function stops type guard from working ¯\_(ツ)_/¯
+        if (
+            authStatus === AuthState.SignedIn &&
+            isDefined(user.username) &&
+            isDefined(user.attributes) &&
+            isDefined(user.attributes['custom:role']) &&
+            isDefined(user.attributes['sub']) &&
+            isDefined(user.attributes['custom:school_id']) &&
+            isDefined(user.attributes['custom:team_id'])
+        ) {
+            const newUser: UserInfo = {
+                username: user.username,
+                role: user.attributes['custom:role'],
+                userId: user.attributes.sub,
+                schoolId: user.attributes['custom:school_id'],
+                teamId: user.attributes['custom:team_id'],
+                token: '',
             }
-        })
-    }, [])
 
-    const isSignedIn = authState === AuthState.SignedIn && !!userInfo
+            Auth.currentSession().then((res) => {
+                const token = res.getIdToken().getJwtToken()
+
+                const userInfo: UserInfo = {
+                    ...newUser,
+                    token,
+                }
+
+                setUserInfo(userInfo)
+            })
+        } else {
+            setUserInfo(signedOutUserInfo)
+
+            if (pathname !== '/') navigate('/login')
+        }
+    }, [authStatus])
+
+    const isSignedIn = authState === 'authenticated' && !!userInfo
 
     return (
         <UserStateContext.Provider

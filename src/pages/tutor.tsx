@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, FC } from 'react'
 import { Router, RouteComponentProps } from '@reach/router'
-import { AmplifyAuthenticator } from '@aws-amplify/ui-react'
+import { Authenticator } from '@aws-amplify/ui-react'
 
 import Header from '../components/tutor/_header'
 import Footer from '../components/tutor/_footer'
@@ -37,11 +37,13 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
         if (userInfo.role === 'student') {
             navigate('/student/team-hub') //TODO: not working...why?? Something to do with client-only?
         }
-
-        return <Component {...rest} />
     }
 
-    return <AmplifyAuthenticator />
+    return (
+        <Authenticator hideSignUp>
+            <Component {...rest} />
+        </Authenticator>
+    )
 }
 
 export interface NewQuestContextType {
