@@ -1,7 +1,7 @@
 import React, { FC, useContext, useEffect } from 'react'
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
-import { GatsbyImage } from 'gatsby-plugin-image'
+import { GatsbyImage, getImage } from 'gatsby-plugin-image'
 import { gql } from '@apollo/client'
 import { ApolloError } from '@apollo/client'
 
@@ -292,16 +292,13 @@ const TeamInfoSection = ({
 const TeamHub: FC = () => {
     const imageData = useStaticQuery(graphql`
         query {
-            allImageSharp(
-                filter: { fixed: { originalName: { regex: "/team-logo-/" } } }
-            ) {
+            allFile(filter: { name: { regex: "/team-logo/" } }) {
                 edges {
                     node {
-                        id
-                        fixed {
-                            originalName
+                        name
+                        childImageSharp {
+                            gatsbyImageData(placeholder: BLURRED)
                         }
-                        gatsbyImageData
                     }
                 }
             }
@@ -397,12 +394,10 @@ const TeamHub: FC = () => {
         return <StageButton {...{ ...stage, stageStatus, docStatus }} />
     })
 
-    const teamLogo = imageData.allImageSharp.edges.find(
-        ({
-            node: {
-                fixed: { originalName },
-            },
-        }) => originalName === logo
+    const teamLogo = getImage(
+        imageData.allFile.edges.find(
+            ({ node: { name } }) => `${name}.jpg` === logo
+        ).node
     )
 
     return (
@@ -425,7 +420,7 @@ const TeamHub: FC = () => {
                                 teamName={teamName}
                                 students={students}
                                 devOptions={devOptions}
-                                image={teamLogo?.node.gatsbyImageData || null}
+                                image={teamLogo || null}
                             />
                         </div>
                     </div>
