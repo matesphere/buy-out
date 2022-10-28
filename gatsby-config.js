@@ -102,7 +102,7 @@ module.exports = {
                     accountId: '3484956',
                     trustKey: '3484956',
                     agentID: '368004654',
-                    licenseKey: 'NRJS-7b61aa977ec45da7b58',
+                    licenseKey: process.env.GATSBY_NEW_RELIC_LICENSE_KEY,
                     applicationID: '368004654',
                     beacon: 'bam.eu01.nr-data.net',
                     errorBeacon: 'bam.eu01.nr-data.net',
