@@ -102,7 +102,7 @@ const Stage2TaskPage = () => {
     const submitted = !!pageData.team_by_pk?.logo
 
     const {
-        allImageSharp,
+        allFile,
         graphCmsStageTaskPage: {
             title,
             taskInfo,
@@ -112,16 +112,13 @@ const Stage2TaskPage = () => {
         },
     } = useStaticQuery(graphql`
         query {
-            allImageSharp(
-                filter: { fixed: { originalName: { regex: "/team-logo-/" } } }
-            ) {
+            allFile(filter: { name: { regex: "/team-logo/" } }) {
                 edges {
                     node {
-                        id
-                        fixed {
-                            originalName
+                        name
+                        childImageSharp {
+                            gatsbyImageData(placeholder: BLURRED)
                         }
-                        gatsbyImageData
                     }
                 }
             }
@@ -188,31 +185,33 @@ const Stage2TaskPage = () => {
                                     taskToComplete={tasksToComplete[0]}
                                 >
                                     <div className="row">
-                                        {allImageSharp.edges.map(
+                                        {allFile.edges.map(
                                             ({
                                                 node: {
-                                                    fixed: { originalName: id },
-                                                    gatsbyImageData,
+                                                    name,
+                                                    childImageSharp: {
+                                                        gatsbyImageData,
+                                                    },
                                                 },
                                             }) => (
                                                 <div
                                                     className="col-lg-3 mb-2"
-                                                    key={id}
+                                                    key={name}
                                                 >
                                                     <div className="multiple-choice">
                                                         <input
                                                             className="form-control"
-                                                            id={id}
-                                                            value={id}
+                                                            id={name}
+                                                            value={name}
                                                             checked={
-                                                                logo === id
+                                                                logo === name
                                                             }
                                                             onChange={
                                                                 submitted
                                                                     ? () => {}
                                                                     : () =>
                                                                           setLogo(
-                                                                              id
+                                                                              name
                                                                           )
                                                             }
                                                             type="radio"
@@ -220,7 +219,7 @@ const Stage2TaskPage = () => {
                                                         />
                                                         <label
                                                             className="form-label"
-                                                            htmlFor={id}
+                                                            htmlFor={name}
                                                         >
                                                             <GatsbyImage
                                                                 alt="logo"
@@ -229,7 +228,7 @@ const Stage2TaskPage = () => {
                                                                 }
                                                             />
                                                             <span className="visuallyhidden">
-                                                                {id}
+                                                                {name}
                                                             </span>
                                                         </label>
                                                     </div>

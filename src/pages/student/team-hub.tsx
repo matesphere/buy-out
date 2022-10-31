@@ -395,9 +395,8 @@ const TeamHub: FC = () => {
     })
 
     const teamLogo = getImage(
-        imageData.allFile.edges.find(
-            ({ node: { name } }) => `${name}.jpg` === logo
-        ).node
+        imageData.allFile.edges.find(({ node: { name } }) => name === logo)
+            ?.node
     )
 
     return (
