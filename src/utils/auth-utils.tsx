@@ -83,8 +83,7 @@ export const useAuthQuery = <TData, TVariables>(
     } = useContext(UserStateContext)
 
     if (!tokenIsValid(token)) {
-        refreshToken().then(() => useAuthQuery(query, options, idRequired))
-        return
+        refreshToken()
     }
 
     let variables = options?.variables || null
@@ -124,9 +123,14 @@ export const useAuthMutation = <TData, TVariables>(
     const {
         userInfo: { token, userId, teamId },
         tokenIsValid,
+        refreshToken,
     } = useContext(UserStateContext)
 
     const { log } = useLogging('auth-mutation')
+
+    if (!tokenIsValid(token)) {
+        refreshToken()
+    }
 
     let mutationOptions: BaseMutationOptions<TData, TVariables> = {
         // ...options,
