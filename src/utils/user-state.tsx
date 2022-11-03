@@ -2,13 +2,13 @@ import React, { createContext, useState, useEffect } from 'react'
 import { useAuthenticator } from '@aws-amplify/ui-react'
 import { Auth } from 'aws-amplify'
 import { navigate, useLocation } from '@reach/router'
-// import { CognitoJwtVerifier } from 'aws-jwt-verify'
+import { CognitoJwtVerifier } from 'aws-jwt-verify'
 
-// const verifier = CognitoJwtVerifier.create({
-//     userPoolId: 'eu-west-1_BmAy1cz4Q',
-//     tokenUse: 'id',
-//     clientId: '45r6i1n1n655isehsq2spbk0me',
-// })
+const verifier = CognitoJwtVerifier.create({
+    userPoolId: 'eu-west-1_BmAy1cz4Q',
+    tokenUse: 'id',
+    clientId: '45r6i1n1n655isehsq2spbk0me',
+})
 
 const signedOutUserInfo: UserInfo = {
     username: '',
@@ -38,7 +38,8 @@ interface UserStateContextType {
     userInfo: UserInfo
     latestStageUnlocked: number
     setLatestStageUnlocked: (value: number) => void
-    // verifyTokensAndRefreshIfNeeded: () => void
+    tokenIsValid: (token: string) => boolean
+    refreshToken: () => Promise<void>
 }
 
 export const UserStateContext = createContext<UserStateContextType>({
@@ -46,7 +47,8 @@ export const UserStateContext = createContext<UserStateContextType>({
     userInfo: signedOutUserInfo,
     latestStageUnlocked: 0,
     setLatestStageUnlocked: () => {},
-    // verifyTokensAndRefreshIfNeeded: () => {},
+    tokenIsValid: () => false,
+    refreshToken: () => Promise.resolve(),
 })
 UserStateContext.displayName = 'UserState'
 
@@ -54,21 +56,23 @@ const isDefined = <T extends unknown>(val: T | undefined | null): val is T => {
     return val !== undefined && val !== null
 }
 
-// const verifyTokensAndRefreshIfNeeded = async () => {
-//     const sess = await Auth.currentSession()
-//     const token = sess.getIdToken().getJwtToken()
+const tokenIsValid = (token: string): boolean => {
+    // does sess.isValid() work? how can we test this?!
+    try {
+        verifier.verify(token)
+        return true
+    } catch {
+        console.log('Token not valid!')
+        return false
+    }
+}
 
-//     // does sess.isValid() work? how can we test this?!
-
-//     try {
-//         verifier.verify(token)
-//         console.log('Token valid')
-//     } catch {
-//         console.log('Token not valid!')
-//         const user = await Auth.currentAuthenticatedUser()
-//         user.refreshSession(sess.getRefreshToken(), (err, sess) => {})
-//     }
-// }
+const refreshToken = async () => {
+    const sess = await Auth.currentSession()
+    const user = await Auth.currentAuthenticatedUser()
+    user.refreshSession(sess.getRefreshToken(), (err, sess) => {})
+    return Promise.resolve()
+}
 
 export const UserStateProvider = ({ children }) => {
     const [authState, setAuthState] = useState({})
@@ -84,9 +88,6 @@ export const UserStateProvider = ({ children }) => {
 
     useEffect(() => {
         setAuthState(authStatus)
-
-        console.log(authStatus)
-        console.log(user)
 
         //? moving all these isDefined things into a separate function stops type guard from working ¯\_(ツ)_/¯
         if (
@@ -133,7 +134,8 @@ export const UserStateProvider = ({ children }) => {
                 userInfo,
                 latestStageUnlocked,
                 setLatestStageUnlocked,
-                // verifyTokensAndRefreshIfNeeded,
+                tokenIsValid,
+                refreshToken,
             }}
         >
             {children}
