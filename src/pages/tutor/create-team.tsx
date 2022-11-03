@@ -18,7 +18,7 @@ import {
 } from '../../utils/auth-utils'
 
 import { UserStateContext } from '../../utils/user-state'
-import { NewQuestContext } from '../tutor'
+import { NewQuestContext } from '../../utils/tutor-contexts'
 
 import { CREATE_QUEST_WITH_TEAMS, START_QUEST } from '../../gql/mutations'
 import { StudentType } from '../../gql/types'

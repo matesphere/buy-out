@@ -31,7 +31,7 @@ import { ReflectionQuestions } from '../../components/tutor/ReflectionQuestions'
 
 import { useAuthQuery } from '../../utils/auth-utils'
 import { POSITION_DISPLAY_NAME } from '../../utils/common-utils'
-import { CurrentQuestContext } from '../tutor'
+import { CurrentQuestsContext } from '../../utils/tutor-contexts'
 
 import { TUTOR_CURRENT_QUEST_QUERY } from '../../gql/queries'
 
@@ -263,9 +263,9 @@ const StageInfoPanel = ({ stages, stageProgresses, devOptions, teamId }) => (
 )
 
 const TutorCurrentQuestPage = () => {
-    const [showUserPassModal, setShowUserPassModal] = useState(false)
     const { expanded, setExpanded, selectedTab, setSelectedTab } =
-        useContext(CurrentQuestContext)
+        useContext(CurrentQuestsContext)
+    const [showUserPassModal, setShowUserPassModal] = useState(false)
     const [showReflectionModal, setShowReflectionModal] = useState(false)
 
     const { loading, error, data } = useAuthQuery<
@@ -367,7 +367,7 @@ const TutorCurrentQuestPage = () => {
 
     return (
         <>
-            <Helmet>
+            <Helmet key={0}>
                 <meta
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
@@ -378,6 +378,7 @@ const TutorCurrentQuestPage = () => {
             <main className="notes">
                 <section className="container" id="currentquest">
                     <Breadcrumbs
+                        key={1}
                         previous={[
                             {
                                 displayName: 'Tutor Hub',
@@ -388,6 +389,7 @@ const TutorCurrentQuestPage = () => {
                     />
 
                     <Tabs
+                        key={2}
                         selectedIndex={selectedTab}
                         onSelect={(index) => setSelectedTab(index)}
                     >

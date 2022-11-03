@@ -1,4 +1,4 @@
-import React, { createContext, useState, useContext, FC } from 'react'
+import React, { useState, useContext, FC } from 'react'
 import { Router, RouteComponentProps } from '@reach/router'
 import { Authenticator } from '@aws-amplify/ui-react'
 
@@ -21,6 +21,7 @@ import TechnicalGuide from './tutor/technical-guide'
 import { StudentType } from '../gql/types'
 
 import { UserStateContext } from '../utils/user-state'
+import { CurrentQuestsContext, NewQuestContext } from '../utils/tutor-contexts'
 
 type LoggedInRouteProps = RouteComponentProps & {
     component: () => string | JSX.Element
@@ -46,30 +47,6 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
     )
 }
 
-export interface NewQuestContextType {
-    studentsToAdd: Array<StudentType>
-    setStudentsToAdd: (students: Array<StudentType>) => void
-}
-
-export const NewQuestContext = createContext<NewQuestContextType>({
-    studentsToAdd: [],
-    setStudentsToAdd: () => {},
-})
-
-export interface CurrentQuestContextType {
-    expanded: Array<string>
-    setExpanded: (expanded: Array<string>) => void
-    selectedTab: number
-    setSelectedTab: (selected: number) => void
-}
-
-export const CurrentQuestContext = createContext<CurrentQuestContextType>({
-    expanded: [],
-    setExpanded: () => {},
-    selectedTab: 0,
-    setSelectedTab: () => {},
-})
-
 const Routes = () => {
     const [studentsToAdd, setStudentsToAdd] = useState<Array<StudentType>>([])
     const [expanded, setExpanded] = useState<Array<string>>([])
@@ -77,7 +54,7 @@ const Routes = () => {
 
     return (
         <NewQuestContext.Provider value={{ studentsToAdd, setStudentsToAdd }}>
-            <CurrentQuestContext.Provider
+            <CurrentQuestsContext.Provider
                 value={{ expanded, setExpanded, selectedTab, setSelectedTab }}
             >
                 <Header />
@@ -140,7 +117,7 @@ const Routes = () => {
                     </Router>
                 </div>
                 <Footer />
-            </CurrentQuestContext.Provider>
+            </CurrentQuestsContext.Provider>
         </NewQuestContext.Provider>
     )
 }

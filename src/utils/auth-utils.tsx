@@ -78,6 +78,7 @@ export const useAuthQuery = <TData, TVariables>(
 ) => {
     const {
         userInfo: { userId, teamId, token },
+        // verifyTokensAndRefreshIfNeeded,
     } = useContext(UserStateContext)
 
     let variables = options?.variables || null
@@ -89,6 +90,8 @@ export const useAuthQuery = <TData, TVariables>(
     if (idRequired === 'teamId') {
         variables = { ...variables, team_id: teamId }
     }
+
+    // verifyTokensAndRefreshIfNeeded()
 
     const queryProps = useQuery<TData, TVariables>(query, {
         ...options,

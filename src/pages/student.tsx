@@ -62,7 +62,7 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
     const { isSignedIn, userInfo, latestStageUnlocked } =
         useContext(UserStateContext)
 
-    Auth.currentAuthenticatedUser({ bypassCache: true })
+    // Auth.currentAuthenticatedUser({ bypassCache: true })
 
     if (isSignedIn) {
         if (userInfo.role === 'tutor') {
@@ -79,13 +79,6 @@ const LoggedInRoute: FC<LoggedInRouteProps> = ({
             <Component {...rest} />
         </Authenticator>
     )
-
-    // return (
-    //     <Authenticator hideSignUp>
-    //         {({}) => {}}
-    //         <AmplifySignIn slot="sign-in" hideSignUp></AmplifySignIn>
-    //     </Authenticator>
-    // )
 }
 
 const Routes = () => {

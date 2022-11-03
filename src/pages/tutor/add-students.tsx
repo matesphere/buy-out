@@ -2,7 +2,7 @@ import React, { useState, useContext, FC, Dispatch } from 'react'
 import { Link } from 'gatsby'
 import { Helmet } from 'react-helmet'
 
-import { NewQuestContext } from '../tutor'
+import { NewQuestContext } from '../../utils/tutor-contexts'
 
 import { StudentType } from '../../gql/types'
 
