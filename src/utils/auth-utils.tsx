@@ -82,7 +82,7 @@ export const useAuthQuery = <TData, TVariables>(
         refreshToken,
     } = useContext(UserStateContext)
 
-    if (!tokenIsValid(token)) {
+    if (token && !tokenIsValid(token)) {
         refreshToken()
     }
 
@@ -128,7 +128,7 @@ export const useAuthMutation = <TData, TVariables>(
 
     const { log } = useLogging('auth-mutation')
 
-    if (!tokenIsValid(token)) {
+    if (token && !tokenIsValid(token)) {
         refreshToken()
     }
 
