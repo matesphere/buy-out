@@ -1,8 +1,7 @@
-import React, { useState, FC } from 'react'
+import React, { useState, useEffect, FC } from 'react'
 import { MutationResult } from '@apollo/client'
 
 import SaveIcon from '../../../assets/save-icon.svg'
-import { useEffect } from 'react'
 
 interface SaveSubmitSectionProps {
     saveWorkObj?: {
@@ -60,7 +59,10 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                             }
                             onClick={() => setShowSubmitModal(true)}
                         >
-                            {submitWorkObj?.response.loading && <span className="spinner"></span>} Submit
+                            {submitWorkObj?.response.loading && (
+                                <span className="spinner"></span>
+                            )}{' '}
+                            Submit
                         </button>
                     )}
                 </>
@@ -112,8 +114,10 @@ export const SaveSubmitSection: FC<SaveSubmitSectionProps> = ({
                                     }
                                     onClick={submitWorkObj.call}
                                 >
-                                    {submitWorkObj?.response.loading && <span className="spinner"></span>} Submit options
-                                    Yes, submit Work
+                                    {submitWorkObj?.response.loading && (
+                                        <span className="spinner"></span>
+                                    )}
+                                    Yes, submit
                                 </button>
                             </>
                         )}

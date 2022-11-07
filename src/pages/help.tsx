@@ -1,14 +1,14 @@
 import React from 'react'
-import Header from '../components/_header'
-import Footer from '../components/_footer'
-import '../scss/index.scss'
-
 import { graphql, Link, useStaticQuery } from 'gatsby'
 import { Helmet } from 'react-helmet'
+import { GatsbyImage } from 'gatsby-plugin-image'
+
+import Header from '../components/_header'
+import Footer from '../components/_footer'
 import TickSheet from '../assets/tick-sheet.svg'
 import HelpIcon from '../assets/help-icon.svg'
-import { GatsbyImage } from 'gatsby-plugin-image'
-import { stage1DataSubTitleEng } from './student/stages/stage-1/_stage1.data'
+
+import '../scss/index.scss'
 
 const HelpPage = () => {
     const data = useStaticQuery(graphql`
@@ -28,9 +28,11 @@ const HelpPage = () => {
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 />
-                <title>Community Land Quest</title>
-                <meta name="description" content="The description" />
-                {/*<meta name="image" content={image} />*/}
+                <title>Community Land Quest - Help</title>
+                <meta
+                    name="description"
+                    content="Help for students embarking on the Community Land Quest"
+                />
             </Helmet>
 
             <main>
@@ -39,15 +41,16 @@ const HelpPage = () => {
                     <div className="row">
                         <div className="col-lg-8">
                             <h2 className="sm-type-drum sm-type-drum--medium mt-4">
-                                Make your community a landowner!
+                                Help turn your community into a landowner!
                             </h2>
                             <p className="sm-type-guitar mb-4">
-                                Can you make it through the 8 steps and emerge
+                                Can you make it through the 8 stages and emerge
                                 victorious?
                             </p>
                             <p className="sm-type-lead mb-4">
-                                The following will walk you through the process
-                                to help on your quest.
+                                The following will give you an idea of what to
+                                look for while making your way through the
+                                Quest.
                             </p>
 
                             <ol>
@@ -62,25 +65,29 @@ const HelpPage = () => {
                                         />
                                     </div>
                                     <p className="sm-type-lead mb-4 small-image-holder">
-                                        When you will see any of the "Questies",
-                                        the section sets out the aim of each
-                                        stage. You will be guided along the way
-                                        to help you achieve your goal.
+                                        When you see a 'Questy', it's there to
+                                        explain the overall aim of each stage.
+                                        Check back here if you need to remind
+                                        yourself what the point of your current
+                                        activity is!
                                     </p>
                                 </li>
 
                                 <li className="sm-type-lead mb-4">
-                                    Your help guide will always appear in the
-                                    "Helpful information" boxes. <br />
+                                    Look out for the handy 'Helpful Information'
+                                    boxes: these will give you things like hints
+                                    or links to stuff that you can use to help
+                                    with the stage tasks. <br />
                                     Look out for this orange icon:{' '}
                                     <span className="side-icon side-icon-orange">
                                         <HelpIcon />
                                     </span>
                                 </li>
+
                                 <li className="sm-type-lead mb-4">
-                                    Make sure you read all the information and
-                                    check "Your checklist" to make sure you have
-                                    completed the task. <br />
+                                    The 'Your Checklist' box lists the things
+                                    you need to do in order to complete the
+                                    stage. <br />
                                     Look out for this green icon:{' '}
                                     <span className="side-icon side-icon-green">
                                         <TickSheet />
@@ -88,8 +95,8 @@ const HelpPage = () => {
                                 </li>
 
                                 <li className="sm-type-lead mb-4">
-                                    You will find the task to complete at each
-                                    stage. <br />
+                                    You will find one or more tasks to complete
+                                    in each stage. <br />
                                     Look out for this red icon:{' '}
                                     <span className="side-icon side-icon-red">
                                         <TickSheet />
@@ -121,21 +128,19 @@ const HelpPage = () => {
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        Did you find the "Helpful information"
-                                        location?
+                                        Find the 'Helpful Information' box.
                                     </p>
                                 </div>
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        Did you find the "Your checklist"
-                                        location?
+                                        Find the 'Your Checklist' box.
                                     </p>
                                 </div>
                                 <div className="checklist">
                                     <div className="tick"></div>
                                     <p className="sm-type-lead">
-                                        Are you ready to start?
+                                        Prepare to start the Quest!
                                     </p>
                                 </div>
                             </div>
